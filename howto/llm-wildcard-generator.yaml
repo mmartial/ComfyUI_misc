@@ -1,0 +1,123 @@
+# ========================================================================
+# LLM PROMPT FOR GENERATING A CUSTOM WILDCARD FILE
+#
+# INSTRUCTIONS:
+# 1. Change the `user_theme` value to your desired theme.
+# 2. Copy the *entire* content of this file.
+# 3. Paste it into your LLM (Gemini, ChatGPT, etc.) and run the prompt.
+# 4. The LLM will output a new, complete YAML file based on your theme.
+# ========================================================================
+
+# 1. USER: Define Your Core Theme
+# Replace the placeholder with your desired theme.
+# Examples: "Cyberpunk", "High Fantasy", "Cozy Bakery", "Lovecraftian Horror", "Steampunk"
+user_theme: "[YOUR_THEME_HERE]"
+
+# 2. LLM: Instructions for Generation
+llm_instructions:
+  - "You are an expert in generative AI prompting and creative writing."
+  - "Your task is to create a comprehensive wildcard YAML file based on the `user_theme` provided above."
+  - "The file must be 100% valid YAML."
+  - "The top-level key *must* be a short, memorable name based on the theme (e.g., if the theme is 'Cyberpunk', the key could be 'my_cyberpunk')."
+  - "You *must* follow the structure defined in `generation_structure`."
+  - "For each category (like `primary_subjects`, `settings`, etc.), you must generate at least 15-20 diverse, high-quality options."
+  - "Incorporate Stable Diffusion-style weighting (e.g., (detailed:1.2)) where it adds meaningful emphasis to an option."
+  - "The 'combo' categories *must* correctly reference other categories using the `__top_level_key/category_name__` syntax. (e.g., `__my_cyberpunk/primary_subjects__`)."
+  - "The `spotlight_prompts` must be complete, highly detailed prompts, not just single items."
+  - "The `negative_prompt` must include general bad-art terms AND theme-specific exclusions (e.g., for a 'Cyberpunk' theme, add 'fantasy, magic, medieval')."
+  - "Do not include these instructions in your final YAML output. The output should begin *only* with the top-level theme key."
+
+# 3. Define the Desired Output Structure
+# LLM: Use this as the template for your output.
+# Do not just copy this structure; *fill it in* with content based on the user_theme.
+# Change the category names (e.g., 'primary_subjects') to be specific to the theme (e.g., 'character_class', 'vehicle_type', 'food_item').
+generation_structure:
+  "[theme_name]": # This MUST be replaced with the short theme name
+
+    # --- Basic Components ---
+    primary_subjects:
+      # - [Instructions: Rename this category (e.g., 'archetypes', 'classes', 'creatures', 'vehicles') and fill with 15-20 options]
+      - "example subject 1"
+      - "example subject 2"
+
+    secondary_subjects:
+      # - [Instructions: Rename this category (e.g., 'companions', 'sidekicks', 'ambient_life') and fill with 15-20 options]
+      - "example detail 1"
+      - "example detail 2"
+
+    # --- Descriptive Details ---
+    subject_descriptors_1:
+      # - [Instructions: Rename this category (e.g., 'clothing_style', 'armor_type', 'materials') and fill with 15-20 options]
+      - "example descriptor 1"
+      - "example descriptor 2"
+
+    subject_descriptors_2:
+      # - [Instructions: Rename this category (e.g., 'emotional_state', 'expression', 'vibe') and fill with 15-20 options]
+      - "example descriptor 3"
+      - "example descriptor 4"
+
+    # --- Environment & Scene ---
+    settings:
+      # - [Instructions: Rename this category (e.g., 'locations', 'environments', 'room_types') and fill with 15-20 options]
+      - "example setting 1"
+      - "example setting 2"
+
+    atmospheres:
+      # - [Instructions: Rename this category (e.g., 'mood', 'weather', 'time_of_day') and fill with 15-20 options]
+      - "example atmosphere 1"
+      - "example atmosphere 2"
+
+    lighting_styles:
+      # - [Instructions: Keep this category name or similar. Fill with 15-20 lighting options]
+      - "example lighting 1"
+      - "example lighting 2"
+
+    # --- Style & Composition ---
+    art_styles:
+      # - [Instructions: Keep this category name or similar. Fill with 15-20 art styles, mediums, or artist names relevant to the theme]
+      - "example style 1"
+      - "example style 2"
+
+    camera_shots:
+      # - [Instructions: Keep this category name or similar. Fill with 10-15 camera angles and compositions]
+      - "example shot 1"
+      - "example shot 2"
+
+    # --- Effects & Extras ---
+    special_effects:
+      # - [Instructions: Rename this category (e.g., 'fx_magic', 'fx_tech', 'particles') and fill with 15-20 options]
+      - "example effect 1"
+      - "example effect 2"
+
+    # --- Combinations ---
+    # Instructions for LLM: Create 3-5 'combo' categories.
+    # These must combine the categories you created above using the format: "__[theme_name]/category_name__"
+    
+    combo_character:
+      - "__[theme_name]/primary_subjects__, __[theme_name]/subject_descriptors_1__, in a __[theme_name]/settings__, __[theme_name]/lighting_styles__, __[theme_name]/art_styles__"
+
+    combo_scene:
+      - "__[theme_name]/settings__, __[theme_name]/atmospheres__, __[theme_name]/lighting_styles__, __[theme_name]/camera_shots__, __[theme_name]/art_styles__, __[theme_name]/special_effects__"
+
+    random:
+      - "__[theme_name]/combo_character__"
+      - "__[theme_name]/combo_scene__"
+
+    # --- Spotlight Prompts ---
+    # Instructions for LLM: Create a 'spotlight_prompts' category.
+    # These are 15-20 *complete*, highly-detailed, pre-written prompts
+    # that showcase the theme at its best. Use weighting like (keyword:1.3).
+    
+    spotlight_prompts:
+      - "[A complete, detailed, and evocative prompt fitting the theme, e.g., 'a (grizzled veteran:1.2) in heavy power armor, standing in a (rain-soaked neon alley:1.1), (volumetric fog:1.2), cinematic lighting, detailed illustration']"
+      - "[Another complete, detailed, and evocative prompt...]"
+      - "[...18 more...]"
+
+    # --- Negative Prompt ---
+    # Instructions for LLM: Create a 'negative_prompt' category.
+    # This should list common failure modes for this theme, plus general bad-art terms.
+    
+    negative_prompt:
+      - "text, watermark, signature, (worst quality:1.2), (low quality:1.2), (bad anatomy:1.3), extra limbs, (missing limbs:1.2), poorly drawn, fused fingers, (too many fingers:1.2)"
+      - "[LLM adds theme-specific negatives here, e.g., 'fantasy, magic, medieval, swords' for a sci-fi theme]"
+      - "[LLM adds more theme-specific negatives, e.g., 'bright colors, happy, cheerful' for a horror theme]"
