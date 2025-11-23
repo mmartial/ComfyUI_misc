@@ -138,7 +138,7 @@
       "flags": {
         "pinned": true
       },
-      "order": 19,
+      "order": 18,
       "mode": 0,
       "inputs": [
         {
@@ -1845,7 +1845,7 @@
         "Node name for S&R": "OllamaConnectivityV2"
       },
       "widgets_values": [
-        "http://ollama:11434",
+        "http://ollama.internal:11434",
         "gpt-oss:20b",
         5,
         "minutes",
@@ -2033,42 +2033,6 @@
       ]
     },
     {
-      "id": 263,
-      "type": "String",
-      "pos": [
-        -330,
-        1770
-      ],
-      "size": [
-        870,
-        430
-      ],
-      "flags": {},
-      "order": 10,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            578
-          ]
-        }
-      ],
-      "title": "System Prompt",
-      "properties": {
-        "cnr_id": "ComfyLiterals",
-        "ver": "bdddb08ca82d90d75d97b1d437a652e0284a32ac",
-        "Node name for S&R": "String"
-      },
-      "widgets_values": [
-        "You are a prompt conversion specialist. \nYou will be given a tag-based prompt that uses comma separation and numerical weights (e.g., (word:1.2)). Your sole task is to analyze these tags and their weights to identify the core subject, action, environment, and style, then synthesize them into a single, descriptive prompt. This prompot will consist of at maximum three setennces. Each new setence must be concise (15-60 words) because the target model understands natural, direct language better than a long list of keywords. \n\n\nA structured approach helps with the result:\n1. Subject: Clearly define the central person, object, or theme.\n2. Description and action: Use vivid adjectives and action verbs to elaborate on the subject and its activity. This adds depth and complexity.\n3. Environment and setting: Describe the background and setting to provide context for the scene.\n4. Style and medium: Indicate the desired artistic style, medium, or movement, such as \"photo,\" \"oil painting,\" \"3D rendering,\" \"impressionist,\" \"cyberpunk,\" or by referencing an artist like \"in the style of Van Gogh\".\n5. Lighting and atmosphere: Define the mood and lighting, using terms like \"somber,\" \"vibrant,\" \"introspective,\" or descriptions such as \"warm sunlight filtering through the trees\". \n6. Technical details (optional): Include technical details like camera settings for more control, especially for photorealistic results, such as \"Highly detailed, with realistic textures and global illumination\". \n\nA suggested formula for prompts is: \n[Subject and Description], \n[Action and Interaction], \n[Environment and Setting], \n[Mood and Atmosphere], \n[Style and Technical Details]. \n\nImperative: Your entire response must be only the final, converted prompt. Do not include any conversational text, labels, or explanations."
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
       "id": 257,
       "type": "ShowText|pysssss",
       "pos": [
@@ -2104,7 +2068,7 @@
         "Node name for S&R": "ShowText|pysssss"
       },
       "widgets_values": [
-        "A gorgeous anime image.\n.   Brown‑haired magical girl warrior with sparkling eyes, neon‑glowing bracelet, and a wand, transforms amid a star‑filled cosmic field and swirling nebula, in a whimsical, vibrant anime style."
+        "A gorgeous comic style illustration.\n.   One sorcerer heroine stands in an urban alley.  \nHer fair skin shows light freckles, elegant side part.  \nBlue‑tinted hair glows with comic highlights.  \nHer eyes are glowing white, pupilless, wide shock.  \nShe wears street clothes layered with practical armor.  \nA stylized animal emblem appears on her chest.  \nHeavy metal boots anchor her; crackling energy surrounds fists.  \nGlowing runes swirl while she casts dynamic spell.  \nJack Kirby bold strokes meet Bill Sienkiewicz abstract media.  \nRetro Kirby dots highlight dynamic energy of heroine."
       ],
       "color": "#232",
       "bgcolor": "#353"
@@ -2121,7 +2085,7 @@
         294
       ],
       "flags": {},
-      "order": 17,
+      "order": 19,
       "mode": 0,
       "inputs": [
         {
@@ -2271,7 +2235,7 @@
         410
       ],
       "flags": {},
-      "order": 11,
+      "order": 10,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -2295,7 +2259,7 @@
         "populate",
         255491777224741,
         "randomize",
-        "Select the Wildcard to add to the text"
+        "Select Wildcard 🟢 Full Cache"
       ]
     },
     {
@@ -2310,7 +2274,7 @@
         200
       ],
       "flags": {},
-      "order": 18,
+      "order": 17,
       "mode": 0,
       "inputs": [
         {
@@ -2340,42 +2304,6 @@
       "bgcolor": "#353"
     },
     {
-      "id": 264,
-      "type": "easy positive",
-      "pos": [
-        -590,
-        570
-      ],
-      "size": [
-        400,
-        200
-      ],
-      "flags": {},
-      "order": 12,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "positive",
-          "type": "STRING",
-          "links": [
-            579
-          ]
-        }
-      ],
-      "title": "Preliminary text (will be added before the Ollama generated text)",
-      "properties": {
-        "cnr_id": "comfyui-easy-use",
-        "ver": "1.3.4",
-        "Node name for S&R": "easy positive"
-      },
-      "widgets_values": [
-        "A gorgeous anime image.\n"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
       "id": 249,
       "type": "Checkpoint Loader with Name (Image Saver)",
       "pos": [
@@ -2387,7 +2315,7 @@
         120
       ],
       "flags": {},
-      "order": 13,
+      "order": 11,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -2427,6 +2355,78 @@
       "widgets_values": [
         "Flux.1 Krea/unstableEvolution_Fp1622GB.safetensors"
       ]
+    },
+    {
+      "id": 263,
+      "type": "String",
+      "pos": [
+        -330,
+        1770
+      ],
+      "size": [
+        870,
+        430
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            578
+          ]
+        }
+      ],
+      "title": "System Prompt",
+      "properties": {
+        "cnr_id": "ComfyLiterals",
+        "ver": "bdddb08ca82d90d75d97b1d437a652e0284a32ac",
+        "Node name for S&R": "String"
+      },
+      "widgets_values": [
+        "You are a prompt conversion specialist. \nYou will be given a tag-based prompt that uses comma separation and numerical weights (e.g., (word:1.2)). Your sole task is to analyze these tags and their weights to identify the core subject, action, environment, and style, then synthesize them into a single, descriptive prompt. This prompot will consist of at maximum ten sentences. Each sentence must be under 60 words. Desribe the expected iamge with natural, direct language that will produce a result following the expectations of the original prompt. \n\n\nA structured approach helps with the result:\n1. Subject: Clearly define the central person, object, or theme.\n2. Description and action: Use vivid adjectives and action verbs to elaborate on the subject and its activity. This adds depth and complexity.\n3. Environment and setting: Describe the background and setting to provide context for the scene.\n4. Style and medium: Indicate the desired artistic style, medium, or movement, such as \"photo,\" \"oil painting,\" \"3D rendering,\" \"impressionist,\" \"cyberpunk,\" or by referencing an artist like \"in the style of Van Gogh\".\n5. Lighting and atmosphere: Define the mood and lighting, using terms like \"somber,\" \"vibrant,\" \"introspective,\" or descriptions such as \"warm sunlight filtering through the trees\". \n6. Technical details (optional): Include technical details like camera settings for more control, especially for photorealistic results, such as \"Highly detailed, with realistic textures and global illumination\". \n\nA suggested formula for prompts is: \n[Subject and Description], \n[Action and Interaction], \n[Environment and Setting], \n[Mood and Atmosphere], \n[Style and Technical Details]. \n\nImperative: Your entire response must be only the final, converted prompt. Do not include any conversational text, labels, or explanations."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 264,
+      "type": "easy positive",
+      "pos": [
+        -650,
+        570
+      ],
+      "size": [
+        439.7833312988281,
+        200
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "STRING",
+          "links": [
+            579
+          ]
+        }
+      ],
+      "title": "Preliminary text (will be added before the Ollama generated text)",
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "1.3.4",
+        "Node name for S&R": "easy positive"
+      },
+      "widgets_values": [
+        "A gorgeous anime image.\n"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
     }
   ],
   "links": [
@@ -3053,12 +3053,13 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 1.0610764609500016,
+      "scale": 0.7972024500000005,
       "offset": [
-        765.1003976978152,
-        -118.40311222855907
+        1644.944973826913,
+        557.6961730360963
       ]
     },
+    "frontendVersion": "1.30.6",
     "info": {
       "name": "workflow",
       "author": "",
@@ -3077,7 +3078,6 @@
       "ComfyUI-Impact-Subpack": "74db20c95eca152a6d686c914edc0ef4e4762cb8",
       "ComfyUI_UltimateSDUpscale": "ff3fdfeee03de46d4462211cffd165d27155e858"
     },
-    "frontendVersion": "1.28.7",
     "VHS_latentpreview": false,
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,
