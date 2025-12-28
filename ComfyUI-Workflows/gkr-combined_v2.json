@@ -1840,7 +1840,7 @@
         "Node name for S&R": "ShowText|pysssss"
       },
       "widgets_values": [
-        "In the twilight of a cold blue night, an ancient temple's overgrown ruins loom beneath twisted trees and gnarled roots, a wide panorama of crumbling stone swallowed by drifting fog.  \nA dragon‑blooded bishounen man stands beneath a glowing river, his long silky straight hair cut into a hime style, scales shimmering with iridescent hues and horns curling like ancient symbols.  \nHe grips a mecha energy blaster, its neon accents cutting through the pale light of the night, reflecting a bright anime bloom that animates the tense, silent air.  \nThe emotional close‑up captures his draconic eyes, tense and silent, holding breath as ghostly apparitions flicker through the ground fog, hinting at unseen threats.  \nHigh‑contrast pen and ink render the ruins in a gothic horror style, neon cyber armor illuminating the bridge over the glowing river, juxtaposing ancient magic with futuristic cyberpunk.  \nThe wide shot establishes the scene of crumbling stone and overgrown vegetation, the cold blue night tones and pale light underscoring a somber, epic and dramatic atmosphere.  \nFaint figures appear in the obscuring fog, their presence hinted at through the glowing sigils on the bridge, as the hero waits, his energy weapon poised for a battle that blurs the line between ancient stone and futuristic fire."
+        "In a dynamic anime hero pose, a bishoujo yakuza adventurer towers amid ancient temple ruins reclaimed by vines.  \nShe wears a sleek suit, its edges sharp and intimidating, and her medium fluffy hair layers fall softly around her face.  \nBold irezumi tattoos snake across her arms, contrasting with glowing runes on her enchanted lightweight armor.  \nShe wields a mecha energy blaster, its sci‑fi gun sparking bright arcs of neon light.  \nThe ancient ruins behind her are overgrown with vines, yet neon reflections shimmer across stone and metal.  \nThe setting, a JRPG‑style temple, feels epic and dramatic, blending cyberpunk neon lighting with mystical isekai fantasy."
       ],
       "color": "#232",
       "bgcolor": "#353"
@@ -1920,7 +1920,7 @@
         "Node name for S&R": "ShowText|pysssss"
       },
       "widgets_values": [
-        "In the twilight of a cold blue night, the ancient temple ruins loom beneath twisted trees and gnarled roots, a sweeping panorama of crumbling stone swallowed by drifting fog.  \nA dragon‑blooded bishounen man stands beneath a luminous river, his long silky straight hair styled in a hime cut, scales shimmering in iridescent hues while horns curl like forgotten sigils.  \nHe grips a mecha energy blaster, neon accents slicing through the pale night light, casting a bright anime bloom that animates the tense, silent air.  \nThe close‑up captures his draconic eyes, tense and silent, breath held as ghostly apparitions flicker through the ground fog, hinting at unseen threats.  \nHigh‑contrast pen and ink render the ruins in gothic horror style, while neon cyber armor illuminates the bridge over the glowing river, juxtaposing ancient magic with futuristic cyberpunk.  \nThe wide shot establishes the crumbling stone and overgrown vegetation, cold blue night tones and pale light underscoring a somber, epic and dramatic atmosphere.  \nFaint figures emerge in the obscuring fog, their presence hinted by glowing sigils on the bridge, as the hero waits, his energy weapon poised for a battle that blurs the line between ancient stone and futuristic fire."
+        "A bishoujo yakuza adventurer strikes a dynamic anime hero pose, towering above ancient temple ruins swallowed by vines.  \nShe dons a sleek, razor‑edge suit that commands respect, while medium‑fluffy hair cascades softly around her striking face.  \nBold irezumi tattoos snake across her arms, striking contrast to glowing runes etched into her enchanted lightweight armor.  \nIn her hand, a mecha energy blaster erupts bright neon arcs, illuminating the ruins with sci‑fi fire.  \nThe ruins behind her, overgrown with vines, still retain towering stone and rusted metal, glistening with neon reflections.  \nThe temple’s atmosphere, rendered in JRPG style, feels epic and dramatic, fusing cyberpunk neon lighting with mystical isekai fantasy.  \nNeon reflections ripple across the path, turning the ancient stoneway into a luminous battlefield that pulls the viewer’s gaze."
       ],
       "color": "#232",
       "bgcolor": "#353"
@@ -2581,39 +2581,8 @@
         false,
         true,
         true,
-        [
-          {
-            "text": "retro artstyle",
-            "active": true,
-            "strength": null,
-            "highlighted": false
-          },
-          {
-            "text": "painting \\(medium\\)",
-            "active": true,
-            "strength": null,
-            "highlighted": false
-          },
-          {
-            "text": "crayon \\(medium\\) watercolor \\(medium\\)",
-            "active": true,
-            "strength": null,
-            "highlighted": false
-          },
-          {
-            "text": "1980s \\(style\\)",
-            "active": true,
-            "strength": null,
-            "highlighted": false
-          },
-          {
-            "text": "1990s \\(style\\)",
-            "active": true,
-            "strength": null,
-            "highlighted": false
-          }
-        ],
-        "retro artstyle, painting \\(medium\\), crayon \\(medium\\) watercolor \\(medium\\), 1980s \\(style\\), 1990s \\(style\\)"
+        [],
+        ""
       ],
       "color": "#223",
       "bgcolor": "#335"
@@ -2656,41 +2625,6 @@
       "bgcolor": "#335"
     },
     {
-      "id": 525,
-      "type": "Fast Groups Bypasser (rgthree)",
-      "pos": [
-        -3590,
-        -520
-      ],
-      "size": [
-        336.15,
-        70
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OPT_CONNECTION",
-          "type": "*",
-          "links": null
-        }
-      ],
-      "title": "Bypass Candidate Selection (no user review)",
-      "properties": {
-        "matchColors": "pale_blue",
-        "matchTitle": "03a",
-        "showNav": true,
-        "showAllGraphs": true,
-        "sort": "position",
-        "customSortAlphabet": "",
-        "toggleRestriction": "default"
-      },
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
       "id": 370,
       "type": "Image Comparer (rgthree)",
       "pos": [
@@ -2730,12 +2664,12 @@
           {
             "name": "A",
             "selected": true,
-            "url": "/api/view?filename=rgthree.compare._temp_kuxff_00213_.png&type=temp&subfolder=&rand=0.8643525847884324"
+            "url": "/api/view?filename=rgthree.compare._temp_kuxff_00237_.png&type=temp&subfolder=&rand=0.182141361942333"
           },
           {
             "name": "B",
             "selected": true,
-            "url": "/api/view?filename=rgthree.compare._temp_kuxff_00214_.png&type=temp&subfolder=&rand=0.12973540551550755"
+            "url": "/api/view?filename=rgthree.compare._temp_kuxff_00238_.png&type=temp&subfolder=&rand=0.3866640022497252"
           }
         ]
       ]
@@ -3108,47 +3042,6 @@
         "Node name for S&R": "PreviewImage"
       },
       "widgets_values": []
-    },
-    {
-      "id": 160,
-      "type": "ImpactWildcardProcessor",
-      "pos": [
-        -5150,
-        -250
-      ],
-      "size": [
-        740,
-        490
-      ],
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "processed text",
-          "type": "STRING",
-          "links": [
-            310
-          ]
-        }
-      ],
-      "title": "ImpactWildcardProcessor (use to expand text or wildcards using Ollama)",
-      "properties": {
-        "cnr_id": "comfyui-impact-pack",
-        "ver": "8.25.1",
-        "Node name for S&R": "ImpactWildcardProcessor"
-      },
-      "widgets_values": [
-        "__gkr_ttrpg/environment__, , __gkr_anime/isekai_combo__, __gkr_gothic/random_backgrounds__",
-        "(ancient temple ruins:1.1), overgrown, , (isekai adventurer:1.1), male, man, (bishounen:1.1), dragon blood hero, (dragon scales:1.2), (dragon horns:1.1), (draconic eyes:1.1), long straight hair, (silky hair:1.1), (hime cut:0.8), mecha energy weapon, (sci-fi gun:1.2), (blaster:1.1), cyber armor, (neon accents:1.2), (futuristic:1.1), (cyberpunk:1.0), (ancient stone bridge:1.1), (glowing river:1.1), magic, night, (epic and dramatic mood:1.1), bright anime glow, (bloom:1.2), (vibrant:1.0), (isekai fantasy illustration:1.2), close-up, (emotional shot:1.1), old forest, (twisted trees:1.2), gnarled roots, tense and silent, holding breath, waiting, cold blue night tones, pale light, somber, gothic horror illustration, (high contrast:1.2), pen and ink, (wide shot:1.1), ruins, establishing scene, drifting fog, ground fog, obscuring, (ghostly apparitions:1.2), faint figures, appearing",
-        "populate",
-        996436129541324,
-        "randomize",
-        "Select Wildcard 🟢 Full Cache"
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
     },
     {
       "id": 515,
@@ -3703,76 +3596,6 @@
       "shape": 4
     },
     {
-      "id": 537,
-      "type": "Fast Groups Bypasser (rgthree)",
-      "pos": [
-        -3720,
-        -720
-      ],
-      "size": [
-        471.48334350585935,
-        154
-      ],
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OPT_CONNECTION",
-          "type": "*",
-          "links": null
-        }
-      ],
-      "title": "Stage selection (bypassing an early stage might block later ones)",
-      "properties": {
-        "matchColors": "pale_blue",
-        "matchTitle": "Stage",
-        "showNav": true,
-        "showAllGraphs": true,
-        "sort": "alphanumeric",
-        "customSortAlphabet": "",
-        "toggleRestriction": "default"
-      },
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
-      "id": 523,
-      "type": "Fast Groups Bypasser (rgthree)",
-      "pos": [
-        -3590,
-        -200
-      ],
-      "size": [
-        330,
-        154
-      ],
-      "flags": {},
-      "order": 10,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OPT_CONNECTION",
-          "type": "*",
-          "links": null
-        }
-      ],
-      "title": "Image Saver bypass",
-      "properties": {
-        "matchColors": "pale_blue",
-        "matchTitle": "Saver",
-        "showNav": true,
-        "showAllGraphs": true,
-        "sort": "alphanumeric",
-        "customSortAlphabet": "",
-        "toggleRestriction": "default"
-      },
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
-    },
-    {
       "id": 159,
       "type": "ShowText|pysssss",
       "pos": [
@@ -3808,7 +3631,7 @@
         "Node name for S&R": "ShowText|pysssss"
       },
       "widgets_values": [
-        "retro artstyle, painting \\(medium\\), crayon \\(medium\\) watercolor \\(medium\\), 1980s \\(style\\), 1990s \\(style\\), .  In the twilight of a cold blue night, the ancient temple ruins loom beneath twisted trees and gnarled roots, a sweeping panorama of crumbling stone swallowed by drifting fog.  \nA dragon‑blooded bishounen man stands beneath a luminous river, his long silky straight hair styled in a hime cut, scales shimmering in iridescent hues while horns curl like forgotten sigils.  \nHe grips a mecha energy blaster, neon accents slicing through the pale night light, casting a bright anime bloom that animates the tense, silent air.  \nThe close‑up captures his draconic eyes, tense and silent, breath held as ghostly apparitions flicker through the ground fog, hinting at unseen threats.  \nHigh‑contrast pen and ink render the ruins in gothic horror style, while neon cyber armor illuminates the bridge over the glowing river, juxtaposing ancient magic with futuristic cyberpunk.  \nThe wide shot establishes the crumbling stone and overgrown vegetation, cold blue night tones and pale light underscoring a somber, epic and dramatic atmosphere.  \nFaint figures emerge in the obscuring fog, their presence hinted by glowing sigils on the bridge, as the hero waits, his energy weapon poised for a battle that blurs the line between ancient stone and futuristic fire..  <lora:Akemi Takada_IL:1.0>"
+        "anime style.  A bishoujo yakuza adventurer strikes a dynamic anime hero pose, towering above ancient temple ruins swallowed by vines.  \nShe dons a sleek, razor‑edge suit that commands respect, while medium‑fluffy hair cascades softly around her striking face.  \nBold irezumi tattoos snake across her arms, striking contrast to glowing runes etched into her enchanted lightweight armor.  \nIn her hand, a mecha energy blaster erupts bright neon arcs, illuminating the ruins with sci‑fi fire.  \nThe ruins behind her, overgrown with vines, still retain towering stone and rusted metal, glistening with neon reflections.  \nThe temple’s atmosphere, rendered in JRPG style, feels epic and dramatic, fusing cyberpunk neon lighting with mystical isekai fantasy.  \nNeon reflections ripple across the path, turning the ancient stoneway into a luminous battlefield that pulls the viewer’s gaze..  <lora:detailed_v2_flux_ntc:0.85>"
       ],
       "color": "#232",
       "bgcolor": "#353"
@@ -3825,7 +3648,7 @@
         106
       ],
       "flags": {},
-      "order": 11,
+      "order": 7,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -3847,296 +3670,6 @@
       },
       "color": "#232",
       "bgcolor": "#353"
-    },
-    {
-      "id": 490,
-      "type": "1f9d88f5-0581-4d0e-95f0-154639d061e3",
-      "pos": [
-        -1330,
-        -730
-      ],
-      "size": [
-        520,
-        664
-      ],
-      "flags": {},
-      "order": 69,
-      "mode": 2,
-      "inputs": [
-        {
-          "label": "Checkpoint",
-          "name": "ckpt_name",
-          "type": "COMBO",
-          "widget": {
-            "name": "ckpt_name"
-          },
-          "link": null
-        },
-        {
-          "label": "Flux1D VAE",
-          "name": "vae_name",
-          "type": "COMBO",
-          "widget": {
-            "name": "vae_name"
-          },
-          "link": null
-        },
-        {
-          "name": "batch_size",
-          "type": "INT",
-          "widget": {
-            "name": "batch_size"
-          },
-          "link": 1403
-        },
-        {
-          "label": "STEPS",
-          "name": "int",
-          "type": "INT",
-          "widget": {
-            "name": "int"
-          },
-          "link": null
-        },
-        {
-          "label": "CFG",
-          "name": "cfg",
-          "type": "FLOAT",
-          "widget": {
-            "name": "cfg"
-          },
-          "link": null
-        },
-        {
-          "name": "seed",
-          "type": "INT",
-          "widget": {
-            "name": "seed"
-          },
-          "link": 1360
-        },
-        {
-          "label": "Post Lora model",
-          "name": "model",
-          "type": "MODEL",
-          "link": 1383
-        },
-        {
-          "label": "Post Lora Conditioning",
-          "name": "",
-          "type": "*",
-          "link": 1388
-        },
-        {
-          "label": "Flux1D ClipL",
-          "name": "clip_name1",
-          "type": "COMBO",
-          "widget": {
-            "name": "clip_name1"
-          },
-          "link": null
-        },
-        {
-          "label": "Flux1D t5 Clip",
-          "name": "clip_name2",
-          "type": "COMBO",
-          "widget": {
-            "name": "clip_name2"
-          },
-          "link": null
-        },
-        {
-          "label": "Flux guidance",
-          "name": "guidance",
-          "type": "FLOAT",
-          "widget": {
-            "name": "guidance"
-          },
-          "link": null
-        },
-        {
-          "label": "negative_prompt",
-          "name": "text_1",
-          "type": "STRING",
-          "widget": {
-            "name": "text_1"
-          },
-          "link": 1356
-        }
-      ],
-      "outputs": [
-        {
-          "label": "KSampler IMAGE",
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            1291
-          ]
-        },
-        {
-          "label": "Selected MODEL",
-          "name": "MODEL",
-          "type": "MODEL",
-          "links": [
-            1280
-          ]
-        },
-        {
-          "name": "model_name",
-          "type": "STRING",
-          "links": [
-            1295
-          ]
-        },
-        {
-          "name": "VAE",
-          "type": "VAE",
-          "links": [
-            1314
-          ]
-        },
-        {
-          "label": "STEPS",
-          "name": "INT_2",
-          "type": "INT",
-          "links": [
-            1304
-          ]
-        },
-        {
-          "label": "CFG",
-          "name": "value",
-          "type": "FLOAT",
-          "links": [
-            1307
-          ]
-        },
-        {
-          "name": "sampler_name",
-          "type": "STRING",
-          "links": [
-            1298
-          ]
-        },
-        {
-          "name": "scheduler_name",
-          "type": "STRING",
-          "links": [
-            1302
-          ]
-        },
-        {
-          "label": "Model CLIP",
-          "name": "CLIP",
-          "type": "CLIP",
-          "links": [
-            1283
-          ]
-        },
-        {
-          "label": "Negative CONDITIONING",
-          "name": "CONDITIONING_1",
-          "type": "CONDITIONING",
-          "links": [
-            1317
-          ]
-        },
-        {
-          "name": "sampler",
-          "type": "COMBO",
-          "links": [
-            1320
-          ]
-        },
-        {
-          "name": "scheduler",
-          "type": "COMBO",
-          "links": [
-            1323
-          ]
-        }
-      ],
-      "properties": {
-        "proxyWidgets": [
-          [
-            "-1",
-            "ckpt_name"
-          ],
-          [
-            "-1",
-            "vae_name"
-          ],
-          [
-            "-1",
-            "clip_name1"
-          ],
-          [
-            "-1",
-            "clip_name2"
-          ],
-          [
-            "-1",
-            "resolution"
-          ],
-          [
-            "-1",
-            "batch_size"
-          ],
-          [
-            "-1",
-            "int"
-          ],
-          [
-            "-1",
-            "cfg"
-          ],
-          [
-            "-1",
-            "guidance"
-          ],
-          [
-            "-1",
-            "sampler_name"
-          ],
-          [
-            "-1",
-            "scheduler"
-          ],
-          [
-            "-1",
-            "seed"
-          ],
-          [
-            "-1",
-            "denoise"
-          ],
-          [
-            "-1",
-            "text_1"
-          ]
-        ],
-        "cnr_id": "comfy-core",
-        "ver": "0.5.1"
-      },
-      "widgets_values": [
-        "Flux.1 D/velvetParadoxFluxDev_alphaV01FP16.safetensors",
-        "Flux/ae.sft",
-        "clip_l.safetensors",
-        "t5xxl_fp16.safetensors",
-        "1920×1080 (16:9) - Full HD",
-        2,
-        25,
-        1,
-        3.5,
-        "deis",
-        "simple",
-        193358757655087,
-        1,
-        "negative_prompt only, positive is set via conditioning"
-      ],
-      "color": "#322",
-      "bgcolor": "#533",
-      "shape": 4
     },
     {
       "id": 325,
@@ -4318,7 +3851,7 @@
         60
       ],
       "flags": {},
-      "order": 12,
+      "order": 8,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -4611,71 +4144,6 @@
       "widgets_values": []
     },
     {
-      "id": 556,
-      "type": "Any Switch (rgthree)",
-      "pos": [
-        -4080,
-        1430
-      ],
-      "size": [
-        293.1666625976562,
-        110
-      ],
-      "flags": {},
-      "order": 33,
-      "mode": 0,
-      "inputs": [
-        {
-          "dir": 3,
-          "name": "any_01",
-          "type": "STRING",
-          "link": 1432
-        },
-        {
-          "dir": 3,
-          "name": "any_02",
-          "type": "STRING",
-          "link": 1433
-        },
-        {
-          "dir": 3,
-          "name": "any_03",
-          "type": "STRING",
-          "link": 1455
-        },
-        {
-          "dir": 3,
-          "name": "any_04",
-          "type": "STRING",
-          "link": null
-        },
-        {
-          "dir": 3,
-          "name": "any_05",
-          "type": "STRING",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "dir": 4,
-          "label": "STRING",
-          "name": "*",
-          "shape": 3,
-          "type": "STRING",
-          "links": [
-            1435
-          ]
-        }
-      ],
-      "title": "01b OR 01a or empty if both are muted",
-      "properties": {
-        "cnr_id": "rgthree-comfy",
-        "ver": "1.0.2512112053"
-      },
-      "widgets_values": []
-    },
-    {
       "id": 563,
       "type": "PrimitiveString",
       "pos": [
@@ -4687,7 +4155,7 @@
         58
       ],
       "flags": {},
-      "order": 13,
+      "order": 9,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -4757,7 +4225,7 @@
         82
       ],
       "flags": {},
-      "order": 14,
+      "order": 10,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -4783,47 +4251,6 @@
       ]
     },
     {
-      "id": 485,
-      "type": "ImpactWildcardProcessor",
-      "pos": [
-        -3740,
-        270
-      ],
-      "size": [
-        410,
-        790
-      ],
-      "flags": {},
-      "order": 15,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "processed text",
-          "type": "STRING",
-          "links": [
-            1436
-          ]
-        }
-      ],
-      "title": "Main Prompt: Positive + Wildcards extender",
-      "properties": {
-        "cnr_id": "comfyui-impact-pack",
-        "ver": "8.28.0",
-        "Node name for S&R": "ImpactWildcardProcessor"
-      },
-      "widgets_values": [
-        "",
-        "",
-        "populate",
-        82951353114262,
-        "randomize",
-        "Select Wildcard 🟢 Full Cache"
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
       "id": 529,
       "type": "MarkdownNote",
       "pos": [
@@ -4837,7 +4264,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 16,
+      "order": 11,
       "mode": 0,
       "inputs": [],
       "outputs": [],
@@ -4861,7 +4288,7 @@
         130
       ],
       "flags": {},
-      "order": 17,
+      "order": 12,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -4885,41 +4312,6 @@
       "bgcolor": "#3f5159"
     },
     {
-      "id": 521,
-      "type": "Fast Groups Muter (rgthree)",
-      "pos": [
-        -3660,
-        20
-      ],
-      "size": [
-        410,
-        154
-      ],
-      "flags": {},
-      "order": 18,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OPT_CONNECTION",
-          "type": "*",
-          "links": null
-        }
-      ],
-      "title": "KSampler Selection (Only 1) [Mute]",
-      "properties": {
-        "matchColors": "red",
-        "matchTitle": "",
-        "showNav": true,
-        "showAllGraphs": true,
-        "sort": "alphanumeric",
-        "customSortAlphabet": "",
-        "toggleRestriction": "always one"
-      },
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
       "id": 192,
       "type": "1bf7fa61-430f-4e4b-81c0-87cffedef833",
       "pos": [
@@ -4932,7 +4324,7 @@
       ],
       "flags": {},
       "order": 37,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "batch_size",
@@ -5172,90 +4564,6 @@
       "shape": 4
     },
     {
-      "id": 468,
-      "type": "Lora Loader (LoraManager)",
-      "pos": [
-        -3310,
-        260
-      ],
-      "size": [
-        360,
-        810
-      ],
-      "flags": {},
-      "order": 68,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "MODEL",
-          "link": 1328
-        },
-        {
-          "name": "clip",
-          "shape": 7,
-          "type": "CLIP",
-          "link": 1284
-        },
-        {
-          "name": "lora_stack",
-          "shape": 7,
-          "type": "LORA_STACK",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "MODEL",
-          "type": "MODEL",
-          "links": [
-            1216
-          ]
-        },
-        {
-          "name": "CLIP",
-          "type": "CLIP",
-          "links": [
-            1217,
-            1218
-          ]
-        },
-        {
-          "name": "trigger_words",
-          "type": "STRING",
-          "links": [
-            1421
-          ]
-        },
-        {
-          "name": "loaded_loras",
-          "type": "STRING",
-          "links": [
-            1439
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfyui-lora-manager",
-        "ver": "0.9.11",
-        "Node name for S&R": "Lora Loader (LoraManager)"
-      },
-      "widgets_values": [
-        "<lora:Akemi Takada_IL:1.00>",
-        [
-          {
-            "name": "Akemi Takada_IL",
-            "strength": 1,
-            "active": true,
-            "expanded": false,
-            "clipStrength": 1
-          }
-        ]
-      ],
-      "color": "#223",
-      "bgcolor": "#335"
-    },
-    {
       "id": 381,
       "type": "Seed (rgthree)",
       "pos": [
@@ -5267,7 +4575,7 @@
         130
       ],
       "flags": {},
-      "order": 19,
+      "order": 13,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -5566,245 +4874,6 @@
         "showOutputText": false,
         "horizontal": false
       }
-    },
-    {
-      "id": 206,
-      "type": "79e952fc-d4ad-4367-8502-a8215ef9fe5e",
-      "pos": [
-        270,
-        760
-      ],
-      "size": [
-        420,
-        442
-      ],
-      "flags": {},
-      "order": 38,
-      "mode": 0,
-      "inputs": [
-        {
-          "label": "SAM_model_name",
-          "name": "model_name",
-          "type": "COMBO",
-          "widget": {
-            "name": "model_name"
-          },
-          "link": null
-        },
-        {
-          "label": "image",
-          "name": "anything",
-          "type": "*",
-          "link": 1459
-        },
-        {
-          "label": "Faces bbox model",
-          "name": "model_name_1",
-          "type": "COMBO",
-          "widget": {
-            "name": "model_name_1"
-          },
-          "link": null
-        },
-        {
-          "label": "Eyes bbox model",
-          "name": "model_name_2",
-          "type": "COMBO",
-          "widget": {
-            "name": "model_name_2"
-          },
-          "link": null
-        },
-        {
-          "name": "model",
-          "type": "MODEL",
-          "link": 819
-        },
-        {
-          "name": "positive",
-          "type": "CONDITIONING",
-          "link": 823
-        },
-        {
-          "name": "negative",
-          "type": "CONDITIONING",
-          "link": 825
-        },
-        {
-          "name": "vae",
-          "type": "VAE",
-          "link": 827
-        },
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 821
-        },
-        {
-          "name": "steps",
-          "type": "INT",
-          "widget": {
-            "name": "steps"
-          },
-          "link": 874
-        },
-        {
-          "name": "sampler_name",
-          "type": "COMBO",
-          "widget": {
-            "name": "sampler_name"
-          },
-          "link": 883
-        },
-        {
-          "name": "scheduler",
-          "type": "COMBO",
-          "widget": {
-            "name": "scheduler"
-          },
-          "link": 884
-        },
-        {
-          "label": "Hands bbox model",
-          "name": "model_name_3",
-          "type": "COMBO",
-          "widget": {
-            "name": "model_name_3"
-          },
-          "link": null
-        },
-        {
-          "label": "Face: max_size",
-          "name": "max_size",
-          "type": "FLOAT",
-          "widget": {
-            "name": "max_size"
-          },
-          "link": null
-        },
-        {
-          "label": "Eyes: max_size",
-          "name": "max_size_1",
-          "type": "FLOAT",
-          "widget": {
-            "name": "max_size_1"
-          },
-          "link": null
-        },
-        {
-          "label": "Hands: max_size",
-          "name": "max_size_2",
-          "type": "FLOAT",
-          "widget": {
-            "name": "max_size_2"
-          },
-          "link": null
-        },
-        {
-          "name": "seed",
-          "type": "INT",
-          "link": 1464
-        },
-        {
-          "label": "detailer steps",
-          "name": "steps_1",
-          "type": "INT",
-          "widget": {
-            "name": "steps_1"
-          },
-          "link": null
-        },
-        {
-          "label": "Face segm model",
-          "name": "model_name_4",
-          "type": "COMBO",
-          "widget": {
-            "name": "model_name_4"
-          },
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": [
-            828,
-            877,
-            1446
-          ]
-        }
-      ],
-      "properties": {
-        "proxyWidgets": [
-          [
-            "-1",
-            "model_name"
-          ],
-          [
-            "-1",
-            "steps_1"
-          ],
-          [
-            "-1",
-            "model_name_1"
-          ],
-          [
-            "-1",
-            "model_name_4"
-          ],
-          [
-            "-1",
-            "max_size"
-          ],
-          [
-            "-1",
-            "model_name_2"
-          ],
-          [
-            "-1",
-            "max_size_1"
-          ],
-          [
-            "-1",
-            "model_name_3"
-          ],
-          [
-            "-1",
-            "max_size_2"
-          ],
-          [
-            "-1",
-            "steps"
-          ],
-          [
-            "-1",
-            "sampler_name"
-          ],
-          [
-            "-1",
-            "scheduler"
-          ]
-        ],
-        "cnr_id": "comfy-core",
-        "ver": "0.5.1"
-      },
-      "widgets_values": [
-        "sam_vit_b_01ec64.pth",
-        10,
-        "bbox/face_yolov8m.pt",
-        "segm/face_yolov8n-seg2_60.pt",
-        512,
-        "bbox/Eyeful_v2-Paired.pt",
-        512,
-        "bbox/hand_yolov8s.pt",
-        512,
-        8,
-        "euler",
-        "simple"
-      ],
-      "color": "#2a363b",
-      "bgcolor": "#3f5159"
     },
     {
       "id": 304,
@@ -6168,6 +5237,906 @@
       ],
       "color": "#2a363b",
       "bgcolor": "#3f5159"
+    },
+    {
+      "id": 521,
+      "type": "Fast Groups Muter (rgthree)",
+      "pos": [
+        -3660,
+        20
+      ],
+      "size": [
+        410,
+        154
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "KSampler Selection (Only 1) [Mute]",
+      "properties": {
+        "matchColors": "red",
+        "matchTitle": "",
+        "showNav": true,
+        "showAllGraphs": true,
+        "sort": "alphanumeric",
+        "customSortAlphabet": "",
+        "toggleRestriction": "always one"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 556,
+      "type": "Any Switch (rgthree)",
+      "pos": [
+        -4080,
+        1430
+      ],
+      "size": [
+        293.1666625976562,
+        110
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "dir": 3,
+          "name": "any_01",
+          "type": "STRING",
+          "link": 1432
+        },
+        {
+          "dir": 3,
+          "name": "any_02",
+          "type": "STRING",
+          "link": 1433
+        },
+        {
+          "dir": 3,
+          "name": "any_03",
+          "type": "STRING",
+          "link": 1455
+        },
+        {
+          "dir": 3,
+          "name": "any_04",
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "dir": 3,
+          "name": "any_05",
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "dir": 4,
+          "label": "STRING",
+          "name": "*",
+          "shape": 3,
+          "type": "STRING",
+          "links": [
+            1435
+          ]
+        }
+      ],
+      "title": "01b OR 01a or empty if both are muted",
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "1.0.2512112053"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 490,
+      "type": "1f9d88f5-0581-4d0e-95f0-154639d061e3",
+      "pos": [
+        -1330,
+        -730
+      ],
+      "size": [
+        520,
+        664
+      ],
+      "flags": {},
+      "order": 69,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Checkpoint",
+          "name": "ckpt_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "ckpt_name"
+          },
+          "link": null
+        },
+        {
+          "label": "Flux1D VAE",
+          "name": "vae_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "vae_name"
+          },
+          "link": null
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "widget": {
+            "name": "batch_size"
+          },
+          "link": 1403
+        },
+        {
+          "label": "STEPS",
+          "name": "int",
+          "type": "INT",
+          "widget": {
+            "name": "int"
+          },
+          "link": null
+        },
+        {
+          "label": "CFG",
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 1360
+        },
+        {
+          "label": "Post Lora model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 1383
+        },
+        {
+          "label": "Post Lora Conditioning",
+          "name": "",
+          "type": "*",
+          "link": 1388
+        },
+        {
+          "label": "Flux1D ClipL",
+          "name": "clip_name1",
+          "type": "COMBO",
+          "widget": {
+            "name": "clip_name1"
+          },
+          "link": null
+        },
+        {
+          "label": "Flux1D t5 Clip",
+          "name": "clip_name2",
+          "type": "COMBO",
+          "widget": {
+            "name": "clip_name2"
+          },
+          "link": null
+        },
+        {
+          "label": "Flux guidance",
+          "name": "guidance",
+          "type": "FLOAT",
+          "widget": {
+            "name": "guidance"
+          },
+          "link": null
+        },
+        {
+          "label": "negative_prompt",
+          "name": "text_1",
+          "type": "STRING",
+          "widget": {
+            "name": "text_1"
+          },
+          "link": 1356
+        }
+      ],
+      "outputs": [
+        {
+          "label": "KSampler IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1291
+          ]
+        },
+        {
+          "label": "Selected MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1280
+          ]
+        },
+        {
+          "name": "model_name",
+          "type": "STRING",
+          "links": [
+            1295
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            1314
+          ]
+        },
+        {
+          "label": "STEPS",
+          "name": "INT_2",
+          "type": "INT",
+          "links": [
+            1304
+          ]
+        },
+        {
+          "label": "CFG",
+          "name": "value",
+          "type": "FLOAT",
+          "links": [
+            1307
+          ]
+        },
+        {
+          "name": "sampler_name",
+          "type": "STRING",
+          "links": [
+            1298
+          ]
+        },
+        {
+          "name": "scheduler_name",
+          "type": "STRING",
+          "links": [
+            1302
+          ]
+        },
+        {
+          "label": "Model CLIP",
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            1283
+          ]
+        },
+        {
+          "label": "Negative CONDITIONING",
+          "name": "CONDITIONING_1",
+          "type": "CONDITIONING",
+          "links": [
+            1317
+          ]
+        },
+        {
+          "name": "sampler",
+          "type": "COMBO",
+          "links": [
+            1320
+          ]
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "links": [
+            1323
+          ]
+        }
+      ],
+      "properties": {
+        "proxyWidgets": [
+          [
+            "-1",
+            "ckpt_name"
+          ],
+          [
+            "-1",
+            "vae_name"
+          ],
+          [
+            "-1",
+            "clip_name1"
+          ],
+          [
+            "-1",
+            "clip_name2"
+          ],
+          [
+            "-1",
+            "resolution"
+          ],
+          [
+            "-1",
+            "batch_size"
+          ],
+          [
+            "-1",
+            "int"
+          ],
+          [
+            "-1",
+            "cfg"
+          ],
+          [
+            "-1",
+            "guidance"
+          ],
+          [
+            "-1",
+            "sampler_name"
+          ],
+          [
+            "-1",
+            "scheduler"
+          ],
+          [
+            "-1",
+            "seed"
+          ],
+          [
+            "-1",
+            "denoise"
+          ],
+          [
+            "-1",
+            "text_1"
+          ]
+        ],
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1"
+      },
+      "widgets_values": [
+        "Flux.1 D/fluxArtfusion4Steps_v12.safetensors",
+        "Flux/ae.sft",
+        "clip_l.safetensors",
+        "t5xxl_fp16.safetensors",
+        "1920×1080 (16:9) - Full HD",
+        2,
+        25,
+        1,
+        3.5,
+        "deis",
+        "simple",
+        193358757655087,
+        1,
+        "negative_prompt only, positive is set via conditioning"
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "shape": 4
+    },
+    {
+      "id": 206,
+      "type": "79e952fc-d4ad-4367-8502-a8215ef9fe5e",
+      "pos": [
+        270,
+        760
+      ],
+      "size": [
+        420,
+        442
+      ],
+      "flags": {},
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "SAM_model_name",
+          "name": "model_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_name"
+          },
+          "link": null
+        },
+        {
+          "label": "image",
+          "name": "anything",
+          "type": "*",
+          "link": 1459
+        },
+        {
+          "label": "Faces bbox model",
+          "name": "model_name_1",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_name_1"
+          },
+          "link": null
+        },
+        {
+          "label": "Eyes bbox model",
+          "name": "model_name_2",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_name_2"
+          },
+          "link": null
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 819
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 823
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 825
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 827
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 821
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": 874
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": 883
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": 884
+        },
+        {
+          "label": "Hands bbox model",
+          "name": "model_name_3",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_name_3"
+          },
+          "link": null
+        },
+        {
+          "label": "Face: max_size",
+          "name": "max_size",
+          "type": "FLOAT",
+          "widget": {
+            "name": "max_size"
+          },
+          "link": null
+        },
+        {
+          "label": "Eyes: max_size",
+          "name": "max_size_1",
+          "type": "FLOAT",
+          "widget": {
+            "name": "max_size_1"
+          },
+          "link": null
+        },
+        {
+          "label": "Hands: max_size",
+          "name": "max_size_2",
+          "type": "FLOAT",
+          "widget": {
+            "name": "max_size_2"
+          },
+          "link": null
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "link": 1464
+        },
+        {
+          "label": "detailer steps",
+          "name": "steps_1",
+          "type": "INT",
+          "widget": {
+            "name": "steps_1"
+          },
+          "link": null
+        },
+        {
+          "label": "Face segm model",
+          "name": "model_name_4",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_name_4"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            828,
+            877,
+            1446
+          ]
+        }
+      ],
+      "properties": {
+        "proxyWidgets": [
+          [
+            "-1",
+            "model_name"
+          ],
+          [
+            "-1",
+            "steps_1"
+          ],
+          [
+            "-1",
+            "model_name_1"
+          ],
+          [
+            "-1",
+            "model_name_4"
+          ],
+          [
+            "-1",
+            "max_size"
+          ],
+          [
+            "-1",
+            "model_name_2"
+          ],
+          [
+            "-1",
+            "max_size_1"
+          ],
+          [
+            "-1",
+            "model_name_3"
+          ],
+          [
+            "-1",
+            "max_size_2"
+          ],
+          [
+            "-1",
+            "steps"
+          ],
+          [
+            "-1",
+            "sampler_name"
+          ],
+          [
+            "-1",
+            "scheduler"
+          ]
+        ],
+        "cnr_id": "comfy-core",
+        "ver": "0.5.1"
+      },
+      "widgets_values": [
+        "sam_vit_b_01ec64.pth",
+        10,
+        "bbox/face_yolov8m.pt",
+        "segm/face_yolov8n-seg2_60.pt",
+        512,
+        "bbox/Eyeful_v2-Paired.pt",
+        512,
+        "bbox/hand_yolov8s.pt",
+        512,
+        8,
+        "euler",
+        "simple"
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 485,
+      "type": "ImpactWildcardProcessor",
+      "pos": [
+        -3740,
+        270
+      ],
+      "size": [
+        410,
+        790
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "processed text",
+          "type": "STRING",
+          "links": [
+            1436
+          ]
+        }
+      ],
+      "title": "Main Prompt: Positive + Wildcards extender",
+      "properties": {
+        "cnr_id": "comfyui-impact-pack",
+        "ver": "8.28.0",
+        "Node name for S&R": "ImpactWildcardProcessor"
+      },
+      "widgets_values": [
+        "anime style",
+        "anime style",
+        "populate",
+        954247898176625,
+        "randomize",
+        "Select Wildcard 🟢 Full Cache"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 160,
+      "type": "ImpactWildcardProcessor",
+      "pos": [
+        -5150,
+        -250
+      ],
+      "size": [
+        740,
+        490
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "processed text",
+          "type": "STRING",
+          "links": [
+            310
+          ]
+        }
+      ],
+      "title": "ImpactWildcardProcessor (use to expand text or wildcards using Ollama)",
+      "properties": {
+        "cnr_id": "comfyui-impact-pack",
+        "ver": "8.25.1",
+        "Node name for S&R": "ImpactWildcardProcessor"
+      },
+      "widgets_values": [
+        "__gkr_anime/isekai_combo__",
+        "(isekai adventurer:1.1), female, woman, (bishoujo:1.1), yakuza, (suit:1.1), (irezumi tattoo:1.2), (intimidating:1.0), medium hair, (fluffy hair:1.1), (layered:0.9), mecha energy weapon, (sci-fi gun:1.2), (blaster:1.1), lightweight magical armor, (enchanted armor:1.1), (glowing runes:1.0), (ancient ruins:1.1), (jrpg style:1.1), (temple:1.1), (reclaimed by vines:1.1), overgrown, (epic and dramatic mood:1.1), neon reflections, (neon lighting:1.2), (cyberpunk:1.0), (isekai fantasy illustration:1.2), anime hero pose, (dynamic pose:1.2)",
+        "populate",
+        793164826930612,
+        "randomize",
+        "Select Wildcard 🟢 Full Cache"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 525,
+      "type": "Fast Groups Bypasser (rgthree)",
+      "pos": [
+        -3590,
+        -520
+      ],
+      "size": [
+        336.15,
+        70
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Bypass Candidate Selection (no user review)",
+      "properties": {
+        "matchColors": "pale_blue",
+        "matchTitle": "03a",
+        "showNav": true,
+        "showAllGraphs": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 537,
+      "type": "Fast Groups Bypasser (rgthree)",
+      "pos": [
+        -3720,
+        -720
+      ],
+      "size": [
+        471.48334350585935,
+        154
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Stage selection (bypassing an early stage might block later ones)",
+      "properties": {
+        "matchColors": "pale_blue",
+        "matchTitle": "Stage",
+        "showNav": true,
+        "showAllGraphs": true,
+        "sort": "alphanumeric",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 523,
+      "type": "Fast Groups Bypasser (rgthree)",
+      "pos": [
+        -3590,
+        -200
+      ],
+      "size": [
+        330,
+        154
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Image Saver bypass",
+      "properties": {
+        "matchColors": "pale_blue",
+        "matchTitle": "Saver",
+        "showNav": true,
+        "showAllGraphs": true,
+        "sort": "alphanumeric",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 468,
+      "type": "Lora Loader (LoraManager)",
+      "pos": [
+        -3310,
+        260
+      ],
+      "size": [
+        360,
+        810
+      ],
+      "flags": {},
+      "order": 68,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1328
+        },
+        {
+          "name": "clip",
+          "shape": 7,
+          "type": "CLIP",
+          "link": 1284
+        },
+        {
+          "name": "lora_stack",
+          "shape": 7,
+          "type": "LORA_STACK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1216
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            1217,
+            1218
+          ]
+        },
+        {
+          "name": "trigger_words",
+          "type": "STRING",
+          "links": [
+            1421
+          ]
+        },
+        {
+          "name": "loaded_loras",
+          "type": "STRING",
+          "links": [
+            1439
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-lora-manager",
+        "ver": "0.9.11",
+        "Node name for S&R": "Lora Loader (LoraManager)"
+      },
+      "widgets_values": [
+        "<lora:detailed_v2_flux_ntc:0.85>",
+        [
+          {
+            "name": "detailed_v2_flux_ntc",
+            "strength": "0.85",
+            "active": true,
+            "expanded": false,
+            "clipStrength": "0.85"
+          }
+        ]
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
     }
   ],
   "links": [
@@ -8376,7 +8345,7 @@
               "collapsed": false
             },
             "order": 0,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "int",
@@ -8427,7 +8396,7 @@
               "collapsed": false
             },
             "order": 5,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "samples",
@@ -8476,7 +8445,7 @@
               "collapsed": false
             },
             "order": 4,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "int",
@@ -8527,7 +8496,7 @@
               "collapsed": false
             },
             "order": 7,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "vae_name",
@@ -8579,7 +8548,7 @@
               "collapsed": false
             },
             "order": 9,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "width",
@@ -8651,7 +8620,7 @@
               "collapsed": false
             },
             "order": 2,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "cfg",
@@ -8704,7 +8673,7 @@
               "collapsed": false
             },
             "order": 10,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "ckpt_name",
@@ -8776,7 +8745,7 @@
             ],
             "flags": {},
             "order": 11,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "model",
@@ -8904,7 +8873,7 @@
             ],
             "flags": {},
             "order": 3,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "sampler_name",
@@ -8963,7 +8932,7 @@
             ],
             "flags": {},
             "order": 6,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "scheduler",
@@ -9022,7 +8991,7 @@
               "collapsed": false
             },
             "order": 13,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "clip",
@@ -9079,7 +9048,7 @@
             ],
             "flags": {},
             "order": 14,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "name": "",
@@ -9116,7 +9085,7 @@
               "collapsed": false
             },
             "order": 12,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "clip",
@@ -9163,7 +9132,7 @@
             ],
             "flags": {},
             "order": 8,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "resolution",
@@ -9217,7 +9186,7 @@
             ],
             "flags": {},
             "order": 1,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "int",
@@ -9268,7 +9237,7 @@
             ],
             "flags": {},
             "order": 15,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "value",
@@ -11465,8 +11434,8 @@
             "id": 219,
             "type": "Reroute",
             "pos": [
-              -180,
-              3140
+              -200,
+              3080
             ],
             "size": [
               75,
@@ -12521,7 +12490,7 @@
               }
             },
             "widgets_values": [
-              1022541765,
+              615350477,
               "randomize",
               4096,
               5400,
@@ -12795,7 +12764,7 @@
               2150
             ],
             "size": [
-              270,
+              301.26666870117185,
               82
             ],
             "flags": {},
@@ -18262,7 +18231,7 @@
             ],
             "flags": {},
             "order": 7,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "name": "",
@@ -18298,7 +18267,7 @@
             ],
             "flags": {},
             "order": 4,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "model",
@@ -18405,66 +18374,6 @@
             ]
           },
           {
-            "id": 234,
-            "type": "DualCLIPLoader",
-            "pos": [
-              -3430,
-              840
-            ],
-            "size": [
-              406.6441650390625,
-              167.08291625976562
-            ],
-            "flags": {},
-            "order": 14,
-            "mode": 2,
-            "inputs": [
-              {
-                "localized_name": "clip_name1",
-                "name": "clip_name1",
-                "type": "COMBO",
-                "widget": {
-                  "name": "clip_name1"
-                },
-                "link": 504
-              },
-              {
-                "localized_name": "clip_name2",
-                "name": "clip_name2",
-                "type": "COMBO",
-                "widget": {
-                  "name": "clip_name2"
-                },
-                "link": 505
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "CLIP",
-                "name": "CLIP",
-                "type": "CLIP",
-                "slot_index": 0,
-                "links": [
-                  549
-                ]
-              }
-            ],
-            "title": "Flux1D: Dual CLIP Loader",
-            "properties": {
-              "cnr_id": "comfy-core",
-              "ver": "0.3.19",
-              "Node name for S&R": "DualCLIPLoader"
-            },
-            "widgets_values": [
-              "clip_l.safetensors",
-              "t5xxl_fp16.safetensors",
-              "flux",
-              "default"
-            ],
-            "color": "#223",
-            "bgcolor": "#335"
-          },
-          {
             "id": 215,
             "type": "VAEDecode",
             "pos": [
@@ -18479,7 +18388,7 @@
               "collapsed": false
             },
             "order": 6,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "samples",
@@ -18513,73 +18422,6 @@
             "widgets_values": []
           },
           {
-            "id": 219,
-            "type": "Checkpoint Loader with Name (Image Saver)",
-            "pos": [
-              -3500,
-              -370
-            ],
-            "size": [
-              350,
-              130
-            ],
-            "flags": {},
-            "order": 8,
-            "mode": 2,
-            "inputs": [
-              {
-                "localized_name": "ckpt_name",
-                "name": "ckpt_name",
-                "type": "COMBO",
-                "widget": {
-                  "name": "ckpt_name"
-                },
-                "link": 489
-              }
-            ],
-            "outputs": [
-              {
-                "localized_name": "MODEL",
-                "name": "MODEL",
-                "type": "MODEL",
-                "links": [
-                  458,
-                  520
-                ]
-              },
-              {
-                "localized_name": "CLIP",
-                "name": "CLIP",
-                "type": "CLIP",
-                "links": null
-              },
-              {
-                "localized_name": "VAE",
-                "name": "VAE",
-                "type": "VAE",
-                "links": null
-              },
-              {
-                "localized_name": "model_name",
-                "name": "model_name",
-                "type": "STRING",
-                "links": [
-                  521
-                ]
-              }
-            ],
-            "properties": {
-              "cnr_id": "comfyui-image-saver",
-              "ver": "1.16.0",
-              "Node name for S&R": "Checkpoint Loader with Name (Image Saver)"
-            },
-            "widgets_values": [
-              "Flux.1 D/velvetParadoxFluxDev_alphaV01FP16.safetensors"
-            ],
-            "color": "#223",
-            "bgcolor": "#335"
-          },
-          {
             "id": 177,
             "type": "Sampler Selector (Image Saver)",
             "pos": [
@@ -18592,7 +18434,7 @@
             ],
             "flags": {},
             "order": 1,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "sampler_name",
@@ -18651,7 +18493,7 @@
             ],
             "flags": {},
             "order": 2,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "scheduler",
@@ -18708,7 +18550,7 @@
             ],
             "flags": {},
             "order": 3,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "name": "",
@@ -18744,7 +18586,7 @@
             ],
             "flags": {},
             "order": 11,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "float",
@@ -18793,7 +18635,7 @@
               "collapsed": false
             },
             "order": 5,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "clip",
@@ -18845,7 +18687,7 @@
             ],
             "flags": {},
             "order": 15,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "conditioning",
@@ -18900,7 +18742,7 @@
             ],
             "flags": {},
             "order": 10,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "conditioning",
@@ -18955,7 +18797,7 @@
             ],
             "flags": {},
             "order": 13,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "vae_name",
@@ -19003,7 +18845,7 @@
             ],
             "flags": {},
             "order": 9,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "resolution",
@@ -19084,7 +18926,7 @@
               "collapsed": false
             },
             "order": 12,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "width",
@@ -19197,7 +19039,7 @@
             ],
             "flags": {},
             "order": 0,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "int",
@@ -19234,6 +19076,133 @@
             "color": "#223",
             "bgcolor": "#335",
             "shape": 1
+          },
+          {
+            "id": 219,
+            "type": "Checkpoint Loader with Name (Image Saver)",
+            "pos": [
+              -3500,
+              -370
+            ],
+            "size": [
+              350,
+              130
+            ],
+            "flags": {},
+            "order": 8,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "ckpt_name",
+                "name": "ckpt_name",
+                "type": "COMBO",
+                "widget": {
+                  "name": "ckpt_name"
+                },
+                "link": 489
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "MODEL",
+                "name": "MODEL",
+                "type": "MODEL",
+                "links": [
+                  458,
+                  520
+                ]
+              },
+              {
+                "localized_name": "CLIP",
+                "name": "CLIP",
+                "type": "CLIP",
+                "links": null
+              },
+              {
+                "localized_name": "VAE",
+                "name": "VAE",
+                "type": "VAE",
+                "links": null
+              },
+              {
+                "localized_name": "model_name",
+                "name": "model_name",
+                "type": "STRING",
+                "links": [
+                  521
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfyui-image-saver",
+              "ver": "1.16.0",
+              "Node name for S&R": "Checkpoint Loader with Name (Image Saver)"
+            },
+            "widgets_values": [
+              "Flux.1 D/fluxArtfusion4Steps_v12.safetensors"
+            ],
+            "color": "#223",
+            "bgcolor": "#335"
+          },
+          {
+            "id": 234,
+            "type": "DualCLIPLoader",
+            "pos": [
+              -3430,
+              840
+            ],
+            "size": [
+              406.6441650390625,
+              167.08291625976562
+            ],
+            "flags": {},
+            "order": 14,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "clip_name1",
+                "name": "clip_name1",
+                "type": "COMBO",
+                "widget": {
+                  "name": "clip_name1"
+                },
+                "link": 504
+              },
+              {
+                "localized_name": "clip_name2",
+                "name": "clip_name2",
+                "type": "COMBO",
+                "widget": {
+                  "name": "clip_name2"
+                },
+                "link": 505
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "CLIP",
+                "name": "CLIP",
+                "type": "CLIP",
+                "slot_index": 0,
+                "links": [
+                  549
+                ]
+              }
+            ],
+            "title": "Flux1D: Dual CLIP Loader",
+            "properties": {
+              "cnr_id": "comfy-core",
+              "ver": "0.3.19",
+              "Node name for S&R": "DualCLIPLoader"
+            },
+            "widgets_values": [
+              "clip_l.safetensors",
+              "t5xxl_fp16.safetensors",
+              "flux",
+              "default"
+            ],
+            "color": "#223",
+            "bgcolor": "#335"
           }
         ],
         "groups": [],
@@ -22906,6 +22875,13 @@
   },
   "config": {},
   "extra": {
+    "ds": {
+      "scale": 0.7972024500000037,
+      "offset": [
+        738.8789324907035,
+        203.78157326782576
+      ]
+    },
     "frontendVersion": "1.35.9",
     "workflowRendererVersion": "LG",
     "ue_links": [],
@@ -22913,14 +22889,7 @@
     "VHS_latentpreview": false,
     "VHS_latentpreviewrate": 0,
     "VHS_MetadataImage": true,
-    "VHS_KeepIntermediate": true,
-    "ds": {
-      "scale": 0.5445000000000009,
-      "offset": [
-        5455.575035069512,
-        1019.7154974255678
-      ]
-    }
+    "VHS_KeepIntermediate": true
   },
   "version": 0.4
 }
