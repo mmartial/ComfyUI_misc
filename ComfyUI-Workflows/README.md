@@ -2,7 +2,7 @@
 
 _(Looking for the older workflows? You can find them in the [Older](Older) folder)_
 
-This folder contains a "Combined Workflow" (over 500KB) that does SDXL, Pony, Illustrious, Flux1D, Qwen and ZImageTurbo generation with an optional prompt extension using Ollama and Wildcards processing.
+This folder contains a "Combined Workflow" (over 650KB) that does SDXL, Pony, Illustrious, Flux1D, Qwen and ZImageTurbo generation with an optional prompt extension using Ollama and Wildcards processing.
 
 It will generate an upscaled 16MP image as the final result while staying as close as possible to the original generation and produce CivitAI compatible metadata for each stage of the image generation.
 - Stage 1: Generate the regular image, pass it to a selector (can be bypassed for batch generation)
@@ -14,7 +14,7 @@ The workflow contains a "READ ME FIRST" section that details some about how it c
 
 FYSA: list of used custom nodes:
 ```bash
-❯ fgrep cnr_id gkr-combined_v2.json| tr -s " " | sort | cut -d ":" -f 2 | uniq
+❯ fgrep cnr_id gkr-combined_v3.json| tr -s " " | sort | cut -d ":" -f 2 | uniq
  "cg-image-filter",
  "comfy-core",
  "comfy-image-saver",
