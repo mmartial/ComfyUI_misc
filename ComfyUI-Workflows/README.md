@@ -1,5 +1,7 @@
 <h1>ComfyUI "Combined Workflow"</h1>
 
+Please check CivitAI for the other versions of this workflow at [https://civitai.com/models/2149956](https://civitai.com/models/2149956)
+
 _(Looking for the older workflows? You can find them in the [Older](Older) folder)_
 
 This folder contains a "Combined Workflow" (over 650KB) that does SDXL, Pony, Illustrious, Flux1D, Qwen and ZImageTurbo generation with an optional prompt extension using Ollama and Wildcards processing.
