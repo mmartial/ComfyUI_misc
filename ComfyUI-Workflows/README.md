@@ -16,7 +16,7 @@ The workflow contains a "READ ME FIRST" section that details some about how it c
 
 FYSA: list of used custom nodes:
 ```bash
-❯ fgrep cnr_id gkr-combined_v3.json| tr -s " " | sort | cut -d ":" -f 2 | uniq
+❯ fgrep cnr_id gkr-combined_v4.json | tr -s " " | sort | cut -d ":" -f 2 | uniq
  "cg-image-filter",
  "comfy-core",
  "comfy-image-saver",
@@ -33,10 +33,10 @@ FYSA: list of used custom nodes:
  "comfyui-impact-subpack",
  "comfyui-inspire-pack",
  "comfyui-kjnodes",
- "comfyui-logicutils",
  "comfyui-lora-manager",
  "comfyui-ollama",
- "controlaltai-nodes",
+ "image-size-tools",
+ "RES4LYF",
  "rgthree-comfy",
  "seedvr2_videoupscaler",
  ```
