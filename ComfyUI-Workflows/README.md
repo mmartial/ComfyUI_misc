@@ -2,6 +2,17 @@
 
 Please check CivitAI for the other versions of this workflow at [https://civitai.com/models/2149956](https://civitai.com/models/2149956)
 
+A few notes on requirements:
+1. the workflow loads all base models from the `Load Checkpoint with name` node. This is due to the need for the `model_name` field to be available to save CiviAI compatible metadata. One method to enable this is to create the `extra_model_paths.yaml` file to use with ComfyUI. Details on a similar process can be found [https://github.com/mmartial/ComfyUI-Nvidia-Docker/wiki/Stability-Matrix-integration](https://github.com/mmartial/ComfyUI-Nvidia-Docker/wiki/Stability-Matrix-integration), the process is the same with a different target  (adapt `/ComfyUI_models_folder` and `Path_to` to match your setup):
+```yaml
+comfy_extend:
+  base_path: /ComfyUI_models_folder
+  checkpoints: |
+    diffusion_models
+```
+Make sure to add `--extra-model-paths-config=Path_to/extra_model_paths.yaml` to your ComfyUI command line arguments. 
+2. Detailers rely on Ultralytics models. Manual configuration is needed as detailed [https://github.com/ltdrdata/ComfyUI-Impact-Subpack](https://github.com/ltdrdata/ComfyUI-Impact-Subpack)
+
 _(Looking for the older workflows? You can find them in the [Older](Older) folder)_
 
 This folder contains a "Combined Workflow" (over 650KB) that does SDXL, Pony, Illustrious, Flux1D, Qwen and ZImageTurbo generation with an optional prompt extension using Ollama and Wildcards processing.
