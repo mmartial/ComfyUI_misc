@@ -1,0 +1,23 @@
+{
+  "ignore_extensions": [
+    ".py"
+  ],
+  "ignore_folders": [
+    "IpAdapter",
+    "IpAdaptersXl",
+    "IpAdapters15",
+    "ControlNet",
+    "ClipVision",
+    "VAE",
+    ".git",
+    "__pycache__",
+    ".ipynb_checkpoints",
+    "venv",
+    "node_modules",
+    "Ultralytics",
+    "TextEncoders"
+  ],
+  "ignore_groups": [
+    "stable_cascade_stage"
+  ]
+}
