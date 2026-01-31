@@ -1,6 +1,6 @@
 <h1>ComfyUI "Combined Workflow"</h1>
 
-Please check CivitAI for the other versions of this workflow at [https://civitai.com/models/2149956](https://civitai.com/models/2149956)
+Please check CivitAI for the older versions of this workflow at [https://civitai.com/models/2149956](https://civitai.com/models/2149956)
 
 A few notes on requirements:
 1. the workflow loads all base models from the `Load Checkpoint with name` node. This is due to the need for the `model_name` field to be available to save CiviAI compatible metadata. One method to enable this is to create the `extra_model_paths.yaml` file to use with ComfyUI. Details on a similar process can be found [https://github.com/mmartial/ComfyUI-Nvidia-Docker/wiki/Stability-Matrix-integration](https://github.com/mmartial/ComfyUI-Nvidia-Docker/wiki/Stability-Matrix-integration), the process is the same with a different target  (adapt `/ComfyUI_models_folder` and `Path_to` to match your setup):
@@ -27,7 +27,7 @@ The workflow contains a "READ ME FIRST" section that details some about how it c
 
 FYSA: list of used custom nodes:
 ```bash
-❯ fgrep cnr_id gkr-combined_v5.json | tr -s " " | sort | cut -d ":" -f 2 | uniq
+❯ fgrep cnr_id gkr-combined_v6.json | tr -s " " | sort | cut -d ":" -f 2 | uniq
  "cg-image-filter",
  "comfy-core",
  "comfy-image-saver",
@@ -51,3 +51,5 @@ FYSA: list of used custom nodes:
  "rgthree-comfy",
  "seedvr2_videoupscaler",
  ```
+
+ Note: using the `nightly` version of [LoraManager](https://github.com/willmiao/ComfyUI-Lora-Manager) (once 0.9.14 is out, this message will be obsolete)
