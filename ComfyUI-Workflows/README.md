@@ -20,24 +20,25 @@ This folder contains a "Combined Workflow" (over 800KB) that does SDXL, Pony, Il
 It will generate an upscaled 16MP image as the final result while staying as close as possible to the original generation and produce CivitAI compatible metadata for each stage of the image generation.
 - Stage 1: Generate the regular image, pass it to a selector (can be bypassed for batch generation)
 - Stage 2: Upscale to 4MP using HiResFix
-- Stage 3: Use Ultimate SD Upscaler (No Upscale) to redefine the components of 4MP image using the original model and loras' specific characteristics. Faces, Hands and Eyes Detailer are then used on the resulting image.
+- Stage 3: Use Ultimate SD Upscaler (No Upscale) to redefine the components of 4MP image using the original model and loras' specific characteristics. an optional Flux.1D resampler is available followed by a Cleanup stage, then Faces, Hands and Eyes Detailer are then used on the resulting image.
 - Stage 4: That result is sent to SeedVR2 to generate the final 16MP image and a color matching step is performed to make it as close as possible as the initial upscaled image.
 
 The workflow contains a "READ ME FIRST" section that details some about how it came to be, what it does and how to use it. Please refer to it for more information.
 
 FYSA: list of used custom nodes:
 ```bash
-❯ fgrep cnr_id gkr-combined_v6.json | tr -s " " | sort | cut -d ":" -f 2 | uniq
+❯ fgrep cnr_id gkr_combined_v7.json | tr -s " " | sort | cut -d ":" -f 2 | uniq
  "cg-image-filter",
  "comfy-core",
  "comfy-image-saver",
  "ComfyLiterals",
- "ComfyMath",
- "ComfyUI_ADV_CLIP_emb",
- "ComfyUI_Comfyroll_CustomNodes",
- "comfyui_resolutionselectorplus",
+ "comfyui_controlnet_aux",
+ "comfyui_essentials",
+ "comfyui_llm_party",
  "comfyui_ultimatesdupscale",
+ "ComfyUI-Crystools",
  "comfyui-custom-scripts",
+ "comfyui-detail-daemon",
  "comfyui-easy-use",
  "comfyui-fbcnn",
  "comfyui-image-saver",
@@ -47,6 +48,7 @@ FYSA: list of used custom nodes:
  "comfyui-kjnodes",
  "comfyui-lora-manager",
  "comfyui-ollama",
+ "comfyui-resolution-master",
  "RES4LYF",
  "rgthree-comfy",
  "seedvr2_videoupscaler",
