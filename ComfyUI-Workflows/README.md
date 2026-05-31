@@ -2,7 +2,7 @@
 
 Please check CivitAI for the older versions of this workflow at [https://civitai.com/models/2149956](https://civitai.com/models/2149956)
 
-This folder contains a "Combined Workflow" (about 2M and over 600 nodes) that does SDXL, Pony, Illustrious, Flux1D, Qwen,ZImage Turbo/Base and Anima generation with an optional prompt extension using LLMs and Wildcards processing.
+This folder contains a "Combined Workflow" (about 2M and over 600 nodes) that does SDXL, Pony, Illustrious, Flux1D, Qwen,ZImage Turbo/Base, Anima and Flux.2 Klein generation with an optional prompt extension using LLMs and Wildcards processing.
 
 It will generate an upscaled 16MP image as the final result while staying as close as possible to the original generation and produce CivitAI compatible metadata for each stage of the image generation.
 - Stage 1: Generate the regular image using [Detail Daemon](https://github.com/Jonseed/ComfyUI-Detail-Daemon) sampler, pass it to a selector (can be bypassed for batch generation)
@@ -14,9 +14,9 @@ The workflow contains a "READ ME FIRST" section that details some about how it c
 
 FYSA: list (and count) of used custom nodes:
 ```bash
-❯ fgrep cnr_id gkr_combined_v8.json | tr '[:upper:]' '[:lower:]' | tr -s " " | sort | cut -d ":" -f 2 | uniq -c
+❯ fgrep cnr_id gkr_combined_v8.2.json | tr '[:upper:]' '[:lower:]' | tr -s " " | sort | cut -d ":" -f 2 | uniq -c
    1  "cg-image-filter",
- 209  "comfy-core",
+ 221  "comfy-core",
    4  "comfy-image-saver",
    2  "comfy-mtb",
   18  "comfyliterals",
@@ -26,10 +26,10 @@ FYSA: list (and count) of used custom nodes:
    2  "comfyui_ultimatesdupscale",
   12  "comfyui-crystools",
   61  "comfyui-custom-scripts",
-   7  "comfyui-detail-daemon",
+   8  "comfyui-detail-daemon",
   51  "comfyui-easy-use",
    5  "comfyui-fbcnn",
-  65  "comfyui-image-saver",
+  69  "comfyui-image-saver",
   41  "comfyui-impact-pack",
    1  "comfyui-inspire-pack",
   35  "comfyui-kjnodes",
@@ -38,7 +38,7 @@ FYSA: list (and count) of used custom nodes:
    4  "comfyui-qwenvl",
    1  "comfyui-resolution-master",
   13  "comfyui-rmbg",
-  74  "rgthree-comfy",
+  75  "rgthree-comfy",
    3  "seedvr2_videoupscaler",
  ```
  
