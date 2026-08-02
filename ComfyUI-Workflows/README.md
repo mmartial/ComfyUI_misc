@@ -1,5 +1,11 @@
 <h1>ComfyUI "Combined Workflow"</h1>
 
+# Simpler version
+
+The simpler version removes Stage 3 and Stage 4 from the Full version, and is therefore much lighter to run at only about 300 nodes (most hidden within subgraphs) and 18 custom nodes to obtain.
+
+# Full version
+
 Please check CivitAI for the older versions of this workflow at [https://civitai.com/models/2149956](https://civitai.com/models/2149956)
 
 This folder contains a "Combined Workflow" (over 2M and close to 800 nodes) that does SDXL, Pony, Illustrious, Flux1D, Qwen,ZImage Turbo/Base, Anima, Flux.2 Klein and Krea 2 Turbo generations with an optional prompt extension using LLMs and Wildcards processing.
