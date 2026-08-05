@@ -1,9 +1,5 @@
 <h1>ComfyUI "Combined Workflow"</h1>
 
-# Simpler version
-
-The simpler version removes Stage 3 and Stage 4 from the Full version, and is therefore much lighter to run at only about 300 nodes (most hidden within subgraphs) and 18 custom nodes to obtain.
-
 # Full version
 
 Please check CivitAI for the older versions of this workflow at [https://civitai.com/models/2149956](https://civitai.com/models/2149956)
@@ -47,4 +43,25 @@ FYSA: list (and count) of used custom nodes:
   87  "rgthree-comfy",
    3  "seedvr2_videoupscaler",
  ```
- 
+
+# Simpler version(s)
+
+The simpler (`_simple`) version removes Stage 3 and Stage 4 from the Full version, and is therefore much lighter to run at only about 300 nodes (most hidden within subgraphs) and 18 custom nodes to obtain.
+
+## extras
+
+### _simple_detailer
+
+Stage3's detailers made generic detailer with manual mask (and drawing for inpainting) selection.
+
+### _simple_detailer_sam3
+
+Stage 3's detailers with automatic detection (SAM3 based) to automatically detail the mask found with the provided prompt.
+
+### _simple_resampler
+
+Stage3's Initial and Detailer resamplers.
+
+### _simple_Flus_resampler
+
+Stage3's Flus resampler.
