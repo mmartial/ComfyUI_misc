@@ -9,205 +9,205 @@ gkr_steampunk:
 # ---------------------------------------------------------
 
   archetype:
-    - (airship captain:1.1), bold expression, leather coat
-    - (sky pirate:1.1), rugged, (wearing eye patch:0.8), grinning
-    - (clockwork soldier:1.2), brass armor, glowing eyes
-    - (eccentric inventor:1.1), wild hair, (goggles:1.1), toolbelt
-    - (dashing explorer:1.1), pith helmet, (holding map:1.1)
-    - (steam engineer:1.1), (soot smudges:1.1), overalls, holding wrench
-    - (masked vigilante:1.2), dark costume, (gears:1.1), perched on rooftop
-    - (aristocratic mastermind:1.1), fine suit, (monocle:1.1), scheming
-    - (street urchin tinkerer:1.1), patched clothes, (satchel of parts:1.1)
-    - (gentleman adventurer:1.1), tweed suit, (holding cane sword:1.1)
-    - (lady adventurer:1.1), (explorer outfit:1.1), confident stance, holding compass
-    - (automaton valet:1.2), polished brass, (butler uniform:1.1), loyal
-    - (pirate lord:1.2), ornate coat, (mechanical leg:1.1), commanding presence
+    - long brass-buttoned leather coat, confident posture, chin raised
+    - rugged weathered coat, (eye patch:0.9), wide grin, tricorn hat
+    - (brass plate armor:1.2), rigid stance, glowing amber eye lenses
+    - wild frizzy hair, (soot-streaked goggles pushed up:1.1), overloaded toolbelt, ink-stained fingers
+    - pith helmet, sun-worn khaki jacket, (holding a weathered map:1.1)
+    - (soot smudges on cheeks:1.1), oil-stained overalls, holding a heavy wrench
+    - dark leather mask, tattered coat, (brass gear-plated gloves:1.1), crouched on a rooftop ledge
+    - tailored fine suit, (gold monocle:1.1), narrowed calculating eyes, faint smile
+    - patched ragged clothes, (satchel stuffed with spare parts:1.1), grease-smudged hands
+    - tweed suit, pocket square, (gripping a brass-topped cane:1.1)
+    - (weathered khaki explorer coat:1.1), confident stance, holding a brass compass
+    - polished brass plating, pressed (butler uniform:1.1), rigid formal posture
+    - (ornate tattered coat:1.2), (brass mechanical leg:1.1), wide commanding stance
 
   age:
-    - (young adult:1.1), 20s, determined expression
-    - (middle aged:1.1), 40s, experienced, (light scars:0.9)
-    - (seasoned veteran:1.1), 50s, (grizzled beard:1.1), stern gaze
-    - (elderly genius:1.1), 60s, (white hair:1.1), (spectacles:1.1), thoughtful
+    - young adult, 20s, determined expression
+    - middle aged, 40s, faint scars, weathered look
+    - 50s, (grizzled beard:1.1), stern gaze, weathered lines
+    - elderly, 60s, white hair, spectacles, thoughtful gaze
 
   build:
-    - (slender build:1.1), agile, lanky
-    - (athletic build:1.1), muscular, fit
-    - (powerful build:1.1), broad shoulders, (strong:1.1)
-    - (compact and wiry:1.1), energetic, small frame
-    - (tall and commanding:1.1), (imposing figure:1.1), high posture
+    - slender build, agile, lanky
+    - athletic build, muscular, fit
+    - powerful build, broad shoulders, strong
+    - compact and wiry build, energetic, small frame
+    - tall and commanding build, imposing figure, high posture
 
   tone:
-    - (pale skin:1.1), fair complexion, victorian
-    - (fair skin:1.1), light complexion
-    - (warm tan skin:1.1), sun-kissed, weathered
-    - (ruddy windburned skin:1.1), explorer, weather-beaten
-    - (sooty smudged complexion:1.2), (engine grease:1.1), mechanic
+    - pale skin, fair complexion, victorian
+    - fair skin, light complexion
+    - warm tan skin, sun-kissed, weathered
+    - ruddy windburned skin, weather-beaten, outdoor-worn
+    - sooty smudged complexion, streaked with engine grease
 
   face_style:
-    - (refined aristocratic features:1.1), high cheekbones, elegant
-    - (rugged explorer face:1.1), (strong jaw:1.1), (minor scars:0.9)
-    - (sharp angular features:1.1), intense gaze, defined
-    - (kindly round face:1.1), (spectacles:1.1), smiling
-    - (mechanical jaw attachments:1.3), (glowing tubes:1.1), cyborg
+    - refined features, high cheekbones, elegant bearing
+    - weathered rugged face, (strong jaw:1.1), faint scars
+    - sharp angular features, intense gaze, defined bone structure
+    - kindly round face, spectacles, warm smile
+    - (mechanical jaw attachments:1.3), glowing tubes, exposed brass joints
 
 # ---------------------------------------------------------
 # APPEARANCE
 # ---------------------------------------------------------
 
   hair:
-    - (neatly combed hair:1.1), victorian style, parted
-    - (windswept explorer hair:1.1), messy, adventurous
-    - (loose curls:1.1), volumetric hair, flowing
-    - (serious bun hairstyle:1.1), (hair pin:1.1), tidy
-    - (side parted hairstyle:1.1), clean cut, gentlemanly
-    - (undercut with long top:1.1), modern steampunk, stylish
-    - (wild inventor hair:1.2), (sticking up:1.1), chaotic, unkempt
+    - neatly combed hair, parted, victorian style
+    - windswept tousled hair, wind-blown strands
+    - loose curls, volumetric, flowing
+    - bun hairstyle, (brass hair pin:1.1), tidy
+    - side parted hair, clean cut
+    - undercut with long top, styled
+    - (wild sticking-up hair:1.2), chaotic, unkempt
 
   hair_color:
-    - (black hair:1.1), dark, rich color
-    - (brown hair:1.1), chestnut, natural
-    - (blonde hair:1.1), golden, bright
-    - (vibrant red hair:1.1), (copper red:1.1), striking
-    - (gleaming silver hair:1.1), metallic shine, elegant
-    - (stark white hair:1.1), aged, pure white
+    - black hair, glossy
+    - brown hair, chestnut
+    - blonde hair, golden
+    - vibrant red hair, copper tones
+    - silver hair, metallic sheen
+    - white hair, pure and bright
 
   eyes:
-    - (keen blue eyes:1.1), (intense gaze:1.1), focused
-    - (sharp green eyes:1.1), perceptive
-    - (deep brown eyes:1.1), warm, thoughtful
-    - (stormy grey eyes:1.1), serious, metallic flecks
-    - (monocle over one eye:1.2), (magnifying lens:1.1), brass frame
-    - (goggles pushed up on head:1.1), (aviator goggles:1.1), leather straps
+    - blue eyes, focused gaze
+    - sharp green eyes, perceptive
+    - deep brown eyes, warm and thoughtful
+    - stormy grey eyes, metallic flecks
+    - (monocle over one eye:1.2), brass frame, magnifying lens
+    - goggles pushed up on forehead, leather straps, brass rims
 
   expression:
-    - (confident smirk:1.1), (knowing smile:1.1), arrogant
-    - (thoughtful analytical gaze:1.1), (scrutinizing:1.1), intelligent
-    - (determined heroic stare:1.1), (focused:1.1), brave
-    - (curious fascinated look:1.1), (wide eyes:1.1), inspecting gadget
-    - (stern commanding expression:1.1), (furrowed brow:1.1), leader
+    - confident smirk, knowing smile
+    - thoughtful scrutinizing gaze
+    - (determined stare:1.1), focused
+    - curious wide-eyed look, inspecting a gadget
+    - stern expression, furrowed brow
 
   clothing:
-    - (tailored waistcoat:1.2), crisp shirt, (brass buttons:1.1)
-    - (long duster coat:1.1), leather, (worn edges:1.1), flowing
-    - (double breasted coat:1.1), (military style:1.1), wool
-    - (corseted dress with bustle:1.2), (victorian gown:1.1), lace, (gears:0.9)
-    - (explorer outfit:1.1), (khaki shirt:1.1), (many belts:1.1), practical
-    - (mechanic overalls:1.1), (canvas straps:1.1), (oil stained:1.1)
-    - (high collar gentleman suit:1.1), (tweed fabric:1.1), cravat
-    - (layered skirts and jackets:1.1), (bohemian steampunk:1.1), patchwork
+    - tailored waistcoat, crisp shirt, (brass buttons:1.1)
+    - long leather duster coat, worn edges, flowing hem
+    - double-breasted wool coat, military-style buttons
+    - (corseted dress with bustle:1.2), lace trim, tiny gears sewn into the bodice
+    - khaki shirt, cargo trousers, (many buckled belts:1.1)
+    - mechanic overalls, canvas straps, oil-stained knees
+    - high-collar tailored suit, tweed fabric, cravat
+    - layered patchwork skirts and jackets, mismatched fabric
 
   armor:
-    - (reinforced leather coat:1.1), (metal plates:1.1), (studded:1.0)
-    - (steam powered breastplate:1.2), (glowing pipes:1.1), (hissing steam:0.8)
-    - (brass shoulder guards:1.1), (ornate filigree:1.1), pauldrons
-    - (armored gauntlets:1.1), (intricate gears:1.1), metallic
-    - (mechanical leg braces:1.2), (pistons:1.1), (assists walking:1.0)
+    - reinforced leather coat, riveted metal plates, studded
+    - (steam-powered breastplate:1.2), glowing pipes, hissing steam vents
+    - brass shoulder pauldrons, ornate filigree
+    - armored gauntlets, intricate gearwork, metallic sheen
+    - (mechanical leg braces:1.2), pistons, assists walking
 
   gear:
-    - (brass goggles:1.1), (magnifying lenses:1.1), on forehead
-    - (pocket watch on chain:1.1), (ornate clockwork:1.1), in hand
-    - (mechanical gauntlet:1.2), (articulated fingers:1.1), (glowing:0.9)
-    - (tool belt with wrenches:1.1), (hammers:1.0), (leather belt:1.1)
-    - (steam powered backpack:1.2), (hissing vents:1.1), (copper pipes:1.1)
-    - (telescopic spyglass:1.1), (brass:1.1), handheld
-    - (clockwork monocle:1.1), (rotating lenses:1.1), over eye
-    - (cog adorned top hat:1.2), (goggles:1.1), victorian
+    - brass goggles, magnifying lenses, pushed up on forehead
+    - pocket watch on a chain, ornate clockwork casing, in hand
+    - (mechanical gauntlet:1.2), articulated fingers, faint glow
+    - tool belt with wrenches and hammers, worn leather
+    - (steam-powered backpack:1.2), hissing vents, copper pipes
+    - telescopic brass spyglass, handheld
+    - clockwork monocle, rotating lenses, over one eye
+    - (cog-adorned top hat:1.2), goggles, victorian
 
   weapons:
-    - (clockwork pistol:1.2), (intricate gears:1.1), (glowing tubes:0.8)
-    - (ornate revolver:1.1), (engraved barrel:1.1), (ivory grip:0.9)
-    - (steam powered rifle:1.2), (pressure gauge:1.1), (glowing coils:1.0)
-    - (gear lined saber:1.1), (clockwork hilt:1.1), sharp
-    - (cane sword:1.1), (hidden blade:1.2), gentleman's weapon
-    - (collapsible spear:1.1), (telescoping shaft:1.1), brass
-    - (tesla coil gun:1.2), (arcing electricity:1.1), (glowing blue:1.1)
+    - (clockwork pistol:1.2), intricate gears, glowing tubes
+    - ornate revolver, engraved barrel, ivory grip
+    - (steam-powered rifle:1.2), pressure gauge, glowing coils
+    - gear-lined saber, clockwork hilt, sharp edge
+    - (cane sword:1.1), (hidden blade:1.2), polished wood shaft
+    - collapsible telescoping spear, brass fittings
+    - (tesla coil gun:1.2), arcing electricity, glowing blue
 
   offhand:
-    - (leather bound notebook:1.1), (pencil:1.0), sketches
-    - (rolled map case:1.1), (leather tube:1.1), explorer
-    - (parasol with hidden blade:1.2), (victorian parasol:1.1), (lace:0.9)
-    - (small steam drone controller:1.1), (levers and gauges:1.1)
-    - (wrench and hammer:1.1), (heavy tools:1.1), mechanic
-    - (lantern with warm glow:1.1), (brass lantern:1.1), illuminating
+    - leather-bound notebook, pencil, sketches
+    - rolled map case, leather tube
+    - (parasol with hidden blade:1.2), lace trim
+    - small steam drone controller, levers and gauges
+    - wrench and hammer, heavy tools
+    - brass lantern, warm glow, illuminating
 
   trinkets:
-    - (intricate key:1.1), (skeleton key:1.1), (brass:1.0)
-    - (small gear locket:1.1), (on a chain:1.1), (sentimental:1.0)
-    - (brass compass:1.1), (ornate dial:1.1), navigational
-    - (vial of glowing ether:1.2), (blue liquid:1.1), potion
-    - (badge of airship crew:1.1), (brass pin:1.1), insignia
-    - (mechanical bird charm:1.1), (tiny automaton:1.1), trinket
+    - intricate brass skeleton key
+    - small gear locket on a chain
+    - brass compass, ornate dial
+    - (vial of glowing ether:1.2), blue liquid
+    - brass crew badge, insignia pin
+    - mechanical bird charm, tiny automaton
 
 # ---------------------------------------------------------
 # VEHICLE
 # ---------------------------------------------------------
 
   vehicle:
-    - (mighty airship:1.2), (dirigible:1.1), (multiple propellers:1.1)
-    - (compact scout airship:1.1), (fast:1.0), (small balloon:1.1)
-    - (steam powered land train:1.1), (on rails:1.0), (billowing smoke:1.1)
-    - (mechanical walking carriage:1.2), (spider legs:1.1), (automaton:1.0)
-    - (personal flying pack:1.2), (steam jets:1.1), (leather straps:1.0)
-    - (armored tricycle carriage:1.1), (single front wheel:1.0), (steam powered:1.1)
+    - (mighty dirigible airship:1.2), multiple propellers
+    - compact scout airship, small balloon, fast
+    - steam-powered land train, on rails, billowing smoke
+    - (mechanical walking carriage:1.2), spider legs
+    - (personal flying pack:1.2), steam jets, leather straps
+    - armored tricycle carriage, single front wheel, steam-powered
 
   vehicle_detail:
-    - (billowing smoke stacks:1.1), (thick black smoke:1.1), industrial
-    - (exposed gears and pipes:1.2), (rotating cogs:1.1), (copper tubes:1.0)
-    - (polished brass panels:1.1), (reflective surface:1.1), ornate
-    - (patched metal plates:1.1), (rivets:1.1), worn, repaired
-    - (large balloon canopy:1.1), (zeppelin:1.0), huge
-    - (sails and rigging:1.1), (sky galleon:1.1), wind-powered
+    - billowing smoke stacks, thick black smoke, industrial
+    - (exposed gears and pipes:1.2), rotating cogs, copper tubes
+    - polished brass panels, reflective, ornate
+    - patched metal plates, rivets, worn and repaired
+    - large balloon canopy, huge zeppelin
+    - sails and rigging, sky galleon, wind-powered
 
 # ---------------------------------------------------------
 # ENVIRONMENT
 # ---------------------------------------------------------
 
   environment:
-    - (airship deck above the clouds:1.2), (wooden deck:1.1), (blue sky:1.0)
-    - (foggy industrial city street:1.1), (cobblestone:1.0), (gaslamps:1.1)
-    - (crowded market square:1.1), (stalls:1.0), (automatons:0.9)
-    - (steam filled factory interior:1.2), (massive machinery:1.1), (sparks:1.0)
-    - (ornate clock tower platform:1.1), (giant clock face:1.2), (city view:1.0)
-    - (grand exhibition hall:1.1), (victorian architecture:1.1), (inventions:1.0)
-    - (secret workshop:1.1), (cluttered:1.0), (blueprints:1.1), (glowing gadgets:1.1)
-    - (subterranean rail tunnel:1.1), (dark:1.0), (glowing pipes:1.1)
+    - (airship deck above the clouds:1.2), wooden planking, blue sky
+    - foggy industrial city street, cobblestone, gaslamps
+    - crowded market square, stalls, automatons
+    - (steam-filled factory interior:1.2), massive machinery, sparks
+    - ornate clock tower platform, (giant clock face:1.2), city view
+    - grand exhibition hall, victorian architecture, inventions on display
+    - secret cluttered workshop, blueprints, glowing gadgets
+    - subterranean rail tunnel, dark, glowing pipes
 
   mood:
-    - (adventurous and bold:1.1), (dynamic:1.0), exciting
-    - (mysterious and foggy:1.2), (obscured:1.1), (gaslight:1.0)
-    - (industrial and grimy:1.1), (soot:1.0), (smokestacks:1.1)
-    - (elegant and refined:1.1), (victorian:1.0), (ornate:1.1)
-    - (tense and conspiratorial:1.1), (shadows:1.1), secretive
-    - (inventive and optimistic:1.1), (bright:1.0), (wondrous:1.1)
+    - adventurous and bold, dynamic, exciting
+    - (mysterious and foggy:1.2), gaslight
+    - industrial and grimy, soot, smokestacks
+    - elegant and refined, victorian, ornate
+    - tense and conspiratorial, shadows, secretive
+    - inventive and optimistic, bright, wondrous
 
   lighting:
-    - (warm gaslamp glow:1.2), (night:1.0), (yellow light:1.1)
-    - (diffuse foggy daylight:1.1), (overcast:1.0), (soft light:1.1)
-    - (furnace firelight:1.2), (orange glow:1.1), (shadows:1.0), (hot:1.1)
-    - (dramatic spotlight from above:1.1), (cinematic lighting:1.1), (high contrast:1.0)
-    - (golden sunset through smog:1.1), (cityscape:1.0), (orange sky:1.1)
-    - (moonlight over rooftops:1.1), (night scene:1.1), (silhouette:0.9)
+    - (warm gaslamp glow:1.2), night, yellow light
+    - diffuse foggy daylight, overcast, soft light
+    - (furnace firelight:1.2), orange glow, hot shadows
+    - dramatic spotlight from above, cinematic lighting, high contrast
+    - golden sunset through smog, cityscape, orange sky
+    - moonlight over rooftops, night, silhouette
 
   camera:
-    - (three quarter character view:1.1), (dynamic pose:1.0)
-    - (low angle hero shot:1.2), (looking up:1.1), (commanding:1.0)
-    - (medium shot waist up:1.1), (portrait:1.0)
-    - (wide view of airship:1.1), (epic scale:1.1)
-    - (bird eye city view:1.1), (overview:1.0), (rooftops:1.1)
-    - (close up on gadget:1.2), (macro shot:1.1), (intricate details:1.1)
+    - three quarter character view, dynamic pose
+    - low angle shot, looking up, commanding
+    - medium shot waist up, portrait
+    - wide view of airship, epic scale
+    - bird's eye city view, overview, rooftops
+    - (close up on gadget:1.2), macro shot, intricate details
 
   style:
-    - (detailed steampunk illustration:1.2), (digital art:1.1), (intricate:1.1)
-    - (Victorian adventure painting:1.1), (oil painting style:1.1), (classic:1.0)
-    - (sepia toned illustration:1.1), (monochromatic:1.0), (aged photo:1.1)
-    - (graphic novel steampunk style:1.1), (bold lines:1.1), (cel shading:0.9)
+    - detailed steampunk illustration, digital art, intricate
+    - Victorian adventure painting, oil painting style, classic
+    - sepia-toned illustration, monochromatic, aged photo
+    - graphic novel steampunk style, bold lines, cel shading
 
   fx_environment:
-    - (drifting steam plumes:1.1), (hissing steam:1.1)
-    - (floating ash particles:1.1), (embers:1.0), (smoky air:1.1)
-    - (falling soot:1.1), (grimy:1.0)
-    - (cog sparks:1.1), (welding:1.0), (bright:1.1)
-    - (swirling fog:1.2), (dense mist:1.1), (obscuring:1.0)
+    - drifting steam plumes, hissing steam
+    - floating ash particles, embers, smoky air
+    - falling soot, grimy
+    - cog sparks, welding, bright
+    - (swirling fog:1.2), dense mist
 
 # ---------------------------------------------------------
 # RANDOM
@@ -220,13 +220,16 @@ gkr_steampunk:
   vehicle_combo:
     - "__gkr_steampunk/vehicle__, __gkr_steampunk/vehicle_detail__, above __gkr_steampunk/environment__, __gkr_steampunk/mood__, __gkr_steampunk/lighting__, wide view of airship, detailed steampunk illustration, __gkr_steampunk/fx_environment__"
 
-  scene_combo:
-    - "__gkr_steampunk/environment__, __gkr_steampunk/mood__, __gkr_steampunk/lighting__, __gkr_steampunk/style__, __gkr_steampunk/camera__, __gkr_steampunk/fx_environment__"
-
   random:
     - "__gkr_steampunk/hero_combo__"
     - "__gkr_steampunk/vehicle_combo__"
-    - "__gkr_steampunk/scene_combo__"
+    - "__gkr_steampunk/random_character__"
+    - "__gkr_steampunk/random_vehicle__"
+    - "__gkr_steampunk/random_scene__"
+    - "__gkr_steampunk/spotlight_characters__"
+    - "__gkr_steampunk/spotlight_backgrounds__"
+    - "__gkr_steampunk/spotlight_vehicles__"
+    - "__gkr_steampunk/spotlight_fashion__"
 
   random_character:
     - "__gkr_steampunk/archetype__, __gkr_steampunk/age__, __gkr_steampunk/build__, __gkr_steampunk/tone__, __gkr_steampunk/face_style__, __gkr_steampunk/hair__, __gkr_steampunk/hair_color__, __gkr_steampunk/eyes__, __gkr_steampunk/expression__, __gkr_steampunk/clothing__, __gkr_steampunk/armor__, __gkr_steampunk/gear__, __gkr_steampunk/weapons__, __gkr_steampunk/offhand__, __gkr_steampunk/trinkets__"
@@ -242,393 +245,386 @@ gkr_steampunk:
 # ---------------------------------------------------------
 
   spotlight_characters:
-    - "(bold airship captain:1.2), (ornate brass plated coat:1.1), leather goggles, (wind-tossed scarf:1.1), on an airship deck, above the clouds, (epic scale:1.1), cinematic lighting, detailed steampunk illustration"
-    - "(clockwork engineer woman:1.1), (soot smudges:1.0), (holding a glowing wrench:1.2), (steam hissing backpack:1.1), in a detailed steampunk workshop, (intricate machinery:1.1), dynamic pose, detailed digital art"
-    - "(gentleman inventor:1.1), tweed suit, (holding polished cane:1.1), (monocle lens arrays:1.2), in a cluttered study, (quiet brilliance:1.0), detailed illustration"
-    - "(full body:1.1), (ornate mechanical automaton:1.3), (exposed intricate gears:1.2), (glowing blue core:1.1), polished brass, standing in a victorian hall, cinematic lighting"
-    - "(steam mage:1.1), (channeling swirling boiler-fire runes:1.3), (glowing hands:1.1), ornate robes, (arcing electricity:1.0), in a dark factory, detailed fantasy art"
-    - "(airborne rogue:1.1), (spring-loaded grapnel:1.2), (patchwork coat:1.1), masked, (dynamic pose:1.1), leaping between rooftops, foggy night, gaslamp glow"
-    - "(goggle-wearing pilot woman:1.1), (oil-stained gloves:1.0), (ornate mechanical wings:1.2), aviator jacket, on a landing platform, (confident stance:1.1), detailed illustration"
-    - "(Victorian swordswoman:1.1), (ornate clockwork rapier:1.2), (leather corset:1.0), (determined stance:1.1), in a foggy cobblestone alley, (gaslamp lighting:1.1)"
-    - "(alchemical chemist:1.1), (reinforced apron:1.0), (holding bubbling glowing vials:1.2), (glowing liquids:1.1), in a cluttered laboratory, detailed digital art"
-    - "(massive brass knight:1.2), (piston-driven armor plates:1.2), (glowing red visor:1.1), (hissing steam:1.0), standing in a factory, (imposing:1.1), cinematic"
-    - "(young street tinkerer:1.1), (satchel of parts:1.1), (excited grin:1.0), patched clothes, sitting on a cobblestone street, (holding a small automaton:1.1), detailed illustration"
-    - "(elite rifleman:1.1), (telescoping brass scope:1.2), (long rifle:1.1), camouflage cloak, perched on a rooftop, (focused gaze:1.0), foggy city background, night"
-    - "(steam witch:1.1), (gear-laced hat:1.1), (glowing amber eyes:1.2), casting a spell, (swirling steam:1.1), in a dark alley, detailed fantasy art"
-    - "(automaton butler:1.2), (polished copper plating:1.1), (graceful poise:1.0), (holding silver tray:1.1), in a victorian mansion, detailed illustration"
-    - "(balloon navigator:1.1), (holding star charts:1.0), (telescopic goggles:1.2), on an airship deck, (night sky:1.1), (glowing compass:1.1), detailed illustration"
-    - "(coal-fired brute:1.2), (steam vents erupting across armor:1.2), massive, enraged, (glowing orange:1.1), in a boiler room, (dynamic pose:1.1), digital art"
-    - "(Victorian noble lady:1.1), (ornate mechanical fan:1.1), (jeweled exosleeve:1.2), elegant gown, in a grand ballroom, (intricate detail:1.1)"
-    - "(airship cook:1.1), (swinging oversized steam-powered skillet:1.2), (chef hat:1.0), splattered apron, in a brass kitchen, (dynamic pose:1.1), humorous"
-    - "(clockwork puppeteer:1.1), (controlling floating brass marionettes:1.2), (intricate strings:1.0), masked, on a victorian stage, (dramatic lighting:1.1)"
-    - "(sand-coated desert explorer:1.1), (gear-grafted compass:1.2), (worn cloak:1.0), in a vast desert, (mechanical ruins:1.1), wide angle, cinematic"
-    - "(mechanist librarian:1.1), (floating cog-driven lamps:1.2), (surrounded by books:1.1), spectacles, in a vast library, (warm lighting:1.0), detailed illustration"
-    - "(gaslight assassin:1.2), (oil-black coat:1.1), (hidden steam blade:1.1), (in a foggy alley:1.1), (crouched:1.0), gaslamp glow, (stealthy:1.1), digital painting"
-    - "(steampunk nun:1.1), (ornate gear-shaped halo:1.2), (mechanical rosary:1.1), dark robes, in a (cathedral of machines:1.1), cinematic lighting"
-    - "(gear witch man:1.1), (controlling rotating brass sigils:1.2), dark robes, (glowing eyes:1.0), in a dark workshop, (mystical:1.1), detailed fantasy art"
-    - "(zephyr swordsman:1.1), (piston-enhanced leaps:1.2), (dual blades:1.0), (dynamic pose:1.1), (wind effect:0.9), on a rooftop, (cinematic:1.1)"
-    - "(Victorian detective:1.1), (ornate cog monocle:1.2), (holding steam lens camera:1.1), trench coat, on a foggy street, (gaslamp:1.1), (mysterious:1.0)"
-    - "(ornate clockwork woman:1.2), (porcelain face panels:1.1), (exposed intricate gears:1.2), elegant dress, in a victorian room, (beautiful:1.1), detailed illustration"
-    - "(boiler knight:1.2), (carrying massive steam hammer:1.1), (furnace chest:1.1), (glowing orange:1.1), (hissing steam:1.0), in a factory, (powerful stance:1.1)"
-    - "(airship bombadier:1.1), (leather harness:1.0), (holding steam grenades:1.2), on an airship, (looking down at clouds:1.1), (dynamic angle:1.0), detailed illustration"
-    - "(copper alchemist woman:1.1), (holding glowing bottled flames:1.2), (leather apron:1.0), in a cluttered workshop, (bubbling vials:1.1), detailed illustration, cinematic"
-    - "(steam monk:1.1), (wielding heated iron gauntlets:1.2), (glowing red hot:1.1), (martial arts pose:1.1), in a steampunk temple, (dynamic:1.0), digital art"
-    - "(street mechanic:1.1), (augmented brass arm:1.3), (holding wrench:1.0), (oil stains:1.0), (confident smirk:1.1), in a garage, (intricate detail:1.1)"
-    - "(clockwork wolf tamer:1.1), (accompanied by mechanical canine:1.2), (glowing red eyes:1.0), in a dark forest, (gaslamp:1.0), (mysterious:1.1)"
-    - "(Victorian illusionist:1.1), (producing hologram-like steam images:1.2), (stage performer:1.0), elegant suit, on a stage, (dramatic lighting:1.1)"
-    - "(psychic machinist:1.1), (channeling telekinetic energy through cogs:1.2), (floating gears:1.1), (glowing eyes:1.0), in a workshop, (intense expression:1.1)"
-    - "(gear paladin:1.1), (radiant sun-shaped crest:1.2), (heavy ornate armor:1.1), (glowing sword:1.1), standing in a cathedral, (divine:1.1), cinematic lighting"
-    - "(ballistic engineer:1.1), (shoulder mounted pressure cannon:1.2), (heavy ammo belt:1.0), goggles, in a factory, (powerful stance:1.0), detailed digital art"
-    - "(time tinkerer:1.1), (surrounded by swiveling clock faces:1.2), (spectacles:1.0), confused expression, in a cluttered workshop, (surreal:1.1)"
-    - "(cinder mage woman:1.1), (throwing sparks from gloved fingertips:1.2), (glowing embers:1.1), dark clothes, in a dark alley, (dynamic pose:1.1), fantasy art"
-    - "(steam bard:1.1), (playing mechanical violin:1.2), (glowing strings:1.1), (ornate costume:1.0), on a cobblestone street, (gaslamp:1.1), detailed illustration"
-    - "(mechanical surgeon:1.1), (precision brass tools:1.2), (magnifying lenses:1.1), (in an operating theater:0.9), (intense focus:1.1), detailed illustration"
-    - "(aeronaut queen:1.1), (wearing feathered exoframe:1.2), (regal gown:1.0), (commanding presence:1.0), on an airship throne, (cinematic:1.1)"
-    - "(steampunk gunslinger:1.1), (twin coil pistols:1.2), (arcing electricity:1.1), (leather duster:1.0), in a desert, (dynamic pose:1.1), wide angle"
-    - "(cog enchanter:1.1), (breathing life into small brass creatures:1.2), (glowing runes:1.0), in a workshop, (gentle expression:1.0), (magical:1.1)"
-    - "(Victorian rogue:1.1), (retractable hook-blade:1.2), (dark clothing:1.0), (in the shadows:1.1), on a rooftop, (stealthy:1.1), digital painting"
-    - "(ironclad duelist:1.1), (pressure valve breastplate:1.2), (rapier:1.0), (ready stance:1.0), in a victorian hall, (focused:1.1), detailed illustration"
-    - "(steam prophet:1.1), (glowing amber gears orbiting:1.2), (hooded robe:1.0), (mystical:1.1), in a dark temple, (cinematic lighting:1.1)"
-    - "(automatist child:1.1), (controlling humming gear sphere:1.2), (focused:1.0), (in a workshop:0.9), (intricate detail:1.1), detailed illustration"
-    - "(gear-masked vigilante:1.2), (perched on lamppost:1.1), (dark cloak:1.0), (foggy night:1.1), (cityscape background:1.0), digital painting"
-    - "(Victorian postman:1.1), (rocket-assisted pack:1.2), (hissing steam:1.1), (mail satchel:1.0), (flying over city:1.1), (dynamic pose:1.0), detailed illustration"
-    - "(bio-mechanical botanist:1.1), (growing copper-plated plants:1.2), (in a greenhouse:1.0), (magnifying glass:1.0), (curious expression:1.0), detailed illustration"
-    - "(airship knight:1.1), (on small gliding jetboard:1.2), (lance:1.0), (full armor:1.0), (flying through clouds:1.1), (dynamic:1.1), digital art"
-    - "(mechanical crow keeper:1.1), (flock of brass birds:1.2), (dark attire:1.0), (perched on arm:1.0), in a foggy graveyard, (mysterious:1.1)"
-    - "(cog-warlock:1.1), (pulling molten metal threads:1.2), (dark magic:1.1), (glowing sigils:1.0), in a dark forge, (intense:1.1), fantasy art"
-    - "(steam ranger:1.1), (longcoat:1.0), (mechanical crossbow:1.2), (in forest:1.0), (hooded:0.9), (sunlight filtering through trees:1.1), detailed illustration"
-    - "(Victorian opera singer:1.1), (voice-amplifying chest coils:1.2), (elegant gown:1.0), (on stage:1.0), (dramatic lighting:1.1), detailed painting"
-    - "(clockwork boxer:1.1), (spring-loaded fists:1.2), (fighting stance:1.0), (in a boxing ring:0.9), (hissing steam:1.0), (dynamic:1.1), digital art"
-    - "(gear diplomat:1.1), (wearing a rotating sigil medallion:1.2), (formal suit:1.0), (negotiating:1.0), in an ornate office, (serious expression:1.1)"
-    - "(pocketwatch mage:1.1), (controlling golden chronospheres:1.2), (floating clocks:1.1), (time magic:1.0), in a grand library, (surreal:1.1), fantasy art"
-    - "(railway guardian:1.1), (piston-locked shield:1.2), (heavy armor:1.1), (on train tracks:1.0), (defensive stance:1.1), (steam locomotive:1.0)"
-    - "(alchemical bladesmith:1.1), (forging glowing copper swords:1.2), (anvil:1.0), (sparks:1.1), (in a forge:1.0), (focused:1.1), detailed illustration"
-    - "(steampunk angel:1.1), (ornate mechanical wings:1.3), (warm brass glow:1.1), (ethereal:1.0), (flying above city:1.1), cinematic, fantasy art"
-    - "(telescope mage:1.1), (peering into cosmic steam fractals:1.2), (in an observatory:1.0), (glowing eyes:1.0), (celestial background:1.1), mystical"
-    - "(street alchemist young man:1.1), (tossing vial bombs:1.2), (explosion:1.1), (in an alleyway:1.0), (dynamic pose:1.1), (mischievous grin:1.0), digital art"
-    - "(aether witch:1.1), (summoning blue steam flames:1.2), (glowing hands:1.1), (dark robes:1.0), in a foggy alley, (mystical:1.1), detailed fantasy art"
-    - "(mechanical mount rider:1.1), (atop steam-driven beast:1.2), (holding reins:1.0), (dynamic pose:1.1), (racing through canyon:1.1), detailed illustration"
-    - "(Victorian pirate queen:1.1), (armed with gear-thorned saber:1.2), (ornate pirate hat:1.1), (on airship deck:1.0), (commanding pose:1.1), cinematic"
-    - "(cog knight:1.1), (rotating shield panels:1.2), (heavy armor:1.1), (defensive stance:1.0), (hissing steam:1.0), in a castle hall, detailed illustration"
-    - "(aether-warrior:1.1), (glowing tube armor:1.2), (energy blade:1.1), (blue glow:1.0), (battle pose:1.1), (sci-fi steampunk:1.1), digital art"
-    - "(shadow machinist:1.1), (cloaked in darkened brass plates:1.2), (sneaking:1.0), (in the shadows:1.1), on a rooftop, (stealthy:1.1), digital painting"
-    - "(boiler mage:1.1), (furnace-lit chest:1.2), (casting fire spell:1.1), (glowing orange:1.1), in a dark factory, (dynamic pose:1.1), fantasy art"
-    - "(twin-blade gear dancer:1.1), (spinning in whirlwind of steam:1.2), (dual swords:1.0), (elegant pose:1.0), in a grand hall, detailed illustration"
-    - "(gravity tinkerer:1.1), (controlling floating brass spheres:1.2), (levitating:1.0), (in a workshop:1.0), (glowing blue energy:1.1), fantasy art"
-    - "(metronome monk:1.1), (fighting in rhythmic pulses:1.2), (glowing tattoos:1.0), (martial arts:1.0), in a steampunk temple, (dynamic pose:1.1)"
-    - "(steam cyborg:1.1), (piston spine:1.2), (glowing mechanical parts:1.1), (integrated armor:1.0), (intense gaze:1.1), detailed sci-fi art"
-    - "(Victorian cartographer:1.1), (levitating compass:1.2), (surrounded by maps:1.1), in a study, (focused:1.0), (warm lighting:1.1), detailed illustration"
-    - "(steam beast hunter:1.1), (reinforced boots:1.0), (large rifle:1.1), (mechanical beast trophy:0.9), (in a wilderness:1.0), (rugged:1.1)"
-    - "(Victorian rider:1.1), (atop clockwork horse:1.2), (hissing steam:1.0), (on cobblestone street:1.0), (dynamic pose:1.1), detailed illustration"
-    - "(torch engineer:1.1), (wielding flame-fed gauntlets:1.2), (shooting flames:1.1), (protective gear:1.0), in a dark tunnel, (dynamic:1.1)"
-    - "(gear witch:1.1), (molten gears orbiting skirt:1.2), (casting spell:1.1), (glowing eyes:1.0), in a forge, (dark magic:1.1), fantasy art"
-    - "(cosmic steamsmith:1.1), (forging glowing star-metal:1.2), (celestial forge:1.1), (nebula background:1.0), (epic scale:1.1), fantasy art"
-    - "(clockwork samurai:1.1), (piston-assisted strikes:1.2), (katana:1.0), (ornate armor:1.1), (dynamic pose:1.1), (bamboo forest:0.9), detailed illustration"
-    - "(cog prophetess:1.1), (brass halo rings:1.2), (flowing robes:1.0), (mystical glow:1.1), in a temple, (serene:1.0), fantasy art"
-    - "(steam mech pilot:1.1), (in bulky open-frame exosuit:1.2), (controlling levers:1.0), (cockpit view:0.9), (intense:1.1), detailed illustration"
-    - "(gaslight swordsman:1.1), (emerging from rolling fog:1.2), (rapier:1.0), (dark cloak:1.0), (mysterious:1.1), (gaslamp:1.1), digital painting"
-    - "(aether-cleric:1.1), (channeling glowing teal energy:1.2), (healing:1.0), (ornate staff:1.1), in a cathedral, (divine:1.1), fantasy art"
-    - "(steampunk rogue woman:1.1), (holding pocket bombs:1.2), (leather armor:1.0), (sneaking:1.1), on a rooftop, (foggy:1.0), digital painting"
-    - "(Victorian mage hunter:1.1), (brass sigil shield:1.2), (anti-magic runes:1.1), (determined:1.0), (facing magic:1.1), dynamic, fantasy art"
-    - "(clockwork giant:1.2), (gears turning in chest:1.1), (massive:1.1), (towering over city:1.1), (epic scale:1.1), cinematic"
-    - "(boiler angel:1.1), (steam-jets trailing from wings:1.2), (glowing:1.1), (flying:1.0), (above clouds:1.1), (ethereal:1.1), fantasy art"
-    - "(tinkerer bard:1.1), (playing steam-powered organ-harp:1.2), (musical notes:1.0), (ornate:1.0), on a stage, detailed illustration"
-    - "(mechanical falconer:1.1), (clockwork hawk on arm:1.2), (brass bird:1.1), (leather glove:1.0), in a field, (focused:1.0), detailed illustration"
-    - "(tea alchemist:1.1), (brewing glowing mixtures:1.2), (ornate teapot:1.1), (vials:1.0), in a shop, (cozy:1.0), detailed illustration"
-    - "(Victorian occultist:1.1), (brass ritual staff:1.2), (summoning circle:1.1), (dark robes:1.0), in a dark library, (mystical:1.1), fantasy art"
-    - "(clockwork fox-woman hybrid:1.1), (glowing eyes:1.2), (mechanical tail:1.1), (agile pose:1.0), in a forest, (fantasy:1.1), digital art"
-    - "(airfield marshal:1.1), (signal batons glowing amber:1.2), (heavy coat:1.0), (on an airfield:1.0), (airships in background:1.1), detailed illustration"
-    - "(steam oracle:1.1), (reading swirling pressure lines:1.2), (glowing steam:1.1), (mystic:1.0), in a temple, (glowing eyes:1.0), fantasy art"
+    - "tricorn hat, (brass-plated coat:1.2), leather goggles, wind-tossed scarf, standing on an airship deck, above the clouds, epic scale, cinematic lighting, detailed steampunk illustration"
+    - "woman in oil-stained overalls, soot smudges on her cheeks, holding a (glowing wrench:1.2), steam hissing from a copper backpack, in a cluttered steampunk workshop, intricate machinery, dynamic pose, detailed digital art"
+    - "tweed suit, waistcoat and pocket watch chain, (holding a polished cane:1.1), (monocle lens arrays:1.2), in a cluttered study, quiet focus, detailed illustration"
+    - "full body view, ornate mechanical automaton with (exposed intricate gears:1.2), glowing blue core, polished brass plating, standing in a victorian hall, cinematic lighting"
+    - "hooded figure in ornate robes, glowing hands, (channeling swirling boiler-fire runes:1.3), arcing electricity, in a dark factory, detailed fantasy art"
+    - "masked figure in a patchwork coat, wielding a (spring-loaded grapnel:1.2), leaping between rooftops, dynamic pose, foggy night, gaslamp glow"
+    - "woman in an aviator jacket and flight goggles, oil-stained gloves, (ornate mechanical wings:1.2), standing on a landing platform, confident stance, detailed illustration"
+    - "woman in a leather corset, wielding an (ornate clockwork rapier:1.2), determined stance, in a foggy cobblestone alley, gaslamp lighting"
+    - "figure in a reinforced apron, holding (bubbling glowing vials:1.2), glowing liquids, in a cluttered laboratory, detailed digital art"
+    - "hulking figure encased in brass armor, (piston-driven armor plates:1.2), glowing red visor, hissing steam, standing in a factory, imposing, cinematic"
+    - "child in patched clothes, satchel of parts slung over one shoulder, excited grin, sitting on a cobblestone street, (holding a small automaton:1.2), detailed illustration"
+    - "figure in a camouflage cloak, long rifle fitted with a (telescoping brass scope:1.2), perched on a rooftop, focused gaze, foggy city background, night"
+    - "figure in a gear-laced pointed hat, (glowing amber eyes:1.2), casting a spell, swirling steam, in a dark alley, detailed fantasy art"
+    - "copper-plated automaton in a butler's tailcoat, (polished copper plating:1.1), graceful poise, holding a silver tray, in a victorian mansion, detailed illustration"
+    - "figure wearing (telescopic goggles:1.2), holding star charts, on an airship deck under a night sky, glowing compass in hand, detailed illustration"
+    - "massive enraged figure, (steam vents erupting across armor:1.2), glowing orange, in a boiler room, dynamic pose, digital art"
+    - "woman in an elegant gown, ornate mechanical fan, (jeweled exosleeve:1.2), in a grand ballroom, intricate detail"
+    - "figure in a chef hat and splattered apron, swinging an (oversized steam-powered skillet:1.2), in a brass kitchen, dynamic pose, humorous"
+    - "masked figure, controlling (floating brass marionettes:1.2), intricate strings, on a victorian stage, dramatic lighting"
+    - "sand-coated figure in a worn cloak, (gear-grafted compass:1.2), in a vast desert among mechanical ruins, wide angle, cinematic"
+    - "figure in spectacles, surrounded by books, (floating cog-driven lamps:1.2), in a vast library, warm lighting, detailed illustration"
+    - "crouched figure in an oil-black coat, (hidden steam blade:1.2), in a foggy alley, gaslamp glow, stealthy, digital painting"
+    - "woman in dark robes, (ornate gear-shaped halo:1.2), mechanical rosary, in a cathedral of machines, cinematic lighting"
+    - "man in dark robes, controlling (rotating brass sigils:1.2), glowing eyes, in a dark workshop, mystical, detailed fantasy art"
+    - "figure wielding dual blades, (piston-enhanced leaps:1.2), dynamic pose, wind effect, on a rooftop, cinematic"
+    - "figure in a trench coat, (ornate cog monocle:1.2), holding a steam lens camera, on a foggy street, gaslamp glow, mysterious"
+    - "clockwork woman with porcelain face panels, (exposed intricate gears:1.2), elegant dress, in a victorian room, detailed illustration"
+    - "armored figure with a glowing furnace chest, carrying a (massive steam hammer:1.2), hissing steam, in a factory, powerful stance"
+    - "figure in a leather harness, holding (steam grenades:1.2), on an airship, looking down at the clouds, dynamic angle, detailed illustration"
+    - "woman in a leather apron, holding (glowing bottled flames:1.2), bubbling vials, in a cluttered workshop, detailed illustration, cinematic"
+    - "robed figure, wielding (heated iron gauntlets:1.2), glowing red hot, martial arts pose, in a steampunk temple, digital art"
+    - "figure with oil-stained clothes, (augmented brass arm:1.3), holding a wrench, confident smirk, in a garage, intricate detail"
+    - "cloaked figure, accompanied by a (mechanical canine:1.2), glowing red eyes, in a dark forest, mysterious"
+    - "figure in an elegant suit, producing (hologram-like steam images:1.2), on a stage, dramatic lighting"
+    - "figure with glowing eyes, channeling (telekinetic energy through cogs:1.2), floating gears, in a workshop, intense expression"
+    - "armored figure in heavy ornate armor, (radiant sun-shaped crest:1.2), glowing sword, standing in a cathedral, divine, cinematic lighting"
+    - "figure in goggles, (shoulder-mounted pressure cannon:1.2), heavy ammo belt, in a factory, powerful stance, detailed digital art"
+    - "figure in spectacles, surrounded by (swiveling clock faces:1.2), confused expression, in a cluttered workshop, surreal"
+    - "woman in dark clothes, throwing (sparks from gloved fingertips:1.2), glowing embers, in a dark alley, dynamic pose, fantasy art"
+    - "figure in an ornate costume, playing a (mechanical violin:1.2), glowing strings, on a cobblestone street, gaslamp glow, detailed illustration"
+    - "figure wearing magnifying lenses, arranging (precision brass tools:1.2), in an operating theater, intense focus, detailed illustration"
+    - "woman in a regal gown, wearing a (feathered exoframe:1.2), commanding presence, on an airship throne, cinematic"
+    - "figure in a leather duster, wielding (twin coil pistols:1.2), arcing electricity, in a desert, dynamic pose, wide angle"
+    - "figure with a gentle expression, breathing life into (small brass creatures:1.2), glowing runes, in a workshop, magical"
+    - "figure in dark clothing, wielding a (retractable hook-blade:1.2), lurking in the shadows, on a rooftop, stealthy, digital painting"
+    - "armored figure, (pressure valve breastplate:1.2), rapier drawn, ready stance, in a victorian hall, focused, detailed illustration"
+    - "hooded robed figure, (glowing amber gears orbiting:1.2), mystical, in a dark temple, cinematic lighting"
+    - "child, controlling a (humming gear sphere:1.2), focused expression, in a workshop, intricate detail, detailed illustration"
+    - "gear-masked figure in a dark cloak, (perched on a lamppost:1.2), foggy night, cityscape background, digital painting"
+    - "figure with a mail satchel, propelled by a (rocket-assisted pack:1.2), hissing steam, flying over the city, dynamic pose, detailed illustration"
+    - "figure holding a magnifying glass, tending (copper-plated plants:1.2), in a greenhouse, curious expression, detailed illustration"
+    - "armored figure in full armor, riding a (gliding jetboard:1.2), lance in hand, flying through the clouds, dynamic, digital art"
+    - "figure in dark attire, a (flock of brass birds:1.2) perched on one arm, in a foggy graveyard, mysterious"
+    - "robed figure, pulling (molten metal threads:1.2), dark magic, glowing sigils, in a dark forge, intense, fantasy art"
+    - "hooded figure in a longcoat, carrying a (mechanical crossbow:1.2), in a forest, sunlight filtering through the trees, detailed illustration"
+    - "woman in an elegant gown, (voice-amplifying chest coils:1.2), on stage, dramatic lighting, detailed painting"
+    - "figure with (spring-loaded fists:1.2), fighting stance, in a boxing ring, hissing steam, dynamic, digital art"
+    - "figure in a formal suit, wearing a (rotating sigil medallion:1.2), in an ornate office, serious expression"
+    - "robed figure, controlling (golden chronospheres:1.2), floating clocks, in a grand library, surreal, fantasy art"
+    - "armored figure in heavy armor, bracing a (piston-locked shield:1.2), on the train tracks, defensive stance, steam locomotive approaching"
+    - "figure at an anvil, forging (glowing copper swords:1.2), sparks flying, in a forge, focused, detailed illustration"
+    - "winged figure with (ornate mechanical wings:1.3), warm brass glow, ethereal, flying above the city, cinematic, fantasy art"
+    - "robed figure, peering into (cosmic steam fractals:1.2), in an observatory, glowing eyes, celestial background, mystical"
+    - "young man, tossing (vial bombs:1.2), explosion, in an alleyway, dynamic pose, mischievous grin, digital art"
+    - "woman in dark robes, summoning (blue steam flames:1.2), glowing hands, in a foggy alley, mystical, detailed fantasy art"
+    - "figure atop a (steam-driven beast:1.2), holding the reins, dynamic pose, racing through a canyon, detailed illustration"
+    - "woman in an ornate pirate hat, armed with a (gear-thorned saber:1.2), on an airship deck, commanding pose, cinematic"
+    - "armored figure in heavy armor, bracing (rotating shield panels:1.2), defensive stance, hissing steam, in a castle hall, detailed illustration"
+    - "armored figure in (glowing tube armor:1.2), wielding an energy blade, blue glow, battle pose, sci-fi steampunk, digital art"
+    - "figure cloaked in (darkened brass plates:1.2), sneaking through the shadows, on a rooftop, stealthy, digital painting"
+    - "robed figure with a (furnace-lit chest:1.2), casting a fire spell, glowing orange, in a dark factory, dynamic pose, fantasy art"
+    - "figure with dual swords, spinning in a (whirlwind of steam:1.2), elegant pose, in a grand hall, detailed illustration"
+    - "figure levitating, controlling (floating brass spheres:1.2), glowing blue energy, in a workshop, fantasy art"
+    - "robed figure with glowing tattoos, (fighting in rhythmic pulses:1.2), martial arts stance, in a steampunk temple, dynamic pose"
+    - "figure with a (piston spine:1.2), glowing mechanical parts, integrated armor, intense gaze, detailed sci-fi art"
+    - "figure surrounded by maps, studying a (levitating compass:1.2), in a study, focused, warm lighting, detailed illustration"
+    - "rugged figure in reinforced boots, carrying a (large rifle:1.2), mechanical beast trophy slung over shoulder, in the wilderness"
+    - "figure atop a (clockwork horse:1.2), hissing steam, on a cobblestone street, dynamic pose, detailed illustration"
+    - "figure in protective gear, wielding (flame-fed gauntlets:1.2), shooting flames, in a dark tunnel, dynamic"
+    - "woman with (molten gears orbiting her skirt:1.2), casting a spell, glowing eyes, in a forge, dark magic, fantasy art"
+    - "figure at a celestial forge, forging (glowing star-metal:1.2), nebula background, epic scale, fantasy art"
+    - "armored figure wielding a katana, (piston-assisted strikes:1.2), ornate armor, dynamic pose, in a bamboo forest, detailed illustration"
+    - "woman in flowing robes, (brass halo rings:1.2), mystical glow, in a temple, serene, fantasy art"
+    - "figure in a (bulky open-frame exosuit:1.2), controlling levers, cockpit view, intense, detailed illustration"
+    - "figure in a dark cloak, rapier in hand, (emerging from rolling fog:1.2), mysterious, gaslamp glow, digital painting"
+    - "robed figure with an ornate staff, channeling (glowing teal energy:1.2), healing light, in a cathedral, divine, fantasy art"
+    - "woman in leather armor, holding (pocket bombs:1.2), sneaking across a rooftop, foggy, digital painting"
+    - "determined figure bracing a (brass sigil shield:1.2), anti-magic runes, facing down a magical threat, dynamic, fantasy art"
+    - "clockwork giant, (gears turning in its chest:1.2), massive, towering over the city, epic scale, cinematic"
+    - "winged figure, (steam-jets trailing from its wings:1.2), glowing, flying above the clouds, ethereal, fantasy art"
+    - "figure in ornate attire, playing a (steam-powered organ-harp:1.2), musical notes drifting, on a stage, detailed illustration"
+    - "figure in a leather glove, a (clockwork hawk perched on arm:1.2), brass bird, in a field, focused, detailed illustration"
+    - "figure brewing (glowing mixtures:1.2), ornate teapot, vials, in a shop, cozy, detailed illustration"
+    - "figure in dark robes, wielding a (brass ritual staff:1.2), summoning circle glowing underfoot, in a dark library, mystical, fantasy art"
+    - "clockwork fox-woman hybrid, (glowing eyes:1.2), mechanical tail, agile pose, in a forest, fantasy, digital art"
+    - "figure in a heavy coat, waving (signal batons glowing amber:1.2), on an airfield, airships in the background, detailed illustration"
+    - "robed figure with glowing eyes, reading (swirling pressure lines:1.2), glowing steam, in a temple, fantasy art"
 
   spotlight_backgrounds:
-    - "(epic Victorian cityscape:1.2), (chimneys billowing thick steam:1.2), (dense smog:1.1), dense victorian buildings, (towering clocktowers:1.1), golden hour lighting, matte painting, epic scale"
-    - "(bustling airship dock:1.1), (suspended skyships:1.2), (ornate brass engines:1.1), wooden platforms, (above the clouds:1.1), cinematic, wide angle"
-    - "(clock tower interior:1.2), (massive rotating gears:1.2), (intricate mechanism:1.1), (view over city:1.0), high altitude, (sunbeams:1.1), detailed illustration"
-    - "(fog-drenched cobblestone street:1.1), (flickering gas lamps:1.2), (night:1.0), (mysterious silhouettes:1.0), (victorian architecture:1.1), detailed painting"
-    - "(industrial steam factory interior:1.1), (lined with glowing pipes:1.1), (pressure gauges:1.0), (glowing tubes:1.1), (sparks flying:0.9), (hissing steam:1.1), detailed illustration"
-    - "(high sky bridge:1.1), (overlooking sprawling gear-filled metropolis:1.2), (high altitude:1.1), (vertigo:1.0), (tiny airships:1.0), epic scale, cinematic painting"
-    - "(cluttered alchemist lab:1.1), (filled with bubbling glass tanks:1.2), (glowing liquids:1.1), (old books:1.0), (intricate brass tools:1.1), detailed illustration"
-    - "(aether reactor chamber:1.2), (glowing with blue steam light:1.2), (complex machinery:1.1), (high tech steampunk:1.1), (arcing electricity:1.0), cinematic"
-    - "(surreal mechanical garden:1.1), (shaped by brass foliage:1.2), (clockwork flowers:1.1), (glowing orbs:1.0), (intricate:1.1), detailed fantasy art"
-    - "(grand railway station:1.1), (towering iron arches:1.2), (ornate steam locomotive:1.1), (crowded platform:0.9), (volumetric light:1.1), detailed painting"
-    - "(airborne floating market:1.2), (anchored to dirigibles:1.1), (bustling with people:1.0), (sky view:1.0), (colorful stalls:1.1), detailed illustration"
-    - "(subterranean boiler room:1.1), (rattling with pressure:1.2), (glowing red furnace:1.1), (hot:1.1), (massive pipes:1.0), (hissing steam:1.1), cinematic"
-    - "(ornate clockwork square:1.1), (rotating public displays:1.2), (automaton statues:1.1), (city center:1.0), (bustling:1.0), detailed illustration, wide angle"
-    - "(Victorian mansion interior:1.1), (filled with ornate machinery:1.2), (elegant victorian furniture:1.0), (cluttered with inventions:1.0), detailed painting"
-    - "(industrial mechanical foundry:1.1), (glowing with molten copper flows:1.2), (sparks flying:1.0), (industrial:1.1), (massive machines:1.1), cinematic"
-    - "(surreal steam swamp:1.1), (bubbling steam vents:1.1), (twisted brass flora:1.2), (foggy:1.0), (glowing fungi:1.0), detailed fantasy art"
-    - "(secret airship pirate cove:1.1), (hidden within giant dirigible wreck:1.2), (secret base:1.0), (patched metal:1.0), (glowing lanterns:1.1), cinematic"
-    - "(deep industrial canyon:1.1), (spanned by rusted catwalks:1.1), (deep:1.0), (smog:1.1), (glowing pipes below:1.1), (epic scale:1.1), matte painting"
-    - "(narrow gas lamp alley:1.1), (glowing in amber light:1.2), (narrow:1.0), (cobblestone:1.0), (dense fog:0.9), (mysterious:1.1), detailed painting"
-    - "(grand brass opera hall:1.1), (adorned with mechanical décor:1.2), (ornate:1.1), (heavy red curtains:1.0), (glowing gaslamps:1.1), detailed digital painting"
-    - "(steam-powered tramway:1.1), (crossing elevated rails:1.1), (city view:1.0), (vintage vehicle:1.0), (smoggy sky:1.1), detailed illustration"
-    - "(surreal clock forest:1.2), (giant ticking mechanisms:1.1), (surreal:1.1), (gears for trees:1.1), (glowing mist:1.0), detailed fantasy art"
-    - "(fog-choked harbor:1.1), (half-submerged gears:1.2), (old steam ships:1.0), (docks:1.0), (eerie:1.1), (gaslamp:1.1), detailed painting"
-    - "(mechanized greenhouse:1.1), (glowing nutrient tubes:1.1), (exotic brass plants:1.2), (glass roof:1.0), (intricate:1.1), detailed illustration"
-    - "(bustling steam bazaar:1.1), (filled with eccentric devices:1.2), (crowded:1.0), (market stalls:1.0), (exotic goods:1.1), detailed illustration, wide angle"
-    - "(Victorian rooftop:1.1), (clustered with chimneys:1.1), (night:1.0), (city view:1.0), (smog:0.9), (full moon:1.1), (gaslamp glow:1.0), detailed painting"
-    - "(deep boiler cavern:1.1), (illuminated by molten glow:1.2), (underground:1.1), (massive pipes:1.0), (glowing orange:1.1), (hissing steam:1.1), cinematic"
-    - "(massive gearwall:1.2), (rising over city rooftops:1.1), (epic scale:1.1), (slowly rotating:1.0), (cinematic:1.1), detailed illustration, matte painting"
-    - "(airship ascension bay:1.1), (surrounded by giant turbines:1.1), (launching:1.0), (industrial:1.0), (airship taking off:1.1), (epic scale:1.1)"
-    - "(industrial bridge:1.1), (spanning glowing chemical canal:1.2), (iron arches:1.0), (smog:1.0), (factory background:1.1), detailed painting"
-    - "(steampunk telescope tower:1.1), (pointed toward cosmic storm:1.2), (observatory:1.1), (stars:1.0), (glowing nebula:1.1), (epic scale:1.1), fantasy art"
-    - "(cathedral of machines:1.2), (stained gear windows:1.1), (ornate brass architecture:1.1), (glowing interior:1.1), (cinematic lighting:1.1), detailed illustration"
-    - "(cozy cog-lit tavern:1.1), (humming apparatus:1.1), (patrons:1.0), (cozy:1.0), (warm lighting:1.1), (fireplace:1.0), detailed illustration"
-    - "(steam observatory:1.1), (brass orrery rotating overhead:1.2), (massive telescope:1.0), (starry night sky:1.1), (intricate detail:1.1), cinematic"
-    - "(dark railway tunnel:1.1), (lined with glowing pipes:1.1), (dark:1.0), (steam locomotive approaching:0.9), (headlight:1.1), (eerie:1.0), detailed painting"
-    - "(floating brass city:1.2), (tethered by massive mechanical anchors:1.1), (in the sky:1.1), (clouds below:1.0), (epic scale:1.1), matte painting"
-    - "(Victorian plaza:1.1), (alive with ornate steam fountains:1.2), (public square:1.0), (benches:1.0), (bustling:1.0), (daytime:1.1), detailed illustration"
-    - "(industrial jungle:1.1), (of tangled pipes and thick cables:1.2), (chaotic:1.0), (grimy:1.1), (glowing leaks:1.0), (dark:1.1), detailed illustration"
-    - "(underground aether mine:1.1), (glowing bright teal crystals:1.2), (crystals:1.1), (mine carts on tracks:1.0), (glowing mist:1.1), fantasy art"
-    - "(surreal clockwork labyrinth:1.1), (shifting brass panels:1.2), (maze:1.0), (confusing:1.0), (glowing lines:1.1), (intricate:1.1), fantasy art"
-    - "(fog-filled mechanical swamp:1.1), (whirring clockwork insects:1.2), (glowing fungi:1.0), (murky water:1.0), (eerie:1.1), detailed fantasy art"
-    - "(massive skyship scrapyard:1.1), (littered with broken dirigibles:1.2), (junk pile:1.0), (rusted metal:1.1), (smog:1.0), detailed illustration"
-    - "(barren copper desert:1.1), (under orange smog sky:1.1), (barren:1.0), (giant mechanical ruins:1.1), (epic scale:1.1), matte painting"
-    - "(steampunk carnival:1.1), (ornate mechanical rides:1.2), (glowing lights:1.1), (night:1.0), (bustling:1.0), (festive:1.1), detailed illustration"
-    - "(ancient boiler ruins:1.1), (covered in vines:1.1), (overgrown:1.0), (crumbling:1.0), (glowing blue energy leak:1.1), (mysterious:1.1), detailed painting"
-    - "(massive piston chamber:1.2), (giant pistons moving rhythmically:1.1), (industrial:1.1), (huge scale:1.0), (glowing orange:1.1), cinematic"
-    - "(surreal gear waterfall:1.2), (cascading brass components:1.1), (surreal:1.1), (shiny:1.0), (glowing mist:1.1), detailed fantasy art"
-    - "(mechanical orchard:1.1), (cog-laden trees:1.2), (brass apples:1.1), (orderly rows:1.0), (surreal:1.1), detailed illustration"
-    - "(cluttered tinker workshop:1.1), (filled with inventions:1.1), (blueprints:1.0), (glowing gadgets:1.1), (tools:1.0), (cozy:1.1), detailed illustration"
-    - "(cozy steam village:1.1), (nestled in metallic valley:1.1), (cozy:1.0), (smokestacks:1.0), (glowing windows:1.1), (night:1.0), detailed painting"
-    - "(bustling airship highway:1.1), (floating lanterns:1.1), (sky traffic:1.1), (clouds:1.0), (city in background:1.1), (epic scale:1.1), detailed illustration"
-    - "(imposing tower fortress:1.1), (powered by giant turbines:1.2), (defensive:1.0), (imposing:1.0), (storm clouds:1.1), (cinematic:1.1), matte painting"
-    - "(deep brass canyon:1.1), (cracked with molten glow:1.2), (volcanic:1.0), (deep chasm:1.0), (glowing orange:1.1), (epic scale:1.1), fantasy art"
-    - "(Victorian greenhouse:1.1), (full of glowing mushrooms:1.2), (botanical:1.0), (glass panels:1.0), (glowing blue:1.1), (mystical:1.1), detailed illustration"
-    - "(floating sky island:1.1), (tethered by thick cables:1.1), (floating:1.1), (waterfall:0.9), (clouds below:1.1), (epic scale:1.1), matte painting"
-    - "(dark coal mine corridor:1.1), (lit by flickering lamps:1.1), (dark:1.0), (support beams:1.0), (mine cart tracks:1.1), (eerie:1.1), detailed painting"
-    - "(mechanized windmill farm:1.1), (rotating brass blade towers:1.1), (wind power:1.0), (open field:1.0), (sunset:1.1), (epic scale:1.1), detailed illustration"
-    - "(ornate steam temple:1.1), (orbiting cog halos:1.2), (mystical:1.1), (ornate architecture:1.0), (glowing runes:1.1), (cinematic lighting:1.1), fantasy art"
-    - "(eerie brass catacombs:1.1), (humming with pressure tubes:1.1), (underground:1.1), (eerie:1.0), (glowing green mist:1.1), detailed painting"
-    - "(aether geyser field:1.1), (erupting luminous blue steam:1.2), (glowing blue:1.1), (volcanic:1.0), (night sky:1.1), (epic scale:1.1), fantasy art"
-    - "(ornate rail bridge:1.1), (over industrial river:1.1), (truss bridge:1.0), (polluted water:1.0), (steam locomotive crossing:1.1), (smog:1.0), detailed painting"
-    - "(dirigible graveyard:1.1), (half sunk in bog:1.1), (wreckage:1.1), (foggy:1.0), (eerie:1.1), (glowing swamp gas:1.1), detailed painting"
-    - "(massive steam forge chamber:1.1), (glowing molten orange:1.2), (sparks:1.0), (blacksmith:0.9), (giant hammer:1.1), (industrial:1.1), cinematic"
-    - "(massive factory conveyor platforms:1.1), (moving parts:1.1), (industrial:1.1), (assembly line:1.0), (automatons working:1.1), detailed illustration"
-    - "(foggy market stall street:1.1), (under ornate gear arches:1.1), (bustling:1.0), (vendors:1.0), (gaslamp glow:1.1), detailed illustration"
-    - "(smoke-filled rail yard:1.1), (stacked freight:1.0), (steam trains:1.1), (gritty:1.0), (workers:1.0), (cinematic lighting:1.1), detailed painting"
-    - "(overgrown steam ruin:1.1), (reclaimed by nature:1.1), (vines:1.0), (ancient machinery:1.0), (glowing artifact:1.1), (mysterious:1.1), detailed painting"
-    - "(brass clock cathedral:1.1), (interior glowing warmly:1.2), (massive clockwork:1.1), (ornate:1.0), (stained glass:1.1), (cinematic:1.1), detailed illustration"
-    - "(gritty workshop alley:1.1), (smelling of oil:1.1), (back alley:1.0), (cluttered:1.0), (steam vents:1.1), (night:1.0), (gaslamp:1.1), detailed painting"
-    - "(floating mechanical spire:1.2), (carving clouds:1.1), (high altitude:1.1), (intricate:1.0), (glowing blue:1.1), (epic scale:1.1), matte painting"
-    - "(abandoned boiler complex:1.1), (collapsing:1.1), (rusted:1.0), (dangerous:1.0), (glowing leaks:1.1), (eerie:1.1), detailed painting"
-    - "(elevated steam highway:1.1), (running between tower blocks:1.1), (elevated road:1.0), (steam vehicles:0.9), (smog:1.1), (cityscape:1.1), detailed illustration"
-    - "(epic airship battlefield:1.1), (above roiling clouds:1.1), (explosions:1.1), (dogfight:1.0), (many airships:1.1), (epic scale:1.1), cinematic, digital painting"
-    - "(cramped engine room:1.1), (hissing valves:1.1), (glowing furnace:1.1), (complex machinery:1.0), (hot:1.1), (engineer working:1.0), detailed illustration"
-    - "(gear city skyline:1.1), (under copper sunset:1.2), (smog:1.0), (silhouettes:1.0), (towering clocktowers:1.1), (epic scale:1.1), matte painting"
-    - "(fog-swept victorian park:1.1), (mechanical birds:1.2), (victorian park:1.0), (gaslamps:1.0), (eerie:1.1), (night:1.0), detailed painting"
-    - "(bustling steam bazaar:1.1), (crowded with tinkers:1.1), (market:1.0), (exotic goods:1.0), (glowing gadgets:1.1), (wide angle:1.1), detailed illustration"
-    - "(massive brass vault door:1.1), (interlocking gears:1.2), (vault:1.0), (intricate:1.0), (glowing seals:1.1), (cinematic:1.1), detailed illustration"
-    - "(industrial sewers:1.1), (lit by glowing sludge:1.2), (tunnels:1.0), (grimy:1.1), (steam pipes:1.1), (eerie:1.1), detailed painting"
-    - "(cluttered Victorian study:1.1), (cluttered with devices:1.1), (bookshelves:1.0), (desk:1.0), (glowing map:1.1), (warm lighting:1.1), detailed illustration"
-    - "(underground steam rail cavern:1.1), (massive cave:1.0), (train tracks:1.1), (glowing lights:1.0), (steam locomotive:1.1), (epic scale:1.1), detailed painting"
-    - "(suspended sky-market:1.1), (beneath giant dirigible:1.2), (hanging stalls:1.1), (crowded:1.0), (clouds below:1.1), detailed illustration"
-    - "(surreal mechanical canyon:1.1), (carved by gear erosion:1.2), (surreal landscape:1.1), (metal walls:1.0), (glowing river:1.1), (epic scale:1.1), fantasy art"
-    - "(steam-lit festival street:1.1), (filled with glowing lanterns:1.2), (celebration:1.0), (night:1.0), (crowds:1.0), (festive:1.1), detailed illustration"
-    - "(towering gear cliffs:1.2), (rising into fog:1.1), (massive scale:1.1), (metal cliffs:1.0), (glowing veins:1.1), (epic:1.1), matte painting"
-    - "(epic aether storm:1.1), (brewing over brass city:1.1), (lightning:1.1), (dark clouds:1.0), (glowing blue energy:1.2), (epic scale:1.1), cinematic"
-    - "(hidden workshop:1.1), (inside clock tower:1.1), (secret:1.0), (tools:1.0), (gears:1.1), (blueprints:1.1), (cozy:1.1), detailed illustration"
-    - "(smog-filled scrapyard:1.1), (giant broken engines:1.1), (junk:1.0), (rusted:1.1), (piles of gears:1.1), (gritty:1.1), detailed illustration"
-    - "(railway crossing:1.1), (beneath brass arches:1.1), (train:1.0), (warning lights:1.0), (night:1.0), (fog:1.1), (gaslamp:1.1), detailed painting"
-    - "(steampunk lighthouse:1.1), (rotating beam gears:1.2), (on cliff:1.0), (stormy ocean:1.1), (cinematic:1.1), detailed painting"
-    - "(foggy victorian port:1.1), (full of steam cranes:1.1), (docks:1.0), (ships:1.0), (glowing lanterns:1.1), (night:1.0), detailed painting"
+    - "(epic Victorian cityscape:1.2), (chimneys billowing thick steam:1.2), dense smog, dense victorian buildings, towering clocktowers, golden hour lighting, matte painting, epic scale"
+    - "(suspended skyships:1.2), bustling airship dock, ornate brass engines, wooden platforms, above the clouds, cinematic, wide angle"
+    - "(clock tower interior:1.2), (massive rotating gears:1.2), intricate mechanism, view over city, high altitude, sunbeams, detailed illustration"
+    - "(fog-drenched cobblestone street:1.1), (flickering gas lamps:1.2), night, mysterious silhouettes, victorian architecture, detailed painting"
+    - "(industrial steam factory interior:1.1), (lined with glowing pipes:1.1), pressure gauges, sparks flying, hissing steam, detailed illustration"
+    - "(high sky bridge:1.1), (overlooking sprawling gear-filled metropolis:1.2), vertigo, tiny airships, epic scale, cinematic painting"
+    - "(cluttered alchemist lab:1.1), (filled with bubbling glass tanks:1.2), glowing liquids, old books, intricate brass tools, detailed illustration"
+    - "(aether reactor chamber:1.2), (glowing with blue steam light:1.2), complex machinery, high tech steampunk, arcing electricity, cinematic"
+    - "(surreal mechanical garden:1.1), (shaped by brass foliage:1.2), clockwork flowers, glowing orbs, intricate, detailed fantasy art"
+    - "(grand railway station:1.1), (towering iron arches:1.2), ornate steam locomotive, crowded platform, volumetric light, detailed painting"
+    - "(airborne floating market:1.2), anchored to dirigibles, bustling with people, sky view, colorful stalls, detailed illustration"
+    - "(subterranean boiler room:1.1), (rattling with pressure:1.2), glowing red furnace, hot, massive pipes, hissing steam, cinematic"
+    - "(ornate clockwork square:1.1), (rotating public displays:1.2), automaton statues, city center, bustling, detailed illustration, wide angle"
+    - "(Victorian mansion interior:1.1), (filled with ornate machinery:1.2), elegant victorian furniture, cluttered with inventions, detailed painting"
+    - "(industrial mechanical foundry:1.1), (glowing with molten copper flows:1.2), sparks flying, massive machines, cinematic"
+    - "(surreal steam swamp:1.1), (twisted brass flora:1.2), bubbling steam vents, foggy, glowing fungi, detailed fantasy art"
+    - "(secret airship pirate cove:1.1), (hidden within giant dirigible wreck:1.2), patched metal, glowing lanterns, cinematic"
+    - "(deep industrial canyon:1.1), (spanned by rusted catwalks:1.1), smog, glowing pipes below, epic scale, matte painting"
+    - "(narrow gas lamp alley:1.1), glowing in amber light, cobblestone, dense fog, mysterious, detailed painting"
+    - "(grand brass opera hall:1.1), (adorned with mechanical décor:1.2), ornate, heavy red curtains, glowing gaslamps, detailed digital painting"
+    - "(steam-powered tramway:1.1), (crossing elevated rails:1.1), city view, vintage vehicle, smoggy sky, detailed illustration"
+    - "(surreal clock forest:1.2), (giant ticking mechanisms:1.1), gears for trees, glowing mist, detailed fantasy art"
+    - "(fog-choked harbor:1.1), (half-submerged gears:1.2), old steam ships, docks, eerie, gaslamp, detailed painting"
+    - "(mechanized greenhouse:1.1), (exotic brass plants:1.2), glowing nutrient tubes, glass roof, intricate, detailed illustration"
+    - "(bustling steam bazaar:1.1), (filled with eccentric devices:1.2), crowded, market stalls, exotic goods, detailed illustration, wide angle"
+    - "(Victorian rooftop:1.1), (full moon:1.1), clustered with chimneys, night, city view, smog, gaslamp glow, detailed painting"
+    - "(deep boiler cavern:1.1), (illuminated by molten glow:1.2), massive pipes, glowing orange, hissing steam, cinematic"
+    - "(massive gearwall:1.2), rising over city rooftops, epic scale, slowly rotating, cinematic, detailed illustration, matte painting"
+    - "(airship ascension bay:1.1), (surrounded by giant turbines:1.1), airship taking off, industrial, epic scale"
+    - "(industrial bridge:1.1), (spanning glowing chemical canal:1.2), iron arches, smog, factory background, detailed painting"
+    - "(steampunk telescope tower:1.1), (pointed toward cosmic storm:1.2), observatory, stars, glowing nebula, epic scale, fantasy art"
+    - "(cathedral of machines:1.2), (stained gear windows:1.1), ornate brass architecture, glowing interior, cinematic lighting, detailed illustration"
+    - "(cozy cog-lit tavern:1.1), (warm lighting:1.1), humming apparatus, patrons, fireplace, detailed illustration"
+    - "(steam observatory:1.1), (brass orrery rotating overhead:1.2), massive telescope, starry night sky, intricate detail, cinematic"
+    - "(dark railway tunnel:1.1), (headlight:1.1), lined with glowing pipes, steam locomotive approaching, eerie, detailed painting"
+    - "(floating brass city:1.2), tethered by massive mechanical anchors, in the sky, clouds below, epic scale, matte painting"
+    - "(Victorian plaza:1.1), (alive with ornate steam fountains:1.2), benches, bustling, daytime, detailed illustration"
+    - "(industrial jungle:1.1), (of tangled pipes and thick cables:1.2), chaotic, grimy, glowing leaks, dark, detailed illustration"
+    - "(underground aether mine:1.1), (glowing bright teal crystals:1.2), mine carts on tracks, glowing mist, fantasy art"
+    - "(surreal clockwork labyrinth:1.1), (shifting brass panels:1.2), confusing, glowing lines, intricate, fantasy art"
+    - "(fog-filled mechanical swamp:1.1), (whirring clockwork insects:1.2), glowing fungi, murky water, eerie, detailed fantasy art"
+    - "(massive skyship scrapyard:1.1), (littered with broken dirigibles:1.2), rusted metal, smog, detailed illustration"
+    - "(barren copper desert:1.1), (giant mechanical ruins:1.1), under orange smog sky, epic scale, matte painting"
+    - "(steampunk carnival:1.1), (ornate mechanical rides:1.2), glowing lights, night, bustling, festive, detailed illustration"
+    - "(ancient boiler ruins:1.1), (glowing blue energy leak:1.1), covered in vines, crumbling, mysterious, detailed painting"
+    - "(massive piston chamber:1.2), (giant pistons moving rhythmically:1.1), industrial, huge scale, glowing orange, cinematic"
+    - "(surreal gear waterfall:1.2), (cascading brass components:1.1), shiny, glowing mist, detailed fantasy art"
+    - "(mechanical orchard:1.1), (cog-laden trees:1.2), brass apples, orderly rows, surreal, detailed illustration"
+    - "(cluttered tinker workshop:1.1), (glowing gadgets:1.1), filled with inventions, blueprints, tools, cozy, detailed illustration"
+    - "(cozy steam village:1.1), (glowing windows:1.1), nestled in metallic valley, smokestacks, night, detailed painting"
+    - "(bustling airship highway:1.1), (epic scale:1.1), floating lanterns, sky traffic, clouds, city in background, detailed illustration"
+    - "(imposing tower fortress:1.1), (powered by giant turbines:1.2), defensive, storm clouds, cinematic, matte painting"
+    - "(deep brass canyon:1.1), (cracked with molten glow:1.2), volcanic, glowing orange, epic scale, fantasy art"
+    - "(Victorian greenhouse:1.1), (full of glowing mushrooms:1.2), botanical, glass panels, glowing blue, mystical, detailed illustration"
+    - "(floating sky island:1.1), (epic scale:1.1), tethered by thick cables, waterfall, clouds below, matte painting"
+    - "(dark coal mine corridor:1.1), (lit by flickering lamps:1.1), support beams, mine cart tracks, eerie, detailed painting"
+    - "(mechanized windmill farm:1.1), (rotating brass blade towers:1.1), wind power, open field, sunset, epic scale, detailed illustration"
+    - "(ornate steam temple:1.1), (orbiting cog halos:1.2), mystical, glowing runes, cinematic lighting, fantasy art"
+    - "(eerie brass catacombs:1.1), (glowing green mist:1.1), humming with pressure tubes, underground, detailed painting"
+    - "(aether geyser field:1.1), (erupting luminous blue steam:1.2), volcanic, night sky, epic scale, fantasy art"
+    - "(ornate rail bridge:1.1), (steam locomotive crossing:1.1), over industrial river, polluted water, smog, detailed painting"
+    - "(dirigible graveyard:1.1), (glowing swamp gas:1.1), half sunk in bog, wreckage, foggy, eerie, detailed painting"
+    - "(massive steam forge chamber:1.1), (glowing molten orange:1.2), sparks, blacksmith, giant hammer, industrial, cinematic"
+    - "(massive factory conveyor platforms:1.1), (automatons working:1.1), moving parts, industrial, assembly line, detailed illustration"
+    - "(foggy market stall street:1.1), (gaslamp glow:1.1), under ornate gear arches, bustling, vendors, detailed illustration"
+    - "(smoke-filled rail yard:1.1), (steam trains:1.1), stacked freight, gritty, workers, cinematic lighting, detailed painting"
+    - "(overgrown steam ruin:1.1), (glowing artifact:1.1), reclaimed by nature, vines, ancient machinery, mysterious, detailed painting"
+    - "(brass clock cathedral:1.1), (interior glowing warmly:1.2), massive clockwork, ornate, stained glass, cinematic, detailed illustration"
+    - "(gritty workshop alley:1.1), (steam vents:1.1), smelling of oil, cluttered, night, gaslamp, detailed painting"
+    - "(floating mechanical spire:1.2), carving clouds, high altitude, intricate, glowing blue, epic scale, matte painting"
+    - "(abandoned boiler complex:1.1), (glowing leaks:1.1), collapsing, rusted, dangerous, eerie, detailed painting"
+    - "(elevated steam highway:1.1), (cityscape:1.1), running between tower blocks, steam vehicles, smog, detailed illustration"
+    - "(epic airship battlefield:1.1), (explosions:1.1), above roiling clouds, dogfight, many airships, epic scale, cinematic, digital painting"
+    - "(cramped engine room:1.1), (glowing furnace:1.1), hissing valves, complex machinery, hot, engineer working, detailed illustration"
+    - "(gear city skyline:1.1), (under copper sunset:1.2), smog, silhouettes, towering clocktowers, epic scale, matte painting"
+    - "(fog-swept victorian park:1.1), (mechanical birds:1.2), gaslamps, eerie, night, detailed painting"
+    - "(bustling steam bazaar:1.1), (glowing gadgets:1.1), crowded with tinkers, exotic goods, wide angle, detailed illustration"
+    - "(massive brass vault door:1.1), (interlocking gears:1.2), intricate, glowing seals, cinematic, detailed illustration"
+    - "(industrial sewers:1.1), (lit by glowing sludge:1.2), tunnels, grimy, steam pipes, eerie, detailed painting"
+    - "(cluttered Victorian study:1.1), (glowing map:1.1), devices, bookshelves, desk, warm lighting, detailed illustration"
+    - "(underground steam rail cavern:1.1), (steam locomotive:1.1), train tracks, glowing lights, epic scale, detailed painting"
+    - "(suspended sky-market:1.1), (beneath giant dirigible:1.2), hanging stalls, crowded, clouds below, detailed illustration"
+    - "(surreal mechanical canyon:1.1), (carved by gear erosion:1.2), metal walls, glowing river, epic scale, fantasy art"
+    - "(steam-lit festival street:1.1), (filled with glowing lanterns:1.2), celebration, night, crowds, festive, detailed illustration"
+    - "(towering gear cliffs:1.2), rising into fog, massive scale, glowing veins, epic, matte painting"
+    - "(epic aether storm:1.1), (glowing blue energy:1.2), brewing over brass city, lightning, dark clouds, cinematic"
+    - "(hidden workshop:1.1), (blueprints:1.1), inside clock tower, tools, gears, cozy, detailed illustration"
+    - "(smog-filled scrapyard:1.1), (giant broken engines:1.1), rusted, piles of gears, gritty, detailed illustration"
+    - "(railway crossing:1.1), (fog:1.1), beneath brass arches, train, warning lights, night, gaslamp, detailed painting"
+    - "(steampunk lighthouse:1.1), (rotating beam gears:1.2), on cliff, stormy ocean, cinematic, detailed painting"
+    - "(foggy victorian port:1.1), (glowing lanterns:1.1), full of steam cranes, docks, ships, night, detailed painting"
   
   spotlight_vehicles:
-    - "(a massive brass-plated airship:1.3), (giant rotating propellers:1.1), (glowing boiler vents:1.1), flying (above the clouds:1.1), (epic scale:1.2), cinematic lighting, detailed steampunk illustration"
-    - "(a steampunk steam-powered tricycle:1.1), (exposed pistons:1.2), (smoke-belching exhausts:1.1), (single rider:1.0), (racing on cobblestone:1.1), dynamic angle, detailed illustration"
-    - "(ornate clockwork train:1.1), (ornate copper plating:1.1), (racing across elevated rails:1.1), (steampunk cityscape:1.0), (hissing steam:1.1), cinematic, detailed illustration"
-    - "(armored steam-carriage:1.1), (pulled by mechanical horses:1.2), (brass and steel:1.1), (victorian:1.0), (on a foggy street:1.1), detailed painting"
-    - "(giant gear-driven walking tank:1.2), (stomping across cobblestone streets:1.1), (heavy armor:1.0), (weaponized:1.0), (hissing steam:1.1), (epic scale:1.1), cinematic"
-    - "(Victorian steam taxi:1.1), (curling smoke pipes:1.1), (velvet interior:1.0), (gaslamp:0.9), (parked on cobblestone street:1.1), detailed illustration"
-    - "(retro-futuristic monowheel vehicle:1.2), (spinning under whirring cogs:1.1), (dynamic:1.0), (racing:1.1), (motion blur:1.0), detailed illustration"
-    - "(compact dual-rotor air skiff:1.1), (drifting on steam jets:1.1), (small:1.0), (scout vehicle:1.0), (flying between buildings:1.1), dynamic angle"
-    - "(massive dirigible fortress:1.2), (hanging lantern decks:1.1), (bristling with cannons:1.1), (imposing:1.0), (floating in storm clouds:1.1), (epic scale:1.1), cinematic"
-    - "(powerful steam motorcycle:1.1), (triple rear wheels:1.1), (brass shock absorbers:1.1), (fast:1.0), (racing on a bridge:1.1), (dynamic:1.1), detailed illustration"
-    - "(ornate steam gondola:1.1), (navigating foggy canals:1.1), (glowing boiler:1.1), (steampunk venice:0.9), (mysterious:1.1), detailed painting"
-    - "(clockwork beetle-shaped crawler:1.2), (climbing stone walls:1.1), (mechanical legs:1.1), (glowing eyes:1.1), (dynamic angle:1.1), detailed illustration"
-    - "(industrial steam-trench digger:1.1), (rotating front drills:1.2), (industrial:1.1), (digging dirt:1.0), (powerful:1.1), detailed illustration"
-    - "(barrel-shaped pressure tank rover:1.1), (puffing heavy steam clouds:1.1), (all-terrain:1.0), (in a rocky canyon:1.1), detailed illustration"
-    - "(steampunk airborne courier glider:1.1), (cloth wings:1.1), (gear-driven winches:1.1), (in flight:1.0), (above city:1.1), (dynamic pose:1.1), detailed illustration"
-    - "(steam-lifted observation balloon:1.1), (brass spyglass deck:1.2), (hot air balloon:1.0), (high altitude:1.0), (above clouds:1.1), detailed illustration"
-    - "(armored battle wagon:1.1), (reinforced with riveted iron plates:1.1), (gear turrets:1.2), (weaponized:1.0), (in a desert:1.1), detailed illustration"
-    - "(ornate Victorian limousine:1.1), (rotating gear axles:1.1), (ornate:1.0), (luxury:1.0), (parked in front of mansion:1.1), detailed illustration"
-    - "(steampunk steam-hoverboard:1.2), (stabilizing pistons hissing:1.1), (personal transport:1.0), (flying over street:1.1), (dynamic:1.1), detailed illustration"
-    - "(ornate automaton rickshaw:1.1), (pulled by mechanical bird:1.2), (ornate carriage:1.0), (flying:1.1), (in a city:1.0), detailed fantasy art"
-    - "(steampunk steam sleigh:1.1), (sliding on glowing heated runners:1.2), (snow:1.0), (winter:1.0), (racing:1.1), (dynamic:1.1), detailed illustration"
-    - "(ornate gear-propelled submarine:1.2), (shaped like a golden fish:1.1), (underwater:1.1), (glowing portholes:1.1), (ocean life:1.0), detailed illustration"
-    - "(tall-wheeled penny-farthing war bike:1.2), (armored shield front:1.1), (weaponized bicycle:1.0), (on a battlefield:1.1), (dynamic:1.1), detailed illustration"
-    - "(steam-powered armored stagecoach:1.1), (retractable brass spikes:1.2), (armored:1.0), (pulled by mechanical horses:1.1), (racing:1.1), detailed illustration"
-    - "(balloon-supported scout craft:1.1), (drifting above rooftops:1.1), (small:1.0), (stealthy:0.9), (night:1.1), (fog:1.0), detailed illustration"
-    - "(walking steam crane:1.1), (giant gear arms:1.2), (lifting cargo:1.0), (industrial:1.0), (at a dock:1.1), detailed illustration"
-    - "(steampunk steam bus:1.1), (open-air deck:1.1), (mechanical stair lift:1.1), (public transport:1.0), (on a city street:1.1), detailed illustration"
-    - "(clockwork beetle tank:1.2), (firing steam bursts:1.1), (armored:1.1), (on a battlefield:1.1), (dynamic:1.1), detailed illustration"
-    - "(industrial steam barge:1.1), (pushing glowing cargo:1.1), (on a foggy river:1.1), (industrial:1.0), (smokestacks:1.1), detailed painting"
-    - "(tri-engine patrol balloon:1.1), (searchlights sweeping:1.2), (night:1.0), (police:0.9), (flying over city:1.1), (mysterious:1.1), detailed illustration"
-    - "(gear-loaded mining cart:1.1), (driven by sputtering boilers:1.1), (on rails:1.0), (in a mine:1.0), (glowing crystals:1.1), (dynamic:1.1), detailed illustration"
-    - "(steampunk pressure-driven bicycle:1.1), (piston-assisted pedaling:1.2), (fast:1.0), (on a cobblestone street:1.1), (dynamic:1.1), detailed illustration"
-    - "(walking automaton carriage:1.2), (shaped like a giant iron owl:1.1), (glowing eyes:1.0), (ornate:1.0), (walking on street:1.1), fantasy art"
-    - "(steam courier drone:1.1), (shaped like a brass dragonfly:1.2), (flying:1.0), (small:1.0), (carrying package:1.1), (dynamic:1.1), detailed illustration"
-    - "(massive sky-freighter dirigible:1.1), (multiple cargo slings:1.1), (huge:1.1), (industrial:1.0), (flying through clouds:1.1), (epic scale:1.1)"
-    - "(defensive steam shield tank:1.1), (rotating gear armor:1.2), (defensive:1.1), (heavy armor:1.0), (on a battlefield:1.1), detailed illustration"
-    - "(heavy artillery railcar:1.1), (loading glowing shell casings:1.2), (massive cannon:1.1), (on train:1.0), (firing:1.1), (dynamic:1.1), detailed illustration"
-    - "(steampunk steam catapult wagon:1.1), (launching mechanical birds:1.2), (siege engine:1.1), (on a battlefield:1.1), (dynamic:1.1), detailed illustration"
-    - "(clockwork gyrocopter:1.1), (spinning noisy rotor blades:1.2), (small aircraft:1.0), (flying over canyon:1.1), (dynamic:1.1), detailed illustration"
-    - "(surreal steam surfboard:1.2), (hovering over city fog:1.1), (surreal:1.0), (personal transport:1.0), (dynamic pose:1.1), detailed illustration"
-    - "(mechanical spider-car:1.2), (eight piston legs:1.1), (all-terrain:1.1), (climbing building:1.1), (dynamic:1.1), detailed illustration"
-    - "(steam-powered armored barge:1.1), (spiked prow:1.1), (on a river:1.0), (weaponized:1.0), (foggy:1.1), detailed illustration"
-    - "(ornate brass glider:1.1), (folding wings:1.1), (gear-braced joints:1.1), (flying:1.0), (above clouds:1.1), (dynamic:1.1), detailed illustration"
-    - "(gothic steam hearse:1.1), (glowing lanterns:1.1), (ornate metal grill:1.1), (gothic:1.0), (on a foggy street:1.1), (eerie:1.1), detailed painting"
-    - "(inventor's mobile workshop carriage:1.2), (filled with hissing pipes:1.1), (cluttered:1.0), (parked in alley:1.1), (glowing:1.1), detailed illustration"
-    - "(luxury airship yacht:1.1), (polished copper hull:1.1), (sails:1.0), (luxury:1.1), (flying at sunset:1.1), (cinematic:1.1), detailed illustration"
-    - "(steampunk steam snow crawler:1.1), (clawed treads:1.1), (snow:1.0), (arctic:1.0), (in a blizzard:1.1), (dynamic:1.1), detailed illustration"
-    - "(clockwork manta-ray flying machine:1.2), (gliding silently:1.1), (biomimicry:1.0), (flying over city:1.1), (night:1.1), (stealthy:1.1), detailed illustration"
-    - "(walking lighthouse vehicle:1.2), (rotating lantern head:1.1), (tall:1.0), (fog:1.0), (walking on coast:1.1), (surreal:1.1), detailed painting"
-    - "(steampunk steam tankette:1.1), (side-mounted cog guns:1.1), (small tank:1.0), (armored:1.0), (in a street battle:1.1), (dynamic:1.1), detailed illustration"
-    - "(towering steam mech:1.2), (smokestacks on shoulders:1.1), (massive robot:1.1), (piloted:1.0), (in a city:1.1), (epic scale:1.1), cinematic"
-    - "(steam-powered cable car:1.1), (climbing steep cliff track:1.1), (mountain:1.0), (epic view:1.1), (dynamic angle:1.1), detailed illustration"
-    - "(steampunk gear-driven helicopter:1.1), (triple-blade rotor:1.1), (brass frame:1.0), (flying over forest:1.1), (dynamic:1.1), detailed illustration"
-    - "(tiny pocket-sized steam automaton scooter:1.2), (miniature:1.1), (whirring:1.0), (on a desk:1.1), (macro shot:1.1), detailed illustration"
-    - "(Victorian armored wagon:1.1), (reinforced with riveted beams:1.1), (horse-drawn:0.9), (on a dirt road:1.1), (dynamic:1.1), detailed illustration"
-    - "(fast steam courier boat:1.1), (racing through fogbound river:1.1), (fast:1.1), (water spray:1.0), (dynamic angle:1.1), detailed illustration"
-    - "(walking carriage shaped like giant brass tortoise:1.2), (heavy armor:1.1), (slow:1.0), (on a street:1.1), (ornate:1.1), detailed illustration"
-    - "(steam grappler vehicle:1.1), (retractable claw arms:1.2), (industrial:1.1), (lifting cargo:1.1), (at a dock:1.1), detailed illustration"
-    - "(agile sky-skiff:1.1), (rotating propeller wings:1.1), (small:1.0), (agile:1.0), (flying between canyons:1.1), (dynamic:1.1), detailed illustration"
-    - "(steampunk fire engine:1.1), (spewing superheated steam:1.2), (brass hoses:1.0), (on a city street:1.1), (dynamic:1.1), detailed illustration"
-    - "(ornate velocipede:1.1), (brass antennae:1.1), (bicycle:1.0), (unusual:1.0), (on a park path:1.1), detailed illustration"
-    - "(steam-powered iron whale submarine:1.2), (underwater:1.1), (glowing portholes:1.0), (deep ocean:1.1), (mysterious:1.1), detailed illustration"
-    - "(massive battle-dirigible:1.2), (bristling with riveted cannons:1.1), (war airship:1.1), (in a stormy sky:1.1), (epic scale:1.1), cinematic"
-    - "(vapor-driven courier scooter:1.1), (gear-stabilized balance:1.1), (fast:1.0), (on a city street:1.1), (dynamic:1.1), detailed illustration"
-    - "(steampunk steam racecar:1.1), (glowing furnace core:1.2), (low profile:1.0), (speeding:1.1), (motion blur:1.1), (on a race track:1.0), dynamic"
-    - "(clockwork scorpion transport:1.2), (articulated stinger:1.1), (mechanical legs:1.1), (in a desert:1.1), (dynamic:1.1), detailed illustration"
-    - "(massive pipeline maintenance walker:1.1), (wrench clamps:1.2), (industrial mech:1.0), (on a giant pipe:1.1), (epic scale:1.1), detailed illustration"
-    - "(steampunk steam biplane:1.1), (cloth wings stitched in runes:1.2), (flying:1.0), (magical:1.0), (above clouds:1.1), (dynamic:1.1), fantasy art"
-    - "(fast fogcutter airship:1.1), (sharp prow for slicing clouds:1.2), (fast:1.1), (flying through fog:1.1), (dynamic:1.1), detailed illustration"
-    - "(steampunk steam trash collector:1.1), (rotating cogs and magnet claws:1.2), (industrial:1.0), (on a gritty street:1.1), detailed illustration"
-    - "(steampunk gear-hopper pogo vehicle:1.2), (powered by boilers:1.1), (bouncing:1.0), (dynamic:1.1), (in a city:1.0), humorous, detailed illustration"
-    - "(walking brass carriage:1.1), (bird-like legs:1.2), (elegant:1.0), (on a victorian street:1.1), detailed illustration"
-    - "(piston-driven speed boat:1.1), (racing across misty bay:1.1), (water spray:1.0), (dynamic angle:1.1), (fast:1.1), detailed illustration"
-    - "(ornate noble air carriage:1.1), (suspended under balloon canopy:1.1), (luxury:1.1), (flying over city:1.1), (elegant:1.1), detailed illustration"
-    - "(steampunk steam harvester:1.1), (trawling through golden fields:1.1), (wheat:1.0), (industrial farm:1.0), (wide angle:1.1), detailed illustration"
-    - "(walking smelter machine:1.1), (trailing sparks:1.1), (molten metal:1.2), (industrial:1.0), (in a factory:1.1), detailed illustration"
-    - "(steam-churned snow wagon:1.1), (pushing frost clouds:1.1), (arctic:1.0), (in a blizzard:1.1), detailed illustration"
-    - "(clockwork gladiator mount:1.1), (spinning saw wheels:1.2), (arena:1.0), (weaponized:1.0), (dynamic:1.1), detailed illustration"
-    - "(steampunk steam street-sweeper:1.1), (rotating brush gears:1.2), (city street:1.0), (night:1.0), (gaslamp:1.1), detailed illustration"
-    - "(steampunk air-cavalry bike:1.1), (piston flaps acting as wings:1.2), (hovering:1.0), (dynamic pose:1.1), (in a city:1.0), detailed illustration"
-    - "(giant cog-wheel landship:1.2), (rolling over terrain:1.1), (massive:1.1), (epic scale:1.1), (hissing steam:1.1), cinematic, detailed illustration"
-    - "(steampunk steam courier beetle:1.1), (heated exhaust plates:1.1), (automaton insect:1.1), (flying:1.1), (dynamic:1.1), detailed illustration"
-    - "(towering rail mech:1.1), (pulling damaged traincars:1.2), (strong:1.1), (on railway:1.1), (epic scale:1.1), detailed illustration"
-    - "(steampunk steam excavator:1.1), (rotating gear jaws:1.2), (construction:1.0), (digging:1.1), (industrial:1.1), detailed illustration"
-    - "(clockwork shark submarine:1.2), (glowing eye-ports:1.1), (underwater:1.1), (deep ocean:1.1), (eerie:1.1), detailed illustration"
-    - "(steampunk dirigible rickshaw:1.1), (powered by miniature thrusters:1.1), (flying:1.0), (between buildings:1.1), (dynamic:1.1), detailed illustration"
-    - "(heavily plated riot wagon:1.1), (firing steam bursts:1.2), (armored:1.1), (on a city street:1.1), (dynamic:1.1), detailed illustration"
-    - "(steampunk steam mower:1.1), (trundling through tall grass:1.1), (brass hum:1.0), (in a park:1.1), detailed illustration"
-    - "(ornate brass chariot:1.1), (pulled by mechanical lions:1.2), (regal:1.0), (in a parade:1.1), (dynamic:1.1), detailed illustration"
-    - "(steampunk rocket sled:1.2), (launching sparks:1.1), (fast:1.1), (on rails:1.0), (motion blur:1.1), (dynamic:1.1), detailed illustration"
-    - "(floating steam skiff:1.1), (drifting between rooftops:1.1), (sky boat:1.0), (foggy:1.1), (mysterious:1.1), detailed illustration"
-    - "(rideable mechanical wolf mount:1.2), (glowing furnace core:1.1), (riding:1.0), (dynamic pose:1.1), (in a forest:1.1), fantasy art"
-    - "(steampunk steam-coil hover tank:1.2), (producing ring-shaped pressure waves:1.1), (sci-fi:1.0), (hovering:1.1), (dynamic:1.1), detailed illustration"
-    - "(grand air cruiser:1.1), (chandeliers inside bridge:1.1), (luxury airship:1.1), (flying at night:1.1), (glowing windows:1.1), cinematic"
-    - "(city maintenance mech:1.1), (walking on piston legs:1.1), (repairing:1.0), (on a building:1.1), (high angle:1.1), detailed illustration"
-    - "(steampunk steam land yacht:1.1), (sailing across dusty plains:1.1), (sails:1.0), (wheels:1.0), (dynamic:1.1), (wide angle:1.1), detailed illustration"
-    - "(fast brass stormrunner:1.1), (racing through dark clouds:1.2), (fast airship:1.0), (lightning:1.1), (dynamic:1.1), cinematic"
-    - "(giant mechanical centipede:1.2), (used for tunnel travel:1.1), (subway:1.0), (glowing eyes:1.1), (in a tunnel:1.1), (eerie:1.1), detailed illustration"
-    - "(steampunk steam digger mole vehicle:1.2), (burrowing through soil:1.1), (underground:1.0), (dynamic:1.1), (dirt flying:1.1), detailed illustration"
+    - "(a massive brass-plated airship:1.3), giant rotating propellers, glowing boiler vents, flying above the clouds, epic scale, cinematic lighting, detailed steampunk illustration"
+    - "(a steampunk steam-powered tricycle:1.1), (exposed pistons:1.2), smoke-belching exhausts, single rider, racing on cobblestone, dynamic angle, detailed illustration"
+    - "(ornate clockwork train:1.1), copper plating, racing across elevated rails, steampunk cityscape, hissing steam, cinematic, detailed illustration"
+    - "(armored steam-carriage:1.1), (pulled by mechanical horses:1.2), brass and steel, victorian, on a foggy street, detailed painting"
+    - "(giant gear-driven walking tank:1.2), stomping across cobblestone streets, hissing steam, epic scale, cinematic"
+    - "(Victorian steam taxi:1.1), curling smoke pipes, velvet interior, gaslamp, parked on cobblestone street, detailed illustration"
+    - "(retro-futuristic monowheel vehicle:1.2), spinning under whirring cogs, dynamic, racing, motion blur, detailed illustration"
+    - "(compact dual-rotor air skiff:1.1), drifting on steam jets, flying between buildings, dynamic angle"
+    - "(massive dirigible fortress:1.2), hanging lantern decks, bristling with cannons, floating in storm clouds, epic scale, cinematic"
+    - "(powerful steam motorcycle:1.1), triple rear wheels, brass shock absorbers, racing on a bridge, dynamic, detailed illustration"
+    - "(ornate steam gondola:1.1), navigating foggy canals, glowing boiler, steampunk venice, mysterious, detailed painting"
+    - "(clockwork beetle-shaped crawler:1.2), climbing stone walls, mechanical legs, glowing eyes, dynamic angle, detailed illustration"
+    - "(industrial steam-trench digger:1.1), (rotating front drills:1.2), digging dirt, powerful, detailed illustration"
+    - "(barrel-shaped pressure tank rover:1.1), puffing heavy steam clouds, all-terrain, in a rocky canyon, detailed illustration"
+    - "(steampunk airborne courier glider:1.1), cloth wings, gear-driven winches, above city, dynamic pose, detailed illustration"
+    - "(steam-lifted observation balloon:1.1), (brass spyglass deck:1.2), high altitude, above clouds, detailed illustration"
+    - "(armored battle wagon:1.1), reinforced with riveted iron plates, (gear turrets:1.2), in a desert, detailed illustration"
+    - "(ornate Victorian limousine:1.1), rotating gear axles, parked in front of mansion, detailed illustration"
+    - "(steampunk steam-hoverboard:1.2), stabilizing pistons hissing, flying over street, dynamic, detailed illustration"
+    - "(ornate automaton rickshaw:1.1), (pulled by mechanical bird:1.2), flying, in a city, detailed fantasy art"
+    - "(steampunk steam sleigh:1.1), (sliding on glowing heated runners:1.2), snow, racing, dynamic, detailed illustration"
+    - "(ornate gear-propelled submarine:1.2), shaped like a golden fish, underwater, glowing portholes, ocean life, detailed illustration"
+    - "(tall-wheeled penny-farthing war bike:1.2), armored shield front, on a battlefield, dynamic, detailed illustration"
+    - "(steam-powered armored stagecoach:1.1), (retractable brass spikes:1.2), pulled by mechanical horses, racing, detailed illustration"
+    - "(balloon-supported scout craft:1.1), drifting above rooftops, stealthy, night, fog, detailed illustration"
+    - "(walking steam crane:1.1), (giant gear arms:1.2), lifting cargo, industrial, at a dock, detailed illustration"
+    - "(steampunk steam bus:1.1), open-air deck, mechanical stair lift, on a city street, detailed illustration"
+    - "(clockwork beetle tank:1.2), firing steam bursts, on a battlefield, dynamic, detailed illustration"
+    - "(industrial steam barge:1.1), pushing glowing cargo, on a foggy river, smokestacks, detailed painting"
+    - "(tri-engine patrol balloon:1.1), (searchlights sweeping:1.2), night, flying over city, mysterious, detailed illustration"
+    - "(gear-loaded mining cart:1.1), driven by sputtering boilers, on rails, glowing crystals, dynamic, detailed illustration"
+    - "(steampunk pressure-driven bicycle:1.1), (piston-assisted pedaling:1.2), fast, on a cobblestone street, dynamic, detailed illustration"
+    - "(walking automaton carriage:1.2), shaped like a giant iron owl, glowing eyes, ornate, fantasy art"
+    - "(steam courier drone:1.1), (shaped like a brass dragonfly:1.2), flying, carrying package, dynamic, detailed illustration"
+    - "(massive sky-freighter dirigible:1.1), multiple cargo slings, industrial, flying through clouds, epic scale"
+    - "(defensive steam shield tank:1.1), (rotating gear armor:1.2), on a battlefield, detailed illustration"
+    - "(heavy artillery railcar:1.1), (loading glowing shell casings:1.2), massive cannon, firing, dynamic, detailed illustration"
+    - "(steampunk steam catapult wagon:1.1), (launching mechanical birds:1.2), on a battlefield, dynamic, detailed illustration"
+    - "(clockwork gyrocopter:1.1), (spinning noisy rotor blades:1.2), flying over canyon, dynamic, detailed illustration"
+    - "(surreal steam surfboard:1.2), hovering over city fog, dynamic pose, detailed illustration"
+    - "(mechanical spider-car:1.2), eight piston legs, all-terrain, climbing building, dynamic, detailed illustration"
+    - "(steam-powered armored barge:1.1), spiked prow, on a river, foggy, detailed illustration"
+    - "(ornate brass glider:1.1), folding wings, gear-braced joints, above clouds, dynamic, detailed illustration"
+    - "(gothic steam hearse:1.1), glowing lanterns, ornate metal grill, on a foggy street, eerie, detailed painting"
+    - "(inventor's mobile workshop carriage:1.2), filled with hissing pipes, cluttered, parked in alley, glowing, detailed illustration"
+    - "(luxury airship yacht:1.1), polished copper hull, sails, flying at sunset, cinematic, detailed illustration"
+    - "(steampunk steam snow crawler:1.1), clawed treads, arctic, in a blizzard, dynamic, detailed illustration"
+    - "(clockwork manta-ray flying machine:1.2), gliding silently, biomimicry, flying over city, night, stealthy, detailed illustration"
+    - "(walking lighthouse vehicle:1.2), rotating lantern head, tall, fog, surreal, detailed painting"
+    - "(steampunk steam tankette:1.1), side-mounted cog guns, in a street battle, dynamic, detailed illustration"
+    - "(towering steam mech:1.2), smokestacks on shoulders, piloted, in a city, epic scale, cinematic"
+    - "(steam-powered cable car:1.1), climbing steep cliff track, mountain, epic view, dynamic angle, detailed illustration"
+    - "(steampunk gear-driven helicopter:1.1), triple-blade rotor, brass frame, flying over forest, dynamic, detailed illustration"
+    - "(tiny pocket-sized steam automaton scooter:1.2), whirring, on a desk, macro shot, detailed illustration"
+    - "(Victorian armored wagon:1.1), reinforced with riveted beams, horse-drawn, on a dirt road, dynamic, detailed illustration"
+    - "(fast steam courier boat:1.1), racing through fogbound river, water spray, dynamic angle, detailed illustration"
+    - "(walking carriage shaped like giant brass tortoise:1.2), heavy armor, slow, on a street, ornate, detailed illustration"
+    - "(steam grappler vehicle:1.1), (retractable claw arms:1.2), industrial, lifting cargo, at a dock, detailed illustration"
+    - "(agile sky-skiff:1.1), rotating propeller wings, flying between canyons, dynamic, detailed illustration"
+    - "(steampunk fire engine:1.1), (spewing superheated steam:1.2), brass hoses, on a city street, dynamic, detailed illustration"
+    - "(ornate velocipede:1.1), brass antennae, unusual, on a park path, detailed illustration"
+    - "(steam-powered iron whale submarine:1.2), deep ocean, glowing portholes, mysterious, detailed illustration"
+    - "(massive battle-dirigible:1.2), bristling with riveted cannons, in a stormy sky, epic scale, cinematic"
+    - "(vapor-driven courier scooter:1.1), gear-stabilized balance, fast, on a city street, dynamic, detailed illustration"
+    - "(steampunk steam racecar:1.1), (glowing furnace core:1.2), low profile, speeding, motion blur, on a race track, dynamic"
+    - "(clockwork scorpion transport:1.2), articulated stinger, mechanical legs, in a desert, dynamic, detailed illustration"
+    - "(massive pipeline maintenance walker:1.1), (wrench clamps:1.2), on a giant pipe, epic scale, detailed illustration"
+    - "(steampunk steam biplane:1.1), (cloth wings stitched in runes:1.2), magical, above clouds, dynamic, fantasy art"
+    - "(fast fogcutter airship:1.1), (sharp prow for slicing clouds:1.2), flying through fog, dynamic, detailed illustration"
+    - "(steampunk steam trash collector:1.1), (rotating cogs and magnet claws:1.2), industrial, on a gritty street, detailed illustration"
+    - "(steampunk gear-hopper pogo vehicle:1.2), powered by boilers, bouncing, dynamic, in a city, humorous, detailed illustration"
+    - "(walking brass carriage:1.1), (bird-like legs:1.2), elegant, on a victorian street, detailed illustration"
+    - "(piston-driven speed boat:1.1), racing across misty bay, water spray, dynamic angle, detailed illustration"
+    - "(ornate noble air carriage:1.1), suspended under balloon canopy, flying over city, elegant, detailed illustration"
+    - "(steampunk steam harvester:1.1), trawling through golden fields, industrial farm, wide angle, detailed illustration"
+    - "(walking smelter machine:1.1), trailing sparks, (molten metal:1.2), industrial, in a factory, detailed illustration"
+    - "(steam-churned snow wagon:1.1), pushing frost clouds, arctic, in a blizzard, detailed illustration"
+    - "(clockwork gladiator mount:1.1), (spinning saw wheels:1.2), arena, dynamic, detailed illustration"
+    - "(steampunk steam street-sweeper:1.1), (rotating brush gears:1.2), night, gaslamp, detailed illustration"
+    - "(steampunk air-cavalry bike:1.1), (piston flaps acting as wings:1.2), hovering, dynamic pose, in a city, detailed illustration"
+    - "(giant cog-wheel landship:1.2), rolling over terrain, epic scale, hissing steam, cinematic, detailed illustration"
+    - "(steampunk steam courier beetle:1.1), heated exhaust plates, flying, dynamic, detailed illustration"
+    - "(towering rail mech:1.1), (pulling damaged traincars:1.2), strong, epic scale, detailed illustration"
+    - "(steampunk steam excavator:1.1), (rotating gear jaws:1.2), digging, industrial, detailed illustration"
+    - "(clockwork shark submarine:1.2), glowing eye-ports, deep ocean, eerie, detailed illustration"
+    - "(steampunk dirigible rickshaw:1.1), powered by miniature thrusters, between buildings, dynamic, detailed illustration"
+    - "(heavily plated riot wagon:1.1), (firing steam bursts:1.2), on a city street, dynamic, detailed illustration"
+    - "(steampunk steam mower:1.1), trundling through tall grass, brass hum, in a park, detailed illustration"
+    - "(ornate brass chariot:1.1), (pulled by mechanical lions:1.2), regal, in a parade, dynamic, detailed illustration"
+    - "(steampunk rocket sled:1.2), launching sparks, fast, on rails, motion blur, dynamic, detailed illustration"
+    - "(floating steam skiff:1.1), drifting between rooftops, foggy, mysterious, detailed illustration"
+    - "(rideable mechanical wolf mount:1.2), glowing furnace core, dynamic pose, in a forest, fantasy art"
+    - "(steampunk steam-coil hover tank:1.2), producing ring-shaped pressure waves, sci-fi, dynamic, detailed illustration"
+    - "(grand air cruiser:1.1), chandeliers inside bridge, flying at night, glowing windows, cinematic"
+    - "(city maintenance mech:1.1), walking on piston legs, repairing, on a building, high angle, detailed illustration"
+    - "(steampunk steam land yacht:1.1), sailing across dusty plains, wheels, dynamic, wide angle, detailed illustration"
+    - "(fast brass stormrunner:1.1), (racing through dark clouds:1.2), lightning, dynamic, cinematic"
+    - "(giant mechanical centipede:1.2), used for tunnel travel, glowing eyes, eerie, detailed illustration"
+    - "(steampunk steam digger mole vehicle:1.2), burrowing through soil, dynamic, dirt flying, detailed illustration"
 
   spotlight_fashion:
-    - "a (long brass-buttoned coat:1.2), (ornate leather straps:1.1), (intricate gear buckles:1.1), on a mannequin, (studio lighting:1.1), detailed fashion concept, victorian, steampunk"
-    - "an (ornate velvet vest:1.1), (gold filigree embroidery:1.1), (brass pocketwatch chain:1.1), victorian fashion, (detailed concept art:1.1), steampunk, studio lighting"
-    - "a pair of (steampunk goggles with emerald-tinted lenses:1.3), (copper hinges:1.1), (intricate:1.0), (leather straps:1.1), product shot, detailed concept art"
-    - "a (ruffled Victorian dress:1.1), (gear-trimmed leather corset:1.2), (intricate lace:1.0), on a mannequin, (steampunk fashion:1.1), detailed concept art, studio lighting"
-    - "an (airship captain jacket:1.1), (ornate shoulder epaulets:1.1), (brass buttons:1.0), (high collar:1.0), steampunk fashion, (detailed concept art:1.1), on mannequin"
-    - "a pair of (boiler engineer overalls:1.1), (stained with oil:1.1), (leather patches:1.0), (brass buckles:1.1), (steampunk utility wear:1.1), detailed concept art, flat lay"
-    - "a (lace-trimmed travel coat:1.1), (brass compass chain:1.1), (elegant:1.0), (victorian:1.1), steampunk fashion, on a mannequin, (detailed concept art:1.1)"
-    - "a (leather mechanic's apron:1.1), (multi-tool harness:1.2), (brass tools:1.1), (utility:1.0), steampunk concept art, (studio lighting:1.1), on mannequin"
-    - "an (ornate copper mask:1.2), (delicate filigree vents:1.1), (mysterious:1.0), (glowing lenses:1.1), victorian, steampunk, detailed product shot, dark background"
-    - "a (silk Victorian waistcoat:1.1), (finely embroidered with clock motifs:1.3), (brass buttons:1.0), victorian fashion, (detailed concept art:1.1), studio lighting, steampunk"
-    - "a (sleeveless leather coat:1.1), (reinforced with metal studs:1.1), (rugged:1.0), (pirate:1.1), (steampunk fashion:1.1), on a mannequin, detailed concept art"
-    - "a (silk steam pilot scarf:1.1), (intricate cog pattern:1.1), (silk:1.0), (billowing:0.9), (steampunk accessory:1.1), studio lighting, detailed concept art"
-    - "a (gear-trimmed top hat:1.1), (attached rotating monocle lens:1.2), (goggles:1.0), (victorian:1.1), steampunk fashion, (detailed product shot:1.1), studio lighting"
-    - "an (alchemist robe:1.1), (glowing vial pockets:1.2), (hooded:1.0), (leather straps:1.1), (steampunk fantasy:1.1), on a mannequin, detailed concept art"
-    - "a (leather corset with pressure-gauge lacing:1.2), (leather:1.1), (glowing gauges:0.9), (victorian:1.1), steampunk fashion, (detailed concept art:1.1), on mannequin"
-    - "a (rifleman's long duster coat:1.1), (reinforced shoulder pads:1.1), (worn leather:1.0), (rugged:1.1), steampunk fashion, (detailed concept art:1.1), on mannequin"
-    - "a (feathered airship navigator coat:1.1), (ornate:1.1), (warm:1.0), (fur collar:1.1), (steampunk fashion:1.1), on a mannequin, detailed concept art"
-    - "a pair of (ornate brass pauldrons:1.1), (etched with runes:1.1), (shoulder armor:1.0), (intricate:1.1), (steampunk armor concept:1.1), studio lighting, detailed"
-    - "a pair of (victorian lace gloves:1.1), (with tiny gear joints:1.2), (victorian:1.0), (elegant:1.1), steampunk fashion, (detailed concept art:1.1), studio lighting"
-    - "(full body:1.0), (ornate pressure-suit armor:1.1), (glowing tube vents:1.1), (glowing gauges:1.0), (heavy:1.1), (steampunk armor concept:1.1), detailed illustration"
-    - "a (gold-and-black opera coat:1.1), (mechanical brooch:1.2), (elegant:1.1), (ornate:1.1), victorian fashion, on a mannequin, detailed concept art"
-    - "a (ornate brass exosleeve:1.2), (augmenting forearm:1.1), (glowing wires:1.0), (intricate gears:1.1), (steampunk cyborg concept:1.1), detailed concept art, studio lighting"
-    - "a pair of (glowing aether wristbands:1.1), (wired into coat:1.1), (blue glow:1.0), (steampunk accessory:1.1), detailed concept art, dark background"
-    - "an (ornate clockwork skirt:1.1), (gear-sprocket hem:1.2), (slowly rotating:1.0), (victorian:1.1), steampunk fashion, (surreal:1.0), on mannequin, concept art"
-    - "a (steampunk steam ranger cloak:1.1), (patched with rivets:1.1), (hooded:1.0), (worn:1.1), (steampunk fantasy:1.1), on a mannequin, detailed concept art"
-    - "an (inventor's jacket:1.1), (stuffed with scroll tubes:1.1), (cluttered:1.0), (tool pockets:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (copper-trimmed bustle skirt:1.1), (layered lace:1.0), (victorian:1.1), (steampunk fashion:1.1), on a mannequin, detailed concept art, studio lighting"
-    - "a pair of (heavy piston boots:1.2), (articulated ankles:1.1), (heavy:1.0), (brass:1.1), (steampunk footwear:1.1), detailed concept art, product shot"
-    - "a pair of (heavy steam gauntlets:1.1), (emitting faint glow:1.1), (hissing steam:1.0), (ornate:1.1), (steampunk armor concept:1.1), detailed concept art, studio lighting"
-    - "a (pilot's leather aviator jacket:1.1), (fur collar:1.1), (patches:1.0), (worn:1.1), (steampunk fashion:1.1), on a mannequin, detailed concept art"
-    - "a (wide leather gear-backed waist belt:1.1), (ornate fasteners:1.1), (wide belt:1.0), (steampunk accessory:1.1), detailed concept art, product shot"
-    - "an (elegant dress lined with tiny spinning cogs:1.2), (elegant:1.1), (mechanical:1.0), (victorian:1.1), steampunk fashion, (surreal:1.0), on mannequin, concept art"
-    - "a (steam-mage robe:1.1), (trimmed with brass etchings:1.1), (glowing runes:1.0), (hooded:1.1), (steampunk fantasy:1.1), on a mannequin, detailed concept art"
-    - "an (ornate mechanical arm bracer:1.1), (rotating plates:1.1), (defensive:1.0), (brass:1.1), (steampunk armor concept:1.1), detailed concept art, product shot"
-    - "a (durable canvas explorer coat:1.1), (many map pockets:1.1), (durable:1.0), (practical:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (tattered sky pirate coat:1.1), (torn epaulets:1.1), (worn:1.0), (rugged:1.1), (steampunk fashion:1.1), on a mannequin, detailed concept art"
-    - "a pair of (ornate aether goggles:1.1), (glowing neon blue lenses:1.2), (bright:1.0), (intricate brass:1.1), (steampunk accessory:1.1), detailed product shot, dark background"
-    - "a (soot-covered clocksmith apron:1.1), (covered in soot:1.1), (tool pockets:1.0), (leather:1.1), (steampunk utility:1.1), detailed concept art, flat lay"
-    - "a (leather corset with integrated vial harness:1.2), (alchemist:1.1), (colorful glowing liquids:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (patchwork mechanic coat:1.1), (uneven stitches:1.1), (grimy:1.0), (worn:1.1), (steampunk fashion:1.1), on a mannequin, detailed concept art"
-    - "a suit of (heavy plated steam armor:1.1), (glowing furnace core:1.2), (heavy:1.1), (hissing steam:1.0), (steampunk armor concept:1.1), on mannequin, detailed illustration"
-    - "a (victorian lace choker:1.1), (with a tiny gear pendant:1.2), (victorian jewelry:1.0), (elegant:1.1), (steampunk accessory:1.1), detailed product shot, studio lighting"
-    - "a (steam detective trench coat:1.1), (high collar:1.1), (dark:1.0), (mysterious:1.1), (steampunk fashion:1.1), on a mannequin, detailed concept art"
-    - "an (elegant noblewoman gown:1.1), (with brass-lace sleeves:1.2), (elegant:1.1), (victorian:1.1), (steampunk fashion:1.1), on a mannequin, detailed concept art"
-    - "an (aether priest robe:1.1), (glowing faintly with teal light:1.1), (ornate sigils:1.1), (steampunk fantasy:1.1), on a mannequin, detailed concept art"
-    - "an (inventor's monocle:1.1), (with tiny rotating lens arms:1.2), (magnifying:1.0), (brass:1.1), (steampunk accessory:1.1), detailed product shot, studio lighting"
-    - "an (airship courier jacket:1.1), (lined with canvas:1.0), (practical:1.0), (leather straps:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (full copper corset:1.1), (embedded with glowing pressure gauges:1.2), (hissing steam:0.9), (ornate:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a pair of (rune-etched gloves:1.1), (padded knuckles:1.0), (glowing blue runes:1.1), (steampunk fantasy:1.1), detailed concept art, studio lighting"
-    - "a (Victorian engineer coat:1.1), (reinforced shoulders:1.1), (tweed fabric:1.0), (leather patches:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a pair of (industrial worker boots:1.1), (with cog-patterned soles:1.2), (heavy duty:1.0), (leather:1.1), (steampunk footwear:1.1), detailed concept art, product shot"
-    - "a (luminous aether harness:1.1), (glowing blue tubes:1.2), (aether powered:1.0), (leather straps:1.1), (steampunk fantasy:1.1), on mannequin, detailed concept art"
-    - "a (clockwork feather hairpiece:1.2), (brass and feathers:1.1), (elegant:1.0), (intricate:1.1), (steampunk accessory:1.1), detailed product shot, studio lighting"
-    - "a (steam assassin hood:1.1), (stitched with brass studs:1.1), (shadows:1.0), (dark:1.1), (stealthy:1.1), (steampunk fashion:1.1), on mannequin, concept art"
-    - "a pair of (padded gauntlets:1.1), (linked by gear chain:1.1), (heavy:1.0), (steampunk armor concept:1.1), detailed concept art, studio lighting"
-    - "a (Victorian military coat:1.1), (ornate gold piping:1.1), (brass medals:1.0), (formal:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (victorian corset dress:1.1), (with a copper-laced skirt:1.1), (victorian:1.0), (elegant:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (high-collar scholar robe:1.1), (with map embroidery:1.2), (academic:1.0), (steampunk fantasy:1.1), on a mannequin, detailed concept art"
-    - "a (grimy mechanic's hood:1.1), (with attached goggles:1.1), (grimy:1.0), (worn:1.1), (steampunk utility:1.1), on mannequin, detailed concept art"
-    - "a pair of (leather pilot trousers:1.1), (reinforced knee pads:1.1), (leather:1.0), (practical:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (gear-encrusted cape:1.1), (clasped with brass brooch:1.1), (flowing:1.0), (ornate:1.1), (steampunk fantasy:1.1), on mannequin, detailed concept art"
-    - "a (secret agent's steam-suit:1.1), (pressure vents:1.1), (stealthy:1.0), (dark:1.1), (steampunk sci-fi:1.1), on mannequin, detailed concept art"
-    - "an (elegant opera dress:1.1), (shimmering metallic fabric:1.2), (elegant gown:1.0), (victorian:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (shadow rogue coat:1.1), (with dozens of interior pockets:1.2), (dark:1.0), (stealthy:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (steam witch cloak:1.1), (covered in brass charms:1.1), (hooded:1.0), (mystical:1.1), (steampunk fantasy:1.1), on mannequin, detailed concept art"
-    - "a (formal tailcoat:1.1), (lined with copper thread:1.1), (gentleman:1.0), (victorian:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a suit of (heavy boiler-armor:1.2), (smoke plume vents:1.1), (massive:1.0), (glowing orange:1.1), (steampunk armor concept:1.1), on mannequin, detailed illustration"
-    - "a pair of (clockwork pauldrons:1.1), (shaped like angel wings:1.2), (ornate armor:1.0), (intricate:1.1), (steampunk fantasy:1.1), detailed concept art, studio lighting"
-    - "an (alchemist wrap:1.1), (glowing vials at belt:1.2), (practical:1.0), (leather:1.1), (steampunk fantasy:1.1), on mannequin, detailed concept art"
-    - "a (steampunk kimono:1.1), (with a gear-patterned sash:1.2), (fusion style:1.0), (elegant:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "an (airship captain hat:1.1), (brass insignia:1.1), (peaked cap:1.0), (formal:1.1), (steampunk accessory:1.1), detailed product shot, studio lighting"
-    - "a pair of (mechanical boots:1.1), (with spring-loaded heels:1.2), (piston:1.0), (steampunk footwear:1.1), detailed concept art, product shot"
-    - "a pair of (engineer gloves:1.1), (with retractable claws:1.2), (tools:1.0), (leather:1.1), (steampunk utility:1.1), detailed concept art, studio lighting"
-    - "a (Victorian blouse:1.1), (with a filigree collar:1.2), (lace:1.0), (elegant:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (corset jacket:1.1), (with piston-strap shoulders:1.2), (unique:1.0), (victorian:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (radiant aether robe:1.1), (shimmering gold:1.1), (magical:1.0), (glowing:1.1), (steampunk fantasy:1.1), on mannequin, detailed concept art"
-    - "a (mechanical priest vestments:1.1), (with a rotating halo gear:1.2), (religious:1.0), (ornate:1.1), (steampunk fantasy:1.1), on mannequin, detailed concept art"
-    - "a (duelist coat:1.1), (double shoulder plating:1.1), (fencing:1.0), (elegant:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "an (airship scout poncho:1.1), (reinforced with leather:1.1), (camouflaged:0.9), (rugged:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (furnace-lined vest:1.1), (for harsh winters:1.0), (glowing hot:1.1), (warm:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "an (ornate copper gown:1.1), (gemstone rivets:1.1), (metallic dress:1.1), (elegant:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (pressure-mask veil:1.1), (lace edging:1.1), (mysterious:1.0), (glowing filter:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (winged shoulder cloak:1.1), (with feathered gears:1.2), (ornate:1.0), (elegant:1.1), (steampunk fantasy:1.1), on mannequin, detailed concept art"
-    - "a suit of (steam royal guard armor:1.1), (gold accents:1.1), (ceremonial:1.0), (ornate:1.1), (steampunk armor concept:1.1), on mannequin, detailed illustration"
-    - "a (gear-lined trench coat:1.1), (massive collar:1.1), (intimidating:1.0), (dark:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "an (inventor's hooded robe:1.1), (blueprint pockets:1.1), (practical:1.0), (cluttered:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "an (artisan coat:1.1), (sprinkled with metal dust:1.1), (workshop:1.0), (leather:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a (clocksmith dress:1.1), (with a turning brooch:1.2), (intricate:1.0), (elegant:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-    - "a pair of (smokestack pauldrons:1.2), (emitting faint steam:1.1), (shoulder armor:1.0), (industrial:1.1), (steampunk armor concept:1.1), detailed concept art, studio lighting"
-    - "a (steam dancer outfit:1.1), (with rotating fan-blades:1.2), (elegant:1.0), (flowing:1.1), (steampunk fashion:1.1), on mannequin, detailed concept art"
-
-# ---------------------------------------------------------
-# NEGATIVE PROMPT
-# ---------------------------------------------------------
-
-  negative_prompt: 
-    - "ugly, tiling, (poorly drawn hands:1.2), (poorly drawn feet:1.1), (poorly drawn face:1.1), out of frame, (extra limbs:1.3), (extra fingers:1.3), (extra hands:1.3), (fused fingers:1.2), (too many fingers:1.2), disfigured, (deformed:1.1), (body out of frame:1.1), (blurry:1.1), bad anatomy, (blurred:1.1), watermark, grainy, signature, cut off, draft, (weird eyes:1.1), (text:1.3), (words:1.3), (letters:1.3), (username:1.2), low quality, (worst quality:1.1), (jpeg artifacts:1.1), monochrome, (grayscale:1.1), (plastic:1.1), (fake:1.1), (cartoon:1.1), (3d render:1.1)"
+    - "a (long brass-buttoned coat:1.2), ornate leather straps, intricate gear buckles, on a mannequin, studio lighting, detailed fashion concept, victorian, steampunk"
+    - "an (ornate velvet vest:1.1), gold filigree embroidery, brass pocketwatch chain, victorian fashion, detailed concept art, steampunk, studio lighting"
+    - "a pair of (steampunk goggles with emerald-tinted lenses:1.3), copper hinges, intricate leather straps, product shot, detailed concept art"
+    - "a (ruffled Victorian dress:1.1), (gear-trimmed leather corset:1.2), intricate lace, on a mannequin, steampunk fashion, detailed concept art, studio lighting"
+    - "a (double-breasted brass-buttoned jacket:1.1), ornate shoulder epaulets, high collar, steampunk fashion, detailed concept art, on mannequin"
+    - "a pair of (oil-stained canvas overalls:1.1), leather patches, brass buckles, steampunk utility wear, detailed concept art, flat lay"
+    - "a (lace-trimmed travel coat:1.1), brass compass chain, elegant, victorian, steampunk fashion, on a mannequin, detailed concept art"
+    - "a (leather mechanic's apron:1.1), (multi-tool harness:1.2), brass tools, utility, steampunk concept art, studio lighting, on mannequin"
+    - "an (ornate copper mask:1.2), delicate filigree vents, mysterious, glowing lenses, victorian, steampunk, detailed product shot, dark background"
+    - "a (silk Victorian waistcoat:1.1), (finely embroidered with clock motifs:1.3), brass buttons, victorian fashion, detailed concept art, studio lighting, steampunk"
+    - "a (sleeveless leather coat:1.1), (reinforced with metal studs:1.1), rugged, steampunk fashion, on a mannequin, detailed concept art"
+    - "a (long trailing silk scarf:1.1), (intricate cog pattern:1.1), billowing, steampunk accessory, studio lighting, detailed concept art"
+    - "a (gear-trimmed top hat:1.1), (attached rotating monocle lens:1.2), goggles, victorian, steampunk fashion, detailed product shot, studio lighting"
+    - "a (hooded canvas robe:1.1), (glowing vial pockets:1.2), leather straps, steampunk fantasy, on a mannequin, detailed concept art"
+    - "a (leather corset with pressure-gauge lacing:1.2), glowing gauges, victorian, steampunk fashion, detailed concept art, on mannequin"
+    - "a (long duster coat with a leather bandolier strap:1.1), (reinforced shoulder pads:1.1), worn leather, rugged, steampunk fashion, detailed concept art, on mannequin"
+    - "a (feathered fur-collared long coat:1.1), ornate, warm, steampunk fashion, on a mannequin, detailed concept art"
+    - "a pair of (ornate brass pauldrons:1.1), (etched with runes:1.1), intricate, steampunk armor concept, studio lighting, detailed"
+    - "a pair of (victorian lace gloves:1.1), (with tiny gear joints:1.2), elegant, steampunk fashion, detailed concept art, studio lighting"
+    - "full body, (ornate pressure-suit armor:1.1), (glowing tube vents:1.1), heavy, steampunk armor concept, detailed illustration"
+    - "a (gold-and-black opera coat:1.1), (mechanical brooch:1.2), elegant, ornate, victorian fashion, on a mannequin, detailed concept art"
+    - "a (ornate brass exosleeve:1.2), augmenting forearm, glowing wires, intricate gears, steampunk cyborg concept, detailed concept art, studio lighting"
+    - "a pair of (glowing aether wristbands:1.1), (wired into coat:1.1), steampunk accessory, detailed concept art, dark background"
+    - "an (ornate clockwork skirt:1.1), (gear-sprocket hem:1.2), slowly rotating, victorian, steampunk fashion, surreal, on mannequin, concept art"
+    - "a (weathered hooded cloak:1.1), (patched with rivets:1.1), worn, steampunk fantasy, on a mannequin, detailed concept art"
+    - "a (canvas work jacket:1.1), (stuffed with scroll tubes:1.1), cluttered, tool pockets, steampunk fashion, on mannequin, detailed concept art"
+    - "a (copper-trimmed bustle skirt:1.1), layered lace, victorian, steampunk fashion, on a mannequin, detailed concept art, studio lighting"
+    - "a pair of (heavy piston boots:1.2), articulated ankles, brass fittings, steampunk footwear, detailed concept art, product shot"
+    - "a pair of (heavy steam gauntlets:1.1), (emitting faint glow:1.1), hissing steam, ornate, steampunk armor concept, detailed concept art, studio lighting"
+    - "a (fur-collared leather jacket:1.1), patches, worn, steampunk fashion, on a mannequin, detailed concept art"
+    - "a (wide leather gear-backed waist belt:1.1), (ornate fasteners:1.1), steampunk accessory, detailed concept art, product shot"
+    - "an (elegant dress lined with tiny spinning cogs:1.2), mechanical, victorian, steampunk fashion, surreal, on mannequin, concept art"
+    - "a (hooded robe trimmed with brass etchings:1.1), glowing runes, steampunk fantasy, on a mannequin, detailed concept art"
+    - "an (ornate mechanical arm bracer:1.1), (rotating plates:1.1), defensive, brass, steampunk armor concept, detailed concept art, product shot"
+    - "a (durable canvas explorer coat:1.1), (many map pockets:1.1), practical, steampunk fashion, on mannequin, detailed concept art"
+    - "a (tattered patchwork coat:1.1), (torn epaulets:1.1), worn, rugged, steampunk fashion, on a mannequin, detailed concept art"
+    - "a pair of (ornate aether goggles:1.1), (glowing neon blue lenses:1.2), intricate brass, steampunk accessory, detailed product shot, dark background"
+    - "a (soot-covered leather apron:1.1), tool pockets, steampunk utility, detailed concept art, flat lay"
+    - "a (leather corset with integrated vial harness:1.2), colorful glowing liquids, steampunk fashion, on mannequin, detailed concept art"
+    - "a (patchwork mechanic coat:1.1), (uneven stitches:1.1), grimy, worn, steampunk fashion, on a mannequin, detailed concept art"
+    - "a suit of (heavy plated steam armor:1.1), (glowing furnace core:1.2), hissing steam, steampunk armor concept, on mannequin, detailed illustration"
+    - "a (victorian lace choker:1.1), (with a tiny gear pendant:1.2), elegant, steampunk accessory, detailed product shot, studio lighting"
+    - "a (dark high-collared trench coat:1.1), mysterious, steampunk fashion, on a mannequin, detailed concept art"
+    - "an (ornate gown with brass-lace sleeves:1.2), victorian, steampunk fashion, on a mannequin, detailed concept art"
+    - "an (ornate sigil-etched robe:1.1), (glowing faintly with teal light:1.1), steampunk fantasy, on a mannequin, detailed concept art"
+    - "an (inventor's monocle:1.1), (with tiny rotating lens arms:1.2), magnifying, brass, steampunk accessory, detailed product shot, studio lighting"
+    - "a (canvas-lined leather jacket:1.1), leather straps, steampunk fashion, on mannequin, detailed concept art"
+    - "a (full copper corset:1.1), (embedded with glowing pressure gauges:1.2), hissing steam, ornate, steampunk fashion, on mannequin, detailed concept art"
+    - "a pair of (glowing rune-etched gloves:1.1), padded knuckles, steampunk fantasy, detailed concept art, studio lighting"
+    - "a (tweed coat with reinforced shoulders:1.1), leather patches, steampunk fashion, on mannequin, detailed concept art"
+    - "a pair of (industrial worker boots:1.1), (with cog-patterned soles:1.2), heavy duty, leather, steampunk footwear, detailed concept art, product shot"
+    - "a (luminous aether harness:1.1), (glowing blue tubes:1.2), leather straps, steampunk fantasy, on mannequin, detailed concept art"
+    - "a (clockwork feather hairpiece:1.2), elegant, intricate, steampunk accessory, detailed product shot, studio lighting"
+    - "a (dark hood stitched with brass studs:1.1), stealthy, steampunk fashion, on mannequin, concept art"
+    - "a pair of (padded gauntlets:1.1), (linked by gear chain:1.1), heavy, steampunk armor concept, detailed concept art, studio lighting"
+    - "a (formal coat with ornate gold piping:1.1), brass medals, steampunk fashion, on mannequin, detailed concept art"
+    - "a (victorian corset dress:1.1), (with a copper-laced skirt:1.1), elegant, steampunk fashion, on mannequin, detailed concept art"
+    - "a (high-collared robe with map embroidery:1.2), steampunk fantasy, on a mannequin, detailed concept art"
+    - "a (grimy mechanic's hood:1.1), (with attached goggles:1.1), worn, steampunk utility, on mannequin, detailed concept art"
+    - "a pair of (leather trousers with reinforced knee pads:1.1), practical, steampunk fashion, on mannequin, detailed concept art"
+    - "a (gear-encrusted cape:1.1), (clasped with brass brooch:1.1), flowing, ornate, steampunk fantasy, on mannequin, detailed concept art"
+    - "a (dark suit with pressure vents:1.1), stealthy, steampunk sci-fi, on mannequin, detailed concept art"
+    - "an (elegant opera dress:1.1), (shimmering metallic fabric:1.2), victorian, steampunk fashion, on mannequin, detailed concept art"
+    - "a (dark coat with dozens of interior pockets:1.2), stealthy, steampunk fashion, on mannequin, detailed concept art"
+    - "a (hooded cloak covered in brass charms:1.1), mystical, steampunk fantasy, on mannequin, detailed concept art"
+    - "a (formal tailcoat:1.1), (lined with copper thread:1.1), victorian, steampunk fashion, on mannequin, detailed concept art"
+    - "a suit of (heavy boiler-armor:1.2), (smoke plume vents:1.1), glowing orange, steampunk armor concept, on mannequin, detailed illustration"
+    - "a pair of (clockwork pauldrons:1.1), (shaped like angel wings:1.2), intricate, steampunk fantasy, detailed concept art, studio lighting"
+    - "a (leather wrap with glowing vials at the belt:1.2), practical, steampunk fantasy, on mannequin, detailed concept art"
+    - "a (steampunk kimono:1.1), (with a gear-patterned sash:1.2), fusion style, elegant, steampunk fashion, on mannequin, detailed concept art"
+    - "a (peaked cap with brass insignia:1.1), formal, steampunk accessory, detailed product shot, studio lighting"
+    - "a pair of (mechanical boots:1.1), (with spring-loaded heels:1.2), piston, steampunk footwear, detailed concept art, product shot"
+    - "a pair of (engineer gloves:1.1), (with retractable claws:1.2), tools, leather, steampunk utility, detailed concept art, studio lighting"
+    - "a (Victorian blouse:1.1), (with a filigree collar:1.2), lace, elegant, steampunk fashion, on mannequin, detailed concept art"
+    - "a (corset jacket:1.1), (with piston-strap shoulders:1.2), victorian, steampunk fashion, on mannequin, detailed concept art"
+    - "a (radiant aether robe:1.1), (shimmering gold:1.1), magical, steampunk fantasy, on mannequin, detailed concept art"
+    - "an (ornate vestments with a rotating halo gear:1.2), steampunk fantasy, on mannequin, detailed concept art"
+    - "a (fitted coat with double shoulder plating:1.1), elegant, steampunk fashion, on mannequin, detailed concept art"
+    - "a (rugged leather-reinforced poncho:1.1), camouflaged, steampunk fashion, on mannequin, detailed concept art"
+    - "a (furnace-lined vest:1.1), (glowing hot:1.1), for harsh winters, steampunk fashion, on mannequin, detailed concept art"
+    - "an (ornate copper gown:1.1), (gemstone rivets:1.1), elegant, steampunk fashion, on mannequin, detailed concept art"
+    - "a (pressure-mask veil:1.1), (glowing filter:1.1), lace edging, mysterious, steampunk fashion, on mannequin, detailed concept art"
+    - "a (winged shoulder cloak:1.1), (with feathered gears:1.2), ornate, elegant, steampunk fantasy, on mannequin, detailed concept art"
+    - "a suit of (ornate gold-accented plate armor:1.1), steampunk armor concept, on mannequin, detailed illustration"
+    - "a (gear-lined trench coat:1.1), (massive collar:1.1), dark, steampunk fashion, on mannequin, detailed concept art"
+    - "a (hooded robe with blueprint pockets:1.1), practical, cluttered, steampunk fashion, on mannequin, detailed concept art"
+    - "an (artisan coat:1.1), (sprinkled with metal dust:1.1), workshop, leather, steampunk fashion, on mannequin, detailed concept art"
+    - "an (elegant dress with a turning brooch:1.2), intricate, steampunk fashion, on mannequin, detailed concept art"
+    - "a pair of (smokestack pauldrons:1.2), (emitting faint steam:1.1), industrial, steampunk armor concept, detailed concept art, studio lighting"
+    - "a (flowing outfit with rotating fan-blades:1.2), elegant, steampunk fashion, on mannequin, detailed concept art"

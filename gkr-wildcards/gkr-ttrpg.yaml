@@ -9,483 +9,470 @@ gkr_ttrpg:
 # ---------------------------------------------------------
 
   archetype:
-    - (heroic adventurer:1.1)
-    - (wandering mercenary:1.1)
-    - (grim sellsword:1.1)
-    - (holy champion:1.1)
-    - (cursed wanderer:1.1)
-    - (arcane scholar:1.1)
-    - (shadowy assassin:1.1)
-    - (monster hunter:1.1)
-    - (fey touched trickster:1.1)
-    - (stoic guardian:1.1)
-    - (zealous inquisitor:1.1)
-    - (storm called champion:1.1)
-    - (relic seeker:1.1)
-    - (seasoned veteran:1.1)
-    - (knight in shining armor:1.1)
-    - (dragon slayer:1.1)
-    - (chosen hero of prophecy:1.1)
-    - (cursed antihero:1.1)
-    - (royal heir in disguise:1.1)
-    - (seasoned captain of the guard:1.1)
-    - (dragon blood warrior:1.1)
-    - (beast tamer:1.1)
-    - (holy inquisitor:1.1)
-    - (pirate captain:1.1)
+    - worn traveling leathers, weapon resting at the hip, confident forward stride
+    - scarred mismatched leather armor, weapon slung across the back, road-dusted boots
+    - notched blade held loose at the side, unshaven jaw, dust-caked cloak
+    - (burnished plate embossed with a sunburst:1.2), white cloak, holy symbol raised overhead
+    - tattered cloak, cracked skin veined with faint dark lines, hollow downcast eyes
+    - ink-stained fingers, spectacles, satchel of scrolls, chalk-dusted robes
+    - close-fitted black leather, lower face wrapped in cloth, twin daggers reverse-gripped
+    - layered leather harness hung with trophies and vials, oversized blade strapped to the back
+    - dappled leaf-patterned coat, faint glow beneath the skin, mismatched eyes
+    - arms crossed, heavy shield planted, unmoving wide stance
+    - severe high-collared coat, branding iron at the belt, unblinking stare
+    - (wind-torn cloak crackling with static:1.2), hair lifted, eyes flickering pale blue
+    - satchel stuffed with maps and artifacts, gloved hands, magnifying loupe on a cord
+    - sun-cracked weathered skin, patched gear, coiled rope and worn waterskin at the hip
+    - polished city-watch uniform, badge of rank on the chest, hand resting on sword pommel
+    - polished silver plate armor, mirror-bright, flowing tabard
+    - dragon-scale trophies strung across the chest, notched greatsword scarred with claw marks
+    - glowing birthmark on the wrist, wind-lifted cloak, hand raised toward distant light
+    - hidden royal signet ring on a cord beneath plain traveler's clothes, posture too straight for a commoner
+    - (dragon-scale patterns rising along the forearms:1.2), faint ember glow beneath the skin
+    - companion beast at the side, leather harness hung with feed pouches and a coiled lead
+    - weathered tricorn hat, gold-buttoned coat, cutlass at the hip, sea-salt-crusted boots
 
   race:
-    - (human:1.1), fantasy character
-    - (elf:1.1), fantasy character
-    - (high elf:1.1), elegant
-    - (wood elf:1.1), forest dweller
-    - (drow:1.1), dark elf, underdark
-    - (half elf:1.1), fantasy character
-    - (dwarf:1.1), fantasy character, bearded
-    - (halfling:1.1), small folk
-    - (gnome:1.1), small folk, inventive
-    - (half orc:1.1), powerful build
-    - (orc:1.1), fantasy monster, green skin
-    - (tiefling:1.1), infernal heritage, horns
-    - (dragonborn:1.1), dragon-like, scales
-    - (aasimar:1.1), celestial heritage, glowing
-    - (goliath:1.1), giant-kin, tall
-    - (tabaxi:1.1), cat-like person, feline
-    - (lizardfolk:1.1), reptilian person, scales
-    - (tortle:1.1), turtle person, shell
-    - (firbolg:1.1), giant-kin, gentle
-    - (goblin:1.1), small monster, mischievous
-    - (kobold:1.1), small reptilian, draconic
-    - (yuan ti pureblood:1.1), snake-like person
-    - (genasi fire:1.1), fire elemental, glowing
-    - (genasi air:1.1), air elemental, floating
-    - (genasi water:1.1), water elemental, fluid
-    - (genasi earth:1.1), earth elemental, solid
-    - (warforged:1.1), (construct:1.1), mechanical body
-    - (changeling:1.1), shapeshifter, pale
-    - (satyr:1.1), fey, goat legs
-    - (triton:1.1), aquatic person, fins
-    - (kalashtar:1.1), psionic, dreaming
-    - (dhampir:1.1), half-vampire, pale skin
-    - (reborn:1.1), undead, stitched
+    - human, fantasy character
+    - elf, fantasy character
+    - high elf, elegant
+    - wood elf, forest dweller
+    - drow, dark elf, underdark
+    - half elf, fantasy character
+    - dwarf, fantasy character, bearded
+    - halfling, small folk
+    - gnome, small folk, inventive
+    - half orc, powerful build
+    - orc, fantasy monster, green skin
+    - tiefling, infernal heritage, horns
+    - dragonborn, dragon-like, scales
+    - aasimar, celestial heritage, glowing
+    - goliath, giant-kin, tall
+    - tabaxi, cat-like person, feline
+    - lizardfolk, reptilian person, scales
+    - tortle, turtle person, shell
+    - firbolg, giant-kin, gentle
+    - goblin, small monster, mischievous
+    - kobold, small reptilian, draconic
+    - yuan ti pureblood, snake-like person
+    - genasi fire, fire elemental, glowing
+    - genasi air, air elemental, floating
+    - genasi water, water elemental, fluid
+    - genasi earth, earth elemental, solid
+    - warforged, construct, mechanical body
+    - changeling, shapeshifter, pale
+    - satyr, fey, goat legs
+    - triton, aquatic person, fins
+    - kalashtar, psionic, dreaming
+    - dhampir, half-vampire, pale skin
+    - reborn, undead, stitched
 
   class:
-    - (barbarian:1.1), warrior, wild
-    - (bard:1.1), musician, performer
-    - (cleric:1.1), holy priest, divine magic
-    - (druid:1.1), nature magic, wild shape
-    - (fighter:1.1), warrior, weapons master
-    - (monk:1.1), martial artist, unarmored
-    - (paladin:1.1), holy warrior, plate armor
-    - (ranger:1.1), archer, wilderness
-    - (rogue:1.1), thief, stealthy
-    - (sorcerer:1.1), innate magic, arcane
-    - (warlock:1.1), pact magic, eldritch
-    - (wizard:1.1), scholar, arcane magic
-    - (artificer:1.1), inventor, magical gadgets
-    - (blood hunter:1.1), crimson rite, dark magic
-    - (bladesinger:1.1), elf, (sword magic:1.1)
-    - (storm sorcerer:1.1), lightning magic, wind
-    - (necromancer:1.1), (undead magic:1.1), wizard
-    - (illusionist:1.1), (illusion magic:1.1), wizard
-    - (abjurer:1.1), (protection magic:1.1), wizard
-    - (evoker:1.1), (evocation magic:1.1), wizard
-    - (draconic sorcerer:1.1), dragon magic, scales
-    - (arcane trickster:1.1), rogue, illusion magic
-    - (gloom stalker:1.1), ranger, dark vision
-    - (beast master ranger:1.1), (animal companion:1.1)
+    - barbarian, warrior, wild
+    - bard, musician, performer
+    - cleric, holy priest, divine magic
+    - druid, nature magic, wild shape
+    - fighter, warrior, weapons master
+    - monk, martial artist, unarmored
+    - paladin, holy warrior, plate armor
+    - ranger, archer, wilderness
+    - rogue, thief, stealthy
+    - sorcerer, innate magic, arcane
+    - warlock, pact magic, eldritch
+    - wizard, scholar, arcane magic
+    - artificer, inventor, magical gadgets
+    - blood hunter, crimson rite, dark magic
+    - bladesinger, elf, sword magic
+    - storm sorcerer, lightning magic, wind
+    - necromancer, undead magic, wizard
+    - illusionist, illusion magic, wizard
+    - abjurer, protection magic, wizard
+    - evoker, evocation magic, wizard
+    - draconic sorcerer, dragon magic, scales
+    - arcane trickster, rogue, illusion magic
+    - gloom stalker, ranger, dark vision
+    - beast master ranger, animal companion
 
   background:
-    - (noble:1.1), aristocrat
-    - (soldier:1.1), military background
-    - (folk hero:1.1), village hero
-    - (urchin:1.1), street kid, city
-    - (acolyte:1.1), temple trained
-    - (sage:1.1), scholar, researcher
-    - (criminal:1.1), underworld
-    - (sailor:1.1), on a ship, coastal
-    - (outlander:1.1), wilderness, survivalist
-    - (entertainer:1.1), performer
-    - (guild artisan:1.1), crafter, merchant
-    - (hermit:1.1), secluded, isolated
-    - (investigator:1.1), detective
-    - (haunted one:1.1), dark past, cursed
-    - (far traveler:1.1), from a distant land
-    - (charlatan:1.1), grifter, disguise
-    - (mercenary veteran:1.1), sellsword
-    - (cloistered scholar:1.1), library, academic
-    - (monster slayer apprentice:1.1), trainee
-
-  alignment:
-    - (lawful good:1.1)
-    - (neutral good:1.1)
-    - (chaotic good:1.1)
-    - (lawful neutral:1.1)
-    - (true neutral:1.1)
-    - (chaotic neutral:1.1)
-    - (lawful evil:1.1)
-    - (neutral evil:1.1)
-    - (chaotic evil:1.1)
+    - fine embroidered doublet, ringed fingers, immaculate posture
+    - standard-issue mail shirt, drilled upright stance, unit insignia stitched on the shoulder
+    - patched homespun clothes, a well-worn tool turned weapon, calloused hands
+    - threadbare oversized clothes, smudged face, quick wary eyes
+    - plain grey robes, prayer beads at the wrist, downcast reverent gaze
+    - ink-stained sleeves, spectacles perched low, a battered tome tucked under one arm
+    - hooded dark clothing, concealed blade, furtive glance over the shoulder
+    - salt-bleached shirt, rope-callused hands, tattoos of anchors and waves
+    - furs and hides layered over leather, weathered skin, a hand-carved walking staff
+    - colorful patched motley, juggling knives tucked in a sash, mid-flourish
+    - leather apron over practical clothes, tool belt, hands stained with craft-work
+    - ragged unkempt robes, long tangled beard, a gnarled walking stick
+    - long coat, magnifying lens on a chain, notebook tucked in a breast pocket
+    - gaunt hollow-eyed face, a single old scar, clothes kept meticulously neat despite the wear
+    - foreign-cut clothing, road-worn pack laden with trinkets, sun-weathered skin
+    - flashy oversized rings, a too-perfect smile, hidden sleeves for palming cards
+    - dented armor patched with mismatched plates, tally marks scratched into the pommel
+    - high-collared robes, ink-stained fingertips, spectacles, stacks of scrolls at the hip
+    - oversized hand-me-down gear, a satchel of vials, eager wide-eyed stance
 
   age:
-    - (young adult:1.1)
-    - (adult:1.1)
-    - (mature:1.1)
-    - (middle aged:1.1)
-    - (elderly:1.1), old
-    - (ancient and timeless:1.1)
-    - (ageless magical presence:1.1)
+    - young adult
+    - adult
+    - mature
+    - middle aged
+    - elderly, old
+    - ancient and timeless
+    - ageless magical presence
 
   build:
-    - (slender build:1.1)
-    - (athletic build:1.1)
-    - (muscular build:1.1)
-    - (stocky build:1.1)
-    - (powerful build:1.1)
-    - (towering:1.1), imposing build
-    - (graceful and agile:1.1)
-    - (heavily armored bulk:1.1)
+    - slender build
+    - athletic build
+    - muscular build
+    - stocky build
+    - powerful build
+    - towering, imposing build
+    - graceful and agile
+    - heavily armored bulk
 
   tone:
-    - (pale skin tone:1.1)
-    - (fair skin tone:1.1)
-    - (warm tan skin:1.1)
-    - (bronze skin:1.1)
-    - (dark brown skin:1.1)
-    - (ebony skin:1.1)
-    - (ashen grey skin:1.1)
-    - (emerald tinted skin:1.1)
-    - (infernal red skin:1.1)
-    - (celestial radiant skin:1.1)
-    - (metallic skin:1.1)
-    - (draconic scaled skin:1.1)
+    - pale skin tone
+    - fair skin tone
+    - warm tan skin
+    - bronze skin
+    - dark brown skin
+    - ebony skin
+    - ashen grey skin
+    - emerald tinted skin
+    - infernal red skin
+    - celestial radiant skin
+    - metallic skin
+    - draconic scaled skin
 
 # ---------------------------------------------------------
 # APPEARANCE
 # ---------------------------------------------------------
 
   hair:
-    - (long flowing hair:1.1)
-    - (long braided hair:1.1)
-    - (shoulder length hair:1.1)
-    - (wavy hair:1.1)
-    - (curly hair:1.1)
-    - (short cropped hair:1.1)
-    - (warrior topknot:1.1), hairstyle
-    - (wild unkempt hair:1.1)
-    - (shaved head:1.1), bald
-    - (intricate braids:1.1)
-    - (dreadlocks:1.1), hair beads
-    - (hooded:1.1), (shadow concealed hair:1.2)
+    - long flowing hair
+    - long braided hair
+    - shoulder length hair
+    - wavy hair
+    - curly hair
+    - short cropped hair
+    - warrior topknot, hairstyle
+    - wild unkempt hair
+    - shaved head, bald
+    - intricate braids
+    - dreadlocks, hair beads
+    - hooded, (shadow concealed hair:1.2)
 
   hair_color:
-    - (black hair:1.1)
-    - (brown hair:1.1)
-    - (blonde hair:1.1)
-    - (white hair:1.1)
-    - (silver hair:1.1)
-    - (fiery red hair:1.1)
-    - (auburn hair:1.1)
-    - (ice blue hair:1.1)
-    - (emerald green hair:1.1)
-    - (amethyst purple hair:1.1)
+    - black hair
+    - brown hair
+    - blonde hair
+    - white hair
+    - silver hair
+    - fiery red hair
+    - auburn hair
+    - ice blue hair
+    - emerald green hair
+    - amethyst purple hair
 
   eyes:
-    - (green eyes:1.1)
-    - (blue eyes:1.1)
-    - (brown eyes:1.1)
-    - (golden eyes:1.1)
-    - (silver eyes:1.1)
-    - (amber eyes:1.1)
+    - green eyes
+    - blue eyes
+    - brown eyes
+    - golden eyes
+    - silver eyes
+    - amber eyes
     - (glowing blue eyes:1.2)
     - (glowing red eyes:1.2)
     - (glowing purple eyes:1.2)
-    - (draconic eyes:1.1), (slit pupils:1.1)
-    - (catlike eyes:1.1), feline
-    - (pupil less eyes:1.1), (glowing eyes:1.2)
+    - draconic eyes, slit pupils
+    - catlike eyes, feline
+    - pupil less eyes, (glowing eyes:1.2)
 
   expression:
-    - (determined expression:1.1)
-    - (stoic expression:1.1)
-    - (fierce battle cry:1.1), open mouth
-    - (subtle smirk:1.1)
-    - (intense focused gaze:1.1)
-    - (confident smile:1.1)
-    - (sorrowful haunted look:1.1)
-    - (mysterious calm:1.1)
-    - (proud heroic posture:1.1)
-    - (rage filled fury:1.1)
+    - determined expression
+    - stoic expression
+    - fierce battle cry, open mouth
+    - subtle smirk
+    - intense focused gaze
+    - confident smile
+    - sorrowful haunted look
+    - mysterious calm
+    - proud heroic posture
+    - rage filled fury
 
   gear:
     - (engraved plate armor:1.2), ornate
-    - (polished breastplate:1.1), armor
-    - (chainmail:1.1), (tabard:1.1)
+    - polished breastplate, armor
+    - chainmail, tabard
     - (runed leather armor:1.2)
-    - (studded leather armor:1.1)
-    - (stealth cloak:1.1), (hood:1.1)
-    - (explorer cloak:1.1), (hood:1.1)
-    - (ceremonial robes:1.1)
-    - (arcane robes:1.1), (glowing runes:1.2)
+    - studded leather armor
+    - stealth cloak, hood
+    - explorer cloak, hood
+    - ceremonial robes
+    - arcane robes, (glowing runes:1.2)
     - (dragon scale armor:1.2)
-    - (enchanted mantle:1.1), cloak
-    - (fur lined cloak:1.1), winter
+    - enchanted mantle, cloak
+    - fur lined cloak, winter
 
   weapons:
-    - (longsword:1.1), (glowing runes:1.2)
-    - (greatsword:1.1), (jagged edge:1.1)
-    - (sword and dagger:1.1), dual wielding
-    - (scimitar:1.1), curved blade
-    - (spear:1.1), carved shaft
-    - (halberd:1.1), (banner:1.1)
-    - (battle axe:1.1), notched blade
-    - (warhammer:1.1), (holy emblem:1.1)
-    - (crossbow:1.1), steel limbs
-    - (longbow:1.1), carved yew
-    - (staff:1.1), (crystal top:1.1)
-    - (wand:1.1), (engraved sigils:1.1)
-    - (chain whip:1.1)
-    - (double bladed weapon:1.1)
+    - longsword, (glowing runes:1.2)
+    - greatsword, jagged edge
+    - sword and dagger, dual wielding
+    - scimitar, curved blade
+    - spear, carved shaft
+    - halberd, banner
+    - battle axe, notched blade
+    - warhammer, holy emblem
+    - crossbow, steel limbs
+    - longbow, carved yew
+    - staff, crystal top
+    - wand, engraved sigils
+    - chain whip
+    - double bladed weapon
 
   offhand:
-    - (shield:1.1), (heraldic crest:1.1)
-    - (round shield:1.1)
-    - (heavy tower shield:1.1)
+    - shield, heraldic crest
+    - round shield
+    - heavy tower shield
     - (glowing spellbook:1.2), open book
-    - (arcane orb:1.1), floating light
-    - (lantern:1.1), (magical flame:1.1)
-    - (scroll case:1.1)
-    - (holy symbol:1.1), reliquary
-    - (potion vial:1.1), glowing liquid
+    - arcane orb, floating light
+    - lantern, magical flame
+    - scroll case
+    - holy symbol, reliquary
+    - potion vial, glowing liquid
 
   trinkets:
-    - (silver amulet:1.1), necklace
-    - (crystal pendant:1.1), necklace
-    - (rune carved ring:1.1)
-    - (bracelet of charms:1.1)
-    - (bone talisman:1.1)
-    - (dragon tooth necklace:1.1)
+    - silver amulet, necklace
+    - crystal pendant, necklace
+    - rune carved ring
+    - bracelet of charms
+    - bone talisman
+    - dragon tooth necklace
     - (glowing tattoos:1.2), skin markings
-    - (ancient key:1.1), on chain
+    - ancient key, on chain
 
 # ---------------------------------------------------------
 # ENVIRONMENT
 # ---------------------------------------------------------
 
   environment:
-    - (torchlit dungeon:1.1), corridor, stone walls
-    - (ancient temple ruins:1.1), overgrown
-    - (enchanted forest:1.1), mystical
-    - (mystical grove:1.1), magical trees
-    - (snowy mountain pass:1.1), blizzard
-    - (stormy cliffside:1.1), (ocean:1.1)
-    - (arcane library:1.1), tower, books
-    - (forgotten battlefield:1.1), broken weapons
-    - (underdark cavern:1.1), (glowing fungi:1.2)
-    - (desert ruins:1.1), (bright sun:1.1)
-    - (coastal cliffs:1.1), (crashing waves:1.1)
-    - (dragon hoard cavern:1.1), (treasure pile:1.2)
-    - (feywild glade:1.1), (floating lights:1.1)
-    - (volcanic forge:1.1), (lava:1.1)
-    - (cursed graveyard:1.1), tombstones
+    - torchlit dungeon, corridor, stone walls
+    - ancient temple ruins, overgrown
+    - enchanted forest, mystical
+    - mystical grove, magical trees
+    - snowy mountain pass, blizzard
+    - stormy cliffside, ocean
+    - arcane library, tower, books
+    - forgotten battlefield, broken weapons
+    - underdark cavern, (glowing fungi:1.2)
+    - desert ruins, bright sun
+    - coastal cliffs, crashing waves
+    - dragon hoard cavern, (treasure pile:1.2)
+    - feywild glade, floating lights
+    - volcanic forge, lava
+    - cursed graveyard, tombstones
 
   mood:
-    - (heroic:1.1), (triumphant mood:1.1)
-    - (dark:1.1), (foreboding mood:1.1)
-    - (mysterious:1.1), (arcane mood:1.1)
-    - (grim:1.1), (ruthless mood:1.1)
-    - (hopeful:1.1), (determined mood:1.1)
-    - (sorrowful:1.1), (reflective mood:1.1)
-    - (chaotic:1.1), (energetic mood:1.1)
-    - (eerie:1.1), (haunting mood:1.1)
-    - (noble:1.1), (composed mood:1.1)
-    - (epic:1.1), (majestic mood:1.1)
+    - heroic, triumphant
+    - dark, foreboding
+    - mysterious, arcane
+    - grim, ruthless
+    - hopeful, determined
+    - sorrowful, reflective
+    - chaotic, energetic
+    - eerie, haunting
+    - noble, composed
+    - epic, majestic
 
   lighting:
-    - (warm torchlight:1.1), flickering
-    - (cold moonlight:1.1), night
-    - (glowing magical aura:1.1)
+    - warm torchlight, flickering
+    - cold moonlight, night
+    - glowing magical aura
     - (dramatic rim lighting:1.2)
     - (cinematic backlight:1.2)
-    - (soft ambient glow:1.1)
-    - (bioluminescent cave light:1.1)
-    - (stained glass colors:1.1), light beams
-    - (golden hour sunlight:1.1)
-    - (lightning flash illumination:1.1)
-    - (volcanic red glow:1.1), (lava glow:1.1)
-    - (holy radiant light:1.1)
+    - soft ambient glow
+    - bioluminescent cave light
+    - stained glass colors, light beams
+    - golden hour sunlight
+    - lightning flash illumination
+    - volcanic red glow, lava glow
+    - holy radiant light
 
   camera:
-    - (waist up shot:1.1), portrait
-    - (shoulders up shot:1.1), close up portrait
-    - (dramatic close up:1.1), face
-    - (full body shot:1.1), (hero pose:1.2)
+    - waist up shot, portrait
+    - shoulders up shot, close up portrait
+    - dramatic close up, face
+    - full body shot, (hero pose:1.2)
     - (dynamic action pose:1.2)
-    - (wide cinematic shot:1.1), landscape
-    - (low angle:1.1), epic shot
-    - (high angle:1.1), dramatic view
-    - (isometric fantasy angle:1.1)
+    - wide cinematic shot, landscape
+    - low angle, epic shot
+    - high angle, dramatic view
+    - isometric fantasy angle
 
 # ---------------------------------------------------------
 # STYLE & ARTISTRY
 # ---------------------------------------------------------
 
   style:
-    - (epic fantasy:1.1), (concept art:1.2)
-    - (cinematic:1.1), (realistic:1.1)
-    - (painterly style:1.2), (high fantasy:1.1)
-    - (gritty:1.1), (dark fantasy:1.1)
-    - (luminous magical illustration:1.1)
-    - (heroic poster art:1.1)
-    - (detailed character art:1.1)
-    - (dynamic scene painting:1.1)
-    - (ancient illuminated manuscript style:1.1)
+    - epic fantasy, (concept art:1.2)
+    - cinematic, realistic
+    - (painterly style:1.2), high fantasy
+    - gritty, dark fantasy
+    - luminous magical illustration
+    - heroic poster art
+    - detailed character art
+    - dynamic scene painting
+    - ancient illuminated manuscript style
 
   artist_fantasy:
     # Adding specific artist styles massively improves quality and consistency.
     - (by Frank Frazetta:0.9)
     - (by Greg Rutkowski:0.9)
     - (by Artgerm:0.8), (by WLOP:0.8)
-    - (by Brom:1.1), (dark art:1.1)
-    - (by Todd Lockwood:1.0), (dragon art:1.1)
-    - (by Yoshitaka Amano:0.9), (ethereal:1.1)
-    - (by Zdzisław Beksiński:1.0), (surreal:1.1), (dark:1.1)
-    - (by Wayne Barlowe:1.0), (creature design:1.1)
-    - (by Andreas Rocha:0.9), (landscape:1.1)
+    - (by Brom:1.1), dark art
+    - (by Todd Lockwood:1.0), dragon art
+    - (by Yoshitaka Amano:0.9), ethereal
+    - (by Zdzisław Beksiński:1.0), surreal, dark
+    - (by Wayne Barlowe:1.0), creature design
+    - (by Andreas Rocha:0.9), landscape
 
   art_medium:
-    - digital painting, (concept art:1.1), (artstation:1.1)
-    - (oil painting:1.1), traditional media, (brush strokes:1.1)
-    - (watercolor illustration:1.1)
-    - (detailed pencil sketch:1.1), (monochrome:1.1)
-    - (unreal engine 5 render:1.1), 8k, (cinematic:1.1)
-    - (3d render:1.1), (blender:1.1), (octane render:1.1)
-    - (anime key visual:1.1), (studio ghibli style:0.8)
-    - (comic book art:1.1), (inked lines:1.1)
+    - digital painting, concept art, artstation
+    - oil painting, traditional media, brush strokes
+    - watercolor illustration
+    - detailed pencil sketch, monochrome
+    - unreal engine 5 render, 8k, cinematic
+    - 3d render, blender, octane render
+    - anime key visual, (studio ghibli style:0.8)
+    - comic book art, inked lines
 
   fx_magic:
     - (swirling arcane runes:1.2), magic effect
     - (glowing magic circle:1.2), on ground
-    - (spectral energy swirling:1.1)
-    - (fire magic:1.1), (in hand:1.2)
-    - (frost magic:1.1), (spreading in air:1.1)
-    - (crackling lightning arcs:1.1)
-    - (radiant halo glow:1.1)
-    - (shadow mist tendrils:1.1)
-    - (floating sparks of magic:1.1)
-    - (chaotic energy distortion:1.1)
+    - spectral energy swirling
+    - fire magic, (in hand:1.2)
+    - frost magic, spreading in air
+    - crackling lightning arcs
+    - radiant halo glow
+    - shadow mist tendrils
+    - floating sparks of magic
+    - chaotic energy distortion
 
   fx_environment:
-    - (drifting embers:1.1), sparks
-    - (swirling mist:1.1), fog
-    - (falling leaves:1.1)
-    - (drifting snow:1.1), blizzard
-    - (rising dust:1.1), particles
-    - (sparks from battle:1.1)
-    - (floating spores:1.1)
-    - (ash falling from sky:1.1)
-    - (feathers drifting:1.1)
-    - (glowing motes in air:1.1)
+    - drifting embers, sparks
+    - swirling mist, fog
+    - falling leaves
+    - drifting snow, blizzard
+    - rising dust, particles
+    - sparks from battle
+    - floating spores
+    - ash falling from sky
+    - feathers drifting
+    - glowing motes in air
 
 # --------------------------------------------------------------
 # MONSTERS
 # --------------------------------------------------------------
 
   monster_type:
-    - (dragon:1.2), fantasy monster
-    - (undead:1.2), monster, zombie, skeleton
-    - (fiend:1.2), demon, devil
-    - (celestial:1.2), angel, divine
-    - (elemental:1.2), fire, water, air, earth
-    - (fey creature:1.2), magical, forest
-    - (aberration:1.2), (tentacles:1.1), bizarre
-    - (giant:1.2), massive person
-    - (beast:1.2), large animal, monster
-    - (monstrosity:1.2), hybrid monster
-    - (construct:1.2), (golem:1.1), mechanical
-    - (ooze:1.2), (slime:1.1), monster
-    - (lycanthrope:1.2), werewolf
-    - (serpent creature:1.2), snake monster
-    - (chimera like hybrid:1.2)
+    - (dragon:1.1), fantasy monster
+    - (undead:1.1), monster, zombie, skeleton
+    - (fiend:1.1), demon, devil
+    - (celestial:1.1), angel, divine
+    - (elemental:1.1), fire, water, air, earth
+    - (fey creature:1.1), magical, forest
+    - (aberration:1.1), tentacles, bizarre
+    - (giant:1.1), massive person
+    - (beast:1.1), large animal, monster
+    - (monstrosity:1.1), hybrid monster
+    - (construct:1.1), golem, mechanical
+    - (ooze:1.1), slime, monster
+    - (lycanthrope:1.1), werewolf
+    - (serpent creature:1.1), snake monster
+    - (chimera like hybrid:1.1)
 
   monster_body:
-    - (towering:1.1), (massive frame:1.1)
-    - (massive monstrous frame:1.1)
+    - towering, massive frame
+    - massive monstrous frame
     - (serpentine body:1.2), snake-like
-    - (quadruped stance:1.1), four legs
-    - (winged creature:1.1), (wings:1.1)
-    - (multi limbed form:1.1)
+    - quadruped stance, four legs
+    - winged creature, wings
+    - multi limbed form
     - (writhing tentacled body:1.2)
-    - (skeletal figure:1.1), (undead:1.1)
-    - (hulking brute form:1.1)
-    - (shadowy incorporeal body:1.1), (ghost:1.1)
-    - (stone carved body:1.1), (golem:1.1)
-    - (molten rock body:1.1), (lava:1.1)
-    - (swirling elemental mass:1.1)
-    - (dripping ooze form:1.1)
-    - (insectoid exoskeleton:1.1)
+    - skeletal figure, undead
+    - hulking brute form
+    - shadowy incorporeal body, ghost
+    - stone carved body, golem
+    - molten rock body, lava
+    - swirling elemental mass
+    - dripping ooze form
+    - insectoid exoskeleton
 
   monster_texture:
-    - (rough cracked scales:1.1)
-    - (smooth polished scales:1.1)
+    - rough cracked scales
+    - smooth polished scales
     - (dripping slime:1.2), viscous
-    - (exposed bones:1.1), (undead:1.1)
-    - (rotting flesh:1.1), (zombie:1.1)
-    - (glowing runic carvings:1.1)
-    - (metallic plating:1.1), (construct:1.1)
-    - (living stone surface:1.1)
-    - (smoky shadow form:1.1)
-    - (fiery molten cracks:1.1), (lava:1.1)
-    - (crystalline growths:1.1)
-    - (moss covered hide:1.1)
+    - exposed bones, undead
+    - rotting flesh, zombie
+    - glowing runic carvings
+    - metallic plating, construct
+    - living stone surface
+    - smoky shadow form
+    - fiery molten cracks, lava
+    - crystalline growths
+    - moss covered hide
 
   monster_features:
     - (glowing eyes:1.2)
     - (many eyes:1.2), multiple eyes
-    - (sharp fangs:1.1)
-    - (jagged horns:1.1)
-    - (massive claws:1.1)
-    - (barbed tail:1.1)
-    - (spiked back:1.1)
-    - (ethereal wings:1.1), (glowing wings:1.1)
-    - (flaming mane:1.1)
-    - (frost coated maw:1.1)
-    - (venom dripping fangs:1.1)
-    - (tentacled mouth:1.1), (aberration:1.1)
-    - (skeletal wings:1.1)
-    - (multi jointed limbs:1.1)
-    - (enchanted rune brands:1.1)
+    - sharp fangs
+    - jagged horns
+    - massive claws
+    - barbed tail
+    - spiked back
+    - ethereal wings, glowing wings
+    - flaming mane
+    - frost coated maw
+    - venom dripping fangs
+    - tentacled mouth, aberration
+    - skeletal wings
+    - multi jointed limbs
+    - enchanted rune brands
 
   monster_ability:
-    - (breathing fire:1.2), (flames:1.1)
-    - (breathing frost:1.2), (ice:1.1)
-    - (breathing lightning:1.2), (electricity:1.1)
-    - (breathing poison:1.2), (toxic gas:1.1)
+    - (breathing fire:1.2), flames
+    - (breathing frost:1.2), ice
+    - (breathing lightning:1.2), electricity
+    - (breathing poison:1.2), toxic gas
     - (breathing acid:1.2), corrosive
-    - (emitting necrotic aura:1.2), (dark energy:1.1)
+    - (emitting necrotic aura:1.2), dark energy
     - (radiating holy light:1.2)
-    - (crackling with electricity:1.1)
-    - (surrounded by swirling spirits:1.1)
-    - (exuding shadow fog:1.1)
-    - (unleashing psychic waves:1.1)
-    - (summoning lesser creatures:1.1)
-    - (distorting reality:1.1)
+    - crackling with electricity
+    - surrounded by swirling spirits
+    - exuding shadow fog
+    - unleashing psychic waves
+    - summoning lesser creatures
+    - distorting reality
 
   monster_environment:
-    - (volcanic lair:1.1), (molten lava:1.1)
-    - (ancient crypt:1.1), (undead:1.1)
-    - (cursed graveyard:1.1)
-    - (frozen tundra wasteland:1.1), (snow:1.1)
-    - (jungle ruins:1.1), overgrown
-    - (deep forest shadow:1.1)
-    - (storm lashed mountain peak:1.1)
+    - volcanic lair, molten lava
+    - ancient crypt, undead
+    - cursed graveyard
+    - frozen tundra wasteland, snow
+    - jungle ruins, overgrown
+    - deep forest shadow
+    - storm lashed mountain peak
     - (abyssal hellscape:1.2), demonic plane
-    - (celestial radiant plane:1.1)
-    - (feywild dream field:1.1)
-    - (astral void:1.1), (stars:1.1)
-    - (underdark chasm:1.1), (glowing fungi:1.1)
-    - (forgotten temple hall:1.1)
-    - (crystalline cavern:1.1)
-    - (plague ridden swamp:1.1)
+    - celestial radiant plane
+    - feywild dream field
+    - astral void, stars
+    - underdark chasm, glowing fungi
+    - forgotten temple hall
+    - crystalline cavern
+    - plague ridden swamp
 
 # --------------------------------------------------------------
 #  MODULAR COMBOS
@@ -498,7 +485,7 @@ gkr_ttrpg:
 
   # --- CHARACTER MODULES ---
   hero_core:
-    - "__gkr_ttrpg/archetype__, __gkr_ttrpg/race__, __gkr_ttrpg/class__, __gkr_ttrpg/age__"
+    - "__gkr_ttrpg/archetype__, __gkr_ttrpg/race__, __gkr_ttrpg/class__, __gkr_ttrpg/background__, __gkr_ttrpg/age__"
   hero_appearance:
     - "__gkr_ttrpg/build__, __gkr_ttrpg/tone__, __gkr_ttrpg/hair__, __gkr_ttrpg/hair_color__, __gkr_ttrpg/eyes__, __gkr_ttrpg/expression__"
   hero_equipment:
@@ -514,10 +501,10 @@ gkr_ttrpg:
     - "__gkr_ttrpg/hero_core__"
   random_hero_portrait:
     # Good for portraits and close-ups
-    - "__gkr_ttrpg/hero_core__, __gkr_ttrpg/hero_appearance__, __gkr_ttrpg/hero_equipment__, (portrait:1.1), __gkr_ttrpg/random_style_full__"
+    - "__gkr_ttrpg/hero_core__, __gkr_ttrpg/hero_appearance__, __gkr_ttrpg/hero_equipment__, portrait, __gkr_ttrpg/random_style_full__"
   random_hero_full:
     # A full character with all details, good for character sheets
-    - "__gkr_ttrpg/hero_core__, __gkr_ttrpg/hero_appearance__, __gkr_ttrpg/hero_equipment__, __gkr_ttrpg/hero_details__, (full body shot:1.1), __gkr_ttrpg/random_style_full__"
+    - "__gkr_ttrpg/hero_core__, __gkr_ttrpg/hero_appearance__, __gkr_ttrpg/hero_equipment__, __gkr_ttrpg/hero_details__, full body shot, __gkr_ttrpg/random_style_full__"
   random_hero_in_scene:
     # A full cinematic scene with a character
     - "__gkr_ttrpg/hero_core__, __gkr_ttrpg/hero_equipment__, __gkr_ttrpg/hero_details__, __gkr_ttrpg/hero_scene__, __gkr_ttrpg/fx_environment__"
@@ -526,13 +513,13 @@ gkr_ttrpg:
   monster_combo:
     - "__gkr_ttrpg/monster_type__, __gkr_ttrpg/monster_body__, __gkr_ttrpg/monster_texture__, __gkr_ttrpg/monster_features__, __gkr_ttrpg/monster_ability__, __gkr_ttrpg/monster_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/camera__, __gkr_ttrpg/random_style_full__, __gkr_ttrpg/fx_environment__"
   dragon_combo:
-    - "(dragon:1.2), __gkr_ttrpg/monster_body__, __gkr_ttrpg/monster_texture__, (massive wings:1.1), __gkr_ttrpg/monster_ability__, (treasure filled cavern:1.1), (epic and majestic mood:1.1), (volcanic red glow lighting:1.1), (low angle epic view:1.1), __gkr_ttrpg/random_style_full__"
+    - "(dragon:1.2), __gkr_ttrpg/monster_body__, __gkr_ttrpg/monster_texture__, massive wings, __gkr_ttrpg/monster_ability__, __gkr_ttrpg/monster_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/camera__, __gkr_ttrpg/random_style_full__"
   undead_combo:
-    - "(undead:1.2), (skeletal figure:1.1), (exposed bones:1.1), (glowing eyes:1.1), (necrotic aura:1.1), (cursed graveyard:1.1), (dark and foreboding mood:1.1), (cold moonlight:1.1), (dramatic close up:1.1), __gkr_ttrpg/random_style_full__"
+    - "(undead:1.2), skeletal figure, exposed bones, (glowing eyes:1.2), necrotic aura, __gkr_ttrpg/monster_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/camera__, __gkr_ttrpg/random_style_full__"
   fiend_combo:
-    - "(fiend:1.2), (spiked back:1.1), (barbed tail:1.1), (flaming mane:1.1), demonic presence, (abyssal hellscape:1.1), (chaotic and energetic mood:1.1), (volcanic red glow:1.1), (dynamic action pose:1.1), __gkr_ttrpg/random_style_full__"
+    - "(fiend:1.2), spiked back, barbed tail, flaming mane, demonic presence, __gkr_ttrpg/monster_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/camera__, __gkr_ttrpg/random_style_full__"
   boss_combo:
-    - "__gkr_ttrpg/monster_type__, (colossal size:1.2), imposing presence, __gkr_ttrpg/monster_texture__, __gkr_ttrpg/monster_features__, __gkr_ttrpg/monster_ability__, (ancient temple ruins:1.1), (epic and majestic mood:1.1), (lightning flash illumination:1.1), (wide cinematic shot:1.1), __gkr_ttrpg/random_style_full__"
+    - "__gkr_ttrpg/monster_type__, (colossal size:1.2), imposing presence, __gkr_ttrpg/monster_texture__, __gkr_ttrpg/monster_features__, __gkr_ttrpg/monster_ability__, __gkr_ttrpg/monster_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/camera__, __gkr_ttrpg/random_style_full__"
   random_scene:
     # Use this for a random background/environment
     - "__gkr_ttrpg/environment__, __gkr_ttrpg/lighting__, __gkr_ttrpg/mood__, __gkr_ttrpg/fx_environment__, __gkr_ttrpg/camera__, __gkr_ttrpg/random_style_full__"
@@ -542,6 +529,7 @@ gkr_ttrpg:
     # This is the main wildcard to call for a "random" prompt
     - "__gkr_ttrpg/random_hero_in_scene__"
     - "__gkr_ttrpg/random_hero_portrait__"
+    - "__gkr_ttrpg/random_hero_full__"
     - "__gkr_ttrpg/monster_combo__"
     - "__gkr_ttrpg/dragon_combo__"
     - "__gkr_ttrpg/undead_combo__"
@@ -552,7 +540,7 @@ gkr_ttrpg:
   # --- LEGACY/SIMPLE COMBOS ---
   random_hero:
     # A simple character-only combo (no scene or style)
-    - "__gkr_ttrpg/archetype__, __gkr_ttrpg/race__, __gkr_ttrpg/class__, __gkr_ttrpg/age__, __gkr_ttrpg/build__, __gkr_ttrpg/tone__, __gkr_ttrpg/hair__, __gkr_ttrpg/hair_color__, __gkr_ttrpg/eyes__, __gkr_ttrpg/expression__, __gkr_ttrpg/gear__, __gkr_ttrpg/weapons__, __gkr_ttrpg/offhand__, __gkr_ttrpg/trinkets__"
+    - "__gkr_ttrpg/archetype__, __gkr_ttrpg/race__, __gkr_ttrpg/class__, __gkr_ttrpg/background__, __gkr_ttrpg/age__, __gkr_ttrpg/build__, __gkr_ttrpg/tone__, __gkr_ttrpg/hair__, __gkr_ttrpg/hair_color__, __gkr_ttrpg/eyes__, __gkr_ttrpg/expression__, __gkr_ttrpg/gear__, __gkr_ttrpg/weapons__, __gkr_ttrpg/offhand__, __gkr_ttrpg/trinkets__"
   random_monster:
     # A simple monster-only combo (no scene or style)
     - "__gkr_ttrpg/monster_type__, __gkr_ttrpg/monster_body__, __gkr_ttrpg/monster_texture__, __gkr_ttrpg/monster_features__, __gkr_ttrpg/monster_ability__, __gkr_ttrpg/monster_environment__"
@@ -563,102 +551,95 @@ gkr_ttrpg:
 
   spotlight_characters:
     # --- KNIGHTS & WARRIORS ---
-    - (epic heroic knight:1.2), (gleaming radiant plate armor:1.3), majestic cloak lifting in wind, determined gaze, holding a (shield with ancient heraldry:1.1), full body shot, cinematic lighting
-    - (dwarven defender:1.2), (heavy interlocking rune armor:1.1), (massive tower shield planted:1.1), stoic expression, braided beard with metal rings, standing in a (stone hall:1.1)
-    - (cursed antihero knight:1.1), (cracked black armor:1.2) with (glowing red fissures:1.2), haunted expression, gripping a (jagged greatsword:1.1), dark and foreboding mood
-    - (aasimar paladin:1.2), (ornate silver and gold armor:1.1), (faint halo glow:1.1), serene determined gaze, (feathered cloak:1.1), holding a (glowing holy warhammer:1.1), divine light
-    - (half-orc barbarian:1.2), (battle-hardened:1.1), (massive scarred muscles:1.1), (furious battle cry:1.2), wielding a (colossal battle axe:1.1), fur-lined leather armor, dynamic action pose
-    - (dragonborn gladiator:1.2), (scorched scale armor:1.1), (draconic eyes:1.1), confident smirk, wielding (twin scimitars:1.1), standing in a (sun-drenched arena:1.1)
-    - (wandering swordsman:1.1), (tattered cloak:1.1), (straw hat:1.1), hand resting on (katana hilt:1.1), standing in a (misty bamboo forest:1.1), mysterious, painterly style
-    - (holy inquisitor:1.1), (severe plate armor:1.2), (hood shadowing stern face:1.1), holding a (flaming torch:1.1) and a (branded zealot's sword:1.1), gritty dark fantasy
-    - (elven bladesinger:1.2), (elegant flowing armor:1.1), (mid-spin:1.1), (blade trailing an arc of light:1.2), graceful and focused, enchanted forest, fantasy art
-    - (human monster hunter:1.1), (layered leathers and trophies:1.1), (silver greatsword on back:1.2), (intense focused gaze:1.1), (glowing potion vials on belt:1.1), cursed swamp
-    - (tiefling duelist:1.1), (flamboyant coat:1.1), (curling horns:1.1), (flourishing a rapier:1.2), cocky smile, (infernal red skin:1.1), standing in a (Victorian city alley:1.1)
-    - (orcish shaman warrior:1.1), (painted face:1.1), (bone armor:1.1), (rattling bone charms:1.1), holding a (glowing spectral axe:1.2), calling on (ancestor spirits:1.1), stormy plains
+    - epic heroic knight, (gleaming radiant plate armor:1.2), majestic cloak lifting in wind, determined gaze, holding a shield with ancient heraldry, full body shot, cinematic lighting
+    - dwarven defender, (heavy interlocking rune armor:1.2), massive tower shield planted, stoic expression, braided beard with metal rings, standing in a stone hall
+    - cursed antihero knight, (cracked black armor with glowing red fissures:1.2), haunted expression, gripping a jagged greatsword, dark and foreboding mood
+    - aasimar paladin, ornate silver and gold armor, (faint halo glow:1.2), serene determined gaze, feathered cloak, holding a glowing holy warhammer, divine light
+    - half-orc barbarian, battle-hardened, massive scarred muscles, (furious battle cry:1.2), wielding a colossal battle axe, fur-lined leather armor, dynamic action pose
+    - dragonborn gladiator, scorched scale armor, draconic eyes, confident smirk, wielding twin scimitars, standing in a sun-drenched arena
+    - wandering swordsman, tattered cloak, straw hat, hand resting on a katana hilt, standing in a misty bamboo forest, mysterious, painterly style
+    - holy inquisitor, (severe plate armor:1.2), hood shadowing a stern face, holding a flaming torch and a branded zealot's sword, gritty dark fantasy
+    - elven bladesinger, elegant flowing armor, mid-spin, (blade trailing an arc of light:1.2), graceful and focused, enchanted forest, fantasy art
+    - human monster hunter, layered leathers and trophies, (silver greatsword on back:1.2), intense focused gaze, glowing potion vials on belt, cursed swamp
+    - tiefling duelist, flamboyant coat, curling horns, (flourishing a rapier:1.2), cocky smile, infernal red skin, standing in a Victorian city alley
+    - orcish shaman warrior, painted face, bone armor, rattling bone charms, holding a (glowing spectral axe:1.2), calling on ancestor spirits, stormy plains
 
     # --- RANGERS & ROGUES ---
-    - (elven ranger:1.2), (leaf-patterned cloak:1.1), (bow drawn:1.2), (sharp focused eyes:1.1), perched in a (forest canopy:1.1), (sunlight filtering through leaves:1.1)
-    - (halfling rogue:1.1), (hood pulled low:1.2), (leather armor:1.1), (perched on a rooftop:1.1), (mischievous smirk:1.1), (daggers glinting:1.1), moonlit city
-    - (shadowy assassin:1.2), (dark stealth suit:1.1), (half-hidden in an alley:1.1), (two daggers at the ready:1.1), (glowing purple eyes:1.1), mysterious, digital painting
-    - (wood elf beast tamer:1.1), (fur-lined cloak:1.1), (loyal wolf companion:1.2), (longbow in hand:1.1), gentle expression, (snowy forest path:1.1)
-    - (human pirate captain:1.2), (flamboyant coat:1.1), (confident grin:1.1), (cutlass in hand:1.1), (parrot on shoulder:1.1), standing on the (deck of a ship:1.1), stormy sea
-    - (tiefling trickster bard:1.1), (fanning glowing magical cards:1.2), (playful smile:1.1), (lute on back:1.1), (colorful attire:1.1), bustling tavern interior
+    - elven ranger, leaf-patterned cloak, (bow drawn:1.2), sharp focused eyes, perched in a forest canopy, sunlight filtering through leaves
+    - halfling rogue, hood pulled low, leather armor, perched on a rooftop, mischievous smirk, (daggers glinting:1.2), moonlit city
+    - shadowy assassin, dark stealth suit, half-hidden in an alley, two daggers at the ready, (glowing purple eyes:1.2), mysterious, digital painting
+    - wood elf beast tamer, fur-lined cloak, (loyal wolf companion:1.2), longbow in hand, gentle expression, snowy forest path
+    - human pirate captain, flamboyant coat, confident grin, cutlass in hand, parrot on shoulder, standing on the deck of a ship, stormy sea
+    - tiefling trickster bard, (fanning glowing magical cards:1.2), playful smile, lute on back, colorful attire, bustling tavern interior
 
     # --- MAGES & SCHOLARS ---
-    - (ancient archmage:1.2), (robes embroidered with constellations:1.1), (long white beard:1.1), (glowing staff:1.2), (swirling arcane runes:1.2), in a (towering library:1.1)
-    - (tiefling warlock:1.2), (curling horns:1.1), (shadowy robes:1.1), (eldritch energy crackling from fingertips:1.3), (glowing spellbook:1.1), in (ancient ruins:1.1)
-    - (wild sorcerer:1.1), (hair lifting in wind:1.1), (chaotic magic swirling around hands:1.3), (glowing eyes:1.1), (dynamic pose:1.1), elemental chaos, concept art
-    - (human necromancer:1.1), (dark robes:1.1), (pale skin:1.1), (holding a skull:1.1), (ghostly figures swirling behind:1.2), (soft green glowing light:1.1), cursed graveyard
-    - (gnome illusionist:1.1), (goggles on wild hair:1.1), (conjuring flickering mirages:1.2), (mischievous laugh:1.1), (colorful eccentric robes:1.1), concept art
-    - (lavaforged warrior mage:1.1), (skin cracks glowing molten orange:1.2), (obsidian armor:1.1), (wielding a (flaming sword:1.2)), volcanic forge, epic fantasy
-    - (storm caller sorcerer:1.1), (lightning crackling around fingertips:1.3), (wind whipping hair and robes:1.1), (eyes glowing white:1.1), (atop a stormy cliffside:1.1)
-    - (elven scholar:1.1), (surrounded by stacks of books:1.1), (crystal floating above open tome:1.2), (intense focused gaze:1.1), (arcane library:1.1), warm candlelight
+    - ancient archmage, robes embroidered with constellations, long white beard, (glowing staff surrounded by swirling arcane runes:1.2), in a towering library
+    - tiefling warlock, curling horns, shadowy robes, (eldritch energy crackling from fingertips:1.3), glowing spellbook, in ancient ruins
+    - wild sorcerer, hair lifting in wind, (chaotic magic swirling around hands:1.3), glowing eyes, dynamic pose, elemental chaos, concept art
+    - human necromancer, dark robes, pale skin, holding a skull, (ghostly figures swirling behind:1.2), soft green glowing light, cursed graveyard
+    - gnome illusionist, goggles on wild hair, (conjuring flickering mirages:1.2), mischievous laugh, colorful eccentric robes, concept art
+    - lavaforged warrior mage, (skin cracks glowing molten orange:1.2), obsidian armor, wielding a flaming sword, volcanic forge, epic fantasy
+    - storm caller sorcerer, (lightning crackling around fingertips:1.3), wind whipping hair and robes, eyes glowing white, atop a stormy cliffside
+    - elven scholar, surrounded by stacks of books, (crystal floating above an open tome:1.2), intense focused gaze, arcane library, warm candlelight
 
     # --- CLERICS & HOLY ---
-    - (human cleric:1.2), (raising a glowing holy symbol:1.3), (robes shifting with radiant light:1.1), (banishing undead:1.1), (determined expression:1.1), in a (dark crypt:1.1)
-    - (dwarven priest:1.1), (ornate chainmail and robes:1.1), (gripping a heavy warhammer:1.1), (chanting a blessing:1.1), (runes glowing on armor:1.1), temple hall
-    - (sun cleric:1.1), (brilliant golden armor:1.1), (brilliant radiance from hands:1.3), (healing a fallen ally:1.1), (compassionate gaze:1.1), (sunbeams in background:1.1)
-    - (infernal warpriest:1.1), (wreathed in smoldering crimson energy:1.2), (dark plate armor:1.1), (mace in hand:1.1), (fiery eyes:1.1), (hellscape background:1.1)
-    - (elven healer:1.1), (simple robes:1.1), (hands glowing with (gentle green light:1.2)), (serene expression:1.1), kneeling in a (sacred grove:1.1)
+    - human cleric, (raising a glowing holy symbol:1.3), robes shifting with radiant light, banishing undead, determined expression, in a dark crypt
+    - dwarven priest, ornate chainmail and robes, gripping a heavy warhammer, chanting a blessing, (runes glowing on armor:1.2), temple hall
+    - sun cleric, brilliant golden armor, (brilliant radiance from hands:1.3), healing a fallen ally, compassionate gaze, sunbeams in background
+    - infernal warpriest, (wreathed in smoldering crimson energy:1.2), dark plate armor, mace in hand, fiery eyes, hellscape background
+    - elven healer, simple robes, (hands glowing with gentle green light:1.2), serene expression, kneeling in a sacred grove
 
     # --- DRUIDS & MONKS ---
-    - (forest druid:1.1), (antler crown:1.1), (living vines in hair:1.2), (holding a (gnarled wooden staff:1.1)), (animal companion:1.1), (enchanted forest:1.1)
-    - (wandering monk:1.1), (simple robes:1.1), (calm focused expression:1.1), (martial arts stance:1.1), (glowing runic tattoos:1.2), (misty mountain monastery:1.1)
-    - (shapeshifter:1.1), (mid-transformation:1.3), (features shifting:1.1), (glowing eyes:1.1), (torn clothing:1.1), (primal energy swirling:1.1), dark woods
-    - (seafaring druid:1.1), (coral jewelry:1.1), (sea-green robes:1.1), (tide swirling around feet:1.2), (holding a staff of driftwood:1.1), (stormy coastal cliffs:1.1)
+    - forest druid, antler crown, (living vines in hair:1.2), holding a gnarled wooden staff, animal companion, enchanted forest
+    - wandering monk, simple robes, calm focused expression, martial arts stance, (glowing runic tattoos:1.2), misty mountain monastery
+    - shapeshifter, (mid-transformation:1.3), features shifting, glowing eyes, torn clothing, primal energy swirling, dark woods
+    - seafaring druid, coral jewelry, sea-green robes, (tide swirling around feet:1.2), holding a staff of driftwood, stormy coastal cliffs
 
   spotlight_backgrounds:
-    - (ancient stone temple interior:1.2), (overgrown with moss and ivy:1.1), lit by (warm flickering torchlight:1.1), (beams of light:1.1), faint dust motes drifting, mysterious atmosphere
-    - (misty forest at dawn:1.1), (tall ancient trees fading into fog:1.2), (soft golden light breaking through:1.1), (dew on glowing moss:1.1), fantasy environment
-    - (snow-covered mountain pass:1.2), (jagged peaks:1.1), (blowing snow:1.1), (narrow stone path:1.1), (pale frozen sky:1.1), (sense of isolation:1.1), concept art
-    - (sunlit meadow:1.1), (dotted with wildflowers:1.1), (distant ruined tower:1.1), (ancient standing stones:1.1), (gentle haze:1.1), high fantasy, painterly style
-    - (candlelit tavern interior:1.1), (warm firelight:1.1), (worn wooden beams:1.1), (shadows of patrons:1.1), (cluttered tables:1.1), (cozy and safe atmosphere:1.1)
-    - (moonlit castle courtyard:1.2), (cracked flagstones:1.1), (ancient banners stirring:1.1), (glowing full moon:1.1), (eerie silence:1.1), cinematic lighting
-    - (stormy cliffside:1.2), (crashing waves far below:1.1), (dark swirling clouds:1.1), (dramatic lightning flash:1.2), (rain-swept rocks:1.1), epic, foreboding
-    - (ancient library tower:1.1), (towering shelves of dusty tomes:1.2), (soft ambient glow:1.1), (floating dust motes:1.1), (large orrery:1.1), (arcane sigils on floor:1.1)
-    - (underdark cavern:1.1), (bioluminescent fungi:1.2), (glowing purple and blue mushrooms:1.1), (crystal formations:1.1), (subterranean river:1.1), dark, mysterious
-    - (dragon's treasure hoard:1.2), (vast cavern:1.1), (piles of gold coins and relics:1.3), (gleaming treasure:1.1), (lit by (molten gold rivers:1.1)), epic fantasy
-    - (feywild glade:1.2), (glowing magical flowers:1.1), (floating lights:1.1), (twisted, mossy trees:1.1), (ethereal purple and green glow:1.1), enchanted, mystical
-    - (cursed graveyard:1.1), (leaning tombstones:1.1), (low creeping fog:1.2), (cold full moon:1.1), (skeletal trees:1.1), (haunting eerie mood:1.1)
-    - (dwarven hall:1.2), (carved into mountain:1.1), (burning braziers:1.1), (massive stone arches:1.1), (banners with clan sigils:1.1), (lava forge in background:1.1)
-    - (elven treetop city:1.1), (graceful wooden walkways:1.1), (lit by glowing lanterns:1.1), (huge ancient trees:1.1), (moonlight:1.1), serene, magical
-    - (forgotten battlefield:1.1), (broken weapons and armor:1.1), (tattered banners:1.1), (soft twilight:1.1), (drifting embers:1.1), (sorrowful mood:1.1), painterly
-    - (volcanic forge:1.2), (rivers of lava:1.1), (glowing embers in the air:1.1), (massive anvil:1.1), (intense heat haze:1.1), (dark metal structures:1.1), industrial fantasy
-    - (astral void:1.1), (swirling constellations:1.2), (drifting celestial islands:1.1), (glowing nebulae:1.1), (no gravity:1.1), (surreal, epic:1.1)
-    - (plague-ridden swamp:1.1), (murky green water:1.1), (twisted mangrove trees:1.1), (glowing toxic fog:1.2), (sunken ruins:1.1), dark and gritty
-    - (floating isles:1.2), (drifting in a serene sky:1.1), (waterfalls cascading into clouds:1.1), (ancient ruins on islands:1.1), (vines connecting islands:1.1), high fantasy
-    - (crystal cavern:1.1), (walls covered in (glowing crystals:1.2)), (refracted light:1.1), (deep chasm:1.1), (underground lake:1.1), magical, beautiful
+    - (ancient stone temple interior:1.2), overgrown with moss and ivy, lit by warm flickering torchlight, beams of light, faint dust motes drifting, mysterious atmosphere
+    - misty forest at dawn, (tall ancient trees fading into fog:1.2), soft golden light breaking through, dew on glowing moss, fantasy environment
+    - (snow-covered mountain pass:1.2), jagged peaks, blowing snow, narrow stone path, pale frozen sky, sense of isolation, concept art
+    - sunlit meadow, dotted with wildflowers, distant ruined tower, ancient standing stones, gentle haze, high fantasy, painterly style
+    - candlelit tavern interior, warm firelight, worn wooden beams, shadows of patrons, cluttered tables, cozy and safe atmosphere
+    - (moonlit castle courtyard:1.2), cracked flagstones, ancient banners stirring, glowing full moon, eerie silence, cinematic lighting
+    - stormy cliffside, crashing waves far below, dark swirling clouds, (dramatic lightning flash:1.2), rain-swept rocks, epic, foreboding
+    - ancient library tower, (towering shelves of dusty tomes:1.2), soft ambient glow, floating dust motes, large orrery, arcane sigils on floor
+    - underdark cavern, (bioluminescent fungi:1.2), glowing purple and blue mushrooms, crystal formations, subterranean river, dark, mysterious
+    - dragon's treasure hoard, vast cavern, (piles of gold coins and relics:1.3), gleaming treasure, lit by molten gold rivers, epic fantasy
+    - (feywild glade:1.2), glowing magical flowers, floating lights, twisted mossy trees, ethereal purple and green glow, enchanted, mystical
+    - cursed graveyard, leaning tombstones, (low creeping fog:1.2), cold full moon, skeletal trees, haunting eerie mood
+    - (dwarven hall:1.2), carved into mountain, burning braziers, massive stone arches, banners with clan sigils, lava forge in background
+    - elven treetop city, graceful wooden walkways, lit by glowing lanterns, huge ancient trees, moonlight, serene, magical
+    - forgotten battlefield, broken weapons and armor, tattered banners, soft twilight, drifting embers, sorrowful mood, painterly
+    - (volcanic forge:1.2), rivers of lava, glowing embers in the air, massive anvil, intense heat haze, dark metal structures, industrial fantasy
+    - astral void, (swirling constellations:1.2), drifting celestial islands, glowing nebulae, no gravity, surreal, epic
+    - plague-ridden swamp, murky green water, twisted mangrove trees, (glowing toxic fog:1.2), sunken ruins, dark and gritty
+    - (floating isles:1.2), drifting in a serene sky, waterfalls cascading into clouds, ancient ruins on islands, vines connecting islands, high fantasy
+    - crystal cavern, walls covered in (glowing crystals:1.2), refracted light, deep chasm, underground lake, magical, beautiful
 
   spotlight_classicscenes:
-    - (massive ancient dragon:1.3), perched atop a (mountain of golden treasure:1.2), inside a (vast cavern:1.1), (unleashing a torrent of fire:1.2), glowing eyes, cinematic, epic fantasy illustration
-    - (adventuring party:1.2), (crossing a rickety rope bridge:1.1), over a (bottomless chasm:1.1), (mist swirling below:1.1), dynamic wide shot, high fantasy
-    - (wizard casting spell:1.1), (arcane energy exploding from staff:1.3), (glowing runes in the air:1.1), standing in (ruined tower:1.1), (lightning storm outside:1.1)
-    - (knight on horseback:1.1), (charging at a (massive ogre:1.2)), (lance lowered:1.1), on a (mist-covered battlefield:1.1), (dynamic action:1.1), painterly style
-    - (rogue sneaking:1.1), (disabling a pressure plate trap:1.2), in a (torchlit dungeon corridor:1.1), (treasure chest in background:1.1), (intense focus:1.1), dramatic shadows
-    - (druid summoning:1.1), (roots and vines erupting from the ground:1.2), (entangling enemies:1.1), (glowing green nature magic:1.1), in an (ancient forest:1.1)
-    - (cleric:1.1), (raising a radiant shield:1.3), (repelling a (swarm of undead:1.2)), (divine light blasting outwards:1.1), in a (dark crypt:1.1), concept art
-    - (barbarian:1.1), (leaping from a cliff:1.2), (axe raised high:1.1), (to strike a colossal troll:1.1), (rage filled expression:1.1), epic low-angle shot
-    - (paladin confronting:1.1), a (demonic warlord:1.2), (holy sword clashing with unholy blade:1.1), (sparks flying:1.1), (before burning gates:1.1), epic duel
-    - (necromancer:1.2), (raising a skeletal army:1.3), (green glowing energy:1.1), in a (midnight graveyard:1.1), (full moon:1.1), dark fantasy illustration
-    - (adventuring party:1.1), (sailing a storm-tossed ship:1.2), (massive kraken tentacle:1.1) (rising from the waves:1.1), (crashing waves:1.1), cinematic
-    - (dwarven forge battle:1.1), (fighters clashing on catwalks:1.1), (above rivers of molten lava:1.2), (sparks from hammers:1.1), (heat haze:1.1), fantasy art
-    - (sorcerer:1.1), (summoning a lightning storm:1.3), (atop an ancient ziggurat:1.1), (dark clouds swirling:1.1), (lightning striking:1.1), epic, majestic
-    - (tavern brawl:1.2), (adventurers fighting guards:1.1), (flying chairs and mugs:1.1), (bard playing music in the corner:1.1), (chaotic and energetic:1.1)
-    - (massive stone golem:1.2), (awakening in a lost temple:1.1), (glowing runes on its body:1.1), (adventurers looking on in terror:1.1), (dust falling from ceiling:1.1)
-    - (monk:1.1), (deflecting arrows mid-air:1.2), (serene focus:1.1), in a (tranquil bamboo grove:1.1), (fast motion blur:1.1), stylized, painterly
-    - (lich:1.2), (casting a soul-draining spell:1.3), (glowing green light:1.1), (atop an obsidian altar:1.1), (souls swirling:1.1), (dark crypt:1.1), evil, fantasy art
-    - (adventurers' last stand:1.2), (back-to-back:1.1), (atop a crumbling rampart:1.1), (facing a (horde of orcs:1.1)), (epic battle:1.1), (cinematic lighting:1.1)
-    - (dragons battling in the sky:1.2), (red dragon vs blue dragon:1.1), (breathing fire and lightning:1.2), (above a burning castle:1.1), epic aerial combat
-    - (archer:1.1), (firing an (enchanted glowing arrow:1.2)), (running along a cliff edge:1.1), (wyvern swooping in:1.1), (dynamic action pose:1.1)
-    - (party discovering:1.1), a (glowing portal:1.2), (swirling with chaotic energy:1.1), in a (deep forest clearing:1.1), (mysterious and foreboding:1.1)
-    - (massive hydra:1.2), (emerging from a swamp:1.1), (multiple heads roaring:1.1), (adventurers on a small boat:1.1), dark, murky, terrifying
-    - (griffon cavalry:1.2), (descending from the sky:1.1), (lances ready:1.1), (sun gleaming on armor:1.1), (above a battlefield:1.1), (heroic and majestic:1.1)
-    - (party solving a puzzle door:1.1), (in a (runic chamber:1.1)), (glowing symbols:1.1), (wizard studying a tome:1.1), (intense concentration:1.1)
-    - (battle against a beholder:1.2), (in a dark chasm:1.1), (multiple eye rays firing:1.1), (heroes dodging:1.1), (glowing central eye:1.1), fantasy horror
-
-# --------------------------------------------------------------
-#  NEGATIVE PROMPT (OPTIMIZED)
-# --------------------------------------------------------------
-
-  negative_prompt:
-    - "(worst quality:1.4), (low quality:1.4), (normal quality:1.4), lowres, normal quality, monotonous, dull, signature, watermark, username, artist name, (text:1.3), (logo:1.2), (bad art:1.2), blurry, blurred, jpeg artifacts, compression, cropped, (modern:1.2), (sci-fi:1.1), (gun:1.4), (firearm:1.4), (rifle:1.4), (t-shirt:1.3), (jeans:1.3), (sneakers:1.2), (car:1.1), (modern building:1.1), (spaceship:1.1), duplicate, morbid, mutilated, (out of frame:1.1), extra fingers, mutated hands, (poorly drawn hands:1.3), (poorly drawn face:1.3), (mutation:1.1), (deformed:1.1), (ugly:1.1), bad anatomy, (bad proportions:1.1), extra limbs, cloned face, (disfigured:1.1), gross proportions, (malformed limbs:1.1), (missing arms:1.1), (missing legs:1.1), (extra arms:1.1), (extra legs:1.1), (fused fingers:1.1), (too many fingers:1.1), (long neck:1.1)"
+    - massive ancient dragon, perched atop a mountain of golden treasure, inside a vast cavern, (unleashing a torrent of fire:1.3), glowing eyes, cinematic, epic fantasy illustration
+    - adventuring party, crossing a rickety rope bridge, over a bottomless chasm, (mist swirling below:1.2), dynamic wide shot, high fantasy
+    - wizard casting a spell, (arcane energy exploding from staff:1.3), glowing runes in the air, standing in a ruined tower, lightning storm outside
+    - knight on horseback, charging at a massive ogre, (lance lowered:1.2), on a mist-covered battlefield, dynamic action, painterly style
+    - rogue sneaking, (disabling a pressure plate trap:1.2), in a torchlit dungeon corridor, treasure chest in background, intense focus, dramatic shadows
+    - druid summoning, (roots and vines erupting from the ground:1.2), entangling enemies, glowing green nature magic, in an ancient forest
+    - cleric, (raising a radiant shield:1.3), repelling a swarm of undead, divine light blasting outwards, in a dark crypt, concept art
+    - barbarian, (leaping from a cliff:1.2), axe raised high, to strike a colossal troll, rage filled expression, epic low-angle shot
+    - paladin confronting a demonic warlord, (holy sword clashing with unholy blade:1.2), sparks flying, before burning gates, epic duel
+    - necromancer, (raising a skeletal army:1.3), green glowing energy, in a midnight graveyard, full moon, dark fantasy illustration
+    - adventuring party, (sailing a storm-tossed ship:1.2), massive kraken tentacle rising from the waves, crashing waves, cinematic
+    - dwarven forge battle, fighters clashing on catwalks, (above rivers of molten lava:1.2), sparks from hammers, heat haze, fantasy art
+    - sorcerer, (summoning a lightning storm:1.3), atop an ancient ziggurat, dark clouds swirling, lightning striking, epic, majestic
+    - tavern brawl, adventurers fighting guards, (flying chairs and mugs:1.2), bard playing music in the corner, chaotic and energetic
+    - massive stone golem, (awakening in a lost temple:1.2), glowing runes on its body, adventurers looking on in terror, dust falling from ceiling
+    - monk, (deflecting arrows mid-air:1.2), serene focus, in a tranquil bamboo grove, fast motion blur, stylized, painterly
+    - lich, (casting a soul-draining spell:1.3), glowing green light, atop an obsidian altar, souls swirling, dark crypt, evil, fantasy art
+    - adventurers' last stand, back-to-back, atop a crumbling rampart, (facing a horde of orcs:1.2), epic battle, cinematic lighting
+    - dragons battling in the sky, red dragon vs blue dragon, (breathing fire and lightning:1.2), above a burning castle, epic aerial combat
+    - archer, (firing an enchanted glowing arrow:1.2), running along a cliff edge, wyvern swooping in, dynamic action pose
+    - party discovering a glowing portal, (swirling with chaotic energy:1.2), in a deep forest clearing, mysterious and foreboding
+    - massive hydra, (emerging from a swamp:1.2), multiple heads roaring, adventurers on a small boat, dark, murky, terrifying
+    - griffon cavalry, (descending from the sky:1.2), lances ready, sun gleaming on armor, above a battlefield, heroic and majestic
+    - party solving a puzzle door, in a runic chamber, (glowing symbols:1.2), wizard studying a tome, intense concentration
+    - battle against a beholder, in a dark chasm, (multiple eye rays firing:1.2), heroes dodging, glowing central eye, fantasy horror
