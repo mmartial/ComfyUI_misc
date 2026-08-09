@@ -20,16 +20,16 @@ gkr_wasteland:
     - (torn business suit layered under scavenged wraps:1.3), hunched wary posture, glancing over one shoulder
     - (visible mutation across bare skin:1.3), tattered rags, hunched posture
     - (mutant trophies strung across the chest:1.3), heavy weapon braced against the shoulder, hard stare
-    - (weathered practical gear:1.2), squared stoic shoulders, unblinking gaze
+    - (weathered practical gear:1.2), squared shoulders, unblinking gaze
     - (heavy mismatched armor plates:1.3), holstered weapon at the hip, mercenary swagger
     - (tech-laden tool harness:1.2), crouched over exposed wiring, soldering iron in hand
     - (dust-covered poncho:1.2), squinting into the wind, sand-scoured skin
     - (makeshift bow drawn:1.3), low tracking crouch, narrowed focused eyes
 
   age:
-    - (young scavenger:1.2), agile stance, survival gear strapped on
-    - (hardened adult build:1.2), scarred forearms, weathered stance
-    - (weathered veteran:1.2), gray hair, deep-set wrinkles
+    - (young adult:1.2), smooth features, upright posture
+    - (middle-aged adult:1.2), faint brow lines, mature features
+    - (elderly adult:1.2), gray hair, deep-set wrinkles
 
   build:
     - (lean wiry frame:1.2), quick fluid movement
@@ -71,14 +71,14 @@ gkr_wasteland:
 
   eyes:
     - (wary eyes:1.2), darting glances
-    - (hardened unflinching stare:1.2), cold
-    - (glowing mutant eyes:1.3), eerie light in the irises
-    - (tired eyes with a spark of hope:1.2), faint smile lines
+    - (hardened unflinching stare:1.2), lowered brows
+    - (glowing mutant eyes:1.3), pale green light in the irises
+    - (tired eyes:1.2), softened gaze, faint upward-curving smile lines
 
   expression:
-    - (set jaw and grim determination:1.3), narrowed focused eyes
+    - (firmly set jaw:1.3), narrowed focused eyes
     - (narrowed distrustful eyes:1.2), tight-lipped
-    - (intense unblinking gaze:1.3), jaw clenched with resolve
+    - (intense unblinking gaze:1.3), tightly clenched jaw
     - (wide panicked eyes:1.2), sharp intake of breath
 
   clothing:
@@ -126,7 +126,7 @@ gkr_wasteland:
     - (broken old-world toy:1.2)
     - (military dog tag on a chain:1.2)
     - (broken wristwatch:1.2), hands frozen, cracked glass
-    - (ornate key of unknown origin:1.2), rust-spotted
+    - (ornate rust-spotted key:1.2), unfamiliar geometric crest
 
 # ---------------------------------------------------------
 # FACTION
@@ -171,23 +171,23 @@ gkr_wasteland:
     - (toxic wasteland:1.3), green fog, glowing pools
     - (dry salt flats:1.2), cracked earth
     - (dust storm plains:1.3), swirling dust, low visibility
-    - (abandoned refinery:1.3), rusting pipes, silent smokestacks
+    - (derelict refinery:1.3), rusting pipes, smokeless smokestacks
     - (underground bunker:1.3), concrete walls, flickering lights
     - (flooded ruin zone:1.3), submerged buildings, murky water
 
   mood:
     - (washed-out desaturated palette:1.2), empty horizon, muted grays
-    - (dust-caked color grade:1.2), clenched fists, forward-leaning stance
-    - (harsh contrast shadows:1.2), tense coiled posture, weapon half-raised
-    - (deep silence in still air:1.2), no movement, long empty shadows
-    - (dim light breaking through storm clouds:1.2), chin raised, standing firm
+    - (dust-caked color grade:1.2), ochre haze, low-saturation browns
+    - (harsh contrast shadows:1.2), compressed dark values, sharp silhouettes
+    - (motionless air:1.2), undisturbed dust, long empty shadows
+    - (dim light breaking through storm clouds:1.2), pale rays crossing a dark horizon
 
   lighting:
     - (harsh noon sun:1.2), strong shadows, overexposed highlights
     - (dusty golden hour light:1.3), warm tones, long shadows
-    - (dim flickering bunker lighting:1.2), fluorescent hum
+    - (dim flickering bunker lighting:1.2), alternating green-white illumination
     - (flickering campfire glow:1.3), warm light, dancing shadows
-    - (storm-darkened sky:1.3), ominous clouds, lightning flashes
+    - (storm-darkened sky:1.3), low black clouds, lightning flashes
 
   camera:
     - (mid shot framing character and environment:1.2)
@@ -197,7 +197,7 @@ gkr_wasteland:
     - (close-up on a weathered face:1.3), visible scars
 
   style:
-    - (gritty post-apocalyptic concept art:1.3), realistic, detailed
+    - (realistic concept art:1.3), coarse surface textures, chipped paint, fine debris detail
     - (cinematic realistic wasteland art:1.3), detailed rendering
     - (graphic novel style:1.3), heavy inks, stylized linework
 
@@ -240,77 +240,77 @@ gkr_wasteland:
 # ---------------------------------------------------------
 
   spotlight_characters:
-    - gritty concept art, (a lone wasteland wanderer:1.3), tattered duster coat, (cracked gas mask:1.2), standing in a ruined city, dusty atmosphere, cinematic lighting
-    - cinematic portrait, (a hardened scavenger woman:1.3), (looted tech:1.1) strapped to a (heavy backpack:1.1), intense gaze, ruined highway background, dusty golden hour
-    - epic character art, (a desert raider warlord:1.3), (intimidating spiked armor:1.2), burning glare, seated on a throne of junk, smoky haze
-    - cinematic shot, (a silent sniper:1.3), patched camo cloak, (perched on a collapsed skyscraper:1.2), aiming a rusted rifle, storm darkened sky
+    - coarse-textured concept art, (a lone figure:1.3), tattered duster coat, (cracked gas mask:1.2), standing in a ruined city, dusty atmosphere, cinematic lighting
+    - cinematic portrait, (a sun-weathered woman:1.3), circuit boards and metal parts strapped to a (heavy backpack:1.1), fixed narrowed gaze, ruined highway background, dusty golden hour
+    - low-angle character art, (a broad desert raider:1.3), (oversized spiked armor:1.2), burning glare, seated on a throne of junk, smoky haze
+    - cinematic shot, (a motionless sniper:1.3), patched camo cloak, (perched on a collapsed skyscraper:1.2), aiming a rusted rifle, storm-darkened sky
     - full body shot, (a biohazard survivor:1.3), (makeshift hazmat suit:1.2), glowing green toxic fog, holding a geiger counter, abandoned refinery
-    - character concept art, (a scarred mechanic:1.3), oil-stained gloves, (wielding an oversized wrench:1.2) as a weapon, standing by a broken down vehicle, gritty
-    - creature design, (a feral mutant:1.3), (glowing toxic eyes:1.2), warped limbs, tattered rags, crouching in a dark tunnel, eerie lighting
-    - cinematic wide shot, (a rooftop scout:1.3), using binoculars, frayed scarf blowing in the wind, (looking out over a vast ruined city:1.2), bleak
-    - gritty portrait, (a masked nomad:1.3), (wandering a dry salt flat:1.1), holding a metal staff, metal charms and trinkets, harsh noon sun
-    - action pose, (a ruin hunter woman:1.3), (neon scavenger goggles:1.2), agile pose, leaping across rubble, flooded ruin zone, dynamic
+    - character concept art, (a scarred mechanic:1.3), oil-stained gloves, (wielding an oversized wrench:1.2), standing by a broken-down vehicle, coarse textures and grease smears
+    - creature design, (a snarling mutant:1.3), (glowing toxic eyes:1.2), warped limbs, tattered rags, crouching in a dark tunnel, green underlighting and deep shadows
+    - cinematic wide shot, (a rooftop figure:1.3), using binoculars, frayed scarf blowing in the wind, (looking out over a vast ruined city:1.2), desaturated gray-brown palette
+    - coarse-textured portrait, (a masked nomad:1.3), (walking across a dry salt flat:1.1), holding a metal staff, metal charms and trinkets, harsh noon sun
+    - action pose, (a woman in patched climbing gear:1.3), (neon goggles:1.2), knees tucked mid-leap across rubble, flooded ruin zone, diagonal composition and motion blur
     - character art, (an anti-radiation soldier:1.3), (heavy reinforced plated suit:1.2), carrying heavy gear, marching through a toxic wasteland, green fog
-    - cinematic portrait, (a fallen officer:1.3), torn police uniform, (hopeful determination in eyes:1.2), standing in rubble, smoky haze
-    - stealth action scene, (a rogue scavenger:1.3), (carrying lockpicks:1.1), holding a compact blade, sneaking through an abandoned bunker, dim flickering lights
-    - action shot, (a biker marauder:1.3), leather jacket, (saw-blade shoulder pads:1.2), on a roaring motorcycle, kicking up dust, road warrior
-    - epic portrait, (a desert priestess:1.3), (adorned with bone jewelry:1.2), dust-covered robes, chanting, under a storm darkened sky, mystical
-    - sci-fi concept art, (a cyber-aug survivor:1.3), (cracked circuitry on skin:1.2), glowing wires, hiding in a derelict tech lab, tense
-    - fantasy art, (a toxic witch:1.3), robed figure, (wielding glowing green fumes:1.3), in a radioactive swamp, eerie and magical
+    - cinematic portrait, (a figure in a torn police uniform:1.3), softened upward gaze and firmly set jaw, standing in rubble, smoky haze
+    - low-light action scene, (a crouching figure in mismatched wraps:1.3), (lockpicks clipped to a belt:1.1), holding a compact blade, creeping through a derelict bunker, dim flickering lights
+    - action shot, (a leather-clad biker:1.3), (saw-blade shoulder pads:1.2), hunched over a motorcycle with vibrating exhaust pipes, kicking up dust
+    - low-angle portrait, (a robed desert figure:1.3), (adorned with bone jewelry:1.2), mouth open and hands raised, under a storm-darkened sky, violet rim light
+    - sci-fi concept art, (a crouching survivor with implants:1.3), (cracked circuitry on skin:1.2), glowing wires, hiding in a derelict tech lab, shoulders raised and eyes wide
+    - fantasy art, (a hooded robed figure:1.3), (spiraling glowing green fumes around raised hands:1.3), in a radioactive swamp, green backlight and floating luminous motes
     - cinematic portrait, (a post-collapse medic:1.3), worn face, (bandolier of medical supplies:1.2), helping a wounded survivor, flickering campfire glow
-    - concept art, (a feral dog tamer:1.3), walking with a pack of wasteland hounds, (animal pelts:1.1), in a burnt forest, bleak
-    - creature design, (a towering brute mutant:1.3), massive muscles, (patchwork scrap-metal armor:1.2), roaring, in a collapsed highway, intimidating
-    - gritty art, (a nomadic trader:1.3), (carrying salvaged relics:1.1), unfurling old maps, pack animals loaded with supplies, in a ruined marketplace
-    - character concept, (a rust-plate knight:1.3), full scrap metal armor, (makeshift shield:1.1), standing guard, at a bunker entrance, stoic
+    - concept art, (a pelt-clad figure:1.3), walking with a pack of scarred hounds, (animal pelts:1.1), in a burnt forest, gray desaturated palette
+    - creature design, (a towering mutant:1.3), massive muscles, (patchwork scrap-metal armor:1.2), mouth open and fists raised, in a collapsed highway, low-angle framing
+    - coarse-textured art, (a nomadic trader:1.3), (carrying salvaged relics:1.1), unfurling old maps, pack animals loaded with supplies, in a ruined marketplace
+    - character concept, (a fully enclosed scrap-armored figure:1.3), (makeshift shield:1.1), standing squarely at a bunker entrance, rigid posture and level gaze
     - action scene, (a canyon sniper:1.3), wearing a camo tarp cloak, (long rifle:1.1), aiming from a high cliff, vast desert canyon below
     - cinematic portrait, (a scorch survivor:1.3), (coated in ash and soot:1.2), visible burn scars, walking through a burnt forest, drifting ash
-    - character art, (a bunker priest:1.3), clutching a relic book, wearing tattered robes, preaching with arms raised, (dim bunker lighting:1.1)
-    - fantasy art, (a radiation monk:1.3), glowing faintly with a blue aura, (meditating:1.1), tattered robes, in a toxic crater lake, serene
+    - character art, (a bunker priest:1.3), clutching a relic book, wearing tattered robes, mouth open and arms raised before a crowd, (dim bunker lighting:1.1)
+    - fantasy art, (a cross-legged robed figure:1.3), glowing faintly with a blue aura, hands resting open on knees, in a toxic crater lake, smooth symmetrical composition
     - action pose, (a city scout woman:1.3), (agile:1.1), wielding a chainsaw-blade spear, on a rooftop, overlooking ruined city
-    - gritty concept art, (a wasteland alchemist:1.3), wearing a gas mask, mixing glowing chemical vials, in a makeshift lab, (eerie green light:1.1)
-    - epic art, (a masked plague rider:1.3), (dark robes:1.1), riding a horse in skeletal armor, toxic green fog swirling, bone talismans swaying from the reins
-    - character concept, (an urban ronin:1.3), (tattered coat:1.1), wielding a jury-rigged katana, standing on a rainy, neon-lit ruin street, moody
+    - coarse-textured concept art, (a wasteland alchemist:1.3), wearing a gas mask, mixing glowing chemical vials, in a makeshift lab, (saturated green underlight:1.1)
+    - low-angle wide art, (a masked plague rider:1.3), (dark robes:1.1), riding a horse in skeletal armor, toxic green fog swirling, bone talismans swaying from the reins
+    - character concept, (an urban ronin:1.3), (tattered coat:1.1), wielding a jury-rigged katana, standing on a rainy neon-lit ruin street, blue-magenta reflections and deep shadows
     - action scene, (a ruin-diver:1.3), climbing harness, (oxygen mask:1.2), climbing a collapsed skyscraper, flooded city below
-    - action pose, (a firebrand raider:1.3), (maniacal expression:1.1), swinging a flaming chain, illuminated by fire, at night, chaotic
-    - action shot, (a silent courier:1.3), (sprinting through rubble:1.1), clutching a reinforced satchel, intense focus, ruined city
-    - concept art, (a radio-tower hermit:1.3), (eccentric:1.1), wearing a transmitter backpack, broadcasting, atop an abandoned radio tower
+    - action pose, (a firebrand raider:1.3), (wide eyes and open grin:1.1), swinging a flaming chain at night, tilted framing, sparks and fire trails crossing the image
+    - action shot, (a masked courier:1.3), (sprinting through rubble:1.1), clutching a reinforced satchel, narrowed forward gaze, ruined city
+    - concept art, (a solitary radio operator:1.3), mismatched antenna ornaments, wearing a transmitter backpack, speaking into a microphone atop a rusted radio tower
     - character art, (a steel-jaw cyborg:1.3), prominent metal jaw, holding a heavy scrap hammer, in a scavenger guild forge, (sparks flying from the hammer strikes:1.1)
-    - fantasy art, (a radiant mutant child:1.3), glowing, (bioluminescent skin:1.2), hiding in a dark, collapsed tunnel, eerie and sad
+    - fantasy art, (a small child:1.3), (bioluminescent skin:1.2), hiding in a dark collapsed tunnel, lowered gaze, tear tracks, blue-green underlighting
     - concept art, (a wanderer bard:1.3), (singing:1.1), carrying a battered guitar, by a flickering campfire, firelight flickering across his face
-    - cinematic portrait, (a drifter mother:1.3), patched coat, (fierce resolve:1.2), protectively holding a child, in a makeshift shelter, determined
-    - epic scene, (a post-collapse warlord:1.3), wearing a bone crown, seated on a throne of car parts, in a raider stronghold, (arms crossed:1.1)
+    - cinematic portrait, (a woman in a patched coat:1.3), jaw clenched and eyes narrowed, holding a child tightly behind one shoulder, in a makeshift shelter
+    - low-angle wide scene, (a bone-crowned figure:1.3), seated on a throne of car parts in a spiked stronghold, (arms crossed:1.1)
     - sci-fi concept, (a scrap engineer woman:1.3), goggles, (a floating drone companion hovers nearby:1.1), repairing tech, in a workshop
     - action pose, (a gas-torch fighter:1.3), (protective mask:1.1), holding a welding flame lance, jet of fire, in a dark industrial ruin
     - character art, (an apocalypse farmer:1.3), overalls, (makeshift hoe-weapon:1.2), guarding a mutant plant garden, in a rooftop greenhouse
-    - cinematic portrait, (a bomb collar enforcer:1.3), dead eyes, holding a shock baton, (visible bomb collar on neck:1.1), bleak
-    - gritty portrait, (a tattered preacher:1.3), (shouting:1.1), gesturing wildly, arms outstretched, to a small crowd of survivors
-    - sci-fi art, (an abandoned A.I. android:1.3), (cracked chassis:1.2), exposed wires sparking, sitting in the rain, ruined city, melancholy
-    - fantasy art, (a desert shaman:1.3), daubed in ash markings, (ritual robes:1.1), performing a ritual, during a dust storm, mystical
+    - cinematic portrait, (a figure with a bomb collar:1.3), unfocused eyes and slack mouth, holding a shock baton, gray desaturated lighting
+    - coarse-textured portrait, (a tattered preacher:1.3), (mouth wide open:1.1), gesturing with arms outstretched toward a small crowd
+    - sci-fi art, (an inactive A.I. android:1.3), (cracked chassis:1.2), exposed wires sparking, sitting in the rain with head bowed, ruined city, cold blue-gray palette
+    - fantasy art, (an ash-marked robed figure:1.3), arms circling a ring of suspended stones, during a dust storm, violet light tracing geometric symbols
     - action pose, (a rad-mage:1.3), channeling glowing toxic energy, (levitating rocks:1.1), eyes glowing green, in a toxic crater
     - cinematic portrait, (an ex-pilot:1.3), (haunted eyes:1.1), wearing a scorched flight suit, in the wreckage of a plane, distant hollow stare
-    - concept art, (scavenger twins:1.3), (moving in sync:1.2), matching tattered outfits, sneaking through abandoned mall, tense
+    - concept art, (twin figures:1.3), (moving in matching crouched strides:1.2), matching tattered outfits, creeping through an empty mall, raised shoulders and wide eyes
     - action pose, (a feral hunter:1.3), wearing animal pelts, wielding a bone-tipped spear, (tracking prey:1.1), in a burnt forest
-    - gritty portrait, (a toxic drifter:1.3), (cracked goggles:1.1), coated in green dust, walking through a toxic wasteland, corroded
-    - character art, (a nomad captain:1.3), (leader:1.1), carrying a solar-charged rifle, scanning the horizon, leading a caravan
+    - coarse-textured portrait, (a toxic drifter:1.3), (cracked goggles:1.1), coated in green dust, walking past corroded metal in a toxic wasteland
+    - character art, (a caravan guide:1.3), walking at the front with one arm raised, carrying a solar-charged rifle, scanning the horizon, pack animals following behind
     - sci-fi art, (a cyber-feral:1.3), crouching, (wires tangled in matted hair:1.2), glowing eyes, in a derelict server room, wild
     - concept art, (a post-collapse scholar:1.3), (tattered robes:1.1), carrying ancient books, in a ruined library, cradling the books close
     - action scene, (a bone-masked raider queen:1.3), (leading a gang:1.1), on a scavenged bike, waving a weapon, racing across dry salt flats
-    - character concept, (a rust-knight champion:1.3), (heavy scrap shield:1.2), holding a rebar sword, defending a makeshift gate, valiant
-    - stealth scene, (an edge-lurker:1.3), (lurking in shadows:1.2), holding a scrap dagger, in a dark alley in a ruin city, menacing
-    - fantasy art, (a psyker mutant:1.3), (glowing temples:1.1), whispering to unseen voices, huddled in a dark corner, eerie purple light
-    - cinematic portrait, (a child survivor:1.3), (big, wary eyes:1.1), a stuffed toy tied to backpack, hiding in rubble, (vulnerable but tough:1.1)
-    - gritty portrait, (a scarred gunslinger:1.3), (hand on pistol:1.1), patched duster coat, intense stare, in a deserted wasteland town
+    - character concept, (a plated gate defender:1.3), (heavy scrap shield:1.2), holding a rebar sword, feet planted before a makeshift gate, chin raised
+    - low-light scene, (a hooded figure:1.3), pressed against deep shadow, holding a scrap dagger angled forward, in a ruined-city alley, eyes narrowed beneath the hood
+    - luminous fantasy art, (a huddled mutant:1.3), (glowing temples:1.1), lips parted and hands pressed over the ears, in a dark corner, saturated purple rim light
+    - cinematic portrait, (a dust-streaked child:1.3), (large wary eyes:1.1), a stuffed toy tied to a backpack, hiding behind rubble, scraped knees and tightly clenched fists
+    - coarse-textured portrait, (a scarred gunslinger:1.3), (hand on pistol:1.1), patched duster coat, fixed narrow stare, in a deserted wasteland town
     - sci-fi art, (a mechanical limb scavenger:1.3), a prosthetic arm with exposed servos, sifting through scrap, in a giant junk pile
-    - action pose, (a ghost-masked assassin:1.3), (coated in ash:1.1), holding throwing knives, emerging from smoky haze, silent
-    - character art, (a bomb disposal survivor:1.3), (heavy blast vest:1.1), covered in scorch marks, disarming a makeshift bomb, tense
+    - action pose, (a ghost-masked knife wielder:1.3), (coated in ash:1.1), holding throwing knives, emerging on bent knees from smoky haze
+    - character art, (a crouching bomb technician:1.3), (heavy blast vest:1.1), covered in scorch marks, clipping a wire on a makeshift bomb, sweat beads and rigid shoulders
     - stealth scene, (a pipeline saboteur:1.3), (sneaking:1.1), wearing an explosive harness, alongside a rusting refinery pipe, at night
-    - cinematic portrait, (a wanderer elder:1.3), (wise, weathered face:1.1), walking with a cane made from rebar, gazing at a ruined horizon
-    - fantasy art, (a toxic druid:1.3), (fungus-covered robes:1.2), holding a staff with glowing mushrooms, in a dark, overgrown tunnel, mystical
+    - cinematic portrait, (an elderly wanderer:1.3), (deep wrinkles and layered facial scars:1.1), walking with a cane made from rebar, gazing at a ruined horizon
+    - fantasy art, (a fungus-covered robed figure:1.3), holding a staff with glowing mushrooms, in a dark overgrown tunnel, floating spores and green rim light
     - concept art, (a tech-salvage woman:1.3), (goggles up:1.1), using a soldering iron, repairing cracked circuits, in a messy workshop
     - character art, (a frontier defender:1.3), (guarding post:1.1), wearing salvaged shield-wall gear, holding a rebar spear, at a settlement gate
-    - sci-fi horror, (an abandoned lab escapee:1.3), (scared:1.1), a glowing neck implant, wearing patient rags, running down a dark corridor
-    - action shot, (a wasteland rider:1.3), on a speeding motorcycle, (spike-studded shoulder armor:1.2), racing across desert, dynamic
-    - concept art, (a post-collapse monk:1.3), (meditating:1.1), holding radio prayer beads, in a quiet, ruined temple, serene
+    - sci-fi horror, (a lab escapee:1.3), (wide eyes and open mouth:1.1), a glowing neck implant, wearing patient rags, running down a dark corridor
+    - action shot, (an armored rider:1.3), on a speeding motorcycle, (spike-studded shoulder armor:1.2), racing across desert, diagonal framing and wheel motion blur
+    - concept art, (a cross-legged robed figure:1.3), holding radio-component beads between open hands, in an empty ruined temple, symmetrical framing and soft diffuse light
     - action scene, (a condemned gladiator:1.3), fighting, (improvised arena armor:1.2), wielding a scrap sword, in a raider arena
     - character concept, (an air-filter nomad:1.3), (layered masks and tubes:1.2), carrying an oxygen tank, walking through thick, yellow fog
     - concept art, (an ancient ruins archaeologist:1.3), (patchwork hazmat suit:1.2), holding a glowing relic, in a half-buried building
@@ -318,124 +318,124 @@ gkr_wasteland:
     - action shot, (an urban survivor:1.3), on a rooftop, aiming a makeshift harpoon launcher, at a creature below, (ruined city:1.1)
     - action shot, (a scorch-dust rider:1.3), on a bike, (flame-scarred cape:1.2), racing through a burning ruin, sparks flying
     - concept art, (a scrap-forge blacksmith:1.3), (smoldering apron:1.1), hammering glowing hot metal, in a makeshift forge, sparks
-    - epic scene, (a scrapper queen:1.3), crowned in bullet casings, sitting on a throne of junk, in a huge salvage yard, (chin raised:1.1)
-    - fantasy art, (a gutter mage:1.3), (hand gestures:1.1), channeling blue radioactive smoke, in a flooded metro tunnel, mystical
-    - cinematic scene, (a combat medic:1.3), helping wounded, (blood-stained wraps:1.2), in the middle of a firefight, (tense, gritty:1.1)
-    - concept art, (a tunnel dweller:1.3), (pale skin:1.1), holding a glowing fungus lantern, navigating dark, concrete tunnels, eerie
-    - character concept, (a post-collapse paladin:1.3), (defensive stance:1.1), carrying a reinforced riot shield, guarding survivors, heroic
+    - low-angle wide scene, (a bullet-crowned figure:1.3), sitting on a throne of junk in a huge salvage yard, (chin raised:1.1)
+    - fantasy art, (a rag-wrapped figure:1.3), (interlocking hand gestures:1.1), channeling spiraling blue radioactive smoke in a flooded metro tunnel, luminous reflections
+    - cinematic scene, (a crouching medic:1.3), binding a wound with (blood-stained wraps:1.2), sparks and tracer lines crossing a firefight, clenched jaw, coarse film grain
+    - concept art, (a pale tunnel dweller:1.3), holding a glowing fungus lantern while navigating dark concrete tunnels, green underlight and long distorted shadows
+    - character concept, (a scrap-armored defender:1.3), (wide braced stance:1.1), carrying a reinforced riot shield in front of a clustered group, low-angle framing
     - action scene, (a plasma torch salvager:1.3), (sparks flying:1.1), using a red hot cutter, on a derelict spaceship hull
     - action pose, (a barren lands archer:1.3), drawing bow, (bone-fletched arrows:1.2), on a rocky outcrop, overlooking desert
-    - cinematic portrait, (an ex-soldier:1.3), (hollow distant stare:1.1), clutching dog tags, staring into a campfire, melancholy
+    - cinematic portrait, (a figure in faded military fatigues:1.3), (hollow distant stare:1.1), clutching dog tags, shoulders slumped beside a campfire, cool shadows around warm firelight
     - fantasy art, (a forest bunker druid:1.3), (moss-covered cloak:1.2), wooden staff, standing by a hidden, overgrown bunker door
-    - character art, (a firemask raider:1.3), wearing a flaming skull helmet, holding a torch, (at night:1.1), menacing
-    - sci-fi art, (a hydro-scav diver:1.3), in murky water, wearing a cracked rebreather suit, in a flooded city, (eerie:1.1)
-    - action scene, (a skybridge scout:1.3), on a high ledge, using grappling gauntlets, (ruined city far below:1.1), dynamic pose
-    - cinematic portrait, (a one-eyed raider elder:1.3), (wise and scarred:1.1), leaning on a rebar spear, in a raider camp
-    - character art, (an underground tunnel prophet:1.3), (wild eyes:1.1), whispering of storms, in a dark, damp tunnel, frantic
-    - character concept, (a post-ruin knight:1.3), (scrap armor:1.1), glowing with faint radiation, holding a broken sword, stoic
+    - character art, (a broad raider:1.3), wearing a flaming skull helmet, holding a torch overhead at night, low-angle view and jagged black silhouette
+    - sci-fi art, (a submerged salvage diver:1.3), wearing a cracked rebreather suit in a flooded city, cyan haze and shadowy submerged windows
+    - action scene, (a skybridge climber:1.3), one boot on a high ledge, grappling gauntlet extended, (ruined city far below:1.1), steep diagonal composition
+    - cinematic portrait, (a one-eyed raider elder:1.3), (deep wrinkles and layered scars:1.1), leaning on a rebar spear in a raider camp
+    - character art, (a rag-robed tunnel figure:1.3), (wide unfocused eyes:1.1), mouth close to a listener's ear, hands trembling in a dark damp tunnel
+    - character concept, (a fully scrap-armored figure:1.3), glowing with faint radiation, holding a broken sword, squared shoulders and level gaze
     - cinematic scene, (a storm scavenger:1.3), wrapped in flapping tarp layers, leaning into heavy wind, in a dust storm
     - action shot, (a dune rider:1.3), (scanning horizon:1.1), standing atop a rusted dune buggy, vast sand dunes
-    - fantasy art, (a bio-cult priest:1.3), chanting, (glowing toxin markings on skin:1.1), leading a ritual, in a toxic swamp
-    - character art, (a lone ranger:1.3), (rifle:1.1), face hidden by broken visor, watching over a desolate valley, dust settling on his shoulders
+    - fantasy art, (a bio-cult priest:1.3), mouth open and arms raised, (glowing toxin markings on skin:1.1), kneeling figures arranged in a circle in a toxic swamp
+    - character art, (a lone rifle carrier:1.3), face hidden by a broken visor, watching over an empty gray valley, dust settling on the shoulders
 
   spotlight_backgrounds:
-    - cinematic wide shot, (a ruined freeway overpass:1.3), (collapsing into dust:1.1), broken concrete, rusted rebar, desolate
-    - bleak environment art, (an abandoned city street:1.3), littered with rusted vehicles, (empty and silent:1.1), overcast sky
-    - moody landscape, (a burnt forest:1.3), (charred tree trunks:1.2), gray sky, drifting ash, eerie silence
+    - cinematic wide shot, (a ruined freeway overpass:1.3), (collapsing into dust:1.1), broken concrete, rusted rebar, empty horizon
+    - desaturated environment art, (a deserted city street:1.3), littered with rusted vehicles, (no people or moving traffic:1.1), overcast sky
+    - low-contrast landscape, (a burnt forest:1.3), (charred tree trunks:1.2), gray sky, drifting ash, no animals or foliage
     - vast landscape art, (a sun-blasted desert wasteland:1.3), (stretching endlessly to the horizon:1.1), giant sand dunes, heat shimmer
-    - epic ruins concept art, (a collapsed skyscraper:1.3), leaning against a shattered tower, (urban decay:1.1), rubble everywhere, dramatic lighting
+    - low-angle ruins concept art, (a collapsed skyscraper:1.3), leaning against a shattered tower, (cracked facades and exposed floors:1.1), rubble everywhere, sharp sunbeams through dust
     - environment concept art, (a rusted gas station:1.3), half-buried and overtaken by sand, (broken pumps:1.1), tattered canopy, sun-bleached signage
-    - eerie interior shot, (an empty overgrown mall:1.3), (shattered glass skylight:1.1), vines and moss covering everything, haunting
-    - dynamic landscape, (a storm-filled wasteland:1.3), (red dust swirling:1.2), dark clouds, forked lightning, ominous
-    - toxic environment art, (a radioactive swamp:1.3), glowing with green fog, (bubbling toxic water:1.1), dead trees, hazardous
+    - green-gray interior shot, (an empty overgrown mall:1.3), (shattered glass skylight:1.1), vines and moss covering everything, deep receding shadows
+    - diagonal landscape composition, (a storm-filled wasteland:1.3), (red dust swirling:1.2), low black clouds, forked lightning
+    - toxic environment art, (a radioactive swamp:1.3), glowing with green fog, (bubbling toxic water:1.1), dead trees, corroded warning signs
     - environment art, (an abandoned suburb:1.3), houses overtaken by vines, (broken, boarded-up houses:1.1), (empty streets:1.1)
-    - creepy concept art, (a busted amusement park:1.3), (a crooked ferris wheel against a gray sky:1.1), rusted rides
-    - industrial concept art, (a derelict factory:1.3), (covered in soot and grime:1.1), rusting machinery, smokestacks silent, bleak
-    - cinematic landscape, (a cracked highway:1.3), leading into a ruined horizon, (desolate:1.1), abandoned cars, endless road
-    - eerie landscape, (a toxic crater lake:1.3), glowing with eerie unnatural light, (barren shoreline:1.1), toxic mist
-    - vast landscape, (a wind-blown cliffside:1.3), overlooking a dead, dry ocean, (barren:1.1), strong wind, desolate
-    - mysterious concept art, (a fog-swept bunker entrance:1.3), heavy rusted hatch, (fog curling around the doorway:1.1), set into a hillside
+    - cold desaturated concept art, (a busted amusement park:1.3), (a crooked ferris wheel against a gray sky:1.1), rusted rides, long angular shadows
+    - industrial concept art, (a derelict factory:1.3), (covered in soot and grime:1.1), rusting machinery, smokeless stacks, gray-brown palette
+    - cinematic landscape, (a cracked highway:1.3), leading into a ruined horizon, (empty lanes:1.1), rusted driverless cars, endless road
+    - green-lit landscape, (a toxic crater lake:1.3), glowing with saturated green light, (barren shoreline:1.1), toxic mist
+    - vast landscape, (a wind-blown cliffside:1.3), overlooking a dry ocean basin, (bare rock:1.1), bent scrub, empty horizon
+    - low-key concept art, (a fog-swept bunker entrance:1.3), heavy rusted hatch, (fog curling around the doorway:1.1), set into a hillside
     - environment art, (a forest reclaimed city block:1.3), (broken windows:1.1), (trees and overgrowth swallowing buildings:1.1), dappled light
-    - dark environment art, (a collapsed tunnel:1.3), covered in debris, a dark, foreboding entrance, (pitch black inside:1.1)
-    - epic landscape, (sunset shining through skeletal skyscrapers:1.3), dusty golden hour light, city ruins
-    - industrial ruins, (a trainyard:1.3), filled with rusting locomotives, (abandoned:1.1), overgrown tracks, bleak
-    - eerie interior, (a flooded metro station:1.3), overrun with algae, (murky water:1.1), dim light from above, haunting
+    - dark environment art, (a collapsed tunnel:1.3), covered in debris, a narrow jagged entrance, (pitch black inside:1.1)
+    - panoramic landscape, (sunset shining through skeletal skyscrapers:1.3), dusty golden hour light, city ruins
+    - industrial ruins, (a trainyard:1.3), filled with rusting locomotives, (empty cabs and broken windows:1.1), overgrown tracks, muted gray palette
+    - dim green interior, (a flooded metro station:1.3), overrun with algae, (murky water:1.1), narrow overhead light beams, deep shadows
     - concept art landscape, (a desert canyon:1.3), carved with twisted metal wreckage, (rocky:1.1), high canyon walls, harsh sunlight
-    - bleak art, (a storm-ruined billboard:1.3), standing in a barren plain, (tattered advertisement:1.1), ominous sky
-    - eerie interior, (an abandoned church:1.3), (collapsed roof:1.2), broken pews, light streaming through hole in roof, hauntingly beautiful
-    - landscape art, (a crumbling bridge:1.3), over a dried riverbed, (broken:1.1), missing sections, desolate
-    - environment art, (post-collapse farmland:1.3), (broken irrigation rigs:1.2), fields of dead crops, dusty, bleak
-    - horror interior, (an empty hospital corridor:1.3), lined with peeling paint, (eerie:1.1), flickering lights, abandoned gurney
+    - desaturated art, (a storm-ruined billboard:1.3), standing in a barren plain, (tattered advertisement:1.1), low black clouds
+    - high-contrast interior, (an empty ruined church:1.3), (collapsed roof:1.2), broken pews, bright light shafts through the roof, dust motes
+    - landscape art, (a crumbling bridge:1.3), over a dried riverbed, (broken:1.1), missing sections, empty banks
+    - environment art, (ruined farmland:1.3), (broken irrigation rigs:1.2), fields of dead crops, dusty, desaturated browns
+    - horror interior, (an empty hospital corridor:1.3), lined with peeling paint, (alternating pools of green light and darkness:1.1), overturned gurney
     - environment concept, (an overgrown airport runway:1.3), (weeds knee-high:1.1), (a wrecked plane in the distance:1.1), empty
-    - epic landscape, (a burned city square:1.3), under a dark orange sky, (ash falling like snow:1.1), charred ruins, apocalyptic
-    - claustrophobic interior, (an underground shelter hallway:1.3), (blinking fluorescent lights:1.2), concrete walls, long corridor, tense
-    - dynamic landscape, (a dust storm sweeping across cracked fields:1.3), low visibility, swirling brown wind
-    - industrial ruins, (a derelict refinery:1.3), (leaking pipes:1.1), toxic spills, rusting metal, hazardous
+    - panoramic landscape, (a burned city square:1.3), under a dark orange sky, (ash falling like snow:1.1), charred ruins, ember-red backlight
+    - claustrophobic interior, (an underground shelter hallway:1.3), (blinking fluorescent lights:1.2), close concrete walls, long corridor, deep vanishing point
+    - diagonal landscape composition, (a dust storm sweeping across cracked fields:1.3), low visibility, swirling brown dust
+    - industrial ruins, (a derelict refinery:1.3), (leaking pipes:1.1), neon toxic spills, rusting metal, warning placards
     - urban decay, (a ruined shopping district:1.3), (broken neon signs:1.2), looted stores, street littered with debris
     - concept art, (an urban rubble pile:1.3), (twisted rebar:1.2), chunks of concrete, (a scavenger climbing it:1.1)
     - interior concept art, (a bunker war room:1.3), covered in old, dusty maps, (abandoned command center:1.1), flickering monitor
     - landscape art, (a rusted watchtower:1.3), overlooking barren lands, (lone structure:1.1), against a gray sky
-    - eerie art, (an abandoned playground:1.3), half buried in dust, (rusty swings:1.1), creepy, desolate
+    - cold desaturated art, (an empty playground:1.3), half buried in dust, (rusty tilted swings:1.1), long shadows, no footprints
     - disaster art, (a sinkhole crater:1.3), swallowing remnants of a street, (deep hole:1.1), broken pipes exposed
-    - eerie interior, (a storm-darkened highway tunnel:1.3), (dangling wires:1.1), eerie, abandoned cars, faint light at the end
+    - low-key interior, (a storm-darkened highway tunnel:1.3), (dangling wires:1.1), rusted driverless cars, faint light at the end
     - desert landscape, (a cracked desert plateau:1.3), beneath a burning sun, (barren:1.1), no life, heat shimmer
-    - horror interior, (a flooded basement:1.3), filled with murky water, (dark:1.1), floating debris, mysterious
-    - landscape art, (a crater field:1.3), dotted with old war debris, (old battlefield:1.1), desolate, bleak
+    - horror interior, (a flooded basement:1.3), filled with murky water, (near-black shadows:1.1), floating debris, one obscured doorway
+    - landscape art, (a crater field:1.3), dotted with shell casings and rusted wreckage, empty horizon, desaturated gray-brown palette
     - environment art, (a collapsed stadium:1.3), overgrown with foliage, (empty seats:1.1), broken concrete
-    - eerie landscape, (a wind farm:1.3), broken turbines spinning slowly, (eerie sound:1.1), overcast sky
+    - stark landscape, (a wind farm:1.3), broken turbines turning slowly, (uneven crooked blades:1.1), overcast sky
     - industrial ruin, (a wrecked shipyard:1.3), littered with torn ship hulls, by a dead, polluted sea, (rust:1.1)
     - toxic environment, (a city square:1.3), filled with drifting ash, everyone wearing gas masks, (toxic air:1.1), green fog
     - environment art, (sunken ruins of old downtown:1.3), (flooded streets:1.2), (makeshift gondola floating by:1.1)
-    - moody landscape, (a foggy ridge:1.3), overlooking a barren plain, (misty:1.1), low visibility, eerie
-    - toxic environment, (a chemical spill zone:1.3), glowing with neon puddles, (hazardous:1.1), warning signs
+    - low-contrast landscape, (a foggy ridge:1.3), overlooking a barren plain, (layered mist:1.1), low visibility, pale gray palette
+    - toxic environment, (a chemical spill zone:1.3), glowing with neon puddles, (corroded barrels and dead grass:1.1), warning signs
     - landscape art, (a war-scarred cliff:1.3), overlooking a ruined valley, (craters:1.1), burnt trees
     - environment art, (a forest bunker:1.3), (a secret entrance hidden among tangled vines:1.1), overgrown
-    - ruins art, (a destroyed military base:1.3), filled with burnt vehicles, (wreckage:1.1), abandoned
+    - ruins art, (a destroyed military base:1.3), filled with burnt vehicles, (collapsed hangars and scattered wreckage:1.1), no people
     - concept art, (a post-ruin marketplace:1.3), (half-collapsed stalls:1.2), scavengers trading goods, makeshift
     - claustrophobic interior, (underground sewage chambers:1.3), echoing with dripping water, (dark:1.1), murky water
-    - landscape art, (an empty freeway interchange:1.3), under storm clouds, (cracked asphalt:1.1), (giant, silent structures:1.1)
-    - ruins art, (burnt houses:1.3), lining cracked asphalt, (suburbia ruins:1.1), charred frames, desolate
+    - landscape art, (an empty freeway interchange:1.3), under storm clouds, (cracked asphalt:1.1), (giant motionless concrete spans:1.1)
+    - ruins art, (burnt houses:1.3), lining cracked asphalt, (collapsed suburban blocks:1.1), charred frames, empty street
     - toxic environment, (a toxic marsh:1.3), emitting green vapors, (dead trees:1.1), bubbling mud
-    - landscape art, (an abandoned radio tower:1.3), looming over the wasteland, (rusting steel:1.1), (tall, silent:1.1)
+    - landscape art, (a disused radio tower:1.3), looming over the wasteland, (rusting steel:1.1), (tall with motionless antenna dishes:1.1)
     - environment art, (a broken overpass:1.3), covered in moss, (reclaimed by nature:1.1), cars rusted underneath
     - urban decay, (a city rooftop:1.3), overtaken by wild vegetation, a view of the ruins, (makeshift shelter:1.1)
-    - concept art, (a destroyed missile silo:1.3), (half sunken:1.1), open hatch, exposed missile, eerie
-    - environment art, (a railroad crossing:1.3), (warped tracks:1.2), (a derelict train stopped:1.1), bleak
+    - concept art, (a destroyed missile silo:1.3), (half sunken:1.1), open hatch, exposed missile, green underlight and deep shadows
+    - environment art, (a railroad crossing:1.3), (warped tracks:1.2), (a derelict train stopped:1.1), desaturated gray palette
     - ruins art, (a fallen billboard:1.3), lying across a highway, (faded advertisement:1.1), blocking the road
     - desert landscape, (a barren dune field:1.3), (a rusted car skeleton half-buried:1.1), endless sand, harsh sun
-    - abstract art, (a forest of metallic junk piles:1.3), towering piles, rust
+    - geometric collage art, (a forest of metallic junk piles:1.3), repeating triangular silhouettes, layered rust textures
     - interior art, (an underground cave bunker:1.3), (glowing faintly:1.1), makeshift lights, damp stone walls
     - landscape art, (a sun-scorched ridge:1.3), (skeleton trees:1.2), barren rock, overlooking a dusty valley
-    - apocalyptic art, (city ruins melting under acid rain:1.3), glowing green rain, corroding buildings
+    - high-contrast art, (city ruins dissolving under acid rain:1.3), glowing green rain, visibly corroding buildings
     - ruins art, (a floodplain of shattered concrete slabs:1.3), muddy, debris field, twisted rebar
-    - eerie art, (post-storm fog rolling across a ghost city:1.3), low visibility, silent
+    - low-contrast art, (post-storm fog rolling across an empty ruined city:1.3), low visibility, no figures or moving vehicles
     - interior art, (an evacuated airport terminal:1.3), (empty seating:1.1), luggage scattered, dusty
-    - eerie interior, (a dust-layered cinema:1.3), (peeling posters:1.2), empty seats, silent
+    - dim interior, (a dust-layered cinema:1.3), (peeling posters:1.2), empty seats, unbroken dust on the aisle
     - disaster art, (a broken dam:1.3), spilling murky water, (rushing water:1.1), flooding the valley below
     - concept art, (a rusted oil tanker:1.3), stranded in the desert, (beached:1.1), half-buried in sand
     - ruins art, (a collapsed office tower:1.3), (spilling debris:1.1), exposed floors, skeletal building
     - landscape art, (a dried lakebed:1.3), cracked into hexagonal plates, (barren:1.1), vast
     - cyberpunk art, (a neon wasteland:1.3), lit by a dying, flickering billboard, (dark ruins:1.1), puddles reflecting neon
     - environment art, (a forest reclamation zone:1.3), swallowing suburbs, (overgrowth:1.1), vines on houses
-    - apocalyptic art, (a nuclear blast zone:1.3), (scorched earth:1.2), glassed sand, epicenter, desolate
-    - epic landscape, (a radio tower hill:1.3), silhouetted under a crimson sunset, (dramatic sky:1.1)
+    - panoramic disaster art, (a nuclear blast zone:1.3), (scorched earth:1.2), glassed sand, central crater, empty horizon
+    - panoramic landscape, (a radio tower hill:1.3), silhouetted under a crimson sunset, (radiating cloud bands:1.1)
     - concept art, (a fallen airliner wreck:1.3), half buried in sand, (broken fuselage:1.1), scavengers nearby
     - ruins art, (an abandoned cargo train:1.3), (open to the sky:1.1), looted, on overgrown tracks
-    - eerie landscape, (a storm-ruined crater:1.3), (blackened soil:1.2), eerie, smoking
+    - high-contrast landscape, (a storm-ruined crater:1.3), (blackened soil:1.2), thin smoke plumes, green light in deep fissures
     - interior art, (a dust-filled garage:1.3), filled with rusting tools, (abandoned mechanic shop:1.1), dim light
-    - bleak landscape, (a post-apocalypse pier:1.3), (broken wood:1.1), over a dry, dead sea, desolate
+    - desaturated landscape, (a ruined pier:1.3), (broken wood:1.1), over a dry sea basin, empty horizon
     - urban decay, (an overgrown drainage canal:1.3), (water flowing weakly:1.1), concrete walls covered in graffiti
     - landscape art, (an ancient rusted pipeline:1.3), stretching across the desert, (leaking:1.1), polluted
     - ruins art, (a barren skybridge:1.3), (leading nowhere:1.2), broken, high above the ruined city
-    - moody landscape, (a smoke-filled valley:1.3), scattered with ruins, (smog:1.1), low visibility, bleak
+    - low-contrast landscape, (a smoke-filled valley:1.3), scattered with ruins, (layered gray smog:1.1), low visibility, muted colors
 
   spotlight_vehicles:
     - vehicle concept art, (a rusted dune buggy:1.3), welded roll cage, (saw-blade wheels:1.2), speeding across sand dunes
     - action scene, (a spike-armored muscle car:1.3), roaring across a cracked desert road, (kicking up dust:1.1), mad max style
     - vehicle concept art, (a tanker truck:1.3), converted into a mobile fortress, (heavy scrap plating:1.1), mounted guns
     - vehicle concept art, (a wasteland motorcycle:1.3), (bone-grip handlebars:1.2), fire-spitting exhaust, parked in rubble
-    - vehicle design, (a radiation-proof armored bus:1.3), reinforced with steel mesh, (hazmat symbols:1.1), heavy duty
-    - epic vehicle art, (a four-engine wasteland war rig:1.3), bristling with flamethrower turrets, (huge:1.1), on a highway
+    - vehicle design, (a radiation-sealed armored bus:1.3), reinforced with steel mesh, (hazmat symbols:1.1), thick riveted panels
+    - low-angle vehicle art, (a four-engine wasteland war rig:1.3), bristling with flamethrower turrets, (filling most of the frame:1.1), on a highway
     - sci-fi concept art, (a salvage hauler wagon:1.3), pulled by a repurposed quad-leg mech, loaded with scrap
     - vehicle concept art, (a desert patrol jeep:1.3), (mounted harpoon launcher:1.2), digital camo, on a rocky outcrop
     - vehicle design, (a scavenger trike:1.3), built from mismatched parts, glowing neon tubing, (at night:1.1)
@@ -443,34 +443,34 @@ gkr_wasteland:
     - concept art, (a battered supply van:1.3), (carrying solar panels on roof:1.1), water barrels strapped to side, nomad vehicle
     - vehicle concept art, (a scrap-metal crawler:1.3), on tank treads, rotating scrap turret, (heavy armor:1.1)
     - concept art, (a makeshift glider:1.3), built from car doors, (duct-taped wings:1.1), soaring over ruins
-    - vehicle concept art, (an armored hearse:1.3), reinforced with welded spikes, (gothic:1.1), menacing
+    - vehicle concept art, (an armored hearse:1.3), reinforced with welded spikes, (pointed black arches and tarnished silver trim:1.1), low-angle framing
     - vehicle design, (a desert racing bike:1.3), (extended forks:1.1), rattling engine, parked at a rusted gas station
     - concept art, (an abandoned ambulance:1.3), refitted as a mobile medic outpost, (red cross painted over:1.1)
     - vehicle concept art, (a smoke-belching cargo truck:1.3), protected with chainmail panels, (hauling goods:1.1)
-    - creature design, (a scorpion-shaped desert rover:1.3), (tail-mounted cannon:1.2), mechanical legs, intimidating
-    - sci-fi vehicle, (a sand-skipper hovercraft:1.3), drifting across dunes, (antigrav pads:1.1), fast
-    - vehicle design, (a post-fall electric buggy:1.3), patched with matte-black solar panels, (silent:1.1), tech-scavenger
-    - vehicle concept art, (a rust-covered armored sedan:1.3), (razor-edged bumper:1.2), raider vehicle
+    - creature design, (a scorpion-shaped desert rover:1.3), (tail-mounted cannon:1.2), tall mechanical legs, low-angle framing
+    - sci-fi vehicle, (a sand-skipper hovercraft:1.3), drifting across dunes, (antigrav pads:1.1), long motion blur and trailing sand plume
+    - vehicle design, (a patched electric buggy:1.3), matte-black solar panels, (no exhaust pipes:1.1), exposed cables and salvaged circuit housings
+    - vehicle concept art, (a rust-covered armored sedan:1.3), (razor-edged bumper:1.2), spikes and skull paint
     - industrial concept, (a mobile refinery truck:1.3), distilling scavenged fuel, (pipes and tanks:1.1)
     - vehicle concept art, (a heavy dump truck:1.3), turned into a rolling sledgehammer ram, (reinforced front:1.1)
-    - sci-fi concept, (a scrap hover-drone:1.3), scouting ruins, (whirring propellers:1.1), red camera eye
+    - sci-fi concept, (a scrap hover-drone:1.3), gliding above ruins, (motion-blurred propellers:1.1), red camera eye
     - fantasy vehicle, (a battle chariot:1.3), pulled by two bio-engineered mutant beasts, (skulls mounted on the frame:1.1)
     - vehicle concept art, (a rail-wheeled truck:1.3), running along collapsed subway tracks, (underground:1.1)
     - vehicle design, (a makeshift armored tractor:1.3), fitted with chainsaw arms, (sparks flying from spinning blades:1.1)
-    - vehicle concept, (a desert wind-sail car:1.3), racing across open salt flats, (fast and silent:1.1)
+    - vehicle concept, (a desert wind-sail car:1.3), racing across open salt flats, (billowing sail and long wheel blur:1.1)
     - vehicle design, (a radiation-sealed armored personnel carrier:1.3), (hazmat symbol:1.1), heavy
     - vehicle concept, (a mounted snow crawler:1.3), (spiked treads:1.1), heated cabin, in a frozen wasteland
     - vehicle design, (an elevated watchtower truck:1.3), a craned lookout pod, (antenna array on top:1.1)
     - vehicle concept, (a camouflaged scavenger van:1.3), draped in fabric tarps, hiding in ruins
-    - vehicle concept, (a pipeline raider bike:1.3), (fuel-line siphons on sides:1.2), fast
-    - vehicle concept art, (a bone-adorned war car:1.3), howling with exhaust pipes, (bone trophies rattling:1.1)
+    - vehicle concept, (a pipeline raider bike:1.3), (fuel-line siphons on sides:1.2), trailing dust and wheel motion blur
+    - vehicle concept art, (a bone-adorned war car:1.3), black smoke blasting from exhaust pipes, (bone trophies blurred by vibration:1.1)
     - vehicle design, (a flame-jet buggy:1.3), front-mounted fire nozzle, (racing:1.1)
-    - vehicle concept, (an improvised armored limo:1.3), (shuttered windows:1.2), warlord vehicle
-    - vehicle concept, (a toxic-waste tanker:1.3), leaking faint green mist, (hazardous:1.1)
+    - vehicle concept, (an improvised armored limo:1.3), (shuttered windows:1.2), oversized hood ornament and gold-painted scrap trim
+    - vehicle concept, (a toxic-waste tanker:1.3), leaking faint green mist, (corroded hazard placards:1.1)
     - sci-fi concept, (a riderless auto-drone:1.3), patrolling collapsed streets, (red sensor light:1.1)
     - vehicle concept, (a converted school bus:1.3), (rooftop water collectors:1.2), nomad home
-    - vehicle art, (a rust-giant semi truck:1.3), (chains dragging behind:1.2), intimidating
-    - vehicle design, (a stealth desert rover:1.3), coated in sand-colored plating, (low profile:1.1)
+    - vehicle art, (a towering rusted semi truck:1.3), (chains dragging behind:1.2), low-angle framing and oversized grille
+    - vehicle design, (a low-visibility desert rover:1.3), coated in matte sand-colored plating, (low profile:1.1)
     - vehicle concept, (a makeshift snowmobile:1.3), built from scavenged motorcycle parts
     - vehicle concept, (a scrap-built gyrocopter:1.3), buzzing through a ruined city
     - industrial vehicle, (a massive tunnel-borer vehicle:1.3), lined with drilling spikes
@@ -490,7 +490,7 @@ gkr_wasteland:
     - vehicle concept, (a hand-cranked rail cart:1.3), for underground exploration
     - vehicle design, (a solar-winged trike:1.3), built for long-range travel
     - vehicle concept, (a canyon-climber vehicle:1.3), retractable grappling spikes
-    - vehicle concept, (a skeleton-decorated raid truck:1.3), blasting war horns
+    - vehicle concept, (a skeleton-decorated raid truck:1.3), fitted with oversized brass horn bells
     - vehicle design, (a junk-tank:1.3), rotating scrap-turret, mismatched armor
     - vehicle concept, (a deep-desert crawler:1.3), reinforced air filters
     - vehicle concept, (a battle-sled:1.3), pulled across sand by a modified engine winch
@@ -510,7 +510,7 @@ gkr_wasteland:
     - sci-fi vehicle, (a mech-spider scout unit:1.3), crawling through rubble
     - fantasy vehicle, (a mutant-beast drawn cart:1.3), with barbed reins
     - creature vehicle, (an armored beetle-shaped rover:1.3), (thick iron shell:1.2)
-    - vehicle concept, (a skull-front armored dragster:1.3), howling with exhaust flames
+    - vehicle concept, (a skull-front armored dragster:1.3), long blue-orange exhaust flames
     - vehicle concept, (a storm-surfer rover:1.3), riding dust cyclones
     - vehicle concept, (a mobile broadcasting RV:1.3), patched with antenna towers
     - vehicle design, (an old fire truck:1.3), retrofitted with a chemical sprayer cannon
