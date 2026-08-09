@@ -9,82 +9,97 @@ gkr_anime:
 # ---------------------------------------------------------
 
   archetype:
-    - shonen hero, (determined:1.1), (battle ready:0.9)
-    - shonen rival, cool, (confident smirk:1.2)
-    - stoic swordsman, (katana:1.1), (serious gaze:1.1)
-    - cheerful schoolgirl, (school uniform:1.1), cheerful expression, (peace sign:0.8)
-    - quiet bookish student, (glasses:1.1), holding book
-    - delinquent punk fighter, (delinquent:1.1), punk fashion, (fighter stance:1.1)
-    - brooding antihero, (brooding:1.1), antihero, dark clothing, (shadows:0.8)
-    - overpowered protagonist, (overpowered:1.1), (confident:1.2), glowing aura
-    - isekai adventurer, (fantasy:1.1), adventurer, practical gear
-    - magical girl warrior, (magical girl:1.1), transformation, (cute:1.1), ribbons
-    - shrine maiden hero, (shrine maiden:1.1), (miko outfit:1.2)
-    - beastkin companion, (fox girl:1.1), (cat girl:1.1), (wolf girl:1.1), animal ears, animal tail
-    - elves in anime style, (elf:1.1), (pointy ears:1.2), elegant, (long hair:0.9)
-    - mecha pilot, (pilot suit:1.1), (sci-fi:1.1), (cockpit:0.8)
-    - sports ace hero, (athlete:1.1), (sportswear:1.1), dynamic pose
-    - gothic warrior, (gothic:1.1), ornate dress, holding weapon
-    - hyperactive sidekick, (energetic:1.2), sidekick, (excited expression:1.1)
-    - cool senpai figure, (senpai:1.1), (cool:1.1), confident, (school uniform:0.9)
-    - mysterious transfer student, (mysterious:1.1), (school uniform:1.1), unreadable expression
-    - futuristic bounty hunter, (bounty hunter:1.1), (sci-fi:1.1), (cybernetic armor:1.1)
-    - idol singer protagonist, (idol:1.1), (singer:1.1), (microphone:1.1), stage outfit
-    - cyber ninja, (ninja:1.1), (cyborg:1.1), futuristic, (cybernetic katana:1.1)
-    - magical academy student, (magic:1.1), student, (academy uniform:1.2)
-    - demon princess, (demon:1.1), (princess:1.1), (horns:1.2), elegant dress
-    - angelic guardian, (angel:1.1), (wings:1.2), guardian, (halo:1.1)
-    - yokai anime companion, (yokai:1.1), spirit, companion, (ethereal:0.9)
-    - chibi mascot companion, (chibi:1.2), (mascot:1.1), (cute:1.2), small
-
-  race:
-    - human, (anime style:1.1)
-    - elf, (pointy ears:1.2), elegant, (slender build:0.9)
-    - dark elf, (dark skin:1.1), (pointy ears:1.2), (silver hair:0.8)
-    - beastkin fox, (fox ears:1.2), (fox tail:1.2), (fluffy:1.1)
-    - beastkin cat, (cat ears:1.2), (cat tail:1.2), (playful:0.9)
-    - beastkin wolf, (wolf ears:1.2), (wolf tail:1.2), (wild:0.9)
-    - demon themed character, (demon:1.1), (horns:1.2), (demon tail:1.1)
-    - angel themed character, (angel:1.1), (wings:1.2), (halo:1.1), (glowing:0.9)
-    - dragon blood hero, (dragon scales:1.2), (dragon horns:1.1), (draconic eyes:1.1)
-    - synthetic android, (android:1.1), (robot:1.1), (mechanical joints:1.1)
-    - mecha cyber human, (cyborg:1.1), (mechanical parts:1.2), (glowing optics:1.1)
-    - celestial being, (celestial:1.1), (glowing:1.1), (starry aura:1.1)
-    - yokai themed anime spirit, (yokai:1.1), spirit, (japanese clothes:1.1)
-    - oni, (demon:1.1), (oni horns:1.2), (kanabo club:1.1)
-    - kitsune spirit, (fox spirit:1.1), (multiple tails:1.2), (kitsune mask:0.9)
-    - kunoichi, (female ninja:1.1), (mask:1.1), (stealth pose:1.0)
-    - ninja, (mask:1.1), (stealth:1.1), (ninja outfit:1.1)
-    - samurai, (samurai armor:1.2), (katana:1.1)
+    - spiky windswept hair, red zip-up jacket, fingerless gloves, wide battle stance, (clenched-fist determination:1.2)
+    - slicked-back hair, unbuttoned high-collar jacket, arms crossed, sharp confident smirk
+    - single katana at the hip, plain indigo hakama, calm narrowed gaze, still upright posture
+    - sailor uniform with pleated skirt, red neckerchief, twin ribbons in hair, bright open-mouthed smile, peace-sign hand gesture
+    - round wire-frame glasses, cardigan over collared shirt, thick book hugged to chest, downward gaze
+    - torn blazer worn open, safety-pin details, undercut hair, raised fists, sneering half-smile
+    - long dark trench coat, hands in pockets, half-shadowed face, (unreadable glare:1.1)
+    - faint glowing aura around clenched fists, plain travel clothes, calm unshaken expression, sparks crackling off the skin
+    - patched leather traveling cloak, worn satchel, short sword at the hip, dusty boots
+    - frilled pastel dress, oversized bow at the chest, thigh-high striped socks, star-tipped wand, ribbons trailing mid-motion
+    - white haori over a red hakama skirt, long braided hair, wooden ofuda charm in hand, calm poised stance
+    - energetic tagalong companion, always trailing one step behind, bright encouraging smile, hand raised in a wave
+    - poised noble heir, refined seated posture, folded hands in the lap, quietly observing the room
+    - form-fitting flight suit with padded shoulder segments, coiled cable plugged into a chest port, helmet tucked under one arm
+    - sleeveless jersey, sweatband, mid-leap motion, sweat-streaked determined face
+    - black ruffled dress with corset lacing, ornate silver pauldron, ankle boots, weapon gripped loosely
+    - messy short hair, oversized grin, one arm raised mid-cheer, bouncing on the balls of the feet
+    - loosened school tie, jacket slung over one shoulder, relaxed confident stance, faint smile
+    - plain unbadged uniform, long hair partly covering one eye, flat unreadable expression, hands folded
+    - segmented dark armor plating, holstered blaster on the thigh, tattered cloak, scanner visor over one eye
+    - sequined stage costume, layered ruffles, handheld sparkling microphone, mid-spin pose, bright stage smile
+    - matte black bodysuit with glowing circuit-line seams, wrapped forearm blades, hood pulled low, crouched ready stance
+    - pointed hat, buttoned robe with a crest pin, wand tucked in the belt, open spellbook
+    - curved black horns, trailing dark ornate gown, clawed fingertips, (regal composed expression:1.1)
+    - feathered white wings, thin golden halo ring, flowing pale robes, serene expression
+    - semi-transparent wispy form, small horns or fox-like features, faint blue glow, playful tilted head
+    - oversized round head, tiny body, big sparkling eyes, bouncing pose
+    - form-fitting dark outfit, cloth mask covering the lower face, crouched stealthy stance, twin kunai at the hip
+    - wrapped cloth mask, form-fitting dark garb, shuriken holster, low crouched stance
+    - dark pinstripe suit, open collar, visible irezumi tattoo along the forearm, cold stare
+    - student, (mysterious:1.1), school uniform, unreadable expression
+    - futuristic bounty hunter, sci-fi, cybernetic armor
+    - idol, singer, microphone, stage outfit
+    - ninja, cyborg, futuristic, (cybernetic katana:1.1)
+    - ninja, katana, stealthy pose, (mask:1.1)
+    - samurai, katana, (samurai armor:1.2)
+    - magic student, (academy uniform:1.2)
+    - demon princess, (horns:1.2), elegant dress
+    - angel, (wings:1.2), guardian, (halo:1.1)
+    - yokai, spirit, companion, (ethereal:0.9)
+    - chibi, (mascot:1.1), (cute:1.2), small
+    - female ninja, (mask:1.1), stealth pose
+    - ninja, (mask:1.1), (stealth:1.1), (ninja outfit:1.1), throwing shuriken
     - yakuza, (suit:1.1), (irezumi tattoo:1.2), (intimidating:1.0)
     - cyborg, (mechanical parts:1.2), (glowing eyes:1.1), (futuristic:1.0)
     - alien, (non-human:1.1), (sci-fi:1.1), (unusual skin color:1.0)
+
+  race:
+    - human
+    - elf, long pointed ears, slender graceful build
+    - dark elf, dark grey-blue skin, long pointed ears, silver hair
+    - fox-eared beastkin, fluffy fox tail, russet fur patches
+    - cat-eared beastkin, sleek cat tail, playful demeanor
+    - wolf-eared beastkin, bushy wolf tail, sharp canine teeth
+    - small curved horns, thin demon tail with an arrow-shaped tip, sharp canine teeth
+    - feathered wings, thin halo ring, faint golden glow
+    - scattered dragon scales along the arms, small curved horns, slit draconic eyes
+    - smooth synthetic skin with visible panel seams, glowing joint lines
+    - metal plating over one arm, glowing optical implant, exposed mechanical joints
+    - faintly glowing skin, drifting star-like motes, ethereal translucent aura
+    - wispy translucent form, traditional layered robes, faint blue glow
+    - red or blue-toned skin, curved horns, wielding a spiked iron club, bared fangs
+    - fox ears, multiple flowing fox tails, wooden fox mask pushed to the side
+    - exposed metal plating along one side, glowing red optical lens, mechanical fingers
+    - unusual skin tone, elongated limbs, faintly glowing eyes
 
 # ---------------------------------------------------------
 # APPEARANCE
 # ---------------------------------------------------------
 
   age:
-    - teen, (anime protagonist:1.1)
-    - young adult, (anime style:1.1)
-    - adult, (mature features:1.1), (anime style:1.0)
-    - timeless spirit youth, (spirit:1.1), (ethereal:1.1), (ageless:1.0)
+    - teen
+    - young adult
+    - adult, mature facial features
+    - ageless ethereal youth, otherworldly presence
 
   gender:
-    - male, man, (bishounen:1.1)
-    - female, woman, (bishoujo:1.1)
+    - male, man, delicate bishounen features
+    - female, woman, delicate bishoujo features
     - male, masculine
     - female, feminine
     - androgynous, non-binary
 
   build:
-    - slender build, (anime style:1.1)
-    - athletic build, (toned muscles:1.1)
-    - graceful build, (elegant pose:1.1)
-    - petite build, (small frame:1.1)
-    - tall, (elegant build:1.1)
-    - toned, (agile build:1.1), (dynamic pose:0.9)
-    - powerful hero build, (muscular:1.2), (toned:1.1)
+    - slender build
+    - athletic build, toned muscles
+    - graceful build, elegant posture
+    - petite build, small frame
+    - tall, elegant build
+    - toned, agile build
+    - muscular powerful build
 
   tone:
     - pale skin
@@ -92,31 +107,31 @@ gkr_anime:
     - warm tan skin
     - soft fair skin
     - warm golden skin
-    - ethereal glowing skin, (glowing:1.2)
-    - demon red skin, (red skin:1.2)
-    - cool blue skin, (blue skin:1.2)
+    - ethereal glowing skin
+    - deep red-toned skin
+    - cool blue-toned skin
 
   face_style:
-    - soft anime face, (soft features:1.1), (moe:0.9)
-    - sharp angular anime face, (sharp features:1.1), (bishounen:0.9)
-    - round cute face, (cute:1.2), (moe:1.1), (big eyes:0.9)
-    - elegant mature face, (mature:1.1), (josei style:1.0)
-    - handsome bishounen face, (handsome:1.2), (bishounen:1.1)
-    - expressive cartoon style face, (expressive:1.2), (exaggerated:1.0)
+    - soft rounded facial features
+    - sharp angular facial features, bishounen look
+    - round soft face, big expressive eyes
+    - elegant mature facial features
+    - handsome sharp-jawed bishounen face
+    - highly expressive, exaggerated features
 
   hair:
-    - long hair, (flowing hair:1.1), (dynamic:0.8)
-    - long straight hair, (silky hair:1.1), (hime cut:0.8)
-    - messy hair, (adventurous hair:1.1), (bedhead:0.9)
-    - medium hair, (fluffy hair:1.1), (layered:0.9)
-    - twintails, (pigtails:1.1), (long hair:0.8)
-    - high ponytail, (ponytail:1.1), (tied up hair:1.0)
-    - short bob cut, (bob cut:1.1), (short hair:1.0)
-    - wavy hair, (fantasy hair:1.1), (wavy texture:1.0)
-    - spiky hair, (anime hair:1.2), (shonen hair:1.1)
-    - braided hair, (elegant braid:1.1), (ornate:0.8)
-    - low ponytail, (ribbon:1.1), (ponytail:1.0)
-    - choppy hair, (layered hair:1.1), (modern:0.9)
+    - long flowing hair
+    - long straight silky hair, hime cut
+    - messy tousled bedhead hair
+    - medium-length fluffy layered hair
+    - long twintails
+    - high ponytail
+    - short bob cut
+    - long wavy hair
+    - spiky upswept hair
+    - elegant ornate braid
+    - low ponytail tied with a ribbon
+    - choppy layered hair
 
   hair_color:
     - black hair
@@ -125,279 +140,292 @@ gkr_anime:
     - silver hair
     - white hair
     - red hair
-    - pink hair, (bright pink:1.1)
-    - blue hair, (vibrant blue:1.1)
+    - bright pink hair
+    - vibrant blue hair
     - teal hair
     - purple hair
     - green hair
-    - gradient hair, (pastel hair:1.1), (anime hair:1.1), (two-tone:0.9)
-    - neon hair, (glowing hair:1.2), (cyberpunk:0.9)
+    - pastel gradient two-tone hair
+    - glowing neon-colored hair
 
   eyes:
-    - big eyes, (expressive eyes:1.1), (anime eyes:1.2)
-    - sharp eyes, (serious eyes:1.1), (focused gaze:1.0)
-    - sparkly eyes, (bright eyes:1.1), (shoujo style:1.1)
-    - annoyed eyes, (tsundere:1.2), (pout:0.9)
-    - golden eyes, (glowing eyes:1.2), (yellow eyes:1.0)
-    - crimson eyes, (red eyes:1.2), (demon eyes:1.1)
-    - blue ocean eyes, (blue eyes:1.1)
-    - green gemlike eyes, (green eyes:1.1)
-    - star shaped pupils, (magical eyes:1.2), (unique pupils:1.1)
-    - heterochromia, (two-tone eyes:1.2), (mismatched eyes:1.1)
-    - pastel eyes, (gradient eyes:1.1), (soft colors:1.0)
+    - large expressive eyes
+    - sharp focused eyes
+    - bright sparkling eyes
+    - narrowed annoyed eyes, slight pout
+    - glowing golden eyes
+    - sharp crimson red eyes
+    - deep blue eyes
+    - clear green eyes
+    - star-shaped pupils, faint magical glow
+    - heterochromia, one eye a different color than the other
+    - soft pastel gradient eyes
 
   expression:
-    - determined expression, (serious:1.1), (battle focus:1.0)
-    - cheerful smile, (happy:1.2), (beaming:1.0)
-    - soft blush, (shy:1.1), (embarrassed:1.0)
-    - shocked expression, (wide-eyed:1.2), (surprised:1.0)
-    - angry expression, (shouting:1.2), (enraged:1.0)
-    - heroic scream, (battle cry:1.2), (shouting:1.1)
-    - confident smirk, (smug:1.2), (grinning:1.0)
-    - mysterious, (calm expression:1.1), (unreadable:1.0)
-    - tearful, (crying:1.2), (emotional:1.1), (tears:1.0)
-    - excited, (energetic expression:1.2), (sparkling eyes:1.0)
+    - determined, focused expression
+    - bright cheerful smile
+    - soft blush, shy embarrassed look
+    - wide-eyed shocked expression
+    - angry, shouting expression
+    - shouting battle cry, mouth open wide
+    - confident, smug smirk
+    - calm, unreadable expression
+    - tearful, crying expression
+    - excited expression, sparkling eyes
 
 # ---------------------------------------------------------
 # OUTFITS
 # ---------------------------------------------------------
 
   clothing:
-    - school uniform, (sailor uniform:1.1), (seifuku:1.0)
-    - fantasy kimono, (ornate kimono:1.2), (detailed patterns:1.0)
-    - formal kimono, (obi:1.1), (traditional:1.0)
-    - magical girl outfit, (ribbons:1.1), (frills:1.1), (cute:1.0)
-    - fantasy armor, (armored outfit:1.1), (pauldrons:0.9)
-    - shrine maiden outfit, (miko:1.1), (hakama:1.1), (white and red:1.0)
-    - elegant gothic lolita dress, (gothic lolita:1.2), (lace:1.1)
-    - futuristic bodysuit, (sci-fi:1.1), (form-fitting:1.1), (techwear:0.9)
-    - cyber streetwear, (techwear:1.2), (futuristic:1.1), (neon details:0.9)
-    - idol performance outfit, (idol:1.1), (singer:1.1), (stage costume:1.1)
-    - casual, (hoodie:1.1), (jeans:1.0), (streetwear:0.9)
-    - long coat, (trench coat:1.1), (anime:1.1), (dramatic:0.9)
-    - battle gi, (martial arts:1.1), (dojo uniform:1.0)
-    - mecha pilot suit, (pilot suit:1.2), (sci-fi:1.1), (helmet:0.8)
+    - sailor-style school uniform, pleated skirt, neckerchief
+    - ornate kimono with detailed floral embroidery, wide obi sash
+    - formal kimono, wide tied obi sash
+    - frilled pastel dress, layered ribbons, puffed sleeves
+    - flowing layered cloak over a fitted tunic, wide leather belt, embroidered trim
+    - white haori, red pleated hakama, wide flowing sleeves
+    - black lace-trimmed dress, layered petticoat, ribbon choker
+    - glossy form-fitting bodysuit with glowing seam lines, small chest-mounted panel
+    - asymmetric jacket with glowing neon trim, utility straps, layered mesh underlayer
+    - sequined layered dress, ruffled hem, sparkling trim
+    - hoodie, jeans, casual streetwear
+    - long trench coat, upturned collar
+    - white karate gi, tied cloth belt
+    - padded flight suit with segmented shoulder plating, tucked-under helmet
 
   armor:
-    - lightweight magical armor, (enchanted armor:1.1), (glowing runes:1.0)
-    - ornate fantasy armor, (detailed armor:1.2), (intricate design:1.1)
-    - sci-fi armored suit, (power armor:1.2), (futuristic:1.1)
-    - cyber armor, (neon accents:1.2), (futuristic:1.1), (cyberpunk:1.0)
-    - enchanted cloth armor, (robes:1.1), (glowing sigils:1.1)
-    - knight armor, (plate armor:1.1), (anime style:1.1), (shining:0.9)
+    - light plated armor etched with faintly glowing runes
+    - ornate engraved armor plates, intricate filigree edging
+    - bulky segmented armor plating, glowing power core on the chest
+    - matte armor plating with glowing neon accent lines
+    - layered cloth robes with faintly glowing embroidered sigils
+    - polished plate armor, shining metal finish
 
 # ---------------------------------------------------------
 # WEAPONS, ITEMS & TRINKETS
 # ---------------------------------------------------------
 
   weapons:
-    - katana, (samurai sword:1.1), (sharp blade:1.0)
-    - dual katana, (dual wielding:1.2), (two swords:1.0)
-    - magical staff, (glowing orb:1.1), (wizard staff:1.0)
-    - energy blade, (laser sword:1.2), (glowing:1.1), (sci-fi:1.0)
-    - oversized sword, (giant sword:1.2), (buster sword:1.1)
-    - spear, (lance:1.1), (polearm:1.0)
-    - bow, (glowing arrows:1.2), (archer:1.0)
-    - enchanted grimoire, (magic book:1.2), (spellbook:1.1), (floating:0.9)
-    - cyber blade, (futuristic:1.1), (katana:1.1), (neon glow:1.0)
-    - magical wand, (wand:1.1), (star shaped:1.0), (cute:0.9)
-    - elemental gauntlets, (magic gauntlets:1.2), (glowing fists:1.1)
-    - mecha energy weapon, (sci-fi gun:1.2), (blaster:1.1)
+    - katana, curved single-edged blade
+    - dual wielded katana, one in each hand
+    - tall wooden staff topped with a glowing orb
+    - glowing energy blade, humming light-edged sword
+    - oversized broad-bladed sword, taller than its wielder
+    - long spear with a leaf-shaped blade
+    - wooden bow, quiver of glowing-tipped arrows
+    - leather-bound grimoire, pages fluttering open, faint glow
+    - sleek katana with a glowing neon-edged blade
+    - short wand with a star-shaped tip
+    - heavy gauntlets with glowing knuckle plating
+    - large handheld energy cannon with a glowing barrel
 
   offhand:
-    - glowing rune book, (magic book:1.1), (open book:0.9)
-    - spirit orb, (glowing orb:1.2), (floating:1.0)
-    - bento box, (snack:1.1), (lunch box:1.0)
-    - school bag, (briefcase:1.0)
-    - umbrella, (parasol:1.1), (japanese umbrella:1.0)
-    - idol microphone, (microphone:1.2), (singing:1.0)
-    - talisman, (charm:1.1), (ofuda:1.2), (paper charm:1.0)
-    - holographic screen, (data screen:1.1), (futuristic:1.0)
+    - open book with glowing runic text across the pages
+    - small floating orb, soft glow
+    - wrapped bento box
+    - leather school satchel
+    - traditional oiled-paper umbrella
+    - handheld sparkling microphone
+    - paper ofuda talisman strip
+    - floating translucent holographic display panel
 
   trinkets:
-    - enchanted necklace, (amulet:1.2), (glowing gem:1.1)
-    - hair accessory, (hair ornament:1.1), (ribbon:1.1), (kanzashi:0.9)
-    - magical brooch, (chest ornament:1.1), (glowing:1.0)
-    - ribbon charm, (tied ribbon:1.1)
-    - mascot keychain, (keychain:1.1), (chibi:1.0)
-    - fox spirit charm, (kitsune mask:1.2), (charm:1.0)
-    - neon bracelet, (glowing:1.2), (cyberpunk:1.0)
-    - power crystal, (gemstone:1.1), (glowing:1.1)
+    - pendant necklace set with a faintly glowing gem
+    - ornate kanzashi hairpin with dangling beads
+    - glowing round brooch pinned at the chest
+    - small tied ribbon charm
+    - small chibi-style mascot keychain
+    - miniature fox mask charm
+    - glowing neon-colored bracelet
+    - faceted glowing crystal shard
 
 # ---------------------------------------------------------
 # LOCATIONS & ENVIRONMENTS
 # ---------------------------------------------------------
 
   environment:
-    - school rooftop, (sunset:1.1), (chain-link fence:0.9)
-    - cherry blossom pathway, (sakura petals:1.2), (falling petals:1.1)
-    - traditional shrine, (torii gate:1.2), (shinto shrine:1.0)
-    - bamboo forest, (anime style:1.1), (dappled light:1.0)
-    - neon city street, (night:1.1), (cyberpunk:1.2), (glowing signs:1.0)
-    - futuristic megacity, (skyline:1.1), (sci-fi:1.2), (flying vehicles:0.9)
-    - floating islands, (fantasy world:1.1), (sky:1.1), (clouds:1.0)
-    - magical academy, (courtyard:1.1), (school:1.1), (fantasy architecture:1.0)
-    - heroic battlefield, (battlefield:1.1), (action:1.1), (explosions:0.9)
-    - festival night market, (lanterns:1.2), (stalls:1.1), (food stalls:0.9)
-    - quiet suburban street, (suburb:1.1), (utility poles:1.0)
-    - cyberpunk alleyway, (neon:1.2), (alley:1.1), (rainy:0.9)
-    - enchanted forest, (magical:1.1), (glowing:1.1), (glowing mushrooms:1.0)
-    - giant mecha hangar, (mecha:1.2), (hangar:1.1), (sci-fi:1.0)
-    - collapsing magical realm, (destruction:1.1), (magic:1.1), (debris:1.0)
-    - fantasy village, (medieval:1.1), (cottages:1.0)
-    - star filled cosmic field, (space:1.1), (stars:1.1), (cosmic:1.1), (nebula:1.0)
+    - school rooftop, golden sunset light, chain-link fence
+    - stone pathway lined with blooming cherry trees, drifting pink petals
+    - traditional wooden shrine, red torii gate
+    - dense bamboo forest, dappled sunlight
+    - night city street, glowing neon signage reflected on wet pavement
+    - sprawling futuristic skyline, flying vehicles weaving between towers
+    - floating islands drifting among the clouds
+    - stone academy courtyard, tall arched windows, ivy-covered walls
+    - scarred battlefield, scattered debris, distant explosions
+    - night market lined with paper lanterns and food stalls
+    - quiet suburban street, rows of utility poles
+    - narrow rain-slicked alley, glowing neon signs overhead
+    - misty forest, clusters of glowing mushrooms
+    - vast hangar bay, towering mechs docked along steel gantries
+    - crumbling fantasy realm, floating debris, cracks of light in the sky
+    - medieval village, thatched-roof cottages
+    - star-filled cosmic expanse, drifting nebula clouds
 
 # ---------------------------------------------------------
 # MOOD, LIGHTING, CAMERA, STYLE
 # ---------------------------------------------------------
 
   mood:
-    - uplifting, (hopeful:1.1), (bright:1.0)
-    - emotional, (heartfelt:1.1), (dramatic:1.0)
-    - epic, (dramatic:1.2), (cinematic:1.0)
-    - mysterious, (magical:1.1), (shadows:1.0)
-    - intense, (action packed:1.2), (dynamic:1.0)
-    - whimsical, (fun:1.1), (playful:1.0)
-    - nostalgic, (warm:1.1), (soft light:1.0)
-    - dark, (foreboding:1.2), (ominous:1.1), (shadows:1.0)
-    - heroic, (powerful:1.1), (epic:1.0)
+    - uplifting, hopeful, bright
+    - emotional, heartfelt, dramatic
+    - epic, dramatic, cinematic
+    - mysterious, magical undertone, soft shadows
+    - intense, action packed, dynamic
+    - whimsical, fun, playful
+    - nostalgic, warm, soft light
+    - dark, foreboding, ominous shadows
+    - heroic, powerful, epic
 
   lighting:
-    - bright anime glow, (bloom:1.2), (vibrant:1.0)
-    - sunset lighting, (golden hour:1.2), (warm light:1.0)
-    - neon reflections, (neon lighting:1.2), (cyberpunk:1.0)
-    - moonlit scene, (night:1.1), (moonlight:1.2), (silver light:1.0)
-    - magical radiant light, (glowing:1.2), (ethereal:1.0)
-    - dramatic rim lighting, (rim light:1.2), (cinematic:1.0)
-    - soft pastel illumination, (pastel colors:1.2), (soft light:1.1)
-    - cosmic star glow, (space:1.1), (stars:1.1), (glowing nebula:1.0)
-    - firelight, (dramatic shadows:1.2), (fire:1.1), (warm light:1.0)
+    - bright anime glow, soft bloom, vibrant highlights
+    - sunset lighting, golden hour, warm light
+    - neon reflections, colorful neon lighting
+    - moonlit scene, night, cool silver moonlight
+    - magical radiant light, soft ethereal glow
+    - dramatic rim lighting, cinematic contrast
+    - soft pastel illumination, gentle diffused light
+    - cosmic star glow, glowing nebula light
+    - firelight, warm flickering glow, dramatic shadows
 
   camera:
-    - anime hero pose, (dynamic pose:1.2)
-    - dynamic action shot, (action pose:1.2), (motion blur:0.9)
-    - close-up, (emotional shot:1.1)
-    - (extreme close-up:1.1), (eyes only:0.9)
-    - high-angle, (overhead shot:1.1), (dramatic angle:1.0)
-    - wide cinematic framing, (wide shot:1.1), (establishing shot:1.0)
-    - low-angle shot, (epic:1.2), (imposing:1.1)
-    - (worm's-eye view:1.1), (looking up:1.0)
-    - (dutch angle:1.2), (tilted frame:1.0), (dramatic:1.0)
-    - three-quarter view, (anime angle:1.1)
-    - (portrait shot:1.1), (upper body:1.1)
-    - (cowboy shot:1.0), (mid-thigh up:1.0)
-    - (pov:1.1), (first-person view:1.0)
-    - full body shot, (standing:1.0)
+    - medium shot, waist-up framing
+    - dynamic action shot, motion blur
+    - close-up, emotional framing
+    - extreme close-up, eyes in focus
+    - high-angle shot, overhead framing
+    - wide cinematic framing, establishing shot
+    - low-angle shot, imposing perspective
+    - worm's-eye view, looking up
+    - dutch angle, tilted dramatic frame
+    - three-quarter view
+    - portrait shot, upper body framing
+    - cowboy shot, mid-thigh up framing
+    - pov, first-person perspective
+    - full body shot, standing pose
 
   style:
-    - bright, (vibrant:1.1), (anime style:1.1), (colorful:1.1)
-    - shonen, (action style:1.2), (dynamic:1.1)
-    - shoujo, (sparkly style:1.2), (romantic:1.1), (soft colors:1.0)
-    - dark fantasy, (anime style:1.1), (dark:1.1), (gothic:1.0)
-    - cyberpunk, (anime style:1.1), (neon:1.2), (futuristic:1.0)
-    - mecha, (anime aesthetic:1.2), (giant robot:1.1)
-    - soft, (watercolor:1.1), (anime style:1.1), (pastel:1.0)
-    - stylized, (manga style:1.2), (ink:1.1), (screentones:1.1)
-    - isekai, (fantasy:1.1), (illustration:1.1), (anime:1.0)
-    - high detail, (anime rendering:1.1), (detailed:1.2), (best quality:1.0)
+    - bright, vibrant, colorful
+    - dark, moody, dramatic
+    - shonen, dynamic pose
+    - shoujo, sparkly style, romantic mood, soft colors
+    - dark fantasy, anime style, dark, gothic
+    - cyberpunk, anime style, neon, futuristic
+    - mecha, anime aesthetic, giant robot
+    - soft, watercolor, anime style, pastel
+    - stylized, manga style, ink, screentones
+    - isekai, fantasy, illustration, anime style
+    - high detail, anime rendering, detailed linework
 
   art_style_specific:
-    - (modern digital anime:1.1), (pixiv:1.1), trending
-    - (90s anime style:1.2), (retro anime:1.1), (film grain:0.9)
-    - (studio trigger style:1.1), (dynamic:1.1), (vibrant:1.1)
-    - (studio ghibli style:1.2), (watercolor:1.1), (painterly:1.0)
-    - (makoto shinkai style:1.2), (beautifully detailed sky:1.1), (light rays:1.0)
-    - (key visual:1.2), (official art:1.1), (high detail:1.0)
-    - (genga:1.1), (anime line art:1.1), (sketch:0.9)
-    - (visual novel style:1.1), (clean lines:1.0)
-    - (kyoto animation style:1.1), (soft:1.1), (moe:1.0)
-    - (ufotable style:1.1), (high-contrast:1.1), (digital effects:1.0)
+    - modern digital anime, pixiv, trending
+    - 90s anime style, retro anime, film grain
+    - studio trigger style, dynamic, vibrant
+    - studio ghibli style, watercolor, painterly
+    - makoto shinkai style, beautifully detailed sky, light rays
+    - key visual, official art, high detail
+    - genga, anime line art, sketch
+    - visual novel style, clean lines
+    - kyoto animation style, soft, moe
+    - ufotable style, high-contrast, digital effects
 
 # ---------------------------------------------------------
 # EFFECTS / ACTION FX
 # ---------------------------------------------------------
 
   fx_magic:
-    - glowing magical aura, (energy aura:1.2), (glowing:1.1)
-    - swirling elemental rings, (magic circle:1.2), (glowing runes:1.1)
-    - sparkly transformation effects, (particles:1.2), (glowing:1.0)
-    - neon particles, (glowing:1.1), (cyber:1.0)
-    - energy burst, (explosion:1.2), (light burst:1.1)
-    - floating magical runes, (magic circle:1.2), (glowing symbols:1.1)
-    - cosmic power aura, (galaxy:1.1), (stars:1.0)
-    - fire slash effect, (sword:1.1), (fire:1.2), (motion:1.0)
-    - lightning arc effect, (electricity:1.2), (sparking:1.1)
+    - glowing magical aura, radiant energy aura
+    - swirling elemental rings, glowing magic circle beneath the feet
+    - sparkly transformation effects, drifting glowing particles
+    - neon particles, glowing cyber sparks
+    - energy burst, bright light explosion
+    - floating magical runes, glowing symbols suspended in air
+    - cosmic power aura, swirling star-flecked energy
+    - fire slash effect, arc of flame trailing the blade
+    - lightning arc effect, crackling sparks of electricity
 
   fx_environment:
-    - falling sakura petals, (petals:1.2), (cherry blossoms:1.1)
-    - drifting sparkles, (particles:1.1), (glowing:1.0)
-    - swirling dust, (battle:1.1), (debris:1.1), (action:1.0)
-    - neon holograms, (holographic:1.2), (futuristic:1.1)
-    - floating embers, (fire:1.1), (sparks:1.1), (glowing:1.0)
-    - glowing butterflies, (butterflies:1.1), (magical:1.1)
-    - magical circle on ground, (runes:1.1), (glowing:1.2)
+    - falling sakura petals, drifting cherry blossoms
+    - drifting sparkles, glowing floating particles
+    - swirling dust, kicked-up debris
+    - neon holograms, flickering holographic projections
+    - floating embers, drifting sparks
+    - glowing butterflies, faint trailing light
+    - shafts of light breaking through clouds, drifting dust motes
 
 # ---------------------------------------------------------
 # MONSTERS / ENEMIES
 # ---------------------------------------------------------
 
   anime_monster:
-    - giant mecha, (robot:1.2), (colossal:1.1)
-    - dragon, (spirit monster:1.1), (eastern dragon:1.0)
-    - yokai, (demon:1.1), (beast:1.1), (japanese monster:1.0)
-    - shadow phantom, (shadow monster:1.2), (ethereal:1.1)
-    - cosmic horror, (eldritch:1.2), (tentacles:1.1), (lovecraftian:1.0)
-    - corrupted magical beast, (corrupted:1.2), (glowing red eyes:1.1)
-    - slime creature, (slime:1.2), (amorphous:1.1)
-    - oni inspired titan, (giant:1.1), (demon:1.1), (oni:1.2)
-    - cybernetic monster, (cyborg:1.1), (monster:1.1), (mechanical parts:1.1)
-    - guardian spirit creature, (spirit:1.1), (guardian:1.1), (glowing:1.0)
+    - giant mecha, colossal robotic frame
+    - dragon, eastern serpentine dragon with long whiskers
+    - yokai, traditional japanese spirit-beast, patterned fur or scales
+    - shadow phantom, wispy shifting silhouette made of smoke
+    - cosmic horror, writhing tentacled mass, too many eyes
+    - corrupted magical beast, twisted misshapen form, glowing red eyes
+    - slime creature, translucent amorphous body
+    - oni-inspired titan, towering horned giant, club in hand
+    - cybernetic monster, mechanical plating fused with organic flesh
+    - guardian spirit creature, glowing ethereal outline, watchful presence
 
   anime_monster_traits:
-    - (glowing eyes:1.2), (menacing:1.0)
-    - ethereal smoke form, (smoke:1.2), (phantom:1.1)
-    - spiked armor plates, (spikes:1.1), (armor:1.1), (chitin:1.0)
-    - glowing energy veins, (glowing:1.2), (power:1.0)
-    - floating crystals, (crystals:1.1), (magical:1.0)
-    - phantom limbs, (ethereal:1.1), (ghostly:1.0)
-    - elemental aura, (fire:1.1), (ice:1.1), (glowing:1.1)
+    - glowing menacing eyes
+    - ethereal wisps of smoke trailing off the body
+    - spiked chitin-like armor plates
+    - glowing veins of energy across the skin
+    - floating crystal shards orbiting the body
+    - translucent ghostly limbs
+    - elemental aura, flickering fire or ice around the form
 
 # ---------------------------------------------------------
 # COMBOS (OPTIMIZED FOR FLEXIBILITY)
 # ---------------------------------------------------------
 
   shonen_hero_combo:
-    - "(shonen hero:1.1), __gkr_anime/gender__, __gkr_anime/race__, __gkr_anime/age__, __gkr_anime/build__, __gkr_anime/hair__, __gkr_anime/hair_color__, __gkr_anime/eyes__, (determined expression:1.1), __gkr_anime/clothing__, __gkr_anime/weapons__, __gkr_anime/offhand__, __gkr_anime/environment__, (epic and dramatic mood:1.1), __gkr_anime/lighting__, (anime hero pose:1.1), (shonen action style:1.2), __gkr_anime/fx_magic__"
+    - "spiky-haired young hero, determined stance, clenched fist, __gkr_anime/gender__, __gkr_anime/race__, __gkr_anime/age__, __gkr_anime/build__, __gkr_anime/hair__, __gkr_anime/hair_color__, __gkr_anime/eyes__, determined expression, __gkr_anime/clothing__, __gkr_anime/weapons__, __gkr_anime/offhand__, __gkr_anime/environment__, epic dramatic mood, __gkr_anime/lighting__, dynamic hero pose, (shonen action style:1.1), __gkr_anime/fx_magic__"
 
   magical_girl_combo:
-    - "(magical girl warrior:1.2), female, __gkr_anime/hair_color__, (sparkling eyes:1.1), (magical girl outfit:1.2), (magical wand:1.1), __gkr_anime/trinkets__, __gkr_anime/environment__, (whimsical and fun mood:1.1), (sparkly transformation effects:1.2), (bright vibrant anime style:1.1), (dynamic action shot:1.1)"
+    - "frilled pastel dress, oversized ribbon, star-tipped wand raised overhead, sparkling eyes, female, __gkr_anime/hair_color__, __gkr_anime/trinkets__, __gkr_anime/environment__, whimsical fun mood, sparkly transformation effects, (bright vibrant anime style:1.1), dynamic action shot"
 
   isekai_combo:
-    - "(isekai adventurer:1.1), __gkr_anime/gender__, __gkr_anime/race__, __gkr_anime/hair__, __gkr_anime/weapons__, __gkr_anime/armor__, __gkr_anime/spotlight_bg_fantasy__, (epic and dramatic mood:1.1), __gkr_anime/lighting__, (isekai fantasy illustration:1.2), __gkr_anime/camera__"
+    - "patched leather traveling cloak, worn satchel, dusty boots, __gkr_anime/gender__, __gkr_anime/race__, __gkr_anime/hair__, __gkr_anime/weapons__, __gkr_anime/armor__, __gkr_anime/spotlight_bg_fantasy__, epic dramatic mood, __gkr_anime/lighting__, (isekai fantasy illustration:1.1), __gkr_anime/camera__"
 
   mecha_pilot_combo:
-    - "(mecha pilot:1.2), __gkr_anime/gender__, __gkr_anime/environment__, (mecha pilot suit:1.2), __gkr_anime/offhand__, (neon reflections:1.1), (intense and action packed mood:1.1), (mecha anime aesthetic:1.2), (wide cinematic framing:1.1), __gkr_anime/fx_environment__"
+    - "padded flight suit with segmented shoulder plating, tucked-under helmet, __gkr_anime/gender__, __gkr_anime/spotlight_bg_scifi__, __gkr_anime/offhand__, neon reflections, intense action-packed mood, (mecha anime aesthetic:1.1), wide cinematic framing, __gkr_anime/fx_environment__"
 
   villain_combo:
-    - "(brooding antihero:1.1), __gkr_anime/gender__, __gkr_anime/hair_color__, (crimson demon eyes:1.2), __gkr_anime/clothing__, __gkr_anime/weapons__, (shadow phantom aura:1.1), __gkr_anime/environment__, (dark and foreboding mood:1.2), (dramatic rim lighting:1.1), (low angle epic shot:1.1)"
+    - "long dark coat, half-shadowed face, unreadable glare, __gkr_anime/gender__, __gkr_anime/hair_color__, crimson glowing eyes, __gkr_anime/clothing__, __gkr_anime/weapons__, wisps of dark shadow trailing off the shoulders, __gkr_anime/environment__, dark foreboding mood, dramatic rim lighting, low-angle epic shot"
 
   idol_combo:
-    - "(idol singer protagonist:1.2), female, (pastel hair:1.1), (large expressive anime eyes:1.1), (idol performance outfit:1.2), (microphone:1.1), __gkr_anime/spotlight_bg_urban__, (uplifting and hopeful mood:1.1), (soft pastel illumination:1.1), (bright vibrant anime style:1.1)"
+    - "sequined layered dress, sparkling handheld microphone, mid-spin pose, bright stage smile, female, pastel hair, large expressive eyes, __gkr_anime/spotlight_bg_urban__, uplifting hopeful mood, soft pastel illumination, (bright vibrant anime style:1.1)"
 
   slice_of_life_combo:
-    - "(cheerful schoolgirl:1.1), (school uniform:1.1), __gkr_anime/offhand__, (quiet suburban street:1.1), (warm and nostalgic mood:1.1), __gkr_anime/lighting__, (portrait style shot:1.0), __gkr_anime/art_style_specific__"
+    - "sailor-style school uniform, bright open smile, twin ribbons in hair, __gkr_anime/offhand__, __gkr_anime/spotlight_bg_urban__, warm nostalgic mood, __gkr_anime/lighting__, portrait style shot, __gkr_anime/art_style_specific__"
 
   cyber_anime_combo:
-    - "(cyber ninja:1.2), __gkr_anime/gender__, (neon purple hair:1.1), (glowing cyber eyes:1.1), (cyber streetwear:1.1), (cyber blade:1.1), (neon city street:1.1), (neon reflections:1.1), (cyberpunk anime style:1.2), (dynamic action shot:1.1), __gkr_anime/fx_environment__"
+    - "matte black bodysuit with glowing circuit-line seams, wrapped forearm blades, crouched ready stance, __gkr_anime/gender__, neon purple hair, glowing eyes, __gkr_anime/spotlight_bg_scifi__, neon reflections, (cyberpunk anime style:1.1), dynamic action shot, __gkr_anime/fx_environment__"
 
   anime_monster_combo:
-    - "__gkr_anime/anime_monster__, __gkr_anime/anime_monster_traits__, __gkr_anime/environment__, (epic and dramatic mood:1.1), (wide cinematic framing:1.1), (dark fantasy anime style:1.1)"
+    - "__gkr_anime/anime_monster__, __gkr_anime/anime_monster_traits__, __gkr_anime/environment__, epic dramatic mood, wide cinematic framing, (dark fantasy anime style:1.1)"
 
   scene_combo:
     - "__gkr_anime/environment__, __gkr_anime/lighting__, __gkr_anime/mood__, __gkr_anime/fx_environment__, __gkr_anime/camera__, __gkr_anime/art_style_specific__"
 
   spotlight_combo:
     - "__gkr_anime/spotlight_char_fantasy_magic__, __gkr_anime/spotlight_bg_fantasy__, __gkr_anime/mood__, __gkr_anime/lighting__, __gkr_anime/camera__, __gkr_anime/art_style_specific__"
+
+  spotlight_warrior_combo:
+    - "__gkr_anime/spotlight_char_fantasy_warrior__, __gkr_anime/spotlight_bg_fantasy__, __gkr_anime/mood__, __gkr_anime/lighting__, __gkr_anime/camera__, __gkr_anime/art_style_specific__"
+
+  spotlight_scifi_combo:
+    - "__gkr_anime/spotlight_char_scifi__, __gkr_anime/spotlight_bg_scifi__, __gkr_anime/mood__, __gkr_anime/lighting__, __gkr_anime/camera__, __gkr_anime/art_style_specific__"
+
+  spotlight_modern_combo:
+    - "__gkr_anime/spotlight_char_modern__, __gkr_anime/spotlight_bg_urban__, __gkr_anime/mood__, __gkr_anime/lighting__, __gkr_anime/camera__, __gkr_anime/art_style_specific__"
+
+  spotlight_nature_combo:
+    - "__gkr_anime/spotlight_bg_natural__, __gkr_anime/lighting__, __gkr_anime/mood__, __gkr_anime/fx_environment__, __gkr_anime/camera__, __gkr_anime/art_style_specific__"
 
 # ---------------------------------------------------------
 # RANDOM
@@ -415,434 +443,429 @@ gkr_anime:
     - "__gkr_anime/anime_monster_combo__"
     - "__gkr_anime/scene_combo__"
     - "__gkr_anime/spotlight_combo__"
+    - "__gkr_anime/spotlight_warrior_combo__"
+    - "__gkr_anime/spotlight_scifi_combo__"
+    - "__gkr_anime/spotlight_modern_combo__"
+    - "__gkr_anime/spotlight_nature_combo__"
     - "__gkr_anime/spotlight_scene_action__"
     - "__gkr_anime/spotlight_scene_sliceoflife__"
+    - "__gkr_anime/spotlight_scene_fantasy__"
+    - "__gkr_anime/spotlight_scene_scifi__"
+    - "__gkr_anime/spotlight_scene_dramatic__"
+    - "__gkr_anime/spotlight_scene_romantic__"
+    - "__gkr_anime/spotlight_scene_other__"
+    - "__gkr_anime/spotlight_scene_fantasy_epic__"
 
   random_character:
-    - "__gkr_anime/archetype__, __gkr_anime/race__, __gkr_anime/build__, __gkr_anime/age__, __gkr_anime/hair__, __gkr_anime/hair_color__, __gkr_anime/eyes__, __gkr_anime/face_style__, __gkr_anime/gender__"
+    - "__gkr_anime/archetype__, __gkr_anime/race__, __gkr_anime/build__, __gkr_anime/age__, __gkr_anime/tone__, __gkr_anime/hair__, __gkr_anime/hair_color__, __gkr_anime/eyes__, __gkr_anime/face_style__, __gkr_anime/expression__, __gkr_anime/gender__"
 
 # ---------------------------------------------------------
 # SPOTLIGHT (SPLIT INTO THEMES)
 # ---------------------------------------------------------
 
   spotlight_char_fantasy_magic:
-    - "(mage:1.1), (pink hair:1.1), (floating spellbook:1.2), (swirling runes:1.2), pastel magic"
-    - "(spirit medium:1.1), (silver hair:1.1), (crystal eyes:1.1), (floating talismans:1.2), ofuda"
-    - "(dark mage:1.2), (torn cloak:1.1), (cursed grimoire:1.2), (chains:1.1), magic book"
-    - "(angel:1.1), (floating:1.1), (small wings:1.1), (shimmering feather aura:1.2)"
-    - "(wind mage:1.2), (controlling wind:1.2), (swirling leaves:1.1), wind trails"
-    - "(demon:1.1), (curled horns:1.2), (ember hair:1.1), (glowing hair:1.1), (runed halberd:1.1)"
-    - "(magical girl:1.2), (star shaped wand:1.2), (glittering skirt:1.1), (radiant pose:1.1), transformation"
-    - "(ice sorceress:1.2), (flowing pale braid:1.1), (ice magic:1.2), (snowflakes orbiting:1.1)"
-    - "(catboy:1.1), (spell thief:1.1), (rune cards:1.1), (card magic:1.1), (flicking cards:1.1), cat ears"
-    - "(golem:1.1), (glowing joints:1.2), (stone body:1.1), floating parts"
-    - "tiny, (fairy:1.1), (mage:1.1), (luminous wings:1.2), floating hair"
-    - "(summoner:1.2), (summoning:1.1), (spectral animals:1.2), spirits"
-    - "(wandering artist:1.1), (painting:1.1), (illusions:1.1), (magic paint:1.1)"
-    - "(celestial:1.2), (constellation cloak:1.2), (swirling star dust:1.1), cosmic"
-    - "(lava mage:1.2), (lava:1.1), (glowing cracks on skin:1.2), (fire magic:1.1)"
-    - "(plant mage:1.2), (sprouting vines:1.1), fingertips, (nature magic:1.1)"
-    - "(dark angel:1.2), (broken black wings:1.2), (sorrowful gaze:1.1), (fallen angel:1.1)"
-    - "(storm witch:1.2), (lightning braids:1.1), (swirling storm clouds:1.2), (storm magic:1.1)"
-    - "(alchemist:1.1), (potion vials:1.1), (shimmering liquid:1.1), science"
-    - "(holy priest:1.1), (radiant lantern:1.1), (kind expression:1.1), healer"
-    - "(anime necromancer:1.2), (ghostly blue flames:1.2), dark, skeletons"
-    - "(sun warrior:1.2), (radiant gold armor:1.2), (shimmering heat haze:1.1), solar"
-    - "(moon mage:1.2), (soft luminous aura:1.1), (crescent staff:1.1), (lunar magic:1.1)"
-    - "(phoenix:1.2), (flames:1.1), (fire:1.1), (wings of light:1.2), (rising from fire:1.1)"
-    - "(gem mage:1.2), (channeling power:1.1), (glowing stones:1.1), (crystal magic:1.1)"
-    - "(anime witch:1.1), (oversized hat:1.2), (broom:1.1), (trailing sparkles:1.1), cute"
-    - "(crystal golem:1.2), (geometric:1.1), (glowing core:1.2), monster"
-    - "(cloud dancer:1.2), (stepping on clouds:1.2), sky, floating"
-    - "(mirror mage:1.2), (dual casting:1.1), (reflections:1.1), magic"
-    - "(ancient spirit:1.1), (translucent robes:1.1), (drifting hair:1.1), ghost"
-    - "(anime reaper:1.2), (floating scythe:1.2), (ghostly cloak:1.1), (shinigami:1.1)"
-    - "(snow bunny:1.1), (rabbit ears:1.2), (fluffy robes:1.1), (ice wand:1.1), snow"
-    - "(elemental guardian:1.2), (swirling orb:1.1), (four elements:1.1), magic"
-    - "(forest witch:1.1), (glowing mushrooms:1.1), (staff of roots:1.1), druid"
-    - "(rogue summoner:1.1), (juggling:1.1), (small elemental spirits:1.2), magic"
-    - "(blight mage:1.2), (thorn covered cloak:1.1), (dark magic:1.1), (curse:1.1)"
-    - "(bubble sorceress:1.2), (pastel bubbles:1.2), floating, (bubble magic:1.1)"
-    - "(serpent mage:1.2), (scale patterned skin:1.1), (snake:1.1), magic"
-    - "(tide sorceress:1.2), (swirling ocean ribbons:1.1), (water magic:1.2)"
-    - "(anime esper:1.2), (glowing eyes:1.1), (psychic ripples:1.2), (telekinesis:1.1)"
-    - "(anime oracle:1.2), (luminous butterfly wings:1.2), psychic, future"
-    - "(fallen star:1.2), (fading:1.1), (stardust trails:1.2), cosmic, dying"
-    - "(dream witch:1.2), (drifting:1.1), (swirling pastel fog:1.1), (sleep magic:1.1)"
-    - "(anime healer:1.1), (warm glow:1.1), (floating runes:1.1), (healing magic:1.1)"
-    - "(void mage:1.2), (swirling black stars:1.2), palm, (void magic:1.1), dark"
-    - "(anime druid:1.1), (vinegrown horns:1.1), (nature magic:1.1), forest"
+    - "pink hair, an open spellbook hovering beside them, swirling glowing runes, soft pastel-colored magic sparks"
+    - "silver hair, crystal-clear eyes, paper ofuda talismans floating in a ring around them"
+    - "tattered dark cloak, heavy iron chains wrapped around one arm, a cursed grimoire bound shut with chains"
+    - "small feathered wings, hovering in midair, shimmering feather-light particles trailing behind"
+    - "swirling leaves caught in a gust around outstretched hands, streaks of visible wind trailing off the fingertips"
+    - "curled black horns, ember-orange glowing hair, gripping a halberd etched with glowing runes"
+    - "star-tipped wand raised overhead, glittering pleated skirt, radiant pose mid-transformation, sparkles bursting outward"
+    - "long pale braid dusted with frost, snowflakes orbiting outstretched hands, faint icy mist"
+    - "cat ears, flicking a fan of glowing rune-etched cards between the fingers"
+    - "hulking stone body, glowing cracks along the joints, fragments of rock hovering loosely around it"
+    - "tiny fairy-sized figure, luminous translucent wings, hair drifting as if weightless"
+    - "arms raised mid-summon, translucent spectral animal spirits materializing around them"
+    - "paintbrush in hand, glowing painted illusions peeling off the canvas into the air"
+    - "cloak patterned like a night sky, constellations glimmering across the fabric, trailing star dust"
+    - "glowing molten cracks across the skin, flickers of flame around clenched fists"
+    - "vines sprouting and curling from the fingertips, small leaves and blossoms unfurling"
+    - "tattered black feathered wings, downcast sorrowful gaze"
+    - "hair crackling with static like braided lightning, swirling dark storm clouds gathering overhead"
+    - "rows of glass vials filled with shimmering colored liquid, one held up to the light"
+    - "holding a glowing lantern, warm kind expression, faint radiant aura"
+    - "cloaked in dark tattered robes, ghostly blue flames flickering in an open palm, skeletal hands emerging from the ground nearby"
+    - "radiant gold-plated armor, shimmering heat haze rippling around the body"
+    - "soft pale luminous glow, staff topped with a crescent-moon ornament"
+    - "wings made of glowing flame, rising from a burst of fire, trailing embers"
+    - "clutching a cluster of glowing crystal stones, faceted light refracting outward"
+    - "oversized pointed witch hat, riding a broomstick, trailing sparkles"
+    - "faceted crystalline body, glowing core visible at the chest"
+    - "stepping lightly across drifting clouds, flowing garments caught in the wind"
+    - "two identical glowing reflections casting in unison on either side"
+    - "translucent flowing robes, hair drifting weightlessly, faint ghostly outline"
+    - "tattered ghostly cloak, a large scythe hovering beside them"
+    - "fluffy white rabbit ears, thick fur-trimmed robes, wand tipped with an ice crystal"
+    - "orbiting sphere split into fire, water, earth, and wind, swirling around outstretched hands"
+    - "twisted wooden staff wrapped in roots, glowing mushrooms sprouting nearby"
+    - "juggling several tiny glowing elemental spirits between the hands"
+    - "cloak covered in twisting black thorns, faint sickly purple magic seeping from the hands"
+    - "iridescent pastel bubbles floating and popping around outstretched hands"
+    - "faint scale-patterned skin along the arms, forked tongue, a glowing serpent coiled at the shoulders"
+    - "ribbons of swirling seawater coiling around the arms like fabric"
+    - "glowing eyes, faint visible ripples of psychic energy warping the air, objects hovering nearby"
+    - "translucent glowing butterfly wings, eyes closed as if seeing something distant"
+    - "faintly fading glow, trailing wisps of stardust, translucent starlit skin"
+    - "drifting weightlessly through swirling pastel fog, half-lidded dreamy eyes"
+    - "hands cupped around a warm golden glow, softly glowing runes circling overhead"
+    - "swirling black starlit void spiraling above an open palm"
+    - "small horns wrapped in growing vines, leaves and moss woven through the hair"
 
   spotlight_char_fantasy_warrior:
-    - "(swordsman:1.2), (brooding:1.1), (long black coat:1.1), (glowing blue blade:1.2), windswept hair"
-    - "(fox beastkin:1.1), (healer:1.1), (soft smile:1.1), (leaf pattern kimono:1.1), (crystal staff:1.1)"
-    - "(knight:1.1), (armored:1.1), (oversized gauntlets:1.2), hopeful, determined eyes"
-    - "(hero:1.1), (bright scarf:1.1), (fingerless gloves:1.1), (fire magic:1.1), (fire in hand:1.2)"
-    - "(battle nun:1.2), (flowing white robes:1.1), (radiant golden sigils:1.2), warrior"
-    - "(elf:1.1), (shy:1.1), (long green hair:1.1), (intricate bow:1.1), (archer:1.1), vine covered boots"
-    - "(catgirl:1.1), (rogue:1.1), (twin daggers:1.1), (playful smirk:1.1), (agile stance:1.1), cat ears"
-    - "(antihero:1.2), (masked:1.1), (tattered cape:1.1), (red glowing visor:1.2), dark"
-    - "(rabbit beastkin:1.1), (rabbit ears:1.2), (archer:1.1), pastel outfit, (oversized bow:1.1)"
-    - "(dragon hybrid:1.2), (scaled arms:1.1), (dragon tail:1.1), (glowing throat:1.1), dragon boy"
-    - "(rogue prince:1.2), (elegant rapier:1.1), (ornate coat:1.1), (sly:1.1), confident smile"
-    - "(sky pirate:1.2), (feathered hat:1.1), (tactical belts:1.1), (swirling wind magic:1.1)"
-    - "(demon:1.1), (samurai:1.1), (horned mask:1.2), (flame red kimono:1.1), oni"
-    - "(armored paladin:1.2), (golden spear:1.1), (white wing motif:1.2), knight"
-    - "(warrior:1.1), (giant hammer:1.2), (huge weapon:1.1), energetic grin"
-    - "(cursed hero:1.2), (dark markings:1.2), (cursed:1.1), (glowing tattoos:1.1)"
-    - "(shrine keeper:1.1), (long hair:1.1), (paper charms:1.1), (ofuda:1.1), orbiting"
-    - "(fox spirit:1.1), (masked:1.1), (kitsune:1.1), (soft glowing tails:1.2), multiple tails"
-    - "(anime knight:1.1), (king:1.1), (flowing hair:1.1), (ornate crown:1.2), gemstone crown"
-    - "(anime monk:1.1), (glowing kanji:1.2), (magic circles:1.1), fists"
-    - "(wolf girl:1.1), (warrior:1.1), (fur collar armor:1.1), (intense eyes:1.1), (wolf beastkin:1.1)"
-    - "(puppeteer:1.2), (enchanted:1.1), (floating marionettes:1.2), puppets"
-    - "(samurai:1.1), (magical girl:1.1), (pastel kimono armor:1.1), (cherry blossom aura:1.2), sakura"
-    - "(swordswoman:1.1), (masked:1.1), (long twin braids:1.1), (crimson blade:1.2), red sword"
-    - "(elf knight:1.1), (long silver hair:1.1), (jeweled sword:1.1), (fantasy armor:1.1)"
-    - "(beastkin:1.1), (lion warrior:1.1), (mane braid:1.1), (roaring stance:1.1)"
-    - "(hunter:1.1), (masked:1.1), (feathered cloak:1.1), archer"
-    - "(fairy knight:1.2), (crystalline armor:1.2), shards, (fairy wings:1.1)"
-    - "(ninja:1.1), (magical girl:1.1), (star shaped talismans:1.1), shuriken"
-    - "(anime knight:1.1), (feathered plume:1.1), (polished armor:1.1), (female knight:1.1)"
-    - "(anime gunslinger:1.2), (arcane revolvers:1.2), (magic guns:1.1)"
-    - "(shadow catboy:1.2), (assassin:1.1), (glowing pupils:1.1), (cat ears:1.1), stealth"
-    - "(archer princess:1.2), (leaf patterned cape:1.1), (bow:1.1), royalty"
-    - "(dragon rider:1.1), (small drake:1.1), (dragon:1.1), (shoulder pet:1.1)"
-    - "(anime paladin:1.2), (halo:1.1), (floating ring:1.1), knight, holy"
-    - "(shadow samurai:1.2), (dissolving silhouette:1.2), (shadow magic:1.1), katana"
-    - "(phoenix knight:1.2), (wreathed in ember wings:1.2), (fire armor:1.1)"
+    - "long black coat, windswept hair, gripping a sword with a faintly glowing blue edge"
+    - "fox ears, soft smile, kimono patterned with leaves, staff topped with a crystal"
+    - "plate armor, oversized metal gauntlets, hopeful determined eyes"
+    - "bright flowing scarf, fingerless gloves, small flame flickering in an open palm"
+    - "flowing white robes, glowing golden sigils embroidered along the hem"
+    - "long green hair, shy expression, intricately carved bow, vine-wrapped boots"
+    - "cat ears, twin daggers, playful smirk, low agile stance"
+    - "tattered cape, featureless mask with a glowing red visor slit"
+    - "long rabbit ears, pastel-colored outfit, oversized bow slung on the back"
+    - "scaled forearms, a dragon tail, faint glow visible at the throat"
+    - "ornate embroidered coat, slender rapier at the hip, sly confident smile"
+    - "wide feathered hat, crossed utility belts, faint wind swirling around the boots"
+    - "curved horned mask, flame-red kimono, katana at the hip"
+    - "gleaming golden spear, armor embossed with a white wing motif"
+    - "massive war hammer slung over one shoulder, energetic grin"
+    - "dark glowing tattoos spreading across the skin"
+    - "long hair, paper ofuda charms orbiting slowly around the body"
+    - "fox mask, multiple soft glowing fox tails"
+    - "flowing hair, ornate gemstone-studded crown"
+    - "glowing kanji characters etched across the knuckles, faint magic circle beneath the feet"
+    - "wolf ears, fur-trimmed armor collar, intense sharp eyes"
+    - "strings trailing from the fingertips, small marionette puppets floating nearby"
+    - "pastel-colored armored kimono, drifting cherry blossom petals swirling around"
+    - "long twin braids, half-mask, blade stained crimson red"
+    - "long silver hair, sword hilt set with jewels, engraved plate armor"
+    - "braided lion-like mane, wide roaring stance"
+    - "feathered cloak, half-mask, bow drawn"
+    - "translucent crystalline armor shards, delicate fairy wings"
+    - "star-shaped glowing talismans clipped to a belt, throwing shuriken in hand"
+    - "polished plate armor, feathered helmet plume"
+    - "twin revolvers etched with glowing arcane markings"
+    - "cat ears, glowing pupils, crouched low in shadow"
+    - "cape patterned with leaves, ornate bow, regal poise"
+    - "a small drake perched on one shoulder"
+    - "thin glowing halo ring hovering above the head, polished armor"
+    - "silhouette dissolving into wisps of shadow at the edges, katana drawn"
+    - "armor wreathed in wings made of glowing embers"
 
   spotlight_char_scifi:
-    - "(inventor:1.1), (cheerful:1.1), (messy pigtails:1.1), (goggles:1.1), (floating mechanical drones:1.1)"
-    - "(steampunk:1.1), (anime mage:1.1), (gears:1.1), spinning, (magical rings:1.1)"
-    - "(mecha-enhanced mage:1.2), (robotic arm:1.2), glowing, (runic circuitry:1.1), cyborg"
-    - "(magitech prodigy:1.2), (holographic glyphs:1.2), flashing, futuristic"
-    - "(cyber mage:1.2), (futuristic:1.1), (floating data:1.1), fragments, hologram"
-    - "(mecha knight:1.2), (magical armor suit:1.2), (power armor:1.1), fantasy"
-    - "(anime tactician:1.1), (floating map:1.1), (holograms:1.1), strategist"
+    - "messy pigtails, goggles pushed up on the forehead, small mechanical drones hovering nearby"
+    - "brass gears spinning in the air, glowing magical rings rotating around the wrist"
+    - "one robotic arm etched with glowing runic circuitry"
+    - "flashing holographic glyphs projected around the hands"
+    - "fragments of glowing holographic data drifting around the body"
+    - "bulky armored suit with glowing joint seams"
+    - "a glowing holographic map hovering above an open hand"
 
   spotlight_char_modern:
-    - "(battle idol:1.2), (singing:1.1), (crystal microphone:1.1), (magic:1.1), flares"
-    - "(arcane detective:1.2), (glowing monocle:1.2), (floating magnifier:1.1), mystery"
-    - "(lost princess:1.1), (fractured crown:1.1), (hopeful gaze:1.1), royalty"
-    - "(tiny demon:1.1), (flaring sparks:1.1), small, (chibi:1.1)"
-    - "(starborn child:1.1), (glowing freckles:1.2), (cosmic aura:1.1), space"
-    - "(anime blacksmith:1.1), (huge glowing hammer:1.2), forge"
-    - "(toy maker:1.1), (enchanted plush:1.2), companions, dolls"
+    - "crystal-shaped microphone, flares of light bursting mid-note"
+    - "a glowing monocle, small magnifying glass hovering beside the hand"
+    - "plain contemporary clothes hiding a jeweled pendant beneath the collar, poised posture, hopeful gaze"
+    - "small chibi proportions, tiny sparks flaring off the fingertips"
+    - "school uniform, faintly glowing star-shaped freckles peeking from a rolled sleeve, soft cosmic aura"
+    - "coveralls rolled to the elbows, welding mask pushed up, sparks flying from a glowing metal workpiece"
+    - "small enchanted plush companions trailing behind"
 
   spotlight_bg_fantasy:
-    - "(magic academy:1.1), (courtyard:1.1), (floating luminous sigils:1.2), grand"
-    - "(sky islands:1.1), (drifting:1.1), (sunlit clouds:1.1), (waterfalls:1.1), floating"
-    - "(glowing crystal cavern:1.1), (towering azure crystals:1.2), cave"
-    - "(ancient ruins:1.1), (jrpg style:1.1), (temple:1.1), (reclaimed by vines:1.1), overgrown"
-    - "(moonlit lake:1.1), (shimmering reflection:1.1), (drifting petals:1.1), night"
-    - "(floating library:1.2), (drifting books:1.2), platforms, (ethereal lights:1.1), magic"
-    - "(giant hollow tree:1.1), (interior:1.1), (magical village:1.1), fantasy"
-    - "(dragon's perch:1.1), (overlooking valley:1.1), (fantasy landscape:1.1), mountain"
-    - "(crystalline palace:1.1), (courtyard:1.1), (glowing:1.1), (soft pastels:1.1), castle"
-    - "(neon enchanted forest:1.2), (magical light trails:1.2), (glowing:1.1), futuristic"
-    - "(ancient shrine:1.1), (floating prayer strips:1.1), (ofuda:1.1), (torii gate:1.1)"
-    - "(ocean temple:1.1), (rising from misty waters:1.1), temple, water"
-    - "(fairy glen:1.1), (tiny glowing dwellings:1.2), treehouses, magical"
-    - "(towering anime castle:1.1), (spiraling cliffs:1.1), fantasy"
-    - "(jrpg overworld:1.1), (path:1.1), winding, (green hills:1.1), landscape"
-    - "(crystal lake:1.1), (mirror reflection:1.1), (galaxy:1.1), stars, space"
-    - "(abandoned magic lab:1.1), (glowing runic circles:1.2), flickering, ruins"
-    - "(ancient stone bridge:1.1), (glowing river:1.1), magic, night"
-    - "(dreamlike pastel city:1.1), (floating on clouds:1.2), (sky city:1.1)"
-    - "(massive observatory:1.1), (aimed at star filled sky:1.1), (telescope:1.1), space"
-    - "(enchanted orchard:1.1), (glowing fruit:1.2), trees, magic"
-    - "(crumbling fortress:1.1), (isolated mountop:1.1), ruins, castle"
-    - "(glowing volcanic crater:1.1), (flowing magma rivers:1.2), volcano, lava"
-    - "(ancient celestial gate:1.2), (hovering:1.1), cliffs, (portal:1.1), magic"
-    - "(twisted forest:1.1), (eerie green moonlight:1.2), spooky, dark"
-    - "(dragon graveyard:1.2), (colossal skeletal remains:1.2), bones, desert"
-    - "(crystal spire:1.1), (rising above dense jungle:1.1), tower, forest"
-    - "(ruined sky fortress:1.1), (floating:1.1), (tattered clouds:1.1), castle, ruins"
-    - "(rainbow waterfalls:1.1), (cascading:1.1), (floating cliffs:1.1), magic"
-    - "(glowing ancient monolith:1.1), (wide grassy plain:1.1), (magic stone:1.1)"
-    - "(mage city tower:1.1), (piercing bright sky:1.1), fantasy, city"
-    - "(massive anime tree:1.1), (entire village in branches:1.2), treehouse"
-    - "(misty ruins:1.1), (pillars float:1.1), (broken ground:1.1), magic, fog"
-    - "(enchanted desert:1.1), (luminous runes beneath sand:1.2), magic"
-    - "(towering sakura tree:1.1), (dwarfing village:1.1), (cherry blossom:1.1), (giant tree:1.1)"
-    - "(ancient bridge:1.1), (stretching over cloud sea:1.2), sky, fog"
-    - "(crystal observatory:1.1), (powered by starlight:1.1), stars, telescope"
-    - "(glowing forest path:1.1), (enchanted creatures:1.1), spirits, road"
-    - "(abandoned mage arena:1.1), (cracked:1.1), (overgrown:1.1), ruins"
-    - "(floating arena platforms:1.1), (surrounded by sky:1.1), battle, magic"
-    - "(towering arch of stone:1.1), (rising above clouds:1.1), sky, ruins"
-    - "(ancient overgrown aqueduct:1.1), (stretching between mountains:1.1), ruins, bridge"
-    - "(enchanted ruins:1.1), (spiraling upward:1.1), helix, magic"
-    - "(forest shrine:1.1), (protected:1.1), (glowing barrier:1.2), magic"
-    - "(magic infused canyon:1.1), (glowing colorful veins:1.2), cliffs"
-    - "(celestial bridge:1.2), (made of starlight:1.2), (crossing sky:1.1), space, cosmic"
+    - "grand academy courtyard, floating luminous sigils drifting overhead"
+    - "sky islands drifting through sunlit clouds, waterfalls spilling off the edges"
+    - "cavern filled with towering azure crystal formations"
+    - "ancient overgrown temple ruins, reclaimed by thick vines"
+    - "moonlit lake with a shimmering reflection, petals drifting across the surface"
+    - "floating library platforms, books drifting between shelves, soft ethereal lights"
+    - "interior of a massive hollow tree housing a small village"
+    - "rocky mountain perch overlooking a sprawling valley"
+    - "crystalline palace courtyard, soft glowing pastel light"
+    - "forest glowing with neon-colored magical light trails"
+    - "ancient shrine, torii gate, paper ofuda strips drifting in the wind"
+    - "ocean temple rising out of misty waters"
+    - "fairy glen dotted with tiny glowing treehouse dwellings"
+    - "towering castle perched atop spiraling cliffs"
+    - "winding path through rolling green hills"
+    - "still crystal lake mirroring a star-filled galaxy above"
+    - "abandoned magic laboratory, flickering glowing runic circles on the floor"
+    - "ancient stone bridge over a faintly glowing river"
+    - "dreamlike pastel-colored city floating on clouds"
+    - "massive observatory, telescope aimed at a star-filled sky"
+    - "enchanted orchard, trees heavy with glowing fruit"
+    - "crumbling fortress ruins atop an isolated mountaintop"
+    - "volcanic crater, rivers of glowing magma flowing below"
+    - "ancient stone gate hovering above cliffs, a glowing portal within"
+    - "twisted forest bathed in eerie green moonlight"
+    - "desert littered with colossal dragon skeleton remains"
+    - "crystal spire rising above dense jungle canopy"
+    - "ruined fortress floating among tattered clouds"
+    - "rainbow-tinted waterfalls cascading off floating cliffs"
+    - "glowing ancient monolith standing in a wide grassy plain"
+    - "tall mage tower piercing a bright sky"
+    - "massive tree with an entire village built into its branches"
+    - "misty ruins, broken ground, stone pillars floating just above the earth"
+    - "enchanted desert, luminous runes glowing faintly beneath the sand"
+    - "colossal cherry blossom tree towering over a small village"
+    - "ancient bridge stretching over a sea of clouds"
+    - "crystal observatory glowing with captured starlight"
+    - "glowing forest path, small spirit creatures drifting alongside it"
+    - "cracked, overgrown remains of an old mage's arena"
+    - "floating arena platforms suspended in open sky"
+    - "towering stone arch rising above the clouds"
+    - "ancient overgrown aqueduct stretching between mountains"
+    - "enchanted ruins spiraling upward in a helix shape"
+    - "forest shrine enclosed by a faintly glowing barrier"
+    - "canyon cliffs veined with glowing colorful light"
+    - "bridge made of woven starlight crossing the night sky"
 
   spotlight_bg_scifi:
-    - "(mechanical tower:1.1), (sprawling anime cityscape:1.1), (futuristic:1.1)"
-    - "(futuristic magitech city:1.2), (fantasy structures:1.1), (sci-fi:1.1), magic"
-    - "(anime airship dock:1.1), (glowing rails:1.1), port, (steampunk:1.1)"
-    - "(rain-soaked neon anime backstreet:1.2), (alley:1.1), (rain:1.1), (night:1.1), neon"
-    - "(cyberpunk alleyway:1.1), (neon:1.2), (alley:1.1), (rainy:0.9)"
-    - "(neon city street:1.1), (night:1.1), (cyberpunk:1.2), (glowing signs:1.0)"
-    - "(futuristic megacity:1.1), (skyline:1.1), (sci-fi:1.2), (flying vehicles:0.9)"
-    - "(giant mecha hangar:1.1), (mecha:1.2), (hangar:1.1), (sci-fi:1.0)"
+    - "tall mechanical tower overlooking a sprawling futuristic cityscape"
+    - "city blending fantasy architecture with glowing magitech circuitry"
+    - "airship dock, glowing guide rails, steampunk piping along the platforms"
+    - "rain-soaked backstreet at night, neon signs reflected in the puddles"
 
   spotlight_bg_urban:
-    - "(anime village:1.1), (street:1.1), (lanterns:1.1), (small wooden shops:1.1), quiet"
-    - "(anime festival:1.1), (street:1.1), (glowing paper lanterns:1.2), (night market:1.1)"
-    - "(sunset cliff road:1.1), (overlooking:1.1), (distant fantasy city:1.1), (golden hour:1.1)"
-    - "(anime marketplace:1.1), (bustling:1.1), (colorful:1.1), stalls, town"
-    - "(sunset city skyline:1.1), (floating lantern ships:1.2), sky, city"
-    - "(training garden:1.1), (wooden dummies:1.1), (sakura petals:1.1), dojo"
-    - "(steaming hot spring:1.1), (onsen:1.2), forest, steam"
-    - "sunrise, (enormous magic academy tower:1.1), school, dawn"
-    - "(abandoned cathedral:1.1), (broken stained glass:1.2), ruins, church"
-    - "(anime fairground:1.1), (floating rides:1.1), (magical lights:1.1), (carnival:1.1), night"
-    - "(waterfall city:1.1), (built into cliffs:1.1), bridges, lifts, (fantasy town:1.1)"
-    - "(quiet anime classroom:1.1), (magic textbooks:1.1), school, inside"
-    - "(anime night market:1.1), (shining:1.1), (vivid color:1.1), stalls, festival"
-    - "(peaceful shrine:1.1), (on hill:1.1), (glowing stars:1.1), night, (torii gate:1.1)"
-    - "(fantasy metropolis:1.1), (flying airships:1.2), city, steampunk"
-    - "(marble plaza:1.1), (fountains:1.1), (magic cores:1.1), city square"
-    - "(haunted school hallway:1.1), (drifting spirits:1.1), (ghost:1.1), dark"
-    - "(anime shrine:1.1), (deep within bamboo forest:1.1), (torii gate:1.1)"
-    - "(anime carnival:1.1), (floating above city skyline:1.1), (night:1.1), festival"
-    - "(sunshine filled town square:1.1), (bustling with life:1.1), day, city"
-    - "thunderstorm, (sweeping across ruined battleground:1.1), (lightning:1.1), rain"
-    - "(school rooftop:1.1), (sunset:1.1), (chain-link fence:0.9)"
-    - "(quiet suburban street:1.1), (suburb:1.1), (utility poles:1.0)"
-    - "(heroic battlefield:1.1), (battlefield:1.1), (action:1.1), (explosions:0.9)"
+    - "quiet village street lined with small wooden shops and hanging lanterns"
+    - "festival street strung with glowing paper lanterns, night market stalls"
+    - "cliffside road at golden hour, overlooking a distant city"
+    - "bustling colorful marketplace, rows of stalls"
+    - "sunset city skyline, small lantern-lit airships drifting overhead"
+    - "training garden with wooden practice dummies, drifting sakura petals"
+    - "steaming outdoor hot spring surrounded by forest"
+    - "sunrise over an enormous academy tower"
+    - "abandoned cathedral, broken stained-glass windows"
+    - "night fairground, floating carnival rides strung with glowing lights"
+    - "town built into cliffs beside a waterfall, connecting bridges and lifts"
+    - "quiet classroom interior, stacks of magic textbooks on the desks"
+    - "vividly lit night market, colorful stalls"
+    - "peaceful hilltop shrine, torii gate under a starlit sky"
+    - "fantasy metropolis with steampunk airships flying overhead"
+    - "marble city plaza, fountains lit by glowing magic cores"
+    - "dim school hallway, faint translucent spirits drifting through it"
+    - "small shrine deep within a bamboo forest, torii gate"
+    - "carnival floating above the night city skyline"
+    - "sunlit town square bustling with people"
+    - "thunderstorm sweeping across a ruined battleground, streaks of lightning"
 
   spotlight_bg_natural:
-    - "(cherry blossom avenue:1.1), (sparkling:1.1), (glowing:1.1), (soft pink light:1.1), (anime style:1.1)"
-    - "(deep enchanted forest:1.1), (glowing spores:1.1), (oversized flowers:1.1), magical"
-    - "(stormy cliff:1.1), (lightning:1.2), (dramatic clouds:1.1), ocean"
-    - "(twilight meadow:1.1), (luminous butterflies:1.2), field, dusk"
-    - "(sky railroad:1.1), (train tracks:1.1), (floating islands:1.1), sky"
-    - "(icy landscape:1.1), (towering frozen spires:1.2), snow, ice"
-    - "(forest ruins:1.1), (overgrown:1.1), (stone roads:1.1), ancient"
-    - "(anime desert canyon:1.1), (glowing crystals:1.1), cliffs, desert"
-    - "(deep ravine:1.1), (unstable rope bridge:1.1), canyon, cliff"
-    - "(wind-swept plains:1.1), (massive anime sky:1.1), (grassy fields:1.1), clouds"
-    - "(firefly filled grove:1.1), (humid dusk:1.1), forest, night, (insects:1.1)"
-    - "(ocean cliffs:1.1), (bioluminescent waves:1.2), night, glowing"
-    - "(forest spring:1.1), (surrounded by luminous plants:1.2), glowing, water"
-    - "(forest canopy walkway:1.1), (illuminated:1.1), (fairy lanterns:1.1), bridge"
-    - "(massive waterfall:1.1), (roaring into abyss:1.1), nature, cliff"
-    - "(star-soaked meadow:1.1), (shimmering constellations:1.2), night sky, field"
-    - "(bamboo forest:1.1), (anime style:1.1), (dappled light:1.0)"
+    - "avenue lined with cherry blossoms, soft glowing pink light"
+    - "deep forest with glowing spores drifting among oversized flowers"
+    - "stormy coastal cliff, lightning flashing over the ocean"
+    - "twilight meadow, luminous butterflies drifting over the grass"
+    - "train tracks stretching between floating sky islands"
+    - "icy landscape with towering frozen spires"
+    - "overgrown forest ruins, cracked stone roads"
+    - "desert canyon, glowing crystal clusters embedded in the cliffs"
+    - "deep ravine crossed by an unstable rope bridge"
+    - "wind-swept grassy plains beneath a vast open sky"
+    - "forest grove filled with fireflies at dusk"
+    - "ocean cliffs, waves glowing with bioluminescence at night"
+    - "forest spring surrounded by faintly glowing plants"
+    - "forest canopy walkway lit with hanging fairy lanterns"
+    - "massive waterfall roaring into a misty abyss"
+    - "meadow beneath a sky thick with shimmering constellations"
 
   spotlight_scene_sliceoflife:
-    - "(rooftop sunset:1.1), (two students talking:1.1), wind, (blowing uniform:1.1), (anime scene:1.1)"
-    - "train, (countryside:1.1), (staring out window:1.1), thoughtful, interior"
-    - "melancholic, (rainy scene:1.1), (two people sharing umbrella:1.1), (sad:1.1)"
-    - "(tea ceremony:1.2), (serene:1.1), (tatami room:1.1), (soft light:1.1), (kimono:1.1)"
-    - "childhood friends, (walking home:1.1), (sakura-lined path:1.1), school, sunset"
-    - "(calm beach:1.1), (morning:1.1), (soft waves:1.1), seagulls, ocean"
-    - "(heroine:1.1), (running late:1.1), school, (toast in mouth:1.2), (funny:1.1)"
-    - "(quiet library:1.1), (two characters reach for same book:1.2), (romantic:1.1)"
-    - "friends, (sharing meal:1.1), (cozy ramen shop:1.1), food, inside"
-    - "quiet moment, (two people staring at starry sky:1.1), (grassy hill:1.1), night"
-    - "(winter classroom:1.1), (frost on windows:1.1), (warm sunlight:1.1), school, snow"
-    - "child, (running:1.1), (golden wheat fields:1.1), (chasing fireflies:1.1), sunset"
-    - "(summer break:1.1), (scene:1.1), (friends:1.1), (at riverbank:1.1), water, relaxing"
-    - "main character, (walking alone:1.1), (empty city street:1.1), night"
-    - "(student council:1.1), (meeting:1.1), (dramatic sunlight:1.1), windows, classroom"
-    - "(market street:1.1), (bustling:1.1), (colorful stands:1.1), banners, city, day"
-    - "(fishing village:1.1), (at dawn:1.1), boats, drifting, ocean, morning"
-    - "(school festival:1.1), (dance performance:1.1), (twinkling lights:1.1), night"
-    - "(cute mascot creature:1.1), (bouncing:1.1), (beside protagonist:1.1), animal, pet"
-    - "(tavern scene:1.1), (fantasy adventurers:1.1), (laughing:1.1), drinking, bar, medieval"
-    - "mysterious transfer student, (staring out window:1.1), (new classroom:1.1), school"
+    - "rooftop sunset, two students talking, wind, blowing uniform, anime scene"
+    - "train, countryside, staring out window, thoughtful, interior"
+    - "melancholic, rainy scene, two people sharing umbrella, sad"
+    - "tea ceremony, serene, tatami room, soft light, kimono"
+    - "childhood friends, walking home, sakura-lined path, school, sunset"
+    - "calm beach, morning, soft waves, seagulls, ocean"
+    - "heroine, running late, school, toast in mouth, funny"
+    - "quiet library, two characters reach for same book, romantic"
+    - "friends, sharing meal, cozy ramen shop, food, inside"
+    - "quiet moment, two people staring at starry sky, grassy hill, night"
+    - "winter classroom, frost on windows, warm sunlight, school, snow"
+    - "child, running, golden wheat fields, chasing fireflies, sunset"
+    - "summer break, scene, friends, at riverbank, water, relaxing"
+    - "main character, walking alone, empty city street, night"
+    - "student council, meeting, dramatic sunlight, windows, classroom"
+    - "market street, bustling, colorful stands, banners, city, day"
+    - "fishing village, at dawn, boats, drifting, ocean, morning"
+    - "school festival, dance performance, twinkling lights, night"
+    - "cute mascot creature, bouncing, beside protagonist, animal, pet"
+    - "tavern scene, fantasy adventurers, laughing, drinking, bar, medieval"
+    - "mysterious transfer student, staring out window, new classroom, school"
 
   spotlight_scene_action:
-    - "(samurai duel:1.2), (falling sakura:1.2), (cherry blossoms:1.1), lanterns, night"
-    - "shonen, (fighter:1.1), (battle aura:1.2), (glowing:1.1), ground cracking, action"
-    - "(epic sword clash:1.2), (shockwave:1.2), (forest clearing:1.1), (two boys fighting:1.1)"
-    - "hero, (sprinting:1.1), (nighttime street:1.1), (neon reflections:1.1), running"
-    - "battle, (atop skyscraper:1.1), wind, (capes:1.1), hair, fighting, city"
-    - "(sci-fi chase:1.2), (neon streets:1.1), (hovering bike:1.2), futuristic, action"
-    - "(dramatic face-off:1.1), (on bridge:1.1), (twilight:1.1), (two boys confrontation:1.1)"
-    - "(sports anime:1.1), (athlete:1.1), (leaps:1.1), (slow motion:1.1), (dynamic:1.1)"
-    - "(dual-wielding:1.1), (ranger:1.1), (sliding through forest:1.1), (high speed:1.1), action"
-    - "(cyber assassin:1.2), (dashing:1.1), (neon-lit rooftop:1.1), futuristic, night"
-    - "swordsman, (blocking:1.1), (massive flaming strike:1.2), action, fire"
-    - "samurai, (blocking arrows:1.1), (dramatic slow motion:1.1), action"
-    - "(airborne duel:1.1), (winged warriors:1.1), (above clouds:1.1), (two boys fighting:1.1), sky"
-    - "archer, (firing arrow:1.1), (into storm:1.1), (lightning:1.1), (dynamic:1.1)"
-    - "hero's cloak, (whipping:1.1), (desert sandstorm:1.1), standoff, wind"
-    - "(clashing mages:1.1), (swirling elemental tornadoes:1.2), (two people:1.1), magic, (fight:1.1)"
-    - "(apocalyptic showdown:1.2), (ruined city:1.1), (floating embers:1.1), fighting, (destruction:1.1)"
-    - "heroine, (battling shadow clones:1.1), (abandoned warehouse:1.1), action"
-    - "(dragon-slayer:1.2), (striking final blow:1.2), sparks, (dragon:1.1), fantasy"
+    - "samurai duel, falling sakura, cherry blossoms, lanterns, night"
+    - "shonen, fighter, battle aura, glowing, ground cracking, action"
+    - "epic sword clash, shockwave, forest clearing, two boys fighting"
+    - "hero, sprinting, nighttime street, neon reflections, running"
+    - "battle, atop skyscraper, wind, capes, hair, fighting, city"
+    - "sci-fi chase, neon streets, hovering bike, futuristic, action"
+    - "dramatic face-off, on bridge, twilight, two boys confrontation"
+    - "sports anime, athlete, leaps, slow motion, dynamic"
+    - "dual-wielding, ranger, sliding through forest, high speed, action"
+    - "cyber assassin, dashing, neon-lit rooftop, futuristic, night"
+    - "swordsman, blocking, massive flaming strike, action, fire"
+    - "samurai, blocking arrows, dramatic slow motion, action"
+    - "airborne duel, winged warriors, above clouds, two boys fighting, sky"
+    - "archer, firing arrow, into storm, lightning, dynamic"
+    - "hero's cloak, whipping, desert sandstorm, standoff, wind"
+    - "clashing mages, swirling elemental tornadoes, two people, magic, fight"
+    - "apocalyptic showdown, ruined city, floating embers, fighting, destruction"
+    - "heroine, battling shadow clones, abandoned warehouse, action"
+    - "dragon-slayer, striking final blow, sparks, dragon, fantasy"
 
   spotlight_scene_fantasy:
-    - "(magical girl:1.1), (transformation:1.2), (sparkles:1.1), rising, (starry sky:1.1)"
-    - "fantasy, (mage:1.1), (casting:1.1), (glowing spell circle:1.2), (ancient ruins:1.1)"
-    - "(mysterious girl:1.1), (floating:1.1), (above lake:1.1), (glowing butterflies:1.1), magic"
-    - "spirits, (rising from shrine:1.1), (red moon:1.1), night, (yokai:1.1)"
-    - "priestess, (miko:1.1), (performing ritual:1.1), (towering torii gate:1.1), shrine"
-    - "battle, (inside bamboo forest:1.1), (leaves scatter:1.1), (two boys fighting:1.1), sword"
-    - "(summoning circle:1.1), (glowing:1.1), (beneath warrior's feet:1.1), magic"
-    - "shrine maiden, (confronting yokai:1.1), (moonlit woods:1.1), monster, night"
-    - "protagonist, (awakening hidden power:1.2), (glowing sigils:1.1), magic"
-    - "(angry demon spirit:1.2), (emerging:1.1), (cracked mask:1.1), (yokai:1.1), monster"
-    - "(mysterious cat spirit:1.1), (sitting:1.1), (atop red shrine gate:1.1), (yokai:1.1), cat"
-    - "(torch-lit cave:1.1), (adventurers:1.1), (glowing-eyed monster:1.2), fantasy, dungeon"
-    - "witch, (brewing potion:1.1), (cluttered cottage:1.1), (runes:1.1), magic"
-    - "(massive golem:1.1), (awakening:1.1), (overgrown ruins:1.1), monster, fantasy"
-    - "(masked festival dancers:1.1), (swirling:1.1), (firepit:1.1), night, dance"
-    - "(spirit wolves:1.1), (racing:1.1), (alongside protagonist:1.1), animal, magic"
-    - "(army of yokai:1.1), (marching:1.1), (foggy valley:1.1), (monsters:1.1), fog"
-    - "hero, (diving underwater:1.1), (chasing glowing spirit fish:1.1), ocean"
-    - "(falling from sky:1.1), (scene:1.1), (papers:1.1), (feathers:1.1), drifting"
-    - "(massive magical explosion:1.2), (illuminating night sky:1.1), (blast:1.1), magic"
-    - "(demonic gate:1.1), (opening:1.1), (crimson sky:1.1), (portal:1.1), dark, monster"
-    - "(otherworldly portal:1.2), (swirling open:1.1), (classroom:1.1), (magic:1.1), school"
-    - "(magic girl:1.1), (hovering above town:1.1), (surrounded by pink light:1.1), magic"
+    - "magical girl, transformation, sparkles, rising, starry sky"
+    - "fantasy, mage, casting, glowing spell circle, ancient ruins"
+    - "mysterious girl, floating, above lake, glowing butterflies, magic"
+    - "spirits, rising from shrine, red moon, night, yokai"
+    - "priestess, miko, performing ritual, towering torii gate, shrine"
+    - "battle, inside bamboo forest, leaves scatter, two boys fighting, sword"
+    - "summoning circle, glowing, beneath warrior's feet, magic"
+    - "shrine maiden, confronting yokai, moonlit woods, monster, night"
+    - "protagonist, awakening hidden power, glowing sigils, magic"
+    - "angry demon spirit, emerging, cracked mask, yokai, monster"
+    - "mysterious cat spirit, sitting, atop red shrine gate, yokai, cat"
+    - "torch-lit cave, adventurers, glowing-eyed monster, fantasy, dungeon"
+    - "witch, brewing potion, cluttered cottage, runes, magic"
+    - "massive golem, awakening, overgrown ruins, monster, fantasy"
+    - "masked festival dancers, swirling, firepit, night, dance"
+    - "spirit wolves, racing, alongside protagonist, animal, magic"
+    - "army of yokai, marching, foggy valley, monsters, fog"
+    - "hero, diving underwater, chasing glowing spirit fish, ocean"
+    - "falling from sky, scene, papers, feathers, drifting"
+    - "massive magical explosion, illuminating night sky, blast, magic"
+    - "demonic gate, opening, crimson sky, portal, dark, monster"
+    - "otherworldly portal, swirling open, classroom, magic, school"
+    - "magic girl, hovering above town, surrounded by pink light, magic"
 
   spotlight_scene_scifi:
-    - "mecha, (landing:1.1), (fiery crater:1.1), nighttime city, raid, (explosion:1.1)"
-    - "android, (waking up:1.1), (cyber lab:1.1), (holograms:1.1), (sci-fi:1.1)"
-    - "(space fighter:1.1), (launching:1.1), (hangar:1.1), alarms, (spaceship:1.1), (sci-fi:1.1)"
-    - "spaceship, (drifting:1.1), (silent starfield:1.1), (space:1.1), (sci-fi:1.1)"
-    - "mecha, (charging forward:1.1), (boosters ignited:1.2), robot, action"
-    - "mecha, (blocking attack:1.2), (protect city:1.1), mecha, defense"
-    - "mecha, (rising from ocean:1.2), (surrounded by steam:1.1), robot, water"
-    - "pilot, (entering cockpit:1.1), (towering battle mech:1.1), mecha"
-    - "(cyber girl:1.1), (floating:1.1), (digital sea:1.1), (data streams:1.1), futuristic"
-    - "airship, (docking:1.1), (floating city platform:1.1), (steampunk:1.1), sky"
-    - "(flying ship:1.1), (gliding:1.1), (above cloud ocean:1.1), dawn, (airship:1.1), fantasy"
+    - "mecha, landing, fiery crater, nighttime city, raid, explosion"
+    - "android, waking up, cyber lab, holograms, sci-fi"
+    - "space fighter, launching, hangar, alarms, spaceship, sci-fi"
+    - "spaceship, drifting, silent starfield, space, sci-fi"
+    - "mecha, charging forward, boosters ignited, robot, action"
+    - "mecha, blocking attack, protect city, mecha, defense"
+    - "mecha, rising from ocean, surrounded by steam, robot, water"
+    - "pilot, entering cockpit, towering battle mech, mecha"
+    - "cyber girl, floating, digital sea, data streams, futuristic"
+    - "airship, docking, floating city platform, steampunk, sky"
+    - "flying ship, gliding, above cloud ocean, dawn, airship, fantasy"
 
   spotlight_scene_dramatic:
-    - "silent, (snowy field:1.1), (lone warrior:1.1), (giant spirit beast:1.2), monster, snow"
-    - "(giant monster:1.1), (attack:1.1), (coastal town:1.1), dust, debris, (destruction:1.1)"
-    - "(mysterious villain:1.1), (standing on cliff:1.1), (lightning storm:1.2), dramatic"
-    - "(crying protagonist:1.1), (under streetlight:1.1), (rain:1.1), (sad:1.1), night"
-    - "(masked hero:1.1), (perched on rooftop:1.1), (overlooking city:1.1), night"
-    - "(sunset train platform:1.1), (emotional farewell:1.2), (sad:1.1), train"
-    - "(ancient dragon:1.1), (unfurling wings:1.1), (atop mountain shrine:1.1), (dragon:1.1), monster"
-    - "(ghost girl:1.1), (standing silently:1.1), (abandoned school hallway:1.1), (horror:1.1)"
-    - "(ancient temple:1.1), (collapsing:1.1), (magical duel:1.1), ruins, (destruction:1.1)"
-    - "hero, (reaching out hand:1.1), (emotional reunion:1.2), (two people:1.1), dramatic"
-    - "heroine, (standing atop skyscraper:1.1), (sun rises behind:1.1), city"
-    - "steam, (rising from hot spring:1.1), (onsen:1.1), (snowy cliffs:1.1), snow"
-    - "(night market:1.1), (alley:1.1), (glowing:1.1), (colorful lanterns:1.1), street"
-    - "(mountain shrine:1.1), (approached:1.1), (lantern-lit stairs:1.1), night, temple"
+    - "silent, snowy field, lone warrior, giant spirit beast, monster, snow"
+    - "giant monster, attack, coastal town, dust, debris, destruction"
+    - "mysterious villain, standing on cliff, lightning storm, dramatic"
+    - "crying protagonist, under streetlight, rain, sad, night"
+    - "masked hero, perched on rooftop, overlooking city, night"
+    - "sunset train platform, emotional farewell, sad, train"
+    - "ancient dragon, unfurling wings, atop mountain shrine, dragon, monster"
+    - "ghost girl, standing silently, abandoned school hallway, horror"
+    - "ancient temple, collapsing, magical duel, ruins, destruction"
+    - "hero, reaching out hand, emotional reunion, two people, dramatic"
+    - "heroine, standing atop skyscraper, sun rises behind, city"
+    - "steam, rising from hot spring, onsen, snowy cliffs, snow"
+    - "night market, alley, glowing, colorful lanterns, street"
+    - "mountain shrine, approached, lantern-lit stairs, night, temple"
 
   spotlight_scene_romantic:
-    - "(quiet library:1.1), (two characters reach for same book:1.2), (romantic:1.1)"
-    - "(romantic confession:1.2), (beneath blooming cherry trees:1.1), (sakura:1.1)"
-    - "quiet park bench, (falling sakura petals:1.1), (two people:1.1), romantic"
-    - "melancholic, (rainy scene:1.1), (two people sharing umbrella:1.1), (sad:1.1)"
+    - "quiet library, two characters reach for same book, romantic"
+    - "romantic confession, beneath blooming cherry trees, sakura"
+    - "quiet park bench, falling sakura petals, two people, romantic"
+    - "melancholic, rainy scene, two people sharing umbrella, sad"
 
   spotlight_scene_other:
-    - "(idol performance:1.2), (glowing stage:1.1), (cheering crowd:1.1), (concert:1.1)"
-    - "(idol dancer:1.1), (spinning mid-air:1.1), (sparkling stage:1.1), concert"
-    - "child, (staring:1.1), (glowing meteor:1.1), (streaking across sky:1.1), night, space"
+    - "idol performance, glowing stage, cheering crowd, concert"
+    - "idol dancer, spinning mid-air, sparkling stage, concert"
+    - "child, staring, glowing meteor, streaking across sky, night, space"
 
   spotlight_scene_fantasy_epic:
-    - "mage, (floating:1.1), (glowing runic circle:1.2), petals, (swirl upward:1.1), magic"
-    - "samurai, (confronting:1.1), (colossal spirit fox:1.2), (kitsune:1.1), (red moon:1.1), night"
-    - "(young hero:1.1), (awakening:1.1), (ancient sword:1.1), (lightning:1.1), (explodes:1.1), ruins"
-    - "(elf archer:1.1), (leaping:1.1), (floating stone platforms:1.1), (sky temple:1.1), ruins"
-    - "(dragon rider:1.1), (soaring through clouds:1.1), (dawn light:1.1), mountains, (dragon:1.1)"
-    - "(forest spirits:1.1), (dancing:1.1), (sacred tree:1.1), (glowing blue light:1.1), night, magic"
-    - "(anime knight:1.1), (blocking:1.1), (massive fireball:1.1), (radiant shield:1.2), magic"
-    - "witch, (casting:1.1), (starlight spell:1.2), (ancient observatory:1.1), space, magic"
-    - "(celestial warrior:1.2), (descending:1.1), (heavens:1.1), (golden wings:1.2), (angel:1.1)"
-    - "heroine, (battling:1.1), (shadow demons:1.1), (moonlit field:1.1), night, monster"
-    - "(magical girl:1.1), (holding:1.1), (luminous staff:1.1), (crystalline forest:1.1), magic"
-    - "swordsman, (clashing:1.1), (horned demon:1.1), (falling ash:1.1), fight, monster"
-    - "friends, (camping:1.1), (giant glowing mushrooms:1.2), (enchanted woods:1.1), night"
-    - "(sky kingdom:1.1), (floating:1.1), (oceans of clouds:1.1), (dragons circling:1.1), castle"
-    - "summoner, (calling:1.1), (massive elemental spirit:1.2), (glowing circle:1.1), magic"
-    - "warrior, (sprinting:1.1), (collapsing rainbow bridge:1.2), sky, action"
-    - "(angelic mage:1.1), (weaving:1.1), (threads of light:1.2), (healing:1.1), magic, angel"
-    - "(forest nymph:1.1), (guiding travelers:1.1), (bioluminescent grove:1.2), glowing"
-    - "battle, (armored chimera:1.2), (on cliffside:1.1), monster, fight, fantasy"
-    - "(anime heroine:1.1), (reaching:1.1), (floating relic:1.1), altar, magic"
-    - "(massive golem:1.1), (rising from lake:1.2), (magical haze:1.1), monster, water"
-    - "paladin, (charging:1.1), (battlefield:1.1), (cracked crystals:1.1), knight"
-    - "(water mage:1.1), (forming:1.1), (swirling dragon of water:1.2), magic"
-    - "(dark sorcerer:1.2), (levitating:1.1), (black feathers:1.1), (rain down:1.1), (dark magic:1.1)"
-    - "(mage apprentice:1.1), (failing spell:1.1), (sparkles:1.1), (burst:1.1), magic, (cute:1.1)"
-    - "(spear warrior:1.1), (confronting hydra:1.2), ruins, monster, fantasy"
-    - "(sky pirates:1.1), (raiding:1.1), (floating island:1.1), (storm:1.1), (airship:1.1), (lightning:1.1)"
-    - "(spirit wolf:1.1), (racing:1.1), (alongside hero:1.1), (snowy forest:1.1), animal"
-    - "battle, (inside ancient library:1.1), (books fly:1.1), (two people:1.1), magic, fighting"
-    - "(anime monk:1.1), (unleashing chi explosion:1.2), (mountain summit:1.1), energy"
-    - "(wind mage:1.1), (hovering:1.1), (tornado:1.1), (coils beneath feet:1.1), magic"
-    - "witch, (flying on broom:1.1), (glowing spirit lanterns:1.1), night, sky"
-    - "runes, (lighting up:1.1), (stone bridge:1.1), (prophecy:1.1), awakens, magic"
-    - "(crystal dragon:1.1), (unfurling wings:1.1), (inside cavern:1.1), mirrors, (dragon:1.1)"
-    - "heroine, (discovering portal:1.1), (hidden inside waterfall:1.1), magic"
-    - "(anime knight:1.1), (kneeling in rain:1.1), (fallen comrade:1.1), (sad:1.1), battlefield"
-    - "(magical girl team:1.2), (assembling:1.1), (colorful burst of light:1.2), transformation"
-    - "(spirit deer:1.1), (watching quietly:1.1), (moonlit clearing:1.1), night, forest, magic"
-    - "battle, (suspended platform:1.1), (celestial arena:1.1), (two people:1.1), fighting, sky"
-    - "(ancient forest guardian:1.2), (towering:1.1), (tiny travelers:1.1), monster, (giant:1.1), (tree spirit:1.1)"
-    - "alchemist, (mixing:1.1), (volatile potion:1.1), (floating glass spheres:1.1), magic"
-    - "(fire mage:1.1), (surrounded:1.1), (swirling phoenix flames:1.2), (fire magic:1.1)"
-    - "(young sorcerer:1.1), (summoning meteors:1.2), (desert battle:1.1), magic"
-    - "(anime swordswoman:1.1), (running across lake surface:1.2), magic, water"
-    - "(dreamlike meadow:1.1), (floating feathers:1.1), (soft sunlight:1.1), field, fantasy"
-    - "necromancer, (raising skeletal warriors:1.2), (swirling shadows:1.1), (dark magic:1.1)"
-    - "(mage duel:1.1), (causing sky to ripple:1.2), (magical storms:1.1), fighting"
-    - "heroine, (standing on mountain peak:1.1), (facing sky titan:1.2), giant"
-    - "(enchanted waterfall:1.1), (hiding:1.1), (glowing golden portal:1.2), magic"
-    - "(anime dragon:1.1), (flying low:1.1), (lavender fields:1.1), purple, landscape"
-    - "(town festival:1.1), (illuminated:1.1), (spirit lanterns:1.1), (binding to sky:1.1), night"
-    - "(fairy queen:1.1), (rising from flower:1.1), (soft pink glow:1.1), magic"
-    - "(griffin cavalry:1.1), (charging:1.1), (emerald plains:1.1), fantasy, army, flying"
-    - "mage, (reading forbidden book:1.1), (runes circle above:1.1), magic"
-    - "(spirit fox:1.1), (kitsune:1.1), (running on air:1.2), (trails of fire:1.1), magic"
-    - "mage, (summoning:1.1), (celestial whale:1.2), (drifting in night sky:1.1), space, magic"
-    - "swordfighter, (slicing:1.1), (illusion clones:1.1), forest, action"
-    - "(anime summoner:1.1), (surrounded:1.1), (floating magical tomes:1.2), books, magic"
-    - "(giant tree spirit:1.1), (shaking leaves:1.1), (glow like stars:1.1), monster, forest"
-    - "(sky duel:1.1), (two winged warriors:1.1), (above clouds:1.1), (fighting:1.1), (angel:1.1)"
-    - "(anime prince:1.1), (kneeling:1.1), (sacred statue:1.1), (awakens:1.1), magic"
-    - "phoenix, (reborn from ashes:1.2), (characters shield eyes:1.1), fire, bird"
-    - "hero, (crossing desert:1.1), (glowing spirit sand:1.1), magic"
-    - "battle, (atop giant turtle:1.1), (carrying ancient shrine:1.1), monster, fantasy"
-    - "(anime mage:1.1), (standing before:1.1), (colossal astral gate:1.2), (portal:1.1), space"
-    - "(enchanted glade:1.1), (spirits float:1.1), (motes of sunlight:1.1), forest, magic"
-    - "(dark knight:1.1), (summoning:1.1), (black armor:1.1), (forged from shadows:1.1), magic"
-    - "oracle, (gazing into glowing water:1.1), (predicting destiny:1.1), magic"
-    - "merfolk, (emerging:1.1), (glowing ocean:1.1), (beneath starlight:1.1), (mermaid:1.1), night"
-    - "battle, (dragon-like wraith:1.2), (stormy sky:1.1), monster, (lightning:1.1)"
-    - "(anime heroine:1.1), (drifting:1.1), (dream realm:1.1), (floating islands:1.1), surreal"
-    - "(magic knights:1.1), (clashing swords:1.1), (infused with elemental energy:1.2), fight"
-    - "(forest temple:1.1), (floating lanterns:1.1), (drifting spirits:1.1), (shrine:1.1), night"
-    - "mage, (riding giant owl:1.1), (twilight skies:1.1), (flying:1.1), animal"
-    - "samurai, (defending village:1.1), (monstrous oni:1.2), monster, fight"
-    - "heroine, (ascending:1.1), (glowing staircase:1.1), (leading to heavens:1.1), sky"
-    - "(anime warrior:1.1), (leaping from cliff:1.1), (giant serpent:1.2), monster, action"
-    - "(dark forest:1.1), (cracking open:1.1), (reveal hidden underworld:1.1), (portal:1.1), dark"
-    - "(winged fox spirit:1.1), (kitsune:1.1), (curled atop:1.1), (floating shrine:1.1), magic"
-    - "(anime druid:1.1), (conversing:1.1), (ancient stone spirit:1.2), monster, magic"
-    - "(massive air wizard:1.1), (summoning:1.1), (lightning dragon:1.2), (storm:1.1), magic"
-    - "hero, (running:1.1), (runic bridge:1.1), (igniting:1.1), (every step:1.1), magic, fire"
-    - "battle, (beneath cherry blossoms:1.1), (raining petals:1.1), (two samurai:1.1), (sakura:1.1)"
-    - "mage, (floating:1.1), (star-filled void:1.1), (channeling cosmic magic:1.2), space"
-    - "(fantasy city skyline:1.1), (floating orbs:1.1), (illuminating night:1.1), city"
-    - "(anime swordsman:1.1), (surrounded:1.1), (fiery aura:1.2), (mid-duel:1.1), action, fire"
-    - "(giant magical barrier:1.1), (domed:1.1), (over ancient capital:1.1), (magic:1.1), shield"
-    - "(wolf spirit:1.1), (walking on water:1.2), (under moonlight:1.1), night, magic"
-    - "party, (confronting:1.1), (ancient world serpent:1.2), (beneath shrine:1.1), monster, giant"
-    - "heroine, (manifesting:1.1), (wings of spirit light:1.2), (angel:1.1), magic"
-    - "(moonlit field:1.1), (spirits drift:1.1), (like fireflies:1.1), night, magic, (ghosts:1.1)"
-    - "(anime warrior:1.1), (cleaving meteor:1.2), (in half:1.1), (enchanted blade:1.1), space"
-    - "(enormous crystal tree:1.1), (shimmering:1.1), (celestial light:1.1), (magic:1.1)"
-    - "(last stand:1.1), (on floating castle:1.1), (sky cracks open:1.1), battle, (destruction:1.1)"
-    - "summoner, (calling:1.1), (constellation creatures:1.2), battle, space, magic"
-    - "heroine, (flowing cape:1.1), (standing before:1.1), (cosmic eclipse:1.1), space"
-
-# ---------------------------------------------------------
-# NEGATIVE PROMPT
-# ---------------------------------------------------------
-
-  negative_prompt:
-    - "(worst quality:1.4), (low quality:1.4), (normal quality:1.4), lowres, normal quality, ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, age spot, (extra arms:1.2), (extra legs:1.2), (extra fingers:1.2), (less fingers:1.2), (malformed limbs:1.2), (fused fingers:1.2), (too many fingers:1.2), (long neck:1.2), (cross-eyed:1.1), (closed eyes:1.1), bad hands, bad anatomy, bad body, bad face, bad teeth, bad feet, watermark, signature, text, logo, nsfw, realistic photo"
+    - "mage, floating, glowing runic circle, petals, swirl upward, magic"
+    - "samurai, confronting, colossal spirit fox, kitsune, red moon, night"
+    - "young hero, awakening, ancient sword, lightning, explodes, ruins"
+    - "elf archer, leaping, floating stone platforms, sky temple, ruins"
+    - "dragon rider, soaring through clouds, dawn light, mountains, dragon"
+    - "forest spirits, dancing, sacred tree, glowing blue light, night, magic"
+    - "anime knight, blocking, massive fireball, radiant shield, magic"
+    - "witch, casting, starlight spell, ancient observatory, space, magic"
+    - "celestial warrior, descending, heavens, golden wings, angel"
+    - "heroine, battling, shadow demons, moonlit field, night, monster"
+    - "magical girl, holding, luminous staff, crystalline forest, magic"
+    - "swordsman, clashing, horned demon, falling ash, fight, monster"
+    - "friends, camping, giant glowing mushrooms, enchanted woods, night"
+    - "sky kingdom, floating, oceans of clouds, dragons circling, castle"
+    - "summoner, calling, massive elemental spirit, glowing circle, magic"
+    - "warrior, sprinting, collapsing rainbow bridge, sky, action"
+    - "angelic mage, weaving, threads of light, healing, magic, angel"
+    - "forest nymph, guiding travelers, bioluminescent grove, glowing"
+    - "battle, armored chimera, on cliffside, monster, fight, fantasy"
+    - "anime heroine, reaching, floating relic, altar, magic"
+    - "massive golem, rising from lake, magical haze, monster, water"
+    - "paladin, charging, battlefield, cracked crystals, knight"
+    - "water mage, forming, swirling dragon of water, magic"
+    - "dark sorcerer, levitating, black feathers, rain down, dark magic"
+    - "mage apprentice, failing spell, sparkles, burst, magic, cute"
+    - "spear warrior, confronting hydra, ruins, monster, fantasy"
+    - "sky pirates, raiding, floating island, storm, airship, lightning"
+    - "spirit wolf, racing, alongside hero, snowy forest, animal"
+    - "battle, inside ancient library, books fly, two people, magic, fighting"
+    - "anime monk, unleashing chi explosion, mountain summit, energy"
+    - "wind mage, hovering, tornado, coils beneath feet, magic"
+    - "witch, flying on broom, glowing spirit lanterns, night, sky"
+    - "runes, lighting up, stone bridge, prophecy, awakens, magic"
+    - "crystal dragon, unfurling wings, inside cavern, mirrors, dragon"
+    - "heroine, discovering portal, hidden inside waterfall, magic"
+    - "anime knight, kneeling in rain, fallen comrade, sad, battlefield"
+    - "magical girl team, assembling, colorful burst of light, transformation"
+    - "spirit deer, watching quietly, moonlit clearing, night, forest, magic"
+    - "battle, suspended platform, celestial arena, two people, fighting, sky"
+    - "ancient forest guardian, towering, tiny travelers, monster, giant, tree spirit"
+    - "alchemist, mixing, volatile potion, floating glass spheres, magic"
+    - "fire mage, surrounded, swirling phoenix flames, fire magic"
+    - "young sorcerer, summoning meteors, desert battle, magic"
+    - "anime swordswoman, running across lake surface, magic, water"
+    - "dreamlike meadow, floating feathers, soft sunlight, field, fantasy"
+    - "necromancer, raising skeletal warriors, swirling shadows, dark magic"
+    - "mage duel, causing sky to ripple, magical storms, fighting"
+    - "heroine, standing on mountain peak, facing sky titan, giant"
+    - "enchanted waterfall, hiding, glowing golden portal, magic"
+    - "anime dragon, flying low, lavender fields, purple, landscape"
+    - "town festival, illuminated, spirit lanterns, binding to sky, night"
+    - "fairy queen, rising from flower, soft pink glow, magic"
+    - "griffin cavalry, charging, emerald plains, fantasy, army, flying"
+    - "mage, reading forbidden book, runes circle above, magic"
+    - "spirit fox, kitsune, running on air, trails of fire, magic"
+    - "mage, summoning, celestial whale, drifting in night sky, space, magic"
+    - "swordfighter, slicing, illusion clones, forest, action"
+    - "anime summoner, surrounded, floating magical tomes, books, magic"
+    - "giant tree spirit, shaking leaves, glow like stars, monster, forest"
+    - "sky duel, two winged warriors, above clouds, fighting, angel"
+    - "anime prince, kneeling, sacred statue, awakens, magic"
+    - "phoenix, reborn from ashes, characters shield eyes, fire, bird"
+    - "hero, crossing desert, glowing spirit sand, magic"
+    - "battle, atop giant turtle, carrying ancient shrine, monster, fantasy"
+    - "anime mage, standing before, colossal astral gate, portal, space"
+    - "enchanted glade, spirits float, motes of sunlight, forest, magic"
+    - "dark knight, summoning, black armor, forged from shadows, magic"
+    - "oracle, gazing into glowing water, predicting destiny, magic"
+    - "merfolk, emerging, glowing ocean, beneath starlight, mermaid, night"
+    - "battle, dragon-like wraith, stormy sky, monster, lightning"
+    - "anime heroine, drifting, dream realm, floating islands, surreal"
+    - "magic knights, clashing swords, infused with elemental energy, fight"
+    - "forest temple, floating lanterns, drifting spirits, shrine, night"
+    - "mage, riding giant owl, twilight skies, flying, animal"
+    - "samurai, defending village, monstrous oni, monster, fight"
+    - "heroine, ascending, glowing staircase, leading to heavens, sky"
+    - "anime warrior, leaping from cliff, giant serpent, monster, action"
+    - "dark forest, cracking open, reveal hidden underworld, portal, dark"
+    - "winged fox spirit, kitsune, curled atop, floating shrine, magic"
+    - "anime druid, conversing, ancient stone spirit, monster, magic"
+    - "massive air wizard, summoning, lightning dragon, storm, magic"
+    - "hero, running, runic bridge, igniting, every step, magic, fire"
+    - "battle, beneath cherry blossoms, raining petals, two samurai, sakura"
+    - "mage, floating, star-filled void, channeling cosmic magic, space"
+    - "fantasy city skyline, floating orbs, illuminating night, city"
+    - "anime swordsman, surrounded, fiery aura, mid-duel, action, fire"
+    - "giant magical barrier, domed, over ancient capital, magic, shield"
+    - "wolf spirit, walking on water, under moonlight, night, magic"
+    - "party, confronting, ancient world serpent, beneath shrine, monster, giant"
+    - "heroine, manifesting, wings of spirit light, angel, magic"
+    - "moonlit field, spirits drift, like fireflies, night, magic, ghosts"
+    - "anime warrior, cleaving meteor, in half, enchanted blade, space"
+    - "enormous crystal tree, shimmering, celestial light, magic"
+    - "last stand, on floating castle, sky cracks open, battle, destruction"
+    - "summoner, calling, constellation creatures, battle, space, magic"
+    - "heroine, flowing cape, standing before, cosmic eclipse, space"
