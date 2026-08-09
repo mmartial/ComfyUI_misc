@@ -20,8 +20,8 @@ gkr_anime:
     - patched leather traveling cloak, worn satchel, short sword at the hip, dusty boots
     - frilled pastel dress, oversized bow at the chest, thigh-high striped socks, star-tipped wand, ribbons trailing mid-motion
     - white haori over a red hakama skirt, long braided hair, wooden ofuda charm in hand, calm poised stance
-    - energetic tagalong companion, always trailing one step behind, bright encouraging smile, hand raised in a wave
-    - poised noble heir, refined seated posture, folded hands in the lap, quietly observing the room
+    - walking one step behind another traveler, bright smile, hand raised in a wave, small matching satchel
+    - upright seated posture, folded gloved hands, embroidered velvet coat, small jeweled coronet, watchful sideways gaze
     - form-fitting flight suit with padded shoulder segments, coiled cable plugged into a chest port, helmet tucked under one arm
     - sleeveless jersey, sweatband, mid-leap motion, sweat-streaked determined face
     - black ruffled dress with corset lacing, ornate silver pauldron, ankle boots, weapon gripped loosely
@@ -33,7 +33,7 @@ gkr_anime:
     - matte black bodysuit with glowing circuit-line seams, wrapped forearm blades, hood pulled low, crouched ready stance
     - pointed hat, buttoned robe with a crest pin, wand tucked in the belt, open spellbook
     - curved black horns, trailing dark ornate gown, clawed fingertips, (regal composed expression:1.1)
-    - feathered white wings, thin golden halo ring, flowing pale robes, serene expression
+    - feathered white wings, thin golden halo ring, flowing pale robes, relaxed brow and faint closed-mouth smile
     - semi-transparent wispy form, small horns or fox-like features, faint blue glow, playful tilted head
     - oversized round head, tiny body, big sparkling eyes, bouncing pose
     - form-fitting dark outfit, cloth mask covering the lower face, crouched stealthy stance, twin kunai at the hip
@@ -55,13 +55,12 @@ gkr_anime:
     - yakuza, (suit:1.1), (irezumi tattoo:1.2), (intimidating:1.0)
     - cyborg, (mechanical parts:1.2), (glowing eyes:1.1), (futuristic:1.0)
     - alien, (non-human:1.1), (sci-fi:1.1), (unusual skin color:1.0)
-
   race:
     - human
     - elf, long pointed ears, slender graceful build
     - dark elf, dark grey-blue skin, long pointed ears, silver hair
     - fox-eared beastkin, fluffy fox tail, russet fur patches
-    - cat-eared beastkin, sleek cat tail, playful demeanor
+    - cat-eared beastkin, sleek cat tail, tilted head, teasing half-smile
     - wolf-eared beastkin, bushy wolf tail, sharp canine teeth
     - small curved horns, thin demon tail with an arrow-shaped tip, sharp canine teeth
     - feathered wings, thin halo ring, faint golden glow
@@ -80,17 +79,17 @@ gkr_anime:
 # ---------------------------------------------------------
 
   age:
-    - teen
+    - adolescent
     - young adult
     - adult, mature facial features
-    - ageless ethereal youth, otherworldly presence
+    - smooth youthful face, luminous unblemished skin, faint halo-like rim glow
 
   gender:
     - male, man, delicate bishounen features
     - female, woman, delicate bishoujo features
     - male, masculine
     - female, feminine
-    - androgynous, non-binary
+    - androgynous facial structure, mixed masculine and feminine styling
 
   build:
     - slender build
@@ -198,8 +197,12 @@ gkr_anime:
     - ornate engraved armor plates, intricate filigree edging
     - bulky segmented armor plating, glowing power core on the chest
     - matte armor plating with glowing neon accent lines
-    - layered cloth robes with faintly glowing embroidered sigils
+    - overlapping lacquered lamellar plates with faintly glowing engraved sigils
     - polished plate armor, shining metal finish
+
+  outfit_choice:
+    - "__gkr_anime/clothing__"
+    - "__gkr_anime/armor__"
 
 # ---------------------------------------------------------
 # WEAPONS, ITEMS & TRINKETS
@@ -267,15 +270,15 @@ gkr_anime:
 # ---------------------------------------------------------
 
   mood:
-    - uplifting, hopeful, bright
-    - emotional, heartfelt, dramatic
-    - epic, dramatic, cinematic
-    - mysterious, magical undertone, soft shadows
-    - intense, action packed, dynamic
-    - whimsical, fun, playful
-    - nostalgic, warm, soft light
-    - dark, foreboding, ominous shadows
-    - heroic, powerful, epic
+    - raised chin, open smile, bright high-key palette
+    - tear-bright eyes, trembling mouth, strong light-and-shadow contrast
+    - tiny figure against a vast environment, sweeping diagonal composition
+    - partially obscured silhouette, soft shadows, faint colored glow
+    - braced pose, flying debris, strong diagonals, visible motion streaks
+    - bouncing poses, rounded shapes, candy-colored accents
+    - warm faded palette, soft light, subtle film grain
+    - hunched silhouettes, deep shadows, narrow pools of light
+    - low-angle composition, broad stance, cape billowing outward
 
   lighting:
     - bright anime glow, soft bloom, vibrant highlights
@@ -291,7 +294,7 @@ gkr_anime:
   camera:
     - medium shot, waist-up framing
     - dynamic action shot, motion blur
-    - close-up, emotional framing
+    - close-up, tear-bright eyes and trembling mouth in frame
     - extreme close-up, eyes in focus
     - high-angle shot, overhead framing
     - wide cinematic framing, establishing shot
@@ -305,29 +308,29 @@ gkr_anime:
     - full body shot, standing pose
 
   style:
-    - bright, vibrant, colorful
-    - dark, moody, dramatic
-    - shonen, dynamic pose
-    - shoujo, sparkly style, romantic mood, soft colors
-    - dark fantasy, anime style, dark, gothic
-    - cyberpunk, anime style, neon, futuristic
-    - mecha, anime aesthetic, giant robot
-    - soft, watercolor, anime style, pastel
-    - stylized, manga style, ink, screentones
-    - isekai, fantasy, illustration, anime style
-    - high detail, anime rendering, detailed linework
+    - saturated primary colors, bright highlights, clean cel shading
+    - low-key palette, deep shadows, sharp rim light
+    - bold speed lines, foreshortened pose, thick impact strokes
+    - fine flowing linework, pastel gradients, sparkling highlights, floral framing
+    - blackened stone textures, pointed silhouettes, muted jewel tones, gothic arches
+    - neon magenta and cyan reflections, dark city surfaces, holographic overlays
+    - hard-surface mechanical detail, crisp cel shading, towering scale cues
+    - translucent watercolor washes, soft pastel edges, lightly textured paper
+    - black ink linework, halftone screentones, high-contrast monochrome shading
+    - detailed fantasy illustration, luminous portal light, layered distant scenery
+    - precise anime linework, layered cel shading, fine material detail
 
   art_style_specific:
-    - modern digital anime, pixiv, trending
-    - 90s anime style, retro anime, film grain
-    - studio trigger style, dynamic, vibrant
-    - studio ghibli style, watercolor, painterly
-    - makoto shinkai style, beautifully detailed sky, light rays
-    - key visual, official art, high detail
-    - genga, anime line art, sketch
-    - visual novel style, clean lines
-    - kyoto animation style, soft, moe
-    - ufotable style, high-contrast, digital effects
+    - polished digital anime illustration, crisp contours, saturated gradient shading
+    - 1990s cel animation look, hand-painted backgrounds, muted colors, fine film grain
+    - exaggerated foreshortening, angular silhouettes, saturated flat colors, bold impact lines
+    - painterly watercolor background, rounded character shapes, warm natural palette
+    - intricately painted cloudscape, brilliant backlight, long volumetric sun rays
+    - centered promotional composition, polished cel shading, dense costume detail
+    - loose graphite construction lines, selective dark ink contours, uncolored animation drawing
+    - clean uniform outlines, softly shaded character sprites, detailed static background
+    - soft rounded linework, gentle pastel palette, subtle facial shading
+    - high-contrast cel shading, luminous particle effects, sweeping colored light trails
 
 # ---------------------------------------------------------
 # EFFECTS / ACTION FX
@@ -367,7 +370,7 @@ gkr_anime:
     - slime creature, translucent amorphous body
     - oni-inspired titan, towering horned giant, club in hand
     - cybernetic monster, mechanical plating fused with organic flesh
-    - guardian spirit creature, glowing ethereal outline, watchful presence
+    - large translucent creature, glowing ethereal outline, body curled protectively around a smaller figure
 
   anime_monster_traits:
     - glowing menacing eyes
@@ -383,31 +386,34 @@ gkr_anime:
 # ---------------------------------------------------------
 
   shonen_hero_combo:
-    - "spiky-haired young hero, determined stance, clenched fist, __gkr_anime/gender__, __gkr_anime/race__, __gkr_anime/age__, __gkr_anime/build__, __gkr_anime/hair__, __gkr_anime/hair_color__, __gkr_anime/eyes__, determined expression, __gkr_anime/clothing__, __gkr_anime/weapons__, __gkr_anime/offhand__, __gkr_anime/environment__, epic dramatic mood, __gkr_anime/lighting__, dynamic hero pose, (shonen action style:1.1), __gkr_anime/fx_magic__"
+    - "spiky-haired young fighter, clenched fist, forward battle stance, __gkr_anime/gender__, __gkr_anime/race__, __gkr_anime/age__, __gkr_anime/build__, __gkr_anime/hair_color__, __gkr_anime/eyes__, focused narrowed gaze, fitted jacket and reinforced trousers, __gkr_anime/weapons__, __gkr_anime/environment__, __gkr_anime/lighting__, low-angle foreshortening, bold speed lines, __gkr_anime/fx_magic__, __gkr_anime/style__"
 
   magical_girl_combo:
-    - "frilled pastel dress, oversized ribbon, star-tipped wand raised overhead, sparkling eyes, female, __gkr_anime/hair_color__, __gkr_anime/trinkets__, __gkr_anime/environment__, whimsical fun mood, sparkly transformation effects, (bright vibrant anime style:1.1), dynamic action shot"
+    - "frilled pastel dress, oversized ribbon, star-tipped wand raised overhead, sparkling eyes, female, __gkr_anime/hair_color__, __gkr_anime/trinkets__, __gkr_anime/environment__, bouncing pose, rounded shapes, candy-colored accents, sparkly transformation effects, saturated cel shading, dynamic action shot, __gkr_anime/style__"
 
   isekai_combo:
-    - "patched leather traveling cloak, worn satchel, dusty boots, __gkr_anime/gender__, __gkr_anime/race__, __gkr_anime/hair__, __gkr_anime/weapons__, __gkr_anime/armor__, __gkr_anime/spotlight_bg_fantasy__, epic dramatic mood, __gkr_anime/lighting__, (isekai fantasy illustration:1.1), __gkr_anime/camera__"
+    - "patched leather traveling cloak worn over engraved armor plates, worn satchel, dusty boots, __gkr_anime/gender__, __gkr_anime/race__, __gkr_anime/hair__, __gkr_anime/weapons__, __gkr_anime/spotlight_bg_fantasy__, tiny figure against sweeping scenery, __gkr_anime/lighting__, detailed fantasy illustration, luminous portal light, __gkr_anime/camera__, __gkr_anime/style__"
 
   mecha_pilot_combo:
-    - "padded flight suit with segmented shoulder plating, tucked-under helmet, __gkr_anime/gender__, __gkr_anime/spotlight_bg_scifi__, __gkr_anime/offhand__, neon reflections, intense action-packed mood, (mecha anime aesthetic:1.1), wide cinematic framing, __gkr_anime/fx_environment__"
+    - "padded flight suit with segmented shoulder plating, helmet tucked under one arm, __gkr_anime/gender__, __gkr_anime/spotlight_bg_scifi__, floating translucent holographic display panel, neon reflections, braced pose, flying sparks, hard-surface mechanical detail, crisp cel shading, wide cinematic framing, __gkr_anime/fx_environment__, __gkr_anime/style__"
 
   villain_combo:
-    - "long dark coat, half-shadowed face, unreadable glare, __gkr_anime/gender__, __gkr_anime/hair_color__, crimson glowing eyes, __gkr_anime/clothing__, __gkr_anime/weapons__, wisps of dark shadow trailing off the shoulders, __gkr_anime/environment__, dark foreboding mood, dramatic rim lighting, low-angle epic shot"
+    - "long dark coat with high collar, half-shadowed face, fixed cold glare, __gkr_anime/gender__, __gkr_anime/hair_color__, crimson glowing eyes, __gkr_anime/weapons__, wisps of dark shadow trailing off the shoulders, __gkr_anime/environment__, deep shadows, narrow pools of light, dramatic rim lighting, low-angle shot, __gkr_anime/style__"
 
   idol_combo:
-    - "sequined layered dress, sparkling handheld microphone, mid-spin pose, bright stage smile, female, pastel hair, large expressive eyes, __gkr_anime/spotlight_bg_urban__, uplifting hopeful mood, soft pastel illumination, (bright vibrant anime style:1.1)"
+    - "sequined layered dress, sparkling handheld microphone, mid-spin pose, bright stage smile, female, pastel hair, large expressive eyes, concert stage with colored spotlights and cheering crowd silhouettes, raised chin, bright high-key palette, soft pastel illumination, __gkr_anime/style__"
 
   slice_of_life_combo:
-    - "sailor-style school uniform, bright open smile, twin ribbons in hair, __gkr_anime/offhand__, __gkr_anime/spotlight_bg_urban__, warm nostalgic mood, __gkr_anime/lighting__, portrait style shot, __gkr_anime/art_style_specific__"
+    - "sailor-style school uniform, bright open smile, twin ribbons in hair, leather school satchel, quiet classroom or neighborhood street, warm faded palette, soft light, subtle film grain, portrait shot, __gkr_anime/art_style_specific__, __gkr_anime/style__"
 
   cyber_anime_combo:
-    - "matte black bodysuit with glowing circuit-line seams, wrapped forearm blades, crouched ready stance, __gkr_anime/gender__, neon purple hair, glowing eyes, __gkr_anime/spotlight_bg_scifi__, neon reflections, (cyberpunk anime style:1.1), dynamic action shot, __gkr_anime/fx_environment__"
+    - "matte black bodysuit with glowing circuit-line seams, wrapped forearm blades, crouched ready stance, __gkr_anime/gender__, neon purple hair, glowing eyes, __gkr_anime/spotlight_bg_scifi__, neon reflections, magenta and cyan holographic overlays, dynamic action shot, __gkr_anime/fx_environment__, __gkr_anime/style__"
 
   anime_monster_combo:
-    - "__gkr_anime/anime_monster__, __gkr_anime/anime_monster_traits__, __gkr_anime/environment__, epic dramatic mood, wide cinematic framing, (dark fantasy anime style:1.1)"
+    - "__gkr_anime/anime_monster__, __gkr_anime/anime_monster_traits__, __gkr_anime/environment__, tiny foreground figures emphasizing enormous scale, sweeping diagonal composition, wide cinematic framing, blackened textures and muted jewel tones, __gkr_anime/style__"
+
+  equipped_character_combo:
+    - "__gkr_anime/race__, __gkr_anime/build__, __gkr_anime/age__, __gkr_anime/tone__, __gkr_anime/hair__, __gkr_anime/hair_color__, __gkr_anime/eyes__, __gkr_anime/face_style__, __gkr_anime/expression__, __gkr_anime/gender__, __gkr_anime/outfit_choice__, __gkr_anime/weapons__, __gkr_anime/offhand__, __gkr_anime/environment__, __gkr_anime/lighting__, __gkr_anime/camera__, __gkr_anime/style__"
 
   scene_combo:
     - "__gkr_anime/environment__, __gkr_anime/lighting__, __gkr_anime/mood__, __gkr_anime/fx_environment__, __gkr_anime/camera__, __gkr_anime/art_style_specific__"
@@ -441,6 +447,7 @@ gkr_anime:
     - "__gkr_anime/slice_of_life_combo__"
     - "__gkr_anime/cyber_anime_combo__"
     - "__gkr_anime/anime_monster_combo__"
+    - "__gkr_anime/equipped_character_combo__"
     - "__gkr_anime/scene_combo__"
     - "__gkr_anime/spotlight_combo__"
     - "__gkr_anime/spotlight_warrior_combo__"
@@ -457,7 +464,7 @@ gkr_anime:
     - "__gkr_anime/spotlight_scene_fantasy_epic__"
 
   random_character:
-    - "__gkr_anime/archetype__, __gkr_anime/race__, __gkr_anime/build__, __gkr_anime/age__, __gkr_anime/tone__, __gkr_anime/hair__, __gkr_anime/hair_color__, __gkr_anime/eyes__, __gkr_anime/face_style__, __gkr_anime/expression__, __gkr_anime/gender__"
+    - "__gkr_anime/archetype__, __gkr_anime/race__, __gkr_anime/build__, __gkr_anime/age__, __gkr_anime/tone__, __gkr_anime/hair__, __gkr_anime/hair_color__, __gkr_anime/eyes__, __gkr_anime/face_style__, __gkr_anime/expression__, __gkr_anime/gender__, __gkr_anime/style__"
 
 # ---------------------------------------------------------
 # SPOTLIGHT (SPLIT INTO THEMES)
@@ -514,7 +521,7 @@ gkr_anime:
   spotlight_char_fantasy_warrior:
     - "long black coat, windswept hair, gripping a sword with a faintly glowing blue edge"
     - "fox ears, soft smile, kimono patterned with leaves, staff topped with a crystal"
-    - "plate armor, oversized metal gauntlets, hopeful determined eyes"
+    - "plate armor, oversized metal gauntlets, raised chin and firmly focused eyes"
     - "bright flowing scarf, fingerless gloves, small flame flickering in an open palm"
     - "flowing white robes, glowing golden sigils embroidered along the hem"
     - "long green hair, shy expression, intricately carved bow, vine-wrapped boots"
@@ -552,21 +559,21 @@ gkr_anime:
 
   spotlight_char_scifi:
     - "messy pigtails, goggles pushed up on the forehead, small mechanical drones hovering nearby"
-    - "brass gears spinning in the air, glowing magical rings rotating around the wrist"
-    - "one robotic arm etched with glowing runic circuitry"
-    - "flashing holographic glyphs projected around the hands"
+    - "brass gear-driven wrist projector, concentric amber holographic rings rotating above it"
+    - "one robotic arm etched with glowing circuit traces"
+    - "flashing holographic interface symbols projected around the hands"
     - "fragments of glowing holographic data drifting around the body"
     - "bulky armored suit with glowing joint seams"
     - "a glowing holographic map hovering above an open hand"
 
   spotlight_char_modern:
-    - "crystal-shaped microphone, flares of light bursting mid-note"
-    - "a glowing monocle, small magnifying glass hovering beside the hand"
-    - "plain contemporary clothes hiding a jeweled pendant beneath the collar, poised posture, hopeful gaze"
-    - "small chibi proportions, tiny sparks flaring off the fingertips"
-    - "school uniform, faintly glowing star-shaped freckles peeking from a rolled sleeve, soft cosmic aura"
-    - "coveralls rolled to the elbows, welding mask pushed up, sparks flying from a glowing metal workpiece"
-    - "small enchanted plush companions trailing behind"
+    - "cropped stage jacket, crystal-shaped microphone, LED spotlights flaring mid-note"
+    - "contemporary detective coat, glowing electronic monocle, magnifying lens held beside one eye"
+    - "plain contemporary shirt and trousers, jeweled pendant beneath the collar, upright posture, gaze raised toward bright light"
+    - "small chibi proportions, oversized hoodie and sneakers, tiny sparks flaring off the fingertips"
+    - "modern school uniform, faintly glowing star-shaped freckles peeking from a rolled sleeve"
+    - "industrial coveralls rolled to the elbows, welding mask pushed up, sparks flying from a hot metal workpiece"
+    - "casual streetwear, small animated plush toys toddling one step behind"
 
   spotlight_bg_fantasy:
     - "grand academy courtyard, floating luminous sigils drifting overhead"
@@ -607,7 +614,7 @@ gkr_anime:
     - "ancient bridge stretching over a sea of clouds"
     - "crystal observatory glowing with captured starlight"
     - "glowing forest path, small spirit creatures drifting alongside it"
-    - "cracked, overgrown remains of an old mage's arena"
+    - "cracked, overgrown circular stone arena with faded runes carved into the floor"
     - "floating arena platforms suspended in open sky"
     - "towering stone arch rising above the clouds"
     - "ancient overgrown aqueduct stretching between mountains"
@@ -623,27 +630,27 @@ gkr_anime:
     - "rain-soaked backstreet at night, neon signs reflected in the puddles"
 
   spotlight_bg_urban:
-    - "quiet village street lined with small wooden shops and hanging lanterns"
+    - "quiet town street lined with narrow storefronts and hanging lanterns"
     - "festival street strung with glowing paper lanterns, night market stalls"
     - "cliffside road at golden hour, overlooking a distant city"
     - "bustling colorful marketplace, rows of stalls"
     - "sunset city skyline, small lantern-lit airships drifting overhead"
-    - "training garden with wooden practice dummies, drifting sakura petals"
-    - "steaming outdoor hot spring surrounded by forest"
-    - "sunrise over an enormous academy tower"
-    - "abandoned cathedral, broken stained-glass windows"
+    - "city training courtyard with wooden practice dummies, apartment roofs beyond the wall"
+    - "rooftop public bath, steam rising above the surrounding city lights"
+    - "sunrise over an enormous academy tower surrounded by dense city blocks"
+    - "abandoned city cathedral, broken stained-glass windows, nearby high-rises visible through the roof"
     - "night fairground, floating carnival rides strung with glowing lights"
-    - "town built into cliffs beside a waterfall, connecting bridges and lifts"
+    - "dense cliffside town beside a waterfall, connecting bridges, elevators, and stacked buildings"
     - "quiet classroom interior, stacks of magic textbooks on the desks"
     - "vividly lit night market, colorful stalls"
-    - "peaceful hilltop shrine, torii gate under a starlit sky"
+    - "hilltop shrine, torii gate overlooking a bright night skyline"
     - "fantasy metropolis with steampunk airships flying overhead"
     - "marble city plaza, fountains lit by glowing magic cores"
     - "dim school hallway, faint translucent spirits drifting through it"
-    - "small shrine deep within a bamboo forest, torii gate"
+    - "small neighborhood shrine between apartment blocks, bamboo clustered behind its torii gate"
     - "carnival floating above the night city skyline"
     - "sunlit town square bustling with people"
-    - "thunderstorm sweeping across a ruined battleground, streaks of lightning"
+    - "thunderstorm sweeping across a damaged city plaza, lightning above shattered storefronts"
 
   spotlight_bg_natural:
     - "avenue lined with cherry blossoms, soft glowing pink light"
@@ -664,68 +671,68 @@ gkr_anime:
     - "meadow beneath a sky thick with shimmering constellations"
 
   spotlight_scene_sliceoflife:
-    - "rooftop sunset, two students talking, wind, blowing uniform, anime scene"
-    - "train, countryside, staring out window, thoughtful, interior"
-    - "melancholic, rainy scene, two people sharing umbrella, sad"
-    - "tea ceremony, serene, tatami room, soft light, kimono"
-    - "childhood friends, walking home, sakura-lined path, school, sunset"
+    - "rooftop at sunset, two uniformed students facing each other, wind lifting their sleeves and hair"
+    - "train interior crossing the countryside, passenger staring out the window with lowered brows"
+    - "rainy street, two people pressed beneath one umbrella, downcast eyes, cool desaturated palette"
+    - "tea ceremony, figure kneeling with relaxed brow in a tatami room, soft light, patterned kimono"
+    - "two uniformed students walking shoulder to shoulder along a sakura-lined path at sunset"
     - "calm beach, morning, soft waves, seagulls, ocean"
-    - "heroine, running late, school, toast in mouth, funny"
-    - "quiet library, two characters reach for same book, romantic"
-    - "friends, sharing meal, cozy ramen shop, food, inside"
+    - "uniformed student sprinting toward school with toast held in the mouth, loose papers flying behind"
+    - "quiet library, two blushing hands reaching for the same book, warm close framing"
+    - "group seated shoulder to shoulder, sharing steaming bowls inside a cozy ramen shop"
     - "quiet moment, two people staring at starry sky, grassy hill, night"
     - "winter classroom, frost on windows, warm sunlight, school, snow"
     - "child, running, golden wheat fields, chasing fireflies, sunset"
-    - "summer break, scene, friends, at riverbank, water, relaxing"
-    - "main character, walking alone, empty city street, night"
-    - "student council, meeting, dramatic sunlight, windows, classroom"
+    - "group of teenagers sitting barefoot at a sunny riverbank, shoes and cold drinks beside them"
+    - "solitary figure walking down an empty city street at night, long shadow under streetlights"
+    - "uniformed students seated around a meeting table, dramatic sunlight cutting through classroom windows"
     - "market street, bustling, colorful stands, banners, city, day"
     - "fishing village, at dawn, boats, drifting, ocean, morning"
     - "school festival, dance performance, twinkling lights, night"
-    - "cute mascot creature, bouncing, beside protagonist, animal, pet"
-    - "tavern scene, fantasy adventurers, laughing, drinking, bar, medieval"
-    - "mysterious transfer student, staring out window, new classroom, school"
+    - "round tiny creature bouncing beside a walking student, oversized sparkling eyes and short paws"
+    - "armored travelers laughing and raising wooden mugs inside a timber-framed tavern"
+    - "newly seated uniformed student staring out the classroom window, face half hidden by long hair"
 
   spotlight_scene_action:
     - "samurai duel, falling sakura, cherry blossoms, lanterns, night"
-    - "shonen, fighter, battle aura, glowing, ground cracking, action"
+    - "young fighter in a wide battle stance, glowing aura bursting outward, ground cracking beneath both feet"
     - "epic sword clash, shockwave, forest clearing, two boys fighting"
-    - "hero, sprinting, nighttime street, neon reflections, running"
+    - "jacketed figure sprinting down a nighttime street, neon reflections streaking across wet pavement"
     - "battle, atop skyscraper, wind, capes, hair, fighting, city"
     - "sci-fi chase, neon streets, hovering bike, futuristic, action"
     - "dramatic face-off, on bridge, twilight, two boys confrontation"
     - "sports anime, athlete, leaps, slow motion, dynamic"
-    - "dual-wielding, ranger, sliding through forest, high speed, action"
-    - "cyber assassin, dashing, neon-lit rooftop, futuristic, night"
-    - "swordsman, blocking, massive flaming strike, action, fire"
+    - "hooded archer holding twin short blades, sliding through a forest with leaves spraying outward"
+    - "masked figure in a circuit-lined bodysuit dashing across a neon-lit rooftop at night"
+    - "armored blade wielder blocking a massive flaming strike, sparks and fire bursting at impact"
     - "samurai, blocking arrows, dramatic slow motion, action"
     - "airborne duel, winged warriors, above clouds, two boys fighting, sky"
     - "archer, firing arrow, into storm, lightning, dynamic"
-    - "hero's cloak, whipping, desert sandstorm, standoff, wind"
+    - "lone figure's cloak whipping sideways in a desert sandstorm, opponent silhouetted across the gap"
     - "clashing mages, swirling elemental tornadoes, two people, magic, fight"
     - "apocalyptic showdown, ruined city, floating embers, fighting, destruction"
-    - "heroine, battling shadow clones, abandoned warehouse, action"
-    - "dragon-slayer, striking final blow, sparks, dragon, fantasy"
+    - "woman swinging a blade through surrounding shadow duplicates inside an abandoned warehouse"
+    - "armored figure driving a spear into a dragon's scales, sparks bursting at impact"
 
   spotlight_scene_fantasy:
     - "magical girl, transformation, sparkles, rising, starry sky"
-    - "fantasy, mage, casting, glowing spell circle, ancient ruins"
-    - "mysterious girl, floating, above lake, glowing butterflies, magic"
+    - "robed figure casting from a glowing spell circle among ancient ruins"
+    - "long-haired girl floating above a lake, face half-shadowed, glowing butterflies orbiting her"
     - "spirits, rising from shrine, red moon, night, yokai"
-    - "priestess, miko, performing ritual, towering torii gate, shrine"
+    - "miko in white haori and red hakama sweeping an ofuda wand beneath a towering shrine torii"
     - "battle, inside bamboo forest, leaves scatter, two boys fighting, sword"
-    - "summoning circle, glowing, beneath warrior's feet, magic"
+    - "glowing concentric runic circle beneath an armored figure's feet, luminous smoke rising"
     - "shrine maiden, confronting yokai, moonlit woods, monster, night"
-    - "protagonist, awakening hidden power, glowing sigils, magic"
+    - "figure arched backward as glowing sigils spread across the skin, hair and clothing lifted by radiant energy"
     - "angry demon spirit, emerging, cracked mask, yokai, monster"
-    - "mysterious cat spirit, sitting, atop red shrine gate, yokai, cat"
-    - "torch-lit cave, adventurers, glowing-eyed monster, fantasy, dungeon"
-    - "witch, brewing potion, cluttered cottage, runes, magic"
+    - "translucent cat with two tails sitting atop a red shrine gate, eyes glowing through mist"
+    - "torch-lit cave, armored travelers facing a many-eyed creature emerging from darkness"
+    - "pointed-hat figure stirring a bubbling potion in a cluttered cottage, glowing runes above the cauldron"
     - "massive golem, awakening, overgrown ruins, monster, fantasy"
     - "masked festival dancers, swirling, firepit, night, dance"
-    - "spirit wolves, racing, alongside protagonist, animal, magic"
+    - "translucent glowing wolves racing beside a cloaked runner"
     - "army of yokai, marching, foggy valley, monsters, fog"
-    - "hero, diving underwater, chasing glowing spirit fish, ocean"
+    - "figure diving underwater after a school of translucent glowing fish"
     - "falling from sky, scene, papers, feathers, drifting"
     - "massive magical explosion, illuminating night sky, blast, magic"
     - "demonic gate, opening, crimson sky, portal, dark, monster"
@@ -738,7 +745,7 @@ gkr_anime:
     - "space fighter, launching, hangar, alarms, spaceship, sci-fi"
     - "spaceship, drifting, silent starfield, space, sci-fi"
     - "mecha, charging forward, boosters ignited, robot, action"
-    - "mecha, blocking attack, protect city, mecha, defense"
+    - "giant mecha braced behind a radiant shield, incoming blast splitting around it above city buildings"
     - "mecha, rising from ocean, surrounded by steam, robot, water"
     - "pilot, entering cockpit, towering battle mech, mecha"
     - "cyber girl, floating, digital sea, data streams, futuristic"
@@ -746,126 +753,126 @@ gkr_anime:
     - "flying ship, gliding, above cloud ocean, dawn, airship, fantasy"
 
   spotlight_scene_dramatic:
-    - "silent, snowy field, lone warrior, giant spirit beast, monster, snow"
+    - "wide snowy field, lone armored figure facing a giant translucent horned beast"
     - "giant monster, attack, coastal town, dust, debris, destruction"
-    - "mysterious villain, standing on cliff, lightning storm, dramatic"
-    - "crying protagonist, under streetlight, rain, sad, night"
-    - "masked hero, perched on rooftop, overlooking city, night"
-    - "sunset train platform, emotional farewell, sad, train"
+    - "long-coated figure standing on a cliff with face hidden in shadow, lightning splitting the storm behind"
+    - "solitary person crying beneath a streetlight in heavy night rain, shoulders folded inward"
+    - "masked caped figure crouched on a rooftop overlooking the city at night"
+    - "sunset train platform, two people reaching toward each other as a departing train separates them"
     - "ancient dragon, unfurling wings, atop mountain shrine, dragon, monster"
     - "ghost girl, standing silently, abandoned school hallway, horror"
     - "ancient temple, collapsing, magical duel, ruins, destruction"
-    - "hero, reaching out hand, emotional reunion, two people, dramatic"
-    - "heroine, standing atop skyscraper, sun rises behind, city"
+    - "two tearful people reaching toward each other with outstretched hands, tight dramatic framing"
+    - "woman standing atop a skyscraper with the sun rising behind the city skyline"
     - "steam, rising from hot spring, onsen, snowy cliffs, snow"
     - "night market, alley, glowing, colorful lanterns, street"
     - "mountain shrine, approached, lantern-lit stairs, night, temple"
 
   spotlight_scene_romantic:
-    - "quiet library, two characters reach for same book, romantic"
-    - "romantic confession, beneath blooming cherry trees, sakura"
-    - "quiet park bench, falling sakura petals, two people, romantic"
-    - "melancholic, rainy scene, two people sharing umbrella, sad"
+    - "quiet library, two blushing hands reaching for the same book, warm close framing"
+    - "one blushing student offering a folded letter to another beneath blooming cherry trees"
+    - "two people seated close together on a quiet park bench, falling sakura petals, shy sideways glances"
+    - "rainy street, two people pressed beneath one umbrella, downcast eyes, cool desaturated palette"
 
   spotlight_scene_other:
-    - "idol performance, glowing stage, cheering crowd, concert"
-    - "idol dancer, spinning mid-air, sparkling stage, concert"
+    - "sequined singer holding a microphone on a glowing stage, cheering crowd silhouettes"
+    - "costumed dancer spinning mid-air above a sparkling concert stage"
     - "child, staring, glowing meteor, streaking across sky, night, space"
 
   spotlight_scene_fantasy_epic:
-    - "mage, floating, glowing runic circle, petals, swirl upward, magic"
+    - "robed figure floating above a glowing runic circle as flower petals spiral upward"
     - "samurai, confronting, colossal spirit fox, kitsune, red moon, night"
-    - "young hero, awakening, ancient sword, lightning, explodes, ruins"
+    - "young figure pulling a glowing ancient sword from rubble as lightning bursts across the ruins"
     - "elf archer, leaping, floating stone platforms, sky temple, ruins"
     - "dragon rider, soaring through clouds, dawn light, mountains, dragon"
     - "forest spirits, dancing, sacred tree, glowing blue light, night, magic"
-    - "anime knight, blocking, massive fireball, radiant shield, magic"
-    - "witch, casting, starlight spell, ancient observatory, space, magic"
-    - "celestial warrior, descending, heavens, golden wings, angel"
-    - "heroine, battling, shadow demons, moonlit field, night, monster"
+    - "plate-armored figure blocking a massive fireball with a radiant shield"
+    - "pointed-hat figure casting a spiral of starlight inside an ancient observatory"
+    - "gold-armored figure descending through clouds on broad luminous wings"
+    - "woman swinging a glowing blade through shadow creatures in a moonlit field"
     - "magical girl, holding, luminous staff, crystalline forest, magic"
-    - "swordsman, clashing, horned demon, falling ash, fight, monster"
-    - "friends, camping, giant glowing mushrooms, enchanted woods, night"
+    - "blade wielder clashing steel with a horned creature beneath falling ash"
+    - "group gathered around a campfire beneath giant glowing mushrooms at night"
     - "sky kingdom, floating, oceans of clouds, dragons circling, castle"
-    - "summoner, calling, massive elemental spirit, glowing circle, magic"
-    - "warrior, sprinting, collapsing rainbow bridge, sky, action"
-    - "angelic mage, weaving, threads of light, healing, magic, angel"
+    - "robed figure raising both arms inside a glowing circle as a massive elemental form materializes"
+    - "armored figure sprinting across a collapsing rainbow bridge in the sky"
+    - "winged robed figure weaving luminous threads around visible wounds"
     - "forest nymph, guiding travelers, bioluminescent grove, glowing"
     - "battle, armored chimera, on cliffside, monster, fight, fantasy"
-    - "anime heroine, reaching, floating relic, altar, magic"
+    - "woman reaching toward a floating glowing relic above a stone altar"
     - "massive golem, rising from lake, magical haze, monster, water"
-    - "paladin, charging, battlefield, cracked crystals, knight"
-    - "water mage, forming, swirling dragon of water, magic"
-    - "dark sorcerer, levitating, black feathers, rain down, dark magic"
-    - "mage apprentice, failing spell, sparkles, burst, magic, cute"
-    - "spear warrior, confronting hydra, ruins, monster, fantasy"
+    - "white-armored figure charging across a battlefield between cracked luminous crystals"
+    - "robed figure shaping a swirling dragon from ribbons of water"
+    - "black-robed figure levitating as black feathers rain through a violet aura"
+    - "young robed student recoiling from a lopsided burst of sparkles, singed sleeves and wide eyes"
+    - "spear-bearing armored figure confronting a many-headed hydra among ruins"
     - "sky pirates, raiding, floating island, storm, airship, lightning"
-    - "spirit wolf, racing, alongside hero, snowy forest, animal"
+    - "translucent glowing wolf racing beside a cloaked runner through a snowy forest"
     - "battle, inside ancient library, books fly, two people, magic, fighting"
-    - "anime monk, unleashing chi explosion, mountain summit, energy"
-    - "wind mage, hovering, tornado, coils beneath feet, magic"
-    - "witch, flying on broom, glowing spirit lanterns, night, sky"
-    - "runes, lighting up, stone bridge, prophecy, awakens, magic"
+    - "shaven-headed figure in wrapped robes thrusting both palms outward, circular energy blast above a mountain summit"
+    - "robed figure hovering above a tornado coiling beneath the feet"
+    - "pointed-hat figure flying on a broom among glowing lanterns in the night sky"
+    - "rows of runes lighting sequentially across an ancient stone bridge"
     - "crystal dragon, unfurling wings, inside cavern, mirrors, dragon"
-    - "heroine, discovering portal, hidden inside waterfall, magic"
-    - "anime knight, kneeling in rain, fallen comrade, sad, battlefield"
+    - "woman parting a waterfall to reveal a glowing circular portal behind it"
+    - "armored figure kneeling in rain beside a motionless armored body on a battlefield, head bowed"
     - "magical girl team, assembling, colorful burst of light, transformation"
     - "spirit deer, watching quietly, moonlit clearing, night, forest, magic"
     - "battle, suspended platform, celestial arena, two people, fighting, sky"
-    - "ancient forest guardian, towering, tiny travelers, monster, giant, tree spirit"
+    - "towering humanoid tree creature looming above tiny travelers in an ancient forest"
     - "alchemist, mixing, volatile potion, floating glass spheres, magic"
-    - "fire mage, surrounded, swirling phoenix flames, fire magic"
-    - "young sorcerer, summoning meteors, desert battle, magic"
+    - "robed figure surrounded by swirling flames shaped like a phoenix"
+    - "young robed figure pointing skyward as glowing meteors descend over a desert battlefield"
     - "anime swordswoman, running across lake surface, magic, water"
     - "dreamlike meadow, floating feathers, soft sunlight, field, fantasy"
     - "necromancer, raising skeletal warriors, swirling shadows, dark magic"
-    - "mage duel, causing sky to ripple, magical storms, fighting"
-    - "heroine, standing on mountain peak, facing sky titan, giant"
+    - "two robed figures casting opposing energy beams as concentric ripples spread across the stormy sky"
+    - "woman standing on a mountain peak facing a colossal humanoid silhouette in the clouds"
     - "enchanted waterfall, hiding, glowing golden portal, magic"
     - "anime dragon, flying low, lavender fields, purple, landscape"
     - "town festival, illuminated, spirit lanterns, binding to sky, night"
-    - "fairy queen, rising from flower, soft pink glow, magic"
+    - "tiny crowned winged figure rising from a giant flower in soft pink light"
     - "griffin cavalry, charging, emerald plains, fantasy, army, flying"
-    - "mage, reading forbidden book, runes circle above, magic"
+    - "hooded figure reading a chained black book as warning-red runes circle overhead"
     - "spirit fox, kitsune, running on air, trails of fire, magic"
-    - "mage, summoning, celestial whale, drifting in night sky, space, magic"
+    - "robed figure raising a glowing staff as a translucent star-filled whale materializes in the night sky"
     - "swordfighter, slicing, illusion clones, forest, action"
-    - "anime summoner, surrounded, floating magical tomes, books, magic"
+    - "robed figure surrounded by open floating tomes and rotating luminous symbols"
     - "giant tree spirit, shaking leaves, glow like stars, monster, forest"
     - "sky duel, two winged warriors, above clouds, fighting, angel"
-    - "anime prince, kneeling, sacred statue, awakens, magic"
+    - "figure in an embroidered coat and small coronet kneeling as a stone statue opens glowing eyes"
     - "phoenix, reborn from ashes, characters shield eyes, fire, bird"
-    - "hero, crossing desert, glowing spirit sand, magic"
+    - "cloaked traveler crossing a desert where luminous sand curls into translucent animal shapes"
     - "battle, atop giant turtle, carrying ancient shrine, monster, fantasy"
-    - "anime mage, standing before, colossal astral gate, portal, space"
+    - "tiny robed figure standing before a colossal star-filled circular gate"
     - "enchanted glade, spirits float, motes of sunlight, forest, magic"
-    - "dark knight, summoning, black armor, forged from shadows, magic"
-    - "oracle, gazing into glowing water, predicting destiny, magic"
+    - "black-armored figure pulling a solid blade from coiling shadows"
+    - "hooded figure gazing into glowing water, reflected constellations and branching translucent images hovering above the basin"
     - "merfolk, emerging, glowing ocean, beneath starlight, mermaid, night"
     - "battle, dragon-like wraith, stormy sky, monster, lightning"
-    - "anime heroine, drifting, dream realm, floating islands, surreal"
+    - "woman drifting weightlessly among upside-down floating islands and pastel clouds"
     - "magic knights, clashing swords, infused with elemental energy, fight"
     - "forest temple, floating lanterns, drifting spirits, shrine, night"
-    - "mage, riding giant owl, twilight skies, flying, animal"
+    - "robed figure riding a giant owl through violet twilight clouds"
     - "samurai, defending village, monstrous oni, monster, fight"
-    - "heroine, ascending, glowing staircase, leading to heavens, sky"
-    - "anime warrior, leaping from cliff, giant serpent, monster, action"
+    - "woman ascending a glowing staircase that disappears into bright clouds"
+    - "armored figure leaping from a cliff toward a giant airborne serpent"
     - "dark forest, cracking open, reveal hidden underworld, portal, dark"
     - "winged fox spirit, kitsune, curled atop, floating shrine, magic"
-    - "anime druid, conversing, ancient stone spirit, monster, magic"
+    - "leaf-cloaked figure touching palms with an ancient moss-covered stone creature"
     - "massive air wizard, summoning, lightning dragon, storm, magic"
-    - "hero, running, runic bridge, igniting, every step, magic, fire"
+    - "cloaked runner crossing a bridge as each rune ignites beneath the next footstep"
     - "battle, beneath cherry blossoms, raining petals, two samurai, sakura"
-    - "mage, floating, star-filled void, channeling cosmic magic, space"
+    - "robed figure floating in a star-filled void, spiraling nebula energy between raised hands"
     - "fantasy city skyline, floating orbs, illuminating night, city"
-    - "anime swordsman, surrounded, fiery aura, mid-duel, action, fire"
+    - "blade wielder surrounded by a fiery aura, sword locked against an opponent's weapon"
     - "giant magical barrier, domed, over ancient capital, magic, shield"
     - "wolf spirit, walking on water, under moonlight, night, magic"
     - "party, confronting, ancient world serpent, beneath shrine, monster, giant"
-    - "heroine, manifesting, wings of spirit light, angel, magic"
+    - "woman arching backward as broad translucent wings of light unfold from her shoulders"
     - "moonlit field, spirits drift, like fireflies, night, magic, ghosts"
-    - "anime warrior, cleaving meteor, in half, enchanted blade, space"
+    - "armored figure swinging a glowing blade through a meteor, two burning halves splitting apart"
     - "enormous crystal tree, shimmering, celestial light, magic"
-    - "last stand, on floating castle, sky cracks open, battle, destruction"
-    - "summoner, calling, constellation creatures, battle, space, magic"
-    - "heroine, flowing cape, standing before, cosmic eclipse, space"
+    - "small battered group back-to-back on a collapsing floating castle as glowing cracks split the sky"
+    - "robed figure raising both arms as luminous constellation animals descend over a battlefield"
+    - "caped woman standing in silhouette before a vast cosmic eclipse"
