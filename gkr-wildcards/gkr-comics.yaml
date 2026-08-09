@@ -9,43 +9,43 @@ gkr_comics:
 # ---------------------------------------------------------
 
   hero_archetype:
-    - (caped superhero:1.2), flowing cape, heroic
-    - (masked vigilante:1.2), stealthy, dark
-    - (street level hero:1.2), urban setting, gritty
-    - (cosmic champion:1.2), space, (glowing with energy:1.1)
-    - (armored powerhouse:1.2), heavy armor, imposing
-    - (agile acrobat:1.2), dynamic pose, flexible
+    - (caped superhero:1.2), flowing cape, confident stance, chin lifted
+    - (masked vigilante:1.2), crouched in shadow, narrowed eyes
+    - (street level hero:1.2), urban setting, scuffed jacket, worn gloves
+    - (cosmic champion:1.2), starfield backdrop, (glowing with energy:1.1)
+    - (armored powerhouse:1.2), heavy armor, wide braced stance
+    - (agile acrobat:1.2), dynamic pose, mid-flip
     - (sorcerer hero:1.2), casting magic, (glowing runes:1.1)
-    - (mutant outcast:1.2), unique features, brooding
-    - (alien defender:1.2), non-human features, noble
-    - (cyber hero:1.2), (cybernetic implants:1.1), high-tech
+    - (mutant outcast:1.2), asymmetrical features, hunched shoulders
+    - (alien defender:1.2), non-human features, steady unblinking gaze
+    - (cyber hero:1.2), (cybernetic implants:1.1), exposed wiring
 
   villain_archetype:
-    - (tragic villain:1.2), brooding expression, remorseful
-    - (mastermind villain:1.2), intelligent, (scheming:1.1)
-    - (monstrous brute villain:1.2), giant, (beastly:1.1)
+    - (tragic villain:1.2), brooding expression, downcast eyes, clenched jaw
+    - (mastermind villain:1.2), narrowed calculating eyes, thin knowing smirk
+    - (monstrous brute villain:1.2), giant, coarse hide, jagged teeth
 
   neutral_archetype:
-    - (gadget detective:1.2), (high-tech gadgets:1.1), trench coat
-    - (antihero:1.2), dark past, (brooding:1.1), gritty
-    - (brilliant inventor:1.2), scientist, innovative
-    - (investigative reporter:1.2), determined, truth-seeker
-    - (world weary veteran hero:1.2), seasoned, (scars:1.1)
-    - (cheerful sidekick:1.2), energetic, loyal
-    - (charming rogue:1.2), thief, (confident smirk:1.1)
+    - (trench coat with hidden gadget pouches:1.2), tinted goggles
+    - scarred knuckles, worn leather jacket, (brooding:1.1)
+    - lab coat, safety goggles pushed up, ink-stained fingers
+    - notepad and camera in hand, trench coat, sharp focused eyes
+    - grizzled face, (weathered scars:1.1), grey-streaked hair
+    - bright wide grin, energetic pose, arms thrown open
+    - (confident smirk:1.2), fingerless gloves, concealed dagger
 
   age:
-    - young adult, (aged 20s:1.1)
-    - adult, (aged 30s-40s:1.1)
-    - seasoned veteran, (aged 50s-60s:1.1), weathered face
-    - ageless being, (ancient:1.1), timeless, powerful
+    - young adult, aged 20s
+    - adult, aged 30s-40s
+    - seasoned veteran, aged 50s-60s, weathered face
+    - ageless being, ancient, timeless, unnaturally smooth skin
 
   build:
-    - lean athletic build, (toned:1.1), defined
-    - bulky muscular build, (powerful:1.1), (heavy:1.1)
-    - tall and imposing build, (intimidating:1.1)
-    - agile compact build, (acrobatic:1.1)
-    - graceful toned build, (elegant:1.1)
+    - lean athletic build, toned, defined
+    - bulky muscular build, powerful, heavy
+    - tall and imposing build, intimidating
+    - agile compact build, acrobatic
+    - graceful toned build, elegant
 
   tone:
     - light skin tone, fair skin
@@ -61,208 +61,208 @@ gkr_comics:
 # ---------------------------------------------------------
 
   hair:
-    - short cropped hair, (textured:1.1)
-    - messy windswept hair, (dynamic hair:1.1)
-    - slicked back hair, (wet look:1.1), neat
-    - long flowing hair, (dynamic:1.1), dramatic
-    - tight curls, (coiled hair:1.1), voluminous
-    - shaved head, (bald:1.1), clean shaven
+    - short cropped hair, textured
+    - messy windswept hair, dynamic
+    - slicked back hair, wet look, neat
+    - long flowing hair, dynamic, dramatic
+    - tight curls, coiled, voluminous
+    - shaved head, bald, clean shaven
     - dramatic comic book spikes, (spiky hair:1.2)
-    - classic hero side part, (neat hair:1.1), well-groomed
-    - wild villain mane, (untamed hair:1.1), feral
+    - classic hero side part, neat, well-groomed
+    - wild villain mane, untamed, feral
 
   hair_color:
-    - (black hair:1.2)
-    - (brown hair:1.2)
-    - (blonde hair:1.2)
-    - (red hair:1.2), (vibrant red:1.1)
-    - (white hair:1.2)
-    - (silver hair:1.2)
-    - blue tinted hair, (comic book highlights:1.1)
-    - (purple hair:1.2)
-    - fiery orange hair, (vibrant:1.1)
-    - vibrant dyed streaks, (colorful hair:1.1)
+    - black hair
+    - brown hair
+    - blonde hair
+    - red hair, vibrant red
+    - white hair
+    - silver hair
+    - blue tinted hair, comic book highlights
+    - purple hair
+    - fiery orange hair, vibrant
+    - vibrant dyed streaks, colorful hair
 
   eyes:
-    - piercing blue eyes, (intense gaze:1.1)
-    - bright green eyes, (vivid:1.1)
+    - piercing blue eyes, intense gaze
+    - bright green eyes, vivid
     - warm brown eyes
-    - steely grey eyes, (focused:1.1)
-    - (glowing white eyes:1.3), no pupils, (glowing:1.1)
-    - (glowing red eyes:1.3), menacing, (glowing:1.1)
+    - steely grey eyes, focused
+    - (glowing white eyes:1.3), no pupils, glowing
+    - (glowing red eyes:1.3), menacing, glowing
     - cosmic star filled eyes, (nebula eyes:1.2)
     - masked eyes, (white lenses:1.3), no pupils
 
   expression:
-    - heroic determined expression, (resolute:1.1)
-    - stoic focused expression, (calm:1.1)
+    - furrowed brow, set jaw, narrowed eyes
+    - stoic focused expression, calm
     - (confident smirk:1.2), smug
-    - intense battle shout, (open mouth:1.1), screaming
-    - grim brooding look, (shadowed face:1.1)
-    - kind reassuring smile, (gentle:1.1)
-    - (maniacal villain grin:1.2), (wide smile:1.1), evil
-    - surprised shock expression, (wide eyes:1.1)
+    - intense battle shout, open mouth, screaming
+    - grim brooding look, shadowed face
+    - kind reassuring smile, gentle
+    - (maniacal villain grin:1.2), wide smile, bared teeth
+    - surprised shock expression, wide eyes
 
   costume:
     - (skin tight hero suit:1.2), spandex, classic
-    - (armored hero suit:1.2), (plated:1.1), protective
-    - long flowing cape, (dramatic cape:1.1), billowing
-    - tactical combat suit, (pouches:1.1), gear, straps
-    - trench coat, (mask:1.1), mysterious, (fedora:1.1)
-    - hooded vigilante outfit, (shadows:1.1), dark
-    - bright colorful classic costume, (primary colors:1.1)
-    - dark stealth costume, (shadows:1.1), muted colors
-    - cosmic armor, (glowing lines:1.2), (sci-fi:1.1)
-    - street clothes, layered armor, (urban:1.1), practical
+    - (armored hero suit:1.2), plated, protective
+    - long flowing cape, dramatic, billowing
+    - tactical combat suit, pouches, gear, straps
+    - trench coat, mask, collar turned up, fedora
+    - hooded vigilante outfit, deep shadows, dark
+    - bright colorful classic costume, primary colors
+    - dark stealth costume, shadows, muted colors
+    - cosmic armor, (glowing lines:1.2), sci-fi
+    - street clothes, layered armor, urban, practical
 
   emblem:
-    - bold chest symbol, (emblem:1.3), iconic
-    - stylized animal emblem, (logo:1.2)
-    - lightning bolt emblem, (symbol:1.2)
-    - star shaped emblem, (symbol:1.2)
-    - shield shaped emblem, (crest:1.2)
-    - skull emblem, (symbol:1.2), menacing
-    - simple geometric emblem, (logo:1.2), minimalist
+    - bold chest symbol, iconic
+    - stylized animal emblem, logo
+    - lightning bolt emblem, symbol
+    - star shaped emblem, symbol
+    - shield shaped emblem, crest
+    - skull emblem, symbol, menacing
+    - simple geometric emblem, logo, minimalist
 
   accessories:
-    - utility belt, (gadgets:1.1), pouches
-    - wrist mounted devices, (bracers:1.1), high-tech
-    - high tech visor, (goggles:1.1), glowing lens
+    - utility belt, gadgets, pouches
+    - wrist mounted devices, bracers, high-tech
+    - high tech visor, goggles, glowing lens
     - (domino mask:1.2), classic
     - full face mask, (helmet:1.2), protective
-    - hood, (scarf:1.1), obscuring face
-    - (glowing gauntlets:1.2), (energy:1.1)
-    - armored boots, (heavy boots:1.1), metal
-    - long gloves, (leather:1.1)
-    - bandolier, (gear:1.1), straps, ammunition
+    - hood, scarf, obscuring face
+    - (glowing gauntlets:1.2), energy
+    - armored boots, heavy boots, metal
+    - long gloves, leather
+    - bandolier, gear, straps, ammunition
 
 # ---------------------------------------------------------
 # POWER FX
 # ---------------------------------------------------------
 
   powers_fx:
-    - crackling energy, (glowing fists:1.2), (electricity:1.1)
-    - glowing aura, (power aura:1.2), radiating light
+    - crackling energy, (glowing fists:1.2), electricity
+    - glowing aura, radiating light
     - swirling magical symbols, (magic circle:1.2), arcane, glowing
     - flames surrounding body, (fire aura:1.2), embers, heat haze
     - icy mist, (ice aura:1.2), frost, cold breath
     - electric sparks, (lightning:1.2), arcing, bright
-    - telekinetic force waves, (psychic:1.1), invisible force, distortion
+    - telekinetic force waves, psychic, invisible force, distortion
     - shadowy tendrils, (shadow magic:1.2), darkness, wispy
-    - cosmic dust swirl, (space:1.1), (cosmic:1.2), nebula, particles
+    - cosmic dust swirl, space, (cosmic:1.2), nebula, particles
 
 # ---------------------------------------------------------
 # ENVIRONMENT
 # ---------------------------------------------------------
 
   city_background:
-    - towering city skyline, (at night:1.1), (glowing windows:1.1)
-    - dark alley, (rain:1.1), puddles, (steam from vents:1.1)
-    - rooftop, (above the city:1.1), (night:1.1), gargoyles
-    - crumbling warehouse, (abandoned:1.1), broken windows, dust
-    - busy downtown street, (city:1.1), cars, pedestrians, motion blur
-    - bridge over river, (city:1.1), suspension bridge, (fog:1.1)
-    - fiery battle torn street, (fire:1.1), debris, (destruction:1.1)
-    - secret underground lair, (base:1.1), high-tech, computer screens
-    - futuristic city, (towers:1.1), (sci-fi:1.2), flying vehicles
-    - ruined post apocalyptic city, (ruins:1.2), overgrown, (debris:1.1)
+    - towering city skyline, at night, glowing windows
+    - dark alley, rain, puddles, steam from vents
+    - rooftop, above the city, night, gargoyles
+    - crumbling warehouse, abandoned, broken windows, dust
+    - busy downtown street, city, cars, pedestrians, motion blur
+    - bridge over river, city, suspension bridge, fog
+    - fiery battle torn street, fire, debris, destruction
+    - secret underground lair, base, high-tech, computer screens
+    - futuristic city, towers, (sci-fi:1.2), flying vehicles
+    - ruined post apocalyptic city, (ruins:1.2), overgrown, debris
 
   panel_style:
-    - (bold ink lines:1.3), (inked:1.2), (comic style:1.1)
-    - (heavy shadows:1.3), (dramatic contrast:1.2), (chiaroscuro:1.3), noir
-    - (bright flat colors:1.2), (cel shading:1.2), animated
-    - (halftone print texture:1.3), (halftone dots:1.3), (pop art:1.1)
-    - (vintage comic:1.3), (printing dots:1.2), (retro:1.2), (aged paper:1.1)
-    - (modern digital shading:1.2), (digital art:1.2), (gradient shading:1.1)
-    - (painterly comic:1.3), (rendered:1.2), (digital painting:1.1)
-    - (black and white:1.3), (noir:1.2), (monochrome:1.2), greyscale
+    - (bold ink lines:1.3), inked, comic style
+    - (heavy shadows:1.3), dramatic contrast, chiaroscuro, noir
+    - (bright flat colors:1.2), cel shading, animated
+    - (halftone print texture:1.3), halftone dots, pop art
+    - (vintage comic:1.3), printing dots, retro, aged paper
+    - (modern digital shading:1.2), digital art, gradient shading
+    - (painterly comic:1.3), rendered, digital painting
+    - (black and white:1.3), noir, monochrome, greyscale
 
   camera:
-    - dynamic low angle, (hero shot:1.2), (low angle:1.1), looking up
-    - dramatic high angle, (high angle:1.2), (overhead shot:1.1), looking down
-    - mid action punch shot, (action:1.1), (impact:1.2), motion blur
-    - (close up:1.2), (emotional frame:1.1), (portrait:1.1), intense expression
-    - wide cinematic, (splash panel:1.2), (wide shot:1.1), establishing shot
-    - over the shoulder shot, (confrontation:1.1), facing opponent
-    - tilted angle, (action frame:1.1), (dutch angle:1.2), dynamic, unsettling
+    - dynamic low angle, (hero shot:1.2), looking up
+    - dramatic high angle, overhead shot, looking down
+    - mid action punch shot, (impact:1.2), motion blur
+    - (close up:1.2), emotional frame, portrait, intense expression
+    - wide cinematic, (splash panel:1.2), establishing shot
+    - over the shoulder shot, confrontation, facing opponent
+    - tilted angle, (dutch angle:1.2), dynamic, unsettling
 
   mood:
-    - epic, (heroic:1.1), (grand scale:1.1)
-    - dark, (gritty:1.2), (noir:1.1), moody
-    - hopeful, (uplifting:1.1), (bright:1.1), sunrise
-    - tense, (suspenseful:1.1), (ominous:1.1), shadows
-    - chaotic, (explosive:1.1), (action:1.2), frantic
-    - mysterious, (moody:1.1), (shadowy:1.1), fog
-    - tragic, (emotional:1.1), (sad:1.1), somber
+    - wide establishing shot, dramatic scale, sweeping vista
+    - deep shadows, (high contrast lighting:1.2), muted color palette
+    - warm golden light, soft glow, sunrise
+    - long shadows, dim uneven lighting, narrow framing
+    - motion blur, scattered debris, jagged composition
+    - low-key lighting, drifting fog, obscured silhouettes
+    - desaturated colors, downcast lighting, rain-streaked
 
   fx_environment:
-    - debris flying, (particles:1.1), (dust:1.1), kinetic
-    - shattered glass, (mid air:1.1), (breaking:1.1), (shards:1.1)
-    - swirling smoke clouds, (smoke:1.2), fog, dense
-    - (raining:1.2), (lightning:1.1), (storm:1.1), heavy rain
-    - rising dust, (impact:1.1), (dust:1.1), ground crack
-    - sparks, (broken wires:1.1), (electrical:1.1), arcing
-    - burning flames, (embers:1.1), (fire:1.2), intense heat
+    - debris flying, particles, dust, kinetic
+    - shattered glass, mid air, breaking, shards
+    - swirling smoke clouds, fog, dense
+    - raining, lightning, storm, heavy rain
+    - rising dust, impact, ground crack
+    - sparks, broken wires, electrical, arcing
+    - burning flames, embers, fire, intense heat
 
   style:
-    - (classic superhero:1.3), (comic style:1.2), (retro:1.1), vibrant colors
-    - (gritty graphic novel style:1.3), (dark:1.1), (mature:1.1), (detailed ink:1.1)
-    - (noir crime comic style:1.3), (monochrome:1.2), (heavy shadows:1.2)
-    - (bright all ages:1.3), (comic style:1.2), (colorful:1.1), clean lines
-    - (modern cinematic:1.3), (comic style:1.2), (realistic shading:1.1), dramatic lighting
-    - (painterly graphic novel style:1.3), (digital painting:1.2), (rendered:1.1)
+    - (classic superhero:1.3), comic style, retro, vibrant colors
+    - (gritty graphic novel style:1.3), dark, mature, detailed ink
+    - (noir crime comic style:1.3), monochrome, heavy shadows
+    - (bright all ages:1.3), comic style, colorful, clean lines
+    - (modern cinematic:1.3), comic style, realistic shading, dramatic lighting
+    - (painterly graphic novel style:1.3), digital painting, rendered
 
 # ---------------------------------------------------------
 # NEW LISTS: ARTIST, LAYOUT, ONOATOPOEIA
 # ---------------------------------------------------------
 
   artist_style:
-    - (in the style of Jim Lee:1.3), (detailed ink:1.2), 90s comic style, dynamic
-    - (in the style of Mike Mignola:1.3), (heavy shadows:1.3), (blocky:1.1), (gothic:1.1)
-    - (in the style of Jack Kirby:1.3), (Kirby dots:1.3), (dynamic energy:1.2), (retro:1.1)
-    - (in the style of Alex Ross:1.3), (hyperrealistic painting:1.3), (rendered:1.1), (epic:1.1)
-    - (in the style of Frank Miller:1.3), (noir:1.3), (high contrast:1.3), (black and white:1.1)
-    - (in the style of Moebius:1.3), (clean lines:1.2), (sci-fi:1.1), (surreal:1.1)
-    - (in the style of Todd McFarlane:1.3), (exaggerated anatomy:1.1), (spaghetti webbing:1.1), (dark:1.1)
-    - (in the style of Fiona Staples:1.3), (painterly:1.2), (digital art:1.1), (expressive:1.1)
-    - (in the style of Bill Sienkiewicz:1.3), (abstract:1.2), (mixed media:1.1), (experimental:1.1)
-    - __gkr_comics/style # Fallback to a general style
+    - (in the style of Jim Lee:1.3), detailed ink, 90s comic style, dynamic
+    - (in the style of Mike Mignola:1.3), heavy shadows, blocky, gothic
+    - (in the style of Jack Kirby:1.3), (Kirby dots:1.2), dynamic energy, retro
+    - (in the style of Alex Ross:1.3), hyperrealistic painting, rendered, epic
+    - (in the style of Frank Miller:1.3), noir, high contrast, black and white
+    - (in the style of Moebius:1.3), clean lines, sci-fi, surreal
+    - (in the style of Todd McFarlane:1.3), exaggerated anatomy, (spaghetti webbing:1.2), dark
+    - (in the style of Fiona Staples:1.3), painterly, digital art, expressive
+    - (in the style of Bill Sienkiewicz:1.3), abstract, mixed media, experimental
+    - __gkr_comics/style__ # Fallback to a general style
 
   layout:
-    - (full-bleed splash page:1.3), (epic:1.1), (wide shot:1.1)
-    - (dynamic split panel:1.2), (action:1.1), (multiple actions:1.1)
-    - (inset panel:1.2), (close-up focus:1.1), (detail shot:1.1)
-    - (multiple panels:1.1), (comic strip layout:1.1), (sequence:1.1)
-    - (cinematic widescreen panel:1.2), (dramatic:1.1)
-    - (borderless panel:1.1), (modern:1.1)
+    - (full-bleed splash page:1.3), epic, wide shot
+    - (dynamic split panel:1.2), action, multiple actions
+    - (inset panel:1.2), close-up focus, detail shot
+    - multiple panels, comic strip layout, sequence
+    - (cinematic widescreen panel:1.2), dramatic
+    - borderless panel, modern
 
   onomatopoeia:
-    - (KABOOM:1.3), (comic book sound effect:1.2), (explosion:1.1)
-    - (POW!:1.3), (comic book sound effect:1.2), (impact:1.1)
-    - (ZZZAP:1.3), (comic book sound effect:1.2), (electricity:1.1)
-    - (CRASH:1.3), (comic book sound effect:1.2), (breaking:1.1)
-    - (WHAM:1.3), (comic book sound effect:1.2), (punch:1.1)
-    - (SKRAKOOM:1.3), (comic book sound effect:1.2), (thunder:1.1)
-    - (THWIP:1.3), (comic book sound effect:1.2), (webbing:1.1)
+    - (KABOOM:1.3), comic book sound effect, explosion
+    - (POW!:1.3), comic book sound effect, impact
+    - (ZZZAP:1.3), comic book sound effect, electricity
+    - (CRASH:1.3), comic book sound effect, breaking
+    - (WHAM:1.3), comic book sound effect, punch
+    - (SKRAKOOM:1.3), comic book sound effect, thunder
+    - (THWIP:1.3), comic book sound effect, webbing
 
 # ---------------------------------------------------------
 # COMBOS (Optimized to use new archetype lists)
 # ---------------------------------------------------------
 
   superhero_combo:
-    - "__gkr_comics/hero_archetype__, __gkr_comics/age__, __gkr_comics/build__, __gkr_comics/tone__, __gkr_comics/hair__, __gkr_comics/hair_color__, __gkr_comics/eyes__, (heroic determined expression:1.1), __gkr_comics/costume__, __gkr_comics/emblem__, __gkr_comics/accessories__, __gkr_comics/powers_fx__, __gkr_comics/city_background__, (epic and heroic mood:1.1), __gkr_comics/artist_style__, (dynamic low angle hero shot:1.1)"
+    - "__gkr_comics/hero_archetype__, __gkr_comics/age__, __gkr_comics/build__, __gkr_comics/tone__, __gkr_comics/hair__, __gkr_comics/hair_color__, __gkr_comics/eyes__, __gkr_comics/expression__, __gkr_comics/costume__, __gkr_comics/emblem__, __gkr_comics/accessories__, __gkr_comics/powers_fx__, __gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/artist_style__, __gkr_comics/camera__"
 
   vigilante_combo:
-    - "(masked vigilante:1.2), (agile compact build:1.1), __gkr_comics/tone__, (hooded vigilante outfit:1.1), (trench coat:1.1), (utility belt:1.1), (dark alley:1.2), (rain:1.1), (gritty graphic novel style:1.3), (dark and gritty mood:1.1), __gkr_comics/artist_style__, (heavy shadows:1.2), (dutch angle:1.1)"
+    - "(masked vigilante:1.2), __gkr_comics/build__, __gkr_comics/tone__, hooded vigilante outfit, trench coat, utility belt, __gkr_comics/city_background__, (gritty graphic novel style:1.3), __gkr_comics/mood__, __gkr_comics/artist_style__, __gkr_comics/camera__"
 
   villain_combo:
-    - "__gkr_comics/villain_archetype__, __gkr_comics/age__, (bulky muscular build:1.1), __gkr_comics/hair__, (glowing red eyes:1.3), (maniacal villain grin:1.2), __gkr_comics/costume__, __gkr_comics/emblem__, __gkr_comics/powers_fx__, (rooftop above the city:1.1), (chaotic and explosive mood:1.1), (debris flying:1.1), __gkr_comics/artist_style__, (wide cinematic splash panel:1.1)"
+    - "__gkr_comics/villain_archetype__, __gkr_comics/age__, __gkr_comics/build__, __gkr_comics/hair__, (glowing red eyes:1.3), (maniacal villain grin:1.2), __gkr_comics/costume__, __gkr_comics/emblem__, __gkr_comics/powers_fx__, __gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/fx_environment__, __gkr_comics/artist_style__, __gkr_comics/camera__"
 
   noir_detective_combo:
-    - "(gadget detective:1.2), (seasoned veteran:1.1), (trench coat:1.1), (domino mask:1.1), (city skyline at night:1.2), (noir crime comic style:1.3), (mysterious and moody mood:1.1), (black and white:1.2), (in the style of Frank Miller:1.2), (close up:1.1), (swirling smoke:1.1)"
+    - "__gkr_comics/neutral_archetype__, seasoned veteran, (city skyline at night:1.2), (noir crime comic style:1.3), __gkr_comics/mood__, (black and white:1.2), (in the style of Frank Miller:1.3), __gkr_comics/camera__, swirling smoke"
 
   cosmic_hero_combo:
-    - "(cosmic champion:1.2), (ageless being:1.1), (glowing cosmic skin:1.1), (cosmic armor with glowing lines:1.2), floating, (futuristic city:1.2), (cosmic dust swirl:1.1), (bright flat colors:1.2), __gkr_comics/artist_style__, (epic and heroic mood:1.1), (wide cinematic splash panel:1.1)"
+    - "(cosmic champion:1.2), (ageless being:1.1), (glowing cosmic skin:1.1), (cosmic armor with glowing lines:1.2), floating, (futuristic city:1.2), (cosmic dust swirl:1.1), (bright flat colors:1.2), __gkr_comics/artist_style__, __gkr_comics/mood__, __gkr_comics/camera__"
 
   comic_scene_combo:
     - "__gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/panel_style__, __gkr_comics/fx_environment__, __gkr_comics/camera__, __gkr_comics/layout__, __gkr_comics/artist_style__"
@@ -303,201 +303,194 @@ gkr_comics:
 # ---------------------------------------------------------
 
   spotlight_characters:
-    - (caped hero:1.2), (glowing fists:1.2), strong jawline, (bold comic style with sharp ink shadows:1.3)
-    - (masked vigilante:1.2), (perched on rooftop edge:1.1), (fluttering cloak:1.1), (noir comic style:1.2)
-    - (musclebound barbarian:1.2), (wielding a crackling thunder axe:1.3), (dynamic comic style:1.2), bold ink highlights
-    - (cosmic sorceress:1.2), (star-infused hair:1.1), (casting bright neon spell circles:1.2)
-    - (techno-mage:1.2), (plated armor with runic power:1.1), (glowing gauntlets:1.2)
-    - (street-level detective:1.2), (glowing monocle:1.1), (enchanted revolver:1.1), (noir comic style:1.2), heavy shadows
-    - (shadow manipulator:1.2), (forming drifting ink tendrils:1.3), (dark comic style:1.1)
-    - (thunder paladin:1.2), (summoning divine lightning:1.2), (raised storm hammer:1.1)
-    - (speedster:1.2), (leaving a streaking energy trail:1.3), (dynamic pose:1.1), comic style
-    - (armored sentinel:1.2), (heavy pauldrons:1.1), (glowing crest emblem on chest:1.2)
-    - (necromancer villain:1.2), (summoning skeletal ink silhouettes:1.3), (dark comic style:1.2)
-    - (winged avenger:1.2), (broad feathered wings:1.2), (wearing a radiant helm:1.1), heroic pose
-    - (dark sorcerer villain:1.2), (cape made of fire:1.1), (ominous floating sigils:1.2)
-    - (rune fencer:1.2), (blade glowing with magic runes:1.2), (sharp graphic strokes:1.1), (dynamic sword pose:1.1)
-    - (cosmic guardian:1.2), (wearing shimmering nebula armor:1.2), (heroic stance:1.1), (cosmic background:1.1)
-    - (mystic monk:1.2), (glowing glyph tattoos on body:1.2), (swirling wind fists:1.1), (martial arts pose:1.1)
-    - (elastic shapeshifter:1.2), (exaggerated mid-stretch pose:1.1), (dynamic comic book style:1.1)
-    - (half-dragon hero:1.2), (scale-lined arms:1.1), (breathing smoldering smoke:1.1)
-    - (masked beast vigilante:1.2), (clawed gauntlets:1.1), (hunched feral silhouette:1.1)
-    - (energy archer:1.2), (drawing a luminous bow:1.2), (forming a glowing arrow:1.1), (stylized sharp lines:1.1)
-    - (comic witch:1.2), (oversized hat:1.1), (floating ink-drawn familiars:1.2)
-    - (urban illusionist:1.2), (warping the background panels:1.2), (surreal comic style:1.1)
-    - (vampire antihero:1.2), (flowing red cape:1.1), (glowing scarlet eyes:1.2), (noir comic style:1.1)
-    - (martial arts heroine:1.2), (dynamic kicking pose:1.1), (trailing motion streaks:1.1)
-    - (rock titan:1.2), (jagged stone plating skin:1.1), (massive earth elemental:1.1)
-    - (stealth rogue:1.2), (dissolving into an ink-smudge shadow:1.1), (stealthy pose:1.1), (dark:1.1)
-    - (time-bending hero:1.2), (frozen mid-motion:1.1), (background dissolving in split comic panels:1.2)
-    - (cosmic phoenix villain:1.2), (erupting with radiant solar flames:1.3), (cosmic comic style:1.1)
-    - (armored guardian knight:1.2), (heroic gold outlines:1.1), (massive armor:1.1), (heroic pose:1.1)
-    - (feral wolf-themed hero:1.2), (shredded coat:1.1), (glowing feral eyes:1.1), (werewolf:1.1)
-    - (smug sorcerer:1.2), (levitating:1.1), (surrounded by swirling comic sound effects:1.2)
-    - (heavy gunner:1.2), (holding runic-etched cannons:1.2), (bold black shading:1.1), (massive gun:1.1)
-    - (ink mage:1.2), (forming weapons from swirling dark ink:1.2), (monochrome comic style:1.1)
-    - (celestial champion:1.2), (wielding starfire spear:1.2), (cosmic armor:1.1), (heroic:1.1)
-    - (retro comic barbarian:1.2), (holding a giant sword:1.1), (bright halftone shading:1.2), (retro style:1.1)
-    - (steam-powered armored hero:1.2), (glowing furnace in chest plate:1.1), (steampunk comic style:1.1)
-    - (urban saint:1.2), (casting radiant light in a gritty alley:1.2), (holy magic:1.1)
-    - (shadow reaper:1.2), (oversized scythe:1.1), (dramatic villain silhouette:1.1), (grim reaper:1.1)
-    - (comic angel:1.2), (descending from a glowing panel break:1.1), (radiant wings:1.1)
-    - (acrobatic trickster:1.2), (mid-flip:1.1), (throwing floating glowing cards:1.2), (agile:1.1)
-    - (giant serpent-themed villain:1.2), (forked neon tongue:1.1), (snake monster:1.1)
-    - (stylized sorceress:1.2), (layered robes:1.1), (dramatic ink contours:1.2), (casting magic:1.1)
-    - (comic druid:1.2), (swirling leaves and nature glyphs:1.2), (casting nature magic:1.1)
-    - (giant brute villain:1.2), (smashing the ground:1.1), (massive fists:1.1), (monster:1.1)
-    - (frost knight:1.2), (cape made of ice:1.1), (trailing snowflakes:1.1), (ice magic armor:1.1)
-    - (arcane librarian:1.2), (orbiting by stacks of glowing books:1.1), (scholar:1.1)
-    - (cyber-vigilante:1.2), (glowing visor:1.1), (sharp angular silhouette:1.1), (cyborg:1.1)
-    - (stormcaller villain:1.2), (spiraling storm clouds overhead:1.1), (bold lightning strokes:1.2)
-    - (comic cleric:1.2), (holding a radiant staff:1.1), (shining halo lines:1.1), (healer:1.1)
-    - (dragon mask vigilante:1.2), (ornate armor:1.1), (drifting smoke:1.1), (mask:1.1)
-    - (ember mage villain:1.2), (drifting ash patterns:1.1), (casting fire magic:1.1)
-    - (heroic centaur:1.2), (polished armor:1.1), (flowing comic mane:1.1), (fantasy creature:1.1)
-    - (werewolf hero:1.2), (mid-transformation:1.1), (dynamic split panel effect:1.1)
-    - (moonlight assassin:1.2), (curved daggers glowing silver:1.1), (night scene:1.1), (stealth:1.1)
-    - (gladiator heroine:1.2), (glowing shield:1.1), (gold edged cape:1.1), (warrior:1.1)
-    - (giant golem:1.2), (carved glowing runes on stone body:1.1), (stone monster:1.1)
-    - (comic psion:1.2), (rippling telekinetic energy:1.1), (psychic power:1.1)
-    - (feather-cloaked avian hero:1.2), (piercing comic eyes:1.1), (bird-like:1.1), (wings:1.1)
-    - (ink-ghost villain:1.2), (hollow white outline:1.1), (trailing ink drips:1.1), (ghost:1.1)
-    - (spell-flame rogue:1.2), (daggers burning with magic fire:1.1), (angular stance:1.1)
-    - (water elemental:1.2), (body made of flowing stylized waves:1.2), (water magic:1.1)
-    - (meteor-powered champion:1.2), (blazing hair streak:1.1), (wreathed in fire:1.1), (cosmic hero:1.1)
-    - (grizzled antihero:1.2), (smoking gun:1.1), (torn jacket:1.1), (gritty comic style:1.1)
-    - (siren-voiced villainess:1.2), (projecting sonic soundwave halos:1.2), (sonic power:1.1)
-    - (forest guardian hero:1.2), (bark-plated armor:1.1), (nature spirit:1.1), (druid:1.1)
-    - (masked scholar mage:1.2), (floating quill:1.1), (glowing magic tome:1.1)
-    - (shadow-crowned villain:1.2), (radiating a dark aura:1.1), (spiked crown:1.1), (dark magic:1.1)
-    - (valiant swordsman:1.2), (bathed in heroic rim light:1.1), (holding sword:1.1), (hero:1.1)
-    - (illusion hero:1.2), (fragmenting into multiple comic silhouettes:1.2), (illusion magic:1.1)
-    - (plasma gauntlet brawler:1.2), (crackling energy fists:1.1), (fighting stance:1.1)
-    - (crystal sorceress:1.2), (casting prismatic light bursts:1.2), (crystal magic:1.1)
-    - (comic knight:1.2), (exaggerated heroic proportions:1.1), (shining armor:1.1), (hero:1.1)
-    - (smoke conjurer villain:1.2), (drifting ink tendrils:1.1), (smoke magic:1.1)
-    - (fiend-masked demon hunter:1.2), (flame-carved spear:1.1), (demon mask:1.1)
-    - (cosmic elder hero:1.2), (cloak made of a swirling galaxy:1.1), (old:1.1), (space:1.1)
-    - (knotted-wood druid:1.2), (arms like living branches:1.1), (casting nature magic:1.1)
-    - (raging titan villain:1.2), (towering over buildings:1.1), (smashing pavement:1.1), (giant monster:1.1)
-    - (wind dancer:1.2), (swirling stylized arcs of wind:1.1), (wind magic:1.1), (agile pose:1.1)
-    - (lightweaver:1.2), (projecting radiant blades of light:1.2), (light magic:1.1), (hero:1.1)
-    - (tech-rune hybrid:1.2), (runes pulsing on high-tech armor:1.1), (magitech cyborg:1.1)
-    - (ancient guardian spirit:1.2), (glowing comic outline:1.1), (ghostly:1.1), (magic:1.1)
-    - (bold street hero:1.2), (bright graffiti-style cape:1.2), (urban setting:1.1)
-    - (comic gunslinger:1.2), (firing golden revolvers:1.1), (drifting smoke:1.1), (cowboy:1.1)
-    - (ink-shaded necro knight:1.2), (skull-themed armor:1.1), (necromancer:1.1), (dark art style:1.1)
-    - (feline heroine:1.2), (razor sharp comic silhouette:1.1), (cat-like:1.1), (agile pose:1.1)
-    - (ice witch villainess:1.2), (breathing swirling frost:1.1), (ice magic:1.1), (cold:1.1)
-    - (spark mage:1.2), (projecting arcs of stylized electricity:1.2), (lightning magic:1.1)
-    - (masked defender:1.2), (massive shield with painted icon:1.1), (defensive hero:1.1)
-    - (comic bard:1.2), (floating music glyphs:1.2), (playing instrument:1.1), (music magic:1.1)
-    - (brimstone brute villain:1.2), (glowing cracks in skin:1.2), (fire demon:1.1)
-    - (winged herald:1.2), (radiant feathers:1.1), (angelic hero:1.1), (wings:1.1)
-    - (gargoyle knight:1.2), (perched on a ledge:1.1), (drifting stone dust:1.1), (moody comic style:1.1)
-    - (comic prophet:1.2), (glowing third eye:1.3), (surrounded by floating psychic symbols:1.1)
+    - caped hero, glowing fists, strong jawline, bold comic style with sharp ink shadows
+    - masked vigilante, perched on rooftop edge, fluttering cloak, noir comic style
+    - musclebound barbarian, wielding a crackling thunder axe, dynamic comic style, bold ink highlights
+    - cosmic sorceress, star-infused hair, casting bright neon spell circles
+    - techno-mage, plated armor with runic power, glowing gauntlets
+    - street-level detective, glowing monocle, enchanted revolver, noir comic style, heavy shadows
+    - shadow manipulator, forming drifting ink tendrils, dark comic style
+    - thunder paladin, summoning divine lightning, raised storm hammer
+    - speedster, leaving a streaking energy trail, dynamic pose, comic style
+    - armored sentinel, heavy pauldrons, glowing crest emblem on chest
+    - necromancer villain, summoning skeletal ink silhouettes, dark comic style
+    - winged avenger, broad feathered wings, wearing a radiant helm, heroic pose
+    - dark sorcerer villain, cape made of fire, ominous floating sigils
+    - rune fencer, blade glowing with magic runes, sharp graphic strokes, dynamic sword pose
+    - cosmic guardian, wearing shimmering nebula armor, heroic stance, cosmic background
+    - mystic monk, glowing glyph tattoos on body, swirling wind fists, martial arts pose
+    - elastic shapeshifter, exaggerated mid-stretch pose, dynamic comic book style
+    - half-dragon hero, scale-lined arms, breathing smoldering smoke
+    - masked beast vigilante, clawed gauntlets, hunched feral silhouette
+    - energy archer, drawing a luminous bow, forming a glowing arrow, stylized sharp lines
+    - comic witch, oversized hat, floating ink-drawn familiars
+    - urban illusionist, warping the background panels, surreal comic style
+    - vampire antihero, flowing red cape, glowing scarlet eyes, noir comic style
+    - martial arts heroine, dynamic kicking pose, trailing motion streaks
+    - rock titan, jagged stone plating skin, massive earth elemental
+    - stealth rogue, dissolving into an ink-smudge shadow, stealthy pose, dark
+    - time-bending hero, frozen mid-motion, background dissolving in split comic panels
+    - cosmic phoenix villain, erupting with radiant solar flames, cosmic comic style
+    - armored guardian knight, heroic gold outlines, massive armor, heroic pose
+    - feral wolf-themed hero, shredded coat, glowing feral eyes, werewolf
+    - smug sorcerer, levitating, surrounded by swirling comic sound effects
+    - heavy gunner, holding runic-etched cannons, bold black shading, massive gun
+    - ink mage, forming weapons from swirling dark ink, monochrome comic style
+    - celestial champion, wielding starfire spear, cosmic armor, heroic
+    - retro comic barbarian, holding a giant sword, bright halftone shading, retro style
+    - steam-powered armored hero, glowing furnace in chest plate, steampunk comic style
+    - urban saint, casting radiant light in a gritty alley, holy magic
+    - shadow reaper, oversized scythe, dramatic villain silhouette, grim reaper
+    - comic angel, descending from a glowing panel break, radiant wings
+    - acrobatic trickster, mid-flip, throwing floating glowing cards, agile
+    - giant serpent-themed villain, forked neon tongue, snake monster
+    - stylized sorceress, layered robes, dramatic ink contours, casting magic
+    - comic druid, swirling leaves and nature glyphs, casting nature magic
+    - giant brute villain, smashing the ground, massive fists, monster
+    - frost knight, cape made of ice, trailing snowflakes, ice magic armor
+    - arcane librarian, orbiting by stacks of glowing books, scholar
+    - cyber-vigilante, glowing visor, sharp angular silhouette, cyborg
+    - stormcaller villain, spiraling storm clouds overhead, bold lightning strokes
+    - comic cleric, holding a radiant staff, shining halo lines, healer
+    - dragon mask vigilante, ornate armor, drifting smoke, mask
+    - ember mage villain, drifting ash patterns, casting fire magic
+    - heroic centaur, polished armor, flowing comic mane, fantasy creature
+    - werewolf hero, mid-transformation, dynamic split panel effect
+    - moonlight assassin, curved daggers glowing silver, night scene, stealth
+    - gladiator heroine, glowing shield, gold edged cape, warrior
+    - giant golem, carved glowing runes on stone body, stone monster
+    - comic psion, rippling telekinetic energy, psychic power
+    - feather-cloaked avian hero, piercing comic eyes, bird-like, wings
+    - ink-ghost villain, hollow white outline, trailing ink drips, ghost
+    - spell-flame rogue, daggers burning with magic fire, angular stance
+    - water elemental, body made of flowing stylized waves, water magic
+    - meteor-powered champion, blazing hair streak, wreathed in fire, cosmic hero
+    - grizzled antihero, smoking gun, torn jacket, gritty comic style
+    - siren-voiced villainess, projecting sonic soundwave halos, sonic power
+    - forest guardian hero, bark-plated armor, nature spirit, druid
+    - masked scholar mage, floating quill, glowing magic tome
+    - shadow-crowned villain, radiating a dark aura, spiked crown, dark magic
+    - valiant swordsman, bathed in heroic rim light, holding sword, hero
+    - illusion hero, fragmenting into multiple comic silhouettes, illusion magic
+    - plasma gauntlet brawler, crackling energy fists, fighting stance
+    - crystal sorceress, casting prismatic light bursts, crystal magic
+    - comic knight, exaggerated heroic proportions, shining armor, hero
+    - smoke conjurer villain, drifting ink tendrils, smoke magic
+    - fiend-masked demon hunter, flame-carved spear, demon mask
+    - cosmic elder hero, cloak made of a swirling galaxy, old, space
+    - knotted-wood druid, arms like living branches, casting nature magic
+    - raging titan villain, towering over buildings, smashing pavement, giant monster
+    - wind dancer, swirling stylized arcs of wind, wind magic, agile pose
+    - lightweaver, projecting radiant blades of light, light magic, hero
+    - tech-rune hybrid, runes pulsing on high-tech armor, magitech cyborg
+    - ancient guardian spirit, glowing comic outline, ghostly, magic
+    - bold street hero, bright graffiti-style cape, urban setting
+    - comic gunslinger, firing golden revolvers, drifting smoke, cowboy
+    - ink-shaded necro knight, skull-themed armor, necromancer, dark art style
+    - feline heroine, razor sharp comic silhouette, cat-like, agile pose
+    - ice witch villainess, breathing swirling frost, ice magic, cold
+    - spark mage, projecting arcs of stylized electricity, lightning magic
+    - masked defender, massive shield with painted icon, defensive hero
+    - comic bard, floating music glyphs, playing instrument, music magic
+    - brimstone brute villain, glowing cracks in skin, fire demon
+    - winged herald, radiant feathers, angelic hero, wings
+    - gargoyle knight, perched on a ledge, drifting stone dust, moody comic style
+    - comic prophet, glowing third eye, surrounded by floating psychic symbols
 
   spotlight_classicscenes:
-    - (superhero landing:1.3), (epic three-point pose:1.1), (debris flying everywhere:1.1), (dynamic comic style:1.2)
-    - (masked vigilante:1.2), (on a rooftop overlooking a neon city at night:1.3), (moody noir style:1.1)
-    - (powerful punch:1.2), (creating a bursting comic book shockwave:1.3), (action scene:1.1), (bold ink lines:1.2)
-    - (superhero:1.2), (lifting a collapsing bus:1.3), (saving fleeing civilians:1.1), (epic comic panel:1.1)
-    - (ominous villain:1.2), (emerging from swirling smoke:1.2), (glowing red eyes:1.3), (dramatic lighting:1.1)
-    - (dynamic mid-air chase:1.2), (flying between skyscrapers:1.2), (action-packed comic style:1.1), motion blur
-    - (hero:1.2), (blocking a laser beam:1.1), (glowing energy shield:1.3), (action scene:1.1)
-    - (noir detective:1.2), (walking in a rain-soaked alley:1.2), (dim streetlights:1.1), (moody shadows:1.1), (noir comic style:1.3)
-    - (cyber hero:1.2), (jumping between rooftop antennas:1.2), (during a lightning storm:1.1), (futuristic comic style:1.1)
-    - (super strength:1.2), (hero:1.1), (catching a falling building beam:1.2), (action scene:1.1), (straining:1.1)
-    - (dramatic standoff:1.2), (hero and villain on a bridge at sunset:1.2), (confrontation:1.1)
-    - (villain:1.2), (raising a crackling orb of energy:1.2), (dark magic:1.1), (maniacal laugh:1.1)
-    - (comic panel:1.2), (hero walking away from an exploding car:1.3), (explosion:1.1), (action hero:1.1)
-    - (masked archer:1.2), (firing an arrow mid-leap:1.1), (between rooftops:1.1), (action pose:1.1)
-    - (giant robot:1.2), (smashing through a skyscraper:1.2), (glass shattering everywhere:1.1), (mecha destruction:1.1)
-    - (street brawl:1.2), (hero fighting a gang of masked thugs:1.2), (urban alley:1.1), (action:1.1)
-    - (cosmic hero:1.2), (flying through a star-filled void:1.2), (trailing energy:1.1), (space scene:1.1)
-    - (hero:1.2), (tearing open mechanical armor:1.2), (fighting a robot:1.1), (sparks flying:1.1)
-    - (speedster:1.2), (racing through the city:1.1), (leaving glowing streaks:1.2), (blur effect:1.1)
-    - (heroine:1.2), (shielding a child from an explosion:1.2), (glowing forcefield:1.1), (heroic save:1.1)
-    - (villain:1.2), (sitting on a throne of broken machinery:1.2), (evil leader:1.1), (dark lair:1.1)
-    - (epic clash of fists:1.2), (two heroes collide mid-air:1.2), (energy shockwave:1.1), (dynamic action:1.1)
-    - (comic splash page:1.2), (a meteor crashing into the city:1.2), (massive destruction:1.1), (disaster scene:1.1)
-    - (masked heroine:1.2), (swinging on a cable:1.1), (high above city traffic:1.1), (action pose:1.1)
-    - (giant monster:1.2), (looming over the skyline:1.1), (heroes assembling to fight:1.1), (kaiju attack:1.1)
-    - (superhero:1.2), (punching through a warehouse door:1.2), (splintering wood:1.1), (dramatic entrance:1.1)
-    - (mysterious cloaked figure:1.2), (stepping out of the shadows:1.1), (ominous:1.1), (noir:1.1)
-    - (hero:1.2), (climbing a burning tower:1.2), (flames and smoke:1.1), (rescue mission:1.1)
-    - (cosmic titan:1.2), (gripping a shattered moon fragment:1.2), (epic space scene:1.1), (giant:1.1)
-    - (hero:1.2), (gripping a ledge with one hand:1.2), (lightning flashes in background:1.1), (dramatic peril:1.1)
-    - (villain:1.2), (unleashing a swarm of robotic drones:1.2), (evil army:1.1), (sci-fi:1.1)
-    - (sidekick duo:1.2), (leaping toward the camera:1.1), (dynamic foreshortening:1.2), (action pose:1.1)
-    - (hero:1.2), (standing in a crater:1.1), (from a superhero landing:1.3), (smoking ground:1.1)
-    - (detective:1.2), (shining flashlight in abandoned subway tunnel:1.2), (dark and moody:1.1), (noir style:1.1)
-    - (hero:1.2), (confronting villain on city hall steps:1.1), (public standoff:1.1)
-    - (alien invaders:1.2), (descending from a glowing rift in the sky:1.2), (sci-fi invasion:1.1)
-    - (comic-style panel split:1.2), (showing two locations at once:1.1), (split screen:1.1)
-    - (masked hero:1.2), (perched on a gargoyle:1.1), (under a full moon:1.1), (moody night scene:1.1)
-    - (battle on top of a runaway subway train:1.2), (dynamic action:1.1), (fighting:1.1)
-    - (heroine:1.2), (unleashing a massive energy blast:1.2), (ripples across the page:1.1), (magic power:1.1)
-    - (villain:1.2), (manipulating a holographic map in a dark lair:1.2), (high-tech base:1.1)
-    - (super team:1.2), (assembling:1.1), (dramatic hero lineup pose:1.2), (team shot:1.1)
-    - (gritty fistfight:1.2), (inside a dim warehouse:1.1), (dark action scene:1.1), (brawl:1.1)
-    - (villain:1.2), (firing chaos energy in a shattered lab:1.1), (destruction:1.1), (magic:1.1)
-    - (massive explosion:1.2), (with exaggerated comic sound effect:1.1), (onomatopoeia:1.1), (KABOOM:1.3)
-    - (hero:1.2), (leaping from fiery wreckage:1.2), (dramatic escape:1.1), (explosion:1.1)
-    - (cybernetic villain:1.2), (crawling out of a destroyed robot shell:1.2), (cyborg:1.1), (damaged:1.1)
-    - (gritty rooftop interrogation:1.2), (under a stormy sky:1.1), (noir scene:1.1), (rain:1.1)
-    - (hero:1.2), (holding a tattered flag:1.1), (on a battlefield:1.1), (patriotic:1.1), (victory:1.1)
-    - (space hero:1.2), (hovering in a colorful alien canyon:1.2), (sci-fi landscape:1.1)
-    - (villain:1.2), (breaking free from glowing energy chains:1.2), (powerful escape:1.1)
-    - (duel:1.2), (hero and villain fighting atop a skyscraper antenna:1.2), (high-altitude battle:1.1)
-    - (hero:1.2), (outrunning a collapsing highway:1.2), (destruction chase:1.1), (action:1.1)
-    - (mysterious artifact:1.2), (glowing in the hero's hands:1.2), (magic item:1.1)
-    - (detective:1.2), (silhouetted by flashing police lights:1.2), (noir crime scene:1.1)
-    - (armored antihero:1.2), (charging through enemy gunfire:1.2), (bullets sparking off armor:1.1)
-    - (comic freeze-frame:1.2), (speedster dodging bullets:1.2), (slow motion effect:1.1)
-    - (hero:1.2), (swinging a huge car door like a shield:1.2), (improvised weapon:1.1), (action:1.1)
-    - (villain:1.2), (flying backward from a massive punch:1.2), (impact frame:1.1), (action:1.1)
-    - (masked heroine:1.2), (breaking through a stained-glass window:1.2), (dynamic entry:1.1), (glass shattering:1.1)
-    - (flying hero:1.2), (saving a falling passenger plane:1.2), (heroic rescue:1.1)
-    - (hero:1.2), (firing a grappling hook through a shattered window:1.2), (action pose:1.1)
-    - (super villain:1.2), (summoning a dark storm above the city:1.2), (weather magic:1.1), (ominous:1.1)
-    - (intense stare-down:1.2), (hero and villain in close-up panel:1.2), (dramatic confrontation:1.1)
-    - (hero:1.2), (entering a villain's neon-lit hideout:1.2), (stealth mission:1.1), (futuristic:1.1)
-    - (cosmic heroine:1.2), (channeling stellar energy:1.2), (glowing hair:1.1), (space magic:1.1)
-    - (giant mechanical octopus:1.2), (attacking the harbor:1.1), (robot monster:1.1), (tentacles:1.1)
-    - (team of heroes:1.2), (charging forward together:1.1), (unified splash page:1.2), (team shot:1.1)
-    - (masked antihero:1.2), (walking away from a burning building:1.2), (cool explosion:1.1)
-    - (villain:1.2), (absorbing power from a cracked reactor core:1.2), (glowing with energy:1.1)
-    - (hero:1.2), (dodging a laser grid in a high-security vault:1.1), (stealth action:1.1)
-    - (comic-style onomatopoeia:1.2), (bursting across the action scene:1.1), (POW:1.3), (WHAM:1.3)
-    - (cliffside battle:1.2), (crashing waves below:1.1), (dramatic fight scene:1.1)
-    - (masked martial artist:1.2), (delivering a spinning kick:1.2), (dynamic action pose:1.1)
-    - (hero:1.2), (diving to rescue a falling civilian:1.2), (heroic save:1.1), (action:1.1)
-    - (cosmic entity:1.2), (spreading galaxy-like wings:1.2), (space god:1.1), (nebula:1.1)
-    - (villain:1.2), (escaping through a swirling energy portal:1.1), (magic escape:1.1)
-    - (hero:1.2), (soaring out of an explosion cloud:1.2), (dynamic action:1.1), (smoke:1.1)
-    - (detective:1.2), (confronting a masked figure on a foggy pier:1.1), (noir mystery:1.1)
-    - (hero:1.2), (glowing armor plates activating:1.1), (transformation sequence:1.1)
-    - (antihero:1.2), (firing grappling guns in two directions:1.2), (dual wielding:1.1), (action pose:1.1)
-    - (giant tank mecha:1.2), (rolling through city streets:1.1), (war machine:1.1), (destruction:1.1)
-    - (team of villains:1.2), (striking an iconic pose in their lair:1.2), (evil team shot:1.1)
-    - (hero:1.2), (standing in the spotlight of hovering police drones:1.1), (futuristic police:1.1)
-    - (comic noir bar:1.2), (lit by neon signs:1.1), (cigarette haze:1.1), (moody interior:1.1)
-    - (armored hero:1.2), (blocking a meteor with a shield:1.2), (epic defense:1.1), (space:1.1)
-    - (villain:1.2), (riding a levitating throne high above the city:1.1), (evil ruler:1.1)
-    - (fan-favorite heroic pose:1.2), (cape flowing dramatically:1.2), (iconic:1.1), (bold comic style:1.1)
-    - (hero:1.2), (punching a villain through a concrete wall:1.3), (epic impact:1.1), (super strength:1.1)
-    - (energy mage:1.2), (hovering above the city:1.1), (casting a massive shield bubble:1.2), (magic defense:1.1)
-    - (masked vigilante:1.2), (sprinting across rooftops in the rain:1.1), (night action:1.1)
-    - (hero:1.2), (charging a glowing energy punch:1.2), (illuminating the entire scene:1.1), (power up:1.1)
-    - (cosmic battle:1.2), (unfolding above a ringed planet:1.2), (spaceships and lasers:1.1), (sci-fi war:1.1)
-    - (underwater heroine:1.2), (fighting robotic serpents:1.2), (ocean battle:1.1), (action:1.1)
-    - (hero standing victorious:1.2), (villains fleeing into the shadows:1.2), (end scene of comic:1.1)
-    - (final splash page:1.2), (hero raising fist:1.1), (hopeful sunrise breaks over city:1.2), (victory:1.1)
-
-# ---------------------------------------------------------
-# NEGATIVE PROMPT
-# ---------------------------------------------------------
-
-  negative_prompt:
-    - "(worst quality:1.4), (low quality:1.4), (normal quality:1.2), lowres, blurry, (jpeg artifacts:1.2), compression artifacts, ugly, deformed, disfigured, malformed, (bad anatomy:1.2), (poorly drawn hands:1.3), (poorly drawn face:1.3), (extra limbs:1.2), extra fingers, (missing limbs:1.2), (watermark:1.3), (text:1.3), (signature:1.3), (username:1.3), (logo:1.3), cropped, out of frame, monochrome, grayscale, boring, simple, (bad composition:1.1)"
+    - superhero landing, epic three-point pose, debris flying everywhere, dynamic comic style
+    - masked vigilante, on a rooftop overlooking a neon city at night, moody noir style
+    - powerful punch, creating a bursting comic book shockwave, action scene, bold ink lines
+    - superhero, lifting a collapsing bus, saving fleeing civilians, epic comic panel
+    - ominous villain, emerging from swirling smoke, glowing red eyes, dramatic lighting
+    - dynamic mid-air chase, flying between skyscrapers, action-packed comic style, motion blur
+    - hero, blocking a laser beam, glowing energy shield, action scene
+    - noir detective, walking in a rain-soaked alley, dim streetlights, moody shadows, noir comic style
+    - cyber hero, jumping between rooftop antennas, during a lightning storm, futuristic comic style
+    - super strength, hero, catching a falling building beam, action scene, straining
+    - dramatic standoff, hero and villain on a bridge at sunset, confrontation
+    - villain, raising a crackling orb of energy, dark magic, maniacal laugh
+    - comic panel, hero walking away from an exploding car, explosion, action hero
+    - masked archer, firing an arrow mid-leap, between rooftops, action pose
+    - giant robot, smashing through a skyscraper, glass shattering everywhere, mecha destruction
+    - street brawl, hero fighting a gang of masked thugs, urban alley, action
+    - cosmic hero, flying through a star-filled void, trailing energy, space scene
+    - hero, tearing open mechanical armor, fighting a robot, sparks flying
+    - speedster, racing through the city, leaving glowing streaks, blur effect
+    - heroine, shielding a child from an explosion, glowing forcefield, heroic save
+    - villain, sitting on a throne of broken machinery, evil leader, dark lair
+    - epic clash of fists, two heroes collide mid-air, energy shockwave, dynamic action
+    - comic splash page, a meteor crashing into the city, massive destruction, disaster scene
+    - masked heroine, swinging on a cable, high above city traffic, action pose
+    - giant monster, looming over the skyline, heroes assembling to fight, kaiju attack
+    - superhero, punching through a warehouse door, splintering wood, dramatic entrance
+    - mysterious cloaked figure, stepping out of the shadows, ominous, noir
+    - hero, climbing a burning tower, flames and smoke, rescue mission
+    - cosmic titan, gripping a shattered moon fragment, epic space scene, giant
+    - hero, gripping a ledge with one hand, lightning flashes in background, dramatic peril
+    - villain, unleashing a swarm of robotic drones, evil army, sci-fi
+    - sidekick duo, leaping toward the camera, dynamic foreshortening, action pose
+    - hero, standing in a crater, from a superhero landing, smoking ground
+    - detective, shining flashlight in abandoned subway tunnel, dark and moody, noir style
+    - hero, confronting villain on city hall steps, public standoff
+    - alien invaders, descending from a glowing rift in the sky, sci-fi invasion
+    - comic-style panel split, showing two locations at once, split screen
+    - masked hero, perched on a gargoyle, under a full moon, moody night scene
+    - battle on top of a runaway subway train, dynamic action, fighting
+    - heroine, unleashing a massive energy blast, ripples across the page, magic power
+    - villain, manipulating a holographic map in a dark lair, high-tech base
+    - super team, assembling, dramatic hero lineup pose, team shot
+    - gritty fistfight, inside a dim warehouse, dark action scene, brawl
+    - villain, firing chaos energy in a shattered lab, destruction, magic
+    - massive explosion, with exaggerated comic sound effect, onomatopoeia, KABOOM
+    - hero, leaping from fiery wreckage, dramatic escape, explosion
+    - cybernetic villain, crawling out of a destroyed robot shell, cyborg, damaged
+    - gritty rooftop interrogation, under a stormy sky, noir scene, rain
+    - hero, holding a tattered flag, on a battlefield, patriotic, victory
+    - space hero, hovering in a colorful alien canyon, sci-fi landscape
+    - villain, breaking free from glowing energy chains, powerful escape
+    - duel, hero and villain fighting atop a skyscraper antenna, high-altitude battle
+    - hero, outrunning a collapsing highway, destruction chase, action
+    - mysterious artifact, glowing in the hero's hands, magic item
+    - detective, silhouetted by flashing police lights, noir crime scene
+    - armored antihero, charging through enemy gunfire, bullets sparking off armor
+    - comic freeze-frame, speedster dodging bullets, slow motion effect
+    - hero, swinging a huge car door like a shield, improvised weapon, action
+    - villain, flying backward from a massive punch, impact frame, action
+    - masked heroine, breaking through a stained-glass window, dynamic entry, glass shattering
+    - flying hero, saving a falling passenger plane, heroic rescue
+    - hero, firing a grappling hook through a shattered window, action pose
+    - super villain, summoning a dark storm above the city, weather magic, ominous
+    - intense stare-down, hero and villain in close-up panel, dramatic confrontation
+    - hero, entering a villain's neon-lit hideout, stealth mission, futuristic
+    - cosmic heroine, channeling stellar energy, glowing hair, space magic
+    - giant mechanical octopus, attacking the harbor, robot monster, tentacles
+    - team of heroes, charging forward together, unified splash page, team shot
+    - masked antihero, walking away from a burning building, cool explosion
+    - villain, absorbing power from a cracked reactor core, glowing with energy
+    - hero, dodging a laser grid in a high-security vault, stealth action
+    - comic-style onomatopoeia, bursting across the action scene, POW, WHAM
+    - cliffside battle, crashing waves below, dramatic fight scene
+    - masked martial artist, delivering a spinning kick, dynamic action pose
+    - hero, diving to rescue a falling civilian, heroic save, action
+    - cosmic entity, spreading galaxy-like wings, space god, nebula
+    - villain, escaping through a swirling energy portal, magic escape
+    - hero, soaring out of an explosion cloud, dynamic action, smoke
+    - detective, confronting a masked figure on a foggy pier, noir mystery
+    - hero, glowing armor plates activating, transformation sequence
+    - antihero, firing grappling guns in two directions, dual wielding, action pose
+    - giant tank mecha, rolling through city streets, war machine, destruction
+    - team of villains, striking an iconic pose in their lair, evil team shot
+    - hero, standing in the spotlight of hovering police drones, futuristic police
+    - comic noir bar, lit by neon signs, cigarette haze, moody interior
+    - armored hero, blocking a meteor with a shield, epic defense, space
+    - villain, riding a levitating throne high above the city, evil ruler
+    - fan-favorite heroic pose, cape flowing dramatically, iconic, bold comic style
+    - hero, punching a villain through a concrete wall, epic impact, super strength
+    - energy mage, hovering above the city, casting a massive shield bubble, magic defense
+    - masked vigilante, sprinting across rooftops in the rain, night action
+    - hero, charging a glowing energy punch, illuminating the entire scene, power up
+    - cosmic battle, unfolding above a ringed planet, spaceships and lasers, sci-fi war
+    - underwater heroine, fighting robotic serpents, ocean battle, action
+    - hero standing victorious, villains fleeing into the shadows, end scene of comic
+    - final splash page, hero raising fist, hopeful sunrise breaks over city, victory
