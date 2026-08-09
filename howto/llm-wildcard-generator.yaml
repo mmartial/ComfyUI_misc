@@ -21,10 +21,12 @@ llm_instructions:
   - "The top-level key *must* be a short, memorable name based on the theme (e.g., if the theme is 'Cyberpunk', the key could be 'my_cyberpunk')."
   - "You *must* follow the structure defined in `generation_structure`."
   - "For each category (like `primary_subjects`, `settings`, etc.), you must generate at least 15-20 diverse, high-quality options."
-  - "Incorporate Stable Diffusion-style weighting (e.g., (detailed:1.2)) where it adds meaningful emphasis to an option."
+  - "Weighting is a scalpel, not a blanket: reserve (term:1.1-1.3) for the one or two elements that must dominate the read of an image (a signature prop, key expression, or defining pose) per option or prompt. Never weight filler/generic descriptors. Cap weight at 1.3 outside `negative_prompt`."
+  - "Every option must describe something visible: pose, clothing, prop, material, expression, effect, lighting, or texture. Do not use pure narrative/trope labels (e.g. 'brooding antihero', 'shonen hero') or compound archetype+noun shorthand (e.g. 'wizard robes', 'noir detective coat') — spell out the actual materials, colors, shapes, and props instead. Concrete, well-established literal tags (specific garments, species, props) are fine to keep as-is."
   - "The 'combo' categories *must* correctly reference other categories using the `__top_level_key/category_name__` syntax. (e.g., `__my_cyberpunk/primary_subjects__`)."
+  - "Before finalizing, verify every category you define is pulled by at least one combo (directly or via nesting). A category that no combo ever references is dead content — either wire it in or drop it."
   - "The `spotlight_prompts` must be complete, highly detailed prompts, not just single items."
-  - "The `negative_prompt` must include general bad-art terms AND theme-specific exclusions (e.g., for a 'Cyberpunk' theme, add 'fantasy, magic, medieval')."
+  - "The `random` category must include relevant references to each of the `combo` and `spotlight_prompts` categories."
   - "Do not include these instructions in your final YAML output. The output should begin *only* with the top-level theme key."
 
 # 3. Define the Desired Output Structure
@@ -94,7 +96,7 @@ generation_structure:
     # These must combine the categories you created above using the format: "__[theme_name]/category_name__"
     
     combo_character:
-      - "__[theme_name]/primary_subjects__, __[theme_name]/subject_descriptors_1__, in a __[theme_name]/settings__, __[theme_name]/lighting_styles__, __[theme_name]/art_styles__"
+      - "__[theme_name]/primary_subjects__, __[theme_name]/subject_descriptors_1__, __[theme_name]/subject_descriptors_2__, with __[theme_name]/secondary_subjects__, in a __[theme_name]/settings__, __[theme_name]/lighting_styles__, __[theme_name]/art_styles__"
 
     combo_scene:
       - "__[theme_name]/settings__, __[theme_name]/atmospheres__, __[theme_name]/lighting_styles__, __[theme_name]/camera_shots__, __[theme_name]/art_styles__, __[theme_name]/special_effects__"
@@ -102,6 +104,7 @@ generation_structure:
     random:
       - "__[theme_name]/combo_character__"
       - "__[theme_name]/combo_scene__"
+      - "__[theme_name]/spotlight_prompts__"
 
     # --- Spotlight Prompts ---
     # Instructions for LLM: Create a 'spotlight_prompts' category.
@@ -109,15 +112,6 @@ generation_structure:
     # that showcase the theme at its best. Use weighting like (keyword:1.3).
     
     spotlight_prompts:
-      - "[A complete, detailed, and evocative prompt fitting the theme, e.g., 'a (grizzled veteran:1.2) in heavy power armor, standing in a (rain-soaked neon alley:1.1), (volumetric fog:1.2), cinematic lighting, detailed illustration']"
+      - "[A complete, detailed, and evocative prompt fitting the theme, e.g., 'a (grizzled veteran:1.2) in heavy power armor, standing in a rain-soaked neon alley, volumetric fog, cinematic lighting, detailed illustration' — note only the one dominant element is weighted]"
       - "[Another complete, detailed, and evocative prompt...]"
       - "[...18 more...]"
-
-    # --- Negative Prompt ---
-    # Instructions for LLM: Create a 'negative_prompt' category.
-    # This should list common failure modes for this theme, plus general bad-art terms.
-    
-    negative_prompt:
-      - "text, watermark, signature, (worst quality:1.2), (low quality:1.2), (bad anatomy:1.3), extra limbs, (missing limbs:1.2), poorly drawn, fused fingers, (too many fingers:1.2)"
-      - "[LLM adds theme-specific negatives here, e.g., 'fantasy, magic, medieval, swords' for a sci-fi theme]"
-      - "[LLM adds more theme-specific negatives, e.g., 'bright colors, happy, cheerful' for a horror theme]"
