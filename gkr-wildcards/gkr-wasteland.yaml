@@ -9,204 +9,204 @@ gkr_wasteland:
 # ---------------------------------------------------------
 
   archetype:
-    - (wasteland survivor:1.3), lone figure, (gritty:1.1)
-    - (scavenger nomad:1.3), (drifter:1.1), carrying supplies
-    - (bunker soldier:1.3), (military surplus:1.1), tactical gear
-    - (radiation mage:1.3), (glowing aura:1.1), (toxic energy:1.1)
-    - (road warrior:1.3), (biker gear:1.1), leather
-    - (wandering mechanic:1.3), (grease stains:1.1), (carrying tools:1.1)
-    - (feral scout:1.3), (animal pelts:1.1), (wild look:1.1)
-    - (masked raider:1.3), (spiked armor:1.1), (menacing stance:1.1)
-    - (ex corporate deserter:1.3), (torn suit:1.1), (hiding:1.1)
-    - (mutated outcast:1.3), (visible mutation:1.1), (tattered rags:1.1)
-    - (mutant hunter:1.3), (trophies:1.1), (heavy weapon:1.1)
-    - (hardened survivor:1.3), (stoic:1.1), (practical gear:1.1)
-    - (mutant mercenary:1.3), (hired gun:1.1), (heavy armor:1.1)
-    - (bunker engineer:1.3), (tech gear:1.1), (repairing:1.1)
-    - (desert drifter:1.3), (poncho:1.1), (dust-covered:1.1)
-    - (scavenger hunter:1.3), (bow:1.1), (tracking:1.1)
+    - (sun-weathered skin and makeshift layered wraps:1.2), standing alone, dust-streaked boots
+    - (overloaded pack frame lashed with salvage:1.2), restless traveling stance, bedroll strapped across the back
+    - (faded military surplus fatigues:1.2), disciplined posture, tactical webbing across the chest
+    - (skin lit by a faint glowing aura:1.3), wisps of toxic energy curling from open palms, ritual stance
+    - (scarred leather riding gear:1.2), wide braced stance, chain-wrapped forearms
+    - (grease-stained coveralls:1.2), tool belt slung low, wrench gripped in one hand
+    - (crude animal-pelt wrap:1.2), crouched alert stance, matted hair and dirt-streaked face
+    - (scavenged mask hiding the face:1.3), spiked scrap armor, wide aggressive stance
+    - (torn business suit layered under scavenged wraps:1.3), hunched wary posture, glancing over one shoulder
+    - (visible mutation across bare skin:1.3), tattered rags, hunched posture
+    - (mutant trophies strung across the chest:1.3), heavy weapon braced against the shoulder, hard stare
+    - (weathered practical gear:1.2), squared stoic shoulders, unblinking gaze
+    - (heavy mismatched armor plates:1.3), holstered weapon at the hip, mercenary swagger
+    - (tech-laden tool harness:1.2), crouched over exposed wiring, soldering iron in hand
+    - (dust-covered poncho:1.2), squinting into the wind, sand-scoured skin
+    - (makeshift bow drawn:1.3), low tracking crouch, narrowed focused eyes
 
   age:
-    - (young scavenger:1.2), agile, (survival gear:1.1)
-    - (hardened adult:1.2), (veteran:1.1), (scarred:1.1)
-    - (weathered veteran:1.2), (old warrior:1.1), (gray hair:1.1)
+    - (young scavenger:1.2), agile stance, survival gear strapped on
+    - (hardened adult build:1.2), scarred forearms, weathered stance
+    - (weathered veteran:1.2), gray hair, deep-set wrinkles
 
   build:
-    - (lean and wiry:1.2), (agile:1.1), quick
-    - (muscular and strong:1.2), (intimidating:1.1), (powerful build:1.1)
-    - (compact and agile:1.2), (stealthy:1.1), (quick reflexes:1.1)
+    - (lean wiry frame:1.2), quick fluid movement
+    - (muscular powerful build:1.2), broad shoulders
+    - (compact agile build:1.2), coiled ready stance
 
   tone:
-    - (sunburned skin:1.2), (weathered:1.1), (gritty texture:1.1)
-    - (dust covered skin:1.2), (grimy:1.1), (matte texture:1.1)
-    - (scarred skin:1.2), (battle-worn:1.1), (old wounds:1.1)
-    - (pale bunker skin:1.2), (unhealthy:1.1), (indoors:1.1)
+    - (sunburned weathered skin:1.2), rough dry texture
+    - (dust-covered skin:1.2), grimy matte texture
+    - (scarred skin:1.2), old healed wounds
+    - (pale bunker-pallor skin:1.2), sickly undertone
 
   face_style:
-    - (gaunt face:1.3), (sunken eyes:1.1), (prominent cheekbones:1.1)
-    - (scarred face:1.3), (old wound:1.1), (tough expression:1.1)
-    - (tired eyes:1.2), (weary expression:1.1), (dark circles:1.1)
-    - (face hidden by mask:1.3), (gas mask:1.1), (mysterious:1.1)
+    - (gaunt face:1.3), sunken eyes, prominent cheekbones
+    - (scarred face:1.3), old healed wound across the brow, hard-set jaw
+    - (tired eyes:1.2), dark circles, weary downturned mouth
+    - (face hidden by a gas mask:1.3), cracked eye lenses, breath fogging the glass
 
 # ---------------------------------------------------------
 # APPEARANCE
 # ---------------------------------------------------------
 
   hair:
-    - (shaved head:1.2), (stubble:1.1)
-    - (ragged short hair:1.2), (messy:1.1), (uneven cut:1.1)
-    - (messy medium hair:1.2), (unkempt:1.1), (windblown:1.1)
-    - (improvised braids:1.2), (leather ties:1.1), (grimy:1.1)
-    - (mohawk style:1.2), (punk:1.1), (shaved sides:1.1)
-    - (long unkempt hair:1.2), (matted:1.1), (dirty:1.1)
-    - (spiky hair:1.2), (gelled with grime:1.1), (punk aesthetic:1.1)
-    - (shaved head with designs:1.2), (tribal tattoos:1.1), (scalp art:1.1)
+    - (shaved head:1.2), light stubble
+    - (ragged short hair:1.2), uneven cut
+    - (messy medium-length hair:1.2), windblown
+    - (improvised braids:1.2), leather hair ties, grimy strands
+    - (mohawk:1.2), shaved sides
+    - (long matted hair:1.2), tangled ends
+    - (spiky hair:1.2), grime-stiffened tips
+    - (shaved head with tribal tattoos:1.3), scalp art
 
   hair_color:
-    - (black hair:1.1), (dark:1.1)
-    - (brown hair:1.1), (mousy:1.1)
-    - (blonde hair:1.1), (sun-bleached:1.1), (dirty blonde:1.1)
-    - (grey hair:1.1), (prematurely grey:1.1), (salt and pepper:1.1)
-    - (dyed streaks:1.2), (faded color:1.1), (punk style:1.1)
+    - black hair
+    - brown hair, mousy tone
+    - (sun-bleached blonde hair:1.1)
+    - (salt-and-pepper grey hair:1.1)
+    - (dyed color streaks:1.2), faded tips
 
   eyes:
-    - (wary eyes:1.2), (looking around:1.1), (suspicious:1.1)
-    - (hardened stare:1.2), (cold look:1.1), (unflinching:1.1)
-    - (glowing mutant eyes:1.3), (eerie light:1.1), (unnatural color:1.1)
-    - (tired but hopeful eyes:1.2), (spark of hope:1.1), (weary:1.1)
+    - (wary eyes:1.2), darting glances
+    - (hardened unflinching stare:1.2), cold
+    - (glowing mutant eyes:1.3), eerie light in the irises
+    - (tired eyes with a spark of hope:1.2), faint smile lines
 
   expression:
-    - (grim determination:1.3), (set jaw:1.1), (focused:1.1)
-    - (distrustful look:1.2), (narrowed eyes:1.1), (suspicious:1.1)
-    - (resolute survival focus:1.3), (intense gaze:1.1), (survivor:1.1)
-    - (desperate fear:1.2), (wide eyes:1.1), (panicked:1.1)
+    - (set jaw and grim determination:1.3), narrowed focused eyes
+    - (narrowed distrustful eyes:1.2), tight-lipped
+    - (intense unblinking gaze:1.3), jaw clenched with resolve
+    - (wide panicked eyes:1.2), sharp intake of breath
 
   clothing:
-    - (patched jacket:1.2), (tattered:1.1), worn leather
-    - (layered scavenged clothing:1.3), (rags:1.1), (mismatched fabrics:1.1)
-    - (makeshift armor pieces:1.2), (strapped on:1.1), (scrap metal:1.1)
-    - (long coat with straps:1.2), (duster coat:1.1), (tattered:1.1)
-    - (bunker uniform:1.2), (torn:1.1), (faded insignia:1.1)
+    - (patched jacket:1.2), worn leather, frayed seams
+    - (layered scavenged clothing:1.3), mismatched fabrics
+    - (scrap-metal panels strapped over clothing:1.2), improvised padding
+    - (long duster coat with straps:1.2), tattered hem
+    - (faded bunker uniform:1.2), torn at the seams, faded insignia
 
   armor:
-    - (scrap metal armor:1.3), (welded plates:1.1), (rusted:1.1)
-    - (reinforced leather armor:1.3), (studded:1.1), (hardened leather:1.1)
-    - (improvised riot gear:1.3), (padding:1.1), (shattered visor:1.1)
-    - (radiation shield harness:1.3), (glowing tubes:1.1), (lead plates:1.1)
+    - (scrap metal armor:1.3), welded rusted plates
+    - (reinforced studded leather armor:1.3), hardened leather panels
+    - (improvised riot gear:1.3), bulky padding, shattered visor
+    - (radiation shield harness:1.3), glowing tubes, lead plates
 
   gear:
-    - (gas mask:1.3), (filter:1.1), (cracked visor:1.1)
-    - (goggles:1.2), (welding goggles:1.1), (dust-covered:1.1)
-    - (backpack with supplies:1.2), (bedroll:1.1), (overstuffed:1.1)
-    - (water canteen:1.2), (metal:1.1), (slung over shoulder:1.1)
-    - (rope and hooks:1.2), (climbing gear:1.1), (coiled rope:1.1)
-    - (worn gloves:1.2), (fingerless:1.1), (stained leather:1.1)
-    - (scavenged radio:1.2), (shortwave:1.1), (antenna:1.1)
+    - (gas mask:1.3), filter canister, cracked visor
+    - (dust-covered welding goggles:1.2)
+    - (overstuffed backpack:1.2), bedroll strapped on top
+    - (metal water canteen:1.2), slung over the shoulder
+    - (coiled rope and climbing hooks:1.2)
+    - (worn fingerless gloves:1.2), stained leather
+    - (scavenged shortwave radio:1.2), bent antenna
 
   weapons:
-    - (scrap rifle:1.3), (improvised:1.1), (bolt-action:1.1)
-    - (sawed off shotgun:1.3), (double barrel:1.1), (weathered wood:1.1)
-    - (pipe shotgun:1.3), (crude weapon:1.1), (makeshift:1.1)
-    - (rusted blade:1.2), (machete:1.1), (taped grip:1.1)
-    - (spiked bat:1.3), (nails:1.1), (barbed wire:1.1)
-    - (crossbow made from junk:1.3), (rebar bolts:1.1), (improvised:1.1)
-    - (pistol with taped grip:1.2), (semi-automatic:1.1), (electrical tape:1.1)
-    - (spear with metal tip:1.2), (rebar spear:1.1), (sharpened:1.1)
+    - (improvised bolt-action scrap rifle:1.3)
+    - (sawed-off double-barrel shotgun:1.3), weathered wood stock
+    - (crude pipe shotgun:1.3)
+    - (rusted machete:1.2), taped grip
+    - (spiked bat:1.3), rusty nails, barbed wire wrap
+    - (crossbow built from junk:1.3), rebar bolts
+    - (pistol with a taped grip:1.2), electrical tape wrapped
+    - (sharpened rebar spear:1.2), metal tip
 
   offhand:
-    - (scavenged lantern:1.2), (flickering light:1.1), (kerosene:1.1)
-    - (map of ruins:1.2), (tattered paper:1.1), (hand-drawn:1.1)
-    - (jerry can:1.2), (gasoline:1.1), (rusted metal:1.1)
-    - (makeshift shield:1.3), (stop sign:1.1), (scrap metal:1.1)
-    - (toolbox:1.2), (rusted:1.1), (mechanic:1.1)
-    - (med kit:1.2), (worn canvas bag:1.1), (red cross symbol:1.1)
+    - (scavenged kerosene lantern:1.2), flickering light
+    - (tattered hand-drawn map:1.2)
+    - (rusted jerry can:1.2), gasoline sloshing inside
+    - (makeshift stop-sign shield:1.3), scrap metal edges
+    - (rusted toolbox:1.2)
+    - (worn canvas med kit:1.2), faded red cross symbol
 
   trinkets:
-    - (family photo:1.2), (faded:1.1), (creased:1.1)
-    - (old world toy:1.2), (broken:1.1), (sentimental value:1.1)
-    - (dog tag:1.2), (military:1.1), (on a chain:1.1)
-    - (broken wristwatch:1.2), (stopped time:1.1), (cracked glass:1.1)
-    - (key to unknown door:1.2), (ancient key:1.1), (mysterious:1.1)
+    - (faded creased family photo:1.2)
+    - (broken old-world toy:1.2)
+    - (military dog tag on a chain:1.2)
+    - (broken wristwatch:1.2), hands frozen, cracked glass
+    - (ornate key of unknown origin:1.2), rust-spotted
 
 # ---------------------------------------------------------
 # FACTION
 # ---------------------------------------------------------
 
   faction:
-    - (raider gang:1.3), (spiked armor:1.1), (aggressive:1.1)
-    - (bunker militia:1.2), (uniforms:1.1), (organized:1.1)
-    - (nomad caravan:1.2), (traders:1.1), (pack animals:1.1)
-    - (mutant tribe:1.3), (tribal markings:1.1), (ritualistic:1.1)
-    - (salvager guild:1.2), (tech scraps:1.1), (goggles:1.1)
-    - (cult of the atom:1.3), (glowing symbols:1.1), (radiation worshippers:1.1)
+    - (raider gang:1.3), spiked armor, aggressive posture
+    - (bunker militia:1.2), matching uniforms
+    - (nomad caravan:1.2), traders leading pack animals
+    - (mutant tribe:1.3), tribal markings, ritual body paint
+    - (salvager guild:1.2), tech scraps, goggles
+    - (cult of the atom:1.3), glowing radioactive symbols, worshippers kneeling
 
 # ---------------------------------------------------------
 # VEHICLE
 # ---------------------------------------------------------
 
   vehicle:
-    - (armored muscle car:1.3), (supercharged:1.1), (welded plates:1.1)
-    - (spiked buggy:1.3), (dune buggy:1.1), (roll cage:1.1)
-    - (battered truck:1.2), (off-road tires:1.1), (rusted:1.1)
-    - (motorcycle with sidecar:1.3), (chopper:1.1), (scavenged parts:1.1)
-    - (cobbled together bus:1.3), (armored windows:1.1), (mobile base:1.1)
-    - (scavenged tractor:1.2), (makeshift armor:1.1), (farm equipment:1.1)
-    - (ramshackle armored van:1.3), (no windows:1.1), (reinforced:1.1)
+    - (armored muscle car:1.3), welded steel plates, hood scoop jutting up
+    - (spiked dune buggy:1.3), roll cage
+    - (battered off-road truck:1.2), rusted body, oversized tires
+    - (motorcycle with a sidecar:1.3), scavenged mismatched parts
+    - (cobbled-together bus:1.3), armored windows, crates lashed to the roof
+    - (scavenged tractor:1.2), makeshift armor plating
+    - (ramshackle armored van:1.3), no windows, welded seams
 
   vehicle_detail:
-    - (welded armor plates:1.3), (haphazard:1.1), (scrap metal:1.1)
-    - (spikes and chains:1.3), (intimidating:1.1), (raider aesthetic:1.1)
-    - (rusted surfaces:1.2), (corroded:1.1), (peeling paint:1.1)
-    - (makeshift weapon mounts:1.3), (machine gun:1.1), (harpoon:1.1)
-    - (painted war symbols:1.2), (graffiti:1.1), (skulls:1.1)
-    - (bone decorations:1.2), (trophies:1.1), (tribal:1.1)
+    - (welded scrap-metal armor plates:1.3), haphazard patchwork
+    - (spikes and chains:1.3), bolted along the frame
+    - (rusted corroded surfaces:1.2), peeling paint
+    - (makeshift weapon mounts:1.3), machine gun, harpoon launcher
+    - (painted war symbols:1.2), graffiti, skulls
+    - (bone decorations:1.2), strung trophies
 
 # ---------------------------------------------------------
 # ENVIRONMENT
 # ---------------------------------------------------------
 
   environment:
-    - (ruined city:1.3), (collapsed skyscrapers:1.1), (rubble:1.1)
-    - (collapsed highway:1.3), (broken overpass:1.1), (rusted cars:1.1)
-    - (toxic wasteland:1.3), (green fog:1.1), (glowing pools:1.1)
-    - (dry salt flats:1.2), (barren:1.1), (cracked earth:1.1)
-    - (dust storm plains:1.3), (swirling dust:1.1), (low visibility:1.1)
-    - (abandoned refinery:1.3), (rusting pipes:1.1), (smokestacks:1.1)
-    - (underground bunker:1.3), (concrete walls:1.1), (flickering lights:1.1)
-    - (flooded ruin zone:1.3), (submerged buildings:1.1), (murky water:1.1)
+    - (ruined city:1.3), collapsed skyscrapers, rubble-strewn streets
+    - (collapsed highway:1.3), broken overpass, rusted cars
+    - (toxic wasteland:1.3), green fog, glowing pools
+    - (dry salt flats:1.2), cracked earth
+    - (dust storm plains:1.3), swirling dust, low visibility
+    - (abandoned refinery:1.3), rusting pipes, silent smokestacks
+    - (underground bunker:1.3), concrete walls, flickering lights
+    - (flooded ruin zone:1.3), submerged buildings, murky water
 
   mood:
-    - (bleak and hopeless:1.2), (desolate:1.1), (depressing:1.1)
-    - (desperate but determined:1.2), (survival:1.1), (gritty:1.1)
-    - (tense and dangerous:1.2), (on edge:1.1), (imminent threat:1.1)
-    - (eerie and silent:1.2), (quiet:1.1), (haunting:1.1)
-    - (grim but defiant:1.2), (hopeful:1.1), (fighting back:1.1)
+    - (washed-out desaturated palette:1.2), empty horizon, muted grays
+    - (dust-caked color grade:1.2), clenched fists, forward-leaning stance
+    - (harsh contrast shadows:1.2), tense coiled posture, weapon half-raised
+    - (deep silence in still air:1.2), no movement, long empty shadows
+    - (dim light breaking through storm clouds:1.2), chin raised, standing firm
 
   lighting:
-    - (harsh noon sun:1.2), (strong shadows:1.1), (overexposed:1.1)
-    - (dusty golden hour light:1.3), (warm tones:1.1), (long shadows:1.1)
-    - (dim bunker lighting:1.2), (flickering:1.1), (fluorescent:1.1)
-    - (flickering campfire glow:1.3), (warm light:1.1), (shadows dancing:1.1)
-    - (storm darkened sky:1.3), (ominous clouds:1.1), (lightning:1.1)
+    - (harsh noon sun:1.2), strong shadows, overexposed highlights
+    - (dusty golden hour light:1.3), warm tones, long shadows
+    - (dim flickering bunker lighting:1.2), fluorescent hum
+    - (flickering campfire glow:1.3), warm light, dancing shadows
+    - (storm-darkened sky:1.3), ominous clouds, lightning flashes
 
   camera:
-    - (mid shot in wasteland:1.2), (showing character and environment:1.1)
-    - (low angle tough stance:1.3), (intimidating pose:1.1), (heroic:1.1)
-    - (wide view of desolation:1.3), (vast landscape:1.1), (tiny figure:1.1)
-    - (over the shoulder journey shot:1.2), (traveling:1.1), (looking forward:1.1)
-    - (close up weathered face:1.3), (intense expression:1.1), (scars:1.1)
+    - (mid shot framing character and environment:1.2)
+    - (low angle shot:1.3), wide braced stance
+    - (wide shot of desolation:1.3), vast landscape, tiny distant figure
+    - (over-the-shoulder shot:1.2), looking forward down the road
+    - (close-up on a weathered face:1.3), visible scars
 
   style:
-    - (gritty post apocalyptic art:1.3), (realistic:1.1), (concept art:1.1)
-    - (realistic wasteland concept art:1.3), (detailed:1.1), (cinematic:1.1)
-    - (graphic novel wasteland style:1.3), (heavy inks:1.1), (stylized:1.1)
+    - (gritty post-apocalyptic concept art:1.3), realistic, detailed
+    - (cinematic realistic wasteland art:1.3), detailed rendering
+    - (graphic novel style:1.3), heavy inks, stylized linework
 
   fx_environment:
-    - (drifting ash:1.2), (like snow:1.1), (post-fire:1.1)
-    - (swirling dust:1.2), (windy:1.1), (sandstorm:1.1)
-    - (falling debris:1.2), (collapsing building:1.1), (dust clouds:1.1)
-    - (smoky haze:1.2), (low visibility:1.1), (smell of fire:1.1)
-    - (heat shimmer:1.2), (desert heat:1.1), (distorted air:1.1)
+    - (drifting ash falling like snow:1.2)
+    - (swirling windblown dust:1.2), sandstorm haze
+    - (falling debris:1.2), collapsing building, dust clouds
+    - (smoky haze:1.2), low visibility, orange glow
+    - (heat shimmer:1.2), distorted air over sand
 
 # ---------------------------------------------------------
 # RANDOM (COMBO PROMPTS - DO NOT MODIFY)
@@ -216,7 +216,7 @@ gkr_wasteland:
     - "__gkr_wasteland/archetype__, __gkr_wasteland/age__, __gkr_wasteland/build__, __gkr_wasteland/tone__, __gkr_wasteland/face_style__, __gkr_wasteland/hair__, __gkr_wasteland/hair_color__, __gkr_wasteland/eyes__, __gkr_wasteland/expression__, __gkr_wasteland/clothing__, __gkr_wasteland/armor__, __gkr_wasteland/gear__, __gkr_wasteland/weapons__, __gkr_wasteland/offhand__, __gkr_wasteland/trinkets__, __gkr_wasteland/faction__, __gkr_wasteland/environment__, __gkr_wasteland/mood__, __gkr_wasteland/lighting__, __gkr_wasteland/camera__, __gkr_wasteland/style__, __gkr_wasteland/fx_environment__"
 
   vehicle_combo:
-    - "__gkr_wasteland/vehicle__, __gkr_wasteland/vehicle_detail__, racing across __gkr_wasteland/environment__, __gkr_wasteland/mood__, wide view of desolation, gritty post apocalyptic art, __gkr_wasteland/fx_environment__"
+    - "__gkr_wasteland/vehicle__, __gkr_wasteland/vehicle_detail__, racing across __gkr_wasteland/environment__, __gkr_wasteland/mood__, __gkr_wasteland/camera__, __gkr_wasteland/style__, __gkr_wasteland/fx_environment__"
 
   scene_combo:
     - "__gkr_wasteland/environment__, __gkr_wasteland/mood__, __gkr_wasteland/lighting__, __gkr_wasteland/style__, __gkr_wasteland/camera__, __gkr_wasteland/fx_environment__"
@@ -225,6 +225,9 @@ gkr_wasteland:
     - "__gkr_wasteland/hero_combo__"
     - "__gkr_wasteland/vehicle_combo__"
     - "__gkr_wasteland/scene_combo__"
+    - "__gkr_wasteland/spotlight_characters__"
+    - "__gkr_wasteland/spotlight_backgrounds__"
+    - "__gkr_wasteland/spotlight_vehicles__"
 
   random_character:
     - "__gkr_wasteland/archetype__, __gkr_wasteland/age__, __gkr_wasteland/build__, __gkr_wasteland/tone__, __gkr_wasteland/face_style__, __gkr_wasteland/hair__, __gkr_wasteland/hair_color__, __gkr_wasteland/eyes__, __gkr_wasteland/expression__, __gkr_wasteland/clothing__, __gkr_wasteland/armor__, __gkr_wasteland/gear__, __gkr_wasteland/weapons__, __gkr_wasteland/offhand__, __gkr_wasteland/trinkets__, __gkr_wasteland/faction__"
@@ -237,299 +240,292 @@ gkr_wasteland:
 # ---------------------------------------------------------
 
   spotlight_characters:
-    - (gritty concept art:1.2), (a lone wasteland wanderer:1.3), (tattered duster coat:1.1), (cracked gas mask:1.2), standing in a ruined city, (dusty atmosphere:1.1), cinematic lighting
-    - (cinematic portrait:1.1), (a hardened scavenger woman:1.3), (looted tech:1.1) strapped to a (heavy backpack:1.1), (intense gaze:1.1), (ruined highway background:1.1), dusty golden hour
-    - (epic character art:1.2), (a desert raider warlord:1.4), (intimidating spiked armor:1.2), (burning glare:1.1), seated on a (throne of junk:1.1), (smoky haze:1.1)
-    - (cinematic shot:1.1), (a silent sniper:1.3), (patched camo cloak:1.1), (perched on a collapsed skyscraper:1.2), (aiming a rusted rifle:1.2), (storm darkened sky:1.1)
-    - (full body shot:1.1), (a biohazard survivor:1.3), (makeshift hazmat suit:1.2), (glowing green toxic fog:1.2), (holding a geiger counter:1.1), abandoned refinery
-    - (character concept art:1.2), (a scarred mechanic:1.3), (oil-stained gloves:1.1), (wielding an oversized wrench:1.2) as a weapon, (standing by a broken down vehicle:1.1), gritty
-    - (creature design:1.2), (a feral mutant:1.3), (glowing toxic eyes:1.2), (warped limbs:1.1), (tattered rags:1.1), (crouching in a dark tunnel:1.1), eerie lighting
-    - (cinematic wide shot:1.1), (a rooftop scout:1.3), (using binoculars:1.1), (frayed scarf blowing in the wind:1.1), (looking out over a vast ruined city:1.2), (bleak:1.1)
-    - (gritty portrait:1.1), (a masked nomad:1.3), (wandering a dry salt flat:1.1), (holding a metal staff:1.1), (metal charms and trinkets:1.1), (harsh noon sun:1.1)
-    - (action pose:1.2), (a ruin hunter woman:1.3), (neon scavenger goggles:1.2), (agile pose:1.1), (leaping across rubble:1.1), (flooded ruin zone:1.1), (dynamic:1.1)
-    - (character art:1.1), (an anti-radiation soldier:1.3), (heavy reinforced plated suit:1.2), (carrying heavy gear:1.1), (marching through a (toxic wasteland:1.1):1.1), (green fog:1.1)
-    - (cinematic portrait:1.2), (a fallen officer:1.3), (torn police uniform:1.1), (hopeful determination in eyes:1.2), (standing in rubble:1.1), (smoky haze:1.1)
-    - (stealth action scene:1.1), (a rogue scavenger:1.3), (carrying lockpicks:1.1), (holding a compact blade:1.1), (sneaking through an (abandoned bunker:1.2):1.1), (dim flickering lights:1.1)
-    - (action shot:1.2), (a biker marauder:1.3), (leather jacket:1.1), (saw-blade shoulder pads:1.2), (on a roaring motorcycle:1.1), (kicking up dust:1.1), (road warrior:1.1)
-    - (epic portrait:1.1), (a desert priestess:1.3), (adorned with bone jewelry:1.2), (dust-covered robes:1.1), (chanting:1.1), (under a (storm darkened sky:1.2):1.1), (mystical:1.1)
-    - (sci-fi concept art:1.2), (a cyber-aug survivor:1.3), (cracked circuitry on skin:1.2), (glowing wires:1.1), (hiding in a (derelict tech lab:1.1):1.1), (tense:1.1)
-    - (fantasy art:1.1), (a toxic witch:1.3), (robed figure:1.1), (wielding glowing green fumes:1.3), (in a (radioactive swamp:1.1):1.1), (eerie and magical:1.1)
-    - (cinematic portrait:1.2), (a post-collapse medic:1.3), (worn face:1.1), (bandolier of medical supplies:1.2), (helping a wounded survivor:1.1), (flickering campfire glow:1.1)
-    - (concept art:1.1), (a feral dog tamer:1.3), (walking with a pack of (wasteland hounds:1.2):1.1), (animal pelts:1.1), (in a (burnt forest:1.1):1.1), (bleak:1.1)
-    - (creature design:1.2), (a towering brute mutant:1.4), (massive muscles:1.1), (patchwork scrap-metal armor:1.2), (roaring:1.1), (in a (collapsed highway:1.1):1.1), (intimidating:1.1)
-    - (gritty art:1.1), (a nomadic trader:1.3), (carrying salvaged relics:1.1), (unfurling old maps:1.1), (pack animals loaded with supplies:1.1), (in a (ruined marketplace:1.1):1.1)
-    - (character concept:1.2), (a rust-plate knight:1.4), (full (scrap metal armor:1.3):1.1), (makeshift shield:1.1), (standing guard:1.1), (at a (bunker entrance:1.1):1.1), (stoic:1.1)
-    - (action scene:1.1), (a canyon sniper:1.3), (wearing a (camo tarp cloak:1.2):1.1), (long rifle:1.1), (aiming from a (high cliff:1.1):1.1), (vast desert canyon below:1.1)
-    - (cinematic portrait:1.2), (a scorch survivor:1.3), (coated in ash and soot:1.2), (visible burn scars:1.1), (walking through a (burnt forest:1.1):1.1), (drifting ash:1.1)
-    - (character art:1.1), (a bunker priest:1.3), (clutching a (relic book:1.1):1.1), (wearing (tattered robes:1.1):1.1), (preaching about (forgotten laws:1.1):1.1), (dim bunker lighting:1.1)
-    - (fantasy art:1.2), (a radiation monk:1.3), (glowing faintly with a (blue aura:1.2):1.1), (meditating:1.1), (tattered robes:1.1), (in a (toxic crater lake:1.1):1.1), (serene:1.1)
-    - (action pose:1.2), (a city scout woman:1.3), (agile:1.1), (wielding a (chainsaw-blade spear:1.2):1.1), (on a (rooftop:1.1):1.1), (overlooking (ruined city:1.1):1.1)
-    - (gritty concept art:1.1), (a wasteland alchemist:1.3), (wearing a (gas mask:1.1):1.1), (mixing (glowing chemical vials:1.2):1.1), (in a (makeshift lab:1.1):1.1), (eerie green light:1.1)
-    - (epic art:1.3), (a masked plague rider:1.4), (dark robes:1.1), (riding a (horse in skeletal armor:1.2):1.1), (toxic green fog swirling:1.1), (omen:1.1)
-    - (character concept:1.2), (an urban ronin:1.3), (tattered coat:1.1), (wielding a (jury-rigged katana:1.2):1.1), (standing on a (rainy, neon-lit ruin street:1.1):1.1), (moody:1.1)
-    - (action scene:1.1), (a ruin-diver:1.3), (climbing harness:1.1), (oxygen mask:1.2), (climbing a (collapsed skyscraper:1.1):1.1), (flooded city below:1.1)
-    - (action pose:1.2), (a firebrand raider:1.3), (maniacal expression:1.1), (swinging a (flaming chain:1.2):1.1), (illuminated by fire:1.1), (at night:1.1), (chaotic:1.1)
-    - (action shot:1.1), (a silent courier:1.3), (sprinting through rubble:1.1), (clutching a (reinforced satchel:1.2):1.1), (intense focus:1.1), (ruined city:1.1)
-    - (concept art:1.1), (a radio-tower hermit:1.3), (eccentric:1.1), (wearing a (transmitter backpack:1.2):1.1), (broadcasting:1.1), (atop an (abandoned radio tower:1.1):1.1)
-    - (character art:1.2), (a steel-jaw cyborg:1.3), (prominent (metal jaw:1.1):1.1), (holding a (heavy scrap hammer:1.2):1.1), (in a (scavenger guild forge:1.1):1.1), (intimidating:1.1)
-    - (fantasy art:1.2), (a radiant mutant child:1.3), (glowing:1.1), (bioluminescent skin:1.2), (hiding in a (dark, collapsed tunnel:1.1):1.1), (eerie and sad:1.1)
-    - (concept art:1.1), (a wanderer bard:1.3), (singing:1.1), (carrying a (battered guitar:1.2):1.1), (by a (flickering campfire:1.1):1.1), (small hopeful moment:1.1)
-    - (cinematic portrait:1.2), (a drifter mother:1.3), (patched coat:1.1), (fierce resolve:1.2), (protectively holding a child:1.1), (in a (makeshift shelter:1.1):1.1), (determined:1.1)
-    - (epic scene:1.2), (a post-collapse warlord:1.4), (wearing a (bone crown:1.3):1.1), (seated on a (throne of car parts:1.1):1.1), (in a (raider stronghold:1.1):1.1), (commanding:1.1)
-    - (sci-fi concept:1.1), (a scrap engineer woman:1.3), (goggles:1.1), (a (floating drone companion:1.2) hovers nearby:1.1), (repairing tech:1.1), (in a (workshop:1.1):1.1)
-    - (action pose:1.2), (a gas-torch fighter:1.3), (protective mask:1.1), (holding a (welding flame lance:1.2):1.1), (jet of fire:1.1), (in a (dark industrial ruin:1.1):1.1)
-    - (character art:1.1), (an apocalypse farmer:1.3), (overalls:1.1), (makeshift hoe-weapon:1.2), (guarding a (mutant plant garden:1.1):1.1), (in a (rooftop greenhouse:1.1):1.1)
-    - (cinematic portrait:1.2), (a bomb collar enforcer:1.3), (dead eyes:1.1), (holding a (shock baton:1.1):1.1), (visible (bomb collar:1.2) on neck:1.1), (bleak:1.1)
-    - (gritty portrait:1.1), (a tattered preacher:1.3), (shouting:1.1), (gesturing wildly:1.1), (preaching (survival prophecies:1.1):1.1), (to a (small crowd of survivors:1.1):1.1)
-    - (sci-fi art:1.2), (an abandoned A.I. android:1.3), (cracked chassis:1.2), (exposed wires sparking:1.1), (sitting in the rain:1.1), (ruined city:1.1), (melancholy:1.1)
-    - (fantasy art:1.1), (a desert shaman:1.3), (daubed in (ash markings:1.2):1.1), (ritual robes:1.1), (performing a ritual:1.1), (during a (dust storm:1.1):1.1), (mystical:1.1)
-    - (action pose:1.2), (a rad-mage:1.3), (channeling (glowing toxic energy:1.2):1.1), (levitating rocks:1.1), (eyes glowing green:1.1), (in a (toxic crater:1.1):1.1)
-    - (cinematic portrait:1.2), (an ex-pilot:1.3), (haunted eyes:1.1), (wearing a (scorched flight suit:1.2):1.1), (in the (wreckage of a plane:1.1):1.1), (survivor's guilt:1.1)
-    - (concept art:1.1), (scavenger twins:1.3), (moving in sync:1.2), (matching tattered outfits:1.1), (sneaking through (abandoned mall:1.1):1.1), (tense:1.1)
-    - (action pose:1.1), (a feral hunter:1.3), (wearing (animal pelts:1.1):1.1), (wielding a (bone-tipped spear:1.2):1.1), (tracking prey:1.1), (in a (burnt forest:1.1):1.1)
-    - (gritty portrait:1.1), (a toxic drifter:1.3), (cracked goggles:1.1), (coated in (green dust:1.2):1.1), (walking through a (toxic wasteland:1.1):1.1), (corroded:1.1)
-    - (character art:1.2), (a nomad captain:1.3), (leader:1.1), (carrying a (solar-charged rifle:1.2):1.1), (scanning the horizon:1.1), (leading a (caravan:1.1):1.1)
-    - (sci-fi art:1.2), (a cyber-feral:1.3), (crouching:1.1), (wires tangled in matted hair:1.2), (glowing eyes:1.1), (in a (derelict server room:1.1):1.1), (wild:1.1)
-    - (concept art:1.1), (a post-collapse scholar:1.3), (tattered robes:1.1), (carrying (ancient books:1.2):1.1), (in a (ruined library:1.1):1.1), (protecting knowledge:1.1)
-    - (action scene:1.2), (a bone-masked raider queen:1.4), (leading a gang:1.1), (on a (scavenged bike:1.2):1.1), (waving a weapon:1.1), (racing across (dry salt flats:1.1):1.1)
-    - (character concept:1.2), (a rust-knight champion:1.3), (heavy scrap shield:1.2), (holding a (rebar sword:1.1):1.1), (defending a (makeshift gate:1.1):1.1), (valiant:1.1)
-    - (stealth scene:1.1), (an edge-lurker:1.3), (lurking in shadows:1.2), (holding a (scrap dagger:1.1):1.1), (in a (dark alley in a ruin city:1.1):1.1), (menacing:1.1)
-    - (fantasy art:1.2), (a psyker mutant:1.3), (glowing temples:1.1), (whispering to (unseen voices:1.1):1.1), (huddled in a (dark corner:1.1):1.1), (eerie purple light:1.1)
-    - (cinematic portrait:1.2), (a child survivor:1.3), (big, wary eyes:1.1), (a (stuffed toy tied to backpack:1.2):1.1), (hiding in (rubble:1.1):1.1), (vulnerable but tough:1.1)
-    - (gritty portrait:1.1), (a scarred gunslinger:1.3), (hand on pistol:1.1), (patched duster coat:1.1), (intense stare:1.1), (in a (deserted wasteland town:1.1):1.1)
-    - (sci-fi art:1.2), (a mechanical limb scavenger:1.3), (a (prosthetic arm with exposed servos:1.2):1.1), (sifting through (scrap:1.1):1.1), (in a (giant junk pile:1.1):1.1)
-    - (action pose:1.1), (a ghost-masked assassin:1.3), (coated in ash:1.1), (holding (throwing knives:1.1):1.1), (emerging from (smoky haze:1.1):1.1), (silent:1.1)
-    - (character art:1.1), (a bomb disposal survivor:1.3), (heavy blast vest:1.1), (covered in (scorch marks:1.2):1.1), (disarming a (makeshift bomb:1.1):1.1), (tense:1.1)
-    - (stealth scene:1.1), (a pipeline saboteur:1.3), (sneaking:1.1), (wearing an (explosive harness:1.2):1.1), (alongside a (rusting refinery pipe:1.1):1.1), (at night:1.1)
-    - (cinematic portrait:1.2), (a wanderer elder:1.3), (wise, weathered face:1.1), (walking with a (cane made from rebar:1.2):1.1), (gazing at a (ruined horizon:1.1):1.1)
-    - (fantasy art:1.2), (a toxic druid:1.3), (fungus-covered robes:1.2), (holding a (staff with glowing mushrooms:1.1):1.1), (in a (dark, overgrown tunnel:1.1):1.1), (mystical:1.1)
-    - (concept art:1.1), (a tech-salvage woman:1.3), (goggles up:1.1), (using a (soldering iron:1.1):1.1), (repairing (cracked circuits:1.2):1.1), (in a (messy workshop:1.1):1.1)
-    - (character art:1.1), (a frontier defender:1.3), (guarding post:1.1), (wearing (salvaged shield-wall gear:1.2):1.1), (holding a (rebar spear:1.1):1.1), (at a (settlement gate:1.1):1.1)
-    - (sci-fi horror:1.2), (an abandoned lab escapee:1.3), (scared:1.1), (a (glowing neck implant:1.2):1.1), (wearing (patient rags:1.1):1.1), (running down a (dark corridor:1.1):1.1)
-    - (action shot:1.2), (a wasteland rider:1.3), (on a (speeding motorcycle:1.1):1.1), (spike-studded shoulder armor:1.2), (racing across (desert:1.1):1.1), (dynamic:1.1)
-    - (concept art:1.1), (a post-collapse monk:1.3), (meditating:1.1), (holding (radio prayer beads:1.2):1.1), (in a (quiet, ruined temple:1.1):1.1), (serene:1.1)
-    - (action scene:1.2), (a condemned gladiator:1.3), (fighting:1.1), (improvised arena armor:1.2), (wielding a (scrap sword:1.1):1.1), (in a (raider arena:1.1):1.1)
-    - (character concept:1.2), (an air-filter nomad:1.3), (layered masks and tubes:1.2), (carrying an (oxygen tank:1.1):1.1), (walking through (thick, yellow fog:1.1):1.1)
-    - (concept art:1.1), (an ancient ruins archaeologist:1.3), (patchwork hazmat suit:1.2), (holding a (glowing relic:1.1):1.1), (in a (half-buried building:1.1):1.1)
-    - (creature design:1.2), (a scab-skinned mutant:1.3), (pained expression:1.1), (large (glowing sores:1.2):1.1), (huddled in (rags:1.1):1.1), (in a (dark alley:1.1):1.1)
-    - (action shot:1.1), (an urban survivor:1.3), (on a (rooftop:1.1):1.1), (aiming a (makeshift harpoon launcher:1.2):1.1), (at a (creature below:1.1):1.1), (ruined city:1.1)
-    - (action shot:1.2), (a scorch-dust rider:1.3), (on a (bike:1.1):1.1), (flame-scarred cape:1.2), (racing through a (burning ruin:1.1):1.1), (sparks flying:1.1)
-    - (concept art:1.1), (a scrap-forge blacksmith:1.3), (smoldering apron:1.1), (hammering (glowing hot metal:1.1):1.1), (in a (makeshift forge:1.1):1.1), (sparks:1.1)
-    - (epic scene:1.2), (a scrapper queen:1.4), (crowned in (bullet casings:1.3):1.1), (sitting on a (throne of junk:1.2):1.1), (in a (huge salvage yard:1.1):1.1), (commanding:1.1)
-    - (fantasy art:1.2), (a gutter mage:1.3), (hand gestures:1.1), (channeling (blue radioactive smoke:1.2):1.1), (in a (flooded metro tunnel:1.1):1.1), (mystical:1.1)
-    - (cinematic scene:1.1), (a combat medic:1.3), (helping wounded:1.1), (blood-stained wraps:1.2), (in the (middle of a firefight:1.1):1.1), (tense, gritty:1.1)
-    - (concept art:1.1), (a tunnel dweller:1.3), (pale skin:1.1), (holding a (glowing fungus lantern:1.2):1.1), (navigating (dark, concrete tunnels:1.1):1.1), (eerie:1.1)
-    - (character concept:1.2), (a post-collapse paladin:1.3), (defensive stance:1.1), (carrying a (reinforced riot shield:1.2):1.1), (guarding (survivors:1.1):1.1), (heroic:1.1)
-    - (action scene:1.1), (a plasma torch salvager:1.3), (sparks flying:1.1), (using a (red hot cutter:1.2):1.1), (on a (derelict spaceship hull:1.1):1.1)
-    - (action pose:1.1), (a barren lands archer:1.3), (drawing bow:1.1), (bone-fletched arrows:1.2), (on a (rocky outcrop:1.1):1.1), (overlooking (desert:1.1):1.1)
-    - (cinematic portrait:1.2), (an ex-soldier:1.3), (haunted by long-lost squad:1.1), (clutching (dog tags:1.1):1.1), (staring into a (campfire:1.1):1.1), (melancholy:1.1)
-    - (fantasy art:1.1), (a forest bunker druid:1.3), (moss-covered cloak:1.2), (wooden staff:1.1), (standing by a (hidden, overgrown bunker door:1.1):1.1)
-    - (character art:1.2), (a firemask raider:1.3), (wearing a (flaming skull helmet:1.2):1.1), (holding a (torch:1.1):1.1), (at night:1.1), (menacing:1.1)
-    - (sci-fi art:1.1), (a hydro-scav diver:1.3), (in (murky water:1.1):1.1), (wearing a (cracked rebreather suit:1.2):1.1), (in a (flooded city:1.1):1.1), (eerie:1.1)
-    - (action scene:1.1), (a skybridge scout:1.3), (on a (high ledge:1.1):1.1), (using (grappling gauntlets:1.2):1.1), (ruined city far below:1.1), (dynamic pose:1.1)
-    - (cinematic portrait:1.2), (a one-eyed raider elder:1.3), (wise and scarred:1.1), (leaning on a (rebar spear:1.2):1.1), (in a (raider camp:1.1):1.1)
-    - (character art:1.1), (an underground tunnel prophet:1.3), (wild eyes:1.1), (whispering of (storms:1.1):1.1), (in a (dark, damp tunnel:1.1):1.1), (frantic:1.1)
-    - (character concept:1.2), (a post-ruin knight:1.3), (scrap armor:1.1), (glowing with (faint radiation:1.2):1.1), (holding a (broken sword:1.1):1.1), (stoic:1.1)
-    - (cinematic scene:1.1), (a storm scavenger:1.3), (wrapped in (flapping tarp layers:1.2):1.1), (leaning into (heavy wind:1.1):1.1), (in a (dust storm:1.1):1.1)
-    - (action shot:1.1), (a dune rider:1.3), (scanning horizon:1.1), (standing atop a (rusted dune buggy:1.2):1.1), (vast (sand dunes:1.1):1.1)
-    - (fantasy art:1.2), (a bio-cult priest:1.3), (chanting:1.1), (glowing (toxin markings:1.2) on skin:1.1), (leading a (ritual:1.1):1.1), (in a (toxic swamp:1.1):1.1)
-    - (character art:1.1), (the last ranger:1.3), (rifle:1.1), (face hidden by (broken visor:1.2):1.1), (watching over a (desolate valley:1.1):1.1), (lone survivor:1.1)
+    - gritty concept art, (a lone wasteland wanderer:1.3), tattered duster coat, (cracked gas mask:1.2), standing in a ruined city, dusty atmosphere, cinematic lighting
+    - cinematic portrait, (a hardened scavenger woman:1.3), (looted tech:1.1) strapped to a (heavy backpack:1.1), intense gaze, ruined highway background, dusty golden hour
+    - epic character art, (a desert raider warlord:1.3), (intimidating spiked armor:1.2), burning glare, seated on a throne of junk, smoky haze
+    - cinematic shot, (a silent sniper:1.3), patched camo cloak, (perched on a collapsed skyscraper:1.2), aiming a rusted rifle, storm darkened sky
+    - full body shot, (a biohazard survivor:1.3), (makeshift hazmat suit:1.2), glowing green toxic fog, holding a geiger counter, abandoned refinery
+    - character concept art, (a scarred mechanic:1.3), oil-stained gloves, (wielding an oversized wrench:1.2) as a weapon, standing by a broken down vehicle, gritty
+    - creature design, (a feral mutant:1.3), (glowing toxic eyes:1.2), warped limbs, tattered rags, crouching in a dark tunnel, eerie lighting
+    - cinematic wide shot, (a rooftop scout:1.3), using binoculars, frayed scarf blowing in the wind, (looking out over a vast ruined city:1.2), bleak
+    - gritty portrait, (a masked nomad:1.3), (wandering a dry salt flat:1.1), holding a metal staff, metal charms and trinkets, harsh noon sun
+    - action pose, (a ruin hunter woman:1.3), (neon scavenger goggles:1.2), agile pose, leaping across rubble, flooded ruin zone, dynamic
+    - character art, (an anti-radiation soldier:1.3), (heavy reinforced plated suit:1.2), carrying heavy gear, marching through a toxic wasteland, green fog
+    - cinematic portrait, (a fallen officer:1.3), torn police uniform, (hopeful determination in eyes:1.2), standing in rubble, smoky haze
+    - stealth action scene, (a rogue scavenger:1.3), (carrying lockpicks:1.1), holding a compact blade, sneaking through an abandoned bunker, dim flickering lights
+    - action shot, (a biker marauder:1.3), leather jacket, (saw-blade shoulder pads:1.2), on a roaring motorcycle, kicking up dust, road warrior
+    - epic portrait, (a desert priestess:1.3), (adorned with bone jewelry:1.2), dust-covered robes, chanting, under a storm darkened sky, mystical
+    - sci-fi concept art, (a cyber-aug survivor:1.3), (cracked circuitry on skin:1.2), glowing wires, hiding in a derelict tech lab, tense
+    - fantasy art, (a toxic witch:1.3), robed figure, (wielding glowing green fumes:1.3), in a radioactive swamp, eerie and magical
+    - cinematic portrait, (a post-collapse medic:1.3), worn face, (bandolier of medical supplies:1.2), helping a wounded survivor, flickering campfire glow
+    - concept art, (a feral dog tamer:1.3), walking with a pack of wasteland hounds, (animal pelts:1.1), in a burnt forest, bleak
+    - creature design, (a towering brute mutant:1.3), massive muscles, (patchwork scrap-metal armor:1.2), roaring, in a collapsed highway, intimidating
+    - gritty art, (a nomadic trader:1.3), (carrying salvaged relics:1.1), unfurling old maps, pack animals loaded with supplies, in a ruined marketplace
+    - character concept, (a rust-plate knight:1.3), full scrap metal armor, (makeshift shield:1.1), standing guard, at a bunker entrance, stoic
+    - action scene, (a canyon sniper:1.3), wearing a camo tarp cloak, (long rifle:1.1), aiming from a high cliff, vast desert canyon below
+    - cinematic portrait, (a scorch survivor:1.3), (coated in ash and soot:1.2), visible burn scars, walking through a burnt forest, drifting ash
+    - character art, (a bunker priest:1.3), clutching a relic book, wearing tattered robes, preaching with arms raised, (dim bunker lighting:1.1)
+    - fantasy art, (a radiation monk:1.3), glowing faintly with a blue aura, (meditating:1.1), tattered robes, in a toxic crater lake, serene
+    - action pose, (a city scout woman:1.3), (agile:1.1), wielding a chainsaw-blade spear, on a rooftop, overlooking ruined city
+    - gritty concept art, (a wasteland alchemist:1.3), wearing a gas mask, mixing glowing chemical vials, in a makeshift lab, (eerie green light:1.1)
+    - epic art, (a masked plague rider:1.3), (dark robes:1.1), riding a horse in skeletal armor, toxic green fog swirling, bone talismans swaying from the reins
+    - character concept, (an urban ronin:1.3), (tattered coat:1.1), wielding a jury-rigged katana, standing on a rainy, neon-lit ruin street, moody
+    - action scene, (a ruin-diver:1.3), climbing harness, (oxygen mask:1.2), climbing a collapsed skyscraper, flooded city below
+    - action pose, (a firebrand raider:1.3), (maniacal expression:1.1), swinging a flaming chain, illuminated by fire, at night, chaotic
+    - action shot, (a silent courier:1.3), (sprinting through rubble:1.1), clutching a reinforced satchel, intense focus, ruined city
+    - concept art, (a radio-tower hermit:1.3), (eccentric:1.1), wearing a transmitter backpack, broadcasting, atop an abandoned radio tower
+    - character art, (a steel-jaw cyborg:1.3), prominent metal jaw, holding a heavy scrap hammer, in a scavenger guild forge, (sparks flying from the hammer strikes:1.1)
+    - fantasy art, (a radiant mutant child:1.3), glowing, (bioluminescent skin:1.2), hiding in a dark, collapsed tunnel, eerie and sad
+    - concept art, (a wanderer bard:1.3), (singing:1.1), carrying a battered guitar, by a flickering campfire, firelight flickering across his face
+    - cinematic portrait, (a drifter mother:1.3), patched coat, (fierce resolve:1.2), protectively holding a child, in a makeshift shelter, determined
+    - epic scene, (a post-collapse warlord:1.3), wearing a bone crown, seated on a throne of car parts, in a raider stronghold, (arms crossed:1.1)
+    - sci-fi concept, (a scrap engineer woman:1.3), goggles, (a floating drone companion hovers nearby:1.1), repairing tech, in a workshop
+    - action pose, (a gas-torch fighter:1.3), (protective mask:1.1), holding a welding flame lance, jet of fire, in a dark industrial ruin
+    - character art, (an apocalypse farmer:1.3), overalls, (makeshift hoe-weapon:1.2), guarding a mutant plant garden, in a rooftop greenhouse
+    - cinematic portrait, (a bomb collar enforcer:1.3), dead eyes, holding a shock baton, (visible bomb collar on neck:1.1), bleak
+    - gritty portrait, (a tattered preacher:1.3), (shouting:1.1), gesturing wildly, arms outstretched, to a small crowd of survivors
+    - sci-fi art, (an abandoned A.I. android:1.3), (cracked chassis:1.2), exposed wires sparking, sitting in the rain, ruined city, melancholy
+    - fantasy art, (a desert shaman:1.3), daubed in ash markings, (ritual robes:1.1), performing a ritual, during a dust storm, mystical
+    - action pose, (a rad-mage:1.3), channeling glowing toxic energy, (levitating rocks:1.1), eyes glowing green, in a toxic crater
+    - cinematic portrait, (an ex-pilot:1.3), (haunted eyes:1.1), wearing a scorched flight suit, in the wreckage of a plane, distant hollow stare
+    - concept art, (scavenger twins:1.3), (moving in sync:1.2), matching tattered outfits, sneaking through abandoned mall, tense
+    - action pose, (a feral hunter:1.3), wearing animal pelts, wielding a bone-tipped spear, (tracking prey:1.1), in a burnt forest
+    - gritty portrait, (a toxic drifter:1.3), (cracked goggles:1.1), coated in green dust, walking through a toxic wasteland, corroded
+    - character art, (a nomad captain:1.3), (leader:1.1), carrying a solar-charged rifle, scanning the horizon, leading a caravan
+    - sci-fi art, (a cyber-feral:1.3), crouching, (wires tangled in matted hair:1.2), glowing eyes, in a derelict server room, wild
+    - concept art, (a post-collapse scholar:1.3), (tattered robes:1.1), carrying ancient books, in a ruined library, cradling the books close
+    - action scene, (a bone-masked raider queen:1.3), (leading a gang:1.1), on a scavenged bike, waving a weapon, racing across dry salt flats
+    - character concept, (a rust-knight champion:1.3), (heavy scrap shield:1.2), holding a rebar sword, defending a makeshift gate, valiant
+    - stealth scene, (an edge-lurker:1.3), (lurking in shadows:1.2), holding a scrap dagger, in a dark alley in a ruin city, menacing
+    - fantasy art, (a psyker mutant:1.3), (glowing temples:1.1), whispering to unseen voices, huddled in a dark corner, eerie purple light
+    - cinematic portrait, (a child survivor:1.3), (big, wary eyes:1.1), a stuffed toy tied to backpack, hiding in rubble, (vulnerable but tough:1.1)
+    - gritty portrait, (a scarred gunslinger:1.3), (hand on pistol:1.1), patched duster coat, intense stare, in a deserted wasteland town
+    - sci-fi art, (a mechanical limb scavenger:1.3), a prosthetic arm with exposed servos, sifting through scrap, in a giant junk pile
+    - action pose, (a ghost-masked assassin:1.3), (coated in ash:1.1), holding throwing knives, emerging from smoky haze, silent
+    - character art, (a bomb disposal survivor:1.3), (heavy blast vest:1.1), covered in scorch marks, disarming a makeshift bomb, tense
+    - stealth scene, (a pipeline saboteur:1.3), (sneaking:1.1), wearing an explosive harness, alongside a rusting refinery pipe, at night
+    - cinematic portrait, (a wanderer elder:1.3), (wise, weathered face:1.1), walking with a cane made from rebar, gazing at a ruined horizon
+    - fantasy art, (a toxic druid:1.3), (fungus-covered robes:1.2), holding a staff with glowing mushrooms, in a dark, overgrown tunnel, mystical
+    - concept art, (a tech-salvage woman:1.3), (goggles up:1.1), using a soldering iron, repairing cracked circuits, in a messy workshop
+    - character art, (a frontier defender:1.3), (guarding post:1.1), wearing salvaged shield-wall gear, holding a rebar spear, at a settlement gate
+    - sci-fi horror, (an abandoned lab escapee:1.3), (scared:1.1), a glowing neck implant, wearing patient rags, running down a dark corridor
+    - action shot, (a wasteland rider:1.3), on a speeding motorcycle, (spike-studded shoulder armor:1.2), racing across desert, dynamic
+    - concept art, (a post-collapse monk:1.3), (meditating:1.1), holding radio prayer beads, in a quiet, ruined temple, serene
+    - action scene, (a condemned gladiator:1.3), fighting, (improvised arena armor:1.2), wielding a scrap sword, in a raider arena
+    - character concept, (an air-filter nomad:1.3), (layered masks and tubes:1.2), carrying an oxygen tank, walking through thick, yellow fog
+    - concept art, (an ancient ruins archaeologist:1.3), (patchwork hazmat suit:1.2), holding a glowing relic, in a half-buried building
+    - creature design, (a scab-skinned mutant:1.3), (pained expression:1.1), large glowing sores, huddled in rags, in a dark alley
+    - action shot, (an urban survivor:1.3), on a rooftop, aiming a makeshift harpoon launcher, at a creature below, (ruined city:1.1)
+    - action shot, (a scorch-dust rider:1.3), on a bike, (flame-scarred cape:1.2), racing through a burning ruin, sparks flying
+    - concept art, (a scrap-forge blacksmith:1.3), (smoldering apron:1.1), hammering glowing hot metal, in a makeshift forge, sparks
+    - epic scene, (a scrapper queen:1.3), crowned in bullet casings, sitting on a throne of junk, in a huge salvage yard, (chin raised:1.1)
+    - fantasy art, (a gutter mage:1.3), (hand gestures:1.1), channeling blue radioactive smoke, in a flooded metro tunnel, mystical
+    - cinematic scene, (a combat medic:1.3), helping wounded, (blood-stained wraps:1.2), in the middle of a firefight, (tense, gritty:1.1)
+    - concept art, (a tunnel dweller:1.3), (pale skin:1.1), holding a glowing fungus lantern, navigating dark, concrete tunnels, eerie
+    - character concept, (a post-collapse paladin:1.3), (defensive stance:1.1), carrying a reinforced riot shield, guarding survivors, heroic
+    - action scene, (a plasma torch salvager:1.3), (sparks flying:1.1), using a red hot cutter, on a derelict spaceship hull
+    - action pose, (a barren lands archer:1.3), drawing bow, (bone-fletched arrows:1.2), on a rocky outcrop, overlooking desert
+    - cinematic portrait, (an ex-soldier:1.3), (hollow distant stare:1.1), clutching dog tags, staring into a campfire, melancholy
+    - fantasy art, (a forest bunker druid:1.3), (moss-covered cloak:1.2), wooden staff, standing by a hidden, overgrown bunker door
+    - character art, (a firemask raider:1.3), wearing a flaming skull helmet, holding a torch, (at night:1.1), menacing
+    - sci-fi art, (a hydro-scav diver:1.3), in murky water, wearing a cracked rebreather suit, in a flooded city, (eerie:1.1)
+    - action scene, (a skybridge scout:1.3), on a high ledge, using grappling gauntlets, (ruined city far below:1.1), dynamic pose
+    - cinematic portrait, (a one-eyed raider elder:1.3), (wise and scarred:1.1), leaning on a rebar spear, in a raider camp
+    - character art, (an underground tunnel prophet:1.3), (wild eyes:1.1), whispering of storms, in a dark, damp tunnel, frantic
+    - character concept, (a post-ruin knight:1.3), (scrap armor:1.1), glowing with faint radiation, holding a broken sword, stoic
+    - cinematic scene, (a storm scavenger:1.3), wrapped in flapping tarp layers, leaning into heavy wind, in a dust storm
+    - action shot, (a dune rider:1.3), (scanning horizon:1.1), standing atop a rusted dune buggy, vast sand dunes
+    - fantasy art, (a bio-cult priest:1.3), chanting, (glowing toxin markings on skin:1.1), leading a ritual, in a toxic swamp
+    - character art, (a lone ranger:1.3), (rifle:1.1), face hidden by broken visor, watching over a desolate valley, dust settling on his shoulders
 
   spotlight_backgrounds:
-    - (cinematic wide shot:1.2), (a ruined freeway overpass:1.3), (collapsing into dust:1.1), (broken concrete:1.1), (rusted rebar:1.1), (desolate:1.1)
-    - (bleak environment art:1.1), (an abandoned city street:1.3), (littered with (rusted vehicles:1.2):1.1), (empty and silent:1.1), (overcast sky:1.1)
-    - (moody landscape:1.1), (a burnt forest:1.3), (charred tree trunks:1.2), (gray sky:1.1), (drifting ash:1.1), (eerie silence:1.1)
-    - (vast landscape art:1.2), (a sun-blasted desert wasteland:1.3), (stretching endlessly to the horizon:1.1), (giant sand dunes:1.1), (heat shimmer:1.1)
-    - (epic ruins concept art:1.2), (a collapsed skyscraper:1.3), (leaning against a (shattered tower:1.2):1.1), (urban decay:1.1), (rubble everywhere:1.1), (dramatic lighting:1.1)
-    - (environment concept art:1.1), (a rusted gas station:1.3), (half-buried and (overtaken by sand:1.2):1.1), (broken pumps:1.1), (tattered canopy:1.1), (lone survivor:1.1)
-    - (eerie interior shot:1.1), (an empty overgrown mall:1.3), (shattered glass skylight:1.1), (vines and moss covering everything:1.1), (haunting:1.1)
-    - (dynamic landscape:1.2), (a storm-filled wasteland:1.3), (red dust swirling:1.2), (dark clouds:1.1), (forked lightning:1.1), (ominous:1.1)
-    - (toxic environment art:1.2), (a radioactive swamp:1.3), (glowing with (green fog:1.2):1.1), (bubbling toxic water:1.1), (dead trees:1.1), (hazardous:1.1)
-    - (environment art:1.1), (an abandoned suburb:1.3), (houses (overtaken by vines:1.2):1.1), (broken, boarded-up houses:1.1), (empty streets:1.1)
-    - (creepy concept art:1.1), (a busted amusement park:1.3), (a (crooked ferris wheel:1.2) against a (gray sky:1.1):1.1), (creepy:1.1), (rusted rides:1.1)
-    - (industrial concept art:1.1), (a derelict factory:1.3), (covered in soot and grime:1.1), (rusting machinery:1.1), (smokestacks silent:1.1), (bleak:1.1)
-    - (cinematic landscape:1.2), (a cracked highway:1.3), (leading into a (ruined horizon:1.2):1.1), (desolate:1.1), (abandoned cars:1.1), (endless road:1.1)
-    - (eerie landscape:1.1), (a toxic crater lake:1.3), (glowing with (eerie unnatural light:1.2):1.1), (barren shoreline:1.1), (toxic mist:1.1)
-    - (vast landscape:1.1), (a wind-blown cliffside:1.3), (overlooking a (dead, dry ocean:1.2):1.1), (barren:1.1), (strong wind:1.1), (desolate:1.1)
-    - (mysterious concept art:1.1), (a (fog-swept:1.1) bunker entrance:1.3), (heavy (rusted hatch:1.2):1.1), (mysterious:1.1), (set into a hillside:1.1)
-    - (environment art:1.1), (a forest reclaimed city block:1.3), (broken windows:1.1), (trees and (overgrowth:1.1) swallowing buildings:1.1), (dappled light:1.1)
-    - (dark environment art:1.1), (a collapsed tunnel:1.3), (covered in (debris:1.2):1.1), (a (dark, foreboding entrance:1.1):1.1), (pitch black inside:1.1)
-    - (epic landscape:1.2), (sunset shining through (skeletal skyscrapers:1.4):1.1), (dusty golden hour light:1.2), (city ruins:1.1), (beautiful but sad:1.1)
-    - (industrial ruins:1.1), (a trainyard:1.3), (filled with (rusting locomotives:1.2):1.1), (abandoned:1.1), (overgrown tracks:1.1), (bleak:1.1)
-    - (eerie interior:1.1), (a flooded metro station:1.3), (overrun with (algae:1.1):1.1), (murky water:1.1), (dim light from above:1.1), (haunting:1.1)
-    - (concept art landscape:1.1), (a desert canyon:1.3), (carved with (twisted metal wreckage:1.2):1.1), (rocky:1.1), (high canyon walls:1.1), (harsh sunlight:1.1)
-    - (bleak art:1.1), (a (storm-ruined:1.1) billboard:1.3), (standing in a (barren plain:1.2):1.1), (tattered advertisement:1.1), (ominous sky:1.1)
-    - (eerie interior:1.1), (an abandoned church:1.3), (collapsed roof:1.2), (broken pews:1.1), (light streaming through hole in roof:1.1), (hauntingly beautiful:1.1)
-    - (landscape art:1.1), (a crumbling bridge:1.3), (over a (dried riverbed:1.2):1.1), (broken:1.1), (missing sections:1.1), (desolate:1.1)
-    - (environment art:1.1), (post-collapse farmland:1.3), (broken irrigation rigs:1.2), (fields of (dead crops:1.1):1.1), (dusty:1.1), (bleak:1.1)
-    - (horror interior:1.2), (an empty hospital corridor:1.3), (lined with (peeling paint:1.2):1.1), (eerie:1.1), (flickering lights:1.1), (abandoned gurney:1.1)
-    - (environment concept:1.1), (an overgrown airport runway:1.3), (weeds knee-high:1.1), (a (wrecked plane:1.1) in the distance:1.1), (empty:1.1)
-    - (epic landscape:1.2), (a burned city square:1.3), (under a (dark orange sky:1.2):1.1), (ash falling like snow:1.1), (charred ruins:1.1), (apocalyptic:1.1)
-    - (claustrophobic interior:1.1), (an underground shelter hallway:1.3), (blinking fluorescent lights:1.2), (concrete walls:1.1), (long corridor:1.1), (tense:1.1)
-    - (dynamic landscape:1.2), (a dust storm (sweeping across cracked fields:1.4):1.1), (low visibility:1.1), (swirling brown wind:1.1), (intense:1.1)
-    - (industrial ruins:1.1), (a derelict refinery:1.3), (leaking pipes:1.1), (toxic spills:1.1), (rusting metal:1.1), (hazardous:1.1)
-    - (urban decay:1.1), (a ruined shopping district:1.3), (broken neon signs:1.2), (looted stores:1.1), (street littered with debris:1.1)
-    - (concept art:1.1), (an urban rubble pile:1.3), (twisted rebar:1.2), (chunks of (concrete:1.1):1.1), (a (scavenger:1.1) climbing it:1.1)
-    - (interior concept art:1.1), (a bunker war room:1.3), (covered in (old, dusty maps:1.2):1.1), (abandoned command center:1.1), (flickering monitor:1.1)
-    - (landscape art:1.1), (a rusted watchtower:1.3), (overlooking (barren lands:1.2):1.1), (lone structure:1.1), (against a (gray sky:1.1):1.1)
-    - (eerie art:1.1), (an abandoned playground:1.3), (half buried in (dust:1.2):1.1), (rusty swings:1.1), (creepy:1.1), (desolate:1.1)
-    - (disaster art:1.2), (a sinkhole crater:1.3), (swallowing remnants of a (street:1.2):1.1), (deep hole:1.1), (broken pipes exposed:1.1)
-    - (eerie interior:1.1), (a (storm-darkened:1.1) highway tunnel:1.3), (dangling wires:1.1), (eerie:1.1), (abandoned cars:1.1), (faint light at the end:1.1)
-    - (desert landscape:1.1), (a cracked desert plateau:1.3), (beneath a (burning sun:1.2):1.1), (barren:1.1), (no life:1.1), (heat shimmer:1.1)
-    - (horror interior:1.2), (a flooded basement:1.3), (filled with (murky water:1.2):1.1), (dark:1.1), (floating debris:1.1), (mysterious:1.1)
-    - (landscape art:1.1), (a crater field:1.3), (dotted with (old war debris:1.2):1.1), (old battlefield:1.1), (desolate:1.1), (bleak:1.1)
-    - (environment art:1.1), (a collapsed stadium:1.3), (overgrown with (foliage:1.2):1.1), (empty seats:1.1), (broken concrete:1.1)
-    - (eerie landscape:1.1), (a wind farm:1.3), (broken turbines (spinning slowly:1.2):1.1), (eerie sound:1.1), (overcast sky:1.1)
-    - (industrial ruin:1.1), (a wrecked shipyard:1.3), (littered with (torn ship hulls:1.2):1.1), (by a (dead, polluted sea:1.1):1.1), (rust:1.1)
-    - (toxic environment:1.1), (a city square:1.3), (filled with (drifting ash:1.2):1.1), (everyone wearing (gas masks:1.1):1.1), (toxic air:1.1), (green fog:1.1)
-    - (environment art:1.1), (sunken ruins of old downtown:1.3), (flooded streets:1.2), (makeshift (gondola:1.1) floating by:1.1)
-    - (moody landscape:1.1), (a foggy ridge:1.3), (overlooking a (barren plain:1.2):1.1), (misty:1.1), (low visibility:1.1), (eerie:1.1)
-    - (toxic environment:1.2), (a chemical spill zone:1.3), (glowing with (neon puddles:1.2):1.1), (hazardous:1.1), (warning signs:1.1)
-    - (landscape art:1.1), (a (war-scarred:1.1) cliff:1.3), (overlooking a (ruined valley:1.2):1.1), (craters:1.1), (burnt trees:1.1)
-    - (environment art:1.1), (a forest bunker:1.3), (a (secret entrance:1.1) hidden among (tangled vines:1.2):1.1), (overgrown:1.1)
-    - (ruins art:1.1), (a destroyed military base:1.3), (filled with (burnt vehicles:1.2):1.1), (wreckage:1.1), (abandoned:1.1)
-    - (concept art:1.1), (a post-ruin marketplace:1.3), (half-collapsed stalls:1.2), (scavengers trading goods:1.1), (makeshift:1.1)
-    - (claustrophobic interior:1.1), (underground sewage chambers:1.3), (echoing with (dripping water:1.1):1.1), (dark:1.1), (murky water:1.1)
-    - (landscape art:1.1), (an empty freeway interchange:1.3), (under (storm clouds:1.2):1.1), (cracked asphalt:1.1), (giant, silent structures:1.1)
-    - (ruins art:1.1), (burnt houses:1.3), (lining (cracked asphalt:1.1):1.1), (suburbia ruins:1.1), (charred frames:1.1), (desolate:1.1)
-    - (toxic environment:1.2), (a toxic marsh:1.3), (emitting (green vapors:1.2):1.1), (dead trees:1.1), (bubbling mud:1.1)
-    - (landscape art:1.1), (an abandoned radio tower:1.3), (looming over the (wasteland:1.2):1.1), (rusting steel:1.1), (tall, silent:1.1)
-    - (environment art:1.1), (a broken overpass:1.3), (covered in (moss:1.1):1.1), (reclaimed by nature:1.1), (cars rusted underneath:1.1)
-    - (urban decay:1.1), (a city rooftop:1.3), (overtaken by (wild vegetation:1.2):1.1), (a (view of the ruins:1.1):1.1), (makeshift shelter:1.1)
-    - (concept art:1.1), (a (destroyed:1.1) missile silo:1.3), (half sunken:1.1), (open hatch:1.1), (exposed missile:1.1), (eerie:1.1)
-    - (environment art:1.1), (a railroad crossing:1.3), (warped tracks:1.2), (a (derelict train:1.1) stopped:1.1), (bleak:1.1)
-    - (ruins art:1.1), (a fallen billboard:1.3), (lying across a (highway:1.2):1.1), (faded advertisement:1.1), (blocking the road:1.1)
-    - (desert landscape:1.1), (a barren dune field:1.3), (a (rusted car skeleton:1.2) half-buried:1.1), (endless sand:1.1), (harsh sun:1.1)
-    - (abstract art:1.1), (a forest of (metallic junk piles:1.3):1.1), (scrap metal:1.2), (towering piles:1.1), (rust:1.1)
-    - (interior art:1.1), (an underground cave bunker:1.3), (glowing faintly:1.1), (makeshift lights:1.1), (damp stone walls:1.1)
-    - (landscape art:1.1), (a (sun-scorched:1.1) ridge:1.3), (skeleton trees:1.2), (barren rock:1.1), (overlooking a (dusty valley:1.1):1.1)
-    - (apocalyptic art:1.2), (city ruins (melting under acid rain:1.4):1.1), (glowing green rain:1.1), (corroding buildings:1.1), (hazardous:1.1)
-    - (ruins art:1.1), (a floodplain of (shattered concrete slabs:1.3):1.1), (muddy:1.1), (debris field:1.1), (twisted rebar:1.1)
-    - (eerie art:1.2), (post-storm fog (rolling across a ghost city:1.4):1.1), (eerie:1.1), (low visibility:1.1), (silent:1.1)
-    - (interior art:1.1), (an evacuated airport terminal:1.3), (empty seating:1.1), (luggage scattered:1.1), (dusty:1.1)
-    - (eerie interior:1.1), (a (dust-layered:1.1) cinema:1.3), (peeling posters:1.2), (empty seats:1.1), (silent:1.1)
-    - (disaster art:1.1), (a broken dam:1.3), (spilling (murky water:1.2):1.1), (rushing water:1.1), (flooding the (valley below:1.1):1.1)
-    - (concept art:1.1), (a rusted oil tanker:1.3), (stranded in the (desert:1.2):1.1), (beached:1.1), (half-buried in sand:1.1)
-    - (ruins art:1.1), (a collapsed office tower:1.3), (spilling debris:1.1), (exposed floors:1.1), (skeletal building:1.1)
-    - (landscape art:1.1), (a dried lakebed:1.3), (cracked into (hexagonal plates:1.2):1.1), (barren:1.1), (vast:1.1)
-    - (cyberpunk art:1.1), (a neon wasteland:1.3), (lit by a (dying, flickering billboard:1.2):1.1), (dark ruins:1.1), (puddles reflecting neon:1.1)
-    - (environment art:1.1), (a forest reclamation zone:1.3), (swallowing (suburbs:1.2):1.1), (overgrowth:1.1), (vines on houses:1.1)
-    - (apocalyptic art:1.2), (a nuclear blast zone:1.3), (scorched earth:1.2), (glassed sand:1.1), (epicenter:1.1), (desolate:1.1)
-    - (epic landscape:1.2), (a radio tower hill:1.3), (silhouetted (under a crimson sunset:1.2):1.1), (dramatic sky:1.1)
-    - (concept art:1.1), (a fallen airliner wreck:1.3), (half buried in (sand:1.2):1.1), (broken fuselage:1.1), (scavengers nearby:1.1)
-    - (ruins art:1.1), (an abandoned cargo train:1.3), (open to the sky:1.1), (looted:1.1), (on (overgrown tracks:1.1):1.1)
-    - (eerie landscape:1.1), (a (storm-ruined:1.1) crater:1.3), (blackened soil:1.2), (eerie:1.1), (smoking:1.1)
-    - (interior art:1.1), (a (dust-filled:1.1) garage:1.3), (filled with (rusting tools:1.2):1.1), (abandoned mechanic shop:1.1), (dim light:1.1)
-    - (bleak landscape:1.1), (a post-apocalypse pier:1.3), (broken wood:1.1), (over a (dry, dead sea:1.1):1.1), (desolate:1.1)
-    - (urban decay:1.1), (an overgrown drainage canal:1.3), (water flowing weakly:1.1), (concrete walls (covered in graffiti:1.1):1.1)
-    - (landscape art:1.1), (an ancient rusted pipeline:1.3), (stretching across the (desert:1.2):1.1), (leaking:1.1), (polluted:1.1)
-    - (ruins art:1.1), (a barren skybridge:1.3), (leading nowhere:1.2), (broken:1.1), (high above the (ruined city:1.1):1.1)
-    - (moody landscape:1.1), (a (smoke-filled:1.1) valley:1.3), (scattered with (ruins:1.2):1.1), (smog:1.1), (low visibility:1.1), (bleak:1.1)
+    - cinematic wide shot, (a ruined freeway overpass:1.3), (collapsing into dust:1.1), broken concrete, rusted rebar, desolate
+    - bleak environment art, (an abandoned city street:1.3), littered with rusted vehicles, (empty and silent:1.1), overcast sky
+    - moody landscape, (a burnt forest:1.3), (charred tree trunks:1.2), gray sky, drifting ash, eerie silence
+    - vast landscape art, (a sun-blasted desert wasteland:1.3), (stretching endlessly to the horizon:1.1), giant sand dunes, heat shimmer
+    - epic ruins concept art, (a collapsed skyscraper:1.3), leaning against a shattered tower, (urban decay:1.1), rubble everywhere, dramatic lighting
+    - environment concept art, (a rusted gas station:1.3), half-buried and overtaken by sand, (broken pumps:1.1), tattered canopy, sun-bleached signage
+    - eerie interior shot, (an empty overgrown mall:1.3), (shattered glass skylight:1.1), vines and moss covering everything, haunting
+    - dynamic landscape, (a storm-filled wasteland:1.3), (red dust swirling:1.2), dark clouds, forked lightning, ominous
+    - toxic environment art, (a radioactive swamp:1.3), glowing with green fog, (bubbling toxic water:1.1), dead trees, hazardous
+    - environment art, (an abandoned suburb:1.3), houses overtaken by vines, (broken, boarded-up houses:1.1), (empty streets:1.1)
+    - creepy concept art, (a busted amusement park:1.3), (a crooked ferris wheel against a gray sky:1.1), rusted rides
+    - industrial concept art, (a derelict factory:1.3), (covered in soot and grime:1.1), rusting machinery, smokestacks silent, bleak
+    - cinematic landscape, (a cracked highway:1.3), leading into a ruined horizon, (desolate:1.1), abandoned cars, endless road
+    - eerie landscape, (a toxic crater lake:1.3), glowing with eerie unnatural light, (barren shoreline:1.1), toxic mist
+    - vast landscape, (a wind-blown cliffside:1.3), overlooking a dead, dry ocean, (barren:1.1), strong wind, desolate
+    - mysterious concept art, (a fog-swept bunker entrance:1.3), heavy rusted hatch, (fog curling around the doorway:1.1), set into a hillside
+    - environment art, (a forest reclaimed city block:1.3), (broken windows:1.1), (trees and overgrowth swallowing buildings:1.1), dappled light
+    - dark environment art, (a collapsed tunnel:1.3), covered in debris, a dark, foreboding entrance, (pitch black inside:1.1)
+    - epic landscape, (sunset shining through skeletal skyscrapers:1.3), dusty golden hour light, city ruins
+    - industrial ruins, (a trainyard:1.3), filled with rusting locomotives, (abandoned:1.1), overgrown tracks, bleak
+    - eerie interior, (a flooded metro station:1.3), overrun with algae, (murky water:1.1), dim light from above, haunting
+    - concept art landscape, (a desert canyon:1.3), carved with twisted metal wreckage, (rocky:1.1), high canyon walls, harsh sunlight
+    - bleak art, (a storm-ruined billboard:1.3), standing in a barren plain, (tattered advertisement:1.1), ominous sky
+    - eerie interior, (an abandoned church:1.3), (collapsed roof:1.2), broken pews, light streaming through hole in roof, hauntingly beautiful
+    - landscape art, (a crumbling bridge:1.3), over a dried riverbed, (broken:1.1), missing sections, desolate
+    - environment art, (post-collapse farmland:1.3), (broken irrigation rigs:1.2), fields of dead crops, dusty, bleak
+    - horror interior, (an empty hospital corridor:1.3), lined with peeling paint, (eerie:1.1), flickering lights, abandoned gurney
+    - environment concept, (an overgrown airport runway:1.3), (weeds knee-high:1.1), (a wrecked plane in the distance:1.1), empty
+    - epic landscape, (a burned city square:1.3), under a dark orange sky, (ash falling like snow:1.1), charred ruins, apocalyptic
+    - claustrophobic interior, (an underground shelter hallway:1.3), (blinking fluorescent lights:1.2), concrete walls, long corridor, tense
+    - dynamic landscape, (a dust storm sweeping across cracked fields:1.3), low visibility, swirling brown wind
+    - industrial ruins, (a derelict refinery:1.3), (leaking pipes:1.1), toxic spills, rusting metal, hazardous
+    - urban decay, (a ruined shopping district:1.3), (broken neon signs:1.2), looted stores, street littered with debris
+    - concept art, (an urban rubble pile:1.3), (twisted rebar:1.2), chunks of concrete, (a scavenger climbing it:1.1)
+    - interior concept art, (a bunker war room:1.3), covered in old, dusty maps, (abandoned command center:1.1), flickering monitor
+    - landscape art, (a rusted watchtower:1.3), overlooking barren lands, (lone structure:1.1), against a gray sky
+    - eerie art, (an abandoned playground:1.3), half buried in dust, (rusty swings:1.1), creepy, desolate
+    - disaster art, (a sinkhole crater:1.3), swallowing remnants of a street, (deep hole:1.1), broken pipes exposed
+    - eerie interior, (a storm-darkened highway tunnel:1.3), (dangling wires:1.1), eerie, abandoned cars, faint light at the end
+    - desert landscape, (a cracked desert plateau:1.3), beneath a burning sun, (barren:1.1), no life, heat shimmer
+    - horror interior, (a flooded basement:1.3), filled with murky water, (dark:1.1), floating debris, mysterious
+    - landscape art, (a crater field:1.3), dotted with old war debris, (old battlefield:1.1), desolate, bleak
+    - environment art, (a collapsed stadium:1.3), overgrown with foliage, (empty seats:1.1), broken concrete
+    - eerie landscape, (a wind farm:1.3), broken turbines spinning slowly, (eerie sound:1.1), overcast sky
+    - industrial ruin, (a wrecked shipyard:1.3), littered with torn ship hulls, by a dead, polluted sea, (rust:1.1)
+    - toxic environment, (a city square:1.3), filled with drifting ash, everyone wearing gas masks, (toxic air:1.1), green fog
+    - environment art, (sunken ruins of old downtown:1.3), (flooded streets:1.2), (makeshift gondola floating by:1.1)
+    - moody landscape, (a foggy ridge:1.3), overlooking a barren plain, (misty:1.1), low visibility, eerie
+    - toxic environment, (a chemical spill zone:1.3), glowing with neon puddles, (hazardous:1.1), warning signs
+    - landscape art, (a war-scarred cliff:1.3), overlooking a ruined valley, (craters:1.1), burnt trees
+    - environment art, (a forest bunker:1.3), (a secret entrance hidden among tangled vines:1.1), overgrown
+    - ruins art, (a destroyed military base:1.3), filled with burnt vehicles, (wreckage:1.1), abandoned
+    - concept art, (a post-ruin marketplace:1.3), (half-collapsed stalls:1.2), scavengers trading goods, makeshift
+    - claustrophobic interior, (underground sewage chambers:1.3), echoing with dripping water, (dark:1.1), murky water
+    - landscape art, (an empty freeway interchange:1.3), under storm clouds, (cracked asphalt:1.1), (giant, silent structures:1.1)
+    - ruins art, (burnt houses:1.3), lining cracked asphalt, (suburbia ruins:1.1), charred frames, desolate
+    - toxic environment, (a toxic marsh:1.3), emitting green vapors, (dead trees:1.1), bubbling mud
+    - landscape art, (an abandoned radio tower:1.3), looming over the wasteland, (rusting steel:1.1), (tall, silent:1.1)
+    - environment art, (a broken overpass:1.3), covered in moss, (reclaimed by nature:1.1), cars rusted underneath
+    - urban decay, (a city rooftop:1.3), overtaken by wild vegetation, a view of the ruins, (makeshift shelter:1.1)
+    - concept art, (a destroyed missile silo:1.3), (half sunken:1.1), open hatch, exposed missile, eerie
+    - environment art, (a railroad crossing:1.3), (warped tracks:1.2), (a derelict train stopped:1.1), bleak
+    - ruins art, (a fallen billboard:1.3), lying across a highway, (faded advertisement:1.1), blocking the road
+    - desert landscape, (a barren dune field:1.3), (a rusted car skeleton half-buried:1.1), endless sand, harsh sun
+    - abstract art, (a forest of metallic junk piles:1.3), towering piles, rust
+    - interior art, (an underground cave bunker:1.3), (glowing faintly:1.1), makeshift lights, damp stone walls
+    - landscape art, (a sun-scorched ridge:1.3), (skeleton trees:1.2), barren rock, overlooking a dusty valley
+    - apocalyptic art, (city ruins melting under acid rain:1.3), glowing green rain, corroding buildings
+    - ruins art, (a floodplain of shattered concrete slabs:1.3), muddy, debris field, twisted rebar
+    - eerie art, (post-storm fog rolling across a ghost city:1.3), low visibility, silent
+    - interior art, (an evacuated airport terminal:1.3), (empty seating:1.1), luggage scattered, dusty
+    - eerie interior, (a dust-layered cinema:1.3), (peeling posters:1.2), empty seats, silent
+    - disaster art, (a broken dam:1.3), spilling murky water, (rushing water:1.1), flooding the valley below
+    - concept art, (a rusted oil tanker:1.3), stranded in the desert, (beached:1.1), half-buried in sand
+    - ruins art, (a collapsed office tower:1.3), (spilling debris:1.1), exposed floors, skeletal building
+    - landscape art, (a dried lakebed:1.3), cracked into hexagonal plates, (barren:1.1), vast
+    - cyberpunk art, (a neon wasteland:1.3), lit by a dying, flickering billboard, (dark ruins:1.1), puddles reflecting neon
+    - environment art, (a forest reclamation zone:1.3), swallowing suburbs, (overgrowth:1.1), vines on houses
+    - apocalyptic art, (a nuclear blast zone:1.3), (scorched earth:1.2), glassed sand, epicenter, desolate
+    - epic landscape, (a radio tower hill:1.3), silhouetted under a crimson sunset, (dramatic sky:1.1)
+    - concept art, (a fallen airliner wreck:1.3), half buried in sand, (broken fuselage:1.1), scavengers nearby
+    - ruins art, (an abandoned cargo train:1.3), (open to the sky:1.1), looted, on overgrown tracks
+    - eerie landscape, (a storm-ruined crater:1.3), (blackened soil:1.2), eerie, smoking
+    - interior art, (a dust-filled garage:1.3), filled with rusting tools, (abandoned mechanic shop:1.1), dim light
+    - bleak landscape, (a post-apocalypse pier:1.3), (broken wood:1.1), over a dry, dead sea, desolate
+    - urban decay, (an overgrown drainage canal:1.3), (water flowing weakly:1.1), concrete walls covered in graffiti
+    - landscape art, (an ancient rusted pipeline:1.3), stretching across the desert, (leaking:1.1), polluted
+    - ruins art, (a barren skybridge:1.3), (leading nowhere:1.2), broken, high above the ruined city
+    - moody landscape, (a smoke-filled valley:1.3), scattered with ruins, (smog:1.1), low visibility, bleak
 
   spotlight_vehicles:
-    - (vehicle concept art:1.2), (a rusted dune buggy:1.3), (welded roll cage:1.1), (saw-blade wheels:1.2), (speeding across (sand dunes:1.1):1.1)
-    - (action scene:1.2), (a (spike-armored:1.1) muscle car:1.4), (roaring across a (cracked desert road:1.2):1.1), (kicking up dust:1.1), (mad max style:1.1)
-    - (vehicle concept art:1.1), (a tanker truck:1.3), (converted into a (mobile fortress:1.2):1.1), (heavy scrap plating:1.1), (mounted guns:1.1)
-    - (vehicle concept art:1.1), (a wasteland motorcycle:1.3), (bone-grip handlebars:1.2), (fire-spitting exhaust:1.1), (parked in (rubble:1.1):1.1)
-    - (vehicle design:1.1), (a (radiation-proof:1.1) armored bus:1.3), (reinforced with (steel mesh:1.2):1.1), (hazmat symbols:1.1), (heavy duty:1.1)
-    - (epic vehicle art:1.2), (a (four-engine:1.1) wasteland war rig:1.4), (bristling with (flamethrower turrets:1.3):1.1), (huge:1.1), (on a (highway:1.1):1.1)
-    - (sci-fi concept art:1.1), (a salvage hauler wagon:1.3), (pulled by a (repurposed quad-leg mech:1.2):1.1), (loaded with (scrap:1.1):1.1)
-    - (vehicle concept art:1.1), (a desert patrol jeep:1.3), (mounted harpoon launcher:1.2), (digital camo:1.1), (on a (rocky outcrop:1.1):1.1)
-    - (vehicle design:1.1), (a scavenger trike:1.3), (built from (mismatched parts:1.2):1.1), (glowing (neon tubing:1.1):1.1), (at night:1.1)
-    - (vehicle concept art:1.1), (a (bullet-scarred:1.1) police cruiser:1.3), (retrofitted with (metal slabs:1.2):1.1), (siren light broken:1.1)
-    - (concept art:1.1), (a battered supply van:1.3), (carrying (solar panels:1.1) on roof:1.1), (water barrels strapped to side:1.1), (nomad vehicle:1.1)
-    - (vehicle concept art:1.1), (a scrap-metal crawler:1.3), (on (tank treads:1.2):1.1), (rotating (scrap turret:1.1):1.1), (heavy armor:1.1)
-    - (concept art:1.1), (a makeshift glider:1.3), (built from (car doors:1.1):1.1), (duct-taped wings:1.1), (soaring over (ruins:1.1):1.1)
-    - (vehicle concept art:1.1), (an armored hearse:1.3), (reinforced with (welded spikes:1.2):1.1), (gothic:1.1), (menacing:1.1)
-    - (vehicle design:1.1), (a desert racing bike:1.3), (extended forks:1.1), (rattling engine:1.1), (parked at a (rusted gas station:1.1):1.1)
-    - (concept art:1.1), (an abandoned ambulance:1.3), (refitted as a (mobile medic outpost:1.2):1.1), (red cross painted over:1.1)
-    - (vehicle concept art:1.1), (a (smoke-belching:1.1) cargo truck:1.3), (protected with (chainmail panels:1.2):1.1), (hauling goods:1.1)
-    - (creature design:1.2), (a (scorpion-shaped:1.1) desert rover:1.4), (tail-mounted cannon:1.2), (mechanical legs:1.1), (intimidating:1.1)
-    - (sci-fi vehicle:1.1), (a (sand-skipper:1.1) hovercraft:1.3), (drifting across (dunes:1.1):1.1), (antigrav pads:1.1), (fast:1.1)
-    - (vehicle design:1.1), (a (post-fall:1.1) electric buggy:1.3), (patched with (solar armor tiles:1.2):1.1), (silent:1.1), (tech-scavenger:1.1)
-    - (vehicle concept art:1.1), (a (rust-covered:1.1) armored sedan:1.3), (razor-edged bumper:1.2), (raider vehicle:1.1)
-    - (industrial concept:1.1), (a mobile refinery truck:1.3), (distilling (scavenged fuel:1.2):1.1), (pipes and tanks:1.1)
-    - (vehicle concept art:1.1), (a heavy dump truck:1.3), (turned into a (rolling sledgehammer ram:1.2):1.1), (reinforced front:1.1)
-    - (sci-fi concept:1.1), (a scrap hover-drone:1.3), (scouting (ruins:1.1):1.1), (whirring propellers:1.1), (red camera eye:1.1)
-    - (fantasy vehicle:1.1), (a battle chariot:1.3), (pulled by two (bio-engineered mutant beasts:1.2):1.1), (raider:1.1)
-    - (vehicle concept art:1.1), (a (rail-wheeled:1.1) truck:1.3), (running along (collapsed subway tracks:1.2):1.1), (underground:1.1)
-    - (vehicle design:1.1), (a makeshift armored tractor:1.3), (fitted with (chainsaw arms:1.2):1.1), (madness:1.1)
-    - (vehicle concept:1.1), (a desert (wind-sail:1.1) car:1.3), (racing across (open salt flats:1.2):1.1), (fast and silent:1.1)
-    - (vehicle design:1.1), (a (radiation-sealed:1.1) armored personnel carrier:1.4), (hazmat symbol:1.1), (heavy:1.1)
-    - (vehicle concept:1.1), (a mounted snow crawler:1.3), (spiked treads:1.1), (heated cabin:1.1), (in a (frozen wasteland:1.1):1.1)
-    - (vehicle design:1.1), (an (elevated:1.1) watchtower truck:1.3), (a (craned lookout pod:1.2):1.1), (mobile base:1.1)
-    - (vehicle concept:1.1), (a (camouflaged:1.1) scavenger van:1.3), (draped in (fabric tarps:1.2):1.1), (hiding in (ruins:1.1):1.1)
-    - (vehicle concept:1.1), (a (pipeline raider:1.1) bike:1.3), (fuel-line siphons on sides:1.2), (fast:1.1)
-    - (vehicle concept art:1.1), (a (bone-adorned:1.1) war car:1.3), (howling with (exhaust pipes:1.2):1.1), (raider:1.1)
-    - (vehicle design:1.1), (a (flame-jet:1.1) buggy:1.3), (front-mounted (fire nozzle:1.2):1.1), (racing:1.1)
-    - (vehicle concept:1.1), (an (improvised:1.1) armored limo:1.3), (shuttered windows:1.2), (warlord vehicle:1.1)
-    - (vehicle concept:1.1), (a (toxic-waste:1.1) tanker:1.3), (leaking (faint green mist:1.2):1.1), (hazardous:1.1)
-    - (sci-fi concept:1.1), (a (riderless:1.1) auto-drone:1.3), (patrolling (collapsed streets:1.2):1.1), (red sensor light:1.1)
-    - (vehicle concept:1.1), (a (converted:1.1) school bus:1.3), (rooftop water collectors:1.2), (nomad home:1.1)
-    - (vehicle art:1.1), (a (rust-giant:1.1) semi truck:1.3), (chains dragging behind:1.2), (intimidating:1.1)
-    - (vehicle design:1.1), (a (stealth:1.1) desert rover:1.3), (coated in (sand-colored plating:1.2):1.1), (low profile:1.1)
-    - (vehicle concept:1.1), (a makeshift snowmobile:1.3), (built from (scavenged motorcycle parts:1.2):1.1)
-    - (vehicle concept:1.1), (a (scrap-built:1.1) gyrocopter:1.3), (buzzing through a (ruined city:1.2):1.1)
-    - (industrial vehicle:1.1), (a (massive:1.1) tunnel-borer vehicle:1.3), (lined with (drilling spikes:1.2):1.1)
-    - (vehicle concept:1.1), (a (post-apocalypse:1.1) ice cream truck:1.3), (turned into a (raider rig:1.2):1.1), (spikes:1.1)
-    - (vehicle design:1.1), (a (lightning-rod:1.1) storm chaser:1.3), (equipped with (grounded cables:1.2):1.1)
-    - (vehicle concept:1.1), (a (methane-burning:1.1) trike:1.3), (emitting (blue flames:1.2):1.1)
-    - (vehicle concept:1.1), (an (old armored tank:1.3):1.1), (covered in (welded junk and graffiti:1.2):1.1)
-    - (vehicle concept:1.1), (a (hydro-powered:1.1) scavenger boat:1.3), (prowling (flooded ruins:1.2):1.1)
-    - (vehicle design:1.1), (an amphibious rover:1.3), (patched pontoons:1.1), (rusted engine:1.1)
-    - (vehicle concept:1.1), (a (glow-tubed:1.1) night racer:1.3), (tearing through (dark streets:1.2):1.1)
-    - (vehicle design:1.1), (a (multi-seat:1.1) long-frame motorcycle:1.4), (for a (biker gang:1.1):1.1)
-    - (vehicle concept:1.1), (a pickup truck:1.3), (with a (turreted scrap-metal bunker:1.2) mounted in bed:1.1)
-    - (vehicle concept:1.1), (a flatbed hauler:1.3), (turned (livestock carrier for mutant beasts:1.2):1.1)
-    - (vehicle design:1.1), (a (rust-steel:1.1) horse-drawn wagon:1.3), (armored canopy:1.2)
-    - (vehicle design:1.1), (a (patchwork:1.1) quad-bike:1.3), (plasma torch exhaust:1.2)
-    - (sci-fi vehicle:1.2), (a (makeshift:1.1) armored zeppelin:1.4), (floating above the (wasteland:1.2):1.1)
-    - (vehicle concept:1.1), (a (hand-cranked:1.1) rail cart:1.3), (for (underground exploration:1.1):1.1)
-    - (vehicle design:1.1), (a (solar-winged:1.1) trike:1.3), (built for (long-range travel:1.2):1.1)
-    - (vehicle concept:1.1), (a (canyon-climber:1.1) vehicle:1.3), (retractable (grappling spikes:1.2):1.1)
-    - (vehicle concept:1.1), (a (skeleton-decorated:1.1) raid truck:1.3), (blasting (war horns:1.2):1.1)
-    - (vehicle design:1.1), (a (junk-tank:1.3):1.1), (rotating (scrap-turret:1.2):1.1), (mismatched armor:1.1)
-    - (vehicle concept:1.1), (a (deep-desert:1.1) crawler:1.3), (reinforced (air filters:1.2):1.1)
-    - (vehicle concept:1.1), (a (battle-sled:1.3):1.1), (pulled across sand by a (modified engine winch:1.2):1.1)
-    - (vehicle design:1.1), (a (twin-turbo:1.1) dragster:1.3), (covered in (dust and skull paint:1.2):1.1)
-    - (vehicle concept:1.1), (a (swamp:1.1) rover:1.3), (paddle wheels:1.1), (fog lights:1.1)
-    - (vehicle design:1.1), (a (makeshift:1.1) ambulance bike:1.3), (with a (sidecar medical crate:1.2):1.1)
-    - (vehicle concept:1.1), (a (wind-shield:1.1) buggy:1.3), (draped in (tattered banners:1.2):1.1)
-    - (vehicle design:1.1), (a (siege-ram:1.1) van:1.3), (a (spiked front battering wedge:1.2):1.1)
-    - (sci-fi creature:1.2), (a (bio-engineered:1.1) walking vehicle:1.4), (metallic tendons:1.2)
-    - (sci-fi vehicle:1.1), (a (hover-blade:1.1) patrol skiff:1.3), (gliding (inches above ground:1.2):1.1)
-    - (vehicle concept:1.1), (a (plated:1.1) battle bus:1.3), (with a (rooftop archer platform:1.2):1.1)
-    - (industrial vehicle:1.1), (a (derelict:1.1) cargo lift:1.3), (converted into a (mobile fortress:1.2):1.1)
-    - (vehicle concept:1.1), (a (post-collapse:1.1) taxi:1.3), (turned into a (riot-response machine:1.2):1.1)
-    - (sci-fi vehicle:1.1), (a (turbine-powered:1.1) rover:1.3), (kicking up (storms of sand:1.2):1.1)
-    - (vehicle design:1.1), (a (dual-axle:1.1) war-jeep:1.3), (with a (rotating crossbow turret:1.2):1.1)
-    - (vehicle concept:1.1), (a (contaminated-zone:1.1) crawler:1.3), (lead-lined plating:1.2)
-    - (sci-fi vehicle:1.1), (a (mech-spider:1.1) scout unit:1.3), (crawling through (rubble:1.2):1.1)
-    - (fantasy vehicle:1.1), (a (mutant-beast:1.1) drawn cart:1.3), (with (barbed reins:1.2):1.1)
-    - (creature vehicle:1.1), (an (armored:1.1) beetle-shaped rover:1.3), (thick iron shell:1.2)
-    - (vehicle concept:1.1), (a (skull-front:1.1) armored dragster:1.3), (howling with (exhaust flames:1.2):1.1)
-    - (vehicle concept:1.1), (a (storm-surfer:1.1) rover:1.3), (riding (dust cyclones:1.2):1.1)
-    - (vehicle concept:1.1), (a (mobile broadcasting:1.1) RV:1.3), (patched with (antenna towers:1.2):1.1)
-    - (vehicle design:1.1), (an (old fire truck:1.3):1.1), (retrofitted with a (chemical sprayer cannon:1.2):1.1)
-    - (vehicle concept:1.1), (a (scrap-ship:1.3):1.1), (gliding through a (flooded dead city:1.2):1.1)
-    - (vehicle design:1.1), (a (biofuel:1.1) dune buggy:1.3), (with a (rotating leaf-filter intake:1.2):1.1)
-    - (vehicle concept:1.1), (a (makeshift:1.1) armored forklift:1.3), (used in (close combat:1.1):1.1)
-    - (vehicle design:1.1), (a (rocket-assisted:1.1) raid bike:1.3), (rear ignition flares:1.2)
-    - (vehicle concept:1.1), (an (overclocked:1.1) armored hearse:1.3), (decorated with (bones:1.2):1.1)
-    - (vehicle design:1.1), (a (multi-cabin:1.1) convoy crawler:1.3), (bristling with (armor panels:1.2):1.1)
-    - (vehicle concept:1.1), (a (metal-reef:1.1) skimmer:1.3), (traveling through (rusted debris fields:1.2):1.1)
-    - (sci-fi vehicle:1.1), (a (load-bearing:1.1) mech walker:1.3), (carrying (scavenged scrap:1.2):1.1)
-    - (vehicle design:1.1), (a (battle wagon:1.3):1.1), (with a (rotating flamethrower turret:1.2):1.1)
-    - (sci-fi vehicle:1.1), (a (hover-platform:1.1) rider:1.3), (jury-rigged stabilizers:1.2)
-    - (vehicle art:1.1), (a (giant 8-wheel:1.1) rover:1.3), (crushing (rusted cars:1.1) beneath its tires:1.1)
-    - (vehicle concept:1.1), (an (armored:1.1) swamp-buggy:1.3), (covered in (moss and chain mesh:1.2):1.1)
-    - (vehicle design:1.1), (a (turreted:1.1) tankbike:1.3), (wide front wheel:1.1), (gun mount:1.1)
-    - (vehicle concept:1.1), (a (fallen-corporate:1.1) security APC:1.3), (repurposed for (raiders:1.2):1.1), (graffiti:1.1)
-    - (steampunk vehicle:1.1), (a (steam-powered:1.1) wasteland crawler:1.3), (belching (black smoke:1.2):1.1)
-
-# ========================================================================
-# NEGATIVE PROMPT
-# ========================================================================
-
-  negative_prompt: 
-    - "(ugly:1.3), tiling, (poor quality, worst quality, low quality:1.4), (deformed:1.2), blurry, jpeg artifacts, signature, watermark, username, text, (pristine:1.3), (clean:1.2), new, modern, (lush vegetation:1.2), (green:1.1), vibrant colors, (happy:1.1), cheerful, cartoon, anime, (cute:1.2), bad anatomy, extra limbs, (disfigured:1.3), (fused fingers:1.1), (too many fingers:1.1), (censor:1.1), (bar:1.1)"
+    - vehicle concept art, (a rusted dune buggy:1.3), welded roll cage, (saw-blade wheels:1.2), speeding across sand dunes
+    - action scene, (a spike-armored muscle car:1.3), roaring across a cracked desert road, (kicking up dust:1.1), mad max style
+    - vehicle concept art, (a tanker truck:1.3), converted into a mobile fortress, (heavy scrap plating:1.1), mounted guns
+    - vehicle concept art, (a wasteland motorcycle:1.3), (bone-grip handlebars:1.2), fire-spitting exhaust, parked in rubble
+    - vehicle design, (a radiation-proof armored bus:1.3), reinforced with steel mesh, (hazmat symbols:1.1), heavy duty
+    - epic vehicle art, (a four-engine wasteland war rig:1.3), bristling with flamethrower turrets, (huge:1.1), on a highway
+    - sci-fi concept art, (a salvage hauler wagon:1.3), pulled by a repurposed quad-leg mech, loaded with scrap
+    - vehicle concept art, (a desert patrol jeep:1.3), (mounted harpoon launcher:1.2), digital camo, on a rocky outcrop
+    - vehicle design, (a scavenger trike:1.3), built from mismatched parts, glowing neon tubing, (at night:1.1)
+    - vehicle concept art, (a bullet-scarred police cruiser:1.3), retrofitted with metal slabs, (siren light broken:1.1)
+    - concept art, (a battered supply van:1.3), (carrying solar panels on roof:1.1), water barrels strapped to side, nomad vehicle
+    - vehicle concept art, (a scrap-metal crawler:1.3), on tank treads, rotating scrap turret, (heavy armor:1.1)
+    - concept art, (a makeshift glider:1.3), built from car doors, (duct-taped wings:1.1), soaring over ruins
+    - vehicle concept art, (an armored hearse:1.3), reinforced with welded spikes, (gothic:1.1), menacing
+    - vehicle design, (a desert racing bike:1.3), (extended forks:1.1), rattling engine, parked at a rusted gas station
+    - concept art, (an abandoned ambulance:1.3), refitted as a mobile medic outpost, (red cross painted over:1.1)
+    - vehicle concept art, (a smoke-belching cargo truck:1.3), protected with chainmail panels, (hauling goods:1.1)
+    - creature design, (a scorpion-shaped desert rover:1.3), (tail-mounted cannon:1.2), mechanical legs, intimidating
+    - sci-fi vehicle, (a sand-skipper hovercraft:1.3), drifting across dunes, (antigrav pads:1.1), fast
+    - vehicle design, (a post-fall electric buggy:1.3), patched with matte-black solar panels, (silent:1.1), tech-scavenger
+    - vehicle concept art, (a rust-covered armored sedan:1.3), (razor-edged bumper:1.2), raider vehicle
+    - industrial concept, (a mobile refinery truck:1.3), distilling scavenged fuel, (pipes and tanks:1.1)
+    - vehicle concept art, (a heavy dump truck:1.3), turned into a rolling sledgehammer ram, (reinforced front:1.1)
+    - sci-fi concept, (a scrap hover-drone:1.3), scouting ruins, (whirring propellers:1.1), red camera eye
+    - fantasy vehicle, (a battle chariot:1.3), pulled by two bio-engineered mutant beasts, (skulls mounted on the frame:1.1)
+    - vehicle concept art, (a rail-wheeled truck:1.3), running along collapsed subway tracks, (underground:1.1)
+    - vehicle design, (a makeshift armored tractor:1.3), fitted with chainsaw arms, (sparks flying from spinning blades:1.1)
+    - vehicle concept, (a desert wind-sail car:1.3), racing across open salt flats, (fast and silent:1.1)
+    - vehicle design, (a radiation-sealed armored personnel carrier:1.3), (hazmat symbol:1.1), heavy
+    - vehicle concept, (a mounted snow crawler:1.3), (spiked treads:1.1), heated cabin, in a frozen wasteland
+    - vehicle design, (an elevated watchtower truck:1.3), a craned lookout pod, (antenna array on top:1.1)
+    - vehicle concept, (a camouflaged scavenger van:1.3), draped in fabric tarps, hiding in ruins
+    - vehicle concept, (a pipeline raider bike:1.3), (fuel-line siphons on sides:1.2), fast
+    - vehicle concept art, (a bone-adorned war car:1.3), howling with exhaust pipes, (bone trophies rattling:1.1)
+    - vehicle design, (a flame-jet buggy:1.3), front-mounted fire nozzle, (racing:1.1)
+    - vehicle concept, (an improvised armored limo:1.3), (shuttered windows:1.2), warlord vehicle
+    - vehicle concept, (a toxic-waste tanker:1.3), leaking faint green mist, (hazardous:1.1)
+    - sci-fi concept, (a riderless auto-drone:1.3), patrolling collapsed streets, (red sensor light:1.1)
+    - vehicle concept, (a converted school bus:1.3), (rooftop water collectors:1.2), nomad home
+    - vehicle art, (a rust-giant semi truck:1.3), (chains dragging behind:1.2), intimidating
+    - vehicle design, (a stealth desert rover:1.3), coated in sand-colored plating, (low profile:1.1)
+    - vehicle concept, (a makeshift snowmobile:1.3), built from scavenged motorcycle parts
+    - vehicle concept, (a scrap-built gyrocopter:1.3), buzzing through a ruined city
+    - industrial vehicle, (a massive tunnel-borer vehicle:1.3), lined with drilling spikes
+    - vehicle concept, (a post-apocalypse ice cream truck:1.3), turned into a raider rig, (spikes:1.1)
+    - vehicle design, (a lightning-rod storm chaser:1.3), equipped with grounded cables
+    - vehicle concept, (a methane-burning trike:1.3), emitting blue flames
+    - vehicle concept, (an old armored tank:1.3), covered in welded junk and graffiti
+    - vehicle concept, (a hydro-powered scavenger boat:1.3), prowling flooded ruins
+    - vehicle design, (an amphibious rover:1.3), (patched pontoons:1.1), rusted engine
+    - vehicle concept, (a glow-tubed night racer:1.3), tearing through dark streets
+    - vehicle design, (a multi-seat long-frame motorcycle:1.3), for a biker gang
+    - vehicle concept, (a pickup truck:1.3), (with a turreted scrap-metal bunker mounted in bed:1.1)
+    - vehicle concept, (a flatbed hauler:1.3), turned livestock carrier for mutant beasts
+    - vehicle design, (a rust-steel horse-drawn wagon:1.3), (armored canopy:1.2)
+    - vehicle design, (a patchwork quad-bike:1.3), (plasma torch exhaust:1.2)
+    - sci-fi vehicle, (a makeshift armored zeppelin:1.3), floating above the wasteland
+    - vehicle concept, (a hand-cranked rail cart:1.3), for underground exploration
+    - vehicle design, (a solar-winged trike:1.3), built for long-range travel
+    - vehicle concept, (a canyon-climber vehicle:1.3), retractable grappling spikes
+    - vehicle concept, (a skeleton-decorated raid truck:1.3), blasting war horns
+    - vehicle design, (a junk-tank:1.3), rotating scrap-turret, mismatched armor
+    - vehicle concept, (a deep-desert crawler:1.3), reinforced air filters
+    - vehicle concept, (a battle-sled:1.3), pulled across sand by a modified engine winch
+    - vehicle design, (a twin-turbo dragster:1.3), covered in dust and skull paint
+    - vehicle concept, (a swamp rover:1.3), (paddle wheels:1.1), fog lights
+    - vehicle design, (a makeshift ambulance bike:1.3), with a sidecar medical crate
+    - vehicle concept, (a wind-shield buggy:1.3), draped in tattered banners
+    - vehicle design, (a siege-ram van:1.3), a spiked front battering wedge
+    - sci-fi creature, (a bio-engineered walking vehicle:1.3), (metallic tendons:1.2)
+    - sci-fi vehicle, (a hover-blade patrol skiff:1.3), gliding inches above ground
+    - vehicle concept, (a plated battle bus:1.3), with a rooftop archer platform
+    - industrial vehicle, (a derelict cargo lift:1.3), converted into a mobile fortress
+    - vehicle concept, (a post-collapse taxi:1.3), turned into a riot-response machine
+    - sci-fi vehicle, (a turbine-powered rover:1.3), kicking up storms of sand
+    - vehicle design, (a dual-axle war-jeep:1.3), with a rotating crossbow turret
+    - vehicle concept, (a contaminated-zone crawler:1.3), (lead-lined plating:1.2)
+    - sci-fi vehicle, (a mech-spider scout unit:1.3), crawling through rubble
+    - fantasy vehicle, (a mutant-beast drawn cart:1.3), with barbed reins
+    - creature vehicle, (an armored beetle-shaped rover:1.3), (thick iron shell:1.2)
+    - vehicle concept, (a skull-front armored dragster:1.3), howling with exhaust flames
+    - vehicle concept, (a storm-surfer rover:1.3), riding dust cyclones
+    - vehicle concept, (a mobile broadcasting RV:1.3), patched with antenna towers
+    - vehicle design, (an old fire truck:1.3), retrofitted with a chemical sprayer cannon
+    - vehicle concept, (a scrap-ship:1.3), gliding through a flooded dead city
+    - vehicle design, (a biofuel dune buggy:1.3), with a rotating leaf-filter intake
+    - vehicle concept, (a makeshift armored forklift:1.3), used in close combat
+    - vehicle design, (a rocket-assisted raid bike:1.3), (rear ignition flares:1.2)
+    - vehicle concept, (an overclocked armored hearse:1.3), decorated with bones
+    - vehicle design, (a multi-cabin convoy crawler:1.3), bristling with armor panels
+    - vehicle concept, (a metal-reef skimmer:1.3), traveling through rusted debris fields
+    - sci-fi vehicle, (a load-bearing mech walker:1.3), carrying scavenged scrap
+    - vehicle design, (a battle wagon:1.3), with a rotating flamethrower turret
+    - sci-fi vehicle, (a hover-platform rider:1.3), (jury-rigged stabilizers:1.2)
+    - vehicle art, (a giant 8-wheel rover:1.3), (crushing rusted cars beneath its tires:1.1)
+    - vehicle concept, (an armored swamp-buggy:1.3), covered in moss and chain mesh
+    - vehicle design, (a turreted tankbike:1.3), (wide front wheel:1.1), gun mount
+    - vehicle concept, (a fallen-corporate security APC:1.3), repurposed for raiders, (graffiti:1.1)
+    - steampunk vehicle, (a steam-powered wasteland crawler:1.3), belching black smoke
