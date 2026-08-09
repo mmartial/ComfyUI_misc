@@ -21,7 +21,7 @@ gkr_gothic:
     - grieving widow, black mourning veil, sorrowful
     - haunted child, pale, holding old doll
     - silent watcher, standing motionless in a doorway, unblinking stare
-    - acolyte of darkness, hooded, chanting
+    - hooded acolyte, black robes embroidered with crimson sigils, mouth open, hands raised over candles
     - humanoid shadow wraith, edges dissolving into smoke, (glowing red eyes:1.3)
     - stitched abomination, patchwork skin, grotesque
     - feral figure mid-transformation, clothes tearing at the seams, snarling
@@ -29,11 +29,11 @@ gkr_gothic:
     - priest of light, chin raised, arms outstretched, faint white halo of light behind the head
     - holy knight, polished silver plate armor engraved with prayers, longsword wrapped in blessed cloth
     - spectral guardian, translucent silver plate armor, one hand raised in warning
-    - exorcist, holding crucifix, chanting latin
+    - exorcist, holding crucifix, mouth open, one hand raised toward a recoiling shadow
 
   race:
     - undead, rotting flesh, shambling
-    - human afflicted by curse, (glowing sigils:1.2)
+    - human with (glowing sigils:1.2) spreading beneath cracked skin
     - revenant, clawing up through grave dirt, (glowing eyes:1.2)
     - spectral being, ethereal mist, faint outline
     - ghost, translucent, floating
@@ -41,9 +41,9 @@ gkr_gothic:
     - zombie, blank eyes, torn clothes
     - vampire, elegant, fangs
     - werewolf, bestial, full moon
-    - wraith, shadow form, draining life
-    - specter, cold aura, terrifying
-    - ghostly apparition, sudden appearance, frightening
+    - wraith, shadow form, black tendrils drawing pale light from a collapsed figure
+    - specter, translucent body rimmed with frost, open mouth, clawed hands reaching forward
+    - ghostly apparition, translucent figure emerging through a wall, arms outstretched
     - human, terrified, running
     - elf, pale, ancient, sorrowful
     - dwarf, grim, carrying axe, rune-covered
@@ -194,12 +194,12 @@ gkr_gothic:
     - storm battered cliff side manor, lightning, crashing waves
 
   mood:
-    - eerie and unsettling, palpable dread
-    - oppressive and suffocating, heavy atmosphere
-    - hopeless and bleak, despair, no escape
-    - tense and silent, holding breath, waiting
-    - tragic and sorrowful, deep melancholy
-    - ominous and foreboding, something evil approaches
+    - tilted composition, deep shadows, distant indistinct silhouette
+    - cramped framing, low ceiling, dense black shadows pressing around the subject
+    - desaturated grey palette, collapsed doorway, lone figure with bowed head
+    - motionless figures, rigid poses, wide eyes fixed on an unseen doorway
+    - bowed figures, tear-streaked faces, wilted flowers, cold blue-grey palette
+    - long converging shadows, distant silhouette emerging through fog
 
   lighting:
     - dim candlelight, flickering, soft shadows
@@ -231,7 +231,7 @@ gkr_gothic:
 
   fx_magic:
     - (glowing occult circle:1.3), on floor, runes
-    - swirling dark smoke, summoning, magical
+    - swirling dark smoke spiraling upward from raised hands, violet sparks within
     - (blood red sigils:1.3), (glowing on wall:1.2), magic
     - (ghostly apparitions:1.2), faint figures, appearing
 
@@ -240,13 +240,13 @@ gkr_gothic:
 # ---------------------------------------------------------
 
   hero_combo:
-    - "__gkr_gothic/archetype__, __gkr_gothic/age__, imposing and tall, __gkr_gothic/tone__, __gkr_gothic/face_style__, __gkr_gothic/hair__, __gkr_gothic/hair_color__, __gkr_gothic/eyes__, stern determined expression, __gkr_gothic/clothing__, __gkr_gothic/headwear__, __gkr_gothic/accessories__, __gkr_gothic/weapons__, __gkr_gothic/setting__, eerie mood, unsettling atmosphere, __gkr_gothic/lighting__, low angle, looming figure, gothic horror illustration, __gkr_gothic/fx_environment__"
+    - "__gkr_gothic/archetype__, __gkr_gothic/age__, __gkr_gothic/build__, __gkr_gothic/tone__, __gkr_gothic/face_style__, __gkr_gothic/hair__, __gkr_gothic/hair_color__, __gkr_gothic/eyes__, __gkr_gothic/expression__, __gkr_gothic/clothing__, __gkr_gothic/headwear__, __gkr_gothic/accessories__, __gkr_gothic/weapons__, __gkr_gothic/setting__, __gkr_gothic/mood__, __gkr_gothic/lighting__, __gkr_gothic/camera__, __gkr_gothic/style__, __gkr_gothic/fx_environment__"
 
   monster_combo:
-    - "__gkr_gothic/archetype__, near __gkr_gothic/setting__, __gkr_gothic/mood__, __gkr_gothic/lighting__, wide shot, ruins, dark painterly style, __gkr_gothic/fx_environment__, __gkr_gothic/creatures__"
+    - "__gkr_gothic/race__, near __gkr_gothic/setting__, __gkr_gothic/mood__, __gkr_gothic/lighting__, __gkr_gothic/camera__, __gkr_gothic/style__, __gkr_gothic/fx_environment__, __gkr_gothic/fx_magic__, __gkr_gothic/creatures__"
 
   ritual_combo:
-    - "occult sorcerer, candlelit study, (glowing occult circle:1.3), swirling dark smoke, ominous and foreboding mood, dim candlelight, close up, haunted face, gothic horror illustration, __gkr_gothic/accessories__"
+    - "occult sorcerer in black robes, candlelit study, (glowing occult circle:1.3), swirling dark smoke, long converging shadows, distant silhouette emerging through fog, dim candlelight, close up, wide eyes with dark tear tracks, high-contrast pen-and-ink illustration, __gkr_gothic/accessories__"
 
   scene_combo:
     - "__gkr_gothic/setting__, __gkr_gothic/mood__, __gkr_gothic/lighting__, __gkr_gothic/style__, __gkr_gothic/camera__, __gkr_gothic/fx_environment__, __gkr_gothic/creatures__"
@@ -277,7 +277,7 @@ gkr_gothic:
     - "a gothic huntress, grim expression, leather coat, wielding a (silvered crossbow:1.3), moonlit ruins"
     - "a frail necromancer, hollow cheeks, dark robes, (swirling bone fragments:1.3) in the air"
     - "a Victorian widow, (black mourning veil:1.2), cold emotionless stare, standing in a dusty manor"
-    - "a haunted knight, (rusted gothic armor:1.2), (cursed sigils glowing:1.3), holding a broken sword"
+    - "a hollow-eyed knight, (rusted gothic armor:1.2), (crimson sigils glowing:1.3), holding a broken sword"
     - "a (plague doctor:1.1), (cracked porcelain mask:1.3), holding a lantern with eerie green light, foggy alley"
     - "a witch of the moor, tangled hair, ragged clothes, (smoldering swamp runes:1.2) floating around"
     - "a ghostly child, pale, holding a fading doll, (body drifting like smoke:1.3), in a dark hallway"
@@ -287,17 +287,17 @@ gkr_gothic:
     - "a grinning demon jester, patchwork clothes, holding bells, (clawed gloves:1.2), sinister, in a dark carnival"
     - "a fallen cleric, haunted expression, brandishing a (cracked holy symbol:1.3), faintly glowing, in a ruined church"
     - "a mad alchemist, stained apron, wild eyes, holding (unstable glowing vials:1.3), chaotic laboratory"
-    - "a shadow priest, robes made of (swirling black tendrils:1.3), face obscured by darkness, casting dark magic"
+    - "a shadow priest, robes made of (swirling black tendrils:1.3), face obscured by darkness, black sparks streaming from raised hands"
     - "a pale sorceress, elegant lace dress, channeling a (frost-like death aura:1.3), particles of ice"
     - "a blood knight, (crimson helm:1.2) with a screaming visage, brutal spiked armor, holding a gore-drenched axe"
     - "a cursed bride, torn wedding gown, (drifting unnaturally:1.2), tragic expression, in a ruined chapel"
-    - "a Victorian scholar, clutching an (ancient tome wrapped in chains:1.2), terrified expression, forbidden library"
+    - "a Victorian scholar, clutching an (ancient tome wrapped in chains:1.2), terrified expression, locked library lined with chained books"
     - "a nightmare beast master, cloaked in shadow, (spectral hounds circling:1.3) at his feet"
     - "a skeletal warrior, (flickering soul fire in ribcage:1.3), ancient bone armor, wielding a pitted greatsword"
     - "a ghoul scavenger, cracked claws, hunched gait, feasting, (piles of bones:1.1), crypt setting"
     - "a haunted bard, playing a violin, emitting (ghostly musical notes:1.3), sorrowful melody, cemetery"
     - "a grim witchfinder warrior, holding a (burning stake torch:1.3), steel armor, zealous expression"
-    - "a ragged cultist, (carved ritual scars:1.2) on face, chanting, holding a rusted dagger"
+    - "a ragged cultist, (carved ritual scars:1.2) on face, mouth open, holding a rusted dagger above an altar"
     - "a scarecrow creature, (stitched grin:1.2), straw limbs, (menacing pose:1.1), in a dead cornfield"
     - "a terrified Victorian detective, holding a (trembling lantern:1.2), revolver drawn, staring into darkness"
     - "a crypt sorcerer, wearing (robes stitched from grave shrouds:1.3), holding a gnarled bone staff"
@@ -311,18 +311,18 @@ gkr_gothic:
     - "a rat king magus, (vermin crawling at feet:1.3), controlling a swarm, in a dark sewer tunnel"
     - "a Victorian painter, (possessed:1.1), painting on a canvas with (writhing shadows:1.3), manic expression"
     - "a bone witch, forging runes, (skeletal hands:1.2), chanting, surrounded by bones and candles"
-    - "a graveyard paladin, wielding a (blessed lantern:1.3), holy light pushing back darkness, grim determination"
+    - "a graveyard paladin, wielding a (white-glowing lantern:1.3), radiant light pushing back black tendrils, jaw clenched"
     - "an abomination hybrid, (twisting mismatched limbs:1.2), patchwork skin, grotesque, lurching gait"
     - "a shadow assassin, (form dissolves into smoke:1.3), holding twin (glowing daggers:1.1), perched on a rooftop"
     - "a Victorian surgeon, (trembling scalpel:1.2), hollow stare, madness, in a blood-stained operating theater"
     - "a reaper spirit, cloaked in (drifting black mist:1.2), holding a (pitted scythe:1.1), spectral, silent"
     - "a cursed minstrel, playing a broken harp, (spectral notes:1.2) weeping, in a ruined great hall"
-    - "an eldritch prophet, (eyes shine void-black:1.3), proclaiming doom, arms outstretched, storm gathering"
+    - "an eldritch prophet, (eyes shine void-black:1.3), mouth open, arms outstretched beneath a spiraling storm"
     - "a drowned ghost, covered in (dripping algae:1.2), waterlogged, rising from a dark lake"
     - "a plague monk, covered in (runic bandages:1.2), carrying a staff, chanting, in a desolate village"
     - "a statue maiden, (cracked stone skin:1.2), (bleeding black tears:1.3), weeping in a garden"
     - "a grave warlock, (summoning skeletal hands from the earth:1.3), dark magic swirling, cemetery at night"
-    - "a mad preacher, shouting visions of doom, (wild eyes:1.2), clutching a book, rain-soaked street"
+    - "a preacher with (wild eyes:1.2), mouth open, pointing at a blood-red sky, clutching a book on a rain-soaked street"
     - "a lupine hunter, fur-lined coat, (silvered weapons:1.2), grim, werewolf hunter, in a dark forest"
     - "a Victorian lady, terrified, haunted by a (ghostly duplicate:1.3) standing behind her"
     - "a bone-clad barbarian, (skull mask:1.2), primitive bone armor, wielding a massive club"
@@ -337,9 +337,9 @@ gkr_gothic:
     - "a fog-walker spirit, (drifting through mist:1.2), indistinct, (glowing outline:1.1), silent"
     - "a gloom knight, cloaked in (rotting velvet:1.2), carrying a heavy greatsword, head bowed"
     - "a mad occultist, (glowing runes etched into skin:1.3), chanting wildly, surrounded by candles"
-    - "a grave-borne golem, (stitched from multiple bodies:1.2), patchwork, (unnatural strength:1.1), shambling"
-    - "a child medium, (channeling ghostly voices:1.3), (glowing white eyes:1.2), trance-like, in a haunted nursery"
-    - "a Victorian noble, (monstrous shadow silhouette:1.3) on the wall behind, dual nature"
+    - "a grave-borne golem, (stitched from multiple bodies:1.2), patchwork, bulging mismatched muscles, shambling"
+    - "a child medium, translucent mouths orbiting the head, (glowing white eyes:1.2), unfocused gaze, in a nursery with floating toys"
+    - "a Victorian noble, upright and composed, with a (horned monstrous shadow silhouette:1.3) on the wall behind"
     - "a ghostly bride, holding a (wilted bouquet:1.2), waiting, veil torn, in a ruined church"
     - "a blood mage, drawing (crimson sigils mid-air:1.3), blood magic, intense concentration"
     - "a crypt witch, mixing a potion, (rusted cauldron:1.2), ingredients, surrounded by skulls"
@@ -356,7 +356,7 @@ gkr_gothic:
     - "a masked cult assassin, (curved ritual blades:1.2), stealthy pose, shrouded in shadows"
     - "a possessed Victorian doll, (cracked porcelain face:1.3), small, (glowing red eyes:1.1), sitting on a chair"
     - "a spectral wolf guardian, (looming through fog:1.2), (protective stance:1.1), glowing eyes"
-    - "an inquisitor, drenched in (holy fire:1.3), zealous, (holding a blessed sword:1.1), high contrast"
+    - "an inquisitor, drenched in (white-gold fire:1.3), eyes wide and jaw clenched, holding a radiant engraved sword, high contrast"
     - "a rotted plague victim, walking husk, (pustules:1.1), (blank stare:1.1), shambling"
     - "a moon priestess, (pale luminescent aura:1.3), (crescent moon sigil:1.1) on forehead, serene"
     - "a shadow witch, (swirling black feathers:1.2) cloak, (eyes glowing:1.1), in a dark forest"
@@ -367,56 +367,56 @@ gkr_gothic:
     - "a corpse bride, (stitched smile:1.2), tattered dress, (pale blue skin:1.1), holding a dead flower"
     - "a hollow knight, (chest cavity glowing faintly:1.3), empty armor, (spectral energy:1.1), standing guard"
     - "a gothic sorcerer, (commanding a swirling bat swarm:1.3), (arms raised:1.1), dark magic"
-    - "a night wanderer, cloaked in (creeping ground fog:1.2), mysterious, (only silhouette visible:1.1)"
+    - "a night wanderer, cloaked in (creeping ground fog:1.2), face hidden, (only silhouette visible:1.1)"
 
   spotlight_backgrounds:
     - "a (fog-drenched graveyard:1.2), tilted headstones, (eerie mist:1.1), full moon, gothic horror"
     - "a Victorian mansion corridor, (flickering candles:1.2), (long moving shadows:1.1), dusty, desolate"
     - "an ancient cathedral interior, (broken stained glass:1.2), (moonlight shafts:1.1), dust particles, somber"
-    - "a moonlit cobblestone street, (dim gas lamps:1.1), empty, (swirling fog:1.2), ominous atmosphere"
-    - "an abandoned asylum hall, lined with (rusted beds:1.1), (decaying walls:1.1), oppressive dread"
+    - "a moonlit cobblestone street, (dim gas lamps:1.1), empty, (swirling fog:1.2), long converging shadows"
+    - "an abandoned asylum hall, lined with (rusted beds:1.1), (decaying walls:1.1), cramped framing and dense shadows"
     - "a haunted forest, (twisted gnarled trees:1.2), drifting mist, (glowing eyes:1.1) in the dark"
     - "a dark crypt interior, lit by a (faint blue torch flame:1.2), (piles of skulls:1.1), oppressive shadows"
     - "a stormy cliffside, (crashing waves:1.1), (lightning flash:1.2), overlooking a dark sea, dramatic"
     - "a rotting village, (heavy rain:1.1), (flickering lantern glow:1.1), mud, bleak atmosphere"
-    - "a moonlit battlefield, strewn with (ancient armor:1.1), (spectral mist:1.2), silent, tragic"
-    - "a gothic library, stacked with (dusty forbidden tomes:1.2), scrolls, (flickering candlelight:1.1)"
-    - "a fog-choked bridge, leading to a (ruined fortress:1.1), stone, (eerie silence:1.2)"
+    - "a moonlit battlefield, strewn with (ancient armor:1.1), (spectral mist:1.2), motionless bodies, cold blue-grey palette"
+    - "a gothic library, stacked with (dusty chained tomes:1.2), scrolls, (flickering candlelight:1.1)"
+    - "a fog-choked stone bridge leading to a (ruined fortress:1.1), empty road, motionless banners"
     - "an underground ossuary, (skull-lined walls:1.3), bone, (dim candlelight:1.1), claustrophobic"
-    - "a cracked cathedral nave, (echoing with whispers:1.2), empty pews, (shattered altar:1.1)"
+    - "a cracked cathedral nave, translucent faces emerging from the walls, empty pews, (shattered altar:1.1)"
     - "a haunted manor dining hall, (set for absent guests:1.2), dusty, (cobwebs:1.1), decaying food"
     - "a dark forest trail, (ghostly lights:1.2) between trees, eerie, (twisted roots:1.1)"
     - "an abandoned church, surrounded by (dying grass:1.1), (broken cross:1.1), foreboding"
     - "an ancient tomb entrance, covered in (crawling roots:1.2), (dark opening:1.1), foreboding"
     - "a moldy basement, (dripping pipes:1.1), (deep shadows:1.2), a single flickering lightbulb"
     - "a graveyard hill, beneath a (swollen blood moon:1.3), red light, (silhouetted trees:1.1)"
-    - "fog-soaked docks, (rotting boats:1.1), (still black water:1.2), silent, mysterious"
+    - "fog-soaked docks, (rotting boats:1.1), (still black water:1.2), empty, distant hooded silhouette"
     - "a quiet Victorian alley, lit by a (dim gas lamp:1.1), (long shadows:1.2), cobblestone"
     - "a somber marsh, (stagnant water:1.1), (thick ground fog:1.2), dead reeds, desolate"
     - "a cursed battleground, (swirling specters:1.3), (broken weapons:1.1), eerie glow"
     - "a winding tower staircase, descending into a (dark abyss:1.2), (cold stone steps:1.1)"
-    - "a ruined village, (overtaken by creeping vines:1.1), (collapsed roofs:1.1), haunting silence"
+    - "a ruined village, (overtaken by creeping vines:1.1), (collapsed roofs:1.1), empty streets under grey light"
     - "a coffin-lined crypt chamber, (eerie blue glow:1.2), stone walls, (dusty coffins:1.1)"
     - "a crumbling castle courtyard, under (heavy storm clouds:1.1), (rubble:1.1), wind howling"
     - "a forgotten monastery, deep in (snowy mountains:1.1), isolated, (dark windows:1.1), silent"
-    - "an old prison cellblock, (rusted bars:1.1), (shadowy figures:1.2), despair, dimly lit"
+    - "an old prison cellblock, (rusted bars:1.1), (shadowy figures:1.2) with bowed heads, dimly lit"
     - "an overgrown churchyard, (broken angel statues:1.2), (weeping statues:1.1), desolate"
     - "an abandoned ballroom, (torn curtains:1.1), (dusty chandelier:1.1), spectral dancers, eerie"
     - "a shadowed cavern, (dripping water:1.1), (faint glowing fungi:1.1), deep darkness"
-    - "a Victorian street market, (frozen in stillness:1.2), (abandoned stalls:1.1), eerie silence"
+    - "a Victorian street market, motionless hanging cloth and scattered wares, (abandoned stalls:1.1), empty street"
     - "an eerie mansion attic, filled with (dusty relics:1.1), (covered furniture:1.1), shaft of moonlight"
-    - "a forest clearing, filled with (glowing spectral mushrooms:1.2), (magical aura:1.1), twisted trees"
+    - "a forest clearing, filled with (glowing spectral mushrooms:1.2), violet light radiating through mist, twisted trees"
     - "a moonlit pier, (calm black water:1.1), (stillness:1.2), fog over water, serene but unsettling"
     - "a candlelit ritual chamber, (carved in stone:1.2), (glowing occult symbols:1.3) on the floor"
     - "a cracked mausoleum, surrounded by (dead trees:1.1), (imposing:1.2), faint light inside"
-    - "a gothic village square, (echoing in silence:1.2), (dry fountain:1.1), haunted, at midnight"
+    - "a gothic village square at midnight, empty cobblestones, (dry fountain:1.1), pale figures behind windows"
     - "a collapsed mine tunnel, filled with (damp fog:1.1), (darkness:1.2), creaking supports"
     - "ancient ruins, (swallowed by swamp:1.1), (moss-covered stones:1.1), eerie green mist"
     - "a dusty library reading hall, lit by (moonbeams:1.1), (books scattered:1.1), shadows"
     - "a windswept graveyard, on a cliff (overlooking the sea:1.1), (dramatic:1.2), crashing waves"
     - "a fog-filled catacomb corridor, (echoing steps:1.2), (walls of skulls:1.3), claustrophobic"
     - "a midnight cemetery, under (drifting clouds:1.1), (full moon:1.1), ominous"
-    - "a ruined chapel, (shattered altar:1.2), (tattered holy remnants:1.1), sense of loss"
+    - "a ruined chapel, (shattered altar:1.2), torn prayer banners, wilted flowers scattered across the floor"
     - "a cemetery gate, (rusted iron spikes:1.1), (imposing:1.2), foggy path beyond"
     - "a haunted wood, (hanging moss:1.1), dark, tangled, (path disappearing:1.2), glowing eyes"
     - "an abandoned theater, (torn velvet seats:1.1), (empty stage:1.1), spotlight on a dusty chair"
@@ -424,14 +424,14 @@ gkr_gothic:
     - "a marsh bridge, crossing (stagnant black water:1.1), (twisted wood:1.1), faint glow below"
     - "a forgotten cellar, filled with (broken crates:1.1), (ancient wine barrels:1.1), thick cobwebs"
     - "a forest cabin, in (deep shadow:1.1), (isolated:1.2), faint light in window, smoke from chimney"
-    - "a moonlit castle tower, (overlooking a valley:1.1), (high:1.1), lonely silhouette"
+    - "a moonlit castle tower, (overlooking a valley:1.1), (high:1.1), single silhouetted figure at the parapet"
     - "a collapsing lighthouse, on a (stormy coast:1.1), (flickering beacon:1.2), crashing waves"
     - "a cursed well, (pale stone:1.1), (dark water:1.1), something glowing within"
     - "an ancient bridge, leading to a (dark forest:1.1), (stone arc:1.1), river of fog below"
     - "a gothic mausoleum, glowing in (faint candlelight:1.2), marble, (angel statue:1.1), weeping"
     - "a rotting windmill, under a (cloudy sky:1.1), (broken blades:1.1), eerie creaking, desolate field"
     - "a foggy pier, (stretching to nowhere:1.2), endless, (silent:1.1), dark water"
-    - "a dusty chapel, (cracked stained windows:1.1), (shafts of light:1.1), dust particles, holy dread"
+    - "a dusty chapel, (cracked stained windows:1.1), (shafts of light:1.1), dust particles, black stains spreading from the altar"
     - "a shadowy ravine, filled with (swirling mist:1.1), (deep:1.2), moonlight barely reaches"
     - "an old infirmary room, (rusted medical tools:1.2), (stained medical bed:1.1), decay"
     - "a gothic manor garden, (overrun by dead vines:1.1), (cracked statues:1.1), desolate"
@@ -445,10 +445,10 @@ gkr_gothic:
     - "a chamber of ritual symbols, (carved into stone:1.2), (glowing with dark energy:1.3)"
     - "a marble graveyard path, lit by (pale lanterns:1.1), (clean:1.1), statues, unsettlingly pristine"
     - "an ancient gate, wrapped in (thorned vines:1.2), (locked:1.1), darkness beyond"
-    - "a forgotten cloister, (shrouded in fog:1.1), (stone arches:1.1), sense of dread"
-    - "a decayed mansion foyer, (grand staircase:1.1), (ruined:1.1), chandelier crashed"
-    - "a rain-soaked cliff road, under (lightning flashes:1.1), (dangerous:1.2), mudslide"
-    - "fog-laden church ruins, (whispering eerily:1.3), (stone walls:1.1), no roof"
+    - "a forgotten cloister, (shrouded in fog:1.1), (stone arches:1.1), elongated shadows crossing the walkway"
+    - "a decayed mansion foyer, (grand staircase:1.1), collapsed plaster, chandelier crashed"
+    - "a rain-soaked cliff road beneath (lightning flashes:1.1), crumbling edge and active mudslide"
+    - "fog-laden roofless church ruins, translucent mouths appearing in the mist, (stone walls:1.1)"
     - "a dark shoreline, (wrecked boats:1.1), (black sand:1.1), eerie calm sea"
     - "a black forest path, lit by (pale moon shafts:1.1), (narrow:1.1), claustrophobic"
     - "a cemetery crypt, surrounded by (swirling dead leaves:1.1), (autumn:1.1), wind"
@@ -463,7 +463,7 @@ gkr_gothic:
     - "a pale ghoul, (distended jaw:1.2), (claws like broken glass:1.2), hunched over a corpse, feasting"
     - "a massive (wolf fiend:1.2), (exposed ribs:1.2), glowing ember eyes, snarling, matted fur"
     - "a skeletal knight, animated by (swirling black smoke:1.3), dark magic, (rusted armor:1.1), glowing sword"
-    - "a (blood-soaked revenant:1.2), (hooks embedded in its spine:1.3), dragging chains, eyes glowing with vengeance"
+    - "a (blood-soaked revenant:1.2), (hooks embedded in its spine:1.3), dragging chains, red eyes narrowed and teeth bared"
     - "a (three-eyed bat monstrosity:1.3), leathery wings, (swooping through mist:1.1), glowing red eyes"
     - "a (flesh-stitched abomination:1.3), covered in (mismatched limbs:1.3), lurching, grotesque"
     - "a (gargoyle titan:1.2), (awakening:1.1), stone fragments falling, glowing red eyes, massive, on a cathedral"
@@ -505,7 +505,7 @@ gkr_gothic:
     - "a (multi-limbed corpse spider:1.3), made from (tangled bodies:1.3), horrific, skittering"
     - "a (massive knight wraith:1.2), (armor corroded by centuries:1.2), giant, spectral"
     - "a (moss-covered tomb giant:1.2), (rising from the earth:1.2), stone, glowing sigils"
-    - "an (unholy priest creature:1.2), whispering curses, (multiple screaming mouths:1.3), tattered robes"
+    - "a priest creature in inverted vestments, black vapor spilling from its mouth, (multiple screaming mouths:1.3), tattered robes"
     - "a (phantom horse:1.2), (ribs exposed:1.2), eyes burning white, skeletal, galloping"
     - "a (cracked porcelain doll monster:1.2), (crawling like a spider:1.3), eerie, glowing eyes"
     - "a (void gargler:1.2), (expanding maw:1.3), black hole, sucking in light"
@@ -521,30 +521,30 @@ gkr_gothic:
     - "a (ribcage crawler:1.2), (dragging itself with bony arms:1.2), skeletal, no legs"
     - "an (ashen widow monster:1.2), dripping soot, (tears of ink:1.3), sad, burning dress"
     - "a (dead-eyed butcher spirit:1.2), wearing a (cracked porcelain mask:1.3), cleaver, blood-stained"
-    - "a (wordless phantom:1.2), swirling with (ink-like runes:1.3), magical, no clear form"
+    - "a faceless phantom swirling with (ink-like runes:1.3), translucent body with no clear outline"
     - "a (shadow stag:1.2), (silhouette evaporates into smoke:1.3), ethereal, glowing antlers"
     - "a (massive parasite:1.2), (emerging from a ruptured corpse:1.3), disgusting, many legs"
     - "a (graveyard titan:1.2), composed of (layered bones and gravestones:1.3), huge, slow"
     - "a (nightmare maiden:1.2), (hair forming writhing tendrils:1.3), medusa-like, glowing eyes"
-    - "a (blood-rune golem:1.2), (pulsating lines:1.3) etched across its body, magical, brute"
-    - "an (unhallowed monk:1.2), (empty eye sockets:1.2), arms bound in chains, silent"
+    - "a (blood-rune golem:1.2), (pulsating crimson lines:1.3) etched across its massive stone body"
+    - "a monk in stained inverted vestments, (empty eye sockets:1.2), arms bound in chains, mouth sewn shut"
     - "a (crawling head demon:1.2), (dragging a distorted body:1.3), horrific, screaming"
     - "a (faded soldier ghost:1.1), (bullet holes glowing faint blue:1.3), tattered uniform, holding rifle"
     - "a (blighted wolf:1.2), (fungal antlers:1.2) growing from skull, diseased, glowing green"
-    - "a (twisted angel:1.2), (tattered black wings:1.2), broken halo, fallen, sorrowful"
+    - "a contorted angel, (tattered black wings:1.2), broken halo on the ground, tear-streaked face"
     - "an (ash wraith:1.2), (drifting from a burned pyre:1.2), cinders, glowing embers"
     - "a (crypt-fiend:1.2), (gargling black tar:1.3), dark, long claws, crouched"
     - "a (rotted minotaur creature:1.2), (exposed spine:1.2), labyrinth, raging, broken horns"
-    - "a (haunted marionette:1.2), (jerked by unnatural motion:1.3), puppet, creepy smile"
+    - "a cracked marionette, limbs bent at sharp angles by taut strings, painted smile"
     - "a (shadow-stitched demon:1.2), held together by (threads of darkness:1.3), patched, unraveling"
     - "a (bone reaper:1.2), (scythe made from fused spines:1.3), death, hooded, skeletal"
-    - "a (skeletal vulture:1.1), perched atop a (broken tomb:1.1), waiting, glowing red eyes"
+    - "a (skeletal vulture:1.1), perched motionless atop a (broken tomb:1.1), glowing red eyes"
     - "a (sorrow wraith:1.2), muffled in (torn burial robes:1.2), weeping, spectral"
     - "a (deep crypt worm:1.2), (glowing lantern-like eyes:1.2), burrowing, massive"
     - "a (grave witch monster:1.2), stirring a (cauldron of ghosts:1.3), spectral faces, cackling"
     - "a (nightmare rider:1.2), atop a (skeletal steed:1.2), dark flaming armor, glowing sword"
     - "a (cadaver giant:1.2), shedding (clouds of black flies:1.3), swarm, rotting"
-    - "a (dark altar horror:1.2), wrapped in (cursed talismans:1.2), fused to a stone altar"
+    - "a black-fleshed altar horror, wrapped in (glowing talismans:1.2), fused to a stone altar"
     - "a (castle gargoyle:1.1), (molten cracks glowing red:1.3), awakening, stone skin"
     - "a (blind corpse giant:1.2), swinging a (massive stone column:1.2), raging, empty eye sockets"
     - "a (heartless ghoul:1.2), (gaping chest cavity:1.3), empty, hunched, drooling"

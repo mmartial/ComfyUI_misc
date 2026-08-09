@@ -55,24 +55,24 @@ gkr_scifi:
     - (energy being:1.3), pure light, humanoid shape, no face
     - (synthetic android:1.3), perfectly smooth skin, visible seams
     - (bio mechanical hybrid:1.3), flesh and metal, glowing implants
-    - (uplifted animal species:1.2), anthropomorphic, intelligent eyes
+    - (anthropomorphic animal:1.2), upright posture, dexterous hands, fitted utility clothing
     - (hive mind collective avatar:1.3), blank expression, glowing symbol
 
   age:
     - young adult, 20s, clear skin
-    - (seasoned veteran:1.2), weathered face, old scars
+    - weathered face, old scars, gray at the temples
     - middle aged, 40s, slight wrinkles
-    - (ancient being:1.3), thousands of years old, wise eyes
-    - (ageless synthetic form:1.2), flawless skin, unreadable expression
+    - (deeply lined face:1.3), translucent age-spotted skin, clouded luminous eyes, stooped posture
+    - (flawless synthetic face:1.2), seamless skin, fixed glassy eyes
 
   build:
     - slender build, agile, thin
     - athletic build, defined muscles, fit
-    - (powerful build:1.2), heavy muscles, large
+    - (large heavy-muscled build:1.2), broad shoulders, thick arms
     - compact and agile build, acrobatic
-    - (tall and imposing:1.2), intimidating presence
-    - (enhanced muscular frame:1.3), cybernetic muscles, very strong
-    - lightly built researcher, slender, non-athletic
+    - (tall broad-shouldered frame:1.2), looming silhouette
+    - (enhanced muscular frame:1.3), exposed braided cybernetic muscle fibers
+    - lightly built frame, narrow shoulders, slender arms
 
   tone:
     - pale skin, fair complexion
@@ -91,7 +91,7 @@ gkr_scifi:
     - (sharp angular features:1.2), high cheekbones, defined jawline
     - soft rounded features, youthful face
     - (scarred veteran face:1.3), old scar, weathered skin
-    - (calm symmetrical features:1.2), faint serene half-smile, peaceful
+    - (symmetrical features:1.2), relaxed brow, faint half-smile
     - (synthetic smooth face:1.3), android face, expressionless
     - (elongated symmetrical alien features:1.2), wide-set eyes, faint iridescent sheen
     - face partly covered by (cybernetic implants:1.3), glowing eye
@@ -143,17 +143,17 @@ gkr_scifi:
     - (insectoid compound eyes:1.3), multifaceted, bug eyes
 
   expression:
-    - (calm confident expression:1.1), slight smile
+    - (steady direct gaze:1.1), slight smile, raised chin
     - (fierce battle ready glare:1.3), shouting
-    - (thoughtful strategic gaze:1.1), eyes scanning as if planning
+    - (narrowed scanning gaze:1.1), eyes turned toward a projected tactical map
     - (curious look:1.1), wide eyes
-    - (weary but determined stare:1.2), tired eyes
+    - (tired red-rimmed eyes:1.2), clenched jaw, fixed forward stare
     - (sly smirk:1.2), mischievous glint in the eyes
-    - (serene meditative focus:1.2), eyes closed
+    - (eyes closed:1.2), relaxed face, fingertips touching
     - (intense battle cry:1.3), open mouth
     - (fighting stance with gritted teeth:1.2)
-    - (composed diplomatic demeanor:1.1), calm face
-    - (unreadable synthetic visage:1.3), android face
+    - (neutral face:1.1), hands open above a conference table
+    - (motionless synthetic face:1.3), fixed glassy eyes, closed mouth
 
 # ---------------------------------------------------------
 # CLOTHING
@@ -193,8 +193,8 @@ gkr_scifi:
     - (plasma pistol:1.2), glowing blue, sidearm
     - (energy rifle:1.2), sleek design, glowing barrel
     - (compact blaster:1.2), easily hidden
-    - (heavy particle cannon:1.3), requires two hands
-    - (ion carbine:1.2), medium range
+    - (heavy particle cannon:1.3), braced in both hands, oversized glowing chamber
+    - (ion carbine:1.2), short barrel, blue electrical arcs around the muzzle
     - (laser sword:1.3), glowing blade
     - (collapsible staff weapon:1.2), high-tech
     - (wrist mounted energy blades:1.3), glowing, retractable
@@ -204,13 +204,13 @@ gkr_scifi:
     - (plasma carbine:1.2), compact rifle
     - (plasma shotgun:1.3), wide muzzle, close range
     - (energy sword:1.3), shimmering blade, glowing hilt
-    - (vibro blade:1.2), high frequency hum
+    - (vibro blade:1.2), vibrating edge blurred by rapid motion
     - (energy axe:1.3), glowing axe head
     - (railgun:1.3), magnetic accelerator, long barrel
     - (gauss rifle:1.3), coilgun
     - (fusion cutter:1.2), welding torch
     - (plasma blaster:1.2), glowing, hand cannon
-    - (psycho disruptor:1.3), psionic weapon, glowing crystal
+    - (crystal-tipped disruptor:1.3), concentric violet waves radiating from the glowing crystal
     - (laser gun built into the forearm:1.3), cybernetic arm
     - (laser rifle built into the forearm:1.3), cybernetic weapon
     - (plasma rifle built into the armor:1.3), integrated weapon system
@@ -226,8 +226,8 @@ gkr_scifi:
   offhand:
     - (personal shield emitter:1.3), glowing bubble shield
     - data tablet with a glowing screen
-    - (relic artifact:1.2), ancient, glowing
-    - scanner device analyzing readings
+    - (cracked metal artifact:1.2), eroded engraved surface, glowing seams
+    - handheld scanner with animated spectral graphs on its screen
     - rolled star chart scroll
     - (holo communicator:1.2), projecting a holographic call
     - containment capsule with a glowing specimen inside
@@ -237,10 +237,10 @@ gkr_scifi:
     - (locket with a holographic photo:1.2)
     - (alien crystal charm:1.2), glowing softly
     - (ring with shifting light:1.2), glowing gem
-    - patch from a lost fleet, worn fabric
-    - relic coin from an ancient empire, old gold
+    - faded fleet patch with a torn edge, worn fabric
+    - scratched old-gold coin stamped with a many-spired planet
     - (star map fragment:1.2), glowing lines, torn edges
-    - (star chart fragment:1.2), celestial data, ancient paper
+    - (star chart fragment:1.2), faded constellation lines on yellowed torn paper
     - (holographic star map:1.3), glowing projection, held in hand
     - (holographic star chart:1.3), projected constellations
 
@@ -249,15 +249,15 @@ gkr_scifi:
 # ---------------------------------------------------------
 
   faction:
-    - rebel alliance, (starbird insignia:1.1)
-    - imperial navy, angular warship design
-    - corporate security force, (sleek and modern:1.1)
-    - independent smuggler guild, (patchwork ship:1.1)
-    - explorer coalition, (science vessel:1.1)
-    - temple of star monks, (ornate ship:1.1)
-    - merchant consortium, (large freighter:1.1)
-    - pirate flotilla, (ragtag fleet:1.1)
-    - machine intelligence network, (geometric ship:1.1)
+    - weathered orange-and-gray uniform, (starbird shoulder insignia:1.1)
+    - severe black naval uniform, silver rank bars, angular red crest
+    - tailored graphite security uniform, polished corporate badge, mirrored visor
+    - patched spacer jacket, mismatched guild pins, striped neck scarf
+    - pale blue expedition uniform, constellation sleeve patch, scanner harness
+    - layered ivory robes, radiating-star embroidery, metal prayer beads
+    - burgundy trade coat, gold ledger-chain, cargo-guild lapel pin
+    - ragged dark coat, mismatched armor plates, skull-and-comet patch
+    - seamless white synthetic shell, geometric black markings, pulsing node lights
 
   ship_class:
     - (nimble fighter craft:1.3), small, fast
@@ -268,7 +268,7 @@ gkr_scifi:
     - (advanced research vessel:1.2), sensor dishes, clean design
     - (stealth reconnaissance ship:1.3), black hull, angular
     - (massive battleship:1.3), huge guns
-    - (ancient derelict starship:1.3), damaged hull, drifting
+    - (corroded derelict starship:1.3), breached hull, drifting wreckage
     - (ring shaped generation ship:1.3), rotating, city inside
 
   ship_detail:
@@ -278,7 +278,7 @@ gkr_scifi:
     - (exposed mechanical piping:1.2), greebles, industrial
     - (sleek mirrored hull:1.3), chrome finish
     - (patchwork repaired panels:1.2), worn look, junk ship
-    - (ritual markings on hull:1.2), glowing symbols, ancient
+    - (repeating luminous hull markings:1.2), concentric symbols etched into weathered plating
     - corporate logos and warning symbols
 
 # ---------------------------------------------------------
@@ -299,23 +299,33 @@ gkr_scifi:
     - (asteroid mining field:1.2), floating rocks, mining ships
     - (derelict hulks in debris field:1.3), broken ships, space junk
 
+  ship_environment:
+    - (blue-and-violet nebula clouds:1.3), dense starfield, distant planets
+    - (cratered moon horizon:1.2), black sky, sharp sunlight
+    - (storm-striped gas giant:1.3), glowing auroras, thin planetary rings
+    - (dense asteroid field:1.2), tumbling rocks, scattered metallic debris
+    - (orbital city exterior:1.2), docking towers, streams of shuttle lights
+    - (fractured ringworld arc:1.3), sunlit inner surface spanning the horizon
+    - (icy comet tail:1.2), glittering particles streaming across deep space
+    - (red desert planet:1.2), twin suns cresting the curved horizon
+
   interior_environment:
     - (white sterile research lab:1.2), bright lights, sci-fi equipment
     - (dimly lit cargo hold:1.2), crates, shadows
-    - (meditation chamber:1.2), incense smoke, calm
+    - (circular cushion chamber:1.2), incense smoke, low amber lamps
     - cramped crew quarters, bunk beds, personal items
     - (neon lit cantina:1.2), alien bar, crowded
     - (high security data vault:1.2), glowing servers, lasers
-    - (alien ruin interior:1.3), ancient stone, glowing glyphs
+    - (alien ruin interior:1.3), eroded stone, glowing glyphs
 
   mood:
-    - heroic and triumphant, (epic pose:1.1)
-    - tense and suspenseful, (dark shadows:1.1)
-    - mysterious and otherworldly, (glowing fog:1.1)
-    - hopeful and exploratory, (looking to horizon:1.1)
-    - grim and war torn, (battle damage:1.1)
-    - lonely deep space isolation, (single ship:1.1)
-    - diplomatic but wary, (tense meeting:1.1)
+    - (upright victory pose:1.1), raised chin, bright gold backlight
+    - (rigid guarded posture:1.1), deep shadows, tightly framed composition
+    - (glowing fog:1.1), obscured silhouettes, violet-blue palette
+    - (gaze lifted toward a bright horizon:1.1), open composition, warm dawn colors
+    - (scorched battle damage:1.1), drifting smoke, desaturated gray-red palette
+    - (single small silhouette against a vast starfield:1.1), wide negative space
+    - (figures seated across a long table:1.1), guarded side-glances, hands held still
 
   lighting:
     - cold ship interior light, fluorescent
@@ -329,19 +339,19 @@ gkr_scifi:
   camera:
     - portrait waist up, character focus
     - (close up dramatic angle:1.2), intense face
-    - (low angle heroic shot:1.3), looking up
-    - high angle overview, looking down
-    - (wide cinematic shot:1.2), epic landscape
+    - (low-angle shot:1.3), camera looking upward, enlarged foreground silhouette
+    - high-angle overview, camera looking downward
+    - (wide cinematic shot:1.2), monumental landscape, tiny foreground figure
     - over the shoulder view, point of view
     - three quarter character view, dynamic pose
 
   style:
-    - cinematic science fiction art, (highly detailed:1.2)
-    - detailed concept art style, (digital painting:1.2)
-    - retro pulp space opera style, 1950s, vibrant colors
-    - sleek modern sci fi style, clean lines, minimalist
-    - comic book space opera style, bold lines, dynamic
-    - painterly galactic epic style, visible brushstrokes, grand scale
+    - cinematic widescreen rendering, (highly detailed surfaces:1.2), teal-orange color grade
+    - (digital concept painting:1.2), crisp silhouette design, textured brushwork
+    - 1950s pulp illustration, saturated primary colors, halftone print texture, painted highlights
+    - clean minimalist rendering, sleek geometric forms, white surfaces, cool blue accents
+    - bold ink contours, flat saturated colors, dense speed lines, tilted action composition
+    - broad visible brushstrokes, luminous star colors, tiny figures against monumental scale
 
   fx_magic:
     - (swirling energy halo:1.3), glowing aura
@@ -362,10 +372,11 @@ gkr_scifi:
 # ---------------------------------------------------------
 
   hero_combo:
-    - "__gkr_scifi/archetype__, __gkr_scifi/species__, __gkr_scifi/age__, __gkr_scifi/build__, __gkr_scifi/tone__, __gkr_scifi/face_style__, __gkr_scifi/hair__, __gkr_scifi/hair_color__, __gkr_scifi/eyes__, __gkr_scifi/expression__, __gkr_scifi/clothing__, __gkr_scifi/armor__, __gkr_scifi/gear__, __gkr_scifi/weapons__, __gkr_scifi/offhand__, __gkr_scifi/trinkets__, __gkr_scifi/faction__, __gkr_scifi/environment__, __gkr_scifi/mood__, __gkr_scifi/lighting__, __gkr_scifi/camera__, __gkr_scifi/style__, __gkr_scifi/fx_magic__, __gkr_scifi/fx_environment__"
+    - "__gkr_scifi/archetype__, __gkr_scifi/species__, __gkr_scifi/age__, __gkr_scifi/build__, __gkr_scifi/tone__, __gkr_scifi/face_style__, __gkr_scifi/hair__, __gkr_scifi/hair_color__, __gkr_scifi/eyes__, __gkr_scifi/expression__, __gkr_scifi/clothing__, __gkr_scifi/gear__, __gkr_scifi/weapons__, __gkr_scifi/offhand__, __gkr_scifi/trinkets__, __gkr_scifi/faction__, __gkr_scifi/environment__, __gkr_scifi/mood__, __gkr_scifi/lighting__, __gkr_scifi/camera__, __gkr_scifi/style__, __gkr_scifi/fx_magic__, __gkr_scifi/fx_environment__"
+    - "__gkr_scifi/archetype__, __gkr_scifi/species__, __gkr_scifi/age__, __gkr_scifi/build__, __gkr_scifi/tone__, __gkr_scifi/face_style__, __gkr_scifi/hair__, __gkr_scifi/hair_color__, __gkr_scifi/eyes__, __gkr_scifi/expression__, __gkr_scifi/armor__, __gkr_scifi/gear__, __gkr_scifi/weapons__, __gkr_scifi/offhand__, __gkr_scifi/trinkets__, __gkr_scifi/faction__, __gkr_scifi/environment__, __gkr_scifi/mood__, __gkr_scifi/lighting__, __gkr_scifi/camera__, __gkr_scifi/style__, __gkr_scifi/fx_magic__, __gkr_scifi/fx_environment__"
 
   ship_combo:
-    - "__gkr_scifi/ship_class__, __gkr_scifi/ship_detail__, near __gkr_scifi/environment__, __gkr_scifi/mood__, __gkr_scifi/lighting__, wide cinematic shot, cinematic science fiction art, __gkr_scifi/fx_environment__"
+    - "__gkr_scifi/ship_class__, __gkr_scifi/ship_detail__, above __gkr_scifi/ship_environment__, __gkr_scifi/mood__, __gkr_scifi/lighting__, __gkr_scifi/camera__, __gkr_scifi/style__, __gkr_scifi/fx_environment__"
 
   scene_combo:
     - "__gkr_scifi/environment__, __gkr_scifi/mood__, __gkr_scifi/lighting__, __gkr_scifi/camera__, __gkr_scifi/style__, __gkr_scifi/fx_environment__"
@@ -389,7 +400,8 @@ gkr_scifi:
     - "__gkr_scifi/spotlight_backgrounds__"
 
   random_character:
-    - "__gkr_scifi/archetype__, __gkr_scifi/species__, __gkr_scifi/age__, __gkr_scifi/build__, __gkr_scifi/tone__, __gkr_scifi/face_style__, __gkr_scifi/hair__, __gkr_scifi/hair_color__, __gkr_scifi/eyes__, __gkr_scifi/expression__, __gkr_scifi/clothing__, __gkr_scifi/armor__, __gkr_scifi/gear__, __gkr_scifi/weapons__, __gkr_scifi/offhand__, __gkr_scifi/trinkets__, __gkr_scifi/faction__, __gkr_scifi/mood__, __gkr_scifi/lighting__, __gkr_scifi/camera__, __gkr_scifi/style__"
+    - "__gkr_scifi/archetype__, __gkr_scifi/species__, __gkr_scifi/age__, __gkr_scifi/build__, __gkr_scifi/tone__, __gkr_scifi/face_style__, __gkr_scifi/hair__, __gkr_scifi/hair_color__, __gkr_scifi/eyes__, __gkr_scifi/expression__, __gkr_scifi/clothing__, __gkr_scifi/gear__, __gkr_scifi/weapons__, __gkr_scifi/offhand__, __gkr_scifi/trinkets__, __gkr_scifi/faction__, __gkr_scifi/mood__, __gkr_scifi/lighting__, __gkr_scifi/camera__, __gkr_scifi/style__"
+    - "__gkr_scifi/archetype__, __gkr_scifi/species__, __gkr_scifi/age__, __gkr_scifi/build__, __gkr_scifi/tone__, __gkr_scifi/face_style__, __gkr_scifi/hair__, __gkr_scifi/hair_color__, __gkr_scifi/eyes__, __gkr_scifi/expression__, __gkr_scifi/armor__, __gkr_scifi/gear__, __gkr_scifi/weapons__, __gkr_scifi/offhand__, __gkr_scifi/trinkets__, __gkr_scifi/faction__, __gkr_scifi/mood__, __gkr_scifi/lighting__, __gkr_scifi/camera__, __gkr_scifi/style__"
 
   random_background:
     - "__gkr_scifi/environment__, __gkr_scifi/mood__, __gkr_scifi/lighting__, __gkr_scifi/camera__, __gkr_scifi/style__, __gkr_scifi/fx_environment__"
@@ -401,7 +413,7 @@ gkr_scifi:
   spotlight_hybrid_character:
     - "(poised battle-ready stance:1.3), __gkr_scifi/armor__, wielding a (glowing energy blade:1.2), __gkr_scifi/eyes__, __gkr_scifi/hair_color__, __gkr_scifi/camera__, __gkr_scifi/environment__"
     - "(alert combat stance:1.3), __gkr_scifi/armor__, (glowing implants across the arms:1.1), __gkr_scifi/weapons__, __gkr_scifi/expression__, __gkr_scifi/environment__"
-    - "(hovering meditative posture:1.3), __gkr_scifi/species__, (swirling aura of cosmic dust:1.1), __gkr_scifi/clothing__, __gkr_scifi/mood__, __gkr_scifi/fx_magic__"
+    - "(hovering cross-legged posture:1.3), __gkr_scifi/species__, (swirling aura of cosmic dust:1.1), __gkr_scifi/clothing__, __gkr_scifi/mood__, __gkr_scifi/fx_magic__"
     - "(sly smirk, hand resting near a hip holster:1.2), __gkr_scifi/species__, (worn leather jacket:1.1), __gkr_scifi/weapons__, __gkr_scifi/trinkets__, __gkr_scifi/interior_environment__"
     - "(gripping twin control sticks:1.2), inside a mech cockpit, __gkr_scifi/hair__, __gkr_scifi/eyes__, __gkr_scifi/expression__, (warm control panel glow:1.1)"
 
@@ -411,15 +423,15 @@ gkr_scifi:
 
   spotlight_characters:
     - (gleaming plate armor with a flowing cape:1.3), wielding a (glowing energy blade:1.2)
-    - (crystalline horns:1.2), eyes closed in trance, swirling aura of cosmic dust
-    - (worn flight jacket:1.2), plasma pistol holstered at the hip, (daring grin:1.1)
+    - (crystalline horns:1.2), eyes closed, head tilted back, swirling aura of cosmic dust
+    - (worn flight jacket:1.2), plasma pistol holstered at the hip, (wide crooked grin:1.1)
     - (reinforced cybernetic limbs:1.3), glowing blue visor
     - (ornate ceremonial armor:1.2), radiant star-shaped crest
     - (luminous glowing eyes:1.2), drifting above the ground, deeply lined face
     - (exo-gloves projecting holographic tools:1.2), sparks flying from a half-repaired device
     - (translucent flickering digital form:1.3), shifting glitch patterns across the body
-    - (rugged battle-worn armor:1.2), fist raised, burning resolve in the eyes
-    - (polished metal skin:1.2), hands folded, serene expression
+    - (rugged battle-worn armor:1.2), fist raised, brows lowered, eyes fixed forward
+    - (polished metal skin:1.2), hands folded, relaxed brow, faint smile
     - (dusty long coat:1.2), customized star blaster holstered at the hip
     - sand-scoured layered desert wraps, (glowing moisture mask:1.2)
     - (four arms:1.3), iridescent carapace, battle-ready crouch
@@ -429,7 +441,7 @@ gkr_scifi:
     - (glowing nanite veins pulsing beneath the skin:1.3), clenched fists
     - (robed figure wreathed in swirling violet nebula-mist:1.3), channeling dark energy tendrils from splayed fingers
     - (fractal patterned armor:1.3), radiating starlight, arms spread wide
-    - (neon streaked helmet:1.2), kinetic gauntlets, confident stance
+    - (neon streaked helmet:1.2), kinetic gauntlets, feet planted apart, raised chin
     - (hands twisting the fabric of spacetime:1.3), soft glowing spirals in the air
     - (chrome plated armor:1.3), plasma shield raised
     - (perched on a floating rock fragment:1.3), rifle raised, one eye closed aiming
@@ -477,7 +489,7 @@ gkr_scifi:
     - (reading spinning astral glyphs projected before the eyes:1.3)
     - (bending metal plates with gauntleted hands:1.3), sparks of magnetic force
     - (shaping liquid metal forms from outstretched palms:1.3)
-    - (radiating gentle cosmic glow:1.3), shield raised, calm resolve
+    - (radiating soft cosmic glow:1.3), shield raised, steady gaze, relaxed jaw
     - (ragged cloak:1.2), crackling energy saber raised, defiant stance
     - (translucent glowing panels across the body:1.2), neon ring accents
     - (cloak covered in shifting constellations:1.3), walking stick in hand
@@ -488,10 +500,10 @@ gkr_scifi:
     - (warping gravity around the hands:1.3), space visibly bending
     - (floating prayer beads orbiting the body:1.2), cross-legged meditation pose
     - (massive shield emitters mounted on the arms:1.3), wide protective stance
-    - (emp grenades on a bandolier:1.2), satchel of relics, cocky grin
+    - (EMP grenades on a bandolier:1.2), satchel of engraved metal fragments, lopsided grin
     - (splitting into flickering phase echoes:1.3), rifle raised
     - (bow of radiant particles drawn:1.3), arrow nocked
-    - (carrying an ancient astral codex:1.3), reading intently
+    - (carrying a cracked astral codex:1.3), eyes tracking luminous diagrams across its open pages
     - (shifting bioluminescent patterns across the skin:1.3), ornate crown
     - (four hovering sentry bots circling:1.3), remote control gauntlet
     - (burning cosmic sigils orbiting the hands:1.3)
@@ -500,7 +512,7 @@ gkr_scifi:
     - (projecting illusory doubles of itself:1.3), flickering grin
     - (clad in blazing light armor:1.3), radiant aura
     - (shimmering chitin blades extending from the forearms:1.3), dueling stance
-    - (adorned in sleek ceremonial tech:1.2), formal bearing
+    - (adorned in sleek ceremonial tech:1.2), upright posture, hands clasped at the waist
     - (cracked dimensional armor:1.3), fractured light leaking through the seams
     - (glowing cyber-eyepatch:1.3), tricorn-shaped helmet, hand on hip
     - (wrapped in drifting smoke tendrils:1.3), barely visible silhouette
@@ -512,14 +524,14 @@ gkr_scifi:
 
   spotlight_backgrounds:
     - (twin-sun desert planet:1.3), (towering dune ridges:1.1), shimmering heat haze
-    - (massive orbital ringworld:1.3), (spanning the horizon:1.2), epic scale
+    - (massive orbital ringworld:1.3), (spanning the entire horizon:1.2), tiny ships silhouetted against it
     - (neon-lit starport:1.3), (bustling with ships and travelers:1.1), (glowing signs:1.1)
     - (cosmic nebula:1.3), (swirling pink blue and violet gases:1.2)
     - (abandoned starship corridor:1.2), (flickering red emergency lights:1.3)
     - (alien jungle:1.3), (bioluminescent plants:1.3), (towering roots:1.1)
     - (sleek metallic bridge of star cruiser:1.2), (overlooking galaxy:1.2)
     - (moon-surface outpost:1.2), (under star-filled sky:1.2), domes
-    - (ancient alien temple:1.3), (carved into crystalline cliffs:1.3)
+    - (weather-eroded alien temple:1.3), (carved into crystalline cliffs:1.3)
     - (interstellar bazaar:1.2), (lit by bright neon and strange lanterns:1.2)
     - (glacial world:1.2), (broken ice spires:1.1), (cold auroras:1.2)
     - (derelict megastructure:1.3), (drifting in silent void:1.2), (massive scale:1.1)
@@ -535,9 +547,9 @@ gkr_scifi:
     - (orbital elevator base:1.3), (stretching into sky:1.3)
     - (red dust plains:1.2), (beneath rising twin moons:1.3)
     - (deep space wreck field:1.3), (broken starships:1.2), debris
-    - (ancient mega-city of an extinct alien civilization:1.3), (vast ruins:1.2)
+    - (vast abandoned alien mega-city:1.3), collapsed needle towers, sand-filled avenues
     - (cosmic river of drifting stardust:1.3), (cutting through void:1.2)
-    - (forgotten desert outpost:1.2), (half buried in dunes:1.2)
+    - (desert outpost with dark empty windows:1.2), (half buried in dunes:1.2)
     - (tropical alien coastline:1.2), (glowing coral:1.3)
     - (teleportation hub:1.2), (filled with dancing particles:1.3)
     - (star cruiser war room:1.2), (huge holographic map:1.3)
@@ -550,7 +562,7 @@ gkr_scifi:
     - (industrial shipyard:1.2), (giant suspended hulls:1.2)
     - (starfield horizon:1.2), (visible over rocky moon cliffs:1.2)
     - (astro-monastery:1.2), (under shimmering auroras:1.3)
-    - (ancient alien vault:1.3), (holographic engravings:1.3)
+    - (weathered alien vault:1.3), (holographic engravings:1.3)
     - (space station promenade:1.2), (filled with travelers:1.1)
     - (ringed planet:1.3), (rising behind fractured landscape:1.2)
     - (bio-engineered garden:1.2), (glowing with strange life:1.3)
@@ -564,7 +576,7 @@ gkr_scifi:
     - (crystal spire forest:1.3), (on distant world:1.1), (glowing:1.2)
     - (sunken ruins:1.2), (beneath shifting sand waves:1.2)
     - (derelict orbital ring:1.3), (fractured and drifting:1.2)
-    - (ancient star gate:1.3), (towering above desert floor:1.2), (glowing:1.1)
+    - (eroded stone star gate:1.3), (towering above desert floor:1.2), (glowing:1.1)
     - (luminous alien reef:1.3), (under turquoise sky:1.2)
     - (floating cargo platforms:1.2), (above gas giant:1.3)
     - (abandoned colony:1.2), (lit only by flickering neon signs:1.3)
@@ -575,7 +587,7 @@ gkr_scifi:
     - (holo-lit archive vault:1.2), (filled with glowing displays:1.2)
     - (cosmic archipelago:1.3), (floating asteroids:1.3)
     - (zero-G maintenance bay:1.2), (floating tools:1.2)
-    - (ancient alien throne hall:1.3), (carved of crystal:1.3)
+    - (dust-filled alien throne hall:1.3), cracked seats (carved of crystal:1.3)
     - (sprawling stellar battlefield:1.3), (littered with wreckage:1.3)
     - (lava-scarred planet:1.3), (erupting fissures:1.3)
     - (deep space temple:1.3), (hovering over swirling nebula:1.3)
@@ -590,7 +602,7 @@ gkr_scifi:
     - (prismatic canyon:1.3), (reflecting alien sunlight:1.3)
     - (dim asteroid bar:1.2), (glowing bottle displays:1.2)
     - (starship engine core corridor:1.2), (buzzing with energy:1.3)
-    - (ancient observatory:1.2), (carved into mountain peak:1.2)
+    - (weathered domed observatory:1.2), (carved into mountain peak:1.2)
     - (holographic battlefield simulation chamber:1.3), (glowing grid:1.2)
     - (giant metallic scrapyard:1.2), (floating in orbit:1.2)
     - (alien river delta:1.2), (glowing with turquoise water:1.3)
@@ -609,7 +621,7 @@ gkr_scifi:
     - (drone carrier:1.3), (swarming autonomous fighters:1.3)
     - (warp-shuttle:1.2), (tapered dart of light:1.3)
     - (sphere-core exploration craft:1.3), (surrounded by spinning rings:1.3)
-    - (ancient ark ship:1.3), (covered in moss-like metallic growth:1.3)
+    - (pitted ark ship:1.3), (covered in moss-like metallic growth:1.3)
     - (wingless anti-grav vessel:1.3), (hovering on shimmering field:1.3)
     - (light freighter:1.2), (patchwork plating:1.1), (cargo pods:1.1)
     - (diamond-shaped destroyer:1.3), (lined with glowing glyphs:1.3)
@@ -618,7 +630,7 @@ gkr_scifi:
     - (plasma-wing cruiser:1.3), (slicing through nebula clouds:1.2)
     - (bioengineered creature-ship:1.3), (translucent skin:1.3), (organic:1.2)
     - (monolithic dreadnought:1.3), (cathedral-like silhouette:1.3)
-    - (tri-engine atmospheric lander:1.2), (designed for desert planets:1.2)
+    - (tri-engine atmospheric lander:1.2), broad sand skids, dust filters over every intake
     - (living coral-inspired ship:1.3), (bioluminescent patterns:1.3)
     - (twin-hull attack craft:1.3), (connected by energy truss:1.2)
     - (nano-clad stealth corvette:1.3), (adaptive camo:1.3)
@@ -626,7 +638,7 @@ gkr_scifi:
     - (warp spear vessel:1.3), (needle of pure energy:1.3)
     - (gravity-bending skiff:1.3), (leaving waves in space-time:1.3)
     - (battle shuttle:1.2), (retractable armor plating:1.2)
-    - (ancient relic ship:1.3), (etched with forgotten star maps:1.3)
+    - (weathered relic ship:1.3), (etched with faded star maps:1.3)
     - (octagonal alien ship:1.3), (bristling with crystalline limbs:1.3)
     - (patrol cutter:1.2), (dual thrusters:1.1), (sensor arrays:1.1)
     - (holo-reflective racer ship:1.3), (shifting colors:1.3)
@@ -635,7 +647,7 @@ gkr_scifi:
     - (energy-core exploration ship:1.3), (glowing from within:1.3)
     - (hybrid mecha-ship:1.3), (transforming chassis:1.3)
     - (ringworld repair vessel:1.2), (modular drone wings:1.2)
-    - (blue-and-white humanitarian relief cruiser:1.2), (medical ship:1.1)
+    - (blue-and-white relief cruiser:1.2), illuminated medical crosses, rows of transparent treatment bays
     - (battle ram-ship:1.3), (reinforced prow:1.3)
     - (quantum-fold shuttle:1.3), (bending space around it:1.3)
     - (orbital drop ship:1.2), (glowing atmospheric shields:1.3)
@@ -643,19 +655,19 @@ gkr_scifi:
     - (stellar harvester ship:1.3), (extracting energy from stars:1.3)
     - (bio-mechanical warship:1.3), (wrapped in tendril armor:1.3)
     - (colony barge:1.2), (lush greenhouse domes:1.2)
-    - (giant worm-like tunneler craft:1.3), (designed for gas giants:1.3)
+    - (giant worm-like tunneler craft:1.3), pressure-braced hull rings, glowing intake scoops among gas-giant clouds
     - (spearhead fighter:1.3), (volatile plasma vents:1.2)
     - (interceptor with curved crescent wings:1.3)
     - (scout vessel disguised as drifting asteroid:1.3)
     - (hexagonal swarm ship:1.3), (splitting into micro-drones:1.3)
     - (supercarrier:1.3), (moving armored plates:1.2)
-    - (star yacht:1.2), (mirrored hull:1.2), (luxury:1.1)
+    - (star yacht:1.2), (mirrored hull:1.2), panoramic windows, gold trim
     - (ironclad cruiser:1.3), (industrial steam-tech aesthetic:1.3)
-    - (tri-spine explorer:1.3), (designed for black hole research:1.2)
+    - (tri-spine research vessel:1.3), shielded sensor dishes aimed toward a black hole
     - (energy glider:1.2), (drifting on stellar winds:1.2)
-    - (pilotless war craft:1.3), (glowing with AI symbols:1.3)
+    - (windowless war craft:1.3), geometric machine-code symbols glowing across the hull
     - (experimental warp ship:1.3), (leaving fractal trails:1.3)
-    - (ancient sovereign vessel:1.3), (shaped like stone monolith:1.3)
+    - (dark ceremonial vessel:1.3), (shaped like a carved stone monolith:1.3), gold crest at the prow
     - (spiral-shaped research vessel:1.3), (twisting hull:1.2)
     - (double-deck escort fighter:1.2), (carrying escape pods:1.1)
     - (ring-stabilized shuttle:1.2), (gliding through nebula:1.2)
@@ -697,96 +709,96 @@ gkr_scifi:
 
   spotlight_scenes:
     - (massive starship battle:1.3), (crimson nebula:1.3), (glowing lasers firing:1.2), explosions
-    - (astronaut:1.2), (stepping onto alien desert:1.2), (under triple suns:1.3), first contact
+    - (helmeted astronaut:1.2), (stepping onto alien desert:1.2), (under triple suns:1.3), unfamiliar towering silhouettes on the horizon
     - (city-sized space station:1.3), (hovering above stormy gas giant:1.3)
-    - (mecha warrior:1.3), (clashing with insectoid alien titan:1.3), (epic battle:1.1)
-    - (warp gate igniting:1.3), (as fleet prepares for jump:1.2), (glowing portal:1.1)
-    - (android awakening:1.2), (in glowing lab pod:1.3), (opening eyes:1.1)
-    - (first contact moment:1.3), (as alien vessel descends silently:1.3)
-    - (explorers:1.2), (walking through colossal ancient alien ruins:1.3)
-    - (battle inside orbital ring station:1.3), (breaking windows:1.2), (zero-g:1.1)
-    - (fighter pilot:1.2), (launching from carrier:1.2), (into meteor storm:1.3)
-    - (scientist:1.1), (studying floating crystal lifeform:1.3)
+    - (armored humanoid mecha:1.3), (clashing with insectoid alien titan:1.3), sparks and shattered armor filling the frame
+    - (warp gate igniting:1.3), ships aligned nose-first before it, (glowing portal:1.1)
+    - (android in a glowing lab pod:1.3), eyelids opening, indicator lights activating across its face
+    - helmeted figures shielding their eyes beneath (a descending alien vessel:1.3), dust billowing under blue landing lights
+    - figures in expedition suits, (walking through colossal eroded alien ruins:1.3)
+    - armored figures exchanging laser fire inside an orbital ring station, (shattered windows:1.2), bodies and debris floating in zero gravity
+    - figure in a sealed flight suit, (launching a fighter from a carrier:1.2), (into a meteor storm:1.3)
+    - figure in a white lab coat, scanning (a floating crystal lifeform:1.3) with a handheld spectrometer
     - (cyberpunk city skyline:1.2), (filled with neon and flying cars:1.3)
-    - (space marine:1.3), (firing plasma rifle:1.2), (in derelict ship corridor:1.2)
+    - (figure in bulky plated combat armor:1.3), (firing plasma rifle:1.2), (in derelict ship corridor:1.2)
     - (two fleets exchanging laser fire:1.3), (across starfield:1.1), (space battle:1.2)
-    - (terraforming machine:1.3), (shaping barren landscape:1.2)
+    - (towering terraforming machine:1.3), green vapor pouring from vents as wet soil and fresh shoots spread across cracked ground
     - (giant mech landing:1.3), (on city street:1.1), (sending shockwave:1.2)
-    - (crew entering hypersleep:1.2), (inside glowing chambers:1.3)
+    - figures in fitted sleep suits climbing into rows of glowing chambers, transparent lids closing
     - (alien jungle:1.3), (full of giant bioluminescent plants:1.3)
-    - (stargate opening:1.3), (in ancient temple:1.2), (on distant moon:1.1)
-    - (robot uprising:1.3), (erupting across industrial district:1.2)
+    - (stargate opening:1.3), (in an eroded stone temple:1.2), (on cratered moon:1.1)
+    - rows of factory robots advancing through an industrial district, red optical sensors lit, overturned vehicles burning
     - (spaceship crash-landing:1.3), (on icy planet:1.2), (debris trail:1.1)
-    - (scientists navigating floating debris:1.2), (in zero-gravity:1.2)
+    - figures in white lab coats and tether harnesses navigating floating debris in zero gravity
     - (orbital elevator:1.3), (stretching from city to stratosphere:1.3)
-    - (battle against swarm of small alien drones:1.3), (overwhelming numbers:1.2)
-    - (pilot:1.1), (gazing at black hole:1.3), (bending starlight:1.3)
-    - (explorers:1.2), (discovering planet-sized machine:1.3), (dyson sphere:1.2)
+    - armored figures firing upward at a dense sky-filling swarm of small alien drones
+    - helmeted figure in a cockpit, (gazing at black hole:1.3), (bending starlight:1.3)
+    - tiny figures in expedition suits before (a planet-sized machine:1.3), (Dyson sphere:1.2)
     - (shattered moon pieces:1.3), (drifting above cratered world:1.2)
-    - (android duelist wielding a curved energy blade:1.3), confronting rogue combat units
-    - (heavily armed space convoy:1.2), (crossing dangerous sector:1.2)
-    - (researchers:1.1), (entering glowing alien monolith:1.3)
+    - (android duelist wielding a curved energy blade:1.3), facing combat units with scratched insignia and red targeting eyes
+    - (heavily armed space convoy:1.2), crossing a dark debris field, weapons deployed, escort lights flashing
+    - figures in white field suits, (entering a glowing alien monolith:1.3), scanners raised
     - (mecha dueling:1.3), (inside volcanic canyon:1.3), (lava:1.1)
     - (giant starbeast:1.3), (attacking colony outpost:1.3)
-    - (scout team:1.2), (walking along derelict megaship hull:1.3)
+    - tethered figures in pressure suits, (walking along a derelict megaship hull:1.3), helmet lamps sweeping ahead
     - (robotic mining drones:1.2), (drilling asteroid surface:1.2)
     - (battle-mech:1.3), (firing charged beam:1.3), (across desert:1.1)
     - (cosmic storm:1.3), (swirling in violet lightning:1.3)
-    - (scientist:1.1), (floating in zero-gravity library:1.2), (of holographic books:1.3)
+    - figure in a white lab coat, (floating in a zero-gravity library:1.2), surrounded by (holographic books:1.3)
     - (fleet descending:1.2), (toward water world:1.2), (during storm:1.1)
-    - (alien queen:1.3), (emerging from bio-organic structure:1.3)
-    - (sci-fi market:1.2), (bustling with species from multiple worlds:1.3)
-    - (hacker:1.2), (accessing holographic interface:1.2), (in neon alley:1.1)
+    - (towering alien with a crown-like chitin crest:1.3), (emerging from bio-organic structure:1.3)
+    - (neon market beneath a transparent station dome:1.2), crowded with visibly varied scaled, feathered, synthetic, and humanoid shoppers
+    - hooded figure wearing data gloves, (typing across a holographic interface:1.2), (in neon alley:1.1)
     - (starship:1.1), (navigating through glowing energy tunnels:1.3)
-    - (lost ruin:1.3), (floating above black-hole horizon:1.3)
-    - (cyber assassin:1.3), (sprinting across hologram rooftops:1.3)
-    - (crew:1.1), (repairing hull breach:1.2), (sparks flying:1.2)
-    - (AI consciousness:1.3), (forming humanoid shape from code:1.3)
-    - (terraformers:1.2), (planting crystalline growth towers:1.3)
+    - (crumbling unoccupied ruin:1.3), (floating above black-hole horizon:1.3)
+    - black-clad figure with a cybernetic eye and drawn blade, (sprinting across hologram rooftops:1.3)
+    - figures in pressure suits welding plates over a hull breach, (sparks flying:1.2)
+    - (luminous code fragments:1.3), (forming a translucent humanoid shape:1.3)
+    - figures in sealed environmental suits, (planting crystalline growth towers:1.3) in evenly spaced rows
     - (fighter jets:1.2), (weaving through canyon of skyscrapers:1.3)
     - (spacewalk repair:1.2), (of massive solar array:1.2)
     - (alien forest:1.3), (floating rocks:1.3), (multiple moons:1.2)
     - (mech squadrons:1.3), (charging across snowy battlefield:1.3)
-    - (scientist:1.1), (controlling giant drone swarm:1.3)
+    - figure in a white lab coat, arms spread beneath (a giant synchronized drone swarm:1.3), control projections around both hands
     - (derelict orbital ship graveyard:1.3), (drifting silently:1.2)
-    - (first colony ship:1.2), (landing on glowing meadow planet:1.3)
-    - (council of alien races:1.2), (debating in ring-shaped hall:1.2)
-    - (rogue planet:1.3), (approaching binary star system:1.3)
+    - (colony ship with pristine white hull:1.2), (landing on glowing meadow planet:1.3), unopened habitat modules visible beneath it
+    - varied alien figures gesturing across illuminated desks in a ring-shaped hall
+    - (dark ice-covered planet without a visible star:1.3), (approaching a bright binary star system:1.3)
     - (giant holographic map:1.3), (unfolding in command room:1.2)
     - (armored figure wielding a glowing energy blade:1.3), facing a towering cosmic entity
     - (crew:1.1), (sprinting through collapsing research facility:1.3)
-    - (robot medic:1.2), (treating injured pilot:1.1), (under fire:1.1)
+    - (white robot with illuminated medical symbols:1.2), sealing a bleeding wound on a figure in a torn flight suit, laser streaks and sparks overhead
     - (starscraper tower:1.3), (reaching into aurora-filled sky:1.3)
     - (energy storm:1.3), (tearing apart fleet formation:1.3)
-    - (sentient nebula:1.3), (taking humanoid shape:1.3)
-    - (scientist:1.1), (decoding alien glyphs:1.3), (projected in air:1.2)
-    - (epic chase between starships:1.3), (inside asteroid canyon:1.3)
-    - (AI-controlled mech:1.3), (rampaging through neon district:1.3)
+    - (nebula gases:1.3), (curling into a colossal luminous humanoid shape:1.3)
+    - figure in a white lab coat, tracing (alien glyphs:1.3), (projected in air:1.2)
+    - starships banking at high speed, bright engine trails, (inside asteroid canyon:1.3)
+    - (windowless mech covered in machine-code symbols:1.3), (smashing through a neon district:1.3), red targeting sensors lit
     - (alien sea world:1.3), (floating jelly cities:1.3)
-    - (cosmonaut:1.2), (drifting where gravity fluctuates randomly:1.3)
+    - (cosmonaut in a white pressure suit:1.2), drifting among objects pulled in conflicting directions, curved gravity trails
     - (orbital laser satellite:1.3), (firing massive beam:1.3)
-    - (space monks:1.2), (meditating:1.1), (within glowing temple dome:1.2)
+    - robed figures seated cross-legged with eyes closed, (within glowing temple dome:1.2)
     - (battle on surface of Dyson sphere interior:1.3)
-    - (rescue team:1.2), (pulling survivor from crashed pod:1.2)
+    - figures in orange pressure suits with medical packs, (pulling a soot-covered figure from a crashed pod:1.2)
     - (huge space worm:1.3), (emerging from asteroid:1.3)
     - (android marching army:1.3), (under stormy red sky:1.2)
-    - (scientists:1.1), (exploring underground alien catacombs:1.3)
-    - (captain:1.1), (giving order on bridge:1.1), (as alarms blare:1.2)
+    - figures in white field suits, lamps and scanners raised, (inside underground alien catacombs:1.3)
+    - decorated officer on a bridge pointing toward the viewscreen, crew turning at their consoles, red alarm lights flashing
     - (neon hover-bike chase:1.3), (across elevated expressway:1.3)
-    - (fleet:1.1), (witnessing supernova explosion nearby:1.3)
+    - a fleet of dark ship silhouettes facing (a nearby supernova explosion:1.3), hulls washed in white-orange light
     - (giant mech:1.3), (blocking plasma blast:1.2), (with arm shield:1.1)
-    - (colonists:1.1), (building first outpost:1.1), (on icy moon:1.2)
-    - (alien oracle:1.3), (floating above pool of glowing liquid:1.3)
+    - figures in insulated pressure suits assembling pristine habitat modules, (on icy moon:1.2), cranes lifting unopened wall panels
+    - robed alien with luminous eyes and an elaborate headdress, (floating above pool of glowing liquid:1.3)
     - (ship crew:1.1), (dodging mines:1.2), (in dark nebula:1.2)
     - (robot dog:1.2), (scouting ahead:1.1), (with glowing sensors:1.2)
-    - (galactic arena:1.2), (where champions duel in gravity bubbles:1.3)
-    - (pilot:1.1), (drifting inside damaged cockpit:1.2), (with sparks flying:1.2)
-    - (scientist:1.1), (testing unstable warp crystal:1.3)
+    - (vast ringed arena:1.2), armored duelists tumbling inside glowing gravity bubbles
+    - figure in a torn flight suit, (drifting inside damaged cockpit:1.2), (with sparks flying:1.2)
+    - figure in a white lab coat behind a transparent shield, aiming instruments at (a warp crystal shedding jagged energy arcs:1.3)
     - (mecha:1.2), (launching from cliffside platform:1.2)
     - (female android:1.2), (walking alone:1.1), (through empty megacity:1.2)
     - (splitting space-rift:1.3), (swallowing nearby asteroids:1.3)
-    - (hero:1.1), (standing on cliff:1.1), (watching planet's rings rise:1.3)
-    - (fleet saluting:1.2), (as flagship launches into warp:1.3)
+    - solitary caped figure (standing on cliff:1.1), (watching planet's rings rise:1.3)
+    - rows of ships flashing synchronized running lights as a flagship stretches into a bright warp trail
     - (alien landscape:1.2), (with lakes of molten glass:1.3)
     - (starlight reflecting off ornate plated armor:1.3)
     - (massive quantum tower:1.3), (glowing at planet's core:1.3)

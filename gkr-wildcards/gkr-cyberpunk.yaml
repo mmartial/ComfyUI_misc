@@ -33,23 +33,23 @@ gkr_cyberpunk:
   race:
     - "human, expressive face, detailed skin"
     - "(android, constructed synthetic body:1.2), flawless skin, mechanical joints"
-    - "(synthetic hybrid:1.2), part human, part machine"
-    - "(augmented human:1.2), visible cybernetics, enhanced"
+    - "(synthetic hybrid:1.2), natural skin interrupted by chrome panels and mechanical joints"
+    - "(augmented human:1.2), visible implant ports and articulated cybernetic limbs"
     - "(heavily modded street cyborg:1.3), extensive chrome, robotic limbs"
     - "(fully mechanical robot:1.3), armored shell, glowing optics"
-    - "(gene edited human variant:1.2), unusual features, bioluminescent"
+    - "(gene-edited human:1.2), bioluminescent freckles, elongated pupils, subtly pointed ears"
 
   age:
-    - "young adult, rebellious, energetic"
-    - "adult, experienced, determined"
-    - "mature, veteran, scarred"
+    - "young adult, smooth features, tousled hair, spring-loaded stance"
+    - "adult, faint brow lines, squared shoulders, steady gaze"
+    - "mature adult, gray-streaked hair, weathered features, facial scars"
     - "(ageless synthetic form:1.2), perfect condition, unblemished"
 
   build:
-    - "slender build, agile, lightweight"
-    - "athletic build, muscular, fit"
-    - "powerful build, strong, imposing"
-    - "(enhanced muscular frame:1.2), cybernetic muscles, powerful"
+    - "slender build, narrow shoulders, long limbs"
+    - "athletic build, defined muscles, balanced stance"
+    - "broad powerful build, thick neck, wide shoulders"
+    - "(enhanced muscular frame:1.2), exposed synthetic muscle bundles, reinforced joints"
     - "tall imposing build, high-contrast lighting"
     - "compact agile build, dynamic pose"
     - "(lightweight cyber body:1.2), sleek, robotic"
@@ -110,14 +110,14 @@ gkr_cyberpunk:
     - "(dual tone cyber eyes:1.2), two colors, mismatched"
 
   expression:
-    - "(calm tactical focus:1.2), focused, intense gaze"
-    - "(determined grit:1.2), scowl, resolute"
+    - "(steady narrowed eyes:1.2), relaxed jaw, gaze fixed ahead"
+    - "(clenched jaw and knitted brows:1.2), unwavering forward gaze"
     - "(fierce combat expression:1.2), shouting, battle cry"
     - "unreadable synthetic calm, neutral, robotic"
     - "(rebellious smirk:1.2), confident, punk"
-    - "cold corporate stoicism, emotionless, professional"
+    - "level unblinking stare, pressed lips, rigid upright posture"
     - "(intense hacker concentration:1.2), focused on screen, glowing reflection"
-    - "(street hardened glare:1.2), tough, intimidating"
+    - "(hard sidelong glare:1.2), scarred brow, chin tilted forward"
 
 # ---------------------------------------------------------
 # ACTIONS / POSES (NEWLY ADDED)
@@ -292,7 +292,7 @@ gkr_cyberpunk:
     - "(neon entertainment district with nightclubs:1.2), bright signs"
     - "corporate financial sector, tall skyscrapers, clean"
     - "(industrial factory zone:1.2), smog, machinery"
-    - "(dense slum sprawl:1.2), poverty"
+    - "(dense slum sprawl:1.2), patched sheet-metal roofs, exposed wiring, overflowing bins"
     - "(underground hacker network hub:1.2), servers, wires"
     - "(red-light neon bazaar:1.2), crowds, glowing lanterns"
     - "abandoned shipping yard, cargo containers, desolate"
@@ -329,14 +329,14 @@ gkr_cyberpunk:
 # ---------------------------------------------------------
 
   mood:
-    - "(tense, dangerous atmosphere:1.2), shadows, high contrast"
-    - "cold corporate mood, sterile, blue tones"
-    - "(rebellious, chaotic energy:1.2), dynamic"
-    - "(mysterious, obscured atmosphere:1.2), noir"
-    - "(heroic, determined atmosphere:1.2), strong pose, epic"
-    - "(oppressive, grim atmosphere:1.2), dark, dystopian"
-    - "(chaotic, electric energy:1.2), motion blur, vibrant"
-    - "analytical calm mood, neutral, focused"
+    - "(deep shadows crossed by sharp warning-red light:1.2), figures glancing over their shoulders"
+    - "sterile blue-gray palette, rigid symmetry, empty polished surfaces"
+    - "(canted framing and clashing neon colors:1.2), torn posters whipping through the air"
+    - "(faces half-hidden by rain and shadow:1.2), noir contrast"
+    - "(upright silhouette with raised chin:1.2), bright rim light cutting through smoke"
+    - "(cramped framing beneath looming dark structures:1.2), desaturated palette"
+    - "(canted framing, vivid electric colors, streaked motion blur:1.2)"
+    - "balanced composition, neutral palette, steady gaze, uncluttered background"
     - "(noir atmosphere:1.2), shadows, rain"
 
   lighting:
@@ -361,14 +361,14 @@ gkr_cyberpunk:
     - "street-level perspective, ground view, immersive"
 
   style:
-    - "(neon-drenched cyberpunk aesthetic:1.2), vibrant, cinematic"
-    - "(gritty dystopian realism:1.2), detailed, dark"
-    - "(cinematic sci-fi style:1.2), epic, film grain"
+    - "(saturated neon reflected across wet metal and glass:1.2), cinematic contrast"
+    - "(photoreal worn metal, stained concrete, and soot-dark shadows:1.2), fine surface detail"
+    - "(anamorphic highlights, widescreen composition, subtle film grain:1.2)"
     - "(synthwave neon aesthetic:1.2), retro-futuristic pinks and blues"
     - "(manga-style cyberpunk illustration:1.2), sharp lines"
-    - "high-tech corporate style, clean, minimalist"
-    - "(retro-futuristic vaporwave:1.2), 80s aesthetic, nostalgic"
-    - "(hyper-detailed concept art:1.2), intricate, masterpiece"
+    - "clean white panels, polished glass, strict geometric symmetry, sparse composition"
+    - "(pastel pink-and-cyan gradients, marble textures, wireframe sun:1.2), soft VHS grain"
+    - "(highly detailed digital concept painting:1.2), crisp edges, intricate surface textures"
 
 # ---------------------------------------------------------
 # EFFECTS
@@ -422,37 +422,37 @@ gkr_cyberpunk:
 # ---------------------------------------------------------
 
   samurai_combo:
-    - "(lacquered plate armor over a bodysuit:1.2), __gkr_cyberpunk/race__, __gkr_cyberpunk/age__, __gkr_cyberpunk/build__, __gkr_cyberpunk/tone__, __gkr_cyberpunk/hair__, __gkr_cyberpunk/hair_color__, (glowing neon eyes:1.2), armored trench coat, (mono-molecular katana sheathed at the hip:1.2), __gkr_cyberpunk/character_action__, scanner visor, (neon-flooded street level:1.2), (tense, dangerous atmosphere:1.1), (harsh neon rim light:1.2), (low-angle shot:1.1), (gritty dystopian realism:1.1), __gkr_cyberpunk/fx_magic__, __gkr_cyberpunk/fx_environment__"
+    - "(lacquered plate armor over a bodysuit:1.2), __gkr_cyberpunk/race__, __gkr_cyberpunk/age__, __gkr_cyberpunk/build__, __gkr_cyberpunk/tone__, __gkr_cyberpunk/hair__, __gkr_cyberpunk/hair_color__, (glowing neon eyes:1.2), armored trench coat, (drawing a mono-molecular katana from its hip sheath:1.2), scanner visor, (neon-flooded street level:1.2), deep shadows crossed by sharp warning-red light, (harsh neon rim light:1.2), (low-angle shot:1.1), photoreal worn metal and soot-dark shadows, __gkr_cyberpunk/fx_magic__, __gkr_cyberpunk/fx_environment__"
 
   netrunner_combo:
-    - "(cables trailing from a neck datajack port:1.2), __gkr_cyberpunk/race__, __gkr_cyberpunk/face_style__, slender build, neon dyed hair, (holographic projection eyes:1.2), (hacker hoodie with glowing circuit lines:1.2), neural hacking deck, data tablet, __gkr_cyberpunk/character_action__, (underground hacker den:1.2), (mysterious, obscured atmosphere:1.1), (holographic glow:1.2), (close-up macro detail:1.1), (neon-drenched cyberpunk aesthetic:1.2), glitch energy distortions"
+    - "(cables trailing from a neck datajack port:1.2), __gkr_cyberpunk/race__, __gkr_cyberpunk/face_style__, slender build, neon-dyed hair, (holographic projection eyes:1.2), (hacker hoodie with glowing circuit lines:1.2), neural hacking deck, data tablet, fingers typing across a holographic terminal, (underground hacker den:1.2), face half-hidden by rain-streaked shadow, (holographic glow:1.2), (close-up macro detail:1.1), saturated neon reflected across wet metal and glass, glitch energy distortions"
 
   corporate_agent_combo:
-    - "(severe black suit, arms crossed:1.2), sleek tailored silhouette, __gkr_cyberpunk/augmentation__, __gkr_cyberpunk/eyes__, plasma pistol, __gkr_cyberpunk/character_action__, __gkr_cyberpunk/expression__, corporate high-rise office, cold corporate mood, synthetic white light, portrait direct shot, (cinematic sci-fi style:1.2)"
+    - "(severe black suit, arms crossed:1.2), sleek tailored silhouette, __gkr_cyberpunk/augmentation__, __gkr_cyberpunk/eyes__, holstered plasma pistol, __gkr_cyberpunk/expression__, corporate high-rise office, rigid symmetry and polished glass, synthetic white light, portrait direct shot, anamorphic highlights, subtle film grain"
 
   android_combo:
-    - "(flawless synthetic skin with visible joint seams:1.2), placid unmoving expression, synthetic body, (mechanical optic lens with a camera iris:1.2), chrome bodysuit, __gkr_cyberpunk/offhand__, __gkr_cyberpunk/character_action__, (hologram-filled plaza:1.2), analytical calm mood, bioluminescent ambient light, (high-angle dramatic view:1.1), (hyper-detailed concept art:1.2)"
+    - "(flawless synthetic skin with visible joint seams:1.2), placid unmoving expression, synthetic body, (mechanical optic lens with a camera iris:1.2), chrome bodysuit, __gkr_cyberpunk/offhand__, standing motionless with palms open, (hologram-filled plaza:1.2), balanced composition and neutral palette, bioluminescent ambient light, (high-angle dramatic view:1.1), (highly detailed digital concept painting:1.2)"
 
   racer_combo:
-    - "(fitted racing leathers with sponsor patches:1.2), __gkr_cyberpunk/hair_color__, __gkr_cyberpunk/eyes__, one hand resting on a neon-lit bike frame, __gkr_cyberpunk/vehicle__, neon street circuit, chaotic electric mood, electric blue illumination, __gkr_cyberpunk/camera__, (synthwave neon aesthetic:1.2), __gkr_cyberpunk/vehicle_fx__"
+    - "(fitted racing leathers with sponsor patches:1.2), __gkr_cyberpunk/hair_color__, __gkr_cyberpunk/eyes__, leaning low over the controls of __gkr_cyberpunk/vehicle__, neon street circuit, canted framing and streaked motion blur, electric blue illumination, __gkr_cyberpunk/camera__, (synthwave neon aesthetic:1.2), __gkr_cyberpunk/vehicle_fx__"
 
   cyber_shaman_combo:
-    - "(floating holographic glyphs circling raised hands:1.2), glowing subdermal tattoos climbing the arms, braided street style hair, __gkr_cyberpunk/trinkets__, __gkr_cyberpunk/character_action__, neon city skyline, mystical digital atmosphere, holographic symbols, neon purple haze, portrait shot"
+    - "(floating holographic glyphs circling raised hands:1.2), glowing subdermal tattoos climbing the arms, braided street-style hair, __gkr_cyberpunk/trinkets__, eyes closed with palms raised, neon city skyline, concentric holographic symbols, neon purple haze, portrait shot"
 
   bounty_hunter_combo:
-    - "__gkr_cyberpunk/armor__, (rifle with a glowing digital scope reticle:1.2), (HUD targeting reticle overlaying one eye:1.2), __gkr_cyberpunk/character_action__, (storm-soaked neon bridge:1.1), (tense, dangerous atmosphere:1.1), neon reflections, (dynamic action shot:1.2)"
+    - "__gkr_cyberpunk/armor__, (rifle with a glowing digital scope reticle:1.2), (HUD targeting reticle overlaying one eye:1.2), crouched behind a bridge support while aiming down the rifle scope, (storm-soaked neon bridge:1.1), deep shadows crossed by sharp warning-red light, neon reflections, (diagonal action composition with motion blur:1.2)"
 
   drone_operator_combo:
-    - "(wrist-mounted control gauntlet with a holographic display:1.2), tactical vest, glowing cyber lenses, surveillance drone remote, __gkr_cyberpunk/character_action__, industrial factory zone, chaotic electric mood, flickering signage lighting, __gkr_cyberpunk/style__, (wide cinematic city view:1.2)"
+    - "(wrist-mounted control gauntlet with a holographic display:1.2), tactical vest, glowing cyber lenses, surveillance drone remote, both thumbs working the controls beneath circling drones, industrial factory zone, canted framing and vivid electric colors, flickering signage lighting, __gkr_cyberpunk/style__, (wide cinematic city view:1.2)"
 
   cyber_monster_combo:
-    - "__gkr_cyberpunk/cyber_monster__, __gkr_cyberpunk/cyber_monster_traits__, (robot assembly line:1.2), industrial, automated, (oppressive, grim atmosphere:1.1), electric arc lightning, (dynamic action shot:1.2)"
+    - "__gkr_cyberpunk/cyber_monster__, __gkr_cyberpunk/cyber_monster_traits__, (robot assembly line with moving articulated arms:1.2), stained steel machinery, cramped framing beneath looming dark structures, electric arc lightning, (diagonal action composition with motion blur:1.2)"
 
   vehicle_showcase_combo:
-    - "__gkr_cyberpunk/vehicle__, __gkr_cyberpunk/vehicle_style__, __gkr_cyberpunk/vehicle_fx__, (neon city skyline:1.2), heroic determined mood, (cinematic sci-fi style:1.2), (wide cinematic city view:1.2)"
+    - "__gkr_cyberpunk/vehicle__, __gkr_cyberpunk/vehicle_style__, __gkr_cyberpunk/vehicle_fx__, (neon city skyline:1.2), low-angle three-quarter view, bright rim light cutting through smoke, anamorphic highlights, subtle film grain, (wide cinematic city view:1.2)"
 
   scene_combo:
-    - "__gkr_cyberpunk/environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/mood__, (drifting holograms:1.2), wide cinematic city view, (neon-drenched cyberpunk aesthetic:1.2)"
+    - "__gkr_cyberpunk/environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/mood__, (drifting holograms:1.2), wide city view, saturated neon reflected across wet metal and glass"
 
   random:
     - "__gkr_cyberpunk/samurai_combo__"
@@ -477,16 +477,16 @@ gkr_cyberpunk:
 # ---------------------------------------------------------
 
   random_char_core:
-    - "__gkr_cyberpunk/archetype__, __gkr_cyberpunk/clothing__, __gkr_cyberpunk/eyes__, __gkr_cyberpunk/character_action__, cinematic portrait, (hyper-detailed concept art:1.1)"
+    - "__gkr_cyberpunk/archetype__, __gkr_cyberpunk/clothing__, __gkr_cyberpunk/eyes__, __gkr_cyberpunk/character_action__, waist-up cinematic portrait, (highly detailed digital concept painting:1.1)"
 
   random_char_augmented:
-    - "__gkr_cyberpunk/archetype__, heavily modded, __gkr_cyberpunk/augmentation__, __gkr_cyberpunk/weapons__, __gkr_cyberpunk/character_action__, dynamic pose, (hyper-detailed concept art:1.1)"
+    - "__gkr_cyberpunk/archetype__, multiple exposed implant ports and chrome limb panels, __gkr_cyberpunk/augmentation__, __gkr_cyberpunk/weapons__, __gkr_cyberpunk/character_action__, diagonal action composition, (highly detailed digital concept painting:1.1)"
 
   random_char_stealth:
-    - "__gkr_cyberpunk/archetype__, (stealth nano armor:1.2), __gkr_cyberpunk/weapons__, crouching, shadows, rainy alleyway, (hyper-detailed concept art:1.1)"
+    - "__gkr_cyberpunk/archetype__, (matte-black form-fitting armor with light-absorbing panels:1.2), __gkr_cyberpunk/weapons__, crouching behind cover, deep shadows, rainy alleyway, (highly detailed digital concept painting:1.1)"
 
   random_char_atmospheric:
-    - "__gkr_cyberpunk/archetype__, (neon-flooded street level:1.2), leaning against wall, __gkr_cyberpunk/mood__, cinematic, (hyper-detailed concept art:1.1)"
+    - "__gkr_cyberpunk/archetype__, (neon-flooded street level:1.2), leaning against a rain-streaked wall, __gkr_cyberpunk/mood__, anamorphic highlights, (highly detailed digital concept painting:1.1)"
 
   random_character: # This is now a list that CHOOSES one of the focused prompts above
     - "__gkr_cyberpunk/random_char_core__"
@@ -495,7 +495,9 @@ gkr_cyberpunk:
     - "__gkr_cyberpunk/random_char_atmospheric__"
 
   random_backgrounds:
-    - "__gkr_cyberpunk/city_district__, __gkr_cyberpunk/city_landmark__, __gkr_cyberpunk/city_interior__, __gkr_cyberpunk/environment__, __gkr_cyberpunk/vehicle__"
+    - "__gkr_cyberpunk/environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/mood__, __gkr_cyberpunk/fx_environment__"
+    - "__gkr_cyberpunk/city_district__, __gkr_cyberpunk/city_landmark__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/fx_environment__"
+    - "__gkr_cyberpunk/city_interior__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/mood__, __gkr_cyberpunk/camera__"
 
 # ---------------------------------------------------------
 # SPOTLIGHT

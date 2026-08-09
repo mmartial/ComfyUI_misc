@@ -23,7 +23,7 @@ gkr_videogame:
     - (glowing circuit-lines tracing bare skin:1.2), neon reflections, floating data readouts
     - tactical vest and pouches, weapon shouldered, scanning the horizon
     - bare-knuckle fighting stance, wraps on the forearms, sweat and muscle definition, sharp focused glare
-    - oversized round head and stubby limbs, saturated primary colors, big friendly grin
+    - oversized round head and stubby limbs, saturated primary colors, broad open-mouthed grin
     - simple rounded silhouette, minimal facial features, one hand raised mid-thought
     - wide frightened eyes, gripping a flashlight with both hands, plain civilian clothes
     - fitted racing suit with sponsor patches, helmet tucked under one arm, sharp focused eyes
@@ -31,54 +31,54 @@ gkr_videogame:
     - warm open smile, apron over simple clothes, arranging wares on a wooden stall
 
   genre:
-    - (fantasy role playing game:1.1), sweeping vista, ornate armor and weapons
+    - (fantasy role playing game:1.1), party portraits beside a sweeping vista, ornate armor and weapons, framed ability icons
     - (action adventure game:1.1), mid-leap dynamic pose, cinematic framing
     - (first person shooter game:1.1), weapon visible in frame, tactical gear
     - (third person shooter game:1.1), squad tactical gear, cover-based composition
     - (fighting game:1.1), versus screen split composition, exaggerated dynamic poses
     - (platformer game:1.1), tile-based world, bright saturated colors
     - (racing game:1.1), high speed motion blur, sleek car
-    - (horror survival game:1.1), dark, moody, tense atmosphere
+    - (horror survival game:1.1), narrow flashlight beam, deep shadows, nearly empty health bar
     - (tactical strategy game:1.1), army units arrayed across a map
     - (city builder game:1.1), detailed miniature city blocks
     - (farming sim game:1.1), cozy rustic homestead, rows of crops
     - (sci fi exploration game:1.1), spaceship interior, alien planet vista
-    - (metroidvania style game:1.1), interconnected 2D map, ability-gated corridors
-    - (roguelike dungeon game:1.1), procedurally-tiled dungeon, scattered treasure
+    - (metroidvania style game:1.1), interconnected 2D map overlay, branching corridors, colored locked gates
+    - (roguelike dungeon game:1.1), grid of mismatched dungeon rooms, scattered treasure, repeated doorways
 
   age:
-    - (young adventurer:1.1), determined expression
-    - (adult adventurer:1.1), experienced, confident stance
-    - (seasoned veteran:1.2), grizzled, scarred, wise
-    - (ageless mystical being:1.2), ethereal, glowing, ancient
+    - (late-teen face:1.1), smooth cheeks, wide alert eyes, firmly set mouth
+    - (adult face:1.1), faint brow lines, weathered cheeks, chin raised
+    - (older face:1.2), deep wrinkles, gray-streaked brows, old scars, narrowed eyes
+    - (smooth unlined face:1.2), softly glowing skin, luminous eyes without visible pupils
 
   build:
-    - (slender agile build:1.1), nimble, quick
-    - (athletic build:1.1), fit, strong, toned
-    - (muscular heavy build:1.2), powerful, large frame, strong
-    - (compact agile build:1.1), small, fast, acrobatic
-    - (tall and imposing build:1.2), towering, formidable
+    - (slender build:1.1), narrow shoulders, long limbs, lean muscle definition
+    - (athletic build:1.1), broad shoulders, defined arms, balanced stance
+    - (heavily muscular build:1.2), thick neck, broad torso, large arms
+    - (compact build:1.1), short frame, lean limbs, low spring-loaded stance
+    - (very tall build:1.2), head near the top of the frame, broad silhouette
 
   tone:
     - (light skin tone:1.1), fair skin, pale skin
     - (tan skin tone:1.1), sun-tanned skin, olive skin
     - (dark brown skin tone:1.1), deep brown skin
-    - (pale mystical skin:1.2), glowing skin, ethereal, fantasy
-    - (stone like skin:1.2), cracked skin, golem, magical
-    - (metallic synthetic skin:1.2), robotic skin, android, cyborg
+    - (pale luminous skin:1.2), soft light shining through translucent cheeks
+    - (stone-like skin:1.2), rough gray surface, deep cracks glowing at the edges
+    - (metallic synthetic skin:1.2), brushed metal plates, visible seams at the jaw and neck
 
 # ---------------------------------------------------------
 # APPEARANCE
 # ---------------------------------------------------------
 
   hair:
-    - (short practical hair:1.1), military cut, neat
-    - (spiky gravity-defying hair:1.2), anime style
+    - (short cropped hair:1.1), clean tapered sides, evenly trimmed top
+    - (spiky gravity-defying hair:1.2), sharp separated locks pointing upward
     - (long flowing hair:1.1), windswept, elegant
-    - (side shaved hairstyle:1.1), undercut, modern, edgy
-    - (braided battle hair:1.1), practical, viking style
-    - (messy adventurer hair:1.1), unkempt, rugged
-    - (ponytail:1.1), tied back, athletic
+    - (side-shaved hairstyle:1.1), close undercut beneath a long swept top
+    - (tightly braided hair:1.1), multiple scalp braids bound behind the head
+    - (messy layered hair:1.1), uneven windblown locks across the forehead
+    - (high ponytail:1.1), hair tied firmly back with loose strands in motion
 
   hair_color:
     - (black hair:1.1)
@@ -87,10 +87,10 @@ gkr_videogame:
     - (red hair:1.1), auburn hair
     - (silver hair:1.1), grey hair
     - (white hair:1.1)
-    - (blue hair:1.2), fantasy color, vibrant
-    - (green hair:1.2), neon green, fantasy color
-    - (purple hair:1.2), fantasy color, vibrant
-    - (neon colored hair:1.2), cyberpunk, glowing
+    - (vivid blue hair:1.2), saturated cobalt strands
+    - (neon green hair:1.2), fluorescent green edge glow
+    - (vivid purple hair:1.2), saturated violet strands
+    - (neon gradient hair:1.2), glowing cyan-to-magenta strands
 
   eyes:
     - (bright blue eyes:1.1), clear eyes
@@ -102,48 +102,48 @@ gkr_videogame:
     - (glowing red demonic eyes:1.3), slitted pupils
 
   expression:
-    - (focused combat expression:1.2), determined, intense gaze
-    - (confident ready stance:1.2), chin up, smiling
-    - (calm wise expression:1.1), serene, peaceful
-    - (intense battle shout:1.3), roaring, action pose, dynamic
-    - (cheerful grin:1.1), happy, friendly
-    - (stoic serious gaze:1.1), emotionless, serious
-    - (fearful horror reaction:1.2), scared, wide eyes, screaming
+    - (focused combat expression:1.2), brows drawn together, eyes fixed forward, jaw clenched
+    - (chin raised with a slight smile:1.2), shoulders squared, direct gaze
+    - (calm expression:1.1), relaxed brow, closed mouth, softened gaze
+    - (intense battle shout:1.3), mouth wide, neck tendons taut, weapon mid-swing
+    - (cheerful grin:1.1), raised cheeks, visible teeth, bright wide eyes
+    - (stoic gaze:1.1), level brows, closed lips, motionless face
+    - (fearful reaction:1.2), wide wet eyes, raised brows, open screaming mouth
 
   armor:
     - (leather adventurer armor:1.1), light armor, practical, fantasy
     - (heavy plate armor:1.2), full plate, knight, bulky
-    - (enchanted arcane robes:1.2), mage robes, glowing runes, silk
     - (tactical modern armor:1.2), kevlar vest, military gear, pouches
     - (sci fi exosuit armor:1.3), power armor, futuristic, bulky
-    - (stealth suit armor:1.2), skin-tight, dark colors, high-tech
     - (improvised scavenger armor:1.1), scrap metal, post-apocalyptic, ragged
     - (colorful cartoon armor:1.1), stylized, bright colors, simple
 
   clothing:
     - (fantasy tunic and cloak:1.1), medieval, adventurer, cloth
     - (casual modern outfit:1.1), jeans and t-shirt, hoodie
-    - (futuristic jumpsuit:1.1), sci-fi, skin-tight, uniform
+    - (futuristic jumpsuit:1.1), skin-tight silver fabric, luminous seam lines, high collar
     - (racing suit:1.1), padded, sponsor logos, colorful
     - (martial arts gi:1.1), karate uniform, minimalist
-    - (hooded rogue outfit:1.1), dark cloak, hidden face, stealthy
-    - (steampunk gear outfit:1.1), Victorian, goggles, leather, gears
-    - (Japanese school uniform:1.1), pleated skirt or slacks, blazer, JRPG
+    - (hooded dark outfit:1.1), charcoal cloak shadowing the face, fitted layered fabric
+    - (brass-trimmed leather outfit:1.1), high-collared shirt, goggles, small exposed gears
+    - (Japanese school uniform:1.1), pleated skirt or pressed slacks, fitted blazer, ribbon tie
+    - (silk arcane robes:1.2), layered sleeves, glowing embroidered runes, jeweled sash
+    - (skin-tight stealth suit:1.2), matte black panels, flexible joints, faint luminous circuitry
 
   weapons:
-    - (sword and shield:1.2), knight, fantasy, medieval
-    - (greatsword:1.2), massive sword, two-handed, powerful
-    - (dual daggers:1.2), rogue, assassin, stealthy
+    - (sword and shield:1.2), straight steel blade beside a battered round shield
+    - (greatsword:1.2), massive broad blade held in both hands
+    - (dual daggers:1.2), narrow blades held in reversed grips
     - (bow and arrows:1.2), archer, ranged, quiver
-    - (magic staff:1.2), mage, glowing crystal, wizard
-    - (spell tome:1.2), magic book, floating, arcane symbols
-    - (assault rifle:1.2), modern military, soldier
-    - (energy rifle:1.2), sci-fi, laser, futuristic
-    - (shotgun:1.2), close quarters, powerful, modern
-    - (futuristic pistol:1.1), sci-fi, sidearm, sleek
-    - (rocket launcher:1.3), heavy weapon, explosive
-    - (hammer weapon:1.2), warhammer, giant hammer, blunt
-    - (scythe weapon:1.2), grim reaper, large blade, fantasy
+    - (crystal-tipped staff:1.2), faceted gem emitting blue light and floating symbols
+    - (floating spell tome:1.2), open pages surrounded by luminous geometric symbols
+    - (assault rifle:1.2), black metal receiver, curved magazine, shouldered grip
+    - (energy rifle:1.2), sleek white casing, glowing barrel coils, narrow light beam
+    - (shotgun:1.2), short wide barrel, pump grip, dark steel finish
+    - (futuristic pistol:1.1), sleek compact sidearm with a luminous power cell
+    - (rocket launcher:1.3), shoulder-mounted tube with smoke curling from the muzzle
+    - (giant warhammer:1.2), blocky metal head held in both hands
+    - (long-handled scythe:1.2), sweeping crescent blade catching the light
 
   offhand:
     - (lantern:1.1), holding lantern, glowing, fantasy
@@ -156,10 +156,10 @@ gkr_videogame:
 
   trinkets:
     - (glowing amulet:1.2), magic necklace, chest, enchanted
-    - (ring of power:1.2), magic ring, glowing, on finger
-    - (quest item relic:1.1), ancient artifact, holding, important
-    - (device with blinking lights:1.1), sci-fi, gadget
-    - (pet companion charm:1.1), small animal, shoulder, cute
+    - (glowing ring:1.2), engraved metal band emitting light around one finger
+    - (cracked bronze relic:1.1), inset gem emitting concentric gold light
+    - (palm-sized device with blinking lights:1.1), metal casing, tiny antenna, colored buttons
+    - (animal-shaped enamel charm:1.1), tiny painted creature dangling from a shoulder clasp
     - (headset with microphone:1.1), tactical, communications, modern
 
 # ---------------------------------------------------------
@@ -171,11 +171,11 @@ gkr_videogame:
     - (enchanted forest zone:1.2), glowing mushrooms, mystical trees, fantasy
     - (desert ruins level:1.2), broken pillars, sand, ancient temple
     - (icy mountain zone:1.2), snow, blizzard, mountaintop, frozen
-    - (dark gothic castle:1.2), horror, vampires, imposing, night
+    - (dark gothic castle:1.2), pointed towers, black stone walls, moonlit windows, low-angle view
     - (neon sci fi city:1.3), cyberpunk, skyscrapers, rain, futuristic
     - (space station hub:1.2), futuristic, interior, windows to space
     - (post apocalyptic wasteland:1.2), ruins, desert, scrap
-    - (cozy village farm:1.1), farming sim, peaceful, rustic, fields
+    - (cozy village farm:1.1), timber cottage, neat crop rows, wooden fences, warm window light
     - (retro pixel dungeon:1.2), pixel art, 8-bit, dark, torches
     - (underwater temple level:1.2), submerged ruins, fish, glowing coral
     - (lava filled cavern:1.2), volcano, glowing lava, rocks, hot
@@ -201,39 +201,39 @@ gkr_videogame:
     - (fixed cinematic camera:1.1), cinematic angle, dramatic
 
   lighting:
-    - (bright game lighting:1.1), colorful, vibrant, stylized
+    - (bright game lighting:1.1), saturated colors, broad soft highlights, crisp readable shadows
     - (moody dungeon lighting:1.2), dark, torchlight, shadows
     - (glowing magic lighting:1.2), arcane glow, blue light, fantasy
-    - (harsh sci fi lighting:1.1), neon, sterile, futuristic
-    - (colorful arcade lighting:1.1), neon, bright, flashing
-    - (spooky horror lighting:1.2), dark, flashlight, high contrast
-    - (sunset adventure lighting:1.1), golden hour, warm, epic
+    - (harsh cool lighting:1.1), cyan overhead strips, hard-edged shadows, polished metal reflections
+    - (colorful arcade lighting:1.1), flashing magenta and cyan neon, bright rim light
+    - (flashlight horror lighting:1.2), narrow white beam, crushed black shadows, severe contrast
+    - (sunset lighting:1.1), low warm sun, gold rim light, long shadows
 
   mood:
-    - (heroic and adventurous:1.2), epic, dynamic, brave
-    - (dark and tense:1.2), suspenseful, moody, horror
-    - (playful and lighthearted:1.1), fun, cartoon, cozy
-    - (eerie and suspenseful:1.2), horror, fog, mysterious
-    - (strategic and focused:1.1), calm, thoughtful, tactical
-    - (competitive and intense:1.2), action, conflict, fast-paced
-    - (relaxing and cozy:1.1), peaceful, farming sim, calm
+    - (low-angle triumphant composition:1.2), raised weapon, lifted chin, cloak streaming toward a bright horizon
+    - (claustrophobic shadowed composition:1.2), tight framing, hunched shoulders, gaze fixed off-frame
+    - (playful colorful composition:1.1), rounded shapes, bouncing poses, broad smiles, warm pastel accents
+    - (eerie fogbound composition:1.2), obscured background silhouettes, tilted framing, cold rim light
+    - (measured planning composition:1.1), still figures leaning over a marked map, orderly rows, cool even light
+    - (high-impact versus composition:1.2), opposing figures, diagonal motion lines, sparks at the center
+    - (cozy restful composition:1.1), seated pose, warm window light, soft textiles, rounded framing
 
   style:
-    - (realistic game art style:1.2), photorealistic, high detail, modern
+    - (photorealistic game rendering:1.2), detailed skin and materials, physically based reflections, crisp textures
     - (stylized cartoon game style:1.2), colorful, cel shaded, simple shapes
     - (pixel art style:1.3), 8-bit, 16-bit, retro, pixels
     - (low poly style:1.2), simple polygons, faceted, stylized
-    - (hand painted fantasy style:1.2), painterly, brush strokes, fantasy
+    - (hand-painted rendering:1.2), visible textured brush strokes, softened edges, layered jewel-tone colors
     - (cel shaded comic style:1.2), anime, inked outlines, vibrant
     - (retro arcade style:1.2), 8-bit, neon, pixelated
-    - (modern cinematic game style:1.2), high resolution, dramatic lighting
+    - (cinematic game rendering:1.2), high-resolution textures, volumetric light, shallow depth of field, widescreen framing
 
   fx_magic:
     - (spell casting glow:1.2), glowing hands, arcane energy
     - (swirling particle effects:1.1), magic particles, dust motes
-    - (damage numbers popping:1.1), UI element, combat
-    - (level up burst:1.2), flash of light, glowing aura
-    - (healing light rays:1.1), holy light, green glow, restorative
+    - (floating damage numbers:1.1), bright outlined numerals above an impact spark
+    - (level-up burst:1.2), vertical flash of light, expanding ring, glowing aura
+    - (healing light rays:1.1), soft green beams converging on the body, rising luminous motes
     - (elemental flames:1.1), fire effect, magic fire
     - (ice shards flying:1.1), frost magic, ice crystals
     - (lightning strike effect:1.2), electric, bright flash
@@ -243,7 +243,7 @@ gkr_videogame:
     - (falling leaves:1.1), autumn, forest, wind
     - (drifting fog:1.1), mist, spooky, atmospheric
     - (dust from footsteps:1.1), particles, realistic
-    - (breaking environment pieces:1.1), debris, explosion, destruction
+    - (breaking environment pieces:1.1), cracked masonry flying outward through smoke and sparks
     - (pixel sparkles:1.2), 8-bit, retro, shining
     - (motion blur:1.1), scattering debris, dynamic impact
 
@@ -252,28 +252,28 @@ gkr_videogame:
 # ---------------------------------------------------------
 
   rpg_hero_combo:
-    - "confident adventurer stance, hand resting on the sword hilt, __gkr_videogame/genre__, __gkr_videogame/age__, __gkr_videogame/build__, __gkr_videogame/tone__, __gkr_videogame/hair__, __gkr_videogame/hair_color__, __gkr_videogame/eyes__, (focused combat expression:1.1), (leather adventurer armor:1.1), (sword and shield:1.1), health potion bottle, __gkr_videogame/game_world__, (heroic and adventurous mood:1.1), __gkr_videogame/lighting__, __gkr_videogame/camera__, __gkr_videogame/style__, __gkr_videogame/fx_magic__, __gkr_videogame/fx_environment__, __gkr_videogame/ui_overlay__"
+    - "chin raised, shoulders squared, hand resting on a sword hilt, (fantasy role playing game:1.1), __gkr_videogame/age__, __gkr_videogame/build__, __gkr_videogame/tone__, __gkr_videogame/hair__, __gkr_videogame/hair_color__, __gkr_videogame/eyes__, brows drawn together and gaze fixed forward, (leather adventurer armor:1.1), (sword and shield:1.1), red potion bottle at the belt, medieval fantasy town with timber houses and a market square, low-angle composition, lifted chin, cloak streaming toward a bright horizon, __gkr_videogame/lighting__, (third person follow camera:1.1), __gkr_videogame/style__, __gkr_videogame/fx_magic__, __gkr_videogame/fx_environment__, __gkr_videogame/ui_overlay__"
 
   shooter_hero_combo:
-    - "helmeted futuristic soldier, weapon raised and ready, (first person shooter game:1.1), muscular heavy build, (tactical modern armor:1.1), (assault rifle:1.1), high tech gadget, (space station hub:1.1), (competitive and intense mood:1.1), harsh sci fi lighting, (first person view:1.1), realistic game art style, damage numbers popping, floating game particles, (visible health bar:1.1)"
+    - "helmeted figure in segmented armor, rifle raised to the shoulder, (first person shooter game:1.1), heavily muscular build, (tactical modern armor:1.1), black assault rifle with curved magazine, wrist scanner with a glowing screen, space-station corridor with windows to stars, opposing silhouettes framed by diagonal motion lines and central impact sparks, cyan overhead strips and hard-edged shadows, (first person view:1.1), photorealistic detailed materials, bright outlined damage numerals above an impact, drifting sparks, (visible health bar:1.1)"
 
   platformer_mascot_combo:
-    - "oversized round head, big friendly grin, (spiky gravity-defying hair:1.1), colorful cartoon armor, (greatsword:1.1), (retro pixel dungeon:1.1), (playful and lighthearted mood:1.1), colorful arcade lighting, (side scrolling view:1.1), (pixel art style:1.2), pixel sparkles, (combo counter display:1.1)"
+    - "oversized round head, stubby limbs, broad open-mouthed grin, (spiky gravity-defying hair:1.1), bright simple tunic, small wooden mallet raised overhead, floating grass platforms above a tiled cavern, rounded shapes and a bouncing mid-jump pose, flashing magenta and cyan light, (side scrolling view:1.1), (pixel art style:1.2), pixel sparkles, (combo counter display:1.1)"
 
   horror_protagonist_combo:
-    - "wide frightened eyes, gripping a flashlight with both hands, improvised scavenger armor, (shotgun:1.1), (lantern:1.1), (dark gothic castle:1.2), (eerie and suspenseful mood:1.2), spooky horror lighting, (over the shoulder view:1.1), realistic game art style, drifting fog, breaking environment pieces, (visible health bar:1.1), inventory icons"
+    - "wide wet eyes and raised brows, gripping a flashlight beside a lowered shotgun, torn civilian clothes beneath scavenged metal plates, (dark gothic castle:1.2), background silhouettes obscured by fog, tilted framing, narrow flashlight beam and severe black shadows, (over the shoulder view:1.1), photorealistic detailed materials, drifting fog, cracked masonry falling through dust, (visible health bar:1.1), inventory icons"
 
   racing_driver_combo:
-    - "fitted racing suit with sponsor patches, sharp focused eyes, (racing suit:1.1), futuristic jumpsuit, (neon sci fi city:1.2), (heroic and adventurous mood:1.1), bright game lighting, (third person follow camera:1.1), (stylized cartoon game style:1.1)"
+    - "fitted padded racing suit with sponsor patches, helmet tucked under one arm, brows lowered over a direct gaze, leaning against a sleek race car on a rain-slick neon city grid, low camera angle, cyan and magenta reflections, long light trails, (stylized cartoon game style:1.1), lap counter and speedometer overlay"
 
   strategy_commander_combo:
-    - "pressed uniform with insignia, one hand braced on a map table, (seasoned veteran:1.1), (city builder game:1.1), (sky island floating level:1.1), (strategic and focused mood:1.1), (isometric game view:1.2), (minimal clean ui:1.1), (modern cinematic game style:1.1)"
+    - "older commander with gray-streaked brows and a pressed uniform, both hands braced on a holographic map table, miniature city blocks and orderly unit markers across the display, officers arranged in still rows, cool even light, (isometric game view:1.2), build-menu icons and a clean resource bar, high-resolution textures and volumetric screen glow"
 
   game_scene_combo:
-    - "__gkr_videogame/game_world__, __gkr_videogame/genre__, __gkr_videogame/mood__, __gkr_videogame/camera__, __gkr_videogame/style__, __gkr_videogame/fx_environment__, __gkr_videogame/ui_overlay__"
+    - "__gkr_videogame/genre__, __gkr_videogame/mood__, __gkr_videogame/camera__, __gkr_videogame/style__, __gkr_videogame/fx_environment__, __gkr_videogame/ui_overlay__"
 
   custom_hero_combo:
-    - "__gkr_videogame/archetype__, __gkr_videogame/genre__, __gkr_videogame/age__, __gkr_videogame/build__, __gkr_videogame/tone__, __gkr_videogame/hair__, __gkr_videogame/hair_color__, __gkr_videogame/eyes__, __gkr_videogame/expression__, __gkr_videogame/armor__, __gkr_videogame/clothing__, __gkr_videogame/weapons__, __gkr_videogame/offhand__, __gkr_videogame/trinkets__, __gkr_videogame/game_world__, __gkr_videogame/mood__, __gkr_videogame/lighting__, __gkr_videogame/camera__, __gkr_videogame/style__, __gkr_videogame/fx_magic__, __gkr_videogame/fx_environment__, __gkr_videogame/ui_overlay__"
+    - "__gkr_videogame/archetype__, __gkr_videogame/age__, __gkr_videogame/build__, __gkr_videogame/tone__, __gkr_videogame/hair__, __gkr_videogame/hair_color__, __gkr_videogame/eyes__, __gkr_videogame/expression__, __gkr_videogame/trinkets__, __gkr_videogame/game_world__, __gkr_videogame/mood__, __gkr_videogame/lighting__, __gkr_videogame/camera__, __gkr_videogame/style__, __gkr_videogame/fx_environment__, __gkr_videogame/ui_overlay__"
 
 # ---------------------------------------------------------
 # RANDOM
@@ -283,7 +283,7 @@ gkr_videogame:
     - "__gkr_videogame/archetype__, __gkr_videogame/age__, __gkr_videogame/build__, __gkr_videogame/tone__, __gkr_videogame/hair__, __gkr_videogame/hair_color__, __gkr_videogame/eyes__, __gkr_videogame/expression__, __gkr_videogame/armor__, __gkr_videogame/clothing__, __gkr_videogame/weapons__, __gkr_videogame/offhand__, __gkr_videogame/trinkets__"
 
   random_backgrounds:
-    - "__gkr_videogame/game_scene_combo__"
+    - "__gkr_videogame/game_world__, __gkr_videogame/mood__, __gkr_videogame/lighting__, __gkr_videogame/camera__, __gkr_videogame/style__, __gkr_videogame/fx_environment__, __gkr_videogame/ui_overlay__"
 
   random:
     - "__gkr_videogame/rpg_hero_combo__"
@@ -305,55 +305,55 @@ gkr_videogame:
 # ---------------------------------------------------------
 
   spotlight_characters:
-    - "(JRPG sword hero:1.3), male, bright scarf, wielding shimmering longsword, determined eyes, fantasy art, cinematic lighting"
-    - "(female rogue assassin:1.3), dual-wielding glowing daggers, fast agile stance, stealthy, dark leather armor, night setting"
+    - "(JRPG sword hero:1.3), male, bright scarf, wielding a shimmering longsword, brows drawn down and eyes fixed forward, jewel-tone painted rendering, strong rim light"
+    - "(female rogue assassin:1.3), dual-wielding glowing daggers, low forward-leaning stance, dark leather armor blending into a moonlit alley"
     - "(armored tank knight:1.3), male, heavy shield, bulky pauldrons, ground-cracking stance, massive plate armor"
-    - "(female mage:1.3), casting radiant elemental burst, swirling magical sigils, powerful, arcane robes, glowing eyes"
-    - "(male battle cleric:1.3), channeling warm healing light, ornate staff, holy robes, kind expression, divine energy"
+    - "(female mage:1.3), casting a frame-filling radiant elemental burst, swirling magical sigils, wind-whipped arcane robes, glowing eyes"
+    - "(male battle cleric:1.3), channeling warm healing light, ornate staff, white-and-gold robes, softened eyes and a small reassuring smile"
     - "(loot hunter adventurer:1.2), male, wearing mismatched armor pieces, confident grin, holding treasure, fantasy dungeon"
     - "(berserker warrior:1.3), male, fiery axe, swirling rage aura, intense shout, muscular, tribal armor"
-    - "(arcane sniper:1.3), female, glowing crystal rifle, cloak lined with runes, focused expression, fantasy, stealthy"
+    - "(arcane sniper:1.3), female, glowing crystal rifle braced against her shoulder, rune-lined cloak merging with deep shadows, one eye narrowed"
     - "(female summoner:1.3), floating creature companions, circling her, magical robes, arcane, ethereal"
-    - "(paladin champion:1.3), male, golden armor, holy hammer raised high, radiant light, divine, epic"
+    - "(paladin champion:1.3), male, golden armor, holy hammer raised high inside a column of radiant light, low-angle framing"
     - "(JRPG healer:1.2), female, pastel robes, glowing charms, gentle expression, anime style, digital art, healing magic"
-    - "(shadow monk:1.3), male, wrapped fists, hooded face, flickering shadow clones, dark, stealthy, martial arts"
+    - "(shadow monk:1.3), male, wrapped fists, hooded face, flickering shadow clones fading into a dark corridor, low martial-arts stance"
     - "(dwarf runesmith:1.2), male, forging magic symbols midair, blazing hammer, leather apron, beard, fantasy forge"
-    - "(witch hunter:1.2), male, crossbow, runic stakes on belt, gothic, dark fantasy, leather duster, determined"
+    - "(witch hunter:1.2), male, crossbow raised, runic stakes on belt, leather duster, jaw clenched and eyes fixed forward, moonlit gothic street"
     - "(elemental warrior:1.3), male, crackling fire embedded in gauntlets, battle pose, lava armor, glowing eyes"
     - "(stealth archer:1.2), female, perched, bow drawn, hooded and silent, rogue, forest, moonlight"
-    - "(battle bard:1.2), wielding melodious lute, glowing with power, fantasy, charismatic, colorful outfit"
-    - "(female tank character:1.3), oversized enchanted armor, bright crest, powerful stance, holding massive shield"
+    - "(battle bard:1.2), strumming a lute that emits concentric gold sound rings, broad grin, direct gaze, colorful layered outfit"
+    - "(female tank character:1.3), oversized engraved armor, bright crest, feet planted wide behind a massive shield"
     - "(cypher mage:1.3), male, levitating spell cubes, rotating around him, arcane, high-tech robes, fantasy"
     - "(female forest ranger:1.2), antlered hood, vine-wrapped bow, elf, deep forest, animal companion"
     - "(gravity knight:1.3), male, floating shield fragments, orbiting, sci-fi fantasy, futuristic armor, glowing purple"
     - "(female dual-blade ninja:1.3), red scarf, lightning-fast movement, agile, masked, dark outfit"
     - "(guardian golem:1.3), carved stone plating, glowing core, magical construct, ancient ruins, massive"
-    - "(male time mage:1.3), bending fractured light arcs, arcane, clock motifs, ornate robes, wise expression"
+    - "(male time mage:1.3), concentric translucent clock faces and suspended droplets bending around raised hands, ornate robes, deeply lined calm face"
     - "(steam-powered dwarf engineer:1.3), male, wrench, glowing boilerpack, steampunk, goggles, leather apron"
     - "(noble swordswoman:1.2), ornamental armor, regal poise, fantasy, holding rapier, castle background"
-    - "(plasma warlock:1.3), male, summoning dark purple energy vortex, dark magic, evil, glowing eyes, dark robes"
+    - "(plasma warlock:1.3), male, summoning a dark purple energy vortex, narrowed glowing eyes, sharp grin, black robes whipping inward"
     - "(desert wanderer:1.2), female, curved scimitar, sand swirling around feet, nomadic, layered robes, desert ruins"
     - "(holy archer:1.2), male, imbued with radiant arrows, glowing bow, paladin, angelic, divine light"
     - "(druid shifter:1.3), female, mid-transformation, wolf spirit aura, nature magic, forest, wild"
-    - "(rune thief:1.2), male, glowing scrolls tucked in bandolier, rogue, arcane, stealthy, carrying bag of loot"
+    - "(rune thief:1.2), male, glowing scrolls tucked in a bandolier, crouched in doorway shadow, carrying an overfilled coin bag"
     - "(female dragon tamer:1.2), hatchling perched on shoulder, baby dragon, fantasy, leather armor, smiling"
-    - "(sky pirate captain:1.3), male, feathered tricorn, magic pistol, airship deck, clouds, charismatic"
+    - "(sky pirate captain:1.3), male, feathered tricorn, luminous pistol raised on an airship deck, broad grin, coat billowing above clouds"
     - "(ancient golemancer:1.2), old wizard, tiny stone assistants, walking beside, magic staff, library"
     - "(frost knight:1.3), female, etched ice armor, emitting cold air, fantasy, tundra, glowing blue"
     - "(wandering swordsman:1.2), male, straw hat, mystical blade, ronin, bamboo forest, cinematic"
     - "(mechanical paladin:1.3), glowing joints, shield generator, sci-fi knight, futuristic armor, holy symbol"
     - "(female plant mage:1.3), controlling blooming vines, druid, nature magic, green robes, enchanted forest"
-    - "(demonic lancer:1.3), male, crackling spear, burning eyes, evil, spiky armor, lava background"
-    - "(loot-crazed adventurer:1.2), diving with wild excitement, treasure chest, gold coins, dungeon, happy"
+    - "(demonic lancer:1.3), male, crackling spear angled toward the viewer, burning narrowed eyes, bared teeth, spiky armor, lava background"
+    - "(loot-crazed adventurer:1.2), diving open-armed toward a treasure chest, broad toothy grin, gold coins flying through a dungeon"
     - "(battle rogue:1.2), male, shadow clones mirroring movements, stealth, magic, dual daggers, dark city"
     - "(war priestess:1.3), female, clad in white gold armor, radiant veil, holy, holding mace, temple"
-    - "(tide sorcerer:1.3), male, conjuring spiraling water tendrils, water magic, coastal, robes, powerful"
-    - "(male ranger:1.2), falcon familiar circling above, archer, forest, leather armor, focused"
+    - "(tide sorcerer:1.3), male, conjuring thick spiraling water tendrils above a rocky coast, robes blown outward by spray"
+    - "(male ranger:1.2), falcon circling above, bow drawn in a forest, leather armor, one eye narrowed along the arrow shaft"
     - "(molten berserker:1.3), male, dripping sparks from blade, fire, warrior, volcanic armor, rage"
-    - "(iron sentinel:1.2), shield wall formation pose, guardian, heavy armor, tower shield, determined"
+    - "(iron sentinel:1.2), feet planted in a shield-wall formation, heavy armor, tower shield, jaw clenched beneath a lowered brow"
     - "(glitch mage:1.3), female, casting pixel-like distortion burst, vfx, digital, neon, cyberpunk"
     - "female tower guardian, (wielding oversized tower shield:1.3), defender, heavy armor, castle gate"
-    - "(sky dancer:1.2), female, fighting mid-air, ribbon-like weapon, elegant, fantasy, floating islands"
+    - "(sky dancer:1.2), female, arched mid-air pose, long ribbon weapon tracing smooth loops, flowing layered fabric, floating islands"
     - "(relic hunter:1.2), male, maps, gadgets, ancient relic torch, adventurer, temple ruins, leather jacket"
     - "(female battle alchemist:1.2), swirling potions strapped across chest, scientist, goggles, lab coat, explosion"
     - "(arcane warrior:1.3), male, energy shield, glowing sword edge, spellblade, magic armor"
@@ -364,7 +364,7 @@ gkr_videogame:
     - "(elf bowmaster:1.2), male, longbow carved from ancient wood, fantasy, archer, elegant armor, forest"
     - "(enchanted puppet fighter:1.3), controlled by glowing threads, magical doll, ornate, creepy, fantasy"
     - "(JRPG cleric:1.2), male, holding ornate staff, celestial patterns, healer, white robes, divine"
-    - "(female battle tank:1.3), swinging massive glowing hammer, warrior, heavy armor, powerful, battle cry"
+    - "(female battle tank:1.3), swinging a massive glowing hammer, heavy armor, mouth open in a battle cry, debris bursting beneath her feet"
     - "(vampire duelist:1.3), male, crimson rapier, elegant cape, gothic, noble, dark castle, pale skin"
     - "(dragon monk:1.3), male, channeling scaled fists, martial arts, fantasy, dragon tattoo, fire aura"
     - "(witch of embers:1.3), female, wrapped in drifting sparks, fire magic, dark robes, glowing red eyes"
@@ -375,44 +375,44 @@ gkr_videogame:
     - "(spirit archer:1.2), female, firing ghostlike arrows, spectral, magic, translucent, glowing bow, ruins"
     - "(tech arcanist:1.3), male, blending glowing machinery and magic, sci-fi fantasy, cyborg, casting spell"
     - "(tribal beast warrior:1.2), male, glowing tribal paint, animalistic, fur armor, holding bone club"
-    - "(holy sentinel:1.2), female, radiant barrier around her, guardian, paladin, plate armor, protecting"
+    - "(holy sentinel:1.2), female, plate armor, arms spread before a radiant barrier as arrows shatter against it"
     - "(explorer hero:1.2), male, grappling hook, adventurer's smile, action, jungle ruins, cinematic"
-    - "(wild mage:1.3), female, releasing chaotic multi-colored blast, unpredictable magic, swirling energy"
+    - "(wild mage:1.3), female, releasing an asymmetrical multicolored blast of jagged ribbons, sparks, and spiraling energy"
     - "(crystal paladin:1.3), male, prismatic armor plating, glowing crystal hammer, fantasy, holy"
     - "(rogue artificer:1.2), female, floating drones assisting in battle, engineer, goggles, leather, gadgets"
     - "(ironclad juggernaut:1.3), dragging massive chains, heavy armor, spiked, brute, battlefield"
     - "(wind dancer:1.2), female, casting slicing air crescents, air magic, agile, flowing robes, sky"
-    - "(elder sage:1.2), old wizard, staff of branching luminous wood, wise, long beard, mountain top"
+    - "(elder sage:1.2), deeply wrinkled old wizard, staff of branching luminous wood, long beard, steady half-lidded gaze, mountain top"
     - "(lava knight:1.3), male, wreathed in molten glow, fire armor, volcano, holding magma sword"
     - "(priest of the moon:1.2), female, silver etched armor, lunar magic, night, glowing, crescent symbol"
     - "(battle necromancer:1.3), male, summoning skeletal storm, dark magic, undead, skull pauldron, green glow"
     - "(celestial archer:1.3), female, star infused quiver, cosmic, magic arrows, nebula, glowing bow"
     - "(arcane duelist:1.2), male, weaving sparks with blade motions, spellblade, elegant stance, magic"
     - "(forest guardian:1.2), heavy bark armor, treant, nature, glowing green, ancient forest, mossy"
-    - "(female slime summoner:1.2), smiling gelatin companions, cute, monster tamer, anime style, fantasy"
+    - "(female slime summoner:1.2), smiling round gelatin companions with oversized eyes, pastel anime rendering, bright fantasy meadow"
     - "(towering barbarian:1.3), male, carrying two giant axes, muscular, warrior, fur, battle paint"
     - "(frost ranger:1.2), male, icicle quiver, snow, archer, fur-lined armor, ice bow, tundra"
-    - "(anime-inspired hero:1.2), male, bright coat, glowing sword, JRPG, spiky hair, dynamic pose"
-    - "(stone shapeshifter:1.3), merging body with rocky ground, earth magic, golem, powerful, rocky skin"
-    - "(electric mage:1.3), female, wrapped in crackling arcs, lightning magic, storm, dynamic, glowing eyes"
+    - "(anime-inspired hero:1.2), male, bright coat flaring behind him, glowing sword mid-swing, spiky hair, extreme diagonal pose"
+    - "(stone shapeshifter:1.3), lower body merging into cracked rocky ground, boulder-like shoulders, raised stone fists, rough skin"
+    - "(electric mage:1.3), female, wrapped in crackling arcs beneath storm clouds, hair lifting from static, glowing eyes, diagonal framing"
     - "(dragon knight:1.3), male, summoning spectral dragon head, fantasy, warrior, scale mail armor, fire"
     - "(high elf champion:1.2), female, gleaming spear, elegant armor, noble, fantasy city, poised"
-    - "(rune blade master:1.2), male, carving glowing symbols mid-strike, magic sword, arcane, focused"
+    - "(rune blade master:1.2), male, carving glowing symbols mid-strike with a luminous sword, eyes narrowed along the blade"
     - "(blood hunter:1.3), female, swirling crimson aura, dark magic, warrior, holding cursed blade"
-    - "(gadget rogue:1.2), male, bombs and tiny automatons, artificer, clever, goggles, leather vest"
-    - "(twilight priestess:1.2), female, channeling moonlit horizon glow, dusk, magic, serene, flowing robes"
+    - "(gadget rogue:1.2), male, bombs clipped to a leather vest, tiny automatons circling him, goggles over a raised eyebrow and crooked grin"
+    - "(twilight priestess:1.2), female, channeling moonlit horizon glow at dusk, relaxed brow, half-closed eyes, flowing robes"
     - "(molten golem:1.3), rivers of lava inside cracks, fire elemental, magma, volcano, glowing, massive"
 
   spotlight_backgrounds:
     - "(JRPG overworld plains:1.2), rolling green hills, distant mountains, bright day, fantasy, vibrant"
-    - "(ancient dungeon corridor:1.2), lit by torches, shifting shadows, stone walls, mossy, mysterious"
+    - "(ancient dungeon corridor:1.2), lit by uneven torches, shifting shadows, mossy stone walls, far end hidden in darkness"
     - "(fantasy village square:1.1), bustling, cozy timber houses, market stalls, cobblestone, medieval"
     - "(enchanted forest path:1.2), glowing with floating motes, mystical trees, fantasy, bioluminescent mushrooms"
-    - "(broken castle battlements:1.2), overlooking sunset horizon, ruins, epic, dramatic clouds, fantasy"
+    - "(broken castle battlements:1.2), overlooking a vast sunset horizon, ruined stonework, towering backlit clouds"
     - "(arcane tower interior:1.2), swirling magical diagrams, library, wizard, floating books, high fantasy"
     - "(crystal cavern:1.3), sparkling in soft blue light, glowing gems, underground, magical"
-    - "(ancient desert ruins:1.2), jutting from orange sand, hot sun, broken pillars, mysterious"
-    - "(floating islands:1.2), connected by glowing bridges, sky, clouds, fantasy, waterfalls, epic"
+    - "(ancient desert ruins:1.2), jutting from orange sand, harsh overhead sun, broken pillars half-buried in dunes"
+    - "(floating islands:1.2), connected by glowing bridges above layered clouds, waterfalls dropping into open sky, vast scale"
     - "(mystic shrine:1.2), deep in luminous forest, glowing, ancient, stone shrine, fantasy"
     - "(vast desert highway:1.1), stretching toward distant ruins, post-apocalyptic, cracked asphalt, sand"
     - "(icy tundra:1.2), towering frozen spires, snow, desolate, blizzard, fantasy"
@@ -420,27 +420,27 @@ gkr_videogame:
     - "(volcanic field:1.2), blazing lava rivers, obsidian rock, embers, ash, cinematic"
     - "(ancient library:1.2), endless stacked tomes, dusty, magical, scrolls, fantasy, wizard's study"
     - "(rain-soaked medieval street:1.1), glowing with lanterns, cobblestone, moody, dark, puddles"
-    - "(moonlit cliffside:1.2), overlooking shimmering ocean, night, peaceful, fantasy, dramatic"
-    - "(forest clearing:1.1), surrounded by towering ancient trees, peaceful, sunbeams, nature, fantasy"
+    - "(moonlit cliffside:1.2), overlooking a shimmering ocean at night, still grass, silver rim light, broad open framing"
+    - "(forest clearing:1.1), surrounded by towering ancient trees, still grass and soft sunbeams, wide symmetrical framing"
     - "(underground lake:1.2), shimmering with bioluminescence, cavern, glowing fungi, dark, fantasy"
     - "(moss-covered ruins:1.2), reclaimed by nature, jungle, ancient temple, vines, overgrown"
     - "(gladiator battle arena:1.2), carved from stone, roaring torches, sand pit, crowd, fantasy"
     - "(floating temple:1.2), suspended by glowing energy beams, fantasy, sky, clouds, magical"
     - "(arcane forge:1.2), blazing runes on the walls, blacksmith, magical, anvil, glowing metal"
-    - "(mountain summit:1.2), overlooking vast fantasy valley, epic, vista, clouds below, cinematic"
+    - "(mountain summit:1.2), overlooking a vast valley with clouds below, tiny distant towers, widescreen framing"
     - "(otherworldly cave:1.2), filled with glowing alien crystals, magical, strange flora, sci-fi"
     - "(murky swamp:1.1), riddled with thick fog, glowing fungi, murky water, gnarled trees"
     - "(high elf city:1.2), ornate white towers, shimmering bridges, fantasy, elegant, bright"
     - "(glowing desert oasis:1.1), surrounded by palm shadows, night, magical, spring, stars"
-    - "(ancient labyrinth:1.2), shifting patterns, maze, stone, high walls, mysterious, fantasy"
+    - "(ancient labyrinth:1.2), repeating stone patterns, maze of high walls, distant turns obscured by mist"
     - "(fallen giant tree hollow:1.2), repurposed as settlement, fantasy, village, nature, cozy"
     - "(enchanted waterfall:1.2), crashing into glowing pool, magical, forest, lush, mist"
     - "(ruined fortress:1.1), engulfed by vines and roots, overgrown, nature, stone, medieval"
     - "(luminous moon shrine:1.2), atop rocky plateau, night, spiritual, fantasy, glowing runes"
-    - "(dragon graveyard:1.3), colossal skeletons in dust, desolate, epic, fantasy, bones"
-    - "(mountain monastery:1.1), surrounded by drifting mist, peaceful, temple, asian, high altitude"
+    - "(dragon graveyard:1.3), colossal rib cages and skulls rising from dusty ground, tiny lone figure for scale"
+    - "(mountain monastery:1.1), tiered temple roofs surrounded by drifting mist, empty stone courtyard, high-altitude cliffs"
     - "(great plains:1.1), covered in tall waving grass, open field, wind, setting sun"
-    - "(sunset battlefield:1.2), broken armor scattered, epic, war, banners, dramatic, cinematic"
+    - "(sunset battlefield:1.2), broken armor and torn banners scattered beneath a blood-orange sky, low widescreen view"
     - "(giant canyon:1.1), suspended rope bridges, vast, chasm, desert, rocky"
     - "(steampunk workshop:1.2), glowing with gears and steam, industrial, brass, pipes, messy"
     - "(tower ruins:1.1), under violet dusk, twilight, magical, fantasy, silhouette"
@@ -449,32 +449,32 @@ gkr_videogame:
     - "(airborne ruins:1.2), floating in purple sky, magical, dusk, fantasy, shattered islands"
     - "(ancient sewer tunnels:1.1), dripping with moss, dark, underground, murky water, brickwork"
     - "(bright RPG town:1.1), colorful roofs, lively streets, fantasy, stylized, sunny"
-    - "(enchanted orchard:1.1), glowing fruit, magical, peaceful, fantasy, night"
+    - "(enchanted orchard:1.1), softly glowing fruit beneath still branches, blue night shadows, empty grass path"
     - "(goblin market:1.2), filled with strange lantern light, fantasy, night, crowded, stalls"
     - "(icy castle courtyard:1.1), drifting snow, winter, cold, fantasy, stone walls"
     - "(forest of giant luminous mushrooms:1.2), glowing, fantasy, magical, bioluminescent, avatar"
     - "(tropical cove:1.1), shining with turquoise waters, beach, paradise, white sand, palms"
     - "(war-torn valley:1.2), filled with broken siege engines, battlefield, smoke, fire, desolate"
     - "(celestial garden:1.2), floating constellation stones, cosmic, magical, fantasy, nebula"
-    - "(sacred glen:1.1), mysterious archway, forest, magical, sunbeams, ancient stone"
-    - "(JRPG-style sky bridge:1.2), spanning two mountains, epic, fantasy, high altitude, clouds"
+    - "(sacred glen:1.1), weathered stone archway deep in a forest, sunbeams revealing floating gold motes"
+    - "(JRPG-style sky bridge:1.2), narrow ornate bridge spanning two mountains above layered clouds, tiny figures for scale"
     - "(cracked volcanic cave:1.1), lit by flickering embers, lava, hot, dark, glowing cracks"
     - "(mountain pass:1.1), flanked by rugged cliffs, snow, high altitude, narrow path"
     - "(bioluminescent forest:1.2), glowing under moonlight, magical, night, fantasy, glowing plants"
     - "(ruined cathedral:1.2), filled with falling dust, light rays, gothic, stained glass"
     - "(city plaza:1.1), fountain, bright midday sun, town square, benches, pigeons"
-    - "(ancient magical battlefield:1.2), scarred with glowing lines, epic, runes, destroyed, fantasy"
+    - "(ancient magical battlefield:1.2), shattered ground scarred with glowing lines, broken rune pillars, distant smoke columns"
     - "(mossy temple steps:1.1), leading to high altar, jungle, ruins, ancient, overgrown"
     - "(vast desert plains:1.1), beneath blazing sky, hot, empty, sand dunes, heat haze"
     - "(fairy meadow:1.2), sparkling with luminous petals, magical, flowers, night, fireflies"
-    - "(sun-drenched monastery garden:1.1), peaceful, zen, temple, koi pond, groomed trees"
+    - "(sun-drenched monastery garden:1.1), raked gravel, still koi pond, pruned trees, symmetrical temple framing"
     - "(enchanted observatory:1.2), filled with star charts, magical, night sky, telescope, fantasy"
     - "(snowy village:1.1), glowing with warm lanterns, winter, cozy, night, smoke from chimneys"
     - "(crystal bridge:1.2), over shimmering river, fantasy, magical, glowing, transparent"
     - "(forgotten shrine:1.1), deep within canyon, ancient, hidden, stone, statues"
     - "(floating combat arena:1.2), high above clouds, sky, battle, fantasy, platforms"
     - "(abandoned castle:1.1), overgrown with ivy, ruins, nature, stone, haunting"
-    - "(lava flooded cavern:1.2), glowing reflections, volcano, underground, hot, dangerous"
+    - "(lava-flooded cavern:1.2), orange reflections on black rock, heat haze, narrow ledge above molten currents"
     - "(ancient druid ring:1.1), surrounded by tall stones, stonehenge, magical, grass, mist"
     - "(mystical warp gate:1.2), glowing with swirling light, portal, sci-fi, fantasy, energy"
     - "(haunted forest:1.2), shrouded in deep purple mist, spooky, night, gnarled trees, full moon"
@@ -486,14 +486,14 @@ gkr_videogame:
     - "(castle throne room:1.2), glowing with stained glass, king, royalty, ornate throne, banners"
     - "(deep canyon:1.1), with floating ruins, magical, sky, fantasy, vertigo"
     - "(shadowed graveyard:1.2), beneath cold moon, spooky, gothic, tombstones, fog"
-    - "(volcanic cliffside:1.2), overlooking ember sky, lava, dusk, dramatic, dangerous"
+    - "(volcanic cliffside:1.2), overlooking an ember-filled dusk sky, lava streams below, steep drop emphasized by tilted framing"
     - "(forest ravine:1.1), with rushing water below, bridge, nature, trees, deep"
     - "(wild overgrowth:1.1), covering ruined town, post-apocalyptic, nature, vines, abandoned"
     - "(night market:1.1), glowing with magical lanterns, fantasy, asian, stalls, crowded"
-    - "(massive waterfall:1.2), feeding into wide lake, nature, epic, mist, powerful"
-    - "(mysterious cavern entrance:1.1), of swirling mist, fog, dark, cave, foreboding"
-    - "(quiet village path:1.1), under golden afternoon light, peaceful, cozy, rustic, fence"
-    - "(mountain fortress:1.2), carved into cliff face, castle, fantasy, imposing, stone"
+    - "(massive waterfall:1.2), white water plunging into a wide lake, dense mist, tiny trees and figures for scale"
+    - "(dark cavern entrance:1.1), swirling mist crossing a black opening, jagged rock silhouette, cold backlight"
+    - "(empty village path:1.1), golden afternoon light, warm cottage windows, rustic fence, soft rounded shadows"
+    - "(mountain fortress:1.2), colossal stone castle carved into a cliff face, low-angle view, tiny figures at the gate"
 
   spotlight_classicscenes:
     - "(side-scrolling forest level:1.3), pixel art, floating platforms, bouncing slimes, retro game, 16-bit"
@@ -552,7 +552,7 @@ gkr_videogame:
     - "(retro wasteland desert:1.2), giant skeletons, pixel art, post-apocalyptic, 16-bit"
     - "(floating fortress:1.2), clouds swirling beneath platforms, pixel art, 16-bit, fantasy"
     - "(classic underwater boss arena:1.2), in dark trench, pixel art, 16-bit, spooky, bubbles"
-    - "(steampunk arcade factory:1.2), run by crazy automatons, pixel art, 16-bit, gears"
+    - "(steampunk arcade factory:1.2), erratically spinning automatons with mismatched limbs, pixel art, 16-bit, gears"
     - "(isometric kingdom castle:1.2), guards marching, pixel art, retro RTS, 16-bit"
     - "(ruined cathedral:1.2), bathed in dramatic pixel lighting, 16-bit, gothic, stained glass"
     - "(retro candy land:1.2), bouncy jelly platforms, colorful, pixel art, 8-bit, cute"
@@ -567,7 +567,7 @@ gkr_videogame:
     - "(retro dream world:1.2), floating clocks, surreal colors, pixel art, abstract"
     - "(ancient forest boss arena:1.2), encircled by giant roots, pixel art, 16-bit, nature"
     - "(retro robot factory:1.2), full of conveyor puzzles, pixel art, 8-bit, sci-fi"
-    - "(snowfall mountain temple:1.2), guarded by monks, pixel art, 16-bit, peaceful, japan"
+    - "(snowfall mountain temple:1.2), still rows of monks beneath snow-covered curved roofs, pixel art, 16-bit"
     - "(8-bit toxic zone:1.2), bubbling green pools, pixel art, wasteland, post-apocalyptic"
     - "(underwater caves:1.2), illuminated by bioluminescent coral, pixel art, 16-bit, magical"
     - "(retro plains level:1.2), rolling hills, hidden caves, pixel art, 16-bit, platformer"
@@ -588,11 +588,11 @@ gkr_videogame:
     - "(haunted carnival:1.2), flickering lights, spooky, pixel art, 16-bit, retro"
     - "(classic ice cliff climb:1.2), blowing wind, pixel art, 8-bit, platformer, mountain"
     - "(retro treasure vault:1.2), full of shining gold sprites, pixel art, 16-bit, coins"
-    - "(volcano summit boss stage:1.2), fire eruptions, pixel art, 16-bit, lava, epic"
+    - "(volcano summit boss stage:1.2), towering fire eruptions behind a tiny player sprite, pixel art, 16-bit, lava"
     - "(retro alien hive:1.2), dripping with acid, pixel art, sci-fi, 16-bit, spooky"
-    - "(sunset cliffside:1.2), heroic silhouette backdrop, pixel art, cinematic, 16-bit"
+    - "(sunset cliffside:1.2), lone sword-raised silhouette against a huge orange sun, pixel art, widescreen, 16-bit"
     - "(8-bit arcade final boss room:1.3), with giant looming shadow, pixel art, retro"
-    - "(retro panicked city escape:1.2), as screen scrolls faster, pixel art, 16-bit, action"
+    - "(retro city escape:1.2), running crowd sprites, tilted vehicles, flames behind a rapidly scrolling screen, pixel art, 16-bit"
     - "(mystic waterfall cave:1.2), hiding a secret save point, pixel art, 16-bit, JRPG"
     - "(classic shrine garden:1.1), filled with wandering spirits, pixel art, 16-bit, japan"
     - "(retro throne room:1.2), glowing pixel stained-glass, 16-bit, castle, king"

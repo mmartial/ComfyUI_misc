@@ -9,25 +9,25 @@ gkr_comics:
 # ---------------------------------------------------------
 
   hero_archetype:
-    - (caped superhero:1.2), flowing cape, confident stance, chin lifted
-    - (masked vigilante:1.2), crouched in shadow, narrowed eyes
-    - (street level hero:1.2), urban setting, scuffed jacket, worn gloves
-    - (cosmic champion:1.2), starfield backdrop, (glowing with energy:1.1)
-    - (armored powerhouse:1.2), heavy armor, wide braced stance
-    - (agile acrobat:1.2), dynamic pose, mid-flip
-    - (sorcerer hero:1.2), casting magic, (glowing runes:1.1)
-    - (mutant outcast:1.2), asymmetrical features, hunched shoulders
-    - (alien defender:1.2), non-human features, steady unblinking gaze
-    - (cyber hero:1.2), (cybernetic implants:1.1), exposed wiring
+    - flowing cape, broad chest emblem, feet planted wide, chin lifted
+    - full eye mask, crouched on a shadowed ledge, narrowed eyes
+    - scuffed jacket, worn gloves, protective stance before frightened bystanders
+    - starfield backdrop, radiant body outline, fists glowing with cosmic energy
+    - thick interlocking armor plates, massive gauntlets, wide braced stance
+    - compact athletic figure caught mid-flip, curved motion streaks
+    - layered robes, raised hands, concentric glowing runes and sparks
+    - asymmetrical facial features, patched clothing, hunched shoulders, guarded gaze
+    - non-human facial structure, armored stance before a damaged city, steady unblinking gaze
+    - cybernetic implants, exposed wiring, luminous visor, metal-plated forearm
 
   villain_archetype:
-    - (tragic villain:1.2), brooding expression, downcast eyes, clenched jaw
-    - (mastermind villain:1.2), narrowed calculating eyes, thin knowing smirk
-    - (monstrous brute villain:1.2), giant, coarse hide, jagged teeth
+    - downcast eyes, clenched jaw, tear track through soot, damaged ornate coat
+    - narrowed eyes, thin smirk, fingertips joined above a glowing tactical display
+    - gigantic hunched figure, coarse hide, jagged teeth, oversized clenched fists
 
   neutral_archetype:
     - (trench coat with hidden gadget pouches:1.2), tinted goggles
-    - scarred knuckles, worn leather jacket, (brooding:1.1)
+    - scarred knuckles, worn leather jacket, lowered brow, downcast gaze
     - lab coat, safety goggles pushed up, ink-stained fingers
     - notepad and camera in hand, trench coat, sharp focused eyes
     - grizzled face, (weathered scars:1.1), grey-streaked hair
@@ -37,15 +37,15 @@ gkr_comics:
   age:
     - young adult, aged 20s
     - adult, aged 30s-40s
-    - seasoned veteran, aged 50s-60s, weathered face
-    - ageless being, ancient, timeless, unnaturally smooth skin
+    - aged 50s-60s, weathered face, grey-streaked hair, deep eye creases
+    - unnaturally smooth unlined skin, pale glowing eyes, waist-length white hair
 
   build:
     - lean athletic build, toned, defined
-    - bulky muscular build, powerful, heavy
-    - tall and imposing build, intimidating
+    - bulky muscular build, thick torso, heavy limbs
+    - tall broad-shouldered build, filling the frame
     - agile compact build, acrobatic
-    - graceful toned build, elegant
+    - long-limbed toned build, upright balanced posture
 
   tone:
     - light skin tone, fair skin
@@ -68,8 +68,8 @@ gkr_comics:
     - tight curls, coiled, voluminous
     - shaved head, bald, clean shaven
     - dramatic comic book spikes, (spiky hair:1.2)
-    - classic hero side part, neat, well-groomed
-    - wild villain mane, untamed, feral
+    - neat side-parted hair, glossy comb lines
+    - tangled voluminous mane, flyaway strands
 
   hair_color:
     - black hair
@@ -95,17 +95,17 @@ gkr_comics:
 
   expression:
     - furrowed brow, set jaw, narrowed eyes
-    - stoic focused expression, calm
-    - (confident smirk:1.2), smug
+    - level gaze, relaxed brow, closed mouth
+    - one-sided raised-lip smirk, lifted eyebrow
     - intense battle shout, open mouth, screaming
     - grim brooding look, shadowed face
     - kind reassuring smile, gentle
-    - (maniacal villain grin:1.2), wide smile, bared teeth
+    - extremely wide asymmetrical grin, bared teeth, raised cheeks
     - surprised shock expression, wide eyes
 
   costume:
-    - (skin tight hero suit:1.2), spandex, classic
-    - (armored hero suit:1.2), plated, protective
+    - skin-tight spandex suit, high boots, contrasting briefs and gloves
+    - interlocking plated bodysuit, reinforced chest and shoulders
     - long flowing cape, dramatic, billowing
     - tactical combat suit, pouches, gear, straps
     - trench coat, mask, collar turned up, fedora
@@ -116,7 +116,7 @@ gkr_comics:
     - street clothes, layered armor, urban, practical
 
   emblem:
-    - bold chest symbol, iconic
+    - oversized high-contrast chest symbol
     - stylized animal emblem, logo
     - lightning bolt emblem, symbol
     - star shaped emblem, symbol
@@ -143,13 +143,13 @@ gkr_comics:
   powers_fx:
     - crackling energy, (glowing fists:1.2), electricity
     - glowing aura, radiating light
-    - swirling magical symbols, (magic circle:1.2), arcane, glowing
+    - concentric glowing symbol rings, orbiting glyphs, sparks
     - flames surrounding body, (fire aura:1.2), embers, heat haze
     - icy mist, (ice aura:1.2), frost, cold breath
     - electric sparks, (lightning:1.2), arcing, bright
-    - telekinetic force waves, psychic, invisible force, distortion
-    - shadowy tendrils, (shadow magic:1.2), darkness, wispy
-    - cosmic dust swirl, space, (cosmic:1.2), nebula, particles
+    - concentric transparent force ripples, bent background lines, floating debris
+    - shadowy tendrils curling from raised hands, black wisps with violet rims
+    - swirling nebula dust, star particles, violet and cyan light trails
 
 # ---------------------------------------------------------
 # ENVIRONMENT
@@ -178,7 +178,7 @@ gkr_comics:
     - (black and white:1.3), noir, monochrome, greyscale
 
   camera:
-    - dynamic low angle, (hero shot:1.2), looking up
+    - dynamic low angle, foreshortened boots and raised chest, looking up
     - dramatic high angle, overhead shot, looking down
     - mid action punch shot, (impact:1.2), motion blur
     - (close up:1.2), emotional frame, portrait, intense expression
@@ -205,35 +205,35 @@ gkr_comics:
     - burning flames, embers, fire, intense heat
 
   style:
-    - (classic superhero:1.3), comic style, retro, vibrant colors
-    - (gritty graphic novel style:1.3), dark, mature, detailed ink
-    - (noir crime comic style:1.3), monochrome, heavy shadows
-    - (bright all ages:1.3), comic style, colorful, clean lines
-    - (modern cinematic:1.3), comic style, realistic shading, dramatic lighting
-    - (painterly graphic novel style:1.3), digital painting, rendered
+    - thick black contour lines, retro halftone dots, saturated primary colors
+    - dense scratchy ink, muted palette, rough paper texture, deep shadows
+    - monochrome ink wash, hard-edged shadows, pools of solid black
+    - clean rounded linework, flat bright colors, uncluttered shapes
+    - realistic gradient shading, dramatic rim light, widescreen composition
+    - visible digital brushstrokes, layered paint texture, softly blended shading
 
 # ---------------------------------------------------------
 # NEW LISTS: ARTIST, LAYOUT, ONOATOPOEIA
 # ---------------------------------------------------------
 
   artist_style:
-    - (in the style of Jim Lee:1.3), detailed ink, 90s comic style, dynamic
-    - (in the style of Mike Mignola:1.3), heavy shadows, blocky, gothic
-    - (in the style of Jack Kirby:1.3), (Kirby dots:1.2), dynamic energy, retro
-    - (in the style of Alex Ross:1.3), hyperrealistic painting, rendered, epic
-    - (in the style of Frank Miller:1.3), noir, high contrast, black and white
-    - (in the style of Moebius:1.3), clean lines, sci-fi, surreal
-    - (in the style of Todd McFarlane:1.3), exaggerated anatomy, (spaghetti webbing:1.2), dark
-    - (in the style of Fiona Staples:1.3), painterly, digital art, expressive
-    - (in the style of Bill Sienkiewicz:1.3), abstract, mixed media, experimental
+    - detailed crosshatched ink, sharp anatomy, 1990s coloring, diagonal action composition
+    - blocky silhouettes, broad pools of black, angular gothic architecture
+    - retro thick contours, foreshortened anatomy, clustered black energy dots
+    - hyperrealistic gouache painting, modeled skin, luminous highlights
+    - stark black-and-white ink, sliced silhouettes, extreme contrast
+    - fine clean contours, flat pastel colors, intricate alien machinery
+    - exaggerated anatomy, dense scratchy ink, looping threadlike webbing
+    - loose painterly digital color, economical contour lines, expressive faces
+    - splattered ink and charcoal, torn-paper collage texture, distorted anatomy
     - __gkr_comics/style__ # Fallback to a general style
 
   layout:
-    - (full-bleed splash page:1.3), epic, wide shot
-    - (dynamic split panel:1.2), action, multiple actions
+    - (full-bleed splash page:1.3), wide shot, subject spanning both pages
+    - (dynamic split panel:1.2), diagonal borders, simultaneous poses in adjacent frames
     - (inset panel:1.2), close-up focus, detail shot
     - multiple panels, comic strip layout, sequence
-    - (cinematic widescreen panel:1.2), dramatic
+    - (cinematic widescreen panel:1.2), panoramic crop, strong rim lighting
     - borderless panel, modern
 
   onomatopoeia:
@@ -253,16 +253,16 @@ gkr_comics:
     - "__gkr_comics/hero_archetype__, __gkr_comics/age__, __gkr_comics/build__, __gkr_comics/tone__, __gkr_comics/hair__, __gkr_comics/hair_color__, __gkr_comics/eyes__, __gkr_comics/expression__, __gkr_comics/costume__, __gkr_comics/emblem__, __gkr_comics/accessories__, __gkr_comics/powers_fx__, __gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/artist_style__, __gkr_comics/camera__"
 
   vigilante_combo:
-    - "(masked vigilante:1.2), __gkr_comics/build__, __gkr_comics/tone__, hooded vigilante outfit, trench coat, utility belt, __gkr_comics/city_background__, (gritty graphic novel style:1.3), __gkr_comics/mood__, __gkr_comics/artist_style__, __gkr_comics/camera__"
+    - "full eye mask, crouched posture, __gkr_comics/build__, __gkr_comics/tone__, dark hood, trench coat, utility belt, __gkr_comics/city_background__, dense scratchy ink and rough paper texture, __gkr_comics/mood__, __gkr_comics/artist_style__, __gkr_comics/camera__"
 
   villain_combo:
     - "__gkr_comics/villain_archetype__, __gkr_comics/age__, __gkr_comics/build__, __gkr_comics/hair__, (glowing red eyes:1.3), (maniacal villain grin:1.2), __gkr_comics/costume__, __gkr_comics/emblem__, __gkr_comics/powers_fx__, __gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/fx_environment__, __gkr_comics/artist_style__, __gkr_comics/camera__"
 
   noir_detective_combo:
-    - "__gkr_comics/neutral_archetype__, seasoned veteran, (city skyline at night:1.2), (noir crime comic style:1.3), __gkr_comics/mood__, (black and white:1.2), (in the style of Frank Miller:1.3), __gkr_comics/camera__, swirling smoke"
+    - "__gkr_comics/neutral_archetype__, grey-streaked hair and weathered face, (city skyline at night:1.2), monochrome ink with hard-edged shadows, __gkr_comics/mood__, (black and white:1.2), stark sliced silhouettes and pools of solid black, __gkr_comics/camera__, swirling smoke"
 
   cosmic_hero_combo:
-    - "(cosmic champion:1.2), (ageless being:1.1), (glowing cosmic skin:1.1), (cosmic armor with glowing lines:1.2), floating, (futuristic city:1.2), (cosmic dust swirl:1.1), (bright flat colors:1.2), __gkr_comics/artist_style__, __gkr_comics/mood__, __gkr_comics/camera__"
+    - "radiant figure floating above the skyline, unlined face and pale glowing eyes, (nebula-textured glowing skin:1.1), (armor traced with luminous lines:1.2), (glass-and-chrome tower city:1.2), swirling star particles and violet nebula dust, (bright flat colors:1.2), __gkr_comics/artist_style__, __gkr_comics/mood__, __gkr_comics/camera__"
 
   comic_scene_combo:
     - "__gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/panel_style__, __gkr_comics/fx_environment__, __gkr_comics/camera__, __gkr_comics/layout__, __gkr_comics/artist_style__"
@@ -401,15 +401,15 @@ gkr_comics:
     - superhero landing, epic three-point pose, debris flying everywhere, dynamic comic style
     - masked vigilante, on a rooftop overlooking a neon city at night, moody noir style
     - powerful punch, creating a bursting comic book shockwave, action scene, bold ink lines
-    - superhero, lifting a collapsing bus, saving fleeing civilians, epic comic panel
-    - ominous villain, emerging from swirling smoke, glowing red eyes, dramatic lighting
+    - caped figure bracing beneath a collapsing bus while civilians flee, full-page low-angle panel
+    - cloaked figure emerging from swirling smoke, glowing red eyes, harsh underlighting
     - dynamic mid-air chase, flying between skyscrapers, action-packed comic style, motion blur
     - hero, blocking a laser beam, glowing energy shield, action scene
     - noir detective, walking in a rain-soaked alley, dim streetlights, moody shadows, noir comic style
     - cyber hero, jumping between rooftop antennas, during a lightning storm, futuristic comic style
-    - super strength, hero, catching a falling building beam, action scene, straining
-    - dramatic standoff, hero and villain on a bridge at sunset, confrontation
-    - villain, raising a crackling orb of energy, dark magic, maniacal laugh
+    - muscular figure catching a falling steel beam, bent knees, bulging arms, flying dust
+    - two costumed figures facing each other across a bridge at sunset, fists raised
+    - cloaked figure raising a crackling black-violet energy orb, head thrown back, mouth wide
     - comic panel, hero walking away from an exploding car, explosion, action hero
     - masked archer, firing an arrow mid-leap, between rooftops, action pose
     - giant robot, smashing through a skyscraper, glass shattering everywhere, mecha destruction
@@ -417,18 +417,18 @@ gkr_comics:
     - cosmic hero, flying through a star-filled void, trailing energy, space scene
     - hero, tearing open mechanical armor, fighting a robot, sparks flying
     - speedster, racing through the city, leaving glowing streaks, blur effect
-    - heroine, shielding a child from an explosion, glowing forcefield, heroic save
-    - villain, sitting on a throne of broken machinery, evil leader, dark lair
+    - armored woman crouched over a child before an explosion, glowing forcefield arcing around them
+    - scarred figure sitting on a throne of broken machinery, ranks of bowed silhouettes in a dark lair
     - epic clash of fists, two heroes collide mid-air, energy shockwave, dynamic action
     - comic splash page, a meteor crashing into the city, massive destruction, disaster scene
     - masked heroine, swinging on a cable, high above city traffic, action pose
     - giant monster, looming over the skyline, heroes assembling to fight, kaiju attack
     - superhero, punching through a warehouse door, splintering wood, dramatic entrance
-    - mysterious cloaked figure, stepping out of the shadows, ominous, noir
-    - hero, climbing a burning tower, flames and smoke, rescue mission
+    - face-obscuring cloaked figure stepping from a solid black doorway, stark monochrome ink
+    - costumed figure climbing a burning tower toward silhouettes at a window, flames and smoke
     - cosmic titan, gripping a shattered moon fragment, epic space scene, giant
     - hero, gripping a ledge with one hand, lightning flashes in background, dramatic peril
-    - villain, unleashing a swarm of robotic drones, evil army, sci-fi
+    - armored figure extending one hand as hundreds of red-eyed robotic drones fill the sky
     - sidekick duo, leaping toward the camera, dynamic foreshortening, action pose
     - hero, standing in a crater, from a superhero landing, smoking ground
     - detective, shining flashlight in abandoned subway tunnel, dark and moody, noir style
@@ -446,23 +446,23 @@ gkr_comics:
     - hero, leaping from fiery wreckage, dramatic escape, explosion
     - cybernetic villain, crawling out of a destroyed robot shell, cyborg, damaged
     - gritty rooftop interrogation, under a stormy sky, noir scene, rain
-    - hero, holding a tattered flag, on a battlefield, patriotic, victory
+    - battered caped figure gripping a tattered flag amid battlefield smoke, upright backlit pose
     - space hero, hovering in a colorful alien canyon, sci-fi landscape
     - villain, breaking free from glowing energy chains, powerful escape
     - duel, hero and villain fighting atop a skyscraper antenna, high-altitude battle
     - hero, outrunning a collapsing highway, destruction chase, action
-    - mysterious artifact, glowing in the hero's hands, magic item
+    - faceted relic glowing between a masked figure's hands, runes reflected across the face
     - detective, silhouetted by flashing police lights, noir crime scene
     - armored antihero, charging through enemy gunfire, bullets sparking off armor
     - comic freeze-frame, speedster dodging bullets, slow motion effect
     - hero, swinging a huge car door like a shield, improvised weapon, action
     - villain, flying backward from a massive punch, impact frame, action
     - masked heroine, breaking through a stained-glass window, dynamic entry, glass shattering
-    - flying hero, saving a falling passenger plane, heroic rescue
+    - flying caped figure braced beneath the nose of a falling passenger plane, engines smoking
     - hero, firing a grappling hook through a shattered window, action pose
-    - super villain, summoning a dark storm above the city, weather magic, ominous
+    - black-armored figure raising both arms beneath a spiraling storm over the city, forked lightning
     - intense stare-down, hero and villain in close-up panel, dramatic confrontation
-    - hero, entering a villain's neon-lit hideout, stealth mission, futuristic
+    - masked figure slipping through the doorway of a neon-lit hideout, crouched beneath scanning beams
     - cosmic heroine, channeling stellar energy, glowing hair, space magic
     - giant mechanical octopus, attacking the harbor, robot monster, tentacles
     - team of heroes, charging forward together, unified splash page, team shot
@@ -472,25 +472,25 @@ gkr_comics:
     - comic-style onomatopoeia, bursting across the action scene, POW, WHAM
     - cliffside battle, crashing waves below, dramatic fight scene
     - masked martial artist, delivering a spinning kick, dynamic action pose
-    - hero, diving to rescue a falling civilian, heroic save, action
-    - cosmic entity, spreading galaxy-like wings, space god, nebula
+    - caped figure diving headfirst with arms extended toward a falling civilian, speed lines below
+    - colossal luminous figure spreading galaxy-textured wings across a violet nebula
     - villain, escaping through a swirling energy portal, magic escape
     - hero, soaring out of an explosion cloud, dynamic action, smoke
     - detective, confronting a masked figure on a foggy pier, noir mystery
     - hero, glowing armor plates activating, transformation sequence
     - antihero, firing grappling guns in two directions, dual wielding, action pose
     - giant tank mecha, rolling through city streets, war machine, destruction
-    - team of villains, striking an iconic pose in their lair, evil team shot
+    - five menacing costumed figures in a triangular lineup inside a dark lair, low-angle group shot
     - hero, standing in the spotlight of hovering police drones, futuristic police
     - comic noir bar, lit by neon signs, cigarette haze, moody interior
     - armored hero, blocking a meteor with a shield, epic defense, space
-    - villain, riding a levitating throne high above the city, evil ruler
-    - fan-favorite heroic pose, cape flowing dramatically, iconic, bold comic style
+    - armored figure seated on a levitating throne high above the city, citizens tiny below
+    - wide-legged raised-fist pose, cape flowing dramatically, bold contour lines and saturated colors
     - hero, punching a villain through a concrete wall, epic impact, super strength
     - energy mage, hovering above the city, casting a massive shield bubble, magic defense
     - masked vigilante, sprinting across rooftops in the rain, night action
     - hero, charging a glowing energy punch, illuminating the entire scene, power up
     - cosmic battle, unfolding above a ringed planet, spaceships and lasers, sci-fi war
     - underwater heroine, fighting robotic serpents, ocean battle, action
-    - hero standing victorious, villains fleeing into the shadows, end scene of comic
-    - final splash page, hero raising fist, hopeful sunrise breaks over city, victory
+    - upright caped figure in the foreground while masked opponents flee into deep shadows
+    - full-bleed splash page, caped figure raising a fist as warm sunrise breaks over the city

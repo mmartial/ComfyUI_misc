@@ -9,61 +9,61 @@ gkr_japan:
 # ---------------------------------------------------------
 
   archetype:
-    - (wandering ronin:1.2), japanese man, weathered
-    - (disciplined samurai:1.2), japanese man, focused expression
-    - (stealthy ninja:1.2), masked, dark clothing
+    - japanese man in a travel-stained kimono, straw sandals, unshaven face, hand resting on a sheathed katana
+    - samurai in lacquered lamellar armor, squared stance, focused gaze, both hands on a katana hilt
+    - ninja in matte black wrapped clothing, crouched low with a kunai held close to the body
     - (shrine maiden:1.2), miko, japanese woman, red and white robes
     - (armored onna bugeisha:1.2), female warrior, japanese, naginata
-    - (mysterious monk:1.2), robes, serene, shaved head
-    - (temple guardian:1.2), nio guardian, japanese man, protective stance
-    - (yokai hunter:1.2), talismans, determined expression
-    - (mountain ascetic:1.2), yamabushi, simple robes, wise
-    - (wise onmyoji:1.2), japanese sorcerer, intricate robes, paper talismans
+    - japanese monk with shaved head, layered robes, prayer beads, lowered gaze
+    - muscular japanese temple guard with bare arms, flared robes, clenched fists, wide blocking stance
+    - japanese figure in a charm-covered coat, narrowed eyes, glowing ofuda raised toward the foreground
+    - weathered japanese yamabushi in layered white robes, rope sash, pompom stole, conch shell at the hip
+    - elderly japanese onmyoji in patterned court robes, long white beard, paper talismans orbiting raised hands
     - japanese ninja, matte black bodysuit with glowing circuit-line seams, cybernetic forearm plating, neon accents
     - (street samurai:1.2), tailored dark suit jacket over t-shirt, katana, urban tokyo backstreet
     - (modern swordsman:1.2), kendo, modern clothes
     - japanese woman, (sequined stage costume:1.1), holding a handheld microphone, bright stage smile, one arm raised mid-performance
     - japanese teenager, (spiky multicolor hair:1.1), oversized expressive eyes, determined clenched fist pose, wind-blown school uniform
     - japanese hero, (segmented ridged bodysuit with chest emblem:1.1), oversized boots, wide heroic stance, fist raised skyward
-    - (mecha pilot:1.2), pilot suit, sci-fi
+    - japanese mecha pilot in a fitted pressure suit, segmented collar, illuminated helmet visor, cockpit harness
     - masked figure, (form-fitting dark tactical clothing:1.1), tokyo rooftop silhouette
     - (magical girl warrior:1.2), anime style, frilled ribboned dress with star motifs, wand in hand
     - (wandering storyteller:1.2), biwa hoshi, lute, traveling clothes
     - japanese mercenary, weathered tactical jacket over kevlar vest, glowing neon tattoo sleeve, cybernetic hand, tokyo back alley
-    - (post apocalyptic wasteland survivor:1.2), tattered clothes, makeshift weapon
+    - dust-covered japanese survivor in patched torn layers, respirator at the neck, gripping a scrap-metal spear
     - translucent glowing humanoid figure, flowing ancient robes fading into mist, faint aura
 
   archetype_peaceful:
-    - (mysterious monk:1.2), robes, serene, shaved head
-    - (wise onmyoji:1.2), japanese sorcerer, intricate robes
+    - japanese monk with shaved head, layered robes, prayer beads, lowered gaze
+    - elderly japanese onmyoji in patterned court robes, long white beard, paper talismans held in both hands
     - (wandering storyteller:1.2), biwa hoshi, lute, traveling clothes
     - (shrine maiden:1.2), miko, japanese woman, red and white robes
     - (ronin poet:1.2), travel cloak, bamboo flute
-    - (tea master:1.2), serene presence
-    - (monastery calligrapher:1.2), ink stained hands
+    - tea master kneeling beside a tatami hearth, relaxed shoulders, hands arranging a ceramic chawan
+    - robed monastery calligrapher kneeling over rice paper, ink-stained fingers holding a broad brush
 
   ethnicity:
     - (japanese:1.3), east asian
-    - (ryukyuan:1.3), okinawan features, japanese
-    - (ainu:1.3), indigenous japanese, distinct robes
+    - japanese person in a brightly dyed Ryukyuan bingata robe, dark hair pinned with a hibiscus ornament
+    - Ainu person in an attus robe with bold geometric appliqué, embroidered headband, dark wavy hair
     - (mixed asian:1.1), east asian features
-    - (fantasy inspired japanese:1.2), anime style, east asian
+    - east asian face rendered with clean cel-shaded contours, enlarged reflective eyes, sharply grouped hair strands
 
   age:
     - (young adult:1.1), 20s
     - (adult:1.1), 30s
     - (mature:1.1), 40s or 50s
-    - (elderly wise figure:1.2), wrinkles, white hair
-    - (ageless spirit form:1.2), ethereal, glowing
+    - elderly adult, deeply lined face, white hair, age-spotted hands
+    - translucent adult figure, smooth unlined face, white hair dissolving into pale light
 
   build:
     - (slender build:1.1), thin
     - (athletic build:1.1), muscular
-    - (graceful build:1.1), poised
-    - (agile build:1.1), nimble
-    - (powerful build:1.1), strong
-    - (tall and poised:1.1), elegant
-    - (compact and stealthy:1.1), short
+    - lean build, elongated limbs, balanced upright posture
+    - wiry athletic build, weight held on the balls of the feet
+    - broad muscular build, thick shoulders and forearms
+    - tall slender build, straight back, relaxed shoulders
+    - short compact build, crouched posture, elbows tucked close
     - (armored and imposing:1.2), large, heavy armor
 
   tone:
@@ -71,8 +71,8 @@ gkr_japan:
     - (peach tinted skin:1.1), fair skin, rosy cheeks
     - (warm tan skin:1.1), light brown skin
     - (lightly sun touched skin:1.1), light tan
-    - (porcelain smooth skin:1.2), flawless skin
-    - (ghostly pale skin:1.2), white skin, ethereal
+    - (porcelain smooth skin:1.2), even pale complexion, soft diffuse highlights
+    - (ghostly pale skin:1.2), translucent white complexion, faint blue subsurface glow
     - (warm golden toned skin:1.1), golden tan
 
 # ---------------------------------------------------------
@@ -121,15 +121,15 @@ gkr_japan:
     - (oni style glowing red eyes:1.2), demonic, glowing
 
   expression:
-    - (calm composed expression:1.1), serene
+    - relaxed brow, closed mouth, steady forward gaze
     - (stoic warrior focus:1.1), serious, determined
-    - (intense determination:1.2)
-    - (quiet confidence:1.1), slight smile
+    - knitted brows, clenched jaw, fixed forward gaze
+    - level gaze, relaxed brow, slight closed-mouth smile
     - (fierce battle cry:1.2), open mouth, yelling
     - (gentle smile:1.1)
-    - (mysterious smirk:1.1)
-    - (serene meditative look:1.1), closed eyes
-    - (heroic dramatic expression:1.2), determined
+    - one raised eyebrow, asymmetric closed-mouth smirk, sidelong gaze
+    - closed eyes, relaxed brow and jaw
+    - raised chin, knitted brows, eyes fixed upward
     - (anime shocked expression:1.2), wide eyes, surprised
     - (anime power up expression:1.2), gritted teeth, glowing aura
 
@@ -139,11 +139,11 @@ gkr_japan:
 
   clothing:
     - (silk kimono:1.2), elegant patterns, traditional japanese
-    - (battle kimono:1.2), reinforced plates, warrior
+    - (battle kimono:1.2), heavy wrapped sleeves tied back with cords, split hem, dark quilted fabric
     - (ninja uniform:1.2), shinobi shozoku, hood, dark
     - (hakama and haori ensemble:1.2), traditional japanese
-    - (o-yoroi:1.2), lacquered lamellar armor plates laced with silk cord, kabuto helmet
-    - (lacquered battle armor:1.2), samurai
+    - (ceremonial hitatare:1.2), broad sleeves, woven clan crests, pleated hakama
+    - (sleeveless jimbaori surcoat:1.2), bold clan crest, contrasting silk edging
     - (shrine maiden robes:1.2), miko, red and white
     - monk robes, simple, prayer beads
     - casual yukata, summer kimono
@@ -171,7 +171,7 @@ gkr_japan:
     - chain armored sleeves, kusari
     - (black ninja armor:1.2), shinobi shozoku, stealthy
     - ornately lacquered ceremonial armor, gold filigree fittings, (kabuto:1.1)
-    - (mecha pilot suit:1.2), flight suit, sci-fi
+    - segmented powered exoskeleton plates over a fitted pressure suit, illuminated joints, rigid chest shell
     - (cyber armor with glowing lines:1.2), futuristic, neon
 
 # ---------------------------------------------------------
@@ -285,30 +285,30 @@ gkr_japan:
     - (shoro bell tower:1.1), temple bell
 
   era:
-    - (feudal japan:1.2), sengoku period
-    - (edo period:1.2), traditional japan
-    - (meiji restoration era:1.2), western influence, 19th century
-    - (taisho romantic era:1.2), 1920s japan, art nouveau
-    - (early modern japan:1.1), showa
-    - (modern day tokyo:1.1), contemporary
-    - (cyberpunk tokyo:1.2), neon, futuristic
-    - (near future neon city:1.2), sci-fi
-    - (post apocalyptic wasteland:1.2), ruins
-    - (mythical japan of legends:1.2), fantasy, ancient
-    - (fantasy inspired hybrid:1.2), magic
+    - Sengoku-period setting, timber fortifications, vertical clan banners, lacquered armor
+    - Edo-period setting, wooden machiya facades, paper lanterns, topknots and layered kimono
+    - Meiji-period setting, brick station buildings, gas lamps, frock coats mixed with kimono
+    - Taisho-period setting, 1920s bobbed hair, hakama with lace-up boots, art-nouveau shop signs
+    - early Showa setting, narrow wooden storefronts, enamel signs, period bicycles
+    - present-day Tokyo, glass towers, convenience-store signs, contemporary streetwear
+    - neon future Tokyo, holographic signs, wet reflective pavement, dense overhead cables
+    - near-future city, luminous transit rails, glass towers, compact service robots
+    - ruined city, collapsed concrete, rusted vehicles, windblown ash, patched clothing
+    - ancient shrine landscape, mossy stone lanterns, luminous spirit wisps, pagodas emerging through mist
+    - hybrid fantasy setting, timber shrines fused with glowing crystal arches and floating paper charms
 
   mood:
-    - (serene and peaceful:1.2), calm, tranquil
-    - (meditative calm:1.2), zen
-    - (heroic and righteous:1.2), noble, dramatic
-    - (fierce and intense:1.2), action, battle
-    - (mysterious and magical:1.2), eerie, glowing
-    - (dark and foreboding:1.2), shadows, ominous
-    - (vibrant and energetic:1.2), colorful, dynamic
-    - (elegant and refined:1.2)
-    - (nostalgic and emotional:1.2), melancholy
-    - (playful anime mood:1.2), fun, lighthearted
-    - (high tension action drama:1.2), intense
+    - balanced composition, relaxed posture, still water, generous negative space
+    - closed eyes, lowered hands, symmetrical framing, muted natural colors
+    - upright stance, chin raised, wind-blown fabric, bright rim light against dark clouds
+    - lunging pose, clenched jaw, flying debris, strong diagonal composition
+    - pools of colored glow, drifting mist, half-seen silhouettes, luminous particles
+    - deep shadows, narrow shafts of light, looming silhouettes, desaturated palette
+    - saturated colors, sweeping motion, airborne fabric, tilted composition
+    - restrained gestures, clean silhouette, polished fabric, balanced ornamental detail
+    - faded warm palette, worn surfaces, distant gaze, soft edge falloff
+    - rounded shapes, bright pastel colors, bouncing pose, wide smiling expression
+    - braced stance, wide eyes, taut fabric, converging diagonals, debris suspended midair
 
   lighting:
     - (warm lantern light:1.2), chochin, glowing
@@ -337,19 +337,19 @@ gkr_japan:
     - (isometric environmental shot:1.2), diorama
 
   style:
-    - (traditional japanese painting:1.3), (nihonga:1.2)
-    - (ukiyo e woodblock inspired style:1.3), (ukiyo-e:1.2)
+    - mineral-pigment painting on fibrous paper, flat color fields, delicate ink contours, sparse gold leaf
+    - woodblock-print rendering, bold black outlines, flat limited colors, visible paper grain, bokashi gradients
     - (cinematic realism:1.2), photorealistic, high detail
-    - (stylized anime art:1.2), anime style, vibrant
-    - (vibrant manga illustration:1.2), manga cover art, colorful
-    - (high detail concept art:1.2), artstation, intricate
-    - (cyberpunk neon style:1.2), neon, futuristic
-    - (feudal fantasy painting:1.2), fantasy
-    - (watercolor inspired aesthetic:1.2), watercolor
-    - (heroic poster illustration:1.2), dynamic
-    - (magical girl anime style:1.2), shoujo, cute
-    - (tokusatsu action style:1.2), power rangers, explosions
-    - (mecha anime dynamic style:1.2), gundam, dynamic
+    - clean cel shading, crisp contours, saturated accent colors, large reflective eyes
+    - dense ink contours, halftone shadows, saturated cover colors, bold diagonal layout
+    - intricate production-design painting, sharply rendered materials, layered atmospheric depth
+    - cyan and magenta neon palette, wet reflections, deep black shadows, chromatic bloom
+    - textured painted brushwork, weathered feudal materials, luminous supernatural effects
+    - translucent watercolor washes, soft pigment blooms, visible cold-press paper texture
+    - screen-printed poster treatment, low-angle figure, radiating lines, strong limited palette
+    - pastel cel shading, sparkling highlights, floral borders, flowing ribbon shapes
+    - practical suit texture, miniature city set, low camera angle, sparks and pyrotechnic smoke
+    - hard-surface cel shading, speed lines, foreshortened machinery, bright energy bloom
 
   fx_magic:
     - (swirling sakura petals:1.2), pink, magic
@@ -417,12 +417,12 @@ gkr_japan:
 # ---------------------------------------------------------
 
   thematic_combos:
-    - "(disciplined samurai:1.3), (ornately lacquered o-yoroi armor:1.2), feudal japan era, standing in (cyberpunk tokyo:1.2), neon lit alleyways, cinematic realism, confused expression"
+    - "japanese samurai in ornately lacquered o-yoroi armor, standing rigidly beneath holographic signs in a wet neon Tokyo alley, raised eyebrows and parted lips, photorealistic materials"
     - "__gkr_japan/yokai__, __gkr_japan/yokai_traits__, on a (bustling modern tokyo street:1.2), neon reflections, high detail concept art, scared onlookers"
-    - "__gkr_japan/archetype_peaceful__, __gkr_japan/offhand_peaceful__, near a __gkr_japan/props_items__, in a (zen garden:1.2), __gkr_japan/architecture_interior__, (serene and peaceful:1.2), soft morning light, (traditional japanese painting:1.2)"
-    - "(stealthy ninja:1.3), (ninja uniform:1.2), crouching, on a temple rooftop, __gkr_japan/architecture_exterior__, (moonlit blue tones:1.2), dark and foreboding, stylized anime art"
-    - "(yokai hunter:1.3), determined expression, spirit ward talisman, facing an __gkr_japan/yokai__, in a (yokai haunted forest:1.2), dramatic backlight, anime fantasy style"
-    - "(mecha pilot:1.2), pilot suit, standing next to a __gkr_japan/spotlight_mecha__, on a cyber rooftop view, glowing city skyline, (mecha anime dynamic style:1.2)"
+    - "__gkr_japan/archetype_peaceful__, __gkr_japan/offhand_peaceful__, beside __gkr_japan/props_items__, in a raked stone garden viewed through __gkr_japan/architecture_interior__, relaxed posture, soft morning light, mineral-pigment painting on fibrous paper"
+    - "masked japanese figure in a matte black wrapped uniform, crouching on a temple rooftop beside __gkr_japan/architecture_exterior__, moonlit blue tones, deep shadows and looming silhouettes, clean cel shading"
+    - "japanese hunter in a charm-covered coat, narrowed eyes, glowing ofuda raised toward __gkr_japan/yokai__, among twisted trees and low mist, dramatic backlight, textured painted contours"
+    - "japanese pilot in a fitted pressure suit and illuminated visor, standing beside __gkr_japan/spotlight_mecha__, on a neon-lit rooftop above Tokyo, hard-surface cel shading and bright energy bloom"
 
 # ---------------------------------------------------------
 # KIMONO
@@ -885,28 +885,34 @@ gkr_japan:
 # ---------------------------------------------------------
 
   hero_combo_full:
-    - "__gkr_japan/archetype__, __gkr_japan/era__, __gkr_japan/ethnicity__, __gkr_japan/age__, __gkr_japan/build__, __gkr_japan/tone__, __gkr_japan/hair__, __gkr_japan/hair_color__, __gkr_japan/eyes__, __gkr_japan/expression__, __gkr_japan/clothing__, __gkr_japan/textile_patterns__, __gkr_japan/armor__, __gkr_japan/weapons__, __gkr_japan/offhand__, __gkr_japan/trinkets__, __gkr_japan/environment__, __gkr_japan/mood__, __gkr_japan/lighting__, __gkr_japan/camera__, __gkr_japan/style__, __gkr_japan/fx_magic__, __gkr_japan/fx_environment__"
+    - "japanese warrior in lacquered lamellar armor over a patterned hitatare, __gkr_japan/age__, __gkr_japan/build__, __gkr_japan/tone__, __gkr_japan/hair__, __gkr_japan/hair_color__, __gkr_japan/eyes__, __gkr_japan/expression__, katana held in both hands, feudal castle courtyard with clan banners, __gkr_japan/lighting__, __gkr_japan/camera__, __gkr_japan/style__, __gkr_japan/fx_environment__"
 
   hero_combo_lite:
-    - "__gkr_japan/archetype__, __gkr_japan/weapons__, in a __gkr_japan/environment__, __gkr_japan/mood__, __gkr_japan/style__, __gkr_japan/camera__"
+    - "__gkr_japan/archetype__, __gkr_japan/expression__, __gkr_japan/camera__, __gkr_japan/lighting__, __gkr_japan/style__"
 
   ninja_combo:
-    - "(stealthy ninja:1.2), __gkr_japan/era__, __gkr_japan/build__, __gkr_japan/tone__, __gkr_japan/hair__, __gkr_japan/eyes__, (ninja uniform with hood:1.2), light leather armor, kunai throwing knives, shuriken, __gkr_japan/offhand__, __gkr_japan/environment__, fierce and intense mood, (moonlit blue tones:1.2), (dynamic action pose:1.2), (stylized anime art:1.2), __gkr_japan/fx_magic__, __gkr_japan/fx_environment__"
+    - "masked japanese figure, __gkr_japan/build__, __gkr_japan/tone__, __gkr_japan/eyes__, matte black wrapped uniform with hood and fitted leather guards, kunai held in reverse grip, crouching on a tiled temple roof above an Edo-period street, moonlit blue tones, strong diagonal framing, clean cel shading, __gkr_japan/fx_environment__"
 
   samurai_combo:
-    - "(disciplined samurai:1.2), __gkr_japan/era__, __gkr_japan/age__, __gkr_japan/build__, __gkr_japan/tone__, __gkr_japan/hair__, __gkr_japan/eyes__, (ornately lacquered o-yoroi armor:1.3), __gkr_japan/textile_patterns__, (katana:1.2), __gkr_japan/offhand__, (feudal castle courtyard:1.2), noble and composed mood, warm lantern light, (low angle epic shot:1.2), (cinematic realism:1.2)"
+    - "japanese samurai, __gkr_japan/age__, __gkr_japan/build__, __gkr_japan/tone__, __gkr_japan/hair__, __gkr_japan/eyes__, ornately lacquered o-yoroi armor with __gkr_japan/textile_patterns__, katana held point-down, feudal castle courtyard, upright still posture, warm lantern light, low-angle wide shot, photorealistic materials"
 
   yokai_combo:
-    - "__gkr_japan/yokai__, __gkr_japan/yokai_traits__, __gkr_japan/monster_environment__, (mysterious and magical mood:1.2), (glowing magical aura:1.2), (dramatic backlight:1.2), anime fantasy style, __gkr_japan/fx_environment__"
+    - "__gkr_japan/yokai__, __gkr_japan/yokai_traits__, __gkr_japan/monster_environment__, pools of colored glow and drifting mist, luminous aura tracing the silhouette, dramatic backlight, textured painted contours, __gkr_japan/fx_environment__"
 
   anime_combo:
-    - "japanese teenager, __gkr_japan/era__, __gkr_japan/hair_color__, __gkr_japan/eyes__, (frilled ribboned outfit with star motifs:1.2), (energy katana:1.2), glowing anime effects, neon city skyline, (vibrant and energetic mood:1.2), anime style bright lighting, (anime hero pose:1.2)"
+    - "japanese teenager, __gkr_japan/hair_color__, __gkr_japan/eyes__, frilled ribboned outfit with star motifs, glowing energy katana, concentric light rings and sparkling particles, neon Tokyo skyline, saturated colors, bright cel shading, wide stance with blade raised"
 
   cyber_combo:
-    - "(stealthy ninja:1.3), (cyberpunk tokyo:1.2), __gkr_japan/hair__, neon purple hair, (glowing cyber eyes:1.2), (cyberpunk jacket with neon accents:1.2), (energy katana:1.2), data tablet, (neon lit alleyways:1.2), dramatic and intense mood, (neon reflections:1.2), (dynamic action pose:1.2), (cyberpunk neon style:1.2), __gkr_japan/fx_magic__, __gkr_japan/fx_environment__"
+    - "masked japanese rooftop infiltrator, __gkr_japan/hair__, neon purple hair, luminous cybernetic irises, asymmetric jacket with cyan piping, energy katana and holographic data tablet, wet neon-lit Tokyo alley, lunging pose, cyan-magenta reflections, deep black shadows, __gkr_japan/fx_environment__"
 
   scene_combo:
-    - "__gkr_japan/environment__, __gkr_japan/lighting__, __gkr_japan/mood__, __gkr_japan/fx_environment__, elegant three quarter angle, high detail concept art"
+    - "__gkr_japan/environment__, __gkr_japan/lighting__, __gkr_japan/fx_environment__, three-quarter environmental view, sharply rendered materials, layered atmospheric depth"
+
+  peaceful_combo:
+    - "__gkr_japan/archetype_peaceful__, __gkr_japan/offhand_peaceful__, beside __gkr_japan/props_items__, tatami room opening onto a raked stone garden, relaxed posture, soft morning light, mineral-pigment painting on fibrous paper"
+
+  modern_combo:
+    - "japanese adult in layered contemporary Tokyo streetwear, __gkr_japan/hair__, __gkr_japan/hair_color__, __gkr_japan/eyes__, __gkr_japan/expression__, glass storefronts and overhead rail lines, wet pavement reflections, street-level medium shot, crisp cinematic realism"
 
   random_kimono:
     - "__gkr_japan/kimono_type__, __gkr_japan/kimono_color__, with a __gkr_japan/kimono_pattern__, wearing a __gkr_japan/kimono_obi__, and __gkr_japan/kimono_accessory__"
@@ -920,6 +926,8 @@ gkr_japan:
     - "__gkr_japan/anime_combo__"
     - "__gkr_japan/cyber_combo__"
     - "__gkr_japan/scene_combo__"
+    - "__gkr_japan/peaceful_combo__"
+    - "__gkr_japan/modern_combo__"
     - "__gkr_japan/thematic_combos__"
     - "__gkr_japan/random_kimono__"
     - "__gkr_japan/spotlight_characters__"
@@ -929,7 +937,7 @@ gkr_japan:
     - "__gkr_japan/spotlight_kimono__"
 
   random_character:
-    - "__gkr_japan/archetype__, __gkr_japan/era__, __gkr_japan/ethnicity__, __gkr_japan/age__, __gkr_japan/build__, __gkr_japan/tone__, __gkr_japan/hair__, __gkr_japan/hair_color__, __gkr_japan/eyes__, __gkr_japan/expression__, __gkr_japan/clothing__, __gkr_japan/armor__, __gkr_japan/weapons__, __gkr_japan/offhand__, __gkr_japan/trinkets__"
+    - "__gkr_japan/archetype__, __gkr_japan/age__, __gkr_japan/build__, __gkr_japan/tone__, __gkr_japan/hair__, __gkr_japan/hair_color__, __gkr_japan/eyes__, __gkr_japan/expression__, __gkr_japan/trinkets__"
   
   random_backgrounds:
     - "__gkr_japan/environment__, __gkr_japan/mood__, __gkr_japan/lighting__, __gkr_japan/fx_environment__"
@@ -1362,10 +1370,9 @@ gkr_japan:
     - (kikkou tortoise shell pattern:1.3) on a hitatare under-armor robe, hexagonal pattern, symbol of longevity, metallic thread
     - (yukata for a man:1.2), dark blue, simple geometric pattern, kaku obi, watching fireworks, summer night, realistic
     - (shioze silk kimono:1.3), lightweight, pale pink iromuji, rinzu damask, (understated elegance:1.2), tea master, serene
-    - (woman in a (modern kimono:1.2) with (bold poppy flower print:1.3), art nouveau, bright colors, harajuku street, fashion photography
-    - (hand-painted (ume plum blossom pattern:1.3) on a nagoya obi, artistic, white silk, subtle beauty, high detail
-    - (kimono with (tatewaku pattern:1.3), rising steam, elegant vertical curves, often with other motifs, Heian period, traditional art
+    - woman in a (modern kimono:1.2) with (bold poppy flower print:1.3), sinuous floral lines, bright colors, Harajuku street, full-length fashion photograph
+    - hand-painted (ume plum blossom pattern:1.3) on a white silk nagoya obi, fine brush contours, restrained spacing, macro textile detail
+    - kimono with (tatewaku pattern:1.3), repeated rising-steam curves with small floral motifs, layered Heian-period styling, mineral-pigment illustration
     - (vintage furisode:1.3) with (yuzen painting of butterflies:1.2) and peonies, gold leaf details, showa era, gorgeous, masterpiece
-    - (samurai in a (silk hitatare:1.2) under armor, large sleeves, family crest, formal court wear, sengoku period, historical painting
-    - (woman admiring a (kimono on a rack:1.2), tomesode, (breathtaking landscape painting:1.3) on the hem, yuzen, art gallery
-
+    - samurai in a (silk hitatare:1.2) beneath armor, large sleeves, family crest, Sengoku-period fittings, textured historical illustration
+    - woman admiring a (kimono on a rack:1.2), tomesode with a (detailed landscape painting:1.3) across the hem, yuzen dyeing, white-walled gallery

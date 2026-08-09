@@ -11,75 +11,77 @@ gkr_popculture:
   archetype:
     - (form-fitting primary-color bodysuit:1.2), chest emblem, cape snapping in the wind, fists on hips
     - (full face mask, dark hooded cloak:1.2), crouched on a rooftop ledge, silhouetted against distant neon glow
-    - (weathered hands resting on a carved wooden staff:1.1), long white beard, calm half-lidded eyes
+    - (weathered hands resting on a carved wooden staff:1.1), long white beard, half-lidded eyes, relaxed brow
     - dirt-streaked jacket with a torn sleeve, bandana tied around one arm, (jaw set, eyes narrowed:1.1)
     - weathered leather jacket over a patched flight suit, (holstered blaster on the hip:1.1), lopsided grin
-    - alien warrior, mottled iridescent skin, ridged brow, (armor of overlapping bone plates and braided cord:1.1)
+    - broad-shouldered alien with mottled iridescent skin, ridged brow, (armor of overlapping bone plates and braided cord:1.1)
     - teenager gripping (a glowing pendant:1.2) in one fist, chin lifted, stance planted wide
     - (deep scowl, arms crossed tight:1.1), black jacket collar turned up, hands stuffed in pockets
     - wide gap-toothed grin, eyebrows raised, hands mid-gesture, (mismatched patchwork outfit:1.1)
     - (matte gray plated armor with glowing amber circuitry seams:1.2), rifle slung across the chest, rigid posture
     - sun-bleached canvas vest with multiple pockets, (coiled rope over one shoulder:1.1), eyebrows raised in curiosity
     - sharply tailored black suit, sunglasses pushed low on the nose, faint smirk, (hand resting near a hidden holster:1.1)
-    - (surrounded by floating holographic schematics:1.2), wire-rimmed glasses, sleeves rolled up, focused squint
+    - (surrounded by floating holographic schematics:1.2), wire-rimmed glasses, sleeves rolled up, narrowed eyes fixed on one diagram
     - gripping (a blade wreathed in glowing runes:1.2), knuckles white, wide braced stance, sharp glare
     - weathered trench coat, collar turned up, (flashlight beam cutting through fog:1.1), narrowed watchful eyes
-    - young spellcaster, (both hands raised with sparks arcing between the fingers:1.2), flowing patched robes
-    - wide low fighting stance, fists raised, calloused knuckles, (unblinking focused stare:1.1)
+    - young figure in flowing patched robes, (both hands raised with sparks arcing between the fingers:1.2)
+    - wide low fighting stance, fists raised, calloused knuckles, (unblinking narrowed stare:1.1)
     - (veins glowing faintly beneath the skin:1.2), one hand crackling with contained energy, tensed ready stance
     - (humanoid silhouette dissolving into drifting stardust at the edges:1.2), faint nebula colors swirling beneath translucent skin
     - mismatched clothing from different decades layered together, (brass-and-glass device strapped to one wrist:1.1), ticking dials
 
-  flavor:
+  environment_accents:
     - (vast starfield with drifting nebula clouds:1.2) in the background, distant twin suns
-    - (towering stone spires and stained-glass windows glowing behind:1.2), drifting motes of magical light
-    - (bold black ink outlines, flat halftone dot shading:1.1), dynamic comic-panel composition
+    - (towering stone spires and stained-glass windows glowing behind:1.2), drifting gold-blue light motes
     - (collapsed overpasses and rusted vehicle husks:1.1) fading into dust haze in the background
     - (towering neon signage and holographic ads glowing through drifting mist:1.2) behind
     - (fog-wreathed graveyard with cracked headstones:1.1), bare twisted trees behind
     - (hulking armored mech looming in the background:1.2), hydraulic joints venting steam
     - (rows of uniformed troops and looming warships:1.1) visible in the background haze
     - (graffiti-covered concrete barricades:1.1), torn propaganda banners behind
-    - city skyline at dusk with (a faint magical shimmer hanging over the rooftops:1.1)
+    - city skyline at dusk with (a translucent rainbow shimmer hanging over the rooftops:1.1)
+
+  rendering_treatments:
+    - (bold black ink outlines, flat halftone dot shading:1.1), tilted comic-panel composition
 
 # ---------------------------------------------------------
 # APPEARANCE
 # ---------------------------------------------------------
 
   clothing:
-    - (sleek tactical suit:1.2), carbon fiber texture, high-tech seams
+    - (sleek tactical suit:1.2), carbon-fiber texture, narrow luminous seams
     - (form-fitting armor plates in bold red and blue:1.2), polished metallic sheen, gold trim accents
-    - (long flowing coat:1.1), leather or wool, dramatic silhouette
+    - (long flowing coat:1.1), leather or wool, broad angular silhouette with a wind-lifted hem
     - (matte white jumpsuit with sealed seams:1.2), thin glowing blue piping along the arms
-    - (patched leather and canvas gear:1.1), rugged, weathered stitching
+    - (patched leather and canvas gear:1.1), frayed edges, weathered stitching
     - (deep indigo robes embroidered with silver runic thread:1.2), wide bell sleeves, faint blue glow along the hem
-    - hoodie, sneakers, jeans, casual streetwear
+    - oversized hoodie, low-top sneakers, faded straight-leg jeans
     - (cracked leather armor plates over a padded gambeson:1.2), scuffed edges, mismatched buckles
-    - (form-fitting bodysuit with glowing circuit lines:1.2), high-tech
+    - (form-fitting bodysuit with glowing circuit lines:1.2), sealed collar, reflective panels
     - (asymmetric zippered jacket over a fitted underlayer:1.1), single oversized shoulder pad, mismatched glove colors
 
   gear:
     - (small carved stone orb glowing from within:1.2), faint mist curling off its surface, intricate engraved bands
-    - (sword or axe etched with glowing runes:1.2), faint magical hum
-    - (compact pistol with a glowing blue energy cell:1.2), faint charging whine, vented barrel
-    - (blade made of solid glowing light:1.2), humming faintly, metal hilt with an activation switch
+    - (sword or axe etched with glowing runes:1.2), pale light spilling across the grip
+    - (compact pistol with a glowing blue energy cell:1.2), illuminated charge gauge, vented barrel
+    - (blade made of solid glowing light:1.2), bright bloom along its edges, metal hilt with an activation switch
     - tarnished bronze medallion etched with worn glyphs, chipped edges, (heavy iron chain:1.1)
     - belt pouch bristling with small tools, (a thin holographic readout flickering above one device:1.2)
     - (wooden or metal staff topped with a glowing crystal:1.2), carved grip
     - compact grapple launcher strapped to the forearm, coiled cable, (small targeting lens:1.1)
     - (wrist-mounted device projecting a small flickering blue hologram:1.2)
-    - custom-built weapon with (a hand-painted finish and worn grip tape:1.1), personal mods bolted on
+    - asymmetric weapon with (a hand-painted finish and worn grip tape:1.1), exposed wiring, mismatched screws, auxiliary sight
 
   hair:
     - (wild, high-volume hair:1.1), tousled
-    - (short, neatly styled cut:1.1), professional
+    - (short, neatly styled cut:1.1), crisp side part
     - (long flowing hair:1.1), wind-blown
     - hair with (bright neon-colored streaks:1.1)
     - (slicked-back hair, neat side part:1.1)
     - (spiky, gravity-defying hair:1.1), stylized
     - (intricately braided hair, tight rows:1.1), decorative beads or clasps
-    - (shoulder-length natural hair:1.1), casual
-    - (tidy short modern cut:1.1)
+    - (shoulder-length natural hair:1.1), loose around the face
+    - (tidy short tapered cut:1.1)
     - (asymmetric cut, one side shaved:1.1), sharp angled fringe
 
   hair_color:
@@ -96,27 +98,27 @@ gkr_popculture:
 
   eyes:
     - piercing blue eyes
-    - warm brown eyes
+    - brown eyes with broad amber catchlights
     - emerald green eyes
     - glowing neon eyes, cybernetic
     - silver metallic eyes, robotic
     - fiery red eyes, glowing
     - gentle hazel eyes
-    - dark, mysterious eyes
-    - bright anime-style eyes, large pupils
+    - dark eyes beneath lowered lids, catchlights reduced to pinpoints
+    - oversized bright eyes, large pupils, crisp cel-shaded highlights
     - cosmic galaxy eyes, glowing nebula patterns
 
   expression:
-    - heroic, determined expression
-    - confident, charismatic smirk
-    - stoic, unreadable gaze
-    - fierce, battle-ready glare
-    - hopeful, youthful look
-    - mysterious, unreadable expression
-    - intense, focused stare
-    - playful, charming grin
-    - brooding, shadowed look
-    - warm, friendly smile
+    - brows drawn inward, jaw clenched, chin raised, eyes fixed forward
+    - one-corner smirk, chin raised, direct eye contact
+    - still mouth, relaxed brow, level gaze
+    - teeth clenched, brows sharply lowered, eyes fixed forward
+    - eyes lifted toward the light, lips slightly parted, relaxed brow
+    - still mouth, lowered eyelids, gaze turned slightly away
+    - narrowed unblinking eyes, lips pressed into a straight line
+    - crooked open grin, one eyebrow raised, eyes crinkled
+    - head lowered beneath a heavy brow, face half covered by shadow
+    - broad closed-mouth smile, lifted cheeks, softly crinkled eyes
 
 # ---------------------------------------------------------
 # ENVIRONMENT
@@ -126,11 +128,11 @@ gkr_popculture:
     - (neon cityscape with flying vehicles overhead:1.2), rain-slicked streets
     - (ancient temple walls carved with glowing runes:1.2), overgrown vines
     - (starfield with glowing nebula and distant planets:1.2), deep space
-    - (command center with holographic displays:1.2), sci-fi consoles
-    - (forest clearing lit by a soft magical glow:1.2), giant mushrooms
-    - (ruined wasteland with collapsed buildings:1.2), desolate
+    - (command center with holographic displays:1.2), angular consoles covered in illuminated controls
+    - (forest clearing lit by a soft blue-green glow from giant mushrooms:1.2)
+    - (ruined wasteland with collapsed buildings:1.2), empty road fading into dust haze
     - (courtyard with gothic spires and stained glass:1.2), drifting motes of light
-    - (metallic space station corridor:1.2), sci-fi paneling
+    - (metallic space station corridor:1.2), ribbed wall panels, inset floor lights
     - (towering megacity skyline at sunset:1.2), skyscrapers
     - (castle grounds with high stone ramparts and fluttering banners:1.2), medieval
 
@@ -150,13 +152,13 @@ gkr_popculture:
     - (neon rim lighting:1.2), vibrant colors
     - (cinematic golden hour lighting:1.2), warm, dramatic
     - (dramatic shadow contrast:1.2), noir, high contrast
-    - (soft magical glow illumination:1.2)
-    - (harsh focused spotlighting:1.2), sci-fi
+    - (soft glow rising from runes and floating motes:1.2)
+    - (harsh focused spotlighting:1.2), cool cyan highlights on polished metal
     - (soft diffuse ambience:1.2), dreamy
     - (backlit silhouette lighting:1.2), dark subject
     - (colorful cel-shaded comic book lighting:1.2), bold
-    - (moody blue shadows:1.2), nighttime, cool tones
-    - (warm glowing radiance:1.2), magical
+    - (deep blue shadows:1.2), moonlit sky, cool tones
+    - (warm golden radiance:1.2), light blooming around luminous objects
 
   fx:
     - (electrical energy sparks:1.2), glowing
@@ -175,10 +177,13 @@ gkr_popculture:
 # ---------------------------------------------------------
 
   random_character:
-    - "__gkr_popculture/archetype__, __gkr_popculture/flavor__, __gkr_popculture/hair__, __gkr_popculture/hair_color__, __gkr_popculture/eyes__, __gkr_popculture/expression__, __gkr_popculture/clothing__, __gkr_popculture/gear__"
+    - "__gkr_popculture/archetype__"
+    - "single full-body character, __gkr_popculture/hair__, __gkr_popculture/hair_color__, __gkr_popculture/eyes__, __gkr_popculture/expression__, __gkr_popculture/clothing__, carrying __gkr_popculture/gear__"
 
   random_backgrounds:
     - "__gkr_popculture/environments__, __gkr_popculture/mood__, __gkr_popculture/lighting__, __gkr_popculture/fx__"
+    - "__gkr_popculture/environment_accents__, __gkr_popculture/mood__, __gkr_popculture/lighting__, __gkr_popculture/fx__"
+    - "__gkr_popculture/environments__, __gkr_popculture/rendering_treatments__, __gkr_popculture/lighting__, __gkr_popculture/fx__"
 
   random:
     - "__gkr_popculture/random_character__, __gkr_popculture/random_backgrounds__"
@@ -194,35 +199,35 @@ gkr_popculture:
 
   spotlight_characters:
     - (full face mask, sleek black tactical suit:1.2), glowing neon eyes, flowing black hair, perched atop a stone gargoyle, grappling device in hand
-    - (young wizard in patched robes, hand raised casting a glowing spell:1.2), playful grin, messy brown hair, bright wide eyes, wooden staff in the other hand
-    - (weathered leather jacket over a jumpsuit:1.2), confident smirk, scruffy dark hair, blaster pistol holstered on the hip
-    - (gripping a rune-etched blade that glows faintly:1.2), fierce glare, neon-streaked hair, patched leather and canvas gear
-    - (pilot in a form-fitting tech bodysuit:1.2), determined expression, spiky hair, silver eyes, gripping a glowing artifact
+    - (young figure in patched robes, one hand raised inside a spiral of glowing sparks:1.2), crooked grin and raised eyebrow, messy brown hair, bright wide eyes, wooden staff in the other hand
+    - (weathered leather jacket over a jumpsuit:1.2), one-corner smirk and chin raised, scruffy dark hair, blaster pistol holstered on the hip
+    - (gripping a rune-etched blade that glows faintly:1.2), teeth clenched and brows lowered, neon-streaked hair, patched leather and canvas gear
+    - (pilot in a form-fitting tech bodysuit:1.2), jaw set and eyes fixed ahead, spiky hair, silver eyes, gripping a glowing artifact
     - (long coat with popped collar, deep scowl half in shadow:1.2), glowing neon blue eyes, multicolor gradient hair, gadget-laden belt pouches
-    - (trench coat over casual streetwear:1.2), calm unreadable gaze, tidy short hair, dark eyes, an old tarnished medallion in one hand
-    - (rigid stance in a pressed gray military uniform:1.2), stern expression, metallic silver eyes, blaster rifle held across the chest
-    - (patched scavenged armor:1.2), defiant grin, wild red hair, bright green eyes, gripping a makeshift weapon welded from scrap
-    - (humanoid figure with skin faintly dusted in starlight:1.2), serene expression, glowing white hair, galaxy-flecked eyes, shimmering translucent robes, a glowing sigil hovering beside one hand
-    - (colorful patchwork tunic:1.2), friendly smile, flowing blonde hair, warm hazel eyes, fingers plucking a glowing-stringed lute
-    - (trench coat, collar up:1.2), calm serious expression, slicked-back black hair, icy blue eyes, holding a crackling handheld detector
-    - (makeshift scrap-metal armor:1.2), determined glare, messy short hair, gripping a cobbled-together weapon
-    - (traditional gi with a frayed belt:1.2), focused gaze, braided black hair, gripping a worn wooden bo staff
-    - (teenager in a casual modern outfit:1.2), chin lifted with courage, spiky anime-style hair, bright wide eyes, gripping a glowing pendant
-    - (flowing robes glowing faintly at the seams:1.2), calm expression, silver hair, glowing purple eyes, gripping a crystal-topped energy staff
-    - (sharply tailored black suit:1.2), confident smirk, tidy brown hair, holding a sleek metallic gadget
-    - (brightly mismatched patchwork outfit:1.2), wide cheerful grin, multicolor dyed hair, wide expressive eyes, holding an oversized rubber mallet
+    - (trench coat over an oversized hoodie, jeans, and sneakers:1.2), still mouth and level gaze, tidy short hair, dark eyes, an old tarnished medallion in one hand
+    - (rigid stance in a pressed gray military uniform:1.2), lips pressed thin and brows lowered, metallic silver eyes, blaster rifle held across the chest
+    - (patched scavenged armor:1.2), wide grin and chin thrust forward, wild red hair, bright green eyes, gripping a makeshift weapon welded from scrap
+    - (humanoid figure with skin faintly dusted in starlight:1.2), relaxed brow and softly closed mouth, glowing white hair, galaxy-flecked eyes, shimmering translucent robes, a glowing sigil hovering beside one hand
+    - (colorful patchwork tunic:1.2), broad smile with lifted cheeks, flowing blonde hair, amber-flecked hazel eyes, fingers plucking a glowing-stringed lute
+    - (trench coat, collar up:1.2), still mouth and narrowed eyes, slicked-back black hair, icy blue eyes, holding a crackling handheld detector
+    - (makeshift scrap-metal armor:1.2), teeth clenched and eyes fixed ahead, messy short hair, gripping a cobbled-together weapon
+    - (traditional gi with a frayed belt:1.2), unblinking narrowed gaze, braided black hair, gripping a worn wooden bo staff
+    - (teenager in a hoodie, fitted jeans, and high-top sneakers:1.2), chin raised, spiky cel-shaded hair, bright wide eyes, gripping a glowing pendant
+    - (flowing robes glowing faintly at the seams:1.2), relaxed brow and level gaze, silver hair, glowing purple eyes, gripping a crystal-topped energy staff
+    - (sharply tailored black suit:1.2), one-corner smirk and direct gaze, tidy brown hair, holding a sleek metallic gadget
+    - (brightly mismatched patchwork outfit:1.2), wide open grin and crinkled eyes, multicolor dyed hair, holding an oversized rubber mallet
     - (tattered regal clothing with faded gold trim:1.2), grim expression, white hair, eyes glowing like embers, gripping a weathered ornate blade
-    - (high-tech plated armor:1.2), sharp analytical gaze, neon-streaked ponytail, a small drone hovering at their shoulder
+    - (segmented plated armor with illuminated seams:1.2), narrowed gaze fixed on a wrist display, neon-streaked ponytail, a small drone hovering at their shoulder
     - (long flowing cape, glowing chest emblem:1.2), full face mask, dramatic pose
     - (glowing neon visor, firing plasma gauntlets:1.2), sleek armored suit, dynamic stance
-    - (rugged jacket, tactical belt:1.2), determined expression
+    - (scuffed jacket, tactical belt:1.2), jaw clenched, brows lowered, eyes fixed forward
     - (blurred motion trail, crackling colorful energy:1.2), running at full speed
-    - (glowing hands lifting rubble with psychic power:1.2), focused expression
+    - (glowing hands lifting rubble into the air:1.2), narrowed eyes, taut temples
     - (hovering with jet thrusters, glowing chest repulsors:1.2), armored power suit
     - (glowing neon-edged katana:1.2), cybernetic arm, hooded jacket
     - (drawing luminous glowing sigils in mid-air:1.2), flowing robes, glowing eyes
     - (perched atop a crumbling building ledge:1.2), long dark coat, half-shadowed face
-    - (cracking the pavement with a powerful stomp:1.2), bulky muscular frame
+    - (stomping hard enough to crack the pavement:1.2), bulky muscular frame, stone fragments rising around the boot
     - (dual-wielding pistols, dynamic action pose:1.2), sleek tailored suit
     - (surrounded by floating micro-drones, holographic interface:1.2), teenager in a tech vest
     - (gleaming chrome chest plate, holding a raygun:1.2), retro-styled helmet
@@ -232,14 +237,14 @@ gkr_popculture:
     - (gripping a futuristic steering rig:1.2), full face mask, neon-lit vehicle beneath them
     - (wielding a glowing energy shield:1.2), matte plated armor with glowing seams
     - (wreathed in crackling flames:1.2), bare forearms, gritted teeth
-    - (casting graffiti that peels off the wall and comes alive:1.2), floating magical charms strung on a cord
-    - (firing a glowing energy arrow, drawn bow:1.2), focused aim
+    - (painted graffiti creatures peeling away from the wall as luminous three-dimensional forms:1.2), floating charms strung on a cord
+    - (firing a glowing energy arrow, drawn bow:1.2), one eye closed, arrow aligned with the open eye
     - (fists releasing visible shockwaves on impact:1.2), wide combat stance
-    - (glowing pulsing rings of light circling the head:1.2), intense concentration
+    - (glowing pulsing rings of light circling the head:1.2), eyes squeezed shut, temples taut
     - (guitar reshaped into a weapon, mid power chord:1.2), sonic shockwave rippling outward
     - (flickering translucent form made of pixel shards:1.2), glowing digital silhouette
     - (armor with a metallic wolf-head motif on the chest:1.2), glowing visor
-    - (bending visible air currents while levitating:1.2), focused expression
+    - (bending visible air currents while levitating:1.2), narrowed eyes, both hands held rigid
     - (sound shockwaves rippling from a held microphone:1.2), dramatic pose
     - (wielding a glowing neon baton:1.2), retro arcade-styled jacket
     - (pulling metal debris into a floating shield:1.2), glowing hands
@@ -249,14 +254,14 @@ gkr_popculture:
     - (spinning mid-air with twin energy daggers:1.2), acrobatic pose
     - (knuckle wraps glowing faintly:1.2), full face mask, ready stance
     - (reinforced riot armor, glowing energy shield raised:1.2)
-    - (using glowing energy injection tools:1.2), focused calm expression
+    - (using glowing energy injection tools:1.2), steady hands, relaxed brow, eyes fixed on the illuminated needle
     - (phasing halfway through a wall, glowing particle distortion:1.2)
     - (throwing a swirling potion bomb mid-motion:1.2), satchel of vials at the hip
     - (hair sparking upward, hands crackling with lightning:1.2)
     - (glowing quantum pack strapped to the back:1.2), lab coat, safety goggles
     - (glossy red trench coat, face half in shadow:1.2), fedora pulled low
     - (swinging a coiled plasma lasso overhead:1.2), duster coat, wide-brim hat, holstered raygun
-    - (clad in gleaming blue plated armor:1.2), wide powerful stance
+    - (clad in gleaming blue plated armor:1.2), feet planted wide, shoulders squared
     - (flickering mid-teleport between patches of shadow:1.2), trailing particles
     - (blasting visible sonic ripples that shatter glass nearby:1.2)
     - (surrounded by floating glowing glyph cards:1.2), full face mask, glowing eyes
@@ -264,20 +269,20 @@ gkr_popculture:
     - (summoning swirling thunderclouds overhead, lightning crackling:1.2), teenager with hair whipping in the wind
     - (translucent glowing animal spirits swirling around them:1.2), earthy woven clothing
     - (wearing gauntlets crackling with shock energy:1.2), mid-punch
-    - (perched on a fire escape, drawing a bow:1.2), focused aim
+    - (perched on a fire escape, drawing a bow:1.2), one eye closed, arrow aligned with the open eye
     - (straining to carry a massive slab of debris:1.2), bulging muscles
-    - (surrounded by flickering illusory duplicates of themself:1.2), playful smirk
-    - (emitting a powerful golden glow from the skin:1.2), heroic pose
+    - (surrounded by flickering illusory duplicates of themself:1.2), crooked smirk, one eyebrow raised
+    - (golden light radiating from the skin:1.2), chin raised, chest forward, fists on hips
     - (glowing tattoo lines visible along bare forearms:1.2), martial arts stance
     - (wearing an aerodynamic helmet, seated in a cockpit:1.2)
     - (slicing through falling debris with a glowing plasma blade:1.2)
     - (holding crackling glowing rune stones, mid-spell:1.2), fingerless gloves
-    - (surrounded by swirling soft-colored light wisps:1.2), serene expression
+    - (surrounded by swirling soft-colored light wisps:1.2), relaxed brow, softly closed mouth
     - (bending darkness into curling tendrils:1.2), glowing eyes, hooded silhouette
     - (holding a sparkling microphone under stage lights:1.2), sequined jumpsuit
     - (wearing a neon-lit cybernetic rig, holographic screen glowing overhead:1.2), patched punk jacket
     - (levitating, wearing a crown of star-fire:1.2), flowing regal gown
-    - (condensing air pressure into a glowing sphere between the hands:1.2), intense focus
+    - (condensing air pressure into a glowing sphere between the hands:1.2), teeth clenched, narrowed eyes
     - (grinding along a power line, sparks flying:1.2), full face mask, hoverboard underfoot
     - (forming glowing prism-shaped shields in front of the body:1.2), defensive stance
     - (long trench coat, half-hidden in shadow:1.2), face obscured beneath a wide collar
@@ -285,7 +290,7 @@ gkr_popculture:
     - (hulking figure wrapped in rubble and dust:1.2), glowing eyes
     - (mixing glowing energy discs on holographic turntables:1.2)
     - (leaping midair, dual pistols blazing:1.2), tattered renegade jacket
-    - (bold comic-panel silhouette, cape billowing:1.2), heroic pose, muscular frame
+    - (bold comic-panel silhouette, cape billowing:1.2), chin raised, fists on hips, muscular frame
     - (unleashing a burst of glowing healing energy from the hands:1.2), full face mask
     - (projecting duplicate hard-light clones of themself:1.2), mirrored armor plating
     - (gripping a reinforced baton, braced stance:1.2), street clothes
@@ -313,32 +318,32 @@ gkr_popculture:
 
   spotlight_backgrounds:
     - (neon futuristic megacity:1.2), glowing holographic billboards, flying vehicles streaking past, rain-slicked streets
-    - (ancient enchanted temple interior:1.2), glowing runes on stone walls, magical light shafts from above, overgrown vines
-    - (post-apocalyptic ruin:1.2), dramatic dust storms, silhouettes of broken skyscrapers, desolate, moody
-    - (space station viewport:1.2), looking out at a swirling galaxy nebula, distant planets, sci-fi, awe-inspiring
-    - (wizard school courtyard at dusk:1.2), gothic architecture, magical floating lanterns, enchanting atmosphere
+    - (ancient temple interior:1.2), glowing runes on stone walls, turquoise light shafts from above, overgrown vines
+    - (ruin of collapsed concrete towers:1.2), towering dust clouds, silhouettes of broken skyscrapers, empty foreground, muted brown-gray palette
+    - (space station viewport:1.2), swirling galaxy nebula and distant planets beyond the glass, tiny silhouetted observer at the window
+    - (gothic school courtyard at dusk:1.2), pointed arches, floating lanterns casting golden pools of light, sparkling motes
     - (comic book style action backdrop:1.2), dynamic speed lines, vibrant primary colors, halftone dots
     - (cosmic void:1.2), swirling star energy, drifting asteroid debris, vibrant nebula clouds
     - (urban alleyway at night:1.2), glowing with neon signs, light fog, damp pavement reflections, noir
-    - (majestic fantasy castle bridge:1.2), banners blowing in the wind, dramatic sunset, medieval
-    - (sci-fi command center:1.2), full of holographic displays, high-tech consoles, futuristic, clean
-    - (forest illuminated by magical glowing creatures:1.2), giant luminous mushrooms, mystical, enchanted
+    - (massive stone castle bridge:1.2), crenellated towers, long banners bending in the wind, red-orange sunset
+    - (metallic command center:1.2), floating holographic displays, seamless white consoles, recessed cyan lighting, uncluttered surfaces
+    - (forest illuminated by tiny glowing winged creatures:1.2), giant luminous mushrooms, blue-green light beneath dense foliage
     - (retro 80s neon grid landscape:1.2), glowing laser horizon, wireframe mountains, synthwave style
     - (stormy rooftop at night:1.2), lightning striking nearby, heavy rain, cityscape below, dramatic, tense
-    - (quiet suburban street:1.2), mysterious unnatural glow, long shadows, eerie silence, supernatural
-    - (ancient battlefield covered in fog:1.2), ghostly echoes, tattered banners, somber, mysterious
-    - (high-tech lab interior:1.2), flickering screens, sterile environment, glowing test tubes
-    - (lush fantasy meadow:1.2), giant floating crystals, magical glow, dreamlike
+    - (empty suburban street:1.2), green glow leaking from one upstairs window, long distorted shadows, curtains hanging motionless
+    - (ancient battlefield covered in fog:1.2), translucent armored silhouettes fading among broken spears, tattered banners, cold gray palette
+    - (white laboratory interior:1.2), flickering screens, polished seamless counters, glowing test tubes
+    - (lush meadow:1.2), giant crystals floating above wildflowers, lavender glow, soft hazy edges
     - (comic-style explosion-filled action scene:1.2), bold outlines, sound effect words, dynamic
-    - (heroic sunset vista:1.2), overlooking mountains, golden hour lighting, cinematic, uplifting
+    - (lone figure on a high overlook above layered mountains:1.2), golden-hour backlight, low-angle wide composition, cape lifted by the wind
     - (dark futuristic throne room:1.2), glowing with energy, imposing architecture, dramatic shadows
     - (nighttime city skyline:1.2), filled with neon billboards, light trails from vehicles, vibrant
     - (rooftop helipad:1.2), glowing under rainstorm, city lights reflecting on wet surface
-    - (urban alley drenched in neon reflections:1.2), steam rising from vents, cyberpunk
+    - (urban alley drenched in magenta and cyan reflections:1.2), steam rising from vents, dense illuminated signage and exposed cables
     - (comic-book style street:1.2), exaggerated shadows, bold lines, dramatic perspective
     - (retro arcade:1.2), lit by rainbow cabinet lights, glowing neon signs, checkered floor
-    - (high-tech lab:1.2), holographic displays, glowing energy core, sci-fi
-    - (underground fight ring:1.2), cheering silhouettes, spotlit center, gritty
+    - (metal-and-glass laboratory:1.2), holographic displays, glowing energy core, articulated robotic instruments
+    - (underground fight ring:1.2), raised-arm crowd silhouettes, single overhead spotlight, stained concrete walls and drifting dust
     - (futuristic train station:1.2), streaked with blue light, sleek monorail
     - (abandoned mall:1.2), re-lit with neon graffiti, broken storefronts, eerie
     - (glitch-space corridor:1.2), made of floating pixels, digital distortion, abstract
@@ -346,23 +351,23 @@ gkr_popculture:
     - (cosmic space plaza:1.2), shimmering with star-chrome, alien architecture
     - (music festival stage:1.2), dazzling spotlights, laser beams, crowd silhouette
     - (comic panel background:1.2), halftone dots, bold action lines
-    - (urban rooftop garden:1.2), glowing neon vines, cityscape at night, tranquil
-    - (laboratory reactor chamber:1.2), pulsing brightly, high-tech machinery, warning lights
+    - (urban rooftop garden:1.2), glowing vines curling around planters, still reflecting pool, distant city lights beneath a clear night sky
+    - (laboratory reactor chamber:1.2), bright concentric energy rings, articulated machinery, red warning lights
     - (stormy harbor:1.2), lit by crackling lightning, crashing waves, dramatic
-    - (holographic street market:1.2), bustling with lights, floating stalls, cyberpunk
-    - (retro diner:1.2), glowing red and teal neon, checkered floor, nostalgic
+    - (crowded street market:1.2), floating holographic stalls, dense colored lights, overhead cables, chrome vendor carts
+    - (1950s-style diner:1.2), glowing red and teal neon, checkered floor, chrome stools, curved jukebox
     - (mega-city freeway:1.2), streaking traffic light trails, towering skyscrapers
-    - (abandoned warehouse:1.2), full of hanging chains, shafts of light, gritty, moody
-    - (cosmic realm:1.2), filled with floating asteroids, distant nebula, space opera
+    - (abandoned warehouse:1.2), hanging chains, narrow light shafts, stained concrete, deep blue-gray shadows
+    - (vast starfield:1.2), floating asteroids, distant nebula, tiny angular warships edged in colored engine light
     - (battle-torn downtown:1.2), smoke pillars, rubble and debris, post-apocalyptic
-    - (subway station:1.2), lit by flickering lamps, graffiti on walls, urban, gritty
+    - (subway station:1.2), flickering fluorescent lamps, layered wall graffiti, cracked tile, litter along the tracks
     - (skyscraper interior:1.2), floor-to-ceiling glass walls, view of city below
     - (energy dome arena:1.2), packed with color, holographic scoreboard, futuristic sport
     - (gaming tournament stage:1.2), bright LED panels, team logos, esports
     - (digital void:1.2), neon grids, floating data streams, virtual reality
     - (sunset pier:1.2), glowing with orange and purple hues, calm water reflections
     - (comic-style city street:1.2), frozen mid-action, dynamic perspective
-    - (neon carnival:1.2), spinning hologram rides, glowing attractions, whimsical
+    - (neon carnival:1.2), spinning hologram rides, glowing attractions, oversized curved shapes in a candy-colored palette
     - (underground garage:1.2), glowing neon signs, customized cars, street racing
     - (retro motel:1.2), under flickering pink neon sign, nighttime, noir
     - (urban skatepark:1.2), covered in colorful graffiti murals, ramps and rails
@@ -382,141 +387,140 @@ gkr_popculture:
     - (deserted funfair:1.2), glowing faintly, creepy, overcast sky
     - (pixelated world:1.2), blending into real life, 8-bit elements, digital art
     - (mega stadium:1.2), filled with roaring lights, huge crowd, concert
-    - (cyberpunk alley:1.2), thick with fog, glowing puddles, neon signs
+    - (narrow alley packed with cables and metal ducts:1.2), thick fog, glowing puddles, stacked neon signs
     - (mountain overlook:1.2), glowing neon city below, starry sky
     - (techno cathedral:1.2), glowing teal and magenta light, futuristic gothic
-    - (industrial steelyard:1.2), raining sparks from welding, moody, night
+    - (industrial steelyard at night:1.2), showers of welding sparks, deep blue shadows, orange reflections on wet steel
     - (retro TV studio:1.2), vivid spotlights, vintage cameras, colorful set
-    - (floating urban island:1.2), glowing neon, waterfalls, sci-fi
-    - (cosmic gateway corridor:1.2), pulsing energy, abstract, sci-fi
+    - (floating urban island:1.2), luminous towers, waterfalls spilling into clouds, aircraft circling below
+    - (corridor of concentric floating arches:1.2), pulsing violet energy, reflective black floor, warped starfield at the far end
     - (rain-washed crosswalk:1.2), bright district, reflections, night
-    - (hologram street:1.2), filled with drifting ads, crowd, cyberpunk
+    - (crowded street beneath drifting holographic ads:1.2), chrome storefronts, bundled cables, magenta-cyan light
     - (underground club:1.2), strobe lights, laser beams, dancing silhouettes
     - (urban cliffside:1.2), over glowing bay, city lights, night
     - (digital arena:1.2), glowing with hexagonal patterns, futuristic
-    - (rooftop:1.2), massive hologram figure, cityscape, cyberpunk
-    - (series of giant neon rings:1.2), floating midair, sci-fi race track
+    - (rain-darkened rooftop:1.2), massive translucent hologram figure, dense neon cityscape, antenna cables
+    - (series of giant neon rings:1.2), floating above a suspended metallic race track, small streamlined vehicles banking through them
     - (cosmic battlefield:1.2), swirling with stardust, exploding ships
     - (retro film noir alley:1.2), steam from vents, high contrast shadows
-    - (theme-park city block:1.2), lit by vivid colors, mascots, happy
-    - (empty arcade:1.2), shimmering with reflections, machines in standby, nostalgic
+    - (theme-park city block:1.2), vivid colored lights, waving costumed mascots, smiling crowd with raised hands
+    - (empty 1980s arcade:1.2), cabinet screens shimmering across the polished floor, rows of machines in standby
     - (glowing skybridge:1.2), spanning skyscrapers, flying cars
     - (rainstorm chase street:1.2), bright highlights, blurred motion
     - (comic city block:1.2), dynamic angles, bold colors, action
-    - (floating disc arena:1.2), above city, neon lights, sci-fi
+    - (floating disc arena above the city:1.2), neon boundary lights, hexagonal metal platforms, aircraft below
     - (music video-style neon corridor:1.2), pulsing lights, clean lines
     - (holographic festival:1.2), digital fireworks, cheering crowd
     - (futuristic police checkpoint:1.2), glowing blue barriers, drones
     - (digital tunnel:1.2), made of animated symbols, light speed effect
-    - (retro suburban street:1.2), 80s lighting, vintage cars, nostalgic
+    - (1980s suburban street:1.2), sodium-vapor streetlights, boxy vintage cars, pastel houses, slight film grain
     - (cosmic void street:1.2), blending galaxies and neon, surreal
     - (sunset boulevard:1.2), glowing pink and gold, palm trees
     - (retro costume parade avenue:1.2), colorful floats, cheering crowd
     - (storm-blasted rooftop:1.2), broken antenna sparking, dark clouds
     - (parallel-universe city:1.2), shifting colors, unusual architecture
-    - (rainy overpass:1.2), under bright signs, reflections, moody
-    - (glowing zero-gravity chamber:1.2), floating objects, sci-fi
+    - (rainy overpass beneath bright signs:1.2), long wet reflections, deep blue shadows, isolated backlit figure
+    - (glowing zero-gravity chamber:1.2), loose tools and translucent spheres floating between illuminated wall panels
     - (tech market:1.2), sparkling chrome stalls, holograms, crowded
     - (comic arena:1.2), action lines, cheering crowd, bold
-    - (night carnival:1.2), floating lanterns, ferris wheel, magical
+    - (night carnival:1.2), floating lanterns, illuminated Ferris wheel, gold spark trails curling above striped tents
 
   spotlight_actionscene:
-    - (masked vigilante leaping from a rooftop:1.2), dramatic action pose, neon rain streaking past, glowing city skyline below, comic book style
-    - (cyber-suited hero sliding beneath collapsing debris:1.2), firing glowing plasma blasts
-    - (plasma-knight clashing blades with shadow assassin:1.2), sparks flying, atop a skyscraper
-    - (telekinetic teen shielding civilians:1.2), glowing psychic barrier, exploding hovercar in background, courageous expression
+    - (masked figure leaping from a rooftop:1.2), knees tucked and one arm extended, neon rain streaking past, glowing city skyline below, bold ink outlines and halftone shading
+    - (figure in a circuit-lined suit sliding beneath collapsing debris:1.2), firing glowing plasma blasts
+    - (figure in luminous plate armor clashing an energy blade against a hooded opponent:1.2), sparks flying atop a skyscraper
+    - (teen braced before a group of crouching civilians:1.2), glowing barrier curving around them, exploding hovercar in the background, clenched jaw and wide-planted feet
     - (super-speed runner dodging shockwaves:1.2), street shatters behind them, blurred motion trail, colorful energy
-    - (gravity mage hurling concrete slabs:1.2), fighting giant mechanical beast, glowing hands
-    - (soundwave fighter unleashing a sonic burst:1.2), shattering windows, collapsing tunnel, powerful scream
-    - (neon archer firing prism arrows:1.2), dynamic rooftop chase, focused aim, glowing bow
-    - (masked antihero grappling across a burning billboard:1.2), explosion in background, daring escape
-    - (elemental brawler punching through a wall of swirling flame:1.2), fiery particles, intense battle glare, powerful stance
-    - (urban witch summoning graffiti creatures:1.2), glowing murals coming to life, magical sigils, city street
-    - (quantum manipulator freezing a rainstorm midair:1.2), floating rain drops suspended in midair
-    - (retro-futurist defender blocking missiles:1.2), gleaming chromed energy shield, explosions
-    - (alien hybrid hero spiraling through enemy drones:1.2), zero-gravity combat, glowing alien patterns, laser blasts
-    - (gadget genius releasing a swarm of micro-drones:1.2), holographic interface, crowded street chaos
+    - (robed figure hurling levitating concrete slabs:1.2), facing a giant mechanical beast, violet light around both hands
+    - (armored figure projecting concentric sonic rings from an open mouth:1.2), windows shattering and tunnel supports collapsing
+    - (archer in a neon-edged jacket firing prism arrows:1.2), sprinting across a rooftop, one eye aligned with the glowing bow
+    - (masked figure swinging on a grappling line past a burning billboard:1.2), legs extended away from an explosion, embers trailing behind
+    - (bare-armed figure punching through a wall of swirling flame:1.2), fiery particles, narrowed eyes, legs planted wide
+    - (hooded figure raising painted creatures out of glowing wall murals:1.2), luminous sigils circling both wrists, city street
+    - (figure holding both palms toward a rainstorm suspended in midair:1.2), individual droplets frozen around concentric translucent rings
+    - (figure in chrome retro armor blocking incoming missiles:1.2), gleaming curved energy shield, explosions reflected in its surface
+    - (alien figure spiraling through enemy drones:1.2), zero-gravity pose, glowing patterns across mottled skin, laser blasts
+    - (goggled figure releasing a swarm of micro-drones from an open case:1.2), holographic interface, pedestrians scattering across a crowded street
     - (bladed dancer spinning through hologram barriers:1.2), neon arena, acrobatic pose, twin energy daggers
-    - (masked biker hero drifting a glowing motorcycle:1.2), under laser fire, neon-lit street, high speed chase
-    - (cosmic mystic calling down starlight pillars:1.2), vaporizing charging attackers, glowing eyes, divine power
-    - (urban titan smashing through a parked bus:1.2), ambushed by enemies, super strength, debris flying
-    - (electro mage redirecting lightning strikes:1.2), dramatic rooftop duel, crackling energy, stormy sky
-    - (teleporting rogue blinking behind enemies:1.2), shimmering particle trail, surprise attack, dark alley
-    - (vibronic martial artist generating shockwaves:1.2), every punch shatters air, focused intensity, dynamic stance
-    - (masked vigilante deflecting bullets:1.2), glowing gauntlet shield, sparks flying, intense close-up
-    - (cosmic guardian soaring past a collapsing skybridge:1.2), carrying a civilian, nebula background
-    - (street priestess drawing neon sigils:1.2), dodging plasma bolts, casting protection spell, urban fantasy
-    - (zero-gravity fighter spinning weightlessly:1.2), shattered elevator shaft, kicking off wall, dynamic combat
-    - (firecaster unleashing spiraling flame wheel:1.2), warehouse floor, enemies diving for cover, intense heat
-    - (light mage bending beams into a prism barrier:1.2), falling debris, defensive stance, glowing magic
+    - (masked rider drifting a glowing motorcycle beneath laser fire:1.2), rear wheel sliding across a neon-lit street, long motion-blurred light trails
+    - (floating robed figure calling down vertical starlight pillars:1.2), charging attackers dissolving into bright particles, glowing eyes
+    - (huge muscular figure smashing through a parked bus:1.2), armed figures closing in from both sides, metal panels and glass flying
+    - (coat-clad figure redirecting lightning between raised hands:1.2), rooftop opponent recoiling, branching electrical arcs beneath storm clouds
+    - (half-transparent figure materializing behind armed opponents:1.2), shimmering particle trail, one blade already raised in a dark alley
+    - (martial artist generating shockwaves with each punch:1.2), air splitting into concentric rings, narrowed eyes, feet spread in a low stance
+    - (masked figure deflecting bullets at close range:1.2), glowing gauntlet shield, sparks flying across a tight close-up
+    - (armored winged figure soaring past a collapsing skybridge:1.2), one civilian held against the chest, nebula filling the background
+    - (figure in layered street clothes drawing neon sigils:1.2), body twisting away from plasma bolts, luminous barrier forming above one hand
+    - (figure spinning weightlessly inside a shattered elevator shaft:1.2), one foot kicking off the wall as an opponent tumbles nearby
+    - (figure thrusting both hands through a spiraling wheel of flame:1.2), warehouse floor, enemies diving behind crates, heat shimmer
+    - (robed figure bending bright beams into a prism barrier:1.2), falling debris scattering against its rainbow surface, feet braced apart
     - (masked illusionist creating mirrored copies mid-fight:1.2), confusing enemies, dynamic poses, surreal
-    - (gravity breaker lifting a crushed taxi:1.2), rescuing survivors, glowing anti-gravity field
+    - (figure lifting a crushed taxi inside a glowing anti-gravity field:1.2), soot-streaked passengers crawling from beneath it
     - (masked skater racing along high-voltage power lines:1.2), sparking, dynamic combat, cityscape below
-    - (urban acrobat flipping between fire escapes:1.2), drones in pursuit, daring chase, nighttime city
-    - (retro hero punching a shockwave:1.2), shattering neon billboard, comic book style, powerful impact
-    - (shadow ninja dissolving into smoke:1.2), rooftop ambush, moonlight, catching the enemy off guard
-    - (masked medic shielding wounded allies:1.2), glowing energy barrier, battlefield, healing aura
-    - (comic-style sorcerer bursting through panel-like rifts:1.2), glowing magic
+    - (hooded acrobat flipping between fire escapes:1.2), pursuit drones close behind, moonlit city below
+    - (figure in chrome retro armor punching out a circular shockwave:1.2), neon billboard shattering, bold ink outlines, radiating impact lines
+    - (hooded figure dissolving into smoke above a rooftop:1.2), moonlight catching an opponent turning toward the sudden plume
+    - (masked figure kneeling before wounded companions:1.2), glowing barrier overhead, soft green light radiating from both hands
+    - (robed figure bursting through overlapping comic-panel rifts:1.2), luminous trails and bold black outlines
     - (nebula swordsman carving glowing arcs:1.2), fighting robotic foes, cosmic blade, space battle
     - (hacker punk overriding mechs:1.2), street brawl, glowing data streams, smirking
-    - (street defender parrying attacks:1.2), reinforced baton, gritty expression, defensive stance
-    - (mega-mage unleashing meteor-like energy orbs:1.2), city plaza, epic spellcasting, explosions
-    - (urban oracle dodging bullets:1.2), guided by predictive visions, glowing eyes
-    - (super boxer breaking through a concrete barricade:1.2), glowing gauntlets, debris exploding, powerful charge
-    - (masked archer firing grapple arrow:1.2), swinging into skyscraper, daring infiltration, night
-    - (cosmic empath calming rampaging creature:1.2), radiant pulse of light, gentle expression, peaceful resolution
-    - (dragon-themed fighter punching out a swirling fire vortex:1.2), fiery aura, powerful attack, battle cry
-    - (urban paladin blocking a truck:1.2), glowing riot shield, immovable stance, super strength
-    - (plasma swordsman slicing through falling debris:1.2), mid-air action, glowing blade trail, intense focus
-    - (masked vigilante tackling enemy off a monorail:1.2), high-speed action, city lights blurring past
-    - (energy archer firing prism bolt:1.2), collapsing sky-dome, desperate shot
-    - (telepathic strategist levitating attackers:1.2), glowing aura, effortless control, calm expression
-    - (masked punk heroine riding hoverboard through explosions:1.2), dynamic pose, grinning
+    - (street-clothed figure parrying attacks with a reinforced baton:1.2), teeth clenched, knees bent behind raised forearms
+    - (towering robed figure releasing meteor-like energy orbs:1.2), arms spread over a city plaza, explosions between cracked paving stones
+    - (glowing-eyed figure bending away from bullets:1.2), several translucent afterimages showing the incoming trajectories
+    - (muscular boxer charging through a concrete barricade:1.2), glowing gauntlets, debris exploding around hunched shoulders
+    - (masked archer firing a grappling arrow into a skyscraper ledge:1.2), body already swinging above the street at night
+    - (figure extending an open glowing palm toward a crouched creature:1.2), its raised claws lowering as a soft radiant pulse spreads between them
+    - (figure in scale-patterned armor punching through a swirling fire vortex:1.2), horn-shaped shoulder plates, fiery aura, mouth open and teeth bared
+    - (armored figure blocking a truck with a glowing riot shield:1.2), boots gouging parallel tracks through the asphalt
+    - (armored figure slicing through falling debris with a plasma sword:1.2), body extended in midair, glowing blade trail, teeth clenched
+    - (masked figure tackling an armed opponent off a speeding monorail:1.2), both bodies suspended above blurred city lights
+    - (archer firing a prism-tipped bolt toward a collapsing sky dome:1.2), teeth clenched, bowstring drawn to the cheek
+    - (still figure levitating several attackers inside a glowing aura:1.2), one open palm raised, relaxed mouth and level gaze
+    - (masked punk in a patched jacket riding a hoverboard through explosions:1.2), knees bent, one hand grazing the board, wide grin
     - (mega-strength titan catching a crashing drone carrier:1.2), straining muscles
-    - (street monk releasing shockwave of glowing tattoos:1.2), martial arts pose, pushing back enemies
+    - (shaven-headed figure releasing a shockwave from glowing forearm tattoos:1.2), low martial-arts stance, enemies thrown backward
     - (gravity dancer spinning midair:1.2), shards of glass orbiting them, glowing energy
-    - (masked tank hero bursting through fortified barricades:1.2), unstoppable force, debris flying
-    - (shadowcaster pulling darkness into a swirling vortex:1.2), glowing eyes
-    - (masked fire mage leaping over a burning taxi:1.2), flames trail behind, action pose
-    - (urban witch tearing open glowing graffiti portals:1.2), stepping through, magical transportation
-    - (plasma brawler breaking through a neon-lit rooftop:1.2), shattering glass, dramatic entrance
+    - (massive masked figure in reinforced armor bursting through fortified barricades:1.2), concrete and bent metal flying around squared shoulders
+    - (hooded figure pulling darkness into a swirling vortex:1.2), glowing eyes, black tendrils winding around outstretched fingers
+    - (masked figure with flame-wreathed hands leaping over a burning taxi:1.2), knees tucked, long fire trails behind
+    - (hooded figure tearing open a glowing portal in a graffiti mural:1.2), one leg stepping through the luminous painted opening
+    - (broad-shouldered figure with plasma-wrapped fists crashing through a neon-lit skylight:1.2), glass shards radiating around the descending body
     - (cosmic DJ hurling energy discs:1.2), like vinyl records, holographic turntables, action
-    - (super-speed fighter weaving between laser bolts:1.2), red and blue blur, intense focus
-    - (mirror mage turning reflections into hard-light weapons:1.2), surreal combat, glassy shards
+    - (runner weaving between laser bolts at extreme speed:1.2), red and blue motion blur, narrowed eyes fixed ahead
+    - (figure pulling hard-light weapons from mirror reflections:1.2), mirrored armor, glassy shards suspended around both hands
     - (masked trickster dropping into a firefight:1.2), from billboard frame, laughing, chaotic entry
-    - (street teleporter blinking between rooftops:1.2), daring chase, blue particle trail
-    - (urban cowboy lassoing a runaway armored vehicle:1.2), plasma rope, sci-fi western
+    - (hooded figure blinking between rooftops:1.2), alternating translucent silhouettes connected by a blue particle trail
+    - (figure in a wide-brim hat and long duster lassoing a runaway armored vehicle:1.2), glowing plasma rope, holstered raygun
     - (cosmic shapeshifter morphing mid-combat:1.2), fluid motion, glowing energy
-    - (energy knight shielding team:1.2), on collapsing highway, glowing energy shield
-    - (masked vigilante landing atop armored transport:1.2), night, rain
-    - (urban sorceress bending lamp-light into bright beams:1.2), attacking shadow creatures, glowing hands
+    - (plate-armored figure holding a glowing energy shield over crouching companions:1.2), collapsing elevated highway beneath them
+    - (masked figure landing in a three-point crouch atop an armored transport:1.2), rain streaks and wet reflections at night
+    - (coat-clad figure bending streetlamp light into bright beams:1.2), shadowy creatures recoiling, both hands glowing
     - (gravitycrusher slamming fist to create crater:1.2), shockwave ripples, enemies thrown back
-    - (masked helmsman piloting hovercycle:1.2), through neon canyon, high speed, intense focus
+    - (masked rider leaning over a hovercycle steering rig:1.2), racing through a neon canyon, long light trails, narrowed eyes behind the visor
     - (cyber archer firing from perch:1.2), on crumbling antenna, glowing arrow, long-range shot
-    - (firestorm caster igniting swirling ring of heat:1.2), defensive spell, intense flames
+    - (figure igniting a swirling ring of heat around a braced body:1.2), flames curving away from raised forearms
     - (cosmic dancer weaving between explosions:1.2), graceful movement, starfield background
-    - (urban ranger swinging across skyline:1.2), using grappling line, dynamic mid-air pose
-    - (masked mystic unleashing tarot-symbol blast:1.2), glowing cards, magical attack
-    - (sonic striker shattering glass facades:1.2), powerful frequency burst, sonic rings
-    - (retro mech-fighter punching through concrete wall:1.2), glowing cockpit, powerful
+    - (hooded figure swinging across the skyline on a grappling line:1.2), legs extended in a long midair arc
+    - (masked figure thrusting glowing symbol cards forward:1.2), luminous geometric blast expanding from a fanned hand
+    - (armored figure shattering glass facades with concentric sonic rings:1.2), both palms thrust outward
+    - (retro-styled mech punching through a concrete wall:1.2), glowing cockpit, bent rebar and masonry flying outward
     - (speedster ricocheting off street signs:1.2), during chase, yellow lightning trail
-    - (energy monk blocking a truck:1.2), with open palm, glowing energy shield, serene focus
-    - (cosmic queen raising starlight beam:1.2), through clouds, majestic power, glowing crown
-    - (neon skater outrunning collapsing sky-bridge:1.2), glowing wheels, desperate leap
+    - (shaven-headed figure stopping a truck with one open palm:1.2), glowing energy shield, relaxed face and grounded stance
+    - (crowned figure in a flowing gown raising a starlight beam through clouds:1.2), arms spread, metallic crown glowing at each point
+    - (neon-clad skater outrunning a collapsing skybridge:1.2), glowing wheels leaving trails during a long leap over the gap
     - (techno-wolf clawing through drone swarm:1.2), glowing visor, metallic claws, ferocious
-    - (masked rogue sliding under sparks:1.2), factory fight, close call, smirking
-    - (prism mage refracting a laser beam barrage:1.2), glowing prism shield, colorful light
+    - (masked figure sliding beneath a shower of factory sparks:1.2), opponent's strike passing overhead, crooked smirk
+    - (robed figure refracting a laser barrage through a glowing prism shield:1.2), rainbow beams splitting across the walls
     - (combat violinist slicing air with resonance waves:1.2), glowing music notes, dynamic pose
-    - (gravity mage stopping rubble mid-fall:1.2), protecting civilians, glowing hands, intense concentration
-    - (cyberpunk hero tearing through hologram phantoms:1.2), glitching enemies, neon katana
+    - (figure stopping rubble in midair with glowing hands:1.2), civilians crouched beneath the suspended stones, temples taut and teeth clenched
+    - (figure with a cybernetic arm slicing through holographic phantoms:1.2), glitching silhouettes split by a neon katana
     - (masked flyer breaking sound barrier:1.2), above city, sonic boom, streaking light
-    - (urban titan holding collapsing building beam:1.2), saving people
+    - (huge muscular figure holding up a collapsing building beam:1.2), dust-covered people crawling beneath the raised steel
     - (two figures leaping mid-air back-to-back:1.2), dodging synchronized explosions
-    - (masked vigilante on burning rooftop:1.2), final standoff, intense glare, embers floating
-    - (energy brawler knocking back foes:1.2), with a shockwave burst, glowing fists, crowd control
-    - (cosmic swordswoman slicing falling meteor shard:1.2), glowing cosmic blade, protecting planet
-    - (street defender fending off attackers:1.2), in neon alley, using baton, gritty fight
-    - (retro star-warrior blasting through cosmic portal:1.2), holding laser sword, sci-fi adventure
-    - (masked striker punching shockwave into pavement:1.2), cracking asphalt, powerful impact
-    - (telekinetic hero lifting entire car:1.2), to block explosion, glowing psychic aura, intense effort
-
+    - (masked figure facing an opponent across a burning rooftop:1.2), lowered glare, fists clenched, embers floating between them
+    - (broad-shouldered figure knocking back several foes with a circular shockwave:1.2), glowing fists, bodies lifted off the pavement
+    - (armored swordswoman slicing a falling meteor shard:1.2), galaxy-patterned blade glowing above the curved planet horizon
+    - (street-clothed figure fending off attackers in a neon alley:1.2), reinforced baton raised, teeth clenched
+    - (figure in chrome retro armor blasting through a cosmic portal:1.2), solid-light sword raised, starfield and raygun beams behind
+    - (masked figure punching a shockwave into pavement:1.2), asphalt cracking in concentric rings, debris thrown upward
+    - (figure lifting an entire car inside a glowing aura:1.2), vehicle held between a nearby explosion and crouching bystanders, neck tendons taut
