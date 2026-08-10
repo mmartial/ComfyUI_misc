@@ -29,7 +29,7 @@ gkr_anime:
     - loosened school tie, jacket slung over one shoulder, relaxed confident stance, faint smile
     - plain unbadged uniform, long hair partly covering one eye, flat unreadable expression, hands folded
     - segmented dark armor plating, holstered blaster on the thigh, tattered cloak, scanner visor over one eye
-    - sequined stage costume, layered ruffles, handheld sparkling microphone, mid-spin pose, bright stage smile
+    - idol, stage costume, layered ruffles, handheld sparkling microphone, mid-spin pose, bright stage smile
     - matte black bodysuit with glowing circuit-line seams, wrapped forearm blades, hood pulled low, crouched ready stance
     - pointed hat, buttoned robe with a crest pin, wand tucked in the belt, open spellbook
     - curved black horns, trailing dark ornate gown, clawed fingertips, (regal composed expression:1.1)
@@ -186,7 +186,7 @@ gkr_anime:
     - black lace-trimmed dress, layered petticoat, ribbon choker
     - glossy form-fitting bodysuit with glowing seam lines, small chest-mounted panel
     - asymmetric jacket with glowing neon trim, utility straps, layered mesh underlayer
-    - sequined layered dress, ruffled hem, sparkling trim
+    - idol layered dress, ruffled hem, sparkling trim
     - hoodie, jeans, casual streetwear
     - long trench coat, upturned collar
     - white karate gi, tied cloth belt
@@ -401,7 +401,7 @@ gkr_anime:
     - "long dark coat with high collar, half-shadowed face, fixed cold glare, __gkr_anime/gender__, __gkr_anime/hair_color__, crimson glowing eyes, __gkr_anime/weapons__, wisps of dark shadow trailing off the shoulders, __gkr_anime/environment__, deep shadows, narrow pools of light, dramatic rim lighting, low-angle shot, __gkr_anime/style__"
 
   idol_combo:
-    - "sequined layered dress, sparkling handheld microphone, mid-spin pose, bright stage smile, female, pastel hair, large expressive eyes, concert stage with colored spotlights and cheering crowd silhouettes, raised chin, bright high-key palette, soft pastel illumination, __gkr_anime/style__"
+    - "idol dress, sparkling handheld microphone, mid-spin pose, bright stage smile, female, pastel hair, large expressive eyes, concert stage with colored spotlights and cheering crowd silhouettes, raised chin, bright high-key palette, soft pastel illumination, __gkr_anime/style__"
 
   slice_of_life_combo:
     - "sailor-style school uniform, bright open smile, twin ribbons in hair, leather school satchel, quiet classroom or neighborhood street, warm faded palette, soft light, subtle film grain, portrait shot, __gkr_anime/art_style_specific__, __gkr_anime/style__"
