@@ -30,7 +30,7 @@ gkr_ttrpg:
     - hidden royal signet ring on a cord beneath plain traveler's clothes, posture too straight for a commoner
     - (dragon-scale patterns rising along the forearms:1.2), faint ember glow beneath the skin
     - companion beast at the side, leather harness hung with feed pouches and a coiled lead
-    - weathered tricorn hat, gold-buttoned coat, cutlass at the hip, sea-salt-crusted boots
+    - weathered caravan cloak, brass-buttoned coat, short saber at the hip, road-dusted boots
 
   race:
     - human, rounded ears, expressive face
@@ -229,6 +229,26 @@ gkr_ttrpg:
     - chain whip
     - double bladed weapon
 
+  ancient_weapons:
+    - leaf-shaped bronze xiphos, worn leather grip
+    - forward-curved bronze kopis, heavy single edge
+    - long ash spear with a hammered bronze head
+    - pair of balanced throwing javelins
+    - leather sling and a pouch of smooth stones
+    - short iron gladius with a decorated scabbard
+    - crescent-bladed battle axe with a wooden haft
+    - recurved composite bow and bronze-tipped arrows
+
+  ancient_armor:
+    - hammered bronze muscle cuirass, layered leather skirt, strapped sandals
+    - linen cuirass reinforced with bronze scales, weathered red cloak
+    - round bronze shield, crested helmet, simple wool tunic
+    - overlapping bronze scale armor, wrapped forearms, leather sandals
+    - battered arena helmet, single metal shoulder guard, quilted arm wraps
+    - decorated breastplate, horsehair-crested helmet, deep blue officer's cloak
+    - layered desert linen, bronze neck guard, wrapped sandals
+    - fur mantle over a belted tunic, bronze bracers, hide boots
+
   offhand:
     - shield, heraldic crest
     - round shield
@@ -257,19 +277,33 @@ gkr_ttrpg:
   environment:
     - torchlit dungeon, corridor, stone walls
     - ancient temple ruins, overgrown
-    - ancient forest, blue-glowing leaves, floating lights between twisted trunks
+    - ancient forest, blue-green leaves silvered by moonlight, fireflies between twisted trunks
     - circular grove, silver-barked trees, luminous flowers, low violet mist
     - snowy mountain pass, blizzard
     - stormy cliffside, ocean
     - arcane library, tower, books
     - abandoned battlefield, rusted broken weapons half-buried in mud
-    - underdark cavern, (glowing fungi:1.2)
+    - deep subterranean cavern, pale fungi catching reflected mineral light
     - desert ruins, bright sun
     - coastal cliffs, crashing waves
     - dragon hoard cavern, (treasure pile:1.2)
-    - feywild glade, floating lights
+    - otherworldly fey glade, drifting seed tufts and iridescent mist
     - volcanic forge, lava
     - graveyard, leaning tombstones, black mist leaking from open graves
+
+  mythic_environment:
+    - sun-baked amphitheater, tiered stone seats, sand marked by chariot wheels
+    - labyrinth of towering limestone walls, narrow passages, scraps of red thread tied to corners
+    - fortified coastal city-state, white stone terraces, crowded harbor, bronze statues
+    - oracle temple above a volcanic fissure, painted columns, incense smoke pooling on the floor
+    - desert necropolis, rock-cut tombs, processional road lined with weathered guardian statues
+    - bronze-age palace courtyard, painted frescoes, red columns, broad ceremonial stairs
+    - sacred olive grove, stone altar, votive ribbons moving in a dry wind
+    - wooden war galley deck, square sail, banks of oars cutting through rough water
+    - mountain shrine above the clouds, worn steps, bronze braziers, circling eagles
+    - ruined aqueduct crossing a dry valley, collapsed arches, caravan trail below
+    - bustling agora, canvas market awnings, public fountain, philosophers and soldiers arguing
+    - cyclopean fortress gate, enormous fitted stones, torch-bearing sentries for scale
 
   mood:
     - warm upward light breaking through clouds, bright highlights expanding toward the top of the frame
@@ -286,10 +320,10 @@ gkr_ttrpg:
   lighting:
     - warm torchlight, flickering
     - cold moonlight, night
-    - soft blue-white glow outlining the body
+    - soft blue-white reflected light outlining the body
     - (dramatic rim lighting:1.2)
     - (cinematic backlight:1.2)
-    - soft ambient glow
+    - soft diffuse ambient light
     - bioluminescent cave light
     - stained glass colors, light beams
     - golden hour sunlight
@@ -354,8 +388,8 @@ gkr_ttrpg:
     - oil painting, traditional media, brush strokes
     - watercolor illustration
     - detailed pencil sketch, monochrome
-    - unreal engine 5 render, 8k, cinematic
-    - 3d render, blender, octane render
+    - richly layered gouache illustration, opaque brushwork, textured paper grain
+    - hand-colored woodcut illustration, carved black contours, muted mineral pigments
     - hand-painted animation key visual, clean contour lines, soft watercolor backgrounds
     - comic book art, inked lines
 
@@ -436,14 +470,14 @@ gkr_ttrpg:
     - moss covered hide
 
   monster_features:
-    - (glowing eyes:1.2)
+    - reflective glassy eyes catching the key light
     - (many eyes:1.2), multiple eyes
     - sharp fangs
     - jagged horns
     - massive claws
     - barbed tail
     - spiked back
-    - ethereal wings, glowing wings
+    - ethereal translucent wings, refracting the background light
     - flaming mane
     - frost coated maw
     - venom dripping fangs
@@ -477,9 +511,9 @@ gkr_ttrpg:
     - storm lashed mountain peak
     - (abyssal hellscape:1.2), demonic plane
     - celestial radiant plane
-    - feywild dream field
+    - otherworldly fey dream field
     - astral void, stars
-    - underdark chasm, glowing fungi
+    - deep subterranean chasm, glowing fungi
     - abandoned temple hall, cracked columns, dust-covered altar, roots breaking through the floor
     - crystalline cavern
     - plague ridden swamp
@@ -501,6 +535,38 @@ gkr_ttrpg:
     - swamp hydra, low reptilian body, seven long snapping necks, algae-coated scales, venom dripping from multiple mouths
     - insectoid horror, six jointed limbs, glossy black exoskeleton, split mandibles, clusters of red eyes, translucent wings vibrating
 
+  mythic_creature:
+    - minotaur, bull-headed humanoid, powerful frame, chipped bronze axe, scarred hide
+    - cyclops, towering one-eyed giant, rough wool tunic, uprooted olive tree used as a club
+    - harpy, lean human torso, broad vulture wings, clawed bird legs, wind-tossed hair
+    - gorgon, stern humanoid face framed by living serpents, bronze scales along the arms, petrifying gaze
+    - sphinx, lion body, human face beneath a striped headdress, immense folded wings
+    - centaur, human torso joined to a powerful horse body, spear and round shield held ready
+    - chimera, lion forequarters, goat head rising from its back, serpent-headed tail
+    - manticore, red-maned lion body, humanlike face, leathery wings, tail lined with iron spikes
+    - siren, seabird body with a human face and arms, layered wet feathers, circling above black rocks
+    - lamia, armored human torso above a long patterned serpent body, curved blade in each hand
+    - colossal sea serpent, ridged scales, horned skull, coils rising around a wooden galley
+    - bronze automaton, towering human-shaped body of riveted plates, empty polished face, steam escaping its joints
+
+  # Complete identities paired with environments that reinforce their anatomy
+  # and theme. Component-based concepts remain free to produce unusual hybrids.
+  monster_identity_scene:
+    - enormous red dragon, four clawed legs, broad leathery wings, layered crimson scales, swept-back horns, fire building visibly in its open jaws, volcanic mountain lair above rivers of lava
+    - frost dragon, serpentine neck, pale blue crystalline scales, ice-coated wings, vapor curling from a fanged mouth, frozen tundra beneath wind-carved ice cliffs
+    - skeletal lich, jeweled skull beneath a torn hood, exposed rib cage, cold violet eye sockets, black robes trailing spectral wisps, ancient crypt lined with sealed stone sarcophagi
+    - armored demon, towering red-black body, backward-curving horns, charred plate fused to the skin, barbed tail, smoke coiling around both fists, abyssal fortress of iron bridges and bottomless chasms
+    - radiant winged guardian, human-shaped figure in gold-white armor, six feathered wings, featureless pearlescent eyes, circular halo of engraved metal, celestial plane above banks of brilliant clouds
+    - fire elemental, towering humanoid mass of flame, blackened stone core, molten cracks, sparks streaming from raised arms, collapsed forge surrounded by heat-warped machinery
+    - forest fey beast, slender deer-like body, branch antlers, moss-covered hide, pale flowers growing along its spine, ancient woodland clearing beneath a dense green canopy
+    - tentacled aberration, swollen floating body, ring of mismatched eyes, wet lavender skin, hooked tentacles curling beneath it, astral void filled with fractured stone islands
+    - stone giant, massive humanoid frame, granite skin split by mossy seams, boulder held above one shoulder, storm-lashed mountain pass among weathered monoliths
+    - clockwork golem, riveted brass body, piston-driven limbs, furnace light behind a barred chest plate, steam venting from its shoulders, abandoned workshop crowded with silent gears
+    - translucent ooze, glossy green amorphous body, suspended bones and coins visible inside, acidic droplets pooling beneath it, flooded dungeon beneath corroded iron grates
+    - colossal werewolf, hunched wolf-headed body, matted dark fur, elongated claws, saliva strands between exposed fangs, moonlit pine forest covered in fresh snow
+    - swamp hydra, low reptilian body, seven long snapping necks, algae-coated scales, venom dripping from multiple mouths, plague-ridden swamp among half-submerged ruins
+    - insectoid horror, six jointed limbs, glossy black exoskeleton, split mandibles, clusters of red eyes, translucent wings vibrating, overgrown jungle temple wrapped in enormous nests
+
   # Component libraries also surface through complete, deliberately framed
   # creature studies, so every component produces a usable image on its own.
   monster_component_concept:
@@ -508,7 +574,7 @@ gkr_ttrpg:
     - "creature anatomy study, __gkr_ttrpg/monster_body__, clearly separated silhouette, plain misty backdrop"
     - "towering broad-shouldered creature, __gkr_ttrpg/monster_texture__, full body view, dark neutral backdrop"
     - "hulking charcoal-scaled creature, __gkr_ttrpg/monster_features__, three-quarter view, strong rim light"
-    - "towering horned creature, __gkr_ttrpg/monster_ability__, full body action view, scorched stone ground"
+    - "towering unusual creature, __gkr_ttrpg/monster_features__, __gkr_ttrpg/monster_ability__, full body action view, rugged terrain"
 
 # --------------------------------------------------------------
 #  MODULAR COMBOS
@@ -525,18 +591,18 @@ gkr_ttrpg:
     - "__gkr_ttrpg/tone__, __gkr_ttrpg/hairless_style__"
 
   archetype_character:
-    - "human, __gkr_ttrpg/humanlike_appearance__, __gkr_ttrpg/archetype__, __gkr_ttrpg/age__"
+    - "__gkr_ttrpg/race__, __gkr_ttrpg/archetype__, __gkr_ttrpg/age__"
 
   background_character:
-    - "human, __gkr_ttrpg/humanlike_appearance__, __gkr_ttrpg/background__, __gkr_ttrpg/age__"
+    - "__gkr_ttrpg/race__, __gkr_ttrpg/background__, __gkr_ttrpg/age__"
 
   magic_character:
-    - "human spellcaster, __gkr_ttrpg/humanlike_appearance__, layered neutral robes, __gkr_ttrpg/fx_magic__, __gkr_ttrpg/age__"
+    - "__gkr_ttrpg/race__, spellcaster, layered neutral robes, __gkr_ttrpg/fx_magic__, __gkr_ttrpg/age__"
 
   equipment_character:
-    - "human figure, __gkr_ttrpg/humanlike_appearance__, __gkr_ttrpg/gear__, empty hands visible, __gkr_ttrpg/age__"
-    - "human warrior, __gkr_ttrpg/humanlike_appearance__, plain fitted leather clothing, __gkr_ttrpg/weapons__, __gkr_ttrpg/age__"
-    - "human adventurer, __gkr_ttrpg/humanlike_appearance__, plain fitted leather clothing, sheathed short sword, __gkr_ttrpg/offhand__, __gkr_ttrpg/age__"
+    - "__gkr_ttrpg/race__, __gkr_ttrpg/gear__, empty hands visible, __gkr_ttrpg/age__"
+    - "__gkr_ttrpg/race__, warrior, plain fitted leather clothing, __gkr_ttrpg/weapons__, __gkr_ttrpg/age__"
+    - "__gkr_ttrpg/race__, adventurer, plain fitted leather clothing, sheathed short sword, __gkr_ttrpg/offhand__, __gkr_ttrpg/age__"
 
   hero_core:
     - "__gkr_ttrpg/race__, __gkr_ttrpg/class__, __gkr_ttrpg/age__"
@@ -570,19 +636,92 @@ gkr_ttrpg:
 
   # --- MONSTER & SCENE COMBOS (UPGRADED) ---
   monster_combo:
-    - "__gkr_ttrpg/monster_identity__, __gkr_ttrpg/monster_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__, __gkr_ttrpg/fx_environment__"
+    - "__gkr_ttrpg/monster_identity_scene__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__, __gkr_ttrpg/fx_environment__"
     - "__gkr_ttrpg/monster_component_concept__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/random_style_full__, __gkr_ttrpg/fx_environment__"
   dragon_combo:
-    - "(colossal dragon:1.2), four clawed legs, long scaled neck and tail, massive leathery wings, horned head, jaws releasing a torrent of fire, __gkr_ttrpg/monster_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
+    - "colossal red dragon, four clawed legs, broad leathery wings, swept-back horns, fire gathering in its jaws, volcanic caldera, __gkr_ttrpg/mood__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
+    - "colossal frost dragon, four clawed legs, crystalline wing membranes, crown of ice-coated horns, freezing vapor pouring from its jaws, glacier valley, __gkr_ttrpg/mood__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
+    - "colossal storm dragon, long scaled body, ragged wings spread across thunderclouds, branching electricity between its horns, mountain peak in driving rain, __gkr_ttrpg/mood__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
+    - "colossal forest dragon, bark-like scales, leaf-covered antlers, broad wings patterned like a moth, roots lifting beneath its claws, ancient woodland, __gkr_ttrpg/mood__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
   undead_combo:
-    - "(skeletal undead figure:1.2), exposed bones, torn burial cloth, (glowing green eyes:1.2), black-green mist leaking between the ribs, __gkr_ttrpg/monster_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
+    - "skeletal knight, tarnished ceremonial armor hanging from exposed bones, cold blue pinpoints in empty sockets, sword planted before a ruined mausoleum, __gkr_ttrpg/mood__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
+    - "ancient mummy, layered linen wrappings, cracked gold funerary mask, clouds of dry dust streaming from raised hands, sealed desert tomb, __gkr_ttrpg/mood__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
+    - "drowned revenant, waterlogged clothing clinging to grey skin, strands of weeds across its face, seawater pouring from its open mouth, flooded crypt, __gkr_ttrpg/mood__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
+    - "incorporeal wraith, elongated translucent silhouette, empty face beneath a torn hood, nearby candles bending away in a circular draft, abandoned chapel, __gkr_ttrpg/mood__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
   fiend_combo:
-    - "(towering horned demon:1.2), spiked back, barbed tail, flaming mane, heat haze bending the air around its silhouette, __gkr_ttrpg/monster_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
+    - "towering horned demon, spiked back, barbed tail, smoldering cracks across its hide, __gkr_ttrpg/monster_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
+    - "gaunt winged fiend, elongated limbs, torn membrane wings, cold blue eyes, shadow mist trailing behind it, __gkr_ttrpg/monster_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
+    - "serpentine abyssal fiend, six clawed arms, armored scales, crown of bone spines, green necrotic aura, __gkr_ttrpg/monster_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
+    - "insectoid infernal creature, chitinous plates, hooked limbs, translucent wings, poisonous vapor leaking from its jaws, __gkr_ttrpg/monster_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
   boss_combo:
-    - "__gkr_ttrpg/monster_identity__, (colossal size:1.2), tiny foreground figures looking upward, low camera angle, silhouette filling most of the frame, __gkr_ttrpg/monster_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/random_style_full__"
+    - "__gkr_ttrpg/monster_identity_scene__, (colossal size:1.2), tiny foreground figures looking upward, low camera angle, silhouette filling most of the frame, __gkr_ttrpg/mood__, __gkr_ttrpg/lighting__, __gkr_ttrpg/random_style_full__"
+  random_monster_combo:
+    - "__gkr_ttrpg/monster_combo__"
+    - "__gkr_ttrpg/dragon_combo__"
+    - "__gkr_ttrpg/undead_combo__"
+    - "__gkr_ttrpg/fiend_combo__"
+    - "__gkr_ttrpg/boss_combo__"
   random_scene:
     # Use this for a random background/environment
     - "__gkr_ttrpg/environment__, __gkr_ttrpg/lighting__, __gkr_ttrpg/mood__, __gkr_ttrpg/fx_environment__, __gkr_ttrpg/scene_camera__, __gkr_ttrpg/random_style_full__"
+
+  # --- TABLETOP ADVENTURE & SWORDS-AND-SANDALS ---
+  swords_and_sandals_character:
+    - "arena gladiator, battered helmet and single shoulder guard, bronze kopis and round shield, sand-scuffed strapped sandals, __gkr_ttrpg/expression__"
+    - "veteran hoplite, linen cuirass, horsehair-crested bronze helmet, long ash spear and round shield, sun-darkened red cloak"
+    - "Amazon champion, layered leather and bronze scale armor, crescent shield, recurved bow, braided hair lifting in the wind"
+    - "desert nomad warrior, wrapped linen layers, bronze neck guard, pair of throwing javelins, water skin at the hip"
+    - "oracle priestess, belted white tunic, laurel crown, bronze ritual bowl, incense smoke curling around her hands"
+    - "priest-king, decorated bronze cuirass over purple robes, ceremonial mace, stern profile beneath a sun disk crown"
+    - "charioteer, reinforced leather vest, wrapped forearms, reins pulled taut, two horses surging side by side"
+    - "mythic barbarian, fur mantle over a belted tunic, bronze bracers, massive crescent axe resting on one shoulder"
+    - "wandering philosopher-warrior, weathered cloak, short xiphos, scroll case, calm gaze amid a crowded agora"
+    - "temple guardian, bronze scale armor, tall oval shield, spear held across a painted stone doorway"
+    - "galley captain, salt-stained blue cloak, bronze breastplate, curved sword, one hand raised above ranks of oars"
+    - "tomb robber, dusty linen tunic, hooded lamp, coil of rope, short blade, ancient key tablets tied at the belt"
+
+  swords_and_sandals_combo:
+    - "__gkr_ttrpg/swords_and_sandals_character__, __gkr_ttrpg/mythic_environment__, __gkr_ttrpg/lighting__, __gkr_ttrpg/camera__, __gkr_ttrpg/random_style_full__"
+    - "__gkr_ttrpg/mythic_creature__, confronting an armed champion wearing __gkr_ttrpg/ancient_armor__, __gkr_ttrpg/mythic_environment__, __gkr_ttrpg/monster_camera__, __gkr_ttrpg/random_style_full__"
+    - "mythic warrior equipped with __gkr_ttrpg/ancient_armor__, wielding __gkr_ttrpg/ancient_weapons__, __gkr_ttrpg/mythic_environment__, __gkr_ttrpg/mood__, __gkr_ttrpg/random_style_full__"
+
+  party_combo:
+    - "four-person adventuring party gathered around a weathered map, armored guardian watching the doorway, scout pointing out a route, spellcaster holding a shaded lantern, healer checking supplies, dungeon antechamber"
+    - "five adventurers back-to-back in a ruined hall, shield bearer anchoring the front, archer covering a balcony, rogue watching a side passage, two spellcasters preparing different magic"
+    - "travel-worn adventuring party making camp beside an ancient road, weapons within reach, cookpot over a small fire, one member keeping watch while the others compare maps"
+    - "diverse adventuring party entering a crowded tavern, mud-covered boots and battered packs, innkeeper looking up, local patrons making room around a long table"
+    - "adventuring party crossing a flooded cavern, ranger testing the submerged path with a pole, dwarf carrying the lantern high, wizard protecting a bundle of books, rope linking the group"
+    - "wounded adventuring party resting after battle, healer binding an arm, warrior repairing a shield strap, rogue counting recovered keys, exhausted mage asleep against a pack"
+    - "rival adventuring parties facing one another across a treasure chamber, hands near weapons, wary expressions, opened stone coffer between them"
+    - "adventuring party escorting a merchant caravan through a narrow mountain pass, scouts on the ridges, wagons bunched together, storm approaching behind"
+
+  npc_combo:
+    - "busy innkeeper, rolled sleeves, ring of room keys, polishing a clay mug behind a scarred tavern counter"
+    - "traveling merchant, layered practical clothing, open pack displaying maps and unusual tools, guarded smile in a market square"
+    - "elderly village healer, herb-stained apron, shelves of dried plants and ceramic jars, examining a child's bandaged hand"
+    - "city watch captain, dented uniform armor, folded arrest notice, two tired guards waiting for instructions at a gatehouse"
+    - "nervous young courier, road-dusted cloak, sealed message tube clutched to the chest, glancing over one shoulder in a rain-soaked street"
+    - "retired adventurer, old scars and plain clothes, famous broken sword mounted above the hearth, telling a story to skeptical patrons"
+    - "temple acolyte, simple robes, oil lamp and ledger, guiding visitors through a hall of votive statues"
+    - "underworld fence, neat dark coat, jeweler's loupe, inspecting a questionable relic in a curtained back room"
+    - "rural blacksmith, soot-darkened apron, hammer paused above a red-hot horseshoe, racks of repaired farm tools and weapons"
+    - "minor noble patron, formal embroidered coat, signet ring, confidential map spread across a private dining table"
+    - "battle-weary hireling, mismatched armor, bedroll and ten-foot pole, negotiating pay before a dungeon expedition"
+    - "masked cultist informant, rain-dark cloak, coded parchment held beneath a stone bridge, distant lantern patrol approaching"
+
+  adventure_scene_combo:
+    - "adventurers accepting a dangerous quest from a worried village council, regional map pinned beneath cups and candles, several competing clues on the table"
+    - "party negotiating passage with suspicious gate guards, sealed letter presented forward, crowded caravan waiting behind them"
+    - "scout and scholar mapping an unexplored dungeon junction, chalk marks on stone, measured rope across the floor, companions guarding three dark passages"
+    - "rogue carefully opening a trapped treasure chest while companions shelter behind shields, thin wires and pressure plates clearly visible"
+    - "party investigating a ransacked study, wizard comparing torn pages, ranger examining muddy tracks, hidden figure reflected in a cracked mirror"
+    - "adventurers planning around a campfire, miniature stones marking enemy positions on a map, distant fortress visible across the valley"
+    - "caravan ambush on an ancient road, overturned wagon, guards forming a shield wall, archers visible among rocky slopes"
+    - "tense audience before a monarch, adventurers presenting a recovered relic, rival adviser whispering beside the throne"
+    - "party descending by rope into a buried temple, torchlight revealing murals and an unopened stone door far below"
+    - "adventurers resting after battle in a damaged sanctuary, armor removed for repairs, healer treating wounds, rescued villagers sharing food"
+    - "social encounter in a crowded masked ball, disguised adventurers exchanging coded gestures while guards search the hall"
+    - "rival party confrontation at a narrow bridge, both groups exhausted and mud-covered, shared objective visible in ruins beyond"
 
   # --- MASTER RANDOM LIST ---
   random:
@@ -590,15 +729,15 @@ gkr_ttrpg:
     - "__gkr_ttrpg/random_hero_in_scene__"
     - "__gkr_ttrpg/random_hero_portrait__"
     - "__gkr_ttrpg/random_hero_full__"
-    - "__gkr_ttrpg/monster_combo__"
-    - "__gkr_ttrpg/dragon_combo__"
-    - "__gkr_ttrpg/undead_combo__"
-    - "__gkr_ttrpg/fiend_combo__"
-    - "__gkr_ttrpg/boss_combo__"
+    - "__gkr_ttrpg/random_monster_combo__"
     - "__gkr_ttrpg/random_scene__"
     - "__gkr_ttrpg/spotlight_characters__"
     - "__gkr_ttrpg/spotlight_backgrounds__"
     - "__gkr_ttrpg/spotlight_classicscenes__"
+    - "__gkr_ttrpg/swords_and_sandals_combo__"
+    - "__gkr_ttrpg/party_combo__"
+    - "__gkr_ttrpg/npc_combo__"
+    - "__gkr_ttrpg/adventure_scene_combo__"
 
   # --- LEGACY/SIMPLE COMBOS ---
   random_hero:
@@ -606,7 +745,7 @@ gkr_ttrpg:
     - "__gkr_ttrpg/hero_core__, __gkr_ttrpg/hero_appearance__, __gkr_ttrpg/hero_details__"
   random_monster:
     # A simple coherent monster-only combo (no scene or style)
-    - "__gkr_ttrpg/monster_identity__, __gkr_ttrpg/monster_environment__"
+    - "__gkr_ttrpg/monster_identity_scene__"
 
 # --------------------------------------------------------------
 #  SPOTLIGHT
@@ -616,69 +755,69 @@ gkr_ttrpg:
     # --- KNIGHTS & WARRIORS ---
     - knight, (gleaming plate armor reflecting warm light:1.2), broad cloak lifting in wind, narrowed forward gaze, shield with ancient heraldry held high, full body shot, bright rim lighting
     - dwarven defender, (heavy interlocking rune armor:1.2), massive tower shield planted, level gaze and closed neutral mouth, braided beard with metal rings, standing in a stone hall
-    - knight, (cracked black armor with glowing red fissures:1.2), hollow eyes and clenched jaw, gripping a jagged greatsword, deep shadows and red backlight
+    - knight, cracked black armor with rust-red enamel visible between overlapping plates, hollow eyes and clenched jaw, gripping a jagged greatsword, deep shadows and red backlight
     - aasimar paladin, ornate silver and gold armor, (faint halo glow:1.2), relaxed mouth and steady forward gaze, feathered cloak, holding a glowing warhammer, shafts of gold-white light
     - half-orc barbarian, battle-hardened, massive scarred muscles, (furious battle cry:1.2), wielding a colossal battle axe, fur-lined leather armor, dynamic action pose
     - dragonborn gladiator, scorched scale armor, slit-pupil eyes, one corner of the mouth raised, wielding twin scimitars, standing in a sun-drenched arena
-    - swordsman in a tattered cloak and straw hat, hand resting on a katana hilt, standing alone in a misty bamboo forest, face half-hidden, visible painterly brushwork
+    - wandering bronze-age swordsman in a tattered wool cloak, hand resting on a xiphos hilt, standing alone among wind-bent cypress trees, face half-hidden, visible painterly brushwork
     - armored inquisitor, (angular black plate armor:1.2), hood shadowing a tight-lipped face, holding a flaming torch and a sword branded with red-hot scripture, coarse textures, desaturated palette
-    - elven swordswoman, flowing silver armor, mid-spin, (blade trailing an arc of light:1.2), narrowed gaze, blue-glowing leaves and floating lights between forest trunks, painted fantasy illustration
-    - human monster hunter, layered leathers and claw trophies, (silver greatsword on back:1.2), narrowed eyes fixed ahead, glowing potion vials on belt, swamp with black water and twisted dead trees
-    - tiefling duelist, flamboyant coat, curling horns, (flourishing a rapier:1.2), cocky smile, infernal red skin, standing in a Victorian city alley
-    - orcish shaman warrior, painted face, bone armor, rattling bone charms, holding a (glowing spectral axe:1.2), calling on ancestor spirits, stormy plains
+    - elven swordswoman, flowing silver armor, mid-spin, blade catching a sharp crescent highlight, narrowed gaze, moonlit leaves and fireflies between forest trunks, painted fantasy illustration
+    - human monster hunter, layered leathers and claw trophies, (silver greatsword on back:1.2), narrowed eyes fixed ahead, stoppered potion vials of varied cloudy colors, swamp with black water and twisted dead trees
+    - tiefling duelist, flamboyant brocade coat, curling horns, (flourishing a rapier:1.2), cocky smile, infernal red skin, standing in a narrow lantern-lit fantasy city alley
+    - orcish shaman warrior, painted face, bone armor, rattling bone charms, holding a translucent spectral axe edged with cold mist, calling on ancestor spirits, stormy plains
 
     # --- RANGERS & ROGUES ---
     - elven ranger, leaf-patterned cloak, (bow drawn:1.2), narrowed eyes aligned with the arrow, perched in a forest canopy, sunlight filtering through leaves
     - halfling rogue, hood pulled low, leather armor, perched on a rooftop, mischievous smirk, (daggers glinting:1.2), moonlit city
-    - assassin in a matte dark fitted suit, half-hidden in an alley, two daggers held close, (glowing purple eyes:1.2), face obscured by diagonal shadow, detailed digital painting
+    - assassin in a matte dark fitted suit, half-hidden in an alley, two daggers held close, pale violet irises catching a sliver of light, face obscured by diagonal shadow, detailed digital painting
     - wood elf beast tamer, fur-lined cloak, (wolf companion pressed against one leg:1.2), longbow in hand, soft smile and relaxed eyes, snowy forest path
     - human pirate captain, flamboyant coat, broad grin and chin raised, cutlass in hand, parrot on shoulder, standing on the deck of a ship, stormy sea
-    - tiefling trickster bard, (fanning glowing magical cards:1.2), playful smile, lute on back, colorful attire, bustling tavern interior
+    - tiefling trickster bard, fanning translucent magical cards that cast prismatic reflections, playful smile, lute on back, colorful attire, bustling tavern interior
 
     # --- MAGES & SCHOLARS ---
-    - ancient archmage, robes embroidered with constellations, long white beard, (glowing staff surrounded by swirling arcane runes:1.2), in a towering library
-    - tiefling warlock, curling horns, shadowy robes, (eldritch energy crackling from fingertips:1.3), glowing spellbook, in ancient ruins
+    - ancient archmage, robes embroidered with constellations, long white beard, carved staff surrounded by rotating brass rune rings, in a towering library
+    - tiefling warlock, curling horns, shadowy robes, (eldritch energy crackling from fingertips:1.3), weathered spellbook with wind-turned pages, in ancient ruins
     - sorcerer, hair lifting in wind, (jagged multicolored spell bands swirling around both hands:1.3), glowing eyes, legs braced diagonally, fire, frost, and lightning colliding, detailed concept painting
     - human necromancer, dark robes, pale skin, holding a skull, (translucent figures swirling behind:1.2), soft green light, graveyard with black mist leaking from open graves
-    - gnome illusionist, goggles on wild hair, (conjuring three translucent flickering duplicates:1.2), open laughing mouth, colorful mismatched robes, detailed concept painting
+    - gnome illusionist, goggles on wild hair, (conjuring three translucent offset duplicates:1.2), open laughing mouth, colorful mismatched robes, detailed concept painting
     - lavaforged warrior mage, (skin cracks glowing molten orange:1.2), obsidian armor, wielding a flaming sword, volcanic forge, monumental scale and strong orange rim light
     - storm caller sorcerer, (lightning crackling around fingertips:1.3), wind whipping hair and robes, eyes glowing white, atop a stormy cliffside
     - elven scholar, surrounded by stacks of books, (crystal floating above an open tome:1.2), narrowed eyes fixed on the page, library with glowing floor sigils, warm candlelight
 
     # --- CLERICS & HOLY ---
     - human cleric, (raising a glowing sunburst symbol:1.3), robes lifting in radiating gold light, skeletal figures recoiling, knitted brow and pressed lips, in a dark crypt
-    - dwarven priest, ornate chainmail and robes, gripping a heavy warhammer, chanting a blessing, (runes glowing on armor:1.2), temple hall
+    - dwarven priest, ornate chainmail and robes, gripping a heavy warhammer, chanting a blessing, engraved silver runes reflecting candlelight across the armor, temple hall
     - sun cleric, brilliant golden armor, (brilliant radiance from hands:1.3), healing a fallen ally, compassionate gaze, sunbeams in background
     - infernal warpriest, (wreathed in smoldering crimson energy:1.2), dark plate armor, mace in hand, fiery eyes, hellscape background
     - elven healer, simple robes, (hands surrounded by soft diffuse green light:1.2), relaxed mouth and lowered eyelids, kneeling in a ring of silver-barked trees
 
     # --- DRUIDS & MONKS ---
     - forest druid, antler crown, (living vines in hair:1.2), holding a gnarled wooden staff, small deer at one side, blue-glowing leaves and floating lights between twisted trunks
-    - wandering monk, simple robes, relaxed mouth and eyes fixed forward, low martial arts stance, (glowing runic tattoos:1.2), misty mountain monastery
+    - wandering monk, simple robes, relaxed mouth and eyes fixed forward, low martial arts stance, indigo runic tattoos across both arms, misty mountain monastery
     - shapeshifter, (mid-transformation:1.3), features shifting, glowing eyes, torn clothing, primal energy swirling, dark woods
     - seafaring druid, coral jewelry, sea-green robes, (tide swirling around feet:1.2), holding a staff of driftwood, stormy coastal cliffs
 
   spotlight_backgrounds:
     - (ancient stone temple interior:1.2), overgrown with moss and ivy, lit by warm flickering torchlight, narrow beams of light, dust motes, distant doorway obscured by blue haze
-    - misty forest at dawn, (tall ancient trees fading into fog:1.2), soft golden light breaking through, dew on glowing moss, fantasy environment
+    - misty forest at dawn, (tall ancient trees fading into fog:1.2), soft golden light breaking through, dew beading on dark moss, fantasy environment
     - (snow-covered mountain pass:1.2), jagged peaks, blowing snow, narrow stone path, pale frozen sky, single tiny traveler, vast empty frame, detailed concept painting
     - sunlit meadow dotted with wildflowers, distant ruined tower, carved standing stones, gentle haze, jewel-toned palette, visible painterly brushwork
     - candlelit tavern interior, warm amber firelight, worn wooden beams, relaxed patron silhouettes, cluttered tables, soft shadows and close framing
-    - (moonlit castle courtyard:1.2), cracked flagstones, ancient banners stirring, empty archways, glowing full moon, long blue-black shadows
+    - (moonlit castle courtyard:1.2), cracked flagstones, ancient banners stirring, empty archways, full moon behind thin cloud, long blue-black shadows
     - stormy cliffside, crashing waves far below, dark swirling clouds, (dramatic lightning flash:1.2), rain-swept rocks, monumental scale, deep shadows at the frame edges
     - ancient library tower, (towering shelves of dusty tomes:1.2), soft ambient glow, floating dust motes, large orrery, arcane sigils on floor
-    - underdark cavern, (bioluminescent fungi:1.2), glowing purple and blue mushrooms, crystal formations, subterranean river, deep black recesses, distant forms obscured by violet haze
+    - deep subterranean cavern, pale purple and blue fungi, wet crystal formations reflecting a narrow shaft of light, subterranean river, deep black recesses, distant forms obscured by violet haze
     - dragon's treasure hoard, vast cavern, (piles of gold coins and relics:1.3), gleaming treasure, molten gold rivers, tiny foreground figures for monumental scale
-    - (otherworldly glade:1.2), translucent glowing flowers, floating lights, twisted mossy trees, diffuse purple and green glow, low silver mist
+    - (otherworldly glade:1.2), translucent flowers, drifting pollen, twisted mossy trees, diffuse purple and green twilight, low silver mist
     - graveyard, leaning tombstones, (low creeping fog:1.2), cold full moon, skeletal trees, empty black spaces between narrow trunks
     - (dwarven hall:1.2), carved into mountain, burning braziers, massive stone arches, banners with clan sigils, lava forge in background
-    - elven treetop city, curved wooden walkways, glowing lanterns, huge ancient trees, moonlight, still water below, soft blue-white bloom
+    - elven treetop city, curved wooden walkways, paper lanterns casting warm pools of light, huge ancient trees, moonlight, still water below, soft blue-white haze
     - abandoned battlefield, broken weapons and armor, tattered banners, soft twilight, drifting embers, lowered silhouettes, muted painterly colors
     - (volcanic forge:1.2), rivers of lava, glowing embers in the air, massive anvil, intense heat haze, dark metal structures, industrial fantasy
-    - star-filled void, (swirling constellations:1.2), drifting luminous islands, glowing nebulae, floating rocks and inverted waterfalls, vast wide composition
+    - star-filled void, (swirling constellations:1.2), drifting pale islands, layered nebula clouds, floating rocks and inverted waterfalls, vast wide composition
     - plague-ridden swamp, murky green water, twisted mangrove trees, (glowing toxic fog:1.2), sunken ruins, dark and gritty
     - (floating isles:1.2), drifting beneath a clear pale sky, waterfalls cascading into clouds, ancient ruins on islands, vines connecting islands, jewel-toned painted rendering
-    - crystal cavern, walls covered in (glowing crystals:1.2), rainbow-refracted light, deep chasm, mirror-still underground lake, saturated jewel colors
+    - crystal cavern, walls covered in faceted crystals catching a distant white beam, rainbow-refracted light, deep chasm, mirror-still underground lake, saturated jewel colors
 
   spotlight_classicscenes:
     - massive ancient dragon, perched atop a mountain of golden treasure, inside a vast cavern, (unleashing a torrent of fire:1.3), glowing eyes, widescreen composition, monumental painted scale
@@ -705,4 +844,4 @@ gkr_ttrpg:
     - massive hydra, (emerging from a swamp:1.2), multiple fanged heads roaring over adventurers in a tiny boat, muddy black water, low green fog, cramped composition
     - griffon cavalry, (descending from the sky:1.2), lances lowered, sun gleaming on armor, above a battlefield, broad upward camera angle and radiant cloud break
     - party solving a puzzle door, in a runic chamber, (glowing symbols:1.2), wizard studying a tome, intense concentration
-    - battle against a beholder, in a dark chasm, (multiple eye rays firing:1.2), heroes dodging, glowing central eye, fantasy horror
+    - battle against a floating many-eyed orb tyrant, in a dark chasm, (multiple eye rays firing:1.2), heroes dodging, luminous central eye, fantasy horror

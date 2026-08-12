@@ -9,45 +9,38 @@ gkr_japan:
 # ---------------------------------------------------------
 
   archetype:
-    - japanese man in a travel-stained kimono, straw sandals, unshaven face, hand resting on a sheathed katana
+    - man in a travel-stained kimono, straw sandals, unshaven face, hand resting on a sheathed katana
     - samurai in lacquered lamellar armor, squared stance, focused gaze, both hands on a katana hilt
     - ninja in matte black wrapped clothing, crouched low with a kunai held close to the body
-    - (shrine maiden:1.2), miko, japanese woman, red and white robes
-    - (armored onna bugeisha:1.2), female warrior, japanese, naginata
-    - japanese monk with shaved head, layered robes, prayer beads, lowered gaze
-    - muscular japanese temple guard with bare arms, flared robes, clenched fists, wide blocking stance
-    - japanese figure in a charm-covered coat, narrowed eyes, glowing ofuda raised toward the foreground
-    - weathered japanese yamabushi in layered white robes, rope sash, pompom stole, conch shell at the hip
-    - elderly japanese onmyoji in patterned court robes, long white beard, paper talismans orbiting raised hands
-    - japanese ninja, matte black bodysuit with glowing circuit-line seams, cybernetic forearm plating, neon accents
+    - (shrine maiden:1.2), miko, woman, red and white robes
+    - (armored onna bugeisha:1.2), female warrior, naginata
+    - monk with shaved head, layered robes, prayer beads, lowered gaze
+    - muscular temple guard with bare arms, flared robes, clenched fists, wide blocking stance
+    - figure in a charm-covered coat, narrowed eyes, glowing ofuda raised toward the foreground
+    - weathered yamabushi in layered white robes, rope sash, pompom stole, conch shell at the hip
+    - elderly onmyoji in patterned court robes, long white beard, paper talismans orbiting raised hands
+    - ninja, matte black bodysuit with glowing circuit-line seams, cybernetic forearm plating, neon accents
     - (street samurai:1.2), tailored dark suit jacket over t-shirt, katana, urban tokyo backstreet
     - (modern swordsman:1.2), kendo, modern clothes
-    - japanese woman, (sequined stage costume:1.1), holding a handheld microphone, bright stage smile, one arm raised mid-performance
-    - japanese teenager, (spiky multicolor hair:1.1), oversized expressive eyes, determined clenched fist pose, wind-blown school uniform
-    - japanese hero, (segmented ridged bodysuit with chest emblem:1.1), oversized boots, wide heroic stance, fist raised skyward
-    - japanese mecha pilot in a fitted pressure suit, segmented collar, illuminated helmet visor, cockpit harness
-    - masked figure, (form-fitting dark tactical clothing:1.1), tokyo rooftop silhouette
+    - woman, (idol costume:1.1), holding a handheld microphone, bright stage smile, one arm raised mid-performance
+    - teenager, (spiky multicolor hair:1.1), oversized expressive eyes, determined clenched fist pose, wind-blown school uniform
+    - hero, (segmented ridged bodysuit with chest emblem:1.1), oversized boots, wide heroic stance, fist raised skyward
+    - mecha pilot in a fitted pressure suit, segmented collar, illuminated helmet visor, cockpit harness
+    - ninja, (form-fitting dark tactical clothing:1.1), tokyo rooftop silhouette
     - (magical girl warrior:1.2), anime style, frilled ribboned dress with star motifs, wand in hand
     - (wandering storyteller:1.2), biwa hoshi, lute, traveling clothes
-    - japanese mercenary, weathered tactical jacket over kevlar vest, glowing neon tattoo sleeve, cybernetic hand, tokyo back alley
-    - dust-covered japanese survivor in patched torn layers, respirator at the neck, gripping a scrap-metal spear
+    - mercenary, weathered tactical jacket over kevlar vest, glowing neon tattoo sleeve, cybernetic hand, tokyo back alley
+    - dust-covered survivor in patched torn layers, respirator at the neck, gripping a scrap-metal spear
     - translucent glowing humanoid figure, flowing ancient robes fading into mist, faint aura
 
   archetype_peaceful:
-    - japanese monk with shaved head, layered robes, prayer beads, lowered gaze
-    - elderly japanese onmyoji in patterned court robes, long white beard, paper talismans held in both hands
+    - monk with shaved head, layered robes, prayer beads, lowered gaze
+    - elderly onmyoji in patterned court robes, long white beard, paper talismans held in both hands
     - (wandering storyteller:1.2), biwa hoshi, lute, traveling clothes
-    - (shrine maiden:1.2), miko, japanese woman, red and white robes
+    - (shrine maiden:1.2), miko, woman, red and white robes
     - (ronin poet:1.2), travel cloak, bamboo flute
     - tea master kneeling beside a tatami hearth, relaxed shoulders, hands arranging a ceramic chawan
     - robed monastery calligrapher kneeling over rice paper, ink-stained fingers holding a broad brush
-
-  ethnicity:
-    - (japanese:1.3), east asian
-    - japanese person in a brightly dyed Ryukyuan bingata robe, dark hair pinned with a hibiscus ornament
-    - Ainu person in an attus robe with bold geometric appliqué, embroidered headband, dark wavy hair
-    - (mixed asian:1.1), east asian features
-    - east asian face rendered with clean cel-shaded contours, enlarged reflective eyes, sharply grouped hair strands
 
   age:
     - (young adult:1.1), 20s
@@ -82,7 +75,7 @@ gkr_japan:
   hair:
     - (long straight hair:1.1)
     - (long flowing hair:1.1), wind blowing hair
-    - (traditional pinned hairstyle:1.2), kanzashi, japanese
+    - (traditional pinned hairstyle:1.2), kanzashi
     - (high ponytail:1.1)
     - (short bob cut:1.1)
     - (medium layered cut:1.1)
@@ -151,8 +144,8 @@ gkr_japan:
     - school uniform style outfit, sailor uniform
     - asymmetric zip-up jacket with glowing piping, (neon accents:1.1)
     - angular polymer-plated armor with glowing blue seam lines over a form-fitting bodysuit, sci-fi
-    - sequined bodysuit with layered ruffle skirt, sparkling hair ornaments, stage costume
-    - frilled ribboned dress with star and heart motifs, puffed sleeves, thigh-high stockings
+    - idol bodysuit with layered ruffle skirt, sparkling hair ornaments, stage costume
+    - dress with star and heart motifs, puffed sleeves, thigh-high stockings
 
   textile_patterns:
     - (seigaiha wave pattern:1.2), blue and white, traditional
@@ -416,14 +409,13 @@ gkr_japan:
 # THEMATIC COMBOS (NEW)
 # ---------------------------------------------------------
 
-  thematic_combos:
-    - "japanese samurai in ornately lacquered o-yoroi armor, standing rigidly beneath holographic signs in a wet neon Tokyo alley, raised eyebrows and parted lips, photorealistic materials"
-    - "__gkr_japan/yokai__, __gkr_japan/yokai_traits__, on a (bustling modern tokyo street:1.2), neon reflections, high detail concept art, scared onlookers"
-    - "__gkr_japan/archetype_peaceful__, __gkr_japan/offhand_peaceful__, beside __gkr_japan/props_items__, in a raked stone garden viewed through __gkr_japan/architecture_interior__, relaxed posture, soft morning light, mineral-pigment painting on fibrous paper"
-    - "masked japanese figure in a matte black wrapped uniform, crouching on a temple rooftop beside __gkr_japan/architecture_exterior__, moonlit blue tones, deep shadows and looming silhouettes, clean cel shading"
-    - "japanese hunter in a charm-covered coat, narrowed eyes, glowing ofuda raised toward __gkr_japan/yokai__, among twisted trees and low mist, dramatic backlight, textured painted contours"
-    - "japanese pilot in a fitted pressure suit and illuminated visor, standing beside __gkr_japan/spotlight_mecha__, on a neon-lit rooftop above Tokyo, hard-surface cel shading and bright energy bloom"
-
+  thematic_spotlights:
+    - "samurai in ornately lacquered o-yoroi armor, standing rigidly beneath holographic signs in a wet neon Tokyo alley, raised eyebrows and parted lips, photorealistic materials"
+    - "towering oni in battered armor emerging onto a busy modern Tokyo street, iron kanabo resting on one shoulder, startled onlookers keeping their distance, neon reflections, detailed urban fantasy concept art"
+    - "tea master preparing matcha beside an irori hearth, ceramic utensils arranged precisely, raked stone garden visible through open shoji, relaxed posture, soft morning light, mineral-pigment painting on fibrous paper"
+    - "masked figure in a matte black wrapped uniform, crouching on a temple rooftop beside __gkr_japan/architecture_exterior__, moonlit blue tones, deep shadows and looming silhouettes, clean cel shading"
+    - "hunter in a charm-covered coat confronting a translucent yurei among twisted cedars and low mist, glowing ofuda raised in one hand, dramatic backlight, textured painted contours"
+    - "pilot in a fitted pressure suit and illuminated visor standing beside a compact white-and-indigo scout mech on a neon-lit rooftop above Tokyo, hard-surface cel shading and restrained energy bloom"
 # ---------------------------------------------------------
 # KIMONO
 # ---------------------------------------------------------
@@ -884,38 +876,289 @@ gkr_japan:
 # RANDOM & COMBOS
 # ---------------------------------------------------------
 
+  # Compatibility-aware building blocks. Each family keeps role, equipment,
+  # setting, and visual language within the same genre.
+  ninja_subject:
+    - shinobi scout in dark wrapped clothing and light leather guards
+    - masked courier in a weathered travel cloak over fitted shinobi gear
+    - kunoichi infiltrator in muted indigo layers with a concealed face wrap
+    - elderly shinobi handler in an unassuming merchant's coat
+
+  ninja_mission:
+    - observing a guarded castle gate from a tiled roof at moonrise
+    - carrying a sealed scroll through a rain-dark cedar forest
+    - slipping through the rafters of a lantern-lit storehouse
+    - laying a diversion beside an Edo-period canal at dawn
+
+  ninja_action:
+    - crouched low with one hand braced against the roof tiles
+    - moving quietly with a compact kunai held close to the body
+    - pausing in deep shadow to study the route ahead
+    - landing in a controlled stance as loose fabric settles
+
+  ninja_treatment:
+    - moonlit blue tones, restrained ink contours, deep architectural shadows
+    - muted natural colors, soft rain, cinematic realism
+    - bold woodblock-print shapes, limited indigo palette, visible paper grain
+    - clean cel shading, crisp silhouette, subtle motion lines
+
+  ninja_scenario:
+    - shinobi scout in dark wrapped clothing and light leather guards, observing a guarded castle gate from a tiled roof at moonrise, crouched low behind the ridge tiles, restrained ink contours and deep blue shadows
+    - masked courier in a weathered travel cloak over fitted shinobi gear, carrying a sealed scroll through a rain-dark cedar forest, moving quietly with a compact kunai held close, cinematic realism
+    - kunoichi infiltrator in muted indigo layers with a concealed face wrap, slipping through the rafters of a lantern-lit storehouse, paused in deep shadow to study the route ahead, crisp cel shading
+    - elderly shinobi handler disguised in an unassuming merchant's coat, laying a diversion beside an Edo-period canal at dawn, calm deliberate posture, muted woodblock-print palette
+
+  samurai_role:
+    - veteran retainer in practical lacquered lamellar armor
+    - mounted clan messenger in a sleeveless jimbaori over armor
+    - onna bugeisha in fitted armor with tied-back sleeves
+    - young castle guard in a crested hitatare and light armor
+    - masterless ronin in a weathered kimono and travel cloak
+
+  samurai_equipment:
+    - katana carried at the hip, one hand resting lightly on the hilt
+    - yumi longbow with a compact quiver of arrows
+    - yari spear held upright beside the body
+    - naginata carried diagonally in a guarded stance
+    - paired katana and wakizashi secured at the sash
+
+  samurai_setting:
+    - in a castle courtyard beneath vertical clan banners
+    - crossing a windy mountain pass during the Sengoku period
+    - waiting beside an Edo-period checkpoint at first light
+    - standing in a rain-soaked encampment before battle
+    - traveling along a quiet cedar road in autumn
+
+  samurai_action:
+    - composed upright posture, watchful gaze, hands relaxed
+    - advancing carefully while scanning the middle distance
+    - kneeling over a campaign map with measured concentration
+    - turning toward an unseen sound as fabric moves in the wind
+
+  samurai_scenario:
+    - veteran retainer in practical lacquered lamellar armor, katana carried at the hip, standing watch beneath clan banners in a castle courtyard, composed upright posture, soft overcast light, cinematic realism
+    - mounted clan messenger in a sleeveless jimbaori over armor, sealed dispatch at the sash, crossing a windy Sengoku-period mountain pass, alert forward gaze, textured historical painting
+    - onna bugeisha in fitted armor with tied-back sleeves, naginata held diagonally, guarding an Edo-period checkpoint at first light, balanced full-body composition, restrained ink and color
+    - young castle guard in a crested hitatare and light armor, yari held upright, waiting beside a lantern-lit gate, quiet watchful pose, woodblock-print rendering
+    - masterless ronin in a weathered kimono and travel cloak, paired swords secured at the sash, walking a cedar road in autumn, distant contemplative gaze, translucent watercolor treatment
+    - senior commander in lacquered armor kneeling over a campaign map inside a rain-dark war tent, folded fan in hand, concentrated expression, warm lamplight, detailed historical illustration
+
+  yokai_humanoid:
+    - yuki onna with long white robes dissolving into icy mist
+    - rokurokubi innkeeper revealing an impossibly extended neck
+    - tengu swordsman with a red face and half-unfurled dark wings
+    - translucent yurei in an old kimono with drifting hair
+
+  yokai_animal:
+    - nine-tailed kitsune with blue fox fire circling its paws
+    - bakeneko with two tails and a wavering lantern-lit shadow
+    - tanuki shapeshifter caught midway between human and animal form
+    - kappa crouched at a mossy riverbank with water glistening on its shell
+
+  yokai_giant:
+    - towering oni in battered armor carrying an iron kanabo
+    - nurikabe wall spirit blocking a narrow mountain path
+    - eastern sky dragon coiling through thunderclouds
+    - night parade of varied yokai filling an old village street
+
+  yokai_scenario:
+    - yuki onna with long white robes dissolving into icy mist on a moonlit mountain ridge, pale backlight, delicate supernatural painting
+    - rokurokubi innkeeper revealing an impossibly extended neck inside an abandoned roadside inn, single lantern glow, eerie folklore illustration
+    - tengu swordsman with a red face and half-unfurled dark wings at an ancient mountain shrine, wind-blown leaves, textured painted contours
+    - translucent yurei in an old kimono drifting across an abandoned village street, low fog and cold moonlight, restrained horror composition
+    - nine-tailed kitsune with blue fox fire circling its paws in a misty bamboo forest, luminous eyes, detailed folklore illustration
+    - bakeneko with two tails casting a wavering shadow across a lantern-lit alley, low viewpoint, stylized woodblock textures
+    - tanuki shapeshifter caught midway between human and animal form beside a rural roadside shrine, warm dusk light, playful illustrated mood
+    - kappa crouched at a mossy riverbank with water glistening on its shell, reeds bending in rain, naturalistic creature study
+    - towering oni in battered armor carrying an iron kanabo across a storm-drenched battlefield, lightning revealing its scale, dark fantasy painting
+    - nurikabe wall spirit blocking a narrow mountain path in dense fog, tiny travelers providing scale, minimalist eerie composition
+    - eastern sky dragon coiling through thunderclouds above a stormy coastline, bright lightning along wet scales, cinematic wide view
+    - night parade of varied yokai filling an old village street beneath paper lanterns, layered silhouettes, richly detailed festival-horror illustration
+
+  anime_subject:
+    - high-school astronomy club member carrying a star chart and binoculars
+    - shrine apprentice investigating a trail of faint spirit lights
+    - street dancer rehearsing beneath an elevated railway
+    - rookie mecha pilot checking a compact flight helmet
+    - fantasy courier with a satchel of sealed letters
+    - young musician carrying a weathered guitar case
+    - supernatural detective comparing notes in a pocket notebook
+
+  anime_outfit:
+    - practical school uniform with a light cardigan and worn sneakers
+    - layered contemporary streetwear with a compact shoulder bag
+    - traditional shrine attire adapted for easy movement
+    - fitted utility jacket, cargo trousers, and sturdy boots
+    - understated stage clothes with geometric color accents
+    - streamlined pilot suit with a segmented collar and minimal markings
+
+  anime_activity:
+    - waiting on a quiet station platform as an express train passes
+    - following a mysterious clue through a neighborhood shopping street
+    - sharing a calm break beside a riverside footpath
+    - preparing equipment before a difficult journey
+    - performing under modest festival lights for a small crowd
+    - confronting a strange presence at the edge of a cedar forest
+
+  anime_setting:
+    - present-day residential Tokyo at blue hour
+    - rural town beside rice fields under summer clouds
+    - old shrine grounds after a light rain
+    - layered fantasy port built around timber bridges
+    - near-future transit concourse with restrained holographic signage
+    - school rooftop in warm late-afternoon light
+
+  anime_scenario:
+    - high-school astronomy club member in a cardigan and worn sneakers, carrying a star chart and binoculars on a rural station platform beneath a clear night sky, quiet anticipation, clean cel shading
+    - shrine apprentice in practical red and white attire, following faint spirit lights through old shrine grounds after rain, cautious curiosity, atmospheric supernatural anime illustration
+    - street dancer in layered contemporary clothes, rehearsing beneath an elevated railway at blue hour, portable speaker nearby, energetic natural movement, crisp urban anime key visual
+    - rookie mecha pilot in a streamlined flight suit, checking a compact helmet beside a hangar observation window, focused preflight calm, restrained hard-surface cel shading
+    - fantasy courier in a weatherproof jacket and sturdy boots, carrying sealed letters across a timber bridge in a layered port city, brisk purposeful stride, colorful adventure-anime background art
+    - young musician in understated stage clothes, performing with a weathered guitar at a small summer festival, warm lantern light and an attentive local crowd, expressive slice-of-life anime scene
+    - supernatural detective in modern streetwear, comparing notes beside a strange footprint in a quiet shopping street, evening rain and subtle tension, mystery-anime composition
+
+  cyber_role:
+    - municipal drone technician in a weatherproof utility jacket
+    - street medic carrying a compact diagnostic case
+    - courier with a sealed data capsule and reinforced riding coat
+    - corporate investigator in a tailored coat with discreet implants
+    - underground musician using a wrist-mounted sound controller
+    - security specialist in low-profile polymer armor
+
+  cyber_gear:
+    - translucent data tablet displaying a city transit map
+    - compact repair tools and a hovering inspection drone
+    - sheathed energy blade reserved for emergencies
+    - augmented-reality visor and encrypted earpiece
+    - medical scanner with softly glowing status lights
+    - rugged delivery case locked to a cybernetic forearm
+
+  cyber_setting:
+    - beneath elevated rail lines on a rain-slick service street
+    - inside a quiet all-night noodle shop overlooking neon traffic
+    - on a maintenance roof above a dense near-future ward
+    - in a crowded Shibuya crossing beneath restrained holographic signs
+    - beside a canal lined with delivery drones and luminous wayfinding marks
+
+  cyber_scenario:
+    - municipal drone technician in a weatherproof utility jacket, using compact repair tools on a hovering inspection drone beneath elevated rail lines, rain-softened work lights, cinematic near-future realism
+    - street medic carrying a diagnostic case, scanning an injured cyclist beside a quiet all-night noodle shop, warm interior light against cool wet pavement, grounded science-fiction illustration
+    - courier in a reinforced riding coat with a sealed data capsule locked to one forearm, checking a route beside a canal of autonomous delivery boats, alert but natural posture, crisp concept art
+    - corporate investigator in a tailored coat with discreet implants, reviewing encrypted evidence through an augmented-reality visor in a crowded station concourse, controlled cyan and amber lighting
+    - underground musician operating a wrist-mounted sound controller on a rooftop utility garden, holographic billboards diffused by light rain, energetic performance pose, cel-shaded cyberpunk art
+    - security specialist in low-profile polymer armor, holding a sheathed energy blade while inspecting a maintenance corridor, restrained emergency lighting, tense cinematic framing
+
+  modern_subject:
+    - office worker loosening a coat collar after the evening commute
+    - university student carrying books and a folded umbrella
+    - bicycle courier checking a route beside a convenience store
+    - independent designer photographing storefront typography
+    - elderly neighborhood gardener carrying freshly cut branches
+    - chef taking a short break outside a narrow restaurant
+
+  modern_setting:
+    - glass storefronts beneath an elevated railway in soft overcast light
+    - a compact neighborhood shopping street in warm evening light
+    - a quiet riverside path during the morning commute
+    - a crowded station entrance after summer rain
+    - a residential lane with bicycles, utility poles, and potted plants
+
+  modern_scenario:
+    - office worker loosening a coat collar outside a crowded station entrance after summer rain, tired but relaxed posture, street-level cinematic realism
+    - university student carrying books and a folded umbrella along a quiet riverside path during the morning commute, soft overcast light, candid documentary composition
+    - bicycle courier checking a route beside a convenience store beneath elevated rail lines, wet pavement reflections, crisp urban realism
+    - independent designer photographing storefront typography on a compact neighborhood shopping street, warm evening light, natural working posture
+    - elderly neighborhood gardener carrying freshly cut branches along a residential lane with bicycles and potted plants, gentle morning light, observational portrait
+    - chef taking a short break outside a narrow restaurant, steam drifting from the doorway into cool evening air, intimate street portrait
+
+  peaceful_activity:
+    - tea master preparing matcha beside an irori hearth, ceramic chawan and bamboo whisk arranged within reach, quiet tatami room, soft morning light
+    - monastery calligrapher brushing a single line onto rice paper, inkstone and folded cloth nearby, open shoji facing a moss garden, restrained mineral-pigment painting
+    - wandering storyteller playing a biwa on a wooden engawa, small lantern at the side, garden leaves moving in late-afternoon light, translucent watercolor washes
+    - monk meditating with wooden prayer beads beneath old cedars, distant temple roof in mist, balanced composition and muted natural colors
+    - shrine attendant arranging fresh branches and flowers beside a small altar, clean interior, gentle window light, delicate ink contours
+    - retired ronin playing a bamboo flute beside a calm river, travel cloak folded nearby, autumn reflections, generous negative space
+
+  historical_scene:
+    - Edo-period canal district with wooden machiya facades and paper lanterns, warm evening light, a few drifting leaves, street-level environmental view
+    - Sengoku-period hilltop fort with timber defenses and vertical banners, clearing storm light, wind moving through grass, cinematic wide shot
+    - Taisho-period station street with brick facades, gas lamps, period bicycles, soft dusk light, painterly realism
+    - ancient shrine path with mossy stone lanterns and cedar trees, morning mist, subtle spirit wisps, mineral-pigment painting
+
+  nature_scene:
+    - bamboo forest after rain, soft green reflected light, low mist between the stalks, tranquil wide composition
+    - stormy coastline cliffs with wind-driven spray, broken sunlight through clouds, textured painted brushwork
+    - autumn maple forest beside a narrow stream, warm afternoon light, leaves turning slowly in the current, watercolor treatment
+    - snowy mountain temple at dawn, faint smoke from the eaves, restrained blue and ochre palette, woodblock-print rendering
+
+  modern_scene:
+    - present-day Tokyo side street after rain, convenience-store glow reflected on pavement, sparse pedestrians, cinematic realism
+    - quiet residential district at sunrise, overhead cables and bicycles, long soft shadows, documentary composition
+    - busy station concourse at evening rush hour, layered signage and controlled motion blur, high-angle environmental view
+
+  cyber_scene:
+    - near-future transit hub with luminous route lines and compact service robots, cool interior light, hard-surface concept art
+    - neon city canal at night with autonomous delivery boats, cyan and amber reflections, deep atmospheric perspective
+    - rooftop utility garden among holographic billboards, light rain and distant traffic, clean cel-shaded environment art
+
+  kimono_formal_combo:
+    - "formal houmongi kimono in muted wisteria with a coordinated autumn-grass hem design, formal silver fukuro obi, braided obijime cord and elegant kanzashi, composed standing portrait"
+    - "formal irotomesode with three crests, deep subdued color, auspicious hem pattern, gold brocade fukuro obi, pearl obidome, refined indoor portrait"
+    - "men's montsuki haori hakama in black and charcoal, five family crests, white under-collar, stiff kaku obi, folded sensu tucked at the sash"
+
+  kimono_casual_combo:
+    - "light cotton yukata, __gkr_japan/kimono_color__, simple repeating __gkr_japan/kimono_pattern__, casual hanhaba obi tied in a compact bow, wooden geta and small kinchaku, summer festival setting"
+    - "casual komon kimono in muted seasonal colors, small all-over pattern, Nagoya obi in a complementary tone, modest obijime and folded fan, neighborhood outing"
+    - "men's casual jinbei in indigo cotton, simple woven stripe, straw sandals and uchiwa fan, relaxed summer veranda scene"
+
+  kimono_ceremonial_combo:
+    - "white shiromuku wedding kimono beneath an embroidered white uchikake, formal bridal obi, wataboshi hood, minimal white-and-gold accessories, shrine courtyard"
+    - "maiko's formal hikizuri with coordinated seasonal motifs, long darari obi, hana-kanzashi matched to the season, polished okobo geta, Kyoto alley portrait"
+    - "mourning mofuku kimono in pure black silk with family crests, restrained black obi and plain accessories, solemn interior with soft natural light"
+
+  kimono_modern_combo:
+    - "modern denim kimono with a narrow geometric obi, leather belt layered at the waist, ankle boots, contemporary gallery entrance"
+    - "Taisho-roman furisode with bold art-deco pattern, contrasting obi, lace-up boots and a small western handbag, period brick station"
+    - "avant-garde metallic-thread kimono with minimalist obi construction and sculptural hair ornament, restrained runway lighting"
+
   hero_combo_full:
-    - "japanese warrior in lacquered lamellar armor over a patterned hitatare, __gkr_japan/age__, __gkr_japan/build__, __gkr_japan/tone__, __gkr_japan/hair__, __gkr_japan/hair_color__, __gkr_japan/eyes__, __gkr_japan/expression__, katana held in both hands, feudal castle courtyard with clan banners, __gkr_japan/lighting__, __gkr_japan/camera__, __gkr_japan/style__, __gkr_japan/fx_environment__"
+    - "__gkr_japan/samurai_scenario__"
+    - "__gkr_japan/ninja_combo__"
+    - "__gkr_japan/anime_scenario__"
+    - "__gkr_japan/cyber_scenario__"
 
   hero_combo_lite:
-    - "__gkr_japan/archetype__, __gkr_japan/expression__, __gkr_japan/camera__, __gkr_japan/lighting__, __gkr_japan/style__"
+    - "__gkr_japan/random_character__"
 
   ninja_combo:
-    - "masked japanese figure, __gkr_japan/build__, __gkr_japan/tone__, __gkr_japan/eyes__, matte black wrapped uniform with hood and fitted leather guards, kunai held in reverse grip, crouching on a tiled temple roof above an Edo-period street, moonlit blue tones, strong diagonal framing, clean cel shading, __gkr_japan/fx_environment__"
+    - "__gkr_japan/ninja_scenario__"
 
   samurai_combo:
-    - "japanese samurai, __gkr_japan/age__, __gkr_japan/build__, __gkr_japan/tone__, __gkr_japan/hair__, __gkr_japan/eyes__, ornately lacquered o-yoroi armor with __gkr_japan/textile_patterns__, katana held point-down, feudal castle courtyard, upright still posture, warm lantern light, low-angle wide shot, photorealistic materials"
+    - "__gkr_japan/samurai_scenario__"
 
   yokai_combo:
-    - "__gkr_japan/yokai__, __gkr_japan/yokai_traits__, __gkr_japan/monster_environment__, pools of colored glow and drifting mist, luminous aura tracing the silhouette, dramatic backlight, textured painted contours, __gkr_japan/fx_environment__"
+    - "__gkr_japan/yokai_scenario__"
 
   anime_combo:
-    - "japanese teenager, __gkr_japan/hair_color__, __gkr_japan/eyes__, frilled ribboned outfit with star motifs, glowing energy katana, concentric light rings and sparkling particles, neon Tokyo skyline, saturated colors, bright cel shading, wide stance with blade raised"
+    - "__gkr_japan/anime_scenario__"
 
   cyber_combo:
-    - "masked japanese rooftop infiltrator, __gkr_japan/hair__, neon purple hair, luminous cybernetic irises, asymmetric jacket with cyan piping, energy katana and holographic data tablet, wet neon-lit Tokyo alley, lunging pose, cyan-magenta reflections, deep black shadows, __gkr_japan/fx_environment__"
+    - "__gkr_japan/cyber_scenario__"
 
   scene_combo:
-    - "__gkr_japan/environment__, __gkr_japan/lighting__, __gkr_japan/fx_environment__, three-quarter environmental view, sharply rendered materials, layered atmospheric depth"
+    - "__gkr_japan/random_backgrounds__"
 
   peaceful_combo:
-    - "__gkr_japan/archetype_peaceful__, __gkr_japan/offhand_peaceful__, beside __gkr_japan/props_items__, tatami room opening onto a raked stone garden, relaxed posture, soft morning light, mineral-pigment painting on fibrous paper"
+    - "__gkr_japan/peaceful_activity__"
 
   modern_combo:
-    - "japanese adult in layered contemporary Tokyo streetwear, __gkr_japan/hair__, __gkr_japan/hair_color__, __gkr_japan/eyes__, __gkr_japan/expression__, glass storefronts and overhead rail lines, wet pavement reflections, street-level medium shot, crisp cinematic realism"
+    - "__gkr_japan/modern_scenario__"
 
   random_kimono:
-    - "__gkr_japan/kimono_type__, __gkr_japan/kimono_color__, with a __gkr_japan/kimono_pattern__, wearing a __gkr_japan/kimono_obi__, and __gkr_japan/kimono_accessory__"
+    - "__gkr_japan/kimono_formal_combo__"
+    - "__gkr_japan/kimono_casual_combo__"
+    - "__gkr_japan/kimono_ceremonial_combo__"
+    - "__gkr_japan/kimono_modern_combo__"
 
   random:
     - "__gkr_japan/hero_combo_full__"
@@ -928,7 +1171,7 @@ gkr_japan:
     - "__gkr_japan/scene_combo__"
     - "__gkr_japan/peaceful_combo__"
     - "__gkr_japan/modern_combo__"
-    - "__gkr_japan/thematic_combos__"
+    - "__gkr_japan/thematic_spotlights__"
     - "__gkr_japan/random_kimono__"
     - "__gkr_japan/spotlight_characters__"
     - "__gkr_japan/spotlight_backgrounds__"
@@ -938,10 +1181,20 @@ gkr_japan:
 
   random_character:
     - "__gkr_japan/archetype__, __gkr_japan/age__, __gkr_japan/build__, __gkr_japan/tone__, __gkr_japan/hair__, __gkr_japan/hair_color__, __gkr_japan/eyes__, __gkr_japan/expression__, __gkr_japan/trinkets__"
-  
+    - "veteran retainer in practical lacquered armor, katana at the hip, composed three-quarter character portrait"
+    - "masked shinobi courier in a weathered cloak over fitted dark gear, sealed scroll case at the shoulder, restrained stealth character study"
+    - "high-school astronomy club member in a cardigan and worn sneakers, star chart tucked beneath one arm, clean cel-shaded character design"
+    - "municipal drone technician in a weatherproof utility jacket, compact repair tool in hand, grounded near-future character design"
+    - "independent designer in layered contemporary streetwear, camera and notebook carried in a shoulder bag, natural candid portrait"
+    - "elderly monastery calligrapher in simple robes, ink-stained fingers holding a broad brush, restrained traditional illustration"
+    
   random_backgrounds:
     - "__gkr_japan/environment__, __gkr_japan/mood__, __gkr_japan/lighting__, __gkr_japan/fx_environment__"
-
+    - "__gkr_japan/historical_scene__"
+    - "__gkr_japan/nature_scene__"
+    - "__gkr_japan/modern_scene__"
+    - "__gkr_japan/cyber_scene__"
+    
 # ---------------------------------------------------------
 # SPOTLIGHT (wired into random)
 # ---------------------------------------------------------
