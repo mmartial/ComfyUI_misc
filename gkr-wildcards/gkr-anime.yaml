@@ -1,878 +1,663 @@
 # ========================================================================
-# ANIME — EXTENDED WILDCARDS FOR COMFYUI DYNAMIC PROMPTS (SDXL-Optimized)
+# ANIME & MANGA — MEDIUM-FIRST WILDCARDS FOR COMFYUI DYNAMIC PROMPTS
+# Major-version redesign: coherent genre, demographic, and scene routes.
 # ========================================================================
 
 gkr_anime:
 
-# ---------------------------------------------------------
-# CHARACTER
-# ---------------------------------------------------------
+# ------------------------------------------------------------------------
+# ANIME: ERAS, RENDERING, AND CINEMATIC GRAMMAR
+# ------------------------------------------------------------------------
 
-  archetype:
-    - spiky windswept hair, red zip-up jacket, fingerless gloves, wide battle stance, (clenched-fist determination:1.2)
-    - slicked-back hair, unbuttoned high-collar jacket, arms crossed, sharp confident smirk
-    - single katana at the hip, plain indigo hakama, calm narrowed gaze, still upright posture
-    - sailor uniform with pleated skirt, red neckerchief, twin ribbons in hair, bright open-mouthed smile, peace-sign hand gesture
-    - round wire-frame glasses, cardigan over collared shirt, thick book hugged to chest, downward gaze
-    - torn blazer worn open, safety-pin details, undercut hair, raised fists, sneering half-smile
-    - long dark trench coat, hands in pockets, half-shadowed face, (unreadable glare:1.1)
-    - faint glowing aura around clenched fists, plain travel clothes, calm unshaken expression, sparks crackling off the skin
-    - patched leather traveling cloak, worn satchel, short sword at the hip, dusty boots
-    - frilled pastel dress, oversized bow at the chest, thigh-high striped socks, star-tipped wand, ribbons trailing mid-motion
-    - white haori over a red hakama skirt, long braided hair, wooden ofuda charm in hand, calm poised stance
-    - walking one step behind another traveler, bright smile, hand raised in a wave, small matching satchel
-    - upright seated posture, folded gloved hands, embroidered velvet coat, small jeweled coronet, watchful sideways gaze
-    - form-fitting flight suit with padded shoulder segments, coiled cable plugged into a chest port, helmet tucked under one arm
-    - sleeveless jersey, sweatband, mid-leap motion, sweat-streaked determined face
-    - black ruffled dress with corset lacing, ornate silver pauldron, ankle boots, weapon gripped loosely
-    - messy short hair, oversized grin, one arm raised mid-cheer, bouncing on the balls of the feet
-    - loosened school tie, jacket slung over one shoulder, relaxed confident stance, faint smile
-    - plain unbadged uniform, long hair partly covering one eye, flat unreadable expression, hands folded
-    - segmented dark armor plating, holstered blaster on the thigh, tattered cloak, scanner visor over one eye
-    - idol, stage costume, layered ruffles, handheld sparkling microphone, mid-spin pose, bright stage smile
-    - matte black bodysuit with glowing circuit-line seams, wrapped forearm blades, hood pulled low, crouched ready stance
-    - pointed hat, buttoned robe with a crest pin, wand tucked in the belt, open spellbook
-    - curved black horns, trailing dark ornate gown, clawed fingertips, (regal composed expression:1.1)
-    - feathered white wings, thin golden halo ring, flowing pale robes, relaxed brow and faint closed-mouth smile
-    - semi-transparent wispy form, small horns or fox-like features, faint blue glow, playful tilted head
-    - oversized round head, tiny body, big sparkling eyes, bouncing pose
-    - form-fitting dark outfit, cloth mask covering the lower face, crouched stealthy stance, twin kunai at the hip
-    - wrapped cloth mask, form-fitting dark garb, shuriken holster, low crouched stance
-    - dark pinstripe suit, open collar, visible irezumi tattoo along the forearm, cold stare
-    - student, (mysterious:1.1), school uniform, unreadable expression
-    - futuristic bounty hunter, sci-fi, cybernetic armor
-    - idol, singer, microphone, stage outfit
-    - ninja, cyborg, futuristic, (cybernetic katana:1.1)
-    - ninja, katana, stealthy pose, (mask:1.1)
-    - samurai, katana, (samurai armor:1.2)
-    - magic student, (academy uniform:1.2)
-    - demon princess, (horns:1.2), elegant dress
-    - angel, (wings:1.2), guardian, (halo:1.1)
-    - yokai, spirit, companion, (ethereal:0.9)
-    - chibi, (mascot:1.1), (cute:1.2), small
-    - female ninja, (mask:1.1), stealth pose
-    - ninja, (mask:1.1), (stealth:1.1), (ninja outfit:1.1), throwing shuriken
-    - yakuza, (suit:1.1), (irezumi tattoo:1.2), (intimidating:1.0)
-    - cyborg, (mechanical parts:1.2), (glowing eyes:1.1), (futuristic:1.0)
-    - alien, (non-human:1.1), (sci-fi:1.1), (unusual skin color:1.0)
-  race:
-    - human
-    - elf, long pointed ears, slender graceful build
-    - dark elf, dark grey-blue skin, long pointed ears, silver hair
-    - fox-eared beastkin, fluffy fox tail, russet fur patches
-    - cat-eared beastkin, sleek cat tail, tilted head, teasing half-smile
-    - wolf-eared beastkin, bushy wolf tail, sharp canine teeth
-    - small curved horns, thin demon tail with an arrow-shaped tip, sharp canine teeth
-    - feathered wings, thin halo ring, faint golden glow
-    - scattered dragon scales along the arms, small curved horns, slit draconic eyes
-    - smooth synthetic skin with visible panel seams, glowing joint lines
-    - metal plating over one arm, glowing optical implant, exposed mechanical joints
-    - faintly glowing skin, drifting star-like motes, ethereal translucent aura
-    - wispy translucent form, traditional layered robes, faint blue glow
-    - red or blue-toned skin, curved horns, wielding a spiked iron club, bared fangs
-    - fox ears, multiple flowing fox tails, wooden fox mask pushed to the side
-    - exposed metal plating along one side, glowing red optical lens, mechanical fingers
-    - unusual skin tone, elongated limbs, faintly glowing eyes
+  anime_era_style:
+    - 1960s limited television animation, simplified shapes, economical poses, flat painted backgrounds
+    - 1970s theatrical science-fiction animation, hand-painted cels, dramatic shadows, analog optical effects
+    - 1980s high-detail cel animation, intricate mechanical drawing, airbrushed light, visible film grain
+    - 1990s television cel animation, muted pigments, painted backgrounds, restrained digital compositing
+    - early-2000s digital anime, clean linework, selective gradients, softly composited effects
+    - modern cinematic anime, natural light, subtle character acting, richly observed environments
+    - contemporary television anime, crisp contours, layered cel shading, efficient readable staging
+    - experimental mixed-media animation, charcoal, collage, paint and photographed textures
+    - ink-wash historical animation, expressive brush edges, parchment-toned negative space
+    - gentle children's animation, rounded forms, warm colors, tactile hand-painted backgrounds
 
-# ---------------------------------------------------------
-# APPEARANCE
-# ---------------------------------------------------------
+  anime_camera:
+    - wide establishing frame with characters small inside a carefully observed environment
+    - medium ensemble frame allowing every reaction to remain readable
+    - low tracking view following running feet and changing terrain
+    - still close-up focused on a small shift in eyes, mouth, or hands
+    - overhead composition clarifying movement across the entire location
+    - long-lens view compressing crowd, weather, and distant architecture
+    - subjective point of view with foreground hands or objects anchoring the scene
+    - lateral composition staged like a continuous animated cut
+    - dramatic low angle reserved for one decisive emotional turn
+    - quiet locked frame with action entering and leaving naturally
 
-  age:
-    - adolescent
-    - young adult
-    - adult, mature facial features
-    - smooth youthful face, luminous unblemished skin, faint halo-like rim glow
+  anime_environment:
+    - coastal commuter town, local train crossing, seawall, narrow hillside streets
+    - covered shopping arcade, family businesses, bicycles and afternoon foot traffic
+    - rural mountain village, terraced fields, utility wires, weathered community hall
+    - compact city apartment, low table, laundry balcony, neighboring windows close by
+    - public high school, shoe lockers, club rooms, gymnasium and sunlit corridors
+    - university campus, crowded cafeteria, research rooms and bicycle parking
+    - corporate office floor, fluorescent light, meeting booths, vending-machine corner
+    - neighborhood family restaurant, window booths, drink bar and late-evening regulars
+    - industrial harbor, container cranes, warehouses, ferries and cold sea wind
+    - traditional hot-spring town, steep lanes, wooden inns, steam crossing lantern light
+    - postwar neighborhood, small wooden homes, tram tracks and local market stalls
+    - convenience store after midnight, bright shelves against an empty dark street
+    - vast mecha maintenance hangar, sectional scaffolding, coolant pipes and tiny technicians
+    - historical castle town, workshops, canals, checkpoints and tiled roofs
+    - otherworldly frontier, ruined roads crossing immense unfamiliar ecosystems
 
-  gender:
-    - male, man, delicate bishounen features
-    - female, woman, delicate bishoujo features
-    - male, masculine
-    - female, feminine
-    - androgynous facial structure, mixed masculine and feminine styling
+# ------------------------------------------------------------------------
+# ANIME GENRE SCENES
+# ------------------------------------------------------------------------
 
-  build:
-    - slender build
-    - athletic build, toned muscles
-    - graceful build, elegant posture
-    - petite build, small frame
-    - tall, elegant build
-    - toned, agile build
-    - muscular powerful build
+  anime_action_scene:
+    - young team confronting a longtime rival at a ruined tournament ground, each member protecting a different route of escape
+    - veteran fighter teaching a reckless student through one restrained exchange rather than a display of power
+    - two rivals pausing mid-battle when civilians enter the danger zone, conflict shifting into an uneasy rescue partnership
+    - courier pursued across rooftops, laundry lines and crowded balconies changing the path every few seconds
+    - swordswoman defending a narrow bridge in heavy rain, footwork and terrain more important than visual effects
+    - exhausted hero standing again after the apparent final attack, teammates' reactions carrying the emotional escalation
+    - coordinated team assault on a colossal creature, each role and failure visible within one clear spatial plan
+    - delinquent protecting a younger student at a school gate, confrontation conveyed through posture and surrounding witnesses
 
-  tone:
-    - pale skin
-    - peach tone skin
-    - warm tan skin
-    - soft fair skin
-    - warm golden skin
-    - ethereal glowing skin
-    - deep red-toned skin
-    - cool blue-toned skin
+  anime_romance_scene:
+    - shy confession beside a railway crossing, passing train separating the pair before their reactions are revealed
+    - adult former classmates meeting by chance in a nearly empty family restaurant, polite conversation concealing unresolved history
+    - two coworkers missing the last train and walking home through quiet streets, conversation gradually becoming personal
+    - long-distance couple sharing the same meteor shower from different cities, parallel compositions joined by matching gestures
+    - reserved student repairing an umbrella for someone they pretend not to notice, small actions observed across several quiet cuts
+    - widowed shopkeeper receiving a familiar seasonal order in the handwriting of a deceased spouse
+    - university musicians practicing after hours, mutual affection emerging through timing and attentive listening
+    - elderly couple revisiting a coastal station where they once separated, present and memory sharing the same frame
 
-  face_style:
-    - soft rounded facial features
-    - sharp angular facial features, bishounen look
-    - round soft face, big expressive eyes
-    - elegant mature facial features
-    - handsome sharp-jawed bishounen face
-    - highly expressive, exaggerated features
+  anime_slice_of_life_scene:
+    - friends sharing convenience-store food after missing the last train, jokes giving way to one honest admission
+    - family preparing dinner in a cramped kitchen, several generations moving around one another through practiced routines
+    - student club restoring an abandoned room, discarded objects revealing the school's forgotten history
+    - office worker carrying groceries home in summer rain, stopping to help a neighbor secure laundry in the wind
+    - children exploring drainage paths after a storm, turning ordinary infrastructure into an afternoon expedition
+    - rural residents reopening a shuttered local shop, sweeping dust while older customers tell conflicting stories
+    - university roommates dividing chores after an argument, reconciliation expressed through quietly completed tasks
+    - train conductor beginning the first winter service before dawn, checking platforms known by memory
 
-  hair:
-    - long flowing hair
-    - long straight silky hair, hime cut
-    - messy tousled bedhead hair
-    - medium-length fluffy layered hair
-    - long twintails
-    - high ponytail
-    - short bob cut
-    - long wavy hair
-    - spiky upswept hair
-    - elegant ornate braid
-    - low ponytail tied with a ribbon
-    - choppy layered hair
+  anime_comedy_scene:
+    - carefully planned school announcement collapsing through a chain of mundane interruptions, ensemble reactions held in one wide frame
+    - overconfident amateur cook hiding a ruined dish while increasingly suspicious guests arrive early
+    - supernatural roommate attempting to follow apartment rules while invisible habits betray every effort
+    - four-panel-style misunderstanding escalating because each character interprets the same ordinary object differently
+    - student council staging a solemn ceremony while malfunctioning equipment undermines every formal gesture
+    - fantasy adventurers negotiating restaurant expenses after defeating a monster, heroic poses replaced by itemized receipts
+    - timid employee mistaken for a legendary expert and repeatedly succeeding through coincidence
+    - neighborhood pets silently coordinating around humans who misunderstand the entire situation
 
-  hair_color:
-    - black hair
-    - brown hair
-    - blonde hair
-    - silver hair
-    - white hair
-    - red hair
-    - bright pink hair
-    - vibrant blue hair
-    - teal hair
-    - purple hair
-    - green hair
-    - pastel gradient two-tone hair
-    - glowing neon-colored hair
+  anime_sports_scene:
+    - volleyball team executing a rehearsed final play, every member contributing before the full-court result
+    - exhausted distance runner choosing whether to help an injured rival as the leaders disappear around the bend
+    - baseball pitcher and catcher revising their strategy through signs after the batter anticipates every pitch
+    - high-school football team defending one final attack in heavy rain, spacing and fatigue clearly staged
+    - competitive swimmer alone beneath the surface before the starting signal, crowd noise reduced to vibration
+    - figure skater recovering from an early mistake, choreography becoming simpler and more emotionally direct
+    - cycling team rotating positions through mountain wind, strongest rider sacrificing an individual finish
+    - traditional archery competitor calming their breathing while the tournament continues out of focus
 
-  eyes:
-    - large expressive eyes
-    - sharp focused eyes
-    - bright sparkling eyes
-    - narrowed annoyed eyes, slight pout
-    - glowing golden eyes
-    - sharp crimson red eyes
-    - deep blue eyes
-    - clear green eyes
-    - star-shaped pupils, faint magical glow
-    - heterochromia, one eye a different color than the other
-    - soft pastel gradient eyes
+  anime_mystery_scene:
+    - student detectives reconstructing a locked-room event using classroom objects and conflicting witness positions
+    - rural police officer comparing festival photographs and noticing the same unknown child across several decades
+    - university archivist finding tomorrow's newspaper filed among century-old documents
+    - passengers trapped on a stopped local train realizing each remembers a different final station
+    - private investigator following a mundane accounting discrepancy into a network of neighborhood favors and secrets
+    - siblings mapping sounds inside an inherited house whose rooms do not match the exterior walls
+    - detective interviewing an apparently helpful witness while reflections reveal rehearsed body language
+    - journalist tracing anonymous messages through discontinued vending machines across the city
 
-  expression:
-    - determined, focused expression
-    - bright cheerful smile
-    - soft blush, shy embarrassed look
-    - wide-eyed shocked expression
-    - angry, shouting expression
-    - shouting battle cry, mouth open wide
-    - confident, smug smirk
-    - calm, unreadable expression
-    - tearful, crying expression
-    - excited expression, sparkling eyes
+  anime_horror_scene:
+    - apartment resident noticing a spiral motif recurring in food, plumbing, hair and street architecture
+    - school hallway extending by one door each time a student looks away, daylight remaining unnaturally constant
+    - fishing village performing an ordinary morning routine while every shadow points toward the sea
+    - family portrait gaining one additional relative after each household argument
+    - commuter repeatedly seeing their sleeping body through the windows of trains passing in the opposite direction
+    - shrine visitors hearing their own wishes answered from inside sealed offering boxes
+    - medical team treating a patient whose internal anatomy changes to match each observer's expectations
+    - child drawing the apartment building accurately except for a figure occupying a nonexistent upper floor
 
-# ---------------------------------------------------------
-# OUTFITS
-# ---------------------------------------------------------
+  anime_mecha_scene:
+    - inexperienced pilot seeing a giant machine awaken beneath a flooded city, maintenance bridges tearing loose around it
+    - repair crew working inside an open machine torso during an alarm, mechanic forced to choose what subsystem to leave broken
+    - two rival pilots communicating through precise combat maneuvers while commanders misunderstand their intent
+    - obsolete worker machine defending an evacuation route against modern military units, industrial tools used intelligently
+    - orbital construction mecha stabilizing a damaged habitat while civilian crews evacuate through rotating corridors
+    - pilot returning from battle to discover the machine preserved a recording of every previous operator
+    - giant robot launching from beneath an ordinary coastal town, roads and harbor structures unfolding as practical mechanisms
+    - cockpit team resolving a control conflict through trust and synchronized manual operation rather than increased power
 
-  clothing:
-    - sailor-style school uniform, pleated skirt, neckerchief
-    - ornate kimono with detailed floral embroidery, wide obi sash
-    - formal kimono, wide tied obi sash
-    - frilled pastel dress, layered ribbons, puffed sleeves
-    - flowing layered cloak over a fitted tunic, wide leather belt, embroidered trim
-    - white haori, red pleated hakama, wide flowing sleeves
-    - black lace-trimmed dress, layered petticoat, ribbon choker
-    - glossy form-fitting bodysuit with glowing seam lines, small chest-mounted panel
-    - asymmetric jacket with glowing neon trim, utility straps, layered mesh underlayer
-    - idol layered dress, ruffled hem, sparkling trim
-    - hoodie, jeans, casual streetwear
-    - long trench coat, upturned collar
-    - white karate gi, tied cloth belt
-    - padded flight suit with segmented shoulder plating, tucked-under helmet
+  anime_scifi_scene:
+    - android waking in a quiet care facility and recognizing every patient except the person listed as its owner
+    - cybercrime investigator walking through a reconstructed memory where advertisements respond to hidden guilt
+    - generation ship residents discovering their artificial sky has displayed the wrong constellation for decades
+    - courier transporting an illegal personality backup through a layered city transit network
+    - lunar maintenance worker receiving a live radio call from Earth delayed by far more than distance allows
+    - elderly engineer showing children an abandoned orbital garden designed by a forgotten culture
+    - cloned coworkers comparing tiny habits to determine which memories belong to the original
+    - space-rescue crew boarding a silent vessel whose life-support system continues serving absent passengers
 
-  armor:
-    - light plated armor etched with faintly glowing runes
-    - ornate engraved armor plates, intricate filigree edging
-    - bulky segmented armor plating, glowing power core on the chest
-    - matte armor plating with glowing neon accent lines
-    - overlapping lacquered lamellar plates with faintly glowing engraved sigils
-    - polished plate armor, shining metal finish
+  anime_historical_scene:
+    - wandering swordswoman facing an opponent in wind-bent grass, long preparation followed by one economical exchange
+    - castle steward concealing a succession letter while rival households arrive for a formal audience
+    - traveling medicine seller investigating an illness blamed on spirits but rooted in poisoned trade goods
+    - village women organizing defenses while warriors are absent, farm tools and terrain shaping the plan
+    - Edo-period fire brigade racing across rooftops as wind carries embers toward crowded wooden districts
+    - court poet composing a politically dangerous verse during a moon-viewing ceremony
+    - young craft apprentice learning a fading technique from a difficult elderly master
+    - displaced family opening a small shop in a postwar neighborhood, hope and grief sharing ordinary labor
 
-  outfit_choice:
-    - "__gkr_anime/clothing__"
-    - "__gkr_anime/armor__"
+  anime_music_scene:
+    - school band finding the correct tempo only after listening to the quietest member
+    - punk trio performing at floor level in a tiny club while classmates discover an unexpected side of the singer
+    - idol group rehearsing without costumes or audience, conflict centered on harmony, fatigue and shared responsibility
+    - jazz students trading improvised phrases after the last train, empty practice room becoming an intimate stage
+    - orchestra leader returning after an injury and discovering the ensemble has developed without them
+    - folk musician recording regional songs before the final residents leave a mountain village
+    - electronic composer sampling the mechanical rhythms of a closing factory with its workers
+    - shy songwriter performing one unfinished song at a university festival as rain empties the audience area
 
-# ---------------------------------------------------------
-# WEAPONS, ITEMS & TRINKETS
-# ---------------------------------------------------------
+  anime_culinary_scene:
+    - young cook rebuilding a family recipe from several relatives' contradictory memories
+    - rival chefs preparing the same humble ingredient, technique and hospitality distinguishing the results
+    - exhausted restaurant staff serving one final table after deciding the business must close
+    - traveler learning regional preservation methods during a winter stay in a remote village
+    - school lunch club reducing food waste by redesigning a disliked dish with student feedback
+    - pastry apprentice recovering from a collapsed showpiece through smaller precise work
+    - fantasy party cooking an unfamiliar monster safely, anatomy and preparation treated with practical detail
+    - widower learning to make a spouse's everyday soup for visiting grandchildren
 
-  weapons:
-    - katana, curved single-edged blade
-    - dual wielded katana, one in each hand
-    - tall wooden staff topped with a glowing orb
-    - glowing energy blade, humming light-edged sword
-    - oversized broad-bladed sword, taller than its wielder
-    - long spear with a leaf-shaped blade
-    - wooden bow, quiver of glowing-tipped arrows
-    - leather-bound grimoire, pages fluttering open, faint glow
-    - sleek katana with a glowing neon-edged blade
-    - short wand with a star-shaped tip
-    - heavy gauntlets with glowing knuckle plating
-    - large handheld energy cannon with a glowing barrel
+  anime_adult_drama_scene:
+    - middle-aged manager asked to dismiss a longtime colleague while their department celebrates an anniversary
+    - divorced parents attending the same school event, coordinating care through restrained practical conversation
+    - nurse finishing a night shift and sharing breakfast with an adult child beginning the opposite schedule
+    - former activist confronting how a youthful compromise shaped the company they now lead
+    - aging performer mentoring a replacement who interprets the role in a way they initially resent
+    - siblings clearing their childhood apartment after a parent's death, each assigning different meaning to ordinary objects
+    - municipal worker balancing evacuation policy with residents refusing to abandon a declining coastal town
+    - small-business owner training an immigrant employee while both navigate assumptions and mutual dependence
 
-  offhand:
-    - open book with glowing runic text across the pages
-    - small floating orb, soft glow
-    - wrapped bento box
-    - leather school satchel
-    - traditional oiled-paper umbrella
-    - handheld sparkling microphone
-    - paper ofuda talisman strip
-    - floating translucent holographic display panel
+  anime_childrens_scene:
+    - children following a lost neighborhood cat through hidden gardens and connected rooftops before dinner
+    - shy child discovering tiny household spirits repair forgotten objects at night
+    - siblings building a cardboard spacecraft that transforms familiar rooms through imaginative staging
+    - young forest guide helping an injured creature return to its migration group without magical combat
+    - classroom caring for one seedling through a difficult season, each child contributing differently
+    - child accompanying a grandparent on a slow local train journey and learning why every stop matters
+    - friends staging a miniature festival for residents unable to attend the town celebration
+    - curious apprentice delivering packages through a city where every district follows different visual rules
 
-  trinkets:
-    - pendant necklace set with a faintly glowing gem
-    - ornate kanzashi hairpin with dangling beads
-    - glowing round brooch pinned at the chest
-    - small tied ribbon charm
-    - small chibi-style mascot keychain
-    - miniature fox mask charm
-    - glowing neon-colored bracelet
-    - faceted glowing crystal shard
+# ------------------------------------------------------------------------
+# GENRE-SAFE MODULAR CHARACTERS
+# Each family bundles identity, clothing, and role-defining visual details.
+# ------------------------------------------------------------------------
 
-# ---------------------------------------------------------
-# LOCATIONS & ENVIRONMENTS
-# ---------------------------------------------------------
+  school_archetype:
+    - diligent class representative, annotated planner, composed posture, uniform worn precisely
+    - rebellious transfer student, repaired school jacket, guarded expression, scuffed indoor shoes
+    - quiet literature-club member, paperback filled with notes, observant sideways gaze
+    - energetic track athlete, warm-up jacket, stopwatch, hair tied away from the face
+    - amateur school detective, pocket notebook, instant camera, evidence envelopes
+    - anxious student-council treasurer, calculator and receipts, sleeves rolled before a late meeting
+    - friendly cafeteria volunteer, apron over uniform, stacked lunch trays, practical smile
+    - solitary art student, charcoal-stained fingers, portfolio case, paint on one cuff
 
-  environment:
-    - school rooftop, golden sunset light, chain-link fence
-    - stone pathway lined with blooming cherry trees, drifting pink petals
-    - traditional wooden shrine, red torii gate
-    - dense bamboo forest, dappled sunlight
-    - night city street, glowing neon signage reflected on wet pavement
-    - sprawling futuristic skyline, flying vehicles weaving between towers
-    - floating islands drifting among the clouds
-    - stone academy courtyard, tall arched windows, ivy-covered walls
-    - scarred battlefield, scattered debris, distant explosions
-    - night market lined with paper lanterns and food stalls
-    - quiet suburban street, rows of utility poles
-    - narrow rain-slicked alley, glowing neon signs overhead
-    - misty forest, clusters of glowing mushrooms
-    - vast hangar bay, towering mechs docked along steel gantries
-    - crumbling fantasy realm, floating debris, cracks of light in the sky
-    - medieval village, thatched-roof cottages
-    - star-filled cosmic expanse, drifting nebula clouds
+  adult_archetype:
+    - middle-aged municipal planner, weathered document case, reading glasses, tired attentive expression
+    - night-shift nurse, wrinkled scrubs, practical watch, untouched canned coffee
+    - neighborhood shopkeeper, apron and pencil behind one ear, keys worn smooth from use
+    - investigative journalist, compact recorder, rain-dark coat, several marked notebooks
+    - junior corporate manager, simple suit, employee schedules, controlled worry beneath polite posture
+    - divorced parent commuting from work, grocery bag, child-made charm attached to a phone
+    - veteran craft worker, scarred hands, measuring tools, indigo work jacket repaired many times
+    - elderly retired teacher, walking cane, library books, former students' letters kept in a cloth folder
 
-# ---------------------------------------------------------
-# MOOD, LIGHTING, CAMERA, STYLE
-# ---------------------------------------------------------
+  action_archetype:
+    - disciplined martial-arts student, plain training clothes, taped hands, balanced low stance
+    - impulsive young team leader, reinforced travel jacket, first-aid pouch, chipped practice weapon
+    - tactical support specialist, utility vest, route map, compact rescue tools rather than heavy weapons
+    - veteran mentor, faded training uniform, old injury supported by a brace, economical posture
+    - reserved rival, immaculate fitted jacket, carefully maintained equipment, unreadable expression
+    - agile urban courier, helmet and protective streetwear, climbing gloves, messenger case
+    - shield-bearing rescue fighter, layered impact armor, emergency markings, folding physical barrier
+    - former antagonist seeking redemption, damaged insignia removed from practical combat clothing
 
-  mood:
-    - raised chin, open smile, bright high-key palette
-    - tear-bright eyes, trembling mouth, strong light-and-shadow contrast
-    - tiny figure against a vast environment, sweeping diagonal composition
-    - partially obscured silhouette, soft shadows, faint colored glow
-    - braced pose, flying debris, strong diagonals, visible motion streaks
-    - bouncing poses, rounded shapes, candy-colored accents
-    - warm faded palette, soft light, subtle film grain
-    - hunched silhouettes, deep shadows, narrow pools of light
-    - low-angle composition, broad stance, cape billowing outward
+  fantasy_archetype:
+    - newly arrived otherworld traveler, ordinary modern clothes beneath a borrowed cloak, translation notebook
+    - practical guild scout, weatherproof layers, trail markers, compact bow and survey tools
+    - apprentice healer, linen robes, herb case, bandages and handwritten treatment manual
+    - veteran caravan guard, mismatched repaired armor, spear, route tokens from distant regions
+    - court mage employed as a civil servant, formal layered robes, permit seals, portable writing desk
+    - monster ecologist, field clothes, specimen sketches, nonlethal traps and observation lens
+    - displaced noble learning ordinary work, fine coat altered for travel, hidden signet ring
+    - village shrine keeper, regional ritual clothing, weather records, bundles of protective charms
 
-  lighting:
-    - bright anime glow, soft bloom, vibrant highlights
-    - sunset lighting, golden hour, warm light
-    - neon reflections, colorful neon lighting
-    - moonlit scene, night, cool silver moonlight
-    - magical radiant light, soft ethereal glow
-    - dramatic rim lighting, cinematic contrast
-    - soft pastel illumination, gentle diffused light
-    - cosmic star glow, glowing nebula light
-    - firelight, warm flickering glow, dramatic shadows
+  historical_archetype:
+    - wandering swordswoman, travel-stained kimono and hakama, straw hat, plain well-maintained blade
+    - castle records clerk, formal period robes, document box, inkstone and coded correspondence
+    - Edo fire-brigade runner, quilted coat marked with unit crest, rope and signaling clappers
+    - traveling medicine seller, compartmented wooden case, ledger, practical layered clothing
+    - rural midwife, winter cloak, woven supply basket, lantern protected from the wind
+    - young artisan apprentice, indigo work clothes, wrapped tools, materials carried with care
+    - court poet, seasonally appropriate robes, folded fan, poem slips concealed in a sleeve
+    - postwar print-shop worker, rolled sleeves, ink-stained apron, salvaged type and paper bundles
 
-  camera:
-    - medium shot, waist-up framing
-    - dynamic action shot, motion blur
-    - close-up, tear-bright eyes and trembling mouth in frame
-    - extreme close-up, eyes in focus
-    - high-angle shot, overhead framing
-    - wide cinematic framing, establishing shot
-    - low-angle shot, imposing perspective
-    - worm's-eye view, looking up
-    - dutch angle, tilted dramatic frame
-    - three-quarter view
-    - portrait shot, upper body framing
-    - cowboy shot, mid-thigh up framing
-    - pov, first-person perspective
-    - full body shot, standing pose
+  scifi_archetype:
+    - orbital maintenance engineer, padded work suit, tether reel, analog diagnostic tablet
+    - synthetic care worker, subtle panel seams, soft uniform, patient records held in both hands
+    - cybercrime investigator, understated coat, encrypted recorder, optical overlay visible only at one eye
+    - lunar courier, dust-marked pressure clothing, sealed delivery case, route patches from remote habitats
+    - generation-ship agronomist, greenhouse workwear, seed archive, environmental sensor kit
+    - obsolete service android, repaired casing, mismatched replacement hand, handwritten task list
+    - memory technician, neutral clinic clothing, physical consent forms, isolated storage device
+    - deep-space rescue specialist, compact pressure suit, cutting tools, emergency tow line
 
-  style:
-    - saturated primary colors, bright highlights, clean cel shading
-    - low-key palette, deep shadows, sharp rim light
-    - bold speed lines, foreshortened pose, thick impact strokes
-    - fine flowing linework, pastel gradients, sparkling highlights, floral framing
-    - blackened stone textures, pointed silhouettes, muted jewel tones, gothic arches
-    - neon magenta and cyan reflections, dark city surfaces, holographic overlays
-    - hard-surface mechanical detail, crisp cel shading, towering scale cues
-    - translucent watercolor washes, soft pastel edges, lightly textured paper
-    - black ink linework, halftone screentones, high-contrast monochrome shading
-    - detailed fantasy illustration, luminous portal light, layered distant scenery
-    - precise anime linework, layered cel shading, fine material detail
+  music_archetype:
+    - shy rhythm guitarist, worn instrument case, handwritten chord sheets, school cardigan
+    - exacting orchestra leader, formal black attire, marked score, tuning fork and pencil
+    - basement-club drummer, repaired kit hardware, hearing protection, energetic grounded posture
+    - aspiring idol trainee, simple rehearsal clothes, water bottle, taped floor-position notes
+    - veteran folk singer, weathered acoustic instrument, regional song archive, unshowy stage clothes
+    - jazz saxophonist, practical dark suit, annotated standards book, attentive listening posture
+    - electronic composer, layered everyday clothing, portable sampler, field-recording headphones
+    - theater costume designer, pin-cushion wristband, fabric samples, measuring tape and production schedule
 
-  art_style_specific:
-    - polished digital anime illustration, crisp contours, saturated gradient shading
-    - 1990s cel animation look, hand-painted backgrounds, muted colors, fine film grain
-    - exaggerated foreshortening, angular silhouettes, saturated flat colors, bold impact lines
-    - painterly watercolor background, rounded character shapes, warm natural palette
-    - intricately painted cloudscape, brilliant backlight, long volumetric sun rays
-    - centered promotional composition, polished cel shading, dense costume detail
-    - loose graphite construction lines, selective dark ink contours, uncolored animation drawing
-    - clean uniform outlines, softly shaded character sprites, detailed static background
-    - soft rounded linework, gentle pastel palette, subtle facial shading
-    - high-contrast cel shading, luminous particle effects, sweeping colored light trails
+  sports_archetype:
+    - volleyball setter, numbered uniform, taped fingers, eyes tracking every teammate
+    - reserve baseball catcher, protective gear, pitch chart, patient analytical posture
+    - distance runner balancing school and work, plain team kit, repaired shoes, transit pass
+    - competitive swimmer, warm-up coat, goggles, controlled breathing before the start
+    - traditional archer, formal practice clothing, glove and bow handled with deliberate care
+    - injured team captain, sideline jacket, knee brace, strategy board rather than active equipment
+    - novice cyclist, practical jersey, patch kit, route notes taped to the handlebar
+    - veteran coach, faded club tracksuit, stopwatch, quiet expression that notices fatigue early
 
-# ---------------------------------------------------------
-# EFFECTS / ACTION FX
-# ---------------------------------------------------------
+  supernatural_archetype:
+    - shrine apprentice who hears household spirits, white-and-red work clothing, broom and offering ledger
+    - reserved fox spirit living as a shop assistant, subtle ears visible in reflections, old coin purse
+    - urban exorcist, ordinary office wear beneath a ritual overcoat, paper seals and chalk line
+    - school ghost protecting one forgotten classroom, faded uniform, borrowed library book
+    - yokai researcher, field vest, audio recorder, regional folklore maps and gift offerings
+    - half-transformed guardian, human clothing strained around furred arms, protective rather than predatory stance
+    - dream courier, layered night-blue robes, sealed letters addressed in sleeping handwriting
+    - elderly medium, modest formal wear, family altar keys, patient expression toward an unseen visitor
 
-  fx_magic:
-    - glowing magical aura, radiant energy aura
-    - swirling elemental rings, glowing magic circle beneath the feet
-    - sparkly transformation effects, drifting glowing particles
-    - neon particles, glowing cyber sparks
-    - energy burst, bright light explosion
-    - floating magical runes, glowing symbols suspended in air
-    - cosmic power aura, swirling star-flecked energy
-    - fire slash effect, arc of flame trailing the blade
-    - lightning arc effect, crackling sparks of electricity
+  delinquent_archetype:
+    - protective gang leader, modified school coat, scuffed boots, first-aid supplies hidden inside
+    - motorcycle-club mechanic, work coveralls, grease-stained hands, carefully maintained helmet
+    - feared student with a gentle after-school job, loosened uniform, bakery apron folded in a bag
+    - former street fighter studying for entrance exams, bandaged knuckles, flash cards, library pass
+    - rival-school negotiator, long coat, umbrella, written boundary agreement carried in one pocket
+    - loud comic sidekick, exaggerated hairstyle, repaired bicycle, snacks shared without comment
 
-  fx_environment:
-    - falling sakura petals, drifting cherry blossoms
-    - drifting sparkles, glowing floating particles
-    - swirling dust, kicked-up debris
-    - neon holograms, flickering holographic projections
-    - floating embers, drifting sparks
-    - glowing butterflies, faint trailing light
-    - shafts of light breaking through clouds, drifting dust motes
+  character_relationship:
+    - protagonist and rival with mutual respect hidden beneath formal competition
+    - mentor and apprentice divided over method but aligned on responsibility
+    - siblings protecting one another through opposite coping strategies
+    - longtime friends avoiding a conversation that could change the relationship
+    - veteran and replacement learning that succession is not imitation
+    - investigator and skeptical local exchanging expertise reluctantly
+    - team leader and support specialist quietly reversing their expected roles
+    - parent and adult child rebuilding trust through shared practical work
 
-# ---------------------------------------------------------
-# MONSTERS / ENEMIES
-# ---------------------------------------------------------
+  team_role:
+    - calm coordinator tracking the whole situation
+    - impulsive initiator forcing the group to act
+    - technical specialist solving material constraints
+    - emotional mediator noticing unspoken conflict
+    - experienced defender protecting retreat routes
+    - skeptical analyst testing every assumption
+    - local guide reading environment and custom
+    - inexperienced newcomer asking the necessary question
 
-  anime_monster:
-    - giant mecha, colossal robotic frame
-    - dragon, eastern serpentine dragon with long whiskers
-    - yokai, traditional japanese spirit-beast, patterned fur or scales
-    - shadow phantom, wispy shifting silhouette made of smoke
-    - cosmic horror, writhing tentacled mass, too many eyes
-    - corrupted magical beast, twisted misshapen form, glowing red eyes
-    - slime creature, translucent amorphous body
-    - oni-inspired titan, towering horned giant, club in hand
-    - cybernetic monster, mechanical plating fused with organic flesh
-    - large translucent creature, glowing ethereal outline, body curled protectively around a smaller figure
+  anime_creature:
+    - small household spirit made from folded paper and lost buttons
+    - two-tailed shrine cat carrying messages between visible and hidden communities
+    - moss-covered forest guardian with deerlike anatomy and seasonal plants along its back
+    - river yokai wearing found human objects as misunderstood ceremonial clothing
+    - immense sky whale followed by migrating birds and weather instruments
+    - practical guild slime used for cleaning, composting and carrying water
+    - ancient mechanical fox with wooden outer plates and a slowly winding heart spring
+    - coastal kaiju resembling layered coral, fishing nets and lighthouse beams caught across its body
+    - timid dragon adapted to abandoned industrial heat rather than treasure caves
+    - round child-friendly mascot creature whose expressions change through ears, tail and posture
 
-  anime_monster_traits:
-    - glowing menacing eyes
-    - ethereal wisps of smoke trailing off the body
-    - spiked chitin-like armor plates
-    - glowing veins of energy across the skin
-    - floating crystal shards orbiting the body
-    - translucent ghostly limbs
-    - elemental aura, flickering fire or ice around the form
+  antagonist_archetype:
+    - reformist commander using coercive methods to solve a genuine systemic danger
+    - corporate executive protecting workers while concealing environmental harm
+    - immortal guardian enforcing an oath whose original context has vanished
+    - charismatic rival leader offering safety in exchange for obedience
+    - artificial intelligence interpreting care as permanent restriction
+    - monster created by accumulated abandoned objects and neglected places
+    - respected mentor unable to accept that their tradition must change
+    - frightened official escalating control to hide one irreversible mistake
 
-# ---------------------------------------------------------
-# COMBOS (OPTIMIZED FOR FLEXIBILITY)
-# ---------------------------------------------------------
+  mecha_design:
+    - industrial rescue mecha, broad lifting arms, external hydraulic lines, high-visibility panels
+    - agile interceptor mecha, compact torso, folding wing surfaces, replaceable limb armor
+    - obsolete worker mecha, patched paint, cargo attachments converted for emergency defense
+    - orbital construction frame, multiple tool arms, tether anchors, radiation shielding
+    - amphibious coastal mecha, sealed joints, ballast tanks, corrosion-streaked maintenance panels
+    - ceremonial guardian machine, lacquered armor over ancient mechanical structure, repaired across generations
+    - modular team-operated mecha, distinct cockpit stations, visible subsystem responsibilities
+    - unmanned antagonist unit, minimal silhouette, redundant sensors, unsettlingly efficient movement
 
-  shonen_hero_combo:
-    - "spiky-haired young fighter, clenched fist, forward battle stance, __gkr_anime/gender__, __gkr_anime/race__, __gkr_anime/age__, __gkr_anime/build__, __gkr_anime/hair_color__, __gkr_anime/eyes__, focused narrowed gaze, fitted jacket and reinforced trousers, __gkr_anime/weapons__, __gkr_anime/environment__, __gkr_anime/lighting__, low-angle foreshortening, bold speed lines, __gkr_anime/fx_magic__, __gkr_anime/style__"
+  anime_vehicle:
+    - customized commuter motorcycle, hand-painted panels, repair history visible in mismatched fasteners
+    - compact transforming rescue vehicle, medical storage, winch and deployable shelter
+    - rural single-car train, weathered interior, driver controls and local route signs
+    - orbital utility shuttle, external cargo clamps, scuffed heat shielding, analog backup instruments
+    - fantasy caravan wagon adapted for rough terrain, water storage, folding workbench and sleeping space
+    - historical fire-brigade cart, ladders, ropes, water tools and unit markings
+    - solar racing machine, narrow aerodynamic body, repair patches from previous stages
+    - small coastal research vessel, sampling crane, weather instruments and cramped crew cabin
 
-  magical_girl_combo:
-    - "frilled pastel dress, oversized ribbon, star-tipped wand raised overhead, sparkling eyes, female, __gkr_anime/hair_color__, __gkr_anime/trinkets__, __gkr_anime/environment__, bouncing pose, rounded shapes, candy-colored accents, sparkly transformation effects, saturated cel shading, dynamic action shot, __gkr_anime/style__"
+# ------------------------------------------------------------------------
+# MISSING ANIME TRADITIONS: MODULAR, COHERENT ROUTES
+# ------------------------------------------------------------------------
 
-  isekai_combo:
-    - "patched leather traveling cloak worn over engraved armor plates, worn satchel, dusty boots, __gkr_anime/gender__, __gkr_anime/race__, __gkr_anime/hair__, __gkr_anime/weapons__, __gkr_anime/spotlight_bg_fantasy__, tiny figure against sweeping scenery, __gkr_anime/lighting__, detailed fantasy illustration, luminous portal light, __gkr_anime/camera__, __gkr_anime/style__"
+  isekai_character_combo:
+    - "__gkr_anime/fantasy_archetype__, paired with __gkr_anime/character_relationship__, practical otherworld travel, unfamiliar customs treated as real social systems, __gkr_anime/anime_environment__, __gkr_anime/anime_era_style__"
+  magical_team_combo:
+    - "transformation-hero ensemble with roles: __gkr_anime/team_role__, costumes derived from personal motifs rather than identical uniforms, relationship tension visible before a coordinated rescue, symbolic transformation animation, __gkr_anime/anime_era_style__"
+  yokai_folklore_combo:
+    - "__gkr_anime/supernatural_archetype__ encountering __gkr_anime/anime_creature__, regional custom and negotiated obligation more important than combat, __gkr_anime/anime_environment__, ink-wash and painted-background anime treatment"
+  idol_industry_combo:
+    - "__gkr_anime/music_archetype__, rehearsal or production-day scene, choreography, contracts, fatigue and ensemble trust treated alongside performance, __gkr_anime/character_relationship__, __gkr_anime/anime_era_style__"
+  delinquent_combo:
+    - "__gkr_anime/delinquent_archetype__, __gkr_anime/character_relationship__, neighborhood and school consequences surrounding a confrontation, humor and loyalty balanced with grounded physical stakes, __gkr_anime/anime_era_style__"
+  military_political_combo:
+    - "ensemble led by __gkr_anime/scifi_archetype__, opposing __gkr_anime/antagonist_archetype__, logistics, civilian consequences and conflicting institutions visible, restrained military anime staging, __gkr_anime/anime_era_style__"
+  kaiju_combo:
+    - "__gkr_anime/anime_creature__ at colossal scale near __gkr_anime/anime_environment__, evacuation, infrastructure and scientific observation establishing scale, creature behavior tied to ecology rather than simple destruction, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+  space_opera_combo:
+    - "crew including __gkr_anime/scifi_archetype__ and __gkr_anime/team_role__, aboard __gkr_anime/anime_vehicle__, political objective colliding with personal loyalty, vast space-opera scale grounded by operational detail, __gkr_anime/anime_era_style__"
+  cyberpunk_combo:
+    - "__gkr_anime/scifi_archetype__, __gkr_anime/character_relationship__, layered urban technology, labor and identity conflict, restrained interfaces and believable infrastructure, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+  post_apocalyptic_combo:
+    - "small community including __gkr_anime/adult_archetype__ and __gkr_anime/team_role__, maintaining __gkr_anime/anime_vehicle__ across reclaimed infrastructure, survival through repair, agriculture and cooperation, __gkr_anime/anime_era_style__"
+  racing_combo:
+    - "__gkr_anime/sports_archetype__ piloting or riding __gkr_anime/anime_vehicle__, clear course geography, mechanical limits, team strategy and rival respect, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+  martial_arts_combo:
+    - "__gkr_anime/action_archetype__, paired with __gkr_anime/character_relationship__, training or confrontation centered on timing, balance and philosophy rather than energy effects, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+  iyashikei_combo:
+    - "gentle restorative episode featuring __gkr_anime/adult_archetype__ or __gkr_anime/school_archetype__, seasonal work, food and local relationships in __gkr_anime/anime_environment__, quiet locked frames, tactile painted background, no dramatic effects"
+  ecological_fantasy_combo:
+    - "__gkr_anime/fantasy_archetype__ studying or protecting __gkr_anime/anime_creature__, ecosystem and human livelihood in tension, immense natural environment, hand-painted animation background, restrained wonder"
 
-  mecha_pilot_combo:
-    - "padded flight suit with segmented shoulder plating, helmet tucked under one arm, __gkr_anime/gender__, __gkr_anime/spotlight_bg_scifi__, floating translucent holographic display panel, neon reflections, braced pose, flying sparks, hard-surface mechanical detail, crisp cel shading, wide cinematic framing, __gkr_anime/fx_environment__, __gkr_anime/style__"
+# ------------------------------------------------------------------------
+# MODULAR OUTPUT FORMATS
+# ------------------------------------------------------------------------
 
-  villain_combo:
-    - "long dark coat with high collar, half-shadowed face, fixed cold glare, __gkr_anime/gender__, __gkr_anime/hair_color__, crimson glowing eyes, __gkr_anime/weapons__, wisps of dark shadow trailing off the shoulders, __gkr_anime/environment__, deep shadows, narrow pools of light, dramatic rim lighting, low-angle shot, __gkr_anime/style__"
+  standalone_character_combo:
+    - "standalone school-drama character: __gkr_anime/school_archetype__, neutral contextual background, full-body model-sheet clarity, __gkr_anime/anime_era_style__"
+    - "standalone adult-drama character: __gkr_anime/adult_archetype__, role-defining objects, natural posture, neutral contextual background, __gkr_anime/anime_era_style__"
+    - "standalone action character: __gkr_anime/action_archetype__, equipment used credibly, readable silhouette, __gkr_anime/anime_era_style__"
+    - "standalone fantasy character: __gkr_anime/fantasy_archetype__, material-worn clothing and profession-specific tools, __gkr_anime/anime_era_style__"
+    - "standalone historical character: __gkr_anime/historical_archetype__, researched clothing and tools, restrained pose, __gkr_anime/anime_era_style__"
+    - "standalone science-fiction character: __gkr_anime/scifi_archetype__, believable work equipment and subtle technology, __gkr_anime/anime_era_style__"
+    - "standalone music character: __gkr_anime/music_archetype__, believable instrument or production tools, __gkr_anime/anime_era_style__"
+    - "standalone sports character: __gkr_anime/sports_archetype__, sport-specific posture and equipment, __gkr_anime/anime_era_style__"
+    - "standalone supernatural character: __gkr_anime/supernatural_archetype__, restrained folklore cues, __gkr_anime/anime_era_style__"
 
-  idol_combo:
-    - "idol dress, sparkling handheld microphone, mid-spin pose, bright stage smile, female, pastel hair, large expressive eyes, concert stage with colored spotlights and cheering crowd silhouettes, raised chin, bright high-key palette, soft pastel illumination, __gkr_anime/style__"
+  ensemble_character_combo:
+    - "four-person anime ensemble with complementary roles: __gkr_anime/team_role__, __gkr_anime/team_role__, __gkr_anime/team_role__, and __gkr_anime/team_role__; distinct silhouettes, visible relationships, shared genre-safe design language, __gkr_anime/anime_era_style__"
+    - "paired character study: __gkr_anime/character_relationship__, one drawn from __gkr_anime/adult_archetype__, the other from __gkr_anime/school_archetype__, body language communicating history, __gkr_anime/anime_era_style__"
+    - "fantasy travel party including __gkr_anime/fantasy_archetype__, __gkr_anime/fantasy_archetype__, and __gkr_anime/fantasy_archetype__, complementary tools and responsibilities, __gkr_anime/anime_era_style__"
+    - "science-fiction operations crew including __gkr_anime/scifi_archetype__, __gkr_anime/scifi_archetype__, and __gkr_anime/scifi_archetype__, functional shared environment, __gkr_anime/anime_era_style__"
 
-  slice_of_life_combo:
-    - "sailor-style school uniform, bright open smile, twin ribbons in hair, leather school satchel, quiet classroom or neighborhood street, warm faded palette, soft light, subtle film grain, portrait shot, __gkr_anime/art_style_specific__, __gkr_anime/style__"
+  character_sheet_combo:
+    - "anime character design sheet for __gkr_anime/standalone_character_combo__, front, side and back turnaround, three facial expressions, equipment detail inset, material and color callouts, clean production layout"
+    - "creature design sheet for __gkr_anime/anime_creature__, scale comparison, locomotion studies, resting and alert poses, anatomy notes, clean anime production layout"
+    - "mecha design sheet for __gkr_anime/mecha_design__, front, side and rear views, cockpit location, maintenance access, tool or weapon deployment diagrams, clean mechanical linework"
+    - "vehicle design sheet for __gkr_anime/anime_vehicle__, exterior turnaround, operator position, storage and maintenance detail, weathering callouts"
 
-  cyber_anime_combo:
-    - "matte black bodysuit with glowing circuit-line seams, wrapped forearm blades, crouched ready stance, __gkr_anime/gender__, neon purple hair, glowing eyes, __gkr_anime/spotlight_bg_scifi__, neon reflections, magenta and cyan holographic overlays, dynamic action shot, __gkr_anime/fx_environment__, __gkr_anime/style__"
+  anime_key_visual_combo:
+    - "anime key visual featuring __gkr_anime/ensemble_character_combo__, central relationship readable through eyelines, environment establishing genre, title-safe upper area, polished promotional composition without generic glow"
+    - "anime key visual for __gkr_anime/isekai_character_combo__, foreground cast, distant destination and one unresolved threat, title-safe negative space"
+    - "anime key visual for __gkr_anime/anime_mecha_combo__, human crew foregrounded against __gkr_anime/mecha_design__, mechanical scale and emotional conflict equally visible"
+    - "anime key visual for __gkr_anime/yokai_folklore_combo__, seasonal motif, human and spirit communities sharing the frame, restrained supernatural cues"
 
-  anime_monster_combo:
-    - "__gkr_anime/anime_monster__, __gkr_anime/anime_monster_traits__, __gkr_anime/environment__, tiny foreground figures emphasizing enormous scale, sweeping diagonal composition, wide cinematic framing, blackened textures and muted jewel tones, __gkr_anime/style__"
+  anime_poster_combo:
+    - "theatrical anime poster based on __gkr_anime/anime_action_scene__, one iconic silhouette, supporting cast arranged by relationship, environment and conflict readable at thumbnail size, title-safe negative space"
+    - "theatrical anime poster based on __gkr_anime/anime_romance_scene__, one recurring object as visual metaphor, seasonal palette, restrained composition"
+    - "theatrical anime poster based on __gkr_anime/anime_horror_scene__, threat implied through architecture or repetition, large negative space, limited color"
+    - "theatrical anime poster based on __gkr_anime/anime_adult_drama_scene__, ensemble eyelines and ordinary objects carrying the conflict, naturalistic color"
 
-  equipped_character_combo:
-    - "__gkr_anime/race__, __gkr_anime/build__, __gkr_anime/age__, __gkr_anime/tone__, __gkr_anime/hair__, __gkr_anime/hair_color__, __gkr_anime/eyes__, __gkr_anime/face_style__, __gkr_anime/expression__, __gkr_anime/gender__, __gkr_anime/outfit_choice__, __gkr_anime/weapons__, __gkr_anime/offhand__, __gkr_anime/environment__, __gkr_anime/lighting__, __gkr_anime/camera__, __gkr_anime/style__"
+# ------------------------------------------------------------------------
+# ANIME COMBOS
+# ------------------------------------------------------------------------
 
-  scene_combo:
-    - "__gkr_anime/environment__, __gkr_anime/lighting__, __gkr_anime/mood__, __gkr_anime/fx_environment__, __gkr_anime/camera__, __gkr_anime/art_style_specific__"
+  anime_action_combo:
+    - "__gkr_anime/anime_action_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, clear choreography and emotional stakes"
+  anime_romance_combo:
+    - "__gkr_anime/anime_romance_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, restrained character acting"
+  anime_slice_of_life_combo:
+    - "__gkr_anime/anime_slice_of_life_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, observed everyday detail"
+  anime_comedy_combo:
+    - "__gkr_anime/anime_comedy_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, precise visual timing and reaction staging"
+  anime_sports_combo:
+    - "__gkr_anime/anime_sports_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, anatomically believable motion and team geography"
+  anime_mystery_combo:
+    - "__gkr_anime/anime_mystery_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, fair visual clues"
+  anime_horror_combo:
+    - "__gkr_anime/anime_horror_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, restrained supernatural effects"
+  anime_mecha_combo:
+    - "__gkr_anime/anime_mecha_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, coherent mechanical scale and operational detail"
+  anime_scifi_combo:
+    - "__gkr_anime/anime_scifi_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, technology embedded in daily life"
+  anime_historical_combo:
+    - "__gkr_anime/anime_historical_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, researched material culture and social context"
+  anime_music_combo:
+    - "__gkr_anime/anime_music_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, believable instruments and ensemble interaction"
+  anime_culinary_combo:
+    - "__gkr_anime/anime_culinary_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, precise food preparation and sensory detail"
+  anime_adult_drama_combo:
+    - "__gkr_anime/anime_adult_drama_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, mature restrained performance"
+  anime_childrens_combo:
+    - "__gkr_anime/anime_childrens_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, child-height perspective and gentle discovery"
 
-  spotlight_combo:
-    - "__gkr_anime/spotlight_char_fantasy_magic__, __gkr_anime/spotlight_bg_fantasy__, __gkr_anime/mood__, __gkr_anime/lighting__, __gkr_anime/camera__, __gkr_anime/art_style_specific__"
+# ------------------------------------------------------------------------
+# MANGA: DEMOGRAPHICS, PAGE GRAMMAR, AND SCENES
+# ------------------------------------------------------------------------
 
-  spotlight_warrior_combo:
-    - "__gkr_anime/spotlight_char_fantasy_warrior__, __gkr_anime/spotlight_bg_fantasy__, __gkr_anime/mood__, __gkr_anime/lighting__, __gkr_anime/camera__, __gkr_anime/art_style_specific__"
+  manga_rendering:
+    - bold black contour ink, coarse screentone shadows, tapered speed lines
+    - delicate flowing linework, floral framing, luminous white negative space
+    - realistic anatomy, dense urban crosshatching, restrained facial acting
+    - clean everyday backgrounds, subtle tones, quiet observational drawing
+    - intricate mechanical linework, debris fields, extreme but readable foreshortening
+    - obsessive fine hatching, warped perspective, large areas of solid black
+    - rough brush ink, confrontational low angles, hand-drawn sound effects
+    - woodblock-influenced landscapes, dry-brush motion, controlled sword arcs
+    - scratchy autobiographical linework, collage textures, handwritten narration
+    - playful simplified forms, clean four-panel timing, expressive reaction inserts
 
-  spotlight_scifi_combo:
-    - "__gkr_anime/spotlight_char_scifi__, __gkr_anime/spotlight_bg_scifi__, __gkr_anime/mood__, __gkr_anime/lighting__, __gkr_anime/camera__, __gkr_anime/art_style_specific__"
+  manga_page_grammar:
+    - chapter-opening splash page followed by narrow reaction panels and one silent final panel
+    - clear right-to-left action flow, establishing panel, approach, impact and consequence
+    - repeated fixed composition where one background detail changes in every panel
+    - large emotional close-up balanced by speech-balloon-safe negative space
+    - dense environment spread with small inset panels tracking individual discoveries
+    - quiet six-panel grid using hands, objects and eyelines instead of exposition
+    - irregular fractured gutters reflecting unstable memory without obscuring reading order
+    - four equal horizontal panels with setup, reinforcement, reversal and silent payoff
+    - borderless dream sequence transitioning into rigid panels when reality returns
+    - full-page mechanical or architectural reveal preceded by small scale-reference panels
 
-  spotlight_modern_combo:
-    - "__gkr_anime/spotlight_char_modern__, __gkr_anime/spotlight_bg_urban__, __gkr_anime/mood__, __gkr_anime/lighting__, __gkr_anime/camera__, __gkr_anime/art_style_specific__"
+  manga_shonen_scene:
+    - rivals confronting each other before a tournament's final exchange, damage and spectators recording the history of the fight
+    - adventure team solving a problem by combining specialized skills rather than escalating individual power
+    - reckless protagonist learning a technique through failure while a rival quietly changes strategy
+    - mentor entrusting leadership to the youngest member during an evacuation
+    - former enemy joining a rescue effort while neither side has time to resolve distrust
+    - training chapter centered on repetition, injury prevention and incremental visible improvement
 
-  spotlight_nature_combo:
-    - "__gkr_anime/spotlight_bg_natural__, __gkr_anime/lighting__, __gkr_anime/mood__, __gkr_anime/fx_environment__, __gkr_anime/camera__, __gkr_anime/art_style_specific__"
+  manga_shojo_scene:
+    - student realizing a longtime friend's feelings through objects saved across several seasons
+    - formal dance where partners repeatedly change, visual motifs tracking the person each character truly watches
+    - heroine choosing a personal ambition over an expected relationship, affection remaining without easy resolution
+    - two friends repairing trust after romantic jealousy through an ordinary shared errand
+    - historical correspondence romance shown through letters, seasonal plants and changing handwriting
+    - performer stepping onstage after a rival silently repairs a damaged costume
 
-# ---------------------------------------------------------
-# RANDOM
-# ---------------------------------------------------------
+  manga_seinen_scene:
+    - detective discovering a financial crime hidden inside routine municipal contracts
+    - veteran returning to civilian work and misreading ordinary workplace conflict as tactical threat
+    - engineer investigating why an autonomous system makes compassionate but illegal decisions
+    - aging athlete confronting evidence that a celebrated victory harmed a teammate's career
+    - journalist choosing whether to publish a true story that exposes vulnerable sources
+    - criminal negotiation unfolding across a family restaurant while unrelated customers continue eating
+
+  manga_josei_scene:
+    - coworkers in their thirties negotiating friendship after one becomes the other's supervisor
+    - woman deciding whether to leave a stable career for a craft she has practiced privately for years
+    - divorced parent dating again while maintaining boundaries around family life
+    - adult siblings disagreeing over care for an aging relative without a simple villain
+    - former university friends meeting annually as careers, relationships and expectations diverge
+    - costume designer balancing artistic credit, exploitative deadlines and loyalty to junior staff
+
+  manga_horror_scene:
+    - apartment floor plan changing subtly between panels while the resident marks every discrepancy
+    - town residents smiling identically whenever the protagonist mentions a missing family
+    - medical illustration gradually replacing the reader's view of a living character
+    - reflected crowd containing one figure whose face occupies progressively more of each panel
+    - diary writing new entries in the protagonist's handwriting during blank gutters
+    - seaside staircase continuing below the water while footprints emerge upward
+
+  manga_sports_scene:
+    - final rally decomposed into foot placement, breath, teammate positioning and one decisive contact
+    - injured captain contributing through observation and strategy from the sideline
+    - novice losing badly but recognizing the exact skill needed for the next season
+    - rivals reviewing the same match afterward and interpreting its turning point differently
+    - team practice during a heat wave revealing leadership through small acts of care
+    - athlete balancing school, work and recovery rather than relying on effortless talent
+
+  manga_yonkoma_scene:
+    - office worker misinterpreting an automated reminder as increasingly personal criticism
+    - fantasy hero's legendary weapon repeatedly used for mundane household repairs
+    - cat strategically relocating objects while humans invent supernatural explanations
+    - student preparing the perfect confession only to deliver it to the wrong identical locker
+    - ghost attempting to frighten a resident who keeps offering practical maintenance advice
+    - robot learning sarcasm and deploying it at the single worst possible moment
+
+  manga_historical_scene:
+    - merchant household navigating a political change through inventory, debts and marriage agreements
+    - traveling artist documenting communities before a new road transforms the region
+    - sword school divided over whether tradition permits adaptation to unfamiliar weapons
+    - court attendant using poetry and gift etiquette to prevent a factional confrontation
+    - rural midwife crossing a winter pass to reach an isolated settlement
+    - postwar family rebuilding a neighborhood print shop from salvaged equipment
+
+  manga_experimental_scene:
+    - autobiographical memory redrawn in several incompatible styles as the narrator questions its accuracy
+    - city commute represented as architectural diagrams gradually invaded by human gestures
+    - conversation shown only through objects moved around a shared table
+    - dream narrative where panel borders become streets and characters climb between pages
+    - silent chapter following a discarded object through many unrelated owners
+    - performer hearing music visualized as changes in ink density rather than literal notes
+
+  manga_combo:
+    - "shonen manga chapter: __gkr_anime/manga_shonen_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, coherent sequential storytelling"
+    - "shojo manga chapter: __gkr_anime/manga_shojo_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, emotional motifs and readable panel rhythm"
+    - "seinen manga chapter: __gkr_anime/manga_seinen_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, mature visual storytelling"
+    - "josei manga chapter: __gkr_anime/manga_josei_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, grounded adult relationships"
+    - "horror manga chapter: __gkr_anime/manga_horror_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, controlled revelation and page-turn tension"
+    - "sports manga chapter: __gkr_anime/manga_sports_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, sequential motion clarity"
+    - "yonkoma manga page: __gkr_anime/manga_yonkoma_scene__, four equal horizontal panels, setup, reinforcement, reversal and silent payoff, clean expressive ink"
+    - "historical manga chapter: __gkr_anime/manga_historical_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, researched material culture"
+    - "experimental manga chapter: __gkr_anime/manga_experimental_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, medium-aware visual metaphor"
+
+  manga_cover_combo:
+    - "tankobon cover illustration based on __gkr_anime/manga_shonen_scene__, strong central silhouette, supporting cast arranged by relationship, clear title-safe negative space, __gkr_anime/manga_rendering__"
+    - "tankobon cover illustration based on __gkr_anime/manga_shojo_scene__, symbolic seasonal motif, expressive eye lines, elegant title-safe negative space, __gkr_anime/manga_rendering__"
+    - "literary manga cover based on __gkr_anime/manga_seinen_scene__, one restrained visual metaphor, limited palette, title-safe negative space, __gkr_anime/manga_rendering__"
+
+# ------------------------------------------------------------------------
+# SPOTLIGHT ROUTES
+# ------------------------------------------------------------------------
+
+  spotlight_anime_scenes:
+    - "__gkr_anime/anime_action_combo__"
+    - "__gkr_anime/anime_romance_combo__"
+    - "__gkr_anime/anime_slice_of_life_combo__"
+    - "__gkr_anime/anime_comedy_combo__"
+    - "__gkr_anime/anime_sports_combo__"
+    - "__gkr_anime/anime_mystery_combo__"
+    - "__gkr_anime/anime_horror_combo__"
+    - "__gkr_anime/anime_mecha_combo__"
+    - "__gkr_anime/anime_scifi_combo__"
+    - "__gkr_anime/anime_historical_combo__"
+    - "__gkr_anime/anime_music_combo__"
+    - "__gkr_anime/anime_culinary_combo__"
+    - "__gkr_anime/anime_adult_drama_combo__"
+    - "__gkr_anime/anime_childrens_combo__"
+
+  spotlight_manga_pages:
+    - "__gkr_anime/manga_combo__"
+    - "__gkr_anime/manga_cover_combo__"
+
+  spotlight_characters:
+    - "__gkr_anime/standalone_character_combo__"
+    - "__gkr_anime/ensemble_character_combo__"
+    - "__gkr_anime/character_sheet_combo__"
+
+  spotlight_anime_traditions:
+    - "__gkr_anime/isekai_character_combo__"
+    - "__gkr_anime/magical_team_combo__"
+    - "__gkr_anime/yokai_folklore_combo__"
+    - "__gkr_anime/idol_industry_combo__"
+    - "__gkr_anime/delinquent_combo__"
+    - "__gkr_anime/military_political_combo__"
+    - "__gkr_anime/kaiju_combo__"
+    - "__gkr_anime/space_opera_combo__"
+    - "__gkr_anime/cyberpunk_combo__"
+    - "__gkr_anime/post_apocalyptic_combo__"
+    - "__gkr_anime/racing_combo__"
+    - "__gkr_anime/martial_arts_combo__"
+    - "__gkr_anime/iyashikei_combo__"
+    - "__gkr_anime/ecological_fantasy_combo__"
+
+  spotlight_designs:
+    - "__gkr_anime/character_sheet_combo__"
+    - "__gkr_anime/anime_key_visual_combo__"
+    - "__gkr_anime/anime_poster_combo__"
+
+# ------------------------------------------------------------------------
+# BALANCED DEFAULT
+# ------------------------------------------------------------------------
 
   random:
-    - "__gkr_anime/shonen_hero_combo__"
-    - "__gkr_anime/magical_girl_combo__"
-    - "__gkr_anime/isekai_combo__"
-    - "__gkr_anime/mecha_pilot_combo__"
-    - "__gkr_anime/villain_combo__"
-    - "__gkr_anime/idol_combo__"
-    - "__gkr_anime/slice_of_life_combo__"
-    - "__gkr_anime/cyber_anime_combo__"
-    - "__gkr_anime/anime_monster_combo__"
-    - "__gkr_anime/equipped_character_combo__"
-    - "__gkr_anime/scene_combo__"
-    - "__gkr_anime/spotlight_combo__"
-    - "__gkr_anime/spotlight_warrior_combo__"
-    - "__gkr_anime/spotlight_scifi_combo__"
-    - "__gkr_anime/spotlight_modern_combo__"
-    - "__gkr_anime/spotlight_nature_combo__"
-    - "__gkr_anime/spotlight_scene_action__"
-    - "__gkr_anime/spotlight_scene_sliceoflife__"
-    - "__gkr_anime/spotlight_scene_fantasy__"
-    - "__gkr_anime/spotlight_scene_scifi__"
-    - "__gkr_anime/spotlight_scene_dramatic__"
-    - "__gkr_anime/spotlight_scene_romantic__"
-    - "__gkr_anime/spotlight_scene_other__"
-    - "__gkr_anime/spotlight_scene_fantasy_epic__"
-
-  random_character:
-    - "__gkr_anime/archetype__, __gkr_anime/race__, __gkr_anime/build__, __gkr_anime/age__, __gkr_anime/tone__, __gkr_anime/hair__, __gkr_anime/hair_color__, __gkr_anime/eyes__, __gkr_anime/face_style__, __gkr_anime/expression__, __gkr_anime/gender__, __gkr_anime/style__"
-
-# ---------------------------------------------------------
-# SPOTLIGHT (SPLIT INTO THEMES)
-# ---------------------------------------------------------
-
-  spotlight_char_fantasy_magic:
-    - "pink hair, an open spellbook hovering beside them, swirling glowing runes, soft pastel-colored magic sparks"
-    - "silver hair, crystal-clear eyes, paper ofuda talismans floating in a ring around them"
-    - "tattered dark cloak, heavy iron chains wrapped around one arm, a cursed grimoire bound shut with chains"
-    - "small feathered wings, hovering in midair, shimmering feather-light particles trailing behind"
-    - "swirling leaves caught in a gust around outstretched hands, streaks of visible wind trailing off the fingertips"
-    - "curled black horns, ember-orange glowing hair, gripping a halberd etched with glowing runes"
-    - "star-tipped wand raised overhead, glittering pleated skirt, radiant pose mid-transformation, sparkles bursting outward"
-    - "long pale braid dusted with frost, snowflakes orbiting outstretched hands, faint icy mist"
-    - "cat ears, flicking a fan of glowing rune-etched cards between the fingers"
-    - "hulking stone body, glowing cracks along the joints, fragments of rock hovering loosely around it"
-    - "tiny fairy-sized figure, luminous translucent wings, hair drifting as if weightless"
-    - "arms raised mid-summon, translucent spectral animal spirits materializing around them"
-    - "paintbrush in hand, glowing painted illusions peeling off the canvas into the air"
-    - "cloak patterned like a night sky, constellations glimmering across the fabric, trailing star dust"
-    - "glowing molten cracks across the skin, flickers of flame around clenched fists"
-    - "vines sprouting and curling from the fingertips, small leaves and blossoms unfurling"
-    - "tattered black feathered wings, downcast sorrowful gaze"
-    - "hair crackling with static like braided lightning, swirling dark storm clouds gathering overhead"
-    - "rows of glass vials filled with shimmering colored liquid, one held up to the light"
-    - "holding a glowing lantern, warm kind expression, faint radiant aura"
-    - "cloaked in dark tattered robes, ghostly blue flames flickering in an open palm, skeletal hands emerging from the ground nearby"
-    - "radiant gold-plated armor, shimmering heat haze rippling around the body"
-    - "soft pale luminous glow, staff topped with a crescent-moon ornament"
-    - "wings made of glowing flame, rising from a burst of fire, trailing embers"
-    - "clutching a cluster of glowing crystal stones, faceted light refracting outward"
-    - "oversized pointed witch hat, riding a broomstick, trailing sparkles"
-    - "faceted crystalline body, glowing core visible at the chest"
-    - "stepping lightly across drifting clouds, flowing garments caught in the wind"
-    - "two identical glowing reflections casting in unison on either side"
-    - "translucent flowing robes, hair drifting weightlessly, faint ghostly outline"
-    - "tattered ghostly cloak, a large scythe hovering beside them"
-    - "fluffy white rabbit ears, thick fur-trimmed robes, wand tipped with an ice crystal"
-    - "orbiting sphere split into fire, water, earth, and wind, swirling around outstretched hands"
-    - "twisted wooden staff wrapped in roots, glowing mushrooms sprouting nearby"
-    - "juggling several tiny glowing elemental spirits between the hands"
-    - "cloak covered in twisting black thorns, faint sickly purple magic seeping from the hands"
-    - "iridescent pastel bubbles floating and popping around outstretched hands"
-    - "faint scale-patterned skin along the arms, forked tongue, a glowing serpent coiled at the shoulders"
-    - "ribbons of swirling seawater coiling around the arms like fabric"
-    - "glowing eyes, faint visible ripples of psychic energy warping the air, objects hovering nearby"
-    - "translucent glowing butterfly wings, eyes closed as if seeing something distant"
-    - "faintly fading glow, trailing wisps of stardust, translucent starlit skin"
-    - "drifting weightlessly through swirling pastel fog, half-lidded dreamy eyes"
-    - "hands cupped around a warm golden glow, softly glowing runes circling overhead"
-    - "swirling black starlit void spiraling above an open palm"
-    - "small horns wrapped in growing vines, leaves and moss woven through the hair"
-
-  spotlight_char_fantasy_warrior:
-    - "long black coat, windswept hair, gripping a sword with a faintly glowing blue edge"
-    - "fox ears, soft smile, kimono patterned with leaves, staff topped with a crystal"
-    - "plate armor, oversized metal gauntlets, raised chin and firmly focused eyes"
-    - "bright flowing scarf, fingerless gloves, small flame flickering in an open palm"
-    - "flowing white robes, glowing golden sigils embroidered along the hem"
-    - "long green hair, shy expression, intricately carved bow, vine-wrapped boots"
-    - "cat ears, twin daggers, playful smirk, low agile stance"
-    - "tattered cape, featureless mask with a glowing red visor slit"
-    - "long rabbit ears, pastel-colored outfit, oversized bow slung on the back"
-    - "scaled forearms, a dragon tail, faint glow visible at the throat"
-    - "ornate embroidered coat, slender rapier at the hip, sly confident smile"
-    - "wide feathered hat, crossed utility belts, faint wind swirling around the boots"
-    - "curved horned mask, flame-red kimono, katana at the hip"
-    - "gleaming golden spear, armor embossed with a white wing motif"
-    - "massive war hammer slung over one shoulder, energetic grin"
-    - "dark glowing tattoos spreading across the skin"
-    - "long hair, paper ofuda charms orbiting slowly around the body"
-    - "fox mask, multiple soft glowing fox tails"
-    - "flowing hair, ornate gemstone-studded crown"
-    - "glowing kanji characters etched across the knuckles, faint magic circle beneath the feet"
-    - "wolf ears, fur-trimmed armor collar, intense sharp eyes"
-    - "strings trailing from the fingertips, small marionette puppets floating nearby"
-    - "pastel-colored armored kimono, drifting cherry blossom petals swirling around"
-    - "long twin braids, half-mask, blade stained crimson red"
-    - "long silver hair, sword hilt set with jewels, engraved plate armor"
-    - "braided lion-like mane, wide roaring stance"
-    - "feathered cloak, half-mask, bow drawn"
-    - "translucent crystalline armor shards, delicate fairy wings"
-    - "star-shaped glowing talismans clipped to a belt, throwing shuriken in hand"
-    - "polished plate armor, feathered helmet plume"
-    - "twin revolvers etched with glowing arcane markings"
-    - "cat ears, glowing pupils, crouched low in shadow"
-    - "cape patterned with leaves, ornate bow, regal poise"
-    - "a small drake perched on one shoulder"
-    - "thin glowing halo ring hovering above the head, polished armor"
-    - "silhouette dissolving into wisps of shadow at the edges, katana drawn"
-    - "armor wreathed in wings made of glowing embers"
-
-  spotlight_char_scifi:
-    - "messy pigtails, goggles pushed up on the forehead, small mechanical drones hovering nearby"
-    - "brass gear-driven wrist projector, concentric amber holographic rings rotating above it"
-    - "one robotic arm etched with glowing circuit traces"
-    - "flashing holographic interface symbols projected around the hands"
-    - "fragments of glowing holographic data drifting around the body"
-    - "bulky armored suit with glowing joint seams"
-    - "a glowing holographic map hovering above an open hand"
-
-  spotlight_char_modern:
-    - "cropped stage jacket, crystal-shaped microphone, LED spotlights flaring mid-note"
-    - "contemporary detective coat, glowing electronic monocle, magnifying lens held beside one eye"
-    - "plain contemporary shirt and trousers, jeweled pendant beneath the collar, upright posture, gaze raised toward bright light"
-    - "small chibi proportions, oversized hoodie and sneakers, tiny sparks flaring off the fingertips"
-    - "modern school uniform, faintly glowing star-shaped freckles peeking from a rolled sleeve"
-    - "industrial coveralls rolled to the elbows, welding mask pushed up, sparks flying from a hot metal workpiece"
-    - "casual streetwear, small animated plush toys toddling one step behind"
-
-  spotlight_bg_fantasy:
-    - "grand academy courtyard, floating luminous sigils drifting overhead"
-    - "sky islands drifting through sunlit clouds, waterfalls spilling off the edges"
-    - "cavern filled with towering azure crystal formations"
-    - "ancient overgrown temple ruins, reclaimed by thick vines"
-    - "moonlit lake with a shimmering reflection, petals drifting across the surface"
-    - "floating library platforms, books drifting between shelves, soft ethereal lights"
-    - "interior of a massive hollow tree housing a small village"
-    - "rocky mountain perch overlooking a sprawling valley"
-    - "crystalline palace courtyard, soft glowing pastel light"
-    - "forest glowing with neon-colored magical light trails"
-    - "ancient shrine, torii gate, paper ofuda strips drifting in the wind"
-    - "ocean temple rising out of misty waters"
-    - "fairy glen dotted with tiny glowing treehouse dwellings"
-    - "towering castle perched atop spiraling cliffs"
-    - "winding path through rolling green hills"
-    - "still crystal lake mirroring a star-filled galaxy above"
-    - "abandoned magic laboratory, flickering glowing runic circles on the floor"
-    - "ancient stone bridge over a faintly glowing river"
-    - "dreamlike pastel-colored city floating on clouds"
-    - "massive observatory, telescope aimed at a star-filled sky"
-    - "enchanted orchard, trees heavy with glowing fruit"
-    - "crumbling fortress ruins atop an isolated mountaintop"
-    - "volcanic crater, rivers of glowing magma flowing below"
-    - "ancient stone gate hovering above cliffs, a glowing portal within"
-    - "twisted forest bathed in eerie green moonlight"
-    - "desert littered with colossal dragon skeleton remains"
-    - "crystal spire rising above dense jungle canopy"
-    - "ruined fortress floating among tattered clouds"
-    - "rainbow-tinted waterfalls cascading off floating cliffs"
-    - "glowing ancient monolith standing in a wide grassy plain"
-    - "tall mage tower piercing a bright sky"
-    - "massive tree with an entire village built into its branches"
-    - "misty ruins, broken ground, stone pillars floating just above the earth"
-    - "enchanted desert, luminous runes glowing faintly beneath the sand"
-    - "colossal cherry blossom tree towering over a small village"
-    - "ancient bridge stretching over a sea of clouds"
-    - "crystal observatory glowing with captured starlight"
-    - "glowing forest path, small spirit creatures drifting alongside it"
-    - "cracked, overgrown circular stone arena with faded runes carved into the floor"
-    - "floating arena platforms suspended in open sky"
-    - "towering stone arch rising above the clouds"
-    - "ancient overgrown aqueduct stretching between mountains"
-    - "enchanted ruins spiraling upward in a helix shape"
-    - "forest shrine enclosed by a faintly glowing barrier"
-    - "canyon cliffs veined with glowing colorful light"
-    - "bridge made of woven starlight crossing the night sky"
-
-  spotlight_bg_scifi:
-    - "tall mechanical tower overlooking a sprawling futuristic cityscape"
-    - "city blending fantasy architecture with glowing magitech circuitry"
-    - "airship dock, glowing guide rails, steampunk piping along the platforms"
-    - "rain-soaked backstreet at night, neon signs reflected in the puddles"
-
-  spotlight_bg_urban:
-    - "quiet town street lined with narrow storefronts and hanging lanterns"
-    - "festival street strung with glowing paper lanterns, night market stalls"
-    - "cliffside road at golden hour, overlooking a distant city"
-    - "bustling colorful marketplace, rows of stalls"
-    - "sunset city skyline, small lantern-lit airships drifting overhead"
-    - "city training courtyard with wooden practice dummies, apartment roofs beyond the wall"
-    - "rooftop public bath, steam rising above the surrounding city lights"
-    - "sunrise over an enormous academy tower surrounded by dense city blocks"
-    - "abandoned city cathedral, broken stained-glass windows, nearby high-rises visible through the roof"
-    - "night fairground, floating carnival rides strung with glowing lights"
-    - "dense cliffside town beside a waterfall, connecting bridges, elevators, and stacked buildings"
-    - "quiet classroom interior, stacks of magic textbooks on the desks"
-    - "vividly lit night market, colorful stalls"
-    - "hilltop shrine, torii gate overlooking a bright night skyline"
-    - "fantasy metropolis with steampunk airships flying overhead"
-    - "marble city plaza, fountains lit by glowing magic cores"
-    - "dim school hallway, faint translucent spirits drifting through it"
-    - "small neighborhood shrine between apartment blocks, bamboo clustered behind its torii gate"
-    - "carnival floating above the night city skyline"
-    - "sunlit town square bustling with people"
-    - "thunderstorm sweeping across a damaged city plaza, lightning above shattered storefronts"
-
-  spotlight_bg_natural:
-    - "avenue lined with cherry blossoms, soft glowing pink light"
-    - "deep forest with glowing spores drifting among oversized flowers"
-    - "stormy coastal cliff, lightning flashing over the ocean"
-    - "twilight meadow, luminous butterflies drifting over the grass"
-    - "train tracks stretching between floating sky islands"
-    - "icy landscape with towering frozen spires"
-    - "overgrown forest ruins, cracked stone roads"
-    - "desert canyon, glowing crystal clusters embedded in the cliffs"
-    - "deep ravine crossed by an unstable rope bridge"
-    - "wind-swept grassy plains beneath a vast open sky"
-    - "forest grove filled with fireflies at dusk"
-    - "ocean cliffs, waves glowing with bioluminescence at night"
-    - "forest spring surrounded by faintly glowing plants"
-    - "forest canopy walkway lit with hanging fairy lanterns"
-    - "massive waterfall roaring into a misty abyss"
-    - "meadow beneath a sky thick with shimmering constellations"
-
-  spotlight_scene_sliceoflife:
-    - "rooftop at sunset, two uniformed students facing each other, wind lifting their sleeves and hair"
-    - "train interior crossing the countryside, passenger staring out the window with lowered brows"
-    - "rainy street, two people pressed beneath one umbrella, downcast eyes, cool desaturated palette"
-    - "tea ceremony, figure kneeling with relaxed brow in a tatami room, soft light, patterned kimono"
-    - "two uniformed students walking shoulder to shoulder along a sakura-lined path at sunset"
-    - "calm beach, morning, soft waves, seagulls, ocean"
-    - "uniformed student sprinting toward school with toast held in the mouth, loose papers flying behind"
-    - "quiet library, two blushing hands reaching for the same book, warm close framing"
-    - "group seated shoulder to shoulder, sharing steaming bowls inside a cozy ramen shop"
-    - "quiet moment, two people staring at starry sky, grassy hill, night"
-    - "winter classroom, frost on windows, warm sunlight, school, snow"
-    - "child, running, golden wheat fields, chasing fireflies, sunset"
-    - "group of teenagers sitting barefoot at a sunny riverbank, shoes and cold drinks beside them"
-    - "solitary figure walking down an empty city street at night, long shadow under streetlights"
-    - "uniformed students seated around a meeting table, dramatic sunlight cutting through classroom windows"
-    - "market street, bustling, colorful stands, banners, city, day"
-    - "fishing village, at dawn, boats, drifting, ocean, morning"
-    - "school festival, dance performance, twinkling lights, night"
-    - "round tiny creature bouncing beside a walking student, oversized sparkling eyes and short paws"
-    - "armored travelers laughing and raising wooden mugs inside a timber-framed tavern"
-    - "newly seated uniformed student staring out the classroom window, face half hidden by long hair"
-
-  spotlight_scene_action:
-    - "samurai duel, falling sakura, cherry blossoms, lanterns, night"
-    - "young fighter in a wide battle stance, glowing aura bursting outward, ground cracking beneath both feet"
-    - "epic sword clash, shockwave, forest clearing, two boys fighting"
-    - "jacketed figure sprinting down a nighttime street, neon reflections streaking across wet pavement"
-    - "battle, atop skyscraper, wind, capes, hair, fighting, city"
-    - "sci-fi chase, neon streets, hovering bike, futuristic, action"
-    - "dramatic face-off, on bridge, twilight, two boys confrontation"
-    - "sports anime, athlete, leaps, slow motion, dynamic"
-    - "hooded archer holding twin short blades, sliding through a forest with leaves spraying outward"
-    - "masked figure in a circuit-lined bodysuit dashing across a neon-lit rooftop at night"
-    - "armored blade wielder blocking a massive flaming strike, sparks and fire bursting at impact"
-    - "samurai, blocking arrows, dramatic slow motion, action"
-    - "airborne duel, winged warriors, above clouds, two boys fighting, sky"
-    - "archer, firing arrow, into storm, lightning, dynamic"
-    - "lone figure's cloak whipping sideways in a desert sandstorm, opponent silhouetted across the gap"
-    - "clashing mages, swirling elemental tornadoes, two people, magic, fight"
-    - "apocalyptic showdown, ruined city, floating embers, fighting, destruction"
-    - "woman swinging a blade through surrounding shadow duplicates inside an abandoned warehouse"
-    - "armored figure driving a spear into a dragon's scales, sparks bursting at impact"
-
-  spotlight_scene_fantasy:
-    - "magical girl, transformation, sparkles, rising, starry sky"
-    - "robed figure casting from a glowing spell circle among ancient ruins"
-    - "long-haired girl floating above a lake, face half-shadowed, glowing butterflies orbiting her"
-    - "spirits, rising from shrine, red moon, night, yokai"
-    - "miko in white haori and red hakama sweeping an ofuda wand beneath a towering shrine torii"
-    - "battle, inside bamboo forest, leaves scatter, two boys fighting, sword"
-    - "glowing concentric runic circle beneath an armored figure's feet, luminous smoke rising"
-    - "shrine maiden, confronting yokai, moonlit woods, monster, night"
-    - "figure arched backward as glowing sigils spread across the skin, hair and clothing lifted by radiant energy"
-    - "angry demon spirit, emerging, cracked mask, yokai, monster"
-    - "translucent cat with two tails sitting atop a red shrine gate, eyes glowing through mist"
-    - "torch-lit cave, armored travelers facing a many-eyed creature emerging from darkness"
-    - "pointed-hat figure stirring a bubbling potion in a cluttered cottage, glowing runes above the cauldron"
-    - "massive golem, awakening, overgrown ruins, monster, fantasy"
-    - "masked festival dancers, swirling, firepit, night, dance"
-    - "translucent glowing wolves racing beside a cloaked runner"
-    - "army of yokai, marching, foggy valley, monsters, fog"
-    - "figure diving underwater after a school of translucent glowing fish"
-    - "falling from sky, scene, papers, feathers, drifting"
-    - "massive magical explosion, illuminating night sky, blast, magic"
-    - "demonic gate, opening, crimson sky, portal, dark, monster"
-    - "otherworldly portal, swirling open, classroom, magic, school"
-    - "magic girl, hovering above town, surrounded by pink light, magic"
-
-  spotlight_scene_scifi:
-    - "mecha, landing, fiery crater, nighttime city, raid, explosion"
-    - "android, waking up, cyber lab, holograms, sci-fi"
-    - "space fighter, launching, hangar, alarms, spaceship, sci-fi"
-    - "spaceship, drifting, silent starfield, space, sci-fi"
-    - "mecha, charging forward, boosters ignited, robot, action"
-    - "giant mecha braced behind a radiant shield, incoming blast splitting around it above city buildings"
-    - "mecha, rising from ocean, surrounded by steam, robot, water"
-    - "pilot, entering cockpit, towering battle mech, mecha"
-    - "cyber girl, floating, digital sea, data streams, futuristic"
-    - "airship, docking, floating city platform, steampunk, sky"
-    - "flying ship, gliding, above cloud ocean, dawn, airship, fantasy"
-
-  spotlight_scene_dramatic:
-    - "wide snowy field, lone armored figure facing a giant translucent horned beast"
-    - "giant monster, attack, coastal town, dust, debris, destruction"
-    - "long-coated figure standing on a cliff with face hidden in shadow, lightning splitting the storm behind"
-    - "solitary person crying beneath a streetlight in heavy night rain, shoulders folded inward"
-    - "masked caped figure crouched on a rooftop overlooking the city at night"
-    - "sunset train platform, two people reaching toward each other as a departing train separates them"
-    - "ancient dragon, unfurling wings, atop mountain shrine, dragon, monster"
-    - "ghost girl, standing silently, abandoned school hallway, horror"
-    - "ancient temple, collapsing, magical duel, ruins, destruction"
-    - "two tearful people reaching toward each other with outstretched hands, tight dramatic framing"
-    - "woman standing atop a skyscraper with the sun rising behind the city skyline"
-    - "steam, rising from hot spring, onsen, snowy cliffs, snow"
-    - "night market, alley, glowing, colorful lanterns, street"
-    - "mountain shrine, approached, lantern-lit stairs, night, temple"
-
-  spotlight_scene_romantic:
-    - "quiet library, two blushing hands reaching for the same book, warm close framing"
-    - "one blushing student offering a folded letter to another beneath blooming cherry trees"
-    - "two people seated close together on a quiet park bench, falling sakura petals, shy sideways glances"
-    - "rainy street, two people pressed beneath one umbrella, downcast eyes, cool desaturated palette"
-
-  spotlight_scene_other:
-    - "sequined singer holding a microphone on a glowing stage, cheering crowd silhouettes"
-    - "costumed dancer spinning mid-air above a sparkling concert stage"
-    - "child, staring, glowing meteor, streaking across sky, night, space"
-
-  spotlight_scene_fantasy_epic:
-    - "robed figure floating above a glowing runic circle as flower petals spiral upward"
-    - "samurai, confronting, colossal spirit fox, kitsune, red moon, night"
-    - "young figure pulling a glowing ancient sword from rubble as lightning bursts across the ruins"
-    - "elf archer, leaping, floating stone platforms, sky temple, ruins"
-    - "dragon rider, soaring through clouds, dawn light, mountains, dragon"
-    - "forest spirits, dancing, sacred tree, glowing blue light, night, magic"
-    - "plate-armored figure blocking a massive fireball with a radiant shield"
-    - "pointed-hat figure casting a spiral of starlight inside an ancient observatory"
-    - "gold-armored figure descending through clouds on broad luminous wings"
-    - "woman swinging a glowing blade through shadow creatures in a moonlit field"
-    - "magical girl, holding, luminous staff, crystalline forest, magic"
-    - "blade wielder clashing steel with a horned creature beneath falling ash"
-    - "group gathered around a campfire beneath giant glowing mushrooms at night"
-    - "sky kingdom, floating, oceans of clouds, dragons circling, castle"
-    - "robed figure raising both arms inside a glowing circle as a massive elemental form materializes"
-    - "armored figure sprinting across a collapsing rainbow bridge in the sky"
-    - "winged robed figure weaving luminous threads around visible wounds"
-    - "forest nymph, guiding travelers, bioluminescent grove, glowing"
-    - "battle, armored chimera, on cliffside, monster, fight, fantasy"
-    - "woman reaching toward a floating glowing relic above a stone altar"
-    - "massive golem, rising from lake, magical haze, monster, water"
-    - "white-armored figure charging across a battlefield between cracked luminous crystals"
-    - "robed figure shaping a swirling dragon from ribbons of water"
-    - "black-robed figure levitating as black feathers rain through a violet aura"
-    - "young robed student recoiling from a lopsided burst of sparkles, singed sleeves and wide eyes"
-    - "spear-bearing armored figure confronting a many-headed hydra among ruins"
-    - "sky pirates, raiding, floating island, storm, airship, lightning"
-    - "translucent glowing wolf racing beside a cloaked runner through a snowy forest"
-    - "battle, inside ancient library, books fly, two people, magic, fighting"
-    - "shaven-headed figure in wrapped robes thrusting both palms outward, circular energy blast above a mountain summit"
-    - "robed figure hovering above a tornado coiling beneath the feet"
-    - "pointed-hat figure flying on a broom among glowing lanterns in the night sky"
-    - "rows of runes lighting sequentially across an ancient stone bridge"
-    - "crystal dragon, unfurling wings, inside cavern, mirrors, dragon"
-    - "woman parting a waterfall to reveal a glowing circular portal behind it"
-    - "armored figure kneeling in rain beside a motionless armored body on a battlefield, head bowed"
-    - "magical girl team, assembling, colorful burst of light, transformation"
-    - "spirit deer, watching quietly, moonlit clearing, night, forest, magic"
-    - "battle, suspended platform, celestial arena, two people, fighting, sky"
-    - "towering humanoid tree creature looming above tiny travelers in an ancient forest"
-    - "alchemist, mixing, volatile potion, floating glass spheres, magic"
-    - "robed figure surrounded by swirling flames shaped like a phoenix"
-    - "young robed figure pointing skyward as glowing meteors descend over a desert battlefield"
-    - "anime swordswoman, running across lake surface, magic, water"
-    - "dreamlike meadow, floating feathers, soft sunlight, field, fantasy"
-    - "necromancer, raising skeletal warriors, swirling shadows, dark magic"
-    - "two robed figures casting opposing energy beams as concentric ripples spread across the stormy sky"
-    - "woman standing on a mountain peak facing a colossal humanoid silhouette in the clouds"
-    - "enchanted waterfall, hiding, glowing golden portal, magic"
-    - "anime dragon, flying low, lavender fields, purple, landscape"
-    - "town festival, illuminated, spirit lanterns, binding to sky, night"
-    - "tiny crowned winged figure rising from a giant flower in soft pink light"
-    - "griffin cavalry, charging, emerald plains, fantasy, army, flying"
-    - "hooded figure reading a chained black book as warning-red runes circle overhead"
-    - "spirit fox, kitsune, running on air, trails of fire, magic"
-    - "robed figure raising a glowing staff as a translucent star-filled whale materializes in the night sky"
-    - "swordfighter, slicing, illusion clones, forest, action"
-    - "robed figure surrounded by open floating tomes and rotating luminous symbols"
-    - "giant tree spirit, shaking leaves, glow like stars, monster, forest"
-    - "sky duel, two winged warriors, above clouds, fighting, angel"
-    - "figure in an embroidered coat and small coronet kneeling as a stone statue opens glowing eyes"
-    - "phoenix, reborn from ashes, characters shield eyes, fire, bird"
-    - "cloaked traveler crossing a desert where luminous sand curls into translucent animal shapes"
-    - "battle, atop giant turtle, carrying ancient shrine, monster, fantasy"
-    - "tiny robed figure standing before a colossal star-filled circular gate"
-    - "enchanted glade, spirits float, motes of sunlight, forest, magic"
-    - "black-armored figure pulling a solid blade from coiling shadows"
-    - "hooded figure gazing into glowing water, reflected constellations and branching translucent images hovering above the basin"
-    - "merfolk, emerging, glowing ocean, beneath starlight, mermaid, night"
-    - "battle, dragon-like wraith, stormy sky, monster, lightning"
-    - "woman drifting weightlessly among upside-down floating islands and pastel clouds"
-    - "magic knights, clashing swords, infused with elemental energy, fight"
-    - "forest temple, floating lanterns, drifting spirits, shrine, night"
-    - "robed figure riding a giant owl through violet twilight clouds"
-    - "samurai, defending village, monstrous oni, monster, fight"
-    - "woman ascending a glowing staircase that disappears into bright clouds"
-    - "armored figure leaping from a cliff toward a giant airborne serpent"
-    - "dark forest, cracking open, reveal hidden underworld, portal, dark"
-    - "winged fox spirit, kitsune, curled atop, floating shrine, magic"
-    - "leaf-cloaked figure touching palms with an ancient moss-covered stone creature"
-    - "massive air wizard, summoning, lightning dragon, storm, magic"
-    - "cloaked runner crossing a bridge as each rune ignites beneath the next footstep"
-    - "battle, beneath cherry blossoms, raining petals, two samurai, sakura"
-    - "robed figure floating in a star-filled void, spiraling nebula energy between raised hands"
-    - "fantasy city skyline, floating orbs, illuminating night, city"
-    - "blade wielder surrounded by a fiery aura, sword locked against an opponent's weapon"
-    - "giant magical barrier, domed, over ancient capital, magic, shield"
-    - "wolf spirit, walking on water, under moonlight, night, magic"
-    - "party, confronting, ancient world serpent, beneath shrine, monster, giant"
-    - "woman arching backward as broad translucent wings of light unfold from her shoulders"
-    - "moonlit field, spirits drift, like fireflies, night, magic, ghosts"
-    - "armored figure swinging a glowing blade through a meteor, two burning halves splitting apart"
-    - "enormous crystal tree, shimmering, celestial light, magic"
-    - "small battered group back-to-back on a collapsing floating castle as glowing cracks split the sky"
-    - "robed figure raising both arms as luminous constellation animals descend over a battlefield"
-    - "caped woman standing in silhouette before a vast cosmic eclipse"
+    - "__gkr_anime/anime_action_combo__"
+    - "__gkr_anime/anime_romance_combo__"
+    - "__gkr_anime/anime_slice_of_life_combo__"
+    - "__gkr_anime/anime_comedy_combo__"
+    - "__gkr_anime/anime_sports_combo__"
+    - "__gkr_anime/anime_mystery_combo__"
+    - "__gkr_anime/anime_horror_combo__"
+    - "__gkr_anime/anime_mecha_combo__"
+    - "__gkr_anime/anime_scifi_combo__"
+    - "__gkr_anime/anime_historical_combo__"
+    - "__gkr_anime/anime_music_combo__"
+    - "__gkr_anime/anime_culinary_combo__"
+    - "__gkr_anime/anime_adult_drama_combo__"
+    - "__gkr_anime/anime_childrens_combo__"
+    - "__gkr_anime/manga_combo__"
+    - "__gkr_anime/manga_cover_combo__"
+    - "__gkr_anime/spotlight_anime_scenes__"
+    - "__gkr_anime/spotlight_manga_pages__"
+    - "__gkr_anime/standalone_character_combo__"
+    - "__gkr_anime/ensemble_character_combo__"
+    - "__gkr_anime/character_sheet_combo__"
+    - "__gkr_anime/anime_key_visual_combo__"
+    - "__gkr_anime/anime_poster_combo__"
+    - "__gkr_anime/spotlight_anime_traditions__"
+    - "__gkr_anime/spotlight_characters__"
+    - "__gkr_anime/spotlight_designs__"
