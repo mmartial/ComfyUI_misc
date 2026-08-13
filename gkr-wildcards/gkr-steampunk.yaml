@@ -1,5 +1,16 @@
 # ========================================================================
 # STEAMPUNK — EXTENDED WILDCARDS FOR COMFYUI DYNAMIC PROMPTS
+#
+# COVERS: Alternate industrial worlds of steam engineering, period fashion, skilled
+# professions, intricate machines, vehicles, social tensions, and imagined histories.
+#
+# Theme core components: character/profession, period fashion, engineered object,
+# vehicle, environment, and visual tradition; keep technology functionally plausible.
+#
+# ROUTE USAGE
+# combo: Composes compatible components into a coherent, production-ready prompt.
+# spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
+# random: Selects one complete route for breadth; avoid stacking random routes.
 # ========================================================================
 
 gkr_steampunk:

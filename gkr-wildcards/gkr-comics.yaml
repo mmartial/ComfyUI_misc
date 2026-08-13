@@ -1,6 +1,18 @@
 # ========================================================================
 # GLOBAL COMICS — USA, EUROPE, AND WORLD TRADITIONS
+#
+# COVERS: Comics as sequential art across regional traditions, including character
+# and genre design, page composition, narrative scenes, and publication assets.
+#
 # Medium-first, sequential-storytelling wildcard library.
+#
+# Theme core components: page craft, regional tradition, genre, character,
+# sequential scene, and publication format; keep medium and story logic aligned.
+#
+# ROUTE USAGE
+# combo: Composes compatible components into a coherent, production-ready prompt.
+# spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
+# random: Selects one complete route for breadth; avoid stacking random routes.
 # ========================================================================
 
 gkr_comics:

@@ -1,5 +1,16 @@
 # ========================================================================
 # TableTop RPG FANTASY — EXTENDED WILDCARDS FOR COMFYUI DYNAMIC PROMPTS
+#
+# COVERS: Fantasy role-playing characters, parties, creatures, equipment, encounters,
+# and adventure settings through the visual language of tabletop games and fantasy art.
+#
+# Theme core components: character/class, ancestry/appearance, equipment,
+# environment, monster, action, and art style; respect role and world compatibility.
+#
+# ROUTE USAGE
+# combo: Composes compatible components into a coherent, production-ready prompt.
+# spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
+# random: Selects one complete route for breadth; avoid stacking random routes.
 # ========================================================================
 
 gkr_ttrpg:

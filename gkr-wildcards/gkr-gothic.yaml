@@ -1,7 +1,18 @@
 # ========================================================================
 # GOTHIC HORROR — VISUAL WILDCARDS FOR COMFYUI
+#
+# COVERS: Haunted people and places where buried histories return through decaying
+# architecture, family secrets, folklore, romance, investigation, and bodily dread.
 # Architecture, inheritance, repression, haunting, folklore, mortality,
 # romance, investigation, and bodily dread expressed as visible imagery.
+#
+# Theme core components: visual grammar, character, architecture/environment,
+# supernatural pressure, narrative action, and mood; make dread visibly causal.
+#
+# ROUTE USAGE
+# combo: Composes compatible components into a coherent, production-ready prompt.
+# spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
+# random: Selects one complete route for breadth; avoid stacking random routes.
 # ========================================================================
 
 gkr_gothic:

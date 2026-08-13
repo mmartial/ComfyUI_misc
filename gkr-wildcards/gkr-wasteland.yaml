@@ -1,5 +1,16 @@
 # ========================================================================
 # WASTELAND — EXTENDED WILDCARDS FOR COMFYUI DYNAMIC PROMPTS
+#
+# COVERS: Survival after collapse through weathered people, improvised gear, factions,
+# altered landscapes, scarce resources, dangerous travel, vehicles, and fragile hope.
+#
+# Theme core components: survivor, appearance/gear, faction, vehicle,
+# environment, scarcity pressure, and visual format; make wear and survival causal.
+#
+# ROUTE USAGE
+# combo: Composes compatible components into a coherent, production-ready prompt.
+# spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
+# random: Selects one complete route for breadth; avoid stacking random routes.
 # ========================================================================
 
 gkr_wasteland:

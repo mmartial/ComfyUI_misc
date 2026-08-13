@@ -1,5 +1,16 @@
 # ========================================================================
 # Video Game — EXTENDED WILDCARDS FOR COMFYUI DYNAMIC PROMPTS
+#
+# COVERS: Video-game characters, worlds, genres, eras, gameplay situations, cameras,
+# interface cues, promotional imagery, and production-oriented visual formats.
+#
+# Theme core components: game era, genre, character role, environment,
+# gameplay/camera language, interface cues, and output format; keep them compatible.
+#
+# ROUTE USAGE
+# combo: Composes compatible components into a coherent, production-ready prompt.
+# spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
+# random: Selects one complete route for breadth; avoid stacking random routes.
 # ========================================================================
 
 gkr_videogame:

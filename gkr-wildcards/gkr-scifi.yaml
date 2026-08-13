@@ -1,5 +1,16 @@
 # ========================================================================
 # SCIFI — EXTENDED WILDCARDS FOR COMFYUI DYNAMIC PROMPTS
+#
+# COVERS: Speculative people, societies, sciences, worlds, spacecraft, and encounters,
+# from grounded futures to space opera, with technology tied to visible consequences.
+#
+# Theme core components: character/biology, role, technology, spacecraft,
+# world/environment, speculative premise, and visual tradition; enforce causality.
+#
+# ROUTE USAGE
+# combo: Composes compatible components into a coherent, production-ready prompt.
+# spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
+# random: Selects one complete route for breadth; avoid stacking random routes.
 # ========================================================================
 
 gkr_scifi:

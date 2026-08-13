@@ -1,6 +1,18 @@
 # ========================================================================
 # ANIME & MANGA — MEDIUM-FIRST WILDCARDS FOR COMFYUI DYNAMIC PROMPTS
+#
+# COVERS: Anime and manga as visual storytelling traditions—their eras, genres,
+# audiences, character language, cinematic scenes, and production formats.
+#
 # Major-version redesign: coherent genre, demographic, and scene routes.
+#
+# Theme core components: era/rendering, genre/demographic, character, setting,
+# cinematic grammar, and output format; align them around one readable scene.
+#
+# ROUTE USAGE
+# combo: Composes compatible components into a coherent, production-ready prompt.
+# spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
+# random: Selects one complete route for breadth; avoid stacking random routes.
 # ========================================================================
 
 gkr_anime:

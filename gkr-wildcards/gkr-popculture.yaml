@@ -1,5 +1,16 @@
 # ========================================================================
 # POPCULTURE — EXTENDED WILDCARDS FOR COMFYUI DYNAMIC PROMPTS
+#
+# COVERS: Popular-culture modes across film, television, music, print, advertising,
+# celebrity, fandom, and internet culture without copying specific works.
+#
+# Theme core components: source medium, genre, era, cultural mode, subject,
+# scene language, and output format; build recognizable types without imitation.
+#
+# ROUTE USAGE
+# combo: Composes compatible components into a coherent, production-ready prompt.
+# spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
+# random: Selects one complete route for breadth; avoid stacking random routes.
 # ========================================================================
 
 gkr_popculture:

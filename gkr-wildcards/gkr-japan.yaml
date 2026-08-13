@@ -1,5 +1,16 @@
 # ========================================================================
 # JAPAN — EXTENDED WILDCARDS FOR COMFYUI DYNAMIC PROMPTS
+#
+# COVERS: Japanese people, places, material culture, folklore, and landscapes across
+# historical and modern contexts, including clothing, objects, yokai, and kimono.
+#
+# Theme core components: era/cultural context, character, clothing, prop,
+# environment, folklore, and visual format; keep details historically compatible.
+#
+# ROUTE USAGE
+# combo: Composes compatible components into a coherent, production-ready prompt.
+# spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
+# random: Selects one complete route for breadth; avoid stacking random routes.
 # ========================================================================
 
 gkr_japan:

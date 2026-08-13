@@ -1,7 +1,18 @@
 # ========================================================================
 # CYBERPUNK — VISUAL, SYSTEMS-BASED WILDCARDS FOR COMFYUI
+#
+# COVERS: Lives shaped by unequal technology—augmented bodies, precarious labor,
+# surveillance, corporate power, climate stress, resistance, and urban survival.
 # High technology made visible through labor, bodies, infrastructure,
 # inequality, repair, surveillance, climate, and everyday urban life.
+#
+# Theme core components: visual treatment, character/labor, environment,
+# visible technology, power system, and narrative action; show themes physically.
+#
+# ROUTE USAGE
+# combo: Composes compatible components into a coherent, production-ready prompt.
+# spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
+# random: Selects one complete route for breadth; avoid stacking random routes.
 # ========================================================================
 
 gkr_cyberpunk:
