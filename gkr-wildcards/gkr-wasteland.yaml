@@ -138,7 +138,7 @@ gkr_wasteland:
     - (nomad caravan:1.2), traders leading pack animals
     - (mutant tribe:1.3), tribal markings, ritual body paint
     - (salvager guild:1.2), tech scraps, goggles
-    - (cult of the atom:1.3), glowing radioactive symbols, worshippers kneeling
+    - (radiation-worshipping congregation:1.3), glowing hazard symbols, masked worshippers kneeling around a sealed relic
 
 # ---------------------------------------------------------
 # VEHICLE
@@ -209,31 +209,190 @@ gkr_wasteland:
     - (heat shimmer:1.2), distorted air over sand
 
 # ---------------------------------------------------------
-# RANDOM (COMBO PROMPTS - DO NOT MODIFY)
+# WASTELAND THEMES & VISUAL FORMATS
 # ---------------------------------------------------------
 
+  collapse_origin:
+    - nuclear aftermath, glassed ground, distant crater rims and radiation-warning relics
+    - climate-collapse badlands, abandoned flood barriers, dry reservoirs and bleached concrete
+    - ecological collapse, dead forests, invasive thorn growth and empty agricultural machinery
+    - pandemic aftermath, sealed checkpoints, faded quarantine markings and deserted clinics
+    - machine-war aftermath, disabled drones, scorched autonomous armor and tangled fiber-optic cable
+    - resource-war frontier, blasted pipelines, fortified wells and fuel convoys crossing open ground
+    - asteroid-impact winter, impact glass, ash-dark daylight and a fractured horizon
+    - solar-flare collapse, burned electrical substations, silent satellites and improvised analog equipment
+    - toxic-industrial collapse, corroded chemical works, luminous runoff and sealed breathing apparatus
+    - slow societal abandonment, weathered infrastructure, reclaimed streets and hand-painted community signs
+    - supernatural cataclysm, impossible storm scars, luminous fissures and ritual shelters
+    - far-future ruin cycle, ancient megastructures reduced to mineral-like skeletons beneath a changed sky
+
+  wasteland_biome:
+    - ochre desert erg with wind-carved dunes, half-buried road signs and heat shimmer
+    - cracked salt basin reflecting a white sky, distant caravan silhouettes and rusted survey towers
+    - ash plain beneath a dim copper sun, charred tree trunks and drifting gray flakes
+    - frozen exclusion zone, snow-packed ruins, iced cables and pale blue twilight
+    - flooded coastal ruin, rooftops above dark water, improvised docks and salt-corroded towers
+    - toxic marsh, dead cypress trunks, oily rainbow film and low green vapor
+    - overgrown temperate city, trees splitting asphalt, vine-covered apartments and dappled sunlight
+    - scorched canyon country, layered red cliffs, wreckage caught in gullies and a narrow riverbed
+    - storm grassland, waist-high dry grass, overturned pylons and black shelf clouds
+    - volcanic waste, basalt fields, sulfur vents and orange light beneath smoke
+    - ruined alpine pass, avalanche debris, abandoned tunnels and distant broken cable cars
+    - dry seabed, stranded ships, salt-crusted reefs and navigation buoys leaning in dust
+    - subterranean utility maze, wet concrete, cable galleries and pools beneath emergency lamps
+    - orbital-debris wasteland, fallen capsules, scorched panels and metallic fragments across tundra
+    - tropical storm ruin, flooded streets, snapped palms and bright vegetation reclaiming hotels
+    - glass desert, fused rippling ground, prismatic shards and stark black wreckage
+
+  settlement:
+    - fortified water-trading town built around purification tanks, shade cloth and guarded pipework
+    - cliffside settlement assembled from containers, rope bridges and wind turbines
+    - reclaimed rail station market, canvas stalls, repair benches and a guarded platform gate
+    - bunker commune with hydroponic trays, painted concrete and crowded shared corridors
+    - nomad caravan encampment, ringed vehicles, cook fires, water drums and patchwork awnings
+    - rooftop farming cooperative above a flooded district, greenhouses, rain collectors and pulley lifts
+    - scrapyard workshop village, crane arms, sorted metal stacks and glowing forge bays
+    - canyon fortress carved into rock, lookout nests, switchback stairs and reinforced doors
+    - derelict shopping-mall settlement, balcony homes, hanging banners and a central barter floor
+    - solar farm outpost, mirrored panels, battery sheds and dust screens around living quarters
+    - bridge settlement suspended above dangerous ground, welded cabins and narrow guarded walkways
+    - reclaimed monastery refuge, stone courtyards, medicinal gardens and discreet defenses
+    - icebound research-station haven, insulated modules, tracked transports and amber windows
+    - river-barge community, linked patched vessels, floating gardens and tall signal masts
+
+  wasteland_creature:
+    - lean two-headed desert hound with scarred hide, dust-coated paws and alert mismatched eyes
+    - translucent cave crawler with long jointed limbs, pale organs visible beneath its skin
+    - armored burrowing reptile erupting through salt crust, shovel-like claws and layered stone-colored scales
+    - flock of ragged carrion birds circling a radio mast, metallic debris woven into their nests
+    - massive irradiated elk with asymmetrical antlers, luminous fungal growth and a solemn stance
+    - feral tunnel-dweller with light-sensitive eyes, chalk-pale skin and scavenged cloth wrappings
+    - bioengineered pack beast with broad padded feet, breathing tubes and cargo harness scars
+    - swamp amphibian with algae-covered armor plates, inflated throat sac and reflective eyes
+    - autonomous hunter drone with sand-scoured casing, folding legs and a narrow red sensor slit
+    - colony of luminous insects flowing through ruins like a ribbon of green light
+    - giant filter-feeding desert creature moving beneath dunes, ridged back briefly breaking the surface
+    - rusted agricultural robot overgrown with moss, gentle manipulator arms and a flickering status lamp
+    - frost-coated mutant wolf with thick patchy fur, vapor breath and crystal growths along its spine
+    - territorial rooftop ape using road signs as armor, powerful hands and a nest of bright scavenged objects
+
+  survival_activity:
+    - carefully filtering muddy water through cloth, charcoal and salvaged laboratory glass
+    - crossing an exposed highway while a wall of dust approaches across the plain
+    - repairing a cracked solar panel on a rooftop above an overgrown city
+    - bartering medicine for batteries at a crowded settlement gate
+    - lowering a lantern into a newly opened bunker shaft
+    - salvaging copper cable from a collapsed substation during an electrical storm
+    - defending a water convoy at a narrow canyon choke point
+    - mapping radiation hot spots with a hand-built detector and marked paper chart
+    - guiding pack animals across a frozen reservoir toward amber settlement lights
+    - tending vegetables beneath improvised greenhouse lamps inside a bunker
+    - searching a flooded hospital from a narrow handmade raft
+    - raising a radio antenna as distant signal lights answer on the horizon
+    - dismantling a dormant war machine while lookouts watch the ridgeline
+    - sheltering beneath a wrecked aircraft wing during acid rain
+
+  wasteland_output_format:
+    - cinematic post-apocalyptic keyframe, realistic materials, clear silhouettes and environmental storytelling
+    - detailed game-environment concept art, foreground route, middle-ground objective and distant landmark
+    - full-body survivor character sheet, front three-quarter pose, readable equipment and neutral backdrop
+    - faction design lineup, coordinated silhouettes, material language, insignia and practical gear variations
+    - vehicle design sheet, three-quarter hero view, side profile and functional scrap-built details
+    - creature concept sheet, scale reference, locomotion pose and anatomical detail callouts
+    - graphic-novel splash page, heavy inks, controlled color accents and dramatic panel-scale composition
+    - retro paperback apocalypse cover, painted action, weathered typography space and bold horizon
+    - analog documentary photograph, natural grain, available light and unstaged survival detail
+    - isometric settlement cutaway, readable circulation, defenses, workshops and water infrastructure
+    - panoramic matte painting, layered atmospheric depth and a small human scale reference
+    - environmental storytelling still life, worn tools, ration packaging, maps and accumulated dust
+
+# ---------------------------------------------------------
+# MODULAR ROUTES
+# ---------------------------------------------------------
+
+  survivor_equipment_detail:
+    # One family per roll prevents armor, clothing, weapons and handheld props from all stacking together.
+    - "__gkr_wasteland/clothing__"
+    - "__gkr_wasteland/armor__"
+    - "__gkr_wasteland/gear__"
+    - "__gkr_wasteland/weapons__"
+    - "__gkr_wasteland/offhand__"
+
+  custom_survivor_combo:
+    - "__gkr_wasteland/archetype__, __gkr_wasteland/age__, __gkr_wasteland/build__, __gkr_wasteland/tone__, __gkr_wasteland/face_style__, __gkr_wasteland/hair__, __gkr_wasteland/hair_color__, __gkr_wasteland/eyes__, __gkr_wasteland/expression__, __gkr_wasteland/trinkets__, __gkr_wasteland/survivor_equipment_detail__, __gkr_wasteland/environment__, __gkr_wasteland/lighting__, __gkr_wasteland/camera__, __gkr_wasteland/style__"
+
+  curated_survivor:
+    - sunburned water scout in a patched hooded coat, cracked goggles, canteen and long walking staff, studying a dry reservoir from a concrete spillway
+    - bunker medic in a faded utility uniform, respirator hanging at the neck, canvas medical satchel and portable lamp, kneeling beside an injured traveler
+    - lean caravan navigator in layered desert wraps, binoculars, paper maps and a compact radio, leading loaded pack animals across salt flats
+    - broad salvage mechanic in grease-dark coveralls, welding mask, tool harness and reinforced gloves, repairing a crawler beneath a canvas awning
+    - cautious ruin diver in waterproof chest waders, rope harness, headlamp and sample containers, moving through a flooded transit station
+    - frozen-zone courier in quilted scavenged layers, snow goggles, climbing axe and insulated message case, crossing an iced suspension bridge
+    - settlement guard in repaired riot padding, dust scarf, battered shield and signal flare, watching a fortified water gate
+    - rooftop farmer in sun-faded work clothes, seed pouches, pruning knife and rain gauge, tending crops above a reclaimed city
+    - former surveyor in a weathered field jacket, hand-built radiation detector and annotated map board, marking a luminous exclusion boundary
+    - nomad radio operator in a patched poncho, headset, battery pack and collapsible antenna, calling from a rusted hilltop mast
+    - ashland hunter in layered gray cloth, filter mask, compact crossbow and specimen satchel, tracking prints between charred trees
+    - solar technician in pale protective overalls, tool roll and mirrored visor, replacing cells at a remote desert outpost
+
+  character_pillar:
+    - "__gkr_wasteland/curated_survivor__, __gkr_wasteland/wasteland_output_format__"
+    - "__gkr_wasteland/custom_survivor_combo__"
+
+  world_pillar:
+    - "__gkr_wasteland/wasteland_biome__, __gkr_wasteland/collapse_origin__, __gkr_wasteland/mood__, __gkr_wasteland/lighting__, __gkr_wasteland/camera__, __gkr_wasteland/wasteland_output_format__, __gkr_wasteland/fx_environment__"
+
+  settlement_pillar:
+    - "__gkr_wasteland/settlement__, __gkr_wasteland/wasteland_biome__, __gkr_wasteland/lighting__, __gkr_wasteland/wasteland_output_format__"
+
+  faction_pillar:
+    - "__gkr_wasteland/faction__, __gkr_wasteland/settlement__, __gkr_wasteland/wasteland_biome__, __gkr_wasteland/wasteland_output_format__"
+
+  creature_pillar:
+    - "__gkr_wasteland/wasteland_creature__, __gkr_wasteland/wasteland_biome__, __gkr_wasteland/lighting__, __gkr_wasteland/wasteland_output_format__"
+
+  survival_scene_pillar:
+    - "__gkr_wasteland/curated_survivor__, __gkr_wasteland/survival_activity__, __gkr_wasteland/wasteland_biome__, __gkr_wasteland/lighting__, __gkr_wasteland/wasteland_output_format__"
+
   hero_combo:
-    - "__gkr_wasteland/archetype__, __gkr_wasteland/age__, __gkr_wasteland/build__, __gkr_wasteland/tone__, __gkr_wasteland/face_style__, __gkr_wasteland/hair__, __gkr_wasteland/hair_color__, __gkr_wasteland/eyes__, __gkr_wasteland/expression__, __gkr_wasteland/clothing__, __gkr_wasteland/armor__, __gkr_wasteland/gear__, __gkr_wasteland/weapons__, __gkr_wasteland/offhand__, __gkr_wasteland/trinkets__, __gkr_wasteland/faction__, __gkr_wasteland/environment__, __gkr_wasteland/mood__, __gkr_wasteland/lighting__, __gkr_wasteland/camera__, __gkr_wasteland/style__, __gkr_wasteland/fx_environment__"
+    - "__gkr_wasteland/character_pillar__"
 
   vehicle_combo:
-    - "__gkr_wasteland/vehicle__, __gkr_wasteland/vehicle_detail__, racing across __gkr_wasteland/environment__, __gkr_wasteland/mood__, __gkr_wasteland/camera__, __gkr_wasteland/style__, __gkr_wasteland/fx_environment__"
+    - "__gkr_wasteland/vehicle__, __gkr_wasteland/vehicle_detail__, crossing __gkr_wasteland/wasteland_biome__, __gkr_wasteland/lighting__, __gkr_wasteland/wasteland_output_format__, __gkr_wasteland/fx_environment__"
 
   scene_combo:
-    - "__gkr_wasteland/environment__, __gkr_wasteland/mood__, __gkr_wasteland/lighting__, __gkr_wasteland/style__, __gkr_wasteland/camera__, __gkr_wasteland/fx_environment__"
+    - "__gkr_wasteland/world_pillar__"
+
+  spotlight_combo:
+    - "__gkr_wasteland/spotlight_characters__"
+    - "__gkr_wasteland/spotlight_backgrounds__"
+    - "__gkr_wasteland/spotlight_vehicles__"
+
+  random_spotlight:
+    - "__gkr_wasteland/spotlight_combo__"
 
   random:
     - "__gkr_wasteland/hero_combo__"
     - "__gkr_wasteland/vehicle_combo__"
     - "__gkr_wasteland/scene_combo__"
+    - "__gkr_wasteland/character_pillar__"
+    - "__gkr_wasteland/world_pillar__"
+    - "__gkr_wasteland/settlement_pillar__"
+    - "__gkr_wasteland/faction_pillar__"
+    - "__gkr_wasteland/creature_pillar__"
+    - "__gkr_wasteland/survival_scene_pillar__"
+    - "__gkr_wasteland/random_spotlight__"
+    - "__gkr_wasteland/spotlight_combo__"
     - "__gkr_wasteland/spotlight_characters__"
     - "__gkr_wasteland/spotlight_backgrounds__"
     - "__gkr_wasteland/spotlight_vehicles__"
 
   random_character:
-    - "__gkr_wasteland/archetype__, __gkr_wasteland/age__, __gkr_wasteland/build__, __gkr_wasteland/tone__, __gkr_wasteland/face_style__, __gkr_wasteland/hair__, __gkr_wasteland/hair_color__, __gkr_wasteland/eyes__, __gkr_wasteland/expression__, __gkr_wasteland/clothing__, __gkr_wasteland/armor__, __gkr_wasteland/gear__, __gkr_wasteland/weapons__, __gkr_wasteland/offhand__, __gkr_wasteland/trinkets__, __gkr_wasteland/faction__"
+    - "__gkr_wasteland/character_pillar__"
 
   random_backgrounds:
-    - "__gkr_wasteland/environment__, __gkr_wasteland/mood__, __gkr_wasteland/lighting__, __gkr_wasteland/style__, __gkr_wasteland/camera__, __gkr_wasteland/fx_environment__"
+    - "__gkr_wasteland/world_pillar__"
+    - "__gkr_wasteland/settlement_pillar__"
 
 # ---------------------------------------------------------
 # SPOTLIGHT (CONVERTED TO PROMPTS)
@@ -431,7 +590,7 @@ gkr_wasteland:
 
   spotlight_vehicles:
     - vehicle concept art, (a rusted dune buggy:1.3), welded roll cage, (saw-blade wheels:1.2), speeding across sand dunes
-    - action scene, (a spike-armored muscle car:1.3), roaring across a cracked desert road, (kicking up dust:1.1), mad max style
+    - action scene, (a spike-armored muscle car:1.3), roaring across a cracked desert road, exposed supercharger, welded steel panels, ragged war banners and a towering dust plume
     - vehicle concept art, (a tanker truck:1.3), converted into a mobile fortress, (heavy scrap plating:1.1), mounted guns
     - vehicle concept art, (a wasteland motorcycle:1.3), (bone-grip handlebars:1.2), fire-spitting exhaust, parked in rubble
     - vehicle design, (a radiation-sealed armored bus:1.3), reinforced with steel mesh, (hazmat symbols:1.1), thick riveted panels
