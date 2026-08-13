@@ -723,21 +723,255 @@ gkr_ttrpg:
     - "social encounter in a crowded masked ball, disguised adventurers exchanging coded gestures while guards search the hall"
     - "rival party confrontation at a narrow bridge, both groups exhausted and mud-covered, shared objective visible in ruins beyond"
 
-  # --- MASTER RANDOM LIST ---
-  random:
-    # This is the main wildcard to call for a "random" prompt
-    - "__gkr_ttrpg/random_hero_in_scene__"
-    - "__gkr_ttrpg/random_hero_portrait__"
-    - "__gkr_ttrpg/random_hero_full__"
+# --------------------------------------------------------------
+#  GENRE TRADITIONS & TABLETOP VISUAL FORMATS
+# --------------------------------------------------------------
+
+  fantasy_tradition:
+    - grounded low fantasy, weathered equipment, muddy roads, practical clothing, restrained magic and natural overcast light
+    - heroic high fantasy, monumental architecture, polished heraldry, luminous magic and sweeping cinematic composition
+    - swords-and-sorcery adventure, muscular silhouettes, dangerous ruins, jewel-toned treasures and deep painted shadows
+    - swords-and-sandals myth, bronze arms, sun-bleached stone, linen and wool garments, windblown Mediterranean landscape
+    - dark fantasy, corroded armor, diseased landscapes, oppressive silhouettes and narrow pools of cold light
+    - folkloric fantasy, regional textiles, handmade tools, intimate woodland settings and subtle supernatural signs
+    - fairy-tale fantasy, symbolic forests, theatrical castles, vivid color and clear storybook staging
+    - chivalric romance, heraldic armor, courtly costume, flowering landscapes and illuminated-manuscript detail
+    - dungeon-crawl fantasy, practical expedition gear, cramped stone spaces, torchlight and clearly visible hazards
+    - arcane academy fantasy, layered robes, instruments, libraries, demonstration halls and controlled spell effects
+    - nautical fantasy, weathered ships, salt-stained clothing, sea monsters, storm light and crowded working decks
+    - desert fantasy, layered sun-protective garments, carved sandstone cities, bright mineral colors and heat haze
+    - northern saga fantasy, timber halls, wool and fur layers, carved ornament, snow glare and firelit interiors
+    - tropical ruin fantasy, dense vegetation, wet stone, vivid birds, river travel and ancient monumental sculpture
+    - planar fantasy, impossible horizons, floating terrain, altered gravity and small figures establishing cosmic scale
+
+  character_output_format:
+    - full-body player-character design with readable silhouette, class-defining equipment and restrained background
+    - waist-up character portrait emphasizing face, ancestry, material wear and one meaningful prop
+    - front-and-rear costume sheet showing armor layers, closures, packs and weapon carry
+    - character progression triptych showing novice, experienced and veteran versions of the same adventurer
+    - paired character portrait emphasizing complementary roles and contrasting silhouettes
+    - heroic cover portrait with clear title space, diagonal pose and environmental storytelling
+
+  party_output_format:
+    - coordinated party lineup with each member's role, scale and equipment readable at a glance
+    - cinematic ensemble key art with distinct silhouettes and a shared threat in the environment
+    - campsite group scene with natural interaction, packs, bedrolls, food and watch duties visible
+    - tactical encounter tableau with party positions, terrain elevation and immediate objectives clearly staged
+    - tavern or guild-hall group portrait showing relationships through posture and small gestures
+    - travel panorama with the party small against a vast destination landscape
+
+  monster_output_format:
+    - bestiary plate with full-body profile, scale reference, tracks and one anatomical detail inset
+    - cinematic monster encounter with adventurers providing scale and a clearly readable environment
+    - creature anatomy study with front, side, movement pose and material close-up
+    - boss reveal from a low viewpoint with environmental damage establishing size and ability
+    - folkloric field-guide illustration with habitat plants, handwritten observations and restrained ornament
+    - monster token portrait with centered head-and-shoulders silhouette and simple contrasting backdrop
+
+  scene_output_format:
+    - wide establishing environment with foreground path, middle-ground landmark and distant destination
+    - encounter-map perspective with readable paths, cover, elevation and interactive terrain
+    - cinematic adventure still focused on one decisive action and clearly staged participants
+    - storybook double-page illustration with visual room for narration and layered discoveries
+    - painted campaign-setting panorama with settlements, roads and landmarks connected visibly
+    - illuminated-manuscript scene with flattened perspective, ornate border and mineral-pigment colors
+
+  tabletop_artifact_format:
+    - illustrated magic-item card with isolated object, material detail, scale reference and restrained ornamental border
+    - parchment bestiary page with creature profile, tracks, habitat vignette and handwritten field notes
+    - regional fantasy map with coastlines, settlements, roads, ruins and heraldic cartouche
+    - dungeon map rendered as a clean top-down stone floor plan with doors, hazards and furnishing silhouettes
+    - heraldic faction plate showing banner, shield, colors, rank badges and ceremonial equipment
+    - tavern notice-board composition with quest posting, wax seals, sketches and overlapping local messages
+
+  magic_item_output_format:
+    - illustrated magic-item card with isolated object, material detail, scale reference and restrained ornamental border
+    - equipment design sheet with front, side, grip or closure detail and a small in-use vignette
+    - treasure-hoard still life with the item clearly separated among coins, textiles and mundane expedition gear
+    - illuminated catalogue plate with a centered object, handwritten provenance and decorative mineral-pigment border
+    - cinematic discovery scene with gloved hands lifting the item from a fitted reliquary
+    - merchant-counter product study with appraisal tools, protective cloth and one scale reference
+
+# --------------------------------------------------------------
+#  COMPATIBILITY-SAFE HEROES, CULTURES & QUEST PHASES
+# --------------------------------------------------------------
+
+  hero_scenario:
+    - human caravan ranger in weathered layered leathers, recurved bow and trail map, checking wheel tracks beside a rain-dark forest road
+    - high-elven abjurer in structured blue robes, overlapping translucent ward panels held above evacuating scholars in a damaged library
+    - wood-elven beast master in leaf-patterned travel gear, kneeling beside a harnessed wolf while studying signs at a woodland crossing
+    - dwarven shield guardian in practical mail and engraved plate, tower shield planted across a narrow mine passage, lantern clipped below the rim
+    - halfling burglar in soft dark clothing, carefully lifting a pressure plate with thin tools while companions wait beyond the trap line
+    - gnome artificer in a leather workshop apron, calibrating a palm-sized clockwork scout on a cluttered dungeon workbench
+    - half-orc field medic in reinforced traveling clothes, binding a wounded mercenary's arm beside an overturned caravan
+    - orc storm shaman wearing layered hides and copper charms, reading wind-carried ash from a ridge above the clan encampment
+    - tiefling court bard in a richly embroidered coat, playing a quiet coded melody while watching masked nobles exchange sealed letters
+    - dragonborn arena veteran in scorched scale armor, twin curved blades lowered after combat beneath sunlit stone tiers
+    - aasimar temple guardian in silver mail and white tabard, carrying a shaded sacred lantern through a crypt rather than brandishing a weapon
+    - goliath mountain guide in heavy wool layers, setting an anchor rope for smaller companions on an icy pass
+    - tabaxi rooftop scout in flexible leather armor, crouched beside a chimney while sketching guard routes below
+    - lizardfolk marsh herbalist wearing woven reed pouches, collecting luminous fungi from a half-submerged ruin with a bone knife
+    - warforged former soldier with wood-and-metal body, repairing farm tools in a village smithy, old shield mounts reused as tool brackets
+    - satyr storyteller in a patchwork cloak, playing reed pipes for children beside a woodland shrine at dusk
+    - triton tide cleric in coral-inlaid armor, guiding sailors through a flooded temple with a pearl-lit staff
+    - goblin tunnel surveyor in patched protective gear, measuring airflow with ribbons and a caged candle at a mine junction
+
+  settlement_culture_scenario:
+    - dwarven market hall beneath immense stone arches, smiths, food vendors, couriers and families moving between carved clan markers
+    - elven river settlement built around living trees and curved wooden bridges, dyers hanging fabric while small boats unload baskets
+    - halfling harvest supper outside round-doored hillside homes, long tables, lanterns and musicians beneath late-summer trees
+    - orc hillfort council gathered around a carved terrain model, elders, hunters and young messengers debating visible routes
+    - dragonborn kiln district where ceramicists fire scale-patterned vessels in communal furnaces, warm smoke rising between stone workshops
+    - tiefling night market beneath colored awnings, spice sellers, tailors and scribes illuminated by shielded glass lamps
+    - mixed-ancestry frontier town repairing walls after a monster attack, carpenters, healers, guards and children sharing the public square
+    - temple pilgrimage road crowded with travelers, shrine vendors, pack animals and painted milestone stones beneath spring rain
+    - coastal fishing village preparing for a sea festival, nets drying beside decorated boats and a carved monster effigy
+    - arcane university courtyard during a public demonstration, students holding instruments while professors contain a small weather spell
+    - desert caravanserai at evening, camels and fantasy pack beasts watered beneath vaulted galleries as merchants inspect maps
+    - northern timber hall during a winter assembly, shield racks, carved pillars, shared fire and snow-covered cloaks steaming near the doors
+
+  exploration_scenario:
+    - party charting an unmapped cavern river from a narrow boat, depth line in the water, chalk marks on stone and pale creatures beneath the surface
+    - scouts establishing a safe rope route across a ruined aqueduct while the rest of the party secures packs and watches the valley
+    - scholar making a rubbing of an ancient inscription as the ranger compares it with symbols on a weathered boundary stone
+    - adventurers crossing a glacier using linked ropes and ice tools, buried temple roof emerging from blue ice ahead
+    - expedition assembling a pulley system to descend supplies into a newly opened sinkhole, curious villagers held behind a marked safety line
+    - party navigating a fungal forest by compass and spore color, masks, sample jars and mapped trail markers visible
+    - desert explorers following half-buried colossal footprints toward a distant ruined gate during the cool light before sunrise
+    - coastal adventurers entering sea caves at low tide, lanterns reflected in tidal pools and a stranded wreck visible deeper inside
+    - jungle expedition crossing a flooded plaza by improvised raft, stone faces and tree roots rising above green water
+    - planar travelers testing gravity with thrown stones and tether lines before stepping onto an inverted path in the sky
+
+  social_intrigue_scenario:
+    - adventurers presenting contradictory evidence before a city council, witness, accused official and faction delegates visibly reacting around the chamber
+    - disguised party exchanging a stolen ledger during a masked ball while guards inspect guests beneath mirrored chandeliers
+    - guild negotiation around a scarred table, rival maps, payment chests and disputed salvage arranged between tense representatives
+    - temple tribunal examining a cracked relic, clerics, skeptical scholar and frightened finder separated by pools of candlelight
+    - uneasy peace feast between neighboring clans, weapons left on racks while interpreters and elders study one another across the long table
+    - party questioning travelers at a roadside inn, muddy boots, mismatched stories and a distinctive sealed crate providing visual clues
+    - thief and watch investigator separately tracking the same hidden signal across a crowded festival square
+    - royal succession hearing with three claimants, heraldic evidence and an empty throne dominating the composition
+
+  quest_phase_scenario:
+    - quest briefing around a regional map, patron indicating a ruined pass while adventurers compare supplies and conflicting witness sketches
+    - expedition provisioning in a crowded market, party checking rope, lamp oil, food, medicine and pack-animal tack
+    - overland travel through severe weather, party protecting maps and equipment while maintaining spacing along a narrow trail
+    - dungeon entry procedure, scout checking hinges, shield bearer covering the opening and scholar recording the door inscription
+    - tense exploration at a three-way junction, chalk route marks, measured rope and light sources assigned to different party members
+    - environmental puzzle involving counterweights, water channels and movable stone figures, party members testing separate mechanisms
+    - negotiation with an intelligent monster inside its lair, offered tribute and visible escape route maintaining tension
+    - retreat from a collapsing ruin, party carrying an injured companion and one recovered artifact while debris blocks the original route
+    - post-battle recovery, armor repairs, wound treatment, ration sharing and examination of clues in a damaged sanctuary
+    - triumphant but weary return through a town gate, recovered villagers, broken equipment and waiting families conveying the outcome
+
+  magic_item_scenario:
+    - weathered bronze compass whose needle points toward the nearest open doorway, isolated beside its fitted leather case and explorer's notes
+    - translucent crystal lantern containing a slow artificial dawn, brass shutters controlling the warm light, product-study backdrop
+    - folding silver bridge charm shown closed in a palm and expanded across a narrow chasm in a secondary vignette
+    - healer's ceramic bowl whose painted plants bloom when filled with clean water, cloth wrapping and repair seams visible
+    - black iron key with changing teeth, displayed beside sketches of three incompatible locks and wax impressions
+    - travel cloak woven with a moving night-sky pattern, front, rear, clasp and fabric-detail views
+    - small wooden shield marked by many repaired fractures, each old impact represented by a faint heraldic image
+    - spellbook whose pages form a miniature architectural model when opened, clasps, marginal notes and layered paper mechanisms visible
+    - pair of messenger boots leaving brief luminous route marks on stone, sole construction and worn buckles clearly shown
+    - ancient xiphos with constellations inlaid along the bronze blade, weathered scabbard and archaeological scale reference
+
+# --------------------------------------------------------------
+#  DECLARED THEME PILLARS & REACHABLE GATEWAYS
+# --------------------------------------------------------------
+
+  hero_pillar:
+    - "__gkr_ttrpg/hero_scenario__, __gkr_ttrpg/character_output_format__, __gkr_ttrpg/random_style_full__"
+    - "__gkr_ttrpg/hero_scenario__, __gkr_ttrpg/random_style_full__"
+
+  party_pillar:
+    - "__gkr_ttrpg/party_combo__, __gkr_ttrpg/party_output_format__, __gkr_ttrpg/random_style_full__"
+    - "__gkr_ttrpg/party_combo__, __gkr_ttrpg/random_style_full__"
+
+  monster_pillar:
+    - "__gkr_ttrpg/random_monster_combo__, __gkr_ttrpg/monster_output_format__"
     - "__gkr_ttrpg/random_monster_combo__"
-    - "__gkr_ttrpg/random_scene__"
+
+  adventure_pillar:
+    - "__gkr_ttrpg/adventure_scene_combo__, __gkr_ttrpg/scene_output_format__, __gkr_ttrpg/random_style_full__"
+    - "__gkr_ttrpg/quest_phase_scenario__, __gkr_ttrpg/random_style_full__"
+
+  world_culture_pillar:
+    - "__gkr_ttrpg/settlement_culture_scenario__, __gkr_ttrpg/scene_output_format__, __gkr_ttrpg/random_style_full__"
+    - "__gkr_ttrpg/npc_combo__, __gkr_ttrpg/random_style_full__"
+
+  exploration_pillar:
+    - "__gkr_ttrpg/exploration_scenario__, __gkr_ttrpg/scene_output_format__, __gkr_ttrpg/random_style_full__"
+
+  swords_sandals_pillar:
+    - "__gkr_ttrpg/swords_and_sandals_combo__"
+
+  intrigue_pillar:
+    - "__gkr_ttrpg/social_intrigue_scenario__, __gkr_ttrpg/random_style_full__"
+
+  artifact_pillar:
+    - "__gkr_ttrpg/magic_item_scenario__, __gkr_ttrpg/magic_item_output_format__, __gkr_ttrpg/random_style_full__"
+
+  tradition_pillar:
+    - "__gkr_ttrpg/adventure_scene_combo__, __gkr_ttrpg/fantasy_tradition__"
+    - "__gkr_ttrpg/hero_scenario__, __gkr_ttrpg/fantasy_tradition__"
+
+  spotlight_combo:
     - "__gkr_ttrpg/spotlight_characters__"
     - "__gkr_ttrpg/spotlight_backgrounds__"
     - "__gkr_ttrpg/spotlight_classicscenes__"
-    - "__gkr_ttrpg/swords_and_sandals_combo__"
-    - "__gkr_ttrpg/party_combo__"
-    - "__gkr_ttrpg/npc_combo__"
-    - "__gkr_ttrpg/adventure_scene_combo__"
+
+  random_party:
+    - "__gkr_ttrpg/party_pillar__"
+
+  random_character:
+    - "__gkr_ttrpg/hero_pillar__"
+
+  random_adventure:
+    - "__gkr_ttrpg/adventure_pillar__"
+
+  random_world_culture:
+    - "__gkr_ttrpg/world_culture_pillar__"
+
+  random_exploration:
+    - "__gkr_ttrpg/exploration_pillar__"
+
+  random_intrigue:
+    - "__gkr_ttrpg/intrigue_pillar__"
+
+  random_artifact:
+    - "__gkr_ttrpg/artifact_pillar__"
+
+  random_tradition:
+    - "__gkr_ttrpg/tradition_pillar__"
+
+  random_swords_and_sandals:
+    - "__gkr_ttrpg/swords_sandals_pillar__"
+
+  random_spotlight:
+    - "__gkr_ttrpg/spotlight_combo__"
+
+  # --- MASTER RANDOM LIST ---
+  random:
+    - "__gkr_ttrpg/random_character__"
+    - "__gkr_ttrpg/random_party__"
+    - "__gkr_ttrpg/monster_pillar__"
+    - "__gkr_ttrpg/random_adventure__"
+    - "__gkr_ttrpg/random_world_culture__"
+    - "__gkr_ttrpg/random_exploration__"
+    - "__gkr_ttrpg/random_swords_and_sandals__"
+    - "__gkr_ttrpg/random_intrigue__"
+    - "__gkr_ttrpg/random_artifact__"
+    - "__gkr_ttrpg/random_tradition__"
+    - "__gkr_ttrpg/random_spotlight__"
+    - "__gkr_ttrpg/random_hero_in_scene__"
+    - "__gkr_ttrpg/random_monster_combo__"
+    - "__gkr_ttrpg/random_scene__"
+    - "__gkr_ttrpg/random_hero__"
+    - "__gkr_ttrpg/random_monster__"
+    - "__gkr_ttrpg/spotlight_characters__"
+    - "__gkr_ttrpg/spotlight_backgrounds__"
+    - "__gkr_ttrpg/spotlight_classicscenes__"
 
   # --- LEGACY/SIMPLE COMBOS ---
   random_hero:
