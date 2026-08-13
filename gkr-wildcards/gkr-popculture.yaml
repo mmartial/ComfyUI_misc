@@ -330,7 +330,6 @@ gkr_popculture:
 # ---------------------------------------------------------
 
   random:
-    # Medium-first general pop-culture routing.
     - "__gkr_popculture/movie_scene_combo__"
     - "__gkr_popculture/tv_ensemble_combo__"
     - "__gkr_popculture/manga_scene_combo__"

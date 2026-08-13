@@ -1326,30 +1326,23 @@ gkr_japan:
     - "giant armored rescue robot braced between miniature city towers, practical suit texture, low camera angle, controlled sparks and theatrical smoke"
     - "colorful masked transformation hero confronting a towering creature in a detailed miniature harbor, practical costume materials, pyrotechnic smoke, dramatic television-production still"
 
-  # Declared theme pillars. Repeated references are intentional weights:
-  # kimono 20%, mythic 15%, traditional 15%, anime/manga 15%,
-  # futuristic 10%, mecha/tokusatsu 10%, postcard 10%, culture 5%.
   random:
     - "__gkr_japan/random_kimono__"
-    - "__gkr_japan/random_kimono__"
-    - "__gkr_japan/random_kimono__"
-    - "__gkr_japan/random_kimono__"
-    - "__gkr_japan/mythic_combo__"
-    - "__gkr_japan/mythic_combo__"
     - "__gkr_japan/mythic_combo__"
     - "__gkr_japan/traditional_combo__"
-    - "__gkr_japan/traditional_combo__"
-    - "__gkr_japan/traditional_combo__"
-    - "__gkr_japan/anime_manga_combo__"
-    - "__gkr_japan/anime_manga_combo__"
     - "__gkr_japan/anime_manga_combo__"
     - "__gkr_japan/futuristic_combo__"
-    - "__gkr_japan/futuristic_combo__"
     - "__gkr_japan/mecha_tokusatsu_combo__"
-    - "__gkr_japan/mecha_tokusatsu_combo__"
-    - "__gkr_japan/landscape_postcard_combo__"
     - "__gkr_japan/landscape_postcard_combo__"
     - "__gkr_japan/culture_combo__"
+    - "__gkr_japan/random_character__, __gkr_japan/random_backgrounds__"
+    - "__gkr_japan/random_character__"
+    - "__gkr_japan/random_backgrounds__"
+    - "__gkr_japan/spotlight_character__"
+    - "__gkr_japan/spotlight_backgrounds__"
+    - "__gkr_japan/spotlight_yokai__"
+    - "__gkr_japan/spotlight_mecha__"
+    - "__gkr_japan/spotlight_kimono__"
 
   random_character:
     - "__gkr_japan/archetype__, __gkr_japan/age__, __gkr_japan/build__, __gkr_japan/tone__, __gkr_japan/hair__, __gkr_japan/hair_color__, __gkr_japan/eyes__, __gkr_japan/expression__, __gkr_japan/trinkets__"

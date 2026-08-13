@@ -330,7 +330,6 @@ gkr_steampunk:
   character_combo:
     - "__gkr_steampunk/profession_scenario__, __gkr_steampunk/character_output_format__"
     - "__gkr_steampunk/profession_scenario__"
-    - "__gkr_steampunk/profession_scenario__"
 
 # ---------------------------------------------------------
 # VEHICLES — MEDIUM-SAFE ENGINEERING FAMILIES
@@ -482,12 +481,9 @@ gkr_steampunk:
 
   character_pillar:
     - "__gkr_steampunk/character_combo__"
-    - "__gkr_steampunk/character_combo__"
     - "__gkr_steampunk/profession_scenario__"
 
   vehicle_pillar:
-    - "__gkr_steampunk/vehicle_family_combo__"
-    - "__gkr_steampunk/vehicle_family_combo__"
     - "__gkr_steampunk/vehicle_family_combo__"
 
   environment_pillar:
@@ -530,33 +526,27 @@ gkr_steampunk:
     - "__gkr_steampunk/vehicle__, __gkr_steampunk/vehicle_detail__, __gkr_steampunk/vehicle_environment__, __gkr_steampunk/mood__, __gkr_steampunk/lighting__, __gkr_steampunk/vehicle_camera__, __gkr_steampunk/vehicle_style__, __gkr_steampunk/fx_environment__"
 
   random:
-    # characters and professions — 20%
     - "__gkr_steampunk/character_pillar__"
-    - "__gkr_steampunk/character_pillar__"
-    - "__gkr_steampunk/character_pillar__"
-    - "__gkr_steampunk/character_pillar__"
-    # vehicles and transportation — 20%
     - "__gkr_steampunk/vehicle_pillar__"
-    - "__gkr_steampunk/vehicle_pillar__"
-    - "__gkr_steampunk/vehicle_pillar__"
-    - "__gkr_steampunk/vehicle_pillar__"
-    # cities and environments — 15%
     - "__gkr_steampunk/environment_pillar__"
-    - "__gkr_steampunk/environment_pillar__"
-    - "__gkr_steampunk/environment_pillar__"
-    # invention and engineering — 10%
     - "__gkr_steampunk/invention_pillar__"
-    - "__gkr_steampunk/invention_pillar__"
-    # fashion and costume — 10%
     - "__gkr_steampunk/fashion_pillar__"
-    - "__gkr_steampunk/fashion_pillar__"
-    # adventure and exploration — 10%
     - "__gkr_steampunk/adventure_pillar__"
-    - "__gkr_steampunk/adventure_pillar__"
-    # gaslamp mystery, automata and daily life — 5% each
     - "__gkr_steampunk/gothic_pillar__"
     - "__gkr_steampunk/automata_pillar__"
     - "__gkr_steampunk/daily_life_pillar__"
+    - "__gkr_steampunk/legacy_random_character__"
+    - "__gkr_steampunk/legacy_random_vehicle__"
+    - "__gkr_steampunk/legacy_random_scene__"
+    - "__gkr_steampunk/hero_combo__"
+    - "__gkr_steampunk/vehicle_combo__"
+    - "__gkr_steampunk/random_character__"
+    - "__gkr_steampunk/random_vehicle__"
+    - "__gkr_steampunk/random_scene__"
+    - "__gkr_steampunk/spotlight_characters__"
+    - "__gkr_steampunk/spotlight_backgrounds__"
+    - "__gkr_steampunk/spotlight_vehicles__"
+    - "__gkr_steampunk/spotlight_fashion__"
 
   random_character:
     - "__gkr_steampunk/character_combo__"

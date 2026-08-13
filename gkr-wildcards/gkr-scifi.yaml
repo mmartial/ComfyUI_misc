@@ -701,10 +701,8 @@ gkr_scifi:
 
   character_pillar:
     - "__gkr_scifi/character_family_combo__"
-    - "__gkr_scifi/character_family_combo__"
 
   ship_pillar:
-    - "__gkr_scifi/ship_family_combo__"
     - "__gkr_scifi/ship_family_combo__"
 
   world_pillar:
@@ -755,43 +753,35 @@ gkr_scifi:
     - "__gkr_scifi/spotlight_scenes__, __gkr_scifi/mood__, __gkr_scifi/lighting__, __gkr_scifi/style__"
 
   random:
-    # characters, professions and societies — 3 weighted entries
     - "__gkr_scifi/character_pillar__"
-    - "__gkr_scifi/character_pillar__"
-    - "__gkr_scifi/character_pillar__"
-    # spacecraft and transportation — 3 weighted entries
     - "__gkr_scifi/ship_pillar__"
-    - "__gkr_scifi/ship_pillar__"
-    - "__gkr_scifi/ship_pillar__"
-    # worlds, habitats and environments — 3 weighted entries
     - "__gkr_scifi/world_pillar__"
-    - "__gkr_scifi/world_pillar__"
-    - "__gkr_scifi/world_pillar__"
-    # scientific exploration and discovery — 2 weighted entries
     - "__gkr_scifi/science_pillar__"
-    - "__gkr_scifi/science_pillar__"
-    # near-future Earth — 2 weighted entries
     - "__gkr_scifi/near_future_pillar__"
-    - "__gkr_scifi/near_future_pillar__"
-    # robots, AI and posthuman life — 2 weighted entries
     - "__gkr_scifi/ai_posthuman_pillar__"
-    - "__gkr_scifi/ai_posthuman_pillar__"
-    # space opera and adventure — 2 weighted entries
     - "__gkr_scifi/space_opera_pillar__"
-    - "__gkr_scifi/space_opera_pillar__"
-    # civilian culture, first contact, and cosmic anomalies — 1 weighted entry each
     - "__gkr_scifi/civilian_pillar__"
     - "__gkr_scifi/first_contact_pillar__"
     - "__gkr_scifi/anomaly_pillar__"
-    # cross-genre visual traditions — 2/26
     - "__gkr_scifi/random_tradition__"
-    - "__gkr_scifi/random_tradition__"
-    # explicit military and psionic specialties — 1/26 each
     - "__gkr_scifi/random_military__"
     - "__gkr_scifi/random_psionic__"
-    # legacy spotlight gateway — 2/26; each spotlight family remains equally likely
     - "__gkr_scifi/spotlight_combo__"
-    - "__gkr_scifi/spotlight_combo__"
+    - "__gkr_scifi/random_character__"
+    - "__gkr_scifi/random_ship__"
+    - "__gkr_scifi/random_scene__"
+    - "__gkr_scifi/legacy_random_character__"
+    - "__gkr_scifi/legacy_random_ship__"
+    - "__gkr_scifi/legacy_random_background__"
+    - "__gkr_scifi/spotlight_hybrid_character__"
+    - "__gkr_scifi/spotlight_characters__"
+    - "__gkr_scifi/spotlight_backgrounds__"
+    - "__gkr_scifi/spotlight_ships__"
+    - "__gkr_scifi/spotlight_scenes__"
+    - "__gkr_scifi/hero_combo__"
+    - "__gkr_scifi/ship_combo__"
+    - "__gkr_scifi/scene_combo__"
+    - "__gkr_scifi/spotlight_scene_combo__"
 
   random_character:
     - "__gkr_scifi/character_family_combo__"
