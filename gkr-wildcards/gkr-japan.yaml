@@ -40,7 +40,7 @@ gkr_japan:
     - (shrine maiden:1.2), miko, woman, red and white robes
     - (ronin poet:1.2), travel cloak, bamboo flute
     - tea master kneeling beside a tatami hearth, relaxed shoulders, hands arranging a ceramic chawan
-    - robed monastery calligrapher kneeling over rice paper, ink-stained fingers holding a broad brush
+    - robed temple calligrapher kneeling over handmade washi, ink-stained fingers holding a broad brush
 
   age:
     - (young adult:1.1), 20s
@@ -196,7 +196,7 @@ gkr_japan:
     - (folded fan:1.1), sensu
     - (calligraphy brush:1.1), ink
     - (mask of oni:1.2), oni mask, demonic
-    - (fox mask:1.2), kitsune mask, anbu mask
+    - (fox mask:1.2), kitsune mask, painted festival mask
     - (umbrella parasol:1.1), wagasa, japanese umbrella
     - (cyber data tablet:1.1), hologram, futuristic
     - (glowing energy orb:1.1), magic, floating
@@ -1073,7 +1073,7 @@ gkr_japan:
 
   peaceful_activity:
     - tea master preparing matcha beside an irori hearth, ceramic chawan and bamboo whisk arranged within reach, quiet tatami room, soft morning light
-    - monastery calligrapher brushing a single line onto rice paper, inkstone and folded cloth nearby, open shoji facing a moss garden, restrained mineral-pigment painting
+    - temple calligrapher brushing a single line onto handmade washi, inkstone and folded cloth nearby, open shoji facing a moss garden, restrained mineral-pigment painting
     - wandering storyteller playing a biwa on a wooden engawa, small lantern at the side, garden leaves moving in late-afternoon light, translucent watercolor washes
     - monk meditating with wooden prayer beads beneath old cedars, distant temple roof in mist, balanced composition and muted natural colors
     - shrine attendant arranging fresh branches and flowers beside a small altar, clean interior, gentle window light, delicate ink contours
@@ -1100,6 +1100,127 @@ gkr_japan:
     - near-future transit hub with luminous route lines and compact service robots, cool interior light, hard-surface concept art
     - neon city canal at night with autonomous delivery boats, cyan and amber reflections, deep atmospheric perspective
     - rooftop utility garden among holographic billboards, light rain and distant traffic, clean cel-shaded environment art
+
+# ---------------------------------------------------------
+# POSTCARD LANDSCAPES & VISIBLE CULTURE
+# ---------------------------------------------------------
+
+  postcard_landscape:
+    - Mount Fuji rising beyond Lake Kawaguchi, small sightseeing boats and red maple branches in the foreground, clear autumn morning, polished travel photograph
+    - snow-capped Mount Fuji beyond green tea fields in Shizuoka, precise rows following the hills, bright spring air, panoramic travel poster
+    - Kyoto hillside temple roofs among dense red and gold maple foliage, late-afternoon haze, elevated postcard composition
+    - preserved Gion side street at blue hour, timber machiya facades and warm lanterns reflected on damp stone, restrained architectural photography
+    - Nara park meadow beneath autumn trees, deer resting near a distant timber temple gate, soft morning mist, calm postcard photograph
+    - Osaka Castle above broad stone walls and spring cherry trees, modern skyline held low in the distance, crisp daylight panorama
+    - illuminated Osaka canal district at night, animated signs and restaurant fronts mirrored in dark water, lively wide-angle travel photograph
+    - lavender fields rolling toward the mountains of Furano in Hokkaido, bands of purple and green beneath a vast summer sky, bright travel poster
+    - snow-covered Hokkaido farmland with a solitary windbreak and distant volcanic ridge, pale winter sunrise, minimalist landscape photograph
+    - Yamadera temple buildings clinging to a forested Tohoku mountainside, stone stairway disappearing through cedars, mist after rain
+    - terraced rice fields in the Noto countryside holding the gold light of sunset, sea visible beyond the last ridge, aerial postcard view
+    - restored post town in the Kiso Valley, dark timber inns lining a stone road after light rain, forested mountains closing the horizon
+    - Japanese Alps above a traditional onsen town, rising steam, tiled roofs and fresh snow, warm windows at twilight
+    - Seto Inland Sea viewed from a hilltop, forested islands layered through blue haze, small ferries crossing calm water, luminous panorama
+    - Shikoku pilgrimage path winding past stone markers and cedar forest, white-clad traveler providing scale, gentle morning light
+    - Aso caldera grasslands in Kyushu, winding road beneath an immense volcanic sky, fresh green slopes and distant smoke plume
+    - Beppu hot-spring town at dawn, columns of steam rising between buildings with mountains behind, clear documentary panorama
+    - Okinawan coastal village with red-tiled roofs, limestone walls and bougainvillea above turquoise water, vivid subtropical daylight
+    - Kabira Bay in Okinawa, white sand, emerald islets and glass-bottom boats, high clear viewpoint, classic travel postcard
+    - quiet fishing harbor at sunrise, blue boats tied below weathered houses, stacked nets and seabirds, natural coastal photography
+    - local train crossing a narrow bridge between rice fields and forested hills, summer clouds towering overhead, nostalgic travel illustration
+    - spring hillside covered in pale blossoms above a castle town, river and tiled roofs forming layered bands, soft watercolor travel poster
+    - autumn gorge crossed by a small red railway bridge, clear river far below, richly colored mountain forest, telephoto landscape photograph
+    - winter village of steep-roofed gassho-zukuri farmhouses under heavy snow, warm windows at dusk, elevated postcard view
+
+  cultural_activity:
+    - tea practitioner whisking matcha in a quiet tatami room, iron kettle at the sunken hearth, ceramic utensils arranged with visible precision, soft window light
+    - calligrapher grinding ink and brushing bold characters onto handmade washi, sleeves tied back, low worktable beside an open shoji
+    - ikebana artist adjusting a single flowering branch in a ceramic vessel, tools and trimmed stems visible on the work surface, restrained studio portrait
+    - potter shaping a tea bowl at a wheel in a timber workshop, clay-covered hands, drying vessels and kiln tools in the background
+    - indigo dyer lifting patterned cloth from a deep vat, wet fabric catching the workshop light, wooden racks filled with drying textiles
+    - lacquer artisan applying a fine layer to a small bowl in a dust-controlled workshop, rows of dark polished vessels behind
+    - woodblock printer rubbing a sheet over a carved block, pigments, brushes and registration marks clearly visible, overhead process view
+    - kimono textile artisan painting yuzen resist lines across stretched silk, floral design emerging beneath steady hands, luminous studio detail
+    - taiko ensemble performing in coordinated festival coats, raised drumsticks and taut stances, lantern-lit outdoor stage, dynamic wide composition
+    - shamisen player seated on a small traditional theater stage, pleated kimono and polished instrument under concentrated warm light
+    - noh performer in a brocade costume and carved mask crossing a spare cypress stage, musicians seated along the rear, formal frontal composition
+    - kabuki actor holding a dramatic mie pose in an elaborate costume, painted stage scenery and audience edge visible, saturated theatrical lighting
+    - bunraku puppeteers operating a richly dressed puppet on a dark stage, articulated hands and layered teamwork clearly visible
+    - neighborhood matsuri procession carrying a mikoshi through a narrow shopping street, festival coats, ropes and paper streamers filling the frame
+    - summer bon dance circling a lantern tower at dusk, participants in varied yukata, musicians above, welcoming community atmosphere
+    - family making a New Year shrine visit, winter coats mixed with formal clothing, ema plaques and braided bell rope visible in cool morning light
+    - hanami picnic beneath flowering cherry trees, patterned blankets, shared food boxes and mixed-age friends, candid spring documentary scene
+    - confectioner shaping seasonal wagashi beside small wooden molds and bowls of colored dough, precise close-up process photograph
+    - soba maker cutting folded buckwheat dough into fine noodles, flour dust suspended in side light, practical restaurant workshop
+    - sumo wrestlers practicing at a morning stable, earthen ring, wooden pillars and observing coach, natural documentary lighting
+    - kyudo archer at full draw in an open-sided dojo, long asymmetrical bow aligned toward the distant target, calm lateral composition
+    - tea farmer hand-picking new leaves along vivid green rows, woven basket at the waist, misty hills beyond
+    - coastal fishing crew sorting the morning catch beside blue crates and coiled nets, harbor light reflecting from wet concrete
+    - gardener pruning a pine in a temple garden, bamboo supports, clipped branches and stone basin visible, quiet working portrait
+
+  culture_spotlight:
+    - elderly ceramic artist inspecting a freshly fired tea bowl beside a climbing kiln, ash glaze catching raking afternoon light, tactile documentary portrait
+    - young textile designer coordinating a contemporary obi with hand-dyed kimono fabric in a bright atelier, swatches pinned across the wall, editorial realism
+    - festival musicians and dancers crossing a lantern-lit bridge in coordinated indigo coats, taiko rhythm suggested through synchronized movement, cinematic summer night
+    - woodblock printer lifting a completed multicolor landscape print from the block, wet pigments and carved cherrywood tools filling the foreground, detailed process illustration
+    - noh actor waiting behind the stage curtain with carved mask held at chest height, brocade costume emerging from deep shadow, contemplative theatrical photograph
+    - confectioner arranging maple-leaf wagashi beside a whisked bowl of matcha, lacquer tray and seasonal branches forming a precise still life
+
+# ---------------------------------------------------------
+# MODULAR VISUAL OUTPUT FORMATS
+# ---------------------------------------------------------
+
+  output_format:
+    - full-length character portrait with a clearly readable silhouette and environmental context
+    - waist-up cinematic portrait emphasizing face, garment texture and one meaningful prop
+    - coordinated two-person portrait showing contrasting roles, garments and posture
+    - quiet daily-life scene with natural gestures and layered architectural detail
+    - working craft process with hands, tools, raw materials and finished objects all visible
+    - street-level travel scene with foreground activity, recognizable architecture and deep perspective
+    - wide postcard landscape with a strong foreground anchor and layered atmospheric distance
+    - historical reconstruction with period-specific clothing, objects and built environment
+    - cultural documentary still using natural light and observational composition
+    - kimono fashion editorial with controlled pose, full garment visibility and refined lighting
+    - textile detail plate emphasizing weave, dye, embroidery and coordinated accessories
+    - rear three-quarter kimono portrait emphasizing the obi construction and sleeve drape
+    - anime key visual with clean character grouping, expressive silhouettes and painted background
+    - manga splash page with dense ink contours, controlled screentone and dramatic panel-scale composition
+    - hand-painted animation background with no central character, layered architecture and atmospheric light
+    - mecha design sheet with front, side and action views plus readable mechanical joints
+    - practical-effects hero still with miniature architecture, suit textures, sparks and theatrical smoke
+    - woodblock-style print with bold contour, flat color separation, paper grain and bokashi gradients
+    - mineral-pigment painting with delicate ink contours, matte color fields and sparse gold detail
+    - vintage travel poster with simplified geometry, limited palette and clearly staged landmark view
+
+  anime_manga_output_format:
+    - anime key visual with a clean character silhouette, expressive pose and richly painted background
+    - quiet slice-of-life animation still with natural gestures, lived-in props and soft environmental light
+    - theatrical action-animation still with strong foreshortening, readable motion and controlled effects
+    - manga splash page with dense ink contours, selective screentone and a dramatic full-page composition
+    - manga character-introduction panel with one setting detail and clear costume readability
+    - hand-painted animation background with no central character, layered architecture and atmospheric depth
+
+  mythic_tone:
+    - period-grounded folklore illustration with natural materials and restrained supernatural detail
+    - eerie supernatural scene using silence, mist and an isolated pool of light
+    - dark horror composition with obscured forms, weathered surfaces and deep negative space
+    - heroic fantasy spectacle with wind-driven fabric, monumental scale and luminous effects
+    - whimsical yokai encounter with playful body language and warm storybook color
+    - contemporary urban haunting with an uncanny presence interrupting an ordinary street scene
+
+  kimono_portrait_format:
+    - full-length formal standing portrait, complete garment and hem visible, composed interior setting
+    - seated tatami portrait with sleeve drape, obi edge and seasonal alcove arrangement visible
+    - rear three-quarter view centered on the obi knot, coordinated hair ornament and collar layers
+    - close textile study showing weave, dye transitions, embroidery and precise edge finishing
+    - seasonal garden portrait with the garment palette complementing rather than duplicating the landscape
+    - coordinated multi-generational portrait with distinct age-appropriate garments and restrained poses
+    - contemporary fashion editorial pairing traditional construction with a minimal architectural setting
+    - historically grounded reconstruction with period-specific dressing, hair and accessories
+
+  kimono_creative_combo:
+    - "fantasy kimono character design using __gkr_japan/kimono_color__, __gkr_japan/kimono_pattern__, sculptural obi construction and imaginative hair ornaments, explicitly non-historical editorial styling"
+    - "avant-garde kimono runway look combining __gkr_japan/kimono_type__, __gkr_japan/kimono_color__, __gkr_japan/kimono_pattern__, __gkr_japan/kimono_obi__ and __gkr_japan/kimono_accessory__, deliberately experimental fashion styling"
+    - "anime fantasy heroine wearing a kimono-inspired layered costume in __gkr_japan/kimono_color__ with __gkr_japan/kimono_pattern__, exaggerated sleeves and an ornamental obi, clean cel-shaded key visual"
 
   kimono_formal_combo:
     - "formal houmongi kimono in muted wisteria with a coordinated autumn-grass hem design, formal silver fukuro obi, braided obijime cord and elegant kanzashi, composed standing portrait"
@@ -1155,29 +1276,80 @@ gkr_japan:
     - "__gkr_japan/modern_scenario__"
 
   random_kimono:
-    - "__gkr_japan/kimono_formal_combo__"
-    - "__gkr_japan/kimono_casual_combo__"
-    - "__gkr_japan/kimono_ceremonial_combo__"
-    - "__gkr_japan/kimono_modern_combo__"
-
-  random:
-    - "__gkr_japan/hero_combo_full__"
-    - "__gkr_japan/hero_combo_lite__"
-    - "__gkr_japan/ninja_combo__"
-    - "__gkr_japan/samurai_combo__"
-    - "__gkr_japan/yokai_combo__"
-    - "__gkr_japan/anime_combo__"
-    - "__gkr_japan/cyber_combo__"
-    - "__gkr_japan/scene_combo__"
-    - "__gkr_japan/peaceful_combo__"
-    - "__gkr_japan/modern_combo__"
-    - "__gkr_japan/thematic_spotlights__"
-    - "__gkr_japan/random_kimono__"
-    - "__gkr_japan/spotlight_characters__"
-    - "__gkr_japan/spotlight_backgrounds__"
-    - "__gkr_japan/spotlight_yokai__"
-    - "__gkr_japan/spotlight_mecha__"
+    - "__gkr_japan/kimono_formal_combo__, __gkr_japan/kimono_portrait_format__"
+    - "__gkr_japan/kimono_formal_combo__, __gkr_japan/kimono_portrait_format__"
+    - "__gkr_japan/kimono_casual_combo__, __gkr_japan/kimono_portrait_format__"
+    - "__gkr_japan/kimono_ceremonial_combo__, __gkr_japan/kimono_portrait_format__"
+    - "__gkr_japan/kimono_modern_combo__, __gkr_japan/kimono_portrait_format__"
+    - "__gkr_japan/kimono_creative_combo__"
     - "__gkr_japan/spotlight_kimono__"
+
+  landscape_postcard_combo:
+    - "__gkr_japan/postcard_landscape__"
+    - "__gkr_japan/postcard_landscape__"
+    - "__gkr_japan/nature_scene__, vintage travel-poster composition"
+    - "__gkr_japan/spotlight_backgrounds__"
+
+  culture_combo:
+    - "__gkr_japan/cultural_activity__"
+    - "__gkr_japan/cultural_activity__"
+    - "__gkr_japan/culture_spotlight__"
+    - "__gkr_japan/peaceful_activity__"
+
+  traditional_combo:
+    - "__gkr_japan/samurai_scenario__"
+    - "__gkr_japan/ninja_scenario__"
+    - "__gkr_japan/historical_scene__"
+    - "__gkr_japan/peaceful_activity__"
+    - "__gkr_japan/cultural_activity__"
+
+  mythic_combo:
+    - "__gkr_japan/yokai_scenario__, __gkr_japan/mythic_tone__"
+    - "__gkr_japan/yokai_scenario__, __gkr_japan/mythic_tone__"
+    - "__gkr_japan/thematic_spotlights__, __gkr_japan/mythic_tone__"
+    - "__gkr_japan/spotlight_yokai__"
+
+  anime_manga_combo:
+    - "__gkr_japan/anime_scenario__, __gkr_japan/anime_manga_output_format__"
+    - "__gkr_japan/anime_scenario__, __gkr_japan/anime_manga_output_format__"
+    - "__gkr_japan/spotlight_characters__"
+    - "__gkr_japan/anime_scenario__, __gkr_japan/anime_manga_output_format__"
+
+  futuristic_combo:
+    - "__gkr_japan/cyber_scenario__"
+    - "__gkr_japan/cyber_scene__"
+    - "__gkr_japan/thematic_spotlights__"
+
+  mecha_tokusatsu_combo:
+    - "__gkr_japan/spotlight_mecha__"
+    - "__gkr_japan/spotlight_mecha__"
+    - "giant armored rescue robot braced between miniature city towers, practical suit texture, low camera angle, controlled sparks and theatrical smoke"
+    - "colorful masked transformation hero confronting a towering creature in a detailed miniature harbor, practical costume materials, pyrotechnic smoke, dramatic television-production still"
+
+  # Declared theme pillars. Repeated references are intentional weights:
+  # kimono 20%, mythic 15%, traditional 15%, anime/manga 15%,
+  # futuristic 10%, mecha/tokusatsu 10%, postcard 10%, culture 5%.
+  random:
+    - "__gkr_japan/random_kimono__"
+    - "__gkr_japan/random_kimono__"
+    - "__gkr_japan/random_kimono__"
+    - "__gkr_japan/random_kimono__"
+    - "__gkr_japan/mythic_combo__"
+    - "__gkr_japan/mythic_combo__"
+    - "__gkr_japan/mythic_combo__"
+    - "__gkr_japan/traditional_combo__"
+    - "__gkr_japan/traditional_combo__"
+    - "__gkr_japan/traditional_combo__"
+    - "__gkr_japan/anime_manga_combo__"
+    - "__gkr_japan/anime_manga_combo__"
+    - "__gkr_japan/anime_manga_combo__"
+    - "__gkr_japan/futuristic_combo__"
+    - "__gkr_japan/futuristic_combo__"
+    - "__gkr_japan/mecha_tokusatsu_combo__"
+    - "__gkr_japan/mecha_tokusatsu_combo__"
+    - "__gkr_japan/landscape_postcard_combo__"
+    - "__gkr_japan/landscape_postcard_combo__"
+    - "__gkr_japan/culture_combo__"
 
   random_character:
     - "__gkr_japan/archetype__, __gkr_japan/age__, __gkr_japan/build__, __gkr_japan/tone__, __gkr_japan/hair__, __gkr_japan/hair_color__, __gkr_japan/eyes__, __gkr_japan/expression__, __gkr_japan/trinkets__"
@@ -1194,6 +1366,7 @@ gkr_japan:
     - "__gkr_japan/nature_scene__"
     - "__gkr_japan/modern_scene__"
     - "__gkr_japan/cyber_scene__"
+    - "__gkr_japan/postcard_landscape__"
     
 # ---------------------------------------------------------
 # SPOTLIGHT (wired into random)
@@ -1201,13 +1374,13 @@ gkr_japan:
 
   spotlight_characters:
     - cinematic portrait of a (wandering ronin:1.3), (weathered kimono:1.2), scarred face, hand resting on worn katana hilt, moody lighting, high detail concept art
-    - beautiful painting of a (young shrine maiden:1.3), miko, flowing white and red robes, soft expression, holding fluttering paper charms, sakura petals drifting, artstation
+    - beautiful painting of a (young shrine maiden:1.3), miko, flowing white and red robes, soft expression, holding fluttering paper charms, sakura petals drifting, delicate ink contours and mineral-pigment color
     - (masked shinobi:1.3), ninja, crouching in shadows, poised with a (glowing kunai:1.2), dark wrapped gear, moonlit rooftop, dark fantasy art
     - (epic portrait of a samurai lord:1.3), (ornate lamellar armor:1.2), (sweeping kabuto helm:1.2), stern gaze, cinematic, dramatic lighting, masterpiece
     - (kitsune spirit woman:1.3), ethereal figure, (nine luminous tails:1.2) swirling gently, faint fox ears, mystical glowing aura, fantasy art
     - (powerful onmyoji sorcerer:1.3), intricate robes, casting a spell, (glowing spell papers:1.2) floating, yin-yang sigils, magical, high detail illustration
     - (armored spearfighter:1.3), ashigaru, lacquered jingasa hat, steady disciplined posture, holding yari, battlefield background, realistic
-    - (geisha warrior:1.3), painted mask, elegant battle kimono, (concealed blades in sleeves:1.2), dynamic pose, fantasy illustration
+    - explicitly fantastical masked kimono duelist, elegant battle-inspired robes, concealed blades in sleeves, dynamic pose, richly painted fantasy illustration
     - (tengu swordsman:1.3), red skin, long nose, (feathered wings half unfurled:1.2), perched on a cliff, moody sky, mythical creature art
     - (armored ashigaru foot soldier:1.2), gripping yari spear, dirt and sweat, battle ready stance, cinematic battle scene, high detail
     - (ronin poet:1.2), travel cloak, playing a bamboo flute, calm introspective gaze, sitting by a river, peaceful, watercolor style
@@ -1279,7 +1452,7 @@ gkr_japan:
     - (grave tender:1.2), lantern staff, soft reverent gaze, cemetery at night, peaceful, misty
     - (village protector mother:1.2), (holding farming tool as weapon:1.2), fierce expression, defending child, cinematic
     - (celestial fox warrior:1.3), kitsune, shimmering tails, celestial armor, glowing bow, epic, divine
-    - (smiling farmer hero:1.2), straw hat, boundless kindness, in a rice paddy, sunny day, ghibli style
+    - (smiling young farmer:1.2), straw hat, carrying seedlings through a rice paddy, sunny day, warm hand-painted animation background, rounded natural forms
     - (forest oni child:1.2), small horns, oversized club, curious expression, playing, cute, fantasy
     - (storm priestess:1.2), dancing, swirling sakura petals, summoning storm, dramatic, magical, illustration
     - (samurai executioner:1.2), solemn expression, blackened armor, holding nodachi, moody, dark
@@ -1304,7 +1477,7 @@ gkr_japan:
     - (Shinto shrine courtyard:1.2), (dusted with fallen sakura petals:1.2), peaceful, spring morning, soft light, illustration
     - (stormy coastline:1.2), jagged rocks, roaring waves crashing, dramatic sky, epic, masterpiece painting
     - (quiet tea house garden:1.2), koi pond, stepping stones, raked sand, zen, peaceful, high detail
-    - (golden rice fields:1.2), (shining with evening light:1.2), rural village, nostalgic, Ghibli inspired, landscape painting
+    - (golden rice fields:1.2), (shining with evening light:1.2), rural village, nostalgic hand-painted animation landscape, soft natural forms
     - (busy festival street:1.2), (glowing with colorful lanterns:1.2), matsuri, crowds, vibrant, night, anime style
     - (snowy mountain temple:1.3), carved into cliffs, heavy snow, isolated, peaceful but harsh, epic landscape, concept art
     - (red maple forest:1.3), (blazing with fiery autumn color:1.2), dappled sunlight, path covered in leaves, vibrant, photorealistic
@@ -1355,7 +1528,7 @@ gkr_japan:
     - (overgrown castle ruins:1.2), blanketed in moss, reclaimed by nature, sunbeams, mysterious, concept art
     - (lantern lit torii tunnel:1.3), stretching endlessly, glowing red and orange, night, magical, Fushimi Inari
     - (rain soaked street:1.2), (reflecting neon and lantern shine:1.2), Tokyo, cyberpunk, moody, cinematic
-    - (sacred mountain forest:1.2), towering ancient trees, kodama spirits, misty, magical, Ghibli inspired
+    - (sacred mountain forest:1.2), towering ancient trees, small pale tree spirits, misty, magical, hand-painted animation background
     - (lake island shrine:1.2), reachable only by small boat, reflection in water, serene, isolated, fantasy
     - (forest gorge:1.2), waterfall mist, drifting upward, lush greenery, dramatic, landscape painting
     - (rural village bridge:1.2), (glowing in soft twilight:1.2), river, peaceful, nostalgic, illustration
@@ -1409,7 +1582,7 @@ gkr_japan:
     - (ubume ghost mother:1.3), (holding spectral infant:1.2), tattered robes, rainy night, sad expression, haunting
     - (tsukumogami:1.3), (animated objects:1.2), kasa, sandal, lantern, marching under moonlight, playful, eerie, fantasy
     - (inu gami:1.2), dog guardian, formed from loyal spirit, glowing ethereal form, protecting shrine, divine
-    - (kodama:1.2), forest spirit, blooming where it steps, small white figure, glowing, ancient forest, Ghibli inspired
+    - (small pale tree spirit:1.2), flowers blooming where it steps, softly glowing white figure, ancient forest, lyrical hand-painted animation style
     - (nurarihyon:1.3), (elegant old spirit:1.2), slipping into human homes, gourd-shaped head, leader of yokai, mysterious
     - (oni samurai:1.3), cracked mask, (flaming blade:1.2), demonic armor, glowing red eyes, epic fantasy
     - (ame-onna:1.2), rain woman, hovering, dripping hair, sad, perpetual rain, moody, atmospheric
@@ -1491,11 +1664,11 @@ gkr_japan:
     - (sleek white aerial mecha:1.3), wing thrusters, plasma rifle, flying, sci-fi, dynamic pose, mecha anime style
     - (samurai-inspired mecha:1.3), horned helmet, (energy katana:1.2), glowing red mono-eye, feudal armor plates, epic
     - (heavy artillery mech:1.3), (rotating missile pods:1.2), massive cannons, standing in a crater, military, high detail
-    - (transformable flight frame:1.2), glowing vector fins, mid-transformation, sleek, sci-fi, dynamic, Gundam style
+    - (transformable flight frame:1.2), glowing vector fins, mid-transformation, sleek military science-fiction machinery, precise cel-shaded mechanical detail
     - (massive biped mech:1.3), (stomping through neon streets:1.2), cyberpunk city, reflections, kaiju-sized, epic scale
     - (kaiju-hunter mech:1.3), (gripping oversized shock spear:1.2), battle-damaged armor, facing monster, cinematic
     - (stealth black frame:1.3), angular armor, optical camo shimmering, glowing red sensors, ninja-like, dark
-    - (classic super-robot:1.3), mazinger style, chest-mounted energy core, heroic pose, vibrant colors, retro anime
+    - (classic super-robot:1.3), bold primary-color armor, chest-mounted energy core, heroic pose, heavy graphic contours, 1970s television-animation design
     - (industrial exo-mech:1.2), hydraulic limbs, hazard striping, carrying cargo, utilitarian design, realistic
     - (railgun sniper mech:1.3), (kneeling on ruined rooftop:1.2), long barrel rifle, aiming, scope glint, sci-fi
     - (feudal-style mecha archer:1.3), (launching energy arrows:1.2), yumi bow, samurai-like, dynamic, fantasy mech
@@ -1599,7 +1772,7 @@ gkr_japan:
     - (child at shichi-go-san festival:1.2), wearing a (brightly colored kimono:1.3), (ume plum blossom pattern:1.2), holding a chitose ame bag, joyful, photorealistic
     - cinematic shot of a (tsukesage kimono:1.2), light green, modest patterns of (maple leaves at the shoulder and hem:1.2), elegant dinner party, realistic
     - masterpiece artwork of a (celestial maiden:1.1) in a (hagoromo:1.3), (ethereal feather robe:1.2), glowing silk, translucent, floating in the sky, fantasy art
-    - a man in a (jinbei:1.2), comfortable summer wear, simple stripes, relaxing on an engawa porch, evening, ghibli style
+    - a man in a (jinbei:1.2), comfortable summer wear, simple stripes, relaxing on an engawa porch at evening, warm hand-painted animation treatment
     - photorealistic detail of (yuzen dyeing:1.3), (hand-painted landscape scene:1.2) on a tomesode kimono, flowing water, miniature bridge, gold leaf accents
     - elegant woman in a (komon kimono:1.2) with (sayagata key fret pattern:1.3), subtle and repeating, maroon color, shopping in Ginza, traditional painting
     - portrait of an (onna bugeisha:1.1) wearing a (battle kimono:1.2) under light armor, sleeves tied back, intense expression, dynamic, concept art

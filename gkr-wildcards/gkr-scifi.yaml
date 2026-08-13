@@ -368,7 +368,376 @@ gkr_scifi:
     - streaks of starlight, (warp speed:1.1)
 
 # ---------------------------------------------------------
+# SCIENCE-FICTION TRADITIONS & VISUAL OUTPUTS
+# ---------------------------------------------------------
+
+  visual_tradition:
+    - hard science fiction, physically motivated spacecraft, pressure systems, thermal radiators, practical workwear and restrained instrument light
+    - operatic far future, monumental fleets, ceremonial cultures, vivid planetary horizons and heroic widescreen staging
+    - planetary romance, exotic landscapes, elegant expedition clothing, ancient ruins and painterly adventure composition
+    - 1950s pulp science fiction, saturated primary colors, painted highlights, halftone texture and theatrical rocket design
+    - analog cassette futurism, molded control panels, monochrome displays, labeled switches, fabric uniforms and warm practical lamps
+    - clean optimistic retrofuture, white geometric structures, public technology, landscaped habitats and bright diffuse daylight
+    - cybernetic near future, dense infrastructure, wearable interfaces, prosthetics and grounded urban documentary lighting
+    - biopunk, grown architecture, translucent membranes, engineered organisms and wet laboratory materials
+    - ecological science fiction, climate-adapted settlements, restored ecosystems, visible water systems and renewable infrastructure
+    - posthuman far future, unfamiliar bodies, distributed cognition, minimal artifacts and immense temporal scale
+    - military science fiction, modular armor, logistics, damaged machinery and disciplined ensemble staging
+    - scientific exploration, field instruments, samples, protective equipment and visually legible procedures
+    - first-contact drama, cautious body language, translation tools, environmental separation and balanced group composition
+    - cosmic horror, small figures, incomprehensible structures, weak local light and oppressive negative space
+    - generation-ship society, layered lived-in interiors, agriculture, maintenance infrastructure and multigenerational communities
+    - megastructure fiction, tiny vehicles against engineered planetary-scale geometry and deep atmospheric perspective
+
+  character_output_format:
+    - full-body profession design with readable clothing, tools, body requirements and one contextual setting element
+    - coordinated three-person crew portrait with distinct roles, silhouettes and equipment
+    - waist-up cinematic portrait emphasizing physiology, material wear and one functional device
+    - active working portrait showing hands, instruments, samples and a visible procedure
+    - spacesuit or protective-clothing design sheet with front, rear, helmet and life-support details
+    - diplomatic portrait showing two visibly different beings with translation equipment and respectful spatial staging
+
+  ship_output_format:
+    - spacecraft hero view showing the complete silhouette, propulsion, radiators, access points and operating environment
+    - orthographic spacecraft sheet with top, side, front and mechanical-detail views on a neutral background
+    - spacecraft cutaway showing crew spaces, cargo, tanks, engines and pressure boundaries
+    - mission-operation scene with crew, docking hardware or surface equipment establishing scale
+    - analog mission photograph with restrained color, fine grain and physically plausible lighting
+    - retrofuturist travel poster presenting the vehicle and destination with simplified geometric composition
+
+  environment_output_format:
+    - wide planetary landscape with a small expedition team establishing scale and environmental conditions
+    - street-level habitat scene with foreground activity and layered infrastructure
+    - architectural cutaway showing pressure zones, circulation, utilities and inhabited rooms
+    - orbital panorama with physically motivated sunlight, planetary shadow and recognizable construction scale
+    - environmental concept sheet showing exterior, interior and material details from one coherent location
+    - archaeological reconstruction pairing the discovered remains with a restrained visualization of their original form
+
+  science_output_format:
+    - scientific field procedure with instruments, samples, protective equipment and visible recorded results
+    - laboratory process showing hands, containment, analytical tools and a clear specimen
+    - mission-control view with coordinated operators, readable status displays and one central event
+    - technical plate with cutaway diagrams, scale references and labeled functional components
+    - documentary research photograph with practical lighting and observational composition
+    - scientific-romance illustration balancing precise instruments with an immense unfamiliar environment
+
+  society_output_format:
+    - civilian daily-life scene with natural gestures, personal objects and visibly speculative infrastructure
+    - multigenerational household scene inside a lived-in habitat
+    - public-space ensemble showing varied occupations, bodies and accessibility systems
+    - civic documentary still with restrained lighting and layered social activity
+    - cultural ceremony staged around a clearly visible object, practice or environment
+    - future editorial illustration with a strong social focal point and controlled symbolic details
+
+# ---------------------------------------------------------
+# CHARACTERS — BIOLOGY- AND ROLE-SAFE SCENARIOS
+# ---------------------------------------------------------
+
+  human_profession_scenario:
+    - orbital construction engineer in a compact maneuvering suit, anchoring a replacement radiator panel to a station truss, tether reels and hand controls clearly visible
+    - planetary geologist in a dust-sealed field suit, measuring layered mineral strata with a core sampler and spectral camera beneath a pale double-star sky
+    - mission controller in practical office clothing, coordinating a tense orbital insertion from a curved console of restrained status displays
+    - xenobiologist in translucent protective sleeves, documenting a small alien organism inside a portable field enclosure without touching it
+    - habitat physician using a flexible diagnostic scanner on an elderly patient in a compact clinic, medication printer and handrails visible
+    - terraforming ecologist servicing atmospheric sensors among young engineered trees, water-recovery channels and distant habitat domes in view
+    - propulsion technician inspecting ceramic heat shielding and fuel couplings beneath a landed shuttle, maintenance cart and safety markings nearby
+    - first-contact linguist comparing gesture diagrams with unfamiliar visitors across a transparent environmental partition
+    - lunar mining surveyor operating a ground-penetrating radar sled beside exposed ice deposits, harsh unfiltered sunlight and deep shadows
+    - agricultural systems worker pruning dwarf fruit trees inside a rotating habitat farm, irrigation lines and curved horizon clearly visible
+    - deep-ocean researcher in a pressure suit, sampling microbial mats through a submersible airlock under cold blue work lights
+    - interplanetary courier securing cargo modules inside a compact transfer craft, worn flight clothing and handwritten route notes visible
+
+  adapted_human_scenario:
+    - low-gravity adapted person with elongated limbs moving through a tall orbital garden, using handrails designed for three-dimensional circulation
+    - radiation-adapted maintenance worker with visibly melanized skin and protective eye membranes, inspecting exterior shielding through a service lock
+    - aquatic-adapted human with neck gills and webbed hands tending kelp bioreactors inside a flooded research habitat
+    - cold-world adapted explorer with compact build and insulated facial membranes, calibrating instruments beside a methane-ice fissure
+    - genetically tailored desert settler with reflective eye protection and heat-dissipating skin patterns, repairing a water condenser at dawn
+    - microgravity-born musician using foot restraints and a spherical string instrument in a softly lit station commons
+
+  synthetic_person_scenario:
+    - maintenance android with ceramic shell panels and exposed service joints, replacing a damaged cable bundle inside a cramped station conduit
+    - synthetic diplomat with a matte composite face and subtle expression display, presenting a shared star map to an interspecies council
+    - archival intelligence embodied in a mobile library unit, projecting retrieved family records for an elderly habitat resident
+    - soft-bodied medical robot wrapping flexible manipulators around a surgical instrument tray, preparing a clean procedure room
+    - autonomous field rover unfolding sampling arms beside unfamiliar crystalline growths while remote researchers observe from a pressurized vehicle
+    - decommissioned military android teaching mechanical repair in a civilian workshop, old armor mounting points visible beneath practical clothing
+    - distributed artificial intelligence represented through coordinated maintenance drones tending an orbital garden without a humanoid avatar
+    - companion robot with fabric-covered soft mechanisms helping a child practice walking in reduced gravity, domestic habitat interior
+
+  nonhuman_person_scenario:
+    - aquatic envoy suspended in a clear mobile water chamber, communicating through shifting color patterns while human diplomats watch translated diagrams
+    - avian low-gravity engineer using four delicate grasping limbs to adjust a suspended telescope array inside a vast open-frame habitat
+    - insectoid collective represented by three coordinated bodies operating a shared navigation console, tactile symbols and synchronized posture visible
+    - plant-derived scholar rooted temporarily in a nutrient cradle, exchanging living seed archives with researchers inside a humid conservatory embassy
+    - crystalline organism modulating internal light through faceted limbs as a geologist records its response to mineral samples
+    - silicon-based traveler with articulated stone plates resting beside a high-temperature thermal chamber designed for its atmosphere
+    - nonhumanoid ribbon-like organism swimming through dense gas inside a floating observation habitat, manipulators operating through pressure membranes
+    - biomechanical courier with grown cargo compartments and symbiotic tools arriving at a mixed-species orbital market
+
+  character_family_combo:
+    - "__gkr_scifi/human_profession_scenario__, __gkr_scifi/character_output_format__"
+    - "__gkr_scifi/human_profession_scenario__"
+    - "__gkr_scifi/adapted_human_scenario__, __gkr_scifi/character_output_format__"
+    - "__gkr_scifi/synthetic_person_scenario__, __gkr_scifi/character_output_format__"
+    - "__gkr_scifi/nonhuman_person_scenario__, __gkr_scifi/character_output_format__"
+
+# ---------------------------------------------------------
+# SPACECRAFT & TRANSPORT — FUNCTION-SAFE FAMILIES
+# ---------------------------------------------------------
+
+  small_craft_scenario:
+    - two-seat orbital inspection pod with spherical pressure cabin, maneuvering thrusters and folded manipulator arms, approaching a communications satellite
+    - compact lunar shuttle with broad landing legs, dust shields and dorsal cargo rack, descending toward a marked polar landing zone
+    - atmospheric survey aircraft with long sensor wings and electric ducted fans, skimming above a restored coastal wetland
+    - emergency rescue craft with high-visibility panels, wide docking collar and external medical module, matching rotation beside a damaged station
+
+  industrial_ship_scenario:
+    - modular cargo tug pushing six standardized containers, exposed truss, radiator fins and clustered ion engines, crossing low planetary orbit
+    - asteroid mining vessel anchored to a carbonaceous rock, drilling booms, processing bags and dust-control screens clearly deployed
+    - orbital construction barge carrying folded habitat sections, crane arms and crew shelters, working beside an unfinished rotating station
+    - salvage ship using articulated grapples and floodlights to stabilize a silent derelict, debris nets spread around the operation
+    - interplanetary tanker with insulated spherical tanks, shaded radiators and protective micrometeorite panels, coasting above Mars
+
+  research_ship_scenario:
+    - deep-space telescope vessel with segmented mirror folded behind a broad sunshield, station-keeping far from planetary glare
+    - xenobiology lander with quarantine airlock, sample lockers and a detachable field laboratory, resting beside an alien tidal pool
+    - solar-observation craft protected by a layered heat shield, instrument boom peering around the edge while the corona fills the background
+    - ocean-world research submarine with transparent pressure sphere, sampling arms and biological containment pods descending beneath an ice shelf
+    - gravitational-wave survey ship formed from three laser-linked modules drifting in precise formation against a sparse starfield
+
+  passenger_colony_ship_scenario:
+    - interplanetary passenger liner with rotating cabin ring, storm shelter and broad observation lounge, approaching a busy transfer station
+    - generation ship built around a vast agricultural cylinder, exterior radiators and maintenance vehicles visible against its immense scale
+    - compact colony transport carrying folded surface habitats, seed vaults and landing craft, braking above a cloud-covered planet
+    - lunar commuter ferry with two pressure decks and rapid docking collar, passengers visible through shaded terminal windows
+
+  military_ship_scenario:
+    - patrol corvette with compact armored command section, sensor mast, radiator shutters and restrained point-defense mounts, escorting civilian traffic
+    - damaged fleet tender repairing a frigate behind a deployed debris shield, service drones and replacement panels filling the gap between hulls
+    - long-range reconnaissance craft with low-reflectance hull, recessed radiators and detachable observation probes, drifting in planetary shadow
+    - carrier launching autonomous interceptors while keeping vulnerable radiators shielded, disciplined formation above a storm-lit gas giant
+    - hospital ship with protected medical ring, high-visibility markings and multiple rescue docks moving through the aftermath of an orbital collision
+
+  alien_living_ship_scenario:
+    - living interstellar vessel grown around a translucent pressure core, vascular propulsion structures flexing as it enters orbit
+    - crystalline sailcraft refracting starlight through branching mineral vanes, nonhuman crew chambers visible as dark inclusions
+    - distributed swarm vessel made from thousands of linked reflective units reshaping into a communications array
+    - ancient machine craft with no visible windows or engines, geometric hull slowly opening around an impossible interior volume
+    - symbiotic seed ship extending rootlike landing structures into an ocean world's floating reef
+
+  ship_family_combo:
+    - "__gkr_scifi/small_craft_scenario__, __gkr_scifi/ship_output_format__"
+    - "__gkr_scifi/industrial_ship_scenario__, __gkr_scifi/ship_output_format__"
+    - "__gkr_scifi/research_ship_scenario__, __gkr_scifi/ship_output_format__"
+    - "__gkr_scifi/passenger_colony_ship_scenario__, __gkr_scifi/ship_output_format__"
+    - "__gkr_scifi/military_ship_scenario__, __gkr_scifi/ship_output_format__"
+    - "__gkr_scifi/alien_living_ship_scenario__, __gkr_scifi/ship_output_format__"
+
+# ---------------------------------------------------------
+# WORLDS, SCIENCE, SOCIETY & SPECULATIVE CONCEPTS
+# ---------------------------------------------------------
+
+  world_habitat_scenario:
+    - rotating orbital habitat with agricultural terraces curving overhead, lakes, compact towns and transit lines visible through clear atmosphere
+    - lunar polar settlement buried beneath protective regolith, greenhouse light wells and surface radiators arranged around a crater rim
+    - floating research city in a gas giant's temperate cloud layer, balloon cells, turbine farms and tethered sampling platforms disappearing into mist
+    - Mars canyon settlement built into shaded rock, pressure courtyards and ice-processing towers connected by covered transit
+    - ocean-world habitat formed from linked floating rings, kelp farms and submersible docks surrounding a central storm shelter
+    - climate-adapted coastal megacity with elevated housing, restored tidal wetlands, surge barriers and autonomous ferries under humid daylight
+    - subterranean desert city organized around a deep water reservoir, light wells, cool public gardens and heat exchangers visible in cutaway
+    - generation-ship neighborhood with layered apartments, shared kitchens, repair kiosks and the curved agricultural horizon beyond
+    - alien ruin spanning a salt plain, eroded structures aligned with three moons, survey grids and tiny field shelters establishing scale
+    - orbital shipyard assembling a cylinder habitat from standardized trusses, swarms of utility craft and unfinished pressure shells
+    - post-collapse city being rebuilt around clean transit and water recovery, old concrete towers supporting new timber-and-composite structures
+    - vast ringworld landscape whose engineered horizon rises into the sky, rivers, cities and weather systems extending across the inner surface
+
+  scientific_discovery_scenario:
+    - geologists extracting an ice core from a permanently shadowed lunar crater, layered sample visible inside a sealed transparent sleeve
+    - xenobiologists recording the movement of translucent tidal organisms without entering their shallow alien pool, portable sensors arranged around the edge
+    - astronomers aligning a kilometer-wide radio array across a desert plateau as an unfamiliar repeating signal appears on synchronized displays
+    - materials scientists growing a load-bearing lattice from engineered cells, robotic arms testing the translucent sample inside containment
+    - climate team releasing instrument balloons into a newly thickened Martian atmosphere, frost, wind and calibration equipment clearly visible
+    - linguists and pattern-recognition systems comparing alien pulses with gesture, sound and mathematical diagrams in a first-contact laboratory
+    - physicians monitoring memory transfer between biological neural tissue and a synthetic substrate, patient consent interface visible beside the apparatus
+    - oceanographers retrieving a sensor from beneath an extraterrestrial ice shelf, submersible manipulator and dark liquid ocean beyond
+    - archaeologists mapping microscopic wear on a nonhuman tool, multispectral imaging revealing how unfamiliar limbs once held it
+    - propulsion engineers testing a magnetic plasma nozzle in a vacuum chamber, diagnostic lasers and heat shielding visible through thick glass
+    - ecologists counting pollinators inside a restored orbital biome, tagging equipment and habitat maintenance systems integrated into the scene
+    - contamination-control team sealing an unexpectedly active sample container inside a remote field laboratory, disciplined procedure rather than combat
+
+  near_future_scenario:
+    - automated electric freight port coordinating cargo drones, rail transfer and human inspectors beneath offshore wind turbines
+    - flood-adapted neighborhood using amphibious public transit, shaded elevated walkways and restored mangrove channels during monsoon rain
+    - high-speed rail terminal integrated with an orbital-launch transfer line, travelers, luggage robots and large daylight information displays
+    - hospital rehabilitation room where soft robotic supports help a patient regain movement, clinician and family member participating naturally
+    - vertical urban farm using daylight collectors, nutrient channels and human crop inspectors rather than decorative neon technology
+    - wildfire-response team deploying autonomous mapping aircraft and mobile water systems along a smoke-dark forest edge
+    - ocean research settlement combining floating laboratories, kelp cultivation and storm-energy equipment under practical marine weather
+    - apartment household negotiating privacy settings with a wall-integrated civic AI, ordinary furniture and family routines grounding the scene
+    - school workshop where students repair environmental sensors and small field robots, tools and unfinished projects covering shared tables
+    - post-carbon steelworks using electric furnaces and hydrogen storage, workers inspecting bright material flow from protected stations
+
+  ai_posthuman_scenario:
+    - civic artificial intelligence embodied only through coordinated transit signs, service robots and public kiosks responding to a station emergency
+    - uploaded person maintaining a recognizable room inside a vast digital archive, personal memories represented as spatial objects rather than glowing code
+    - posthuman community using interchangeable biological and synthetic bodies at a quiet public bath designed for multiple physical forms
+    - elderly human and long-lived android comparing repaired family photographs in an archival workshop, subtle differences in aging clearly visible
+    - distributed machine ecology repairing a damaged solar farm through specialized crawling, flying and stationary robots without human supervision
+    - person testing a newly printed body in a clinical movement studio, balance rails, technicians and calibration markings visible
+    - collective intelligence holding a civic meeting through many small bodies arranged around human participants and shared physical models
+    - deep-space probe awakening after centuries, frost leaving its instruments as a red dwarf system enters view
+    - former combat machine tending seedlings inside a reconstruction greenhouse, old mounting points repurposed for gardening tools
+    - nonhuman artificial intelligence constructing temporary geometric manipulators from local dust to examine a human artifact
+
+  space_opera_scenario:
+    - mixed-species bridge crew guiding a damaged exploration cruiser through a crowded debris field, each station showing a distinct task
+    - armored rescue team crossing a breached orbital promenade to reach trapped civilians, pressure foam and emergency barriers replacing indiscriminate gunfire
+    - diplomatic procession entering a monumental interstellar senate beneath suspended planetary banners, varied environmental suits and ceremonial dress
+    - fighter squadron launching from a rotating carrier while a gas giant fills the open bay, ground crew and safety systems clearly staged
+    - frontier starport marshal confronting smugglers beside sealed cargo modules, tense body language and civilian traffic continuing behind
+    - ancient stellar gate opening above a remote colony as survey ships hold cautious formation, immense scale and restrained exotic-physics effects
+    - royal courier carrying a treaty through a crowded alien festival aboard a generation ship, ceremonial fabrics and unfamiliar architecture
+    - fleet hospital receiving escape pods after a distant battle, medical crews, docking arms and damaged ships forming an urgent ensemble
+    - explorers crossing a wind-carved alien plateau toward a dormant city-sized machine, adventurous planetary-romance composition
+    - rebel broadcasters transmitting from a hidden asteroid studio while patrol ships search outside, improvised equipment and close ensemble staging
+
+  civilian_culture_scenario:
+    - multigenerational family sharing a meal in orbital housing, magnetic tableware, curved window view and personal decorations showing long habitation
+    - children playing a three-dimensional ball game in a supervised reduced-gravity gym, handholds and soft boundaries defining the space
+    - passengers sleeping, reading and sharing food aboard a long-duration transfer ferry, worn seats and personal luggage creating a lived-in interior
+    - interspecies market organized around compatible atmosphere booths, tactile signage and translation tools rather than generic neon decoration
+    - remembrance ceremony beside a station observation window, names etched into reused hull material while Earth turns below
+    - community repairing pressure suits and domestic equipment at a shared workshop, varied ages and bodies collaborating around long tables
+    - harvest celebration inside a generation-ship farm, food, music and decorations made from locally grown fibers beneath the curved landscape
+    - court hearing concerning an autonomous machine, human and synthetic citizens seated together around a physical evidence display
+    - low-gravity dance performance using long fabric arcs and controlled air currents in a cylindrical public hall
+    - migration arrival center where families receive habitat clothing, orientation maps and medical checks after interplanetary transit
+
+  first_contact_scenario:
+    - human field team and aquatic visitors meeting across the transparent wall of a shoreline habitat, shared geometric objects used to establish meaning
+    - nonhumanoid aerial organisms circling a research balloon while scientists display harmless light patterns from an open observation deck
+    - robotic probe and crystalline lifeform exchanging carefully arranged mineral samples on a barren moon, no humanoid figure present
+    - diplomats from incompatible atmospheres seated in adjacent pressure chambers around a shared physical model of their star system
+    - farming community observing an immense living vessel take root offshore, cautious distance, emergency crews and ordinary residents sharing the frame
+    - linguist recognizing intentional structure in bioluminescent reef pulses while local organisms gather beyond the submersible window
+    - first exchange of art between a distributed machine intelligence and schoolchildren using modular physical shapes in a public hall
+    - archaeological team discovering that an apparently extinct city is a dormant collective organism, subtle movement beginning beneath survey lights
+
+  anomaly_scenario:
+    - research vessel observing gravitational lensing around an object with no visible mass, background stars forming precise distorted arcs
+    - astronaut returning from a short mission to find the station visibly aged by decades, familiar architecture repaired in unfamiliar ways
+    - laboratory containing two versions of the same damaged probe after a controlled temporal experiment, researchers comparing identical wear marks
+    - doorway opening onto several incompatible climates at once, instrument booms sampling each boundary from a secured research platform
+    - colony receiving radio images of its own city from centuries in the future, residents gathered around a large physical projection wall
+    - expedition crossing an impossible interior whose horizon folds back above them, small lamps emphasizing the absence of conventional scale
+    - deep-space telescope revealing a manufactured pattern across the cosmic microwave background, stunned operators surrounded by restrained data displays
+    - salvage crew entering a derelict whose rooms change scale between doorways, tether lines and mapping markers showing the spatial contradiction
+    - generation ship encountering an exact duplicate traveling in the opposite direction, both vessels exchanging cautious optical signals
+    - lone probe descending toward a black structure larger than a planet, weak sunlight revealing only one geometric edge against the void
+
+  exotic_physics_effect:
+    - localized gravitational distortion bending background light into clean arcs
+    - suspended dust tracing a precise invisible field around the apparatus
+    - electromagnetic discharge crawling across ceramic insulators and grounded rails
+    - thin spacetime boundary doubling nearby edges with subtle chromatic separation
+    - controlled bioluminescent signaling moving through living tissue in measured waves
+    - restrained holographic annotation aligned to physical instruments and samples
+
+  genre_tradition_combo:
+    - "__gkr_scifi/scientific_discovery_scenario__, hard science-fiction treatment with physically motivated equipment, practical workwear and restrained instrument light"
+    - "__gkr_scifi/space_opera_scenario__, operatic far-future treatment with monumental architecture, ceremonial cultures and heroic widescreen staging"
+    - "__gkr_scifi/first_contact_scenario__, planetary-romance painting with exotic landscape, elegant expedition design and visible brushwork"
+    - "__gkr_scifi/ship_family_combo__, 1950s pulp-science-fiction treatment with saturated primary colors, halftone texture and theatrical rocket geometry"
+    - "__gkr_scifi/civilian_culture_scenario__, analog cassette-futurist treatment with molded panels, monochrome displays, labeled switches and warm practical lamps"
+    - "__gkr_scifi/near_future_scenario__, clean optimistic retrofuture with geometric public infrastructure, landscaped spaces and bright diffuse daylight"
+    - "__gkr_scifi/near_future_scenario__, cybernetic near-future documentary treatment with wearable interfaces, prosthetics and dense grounded infrastructure"
+    - "__gkr_scifi/scientific_discovery_scenario__, biopunk treatment with grown tools, translucent membranes, engineered organisms and wet laboratory materials"
+    - "__gkr_scifi/near_future_scenario__, ecological science-fiction treatment emphasizing climate adaptation, restored ecosystems and visible water and energy systems"
+    - "__gkr_scifi/ai_posthuman_scenario__, posthuman far-future treatment with unfamiliar bodies, minimal artifacts and immense temporal scale"
+    - "__gkr_scifi/scientific_discovery_scenario__, scientific-exploration treatment emphasizing samples, instruments, protective equipment and procedural clarity"
+    - "__gkr_scifi/first_contact_scenario__, first-contact drama with cautious body language, environmental separation, translation tools and balanced staging"
+    - "__gkr_scifi/anomaly_scenario__, cosmic-horror composition with weak local light, tiny figures and oppressive negative space"
+    - "__gkr_scifi/civilian_culture_scenario__, generation-ship society with layered lived-in interiors, agriculture, maintenance and multigenerational community"
+    - "__gkr_scifi/world_habitat_scenario__, megastructure-fiction panorama with tiny vehicles against planetary-scale engineered geometry"
+
+  military_scenario:
+    - orbital boarding team in sealed modular suits cutting into a disabled unmanned weapons platform, tether discipline and pressure safety clearly visible
+    - reconnaissance unit deploying passive sensors across a frozen moon, low-reflectance equipment and distant transport held beneath a sparse sky
+    - field medics stabilizing injured personnel inside an inflatable pressure shelter while support robots prepare evacuation
+    - logistics crew unloading standardized life-support modules from a military transport after a colony disaster, civilians and local responders coordinating nearby
+    - armored infantry moving through a breached habitat only after autonomous drones map the unsafe pressure zones, emergency barriers and damaged utilities dominating the scene
+    - fleet officers studying physical models of orbital trajectories around a planning table, restrained displays and visible uncertainty rather than heroic posing
+    - ceasefire delegation meeting inside a neutral docking module, weapons secured outside and damaged ships visible through opposing windows
+    - search-and-rescue pilots locating escape pods in a debris field after battle, recovery equipment and medical readiness emphasized
+
+  psionic_scenario:
+    - researcher demonstrating controlled telekinesis as instrumented particles trace a measurable field around one raised hand, restrained laboratory lighting
+    - alien mediator projecting shared sensory images as translucent spatial forms between two negotiating groups, calm body language and limited luminous effects
+    - navigator perceiving folded-space routes as delicate arcs aligned over a physical star chart, dark observation chamber and concentrated posture
+    - group consciousness synchronizing through subtle repeated gestures while diagnostic equipment records matching neural patterns
+    - ancient artifact responding to a nearby person by suspending dust in precise concentric layers, archaeological chamber and cautious observers
+    - posthuman figure altering local gravity around a damaged rescue craft, floating tools and bent background light making the effect physically visible
+
+  random_tradition:
+    - "__gkr_scifi/genre_tradition_combo__"
+
+  random_military:
+    - "__gkr_scifi/military_scenario__"
+
+  random_psionic:
+    - "__gkr_scifi/psionic_scenario__"
+
+  spotlight_combo:
+    - "__gkr_scifi/spotlight_hybrid_character__"
+    - "__gkr_scifi/spotlight_characters__"
+    - "__gkr_scifi/spotlight_backgrounds__"
+    - "__gkr_scifi/spotlight_ships__"
+    - "__gkr_scifi/spotlight_scene_combo__"
+
+# ---------------------------------------------------------
+# DECLARED THEME PILLARS
+# ---------------------------------------------------------
+
+  character_pillar:
+    - "__gkr_scifi/character_family_combo__"
+    - "__gkr_scifi/character_family_combo__"
+
+  ship_pillar:
+    - "__gkr_scifi/ship_family_combo__"
+    - "__gkr_scifi/ship_family_combo__"
+
+  world_pillar:
+    - "__gkr_scifi/world_habitat_scenario__, __gkr_scifi/environment_output_format__"
+    - "__gkr_scifi/world_habitat_scenario__"
+
+  science_pillar:
+    - "__gkr_scifi/scientific_discovery_scenario__, __gkr_scifi/science_output_format__"
+    - "__gkr_scifi/scientific_discovery_scenario__"
+
+  near_future_pillar:
+    - "__gkr_scifi/near_future_scenario__"
+
+  ai_posthuman_pillar:
+    - "__gkr_scifi/ai_posthuman_scenario__"
+
+  space_opera_pillar:
+    - "__gkr_scifi/space_opera_scenario__"
+    - "__gkr_scifi/space_opera_scenario__, operatic far-future treatment with monumental architecture, ceremonial cultures and heroic widescreen staging"
+
+  civilian_pillar:
+    - "__gkr_scifi/civilian_culture_scenario__, __gkr_scifi/society_output_format__"
+
+  first_contact_pillar:
+    - "__gkr_scifi/first_contact_scenario__"
+
+  anomaly_pillar:
+    - "__gkr_scifi/anomaly_scenario__, __gkr_scifi/exotic_physics_effect__"
+
+# ---------------------------------------------------------
 # RANDOM
+# Compatibility-aware public routes. Structured pillars remain dominant while
+# specialty generators and legacy spotlights enter through controlled gateways.
 # ---------------------------------------------------------
 
   hero_combo:
@@ -386,24 +755,69 @@ gkr_scifi:
     - "__gkr_scifi/spotlight_scenes__, __gkr_scifi/mood__, __gkr_scifi/lighting__, __gkr_scifi/style__"
 
   random:
-    - "__gkr_scifi/hero_combo__"
-    - "__gkr_scifi/ship_combo__"
-    - "__gkr_scifi/scene_combo__"
-    - "__gkr_scifi/spotlight_hybrid_character__"
-    - "__gkr_scifi/spotlight_characters__, in __gkr_scifi/spotlight_backgrounds__"
-    - "__gkr_scifi/spotlight_ships__, near __gkr_scifi/spotlight_backgrounds__"
-    - "__gkr_scifi/spotlight_scene_combo__"
-    - "__gkr_scifi/archetype__, __gkr_scifi/species__, in __gkr_scifi/environment__"
-    - "__gkr_scifi/random_character__, in __gkr_scifi/random_background__"
-    - "__gkr_scifi/random_character__"
-    - "__gkr_scifi/random_background__"
-    - "__gkr_scifi/spotlight_backgrounds__"
+    # characters, professions and societies — 3 weighted entries
+    - "__gkr_scifi/character_pillar__"
+    - "__gkr_scifi/character_pillar__"
+    - "__gkr_scifi/character_pillar__"
+    # spacecraft and transportation — 3 weighted entries
+    - "__gkr_scifi/ship_pillar__"
+    - "__gkr_scifi/ship_pillar__"
+    - "__gkr_scifi/ship_pillar__"
+    # worlds, habitats and environments — 3 weighted entries
+    - "__gkr_scifi/world_pillar__"
+    - "__gkr_scifi/world_pillar__"
+    - "__gkr_scifi/world_pillar__"
+    # scientific exploration and discovery — 2 weighted entries
+    - "__gkr_scifi/science_pillar__"
+    - "__gkr_scifi/science_pillar__"
+    # near-future Earth — 2 weighted entries
+    - "__gkr_scifi/near_future_pillar__"
+    - "__gkr_scifi/near_future_pillar__"
+    # robots, AI and posthuman life — 2 weighted entries
+    - "__gkr_scifi/ai_posthuman_pillar__"
+    - "__gkr_scifi/ai_posthuman_pillar__"
+    # space opera and adventure — 2 weighted entries
+    - "__gkr_scifi/space_opera_pillar__"
+    - "__gkr_scifi/space_opera_pillar__"
+    # civilian culture, first contact, and cosmic anomalies — 1 weighted entry each
+    - "__gkr_scifi/civilian_pillar__"
+    - "__gkr_scifi/first_contact_pillar__"
+    - "__gkr_scifi/anomaly_pillar__"
+    # cross-genre visual traditions — 2/26
+    - "__gkr_scifi/random_tradition__"
+    - "__gkr_scifi/random_tradition__"
+    # explicit military and psionic specialties — 1/26 each
+    - "__gkr_scifi/random_military__"
+    - "__gkr_scifi/random_psionic__"
+    # legacy spotlight gateway — 2/26; each spotlight family remains equally likely
+    - "__gkr_scifi/spotlight_combo__"
+    - "__gkr_scifi/spotlight_combo__"
 
   random_character:
+    - "__gkr_scifi/character_family_combo__"
+
+  random_ship:
+    - "__gkr_scifi/ship_family_combo__"
+
+  random_background:
+    - "__gkr_scifi/world_pillar__"
+
+  random_scene:
+    - "__gkr_scifi/world_pillar__"
+    - "__gkr_scifi/science_pillar__"
+    - "__gkr_scifi/near_future_pillar__"
+    - "__gkr_scifi/civilian_pillar__"
+    - "__gkr_scifi/first_contact_pillar__"
+    - "__gkr_scifi/anomaly_pillar__"
+
+  legacy_random_character:
     - "__gkr_scifi/archetype__, __gkr_scifi/species__, __gkr_scifi/age__, __gkr_scifi/build__, __gkr_scifi/tone__, __gkr_scifi/face_style__, __gkr_scifi/hair__, __gkr_scifi/hair_color__, __gkr_scifi/eyes__, __gkr_scifi/expression__, __gkr_scifi/clothing__, __gkr_scifi/gear__, __gkr_scifi/weapons__, __gkr_scifi/offhand__, __gkr_scifi/trinkets__, __gkr_scifi/faction__, __gkr_scifi/mood__, __gkr_scifi/lighting__, __gkr_scifi/camera__, __gkr_scifi/style__"
     - "__gkr_scifi/archetype__, __gkr_scifi/species__, __gkr_scifi/age__, __gkr_scifi/build__, __gkr_scifi/tone__, __gkr_scifi/face_style__, __gkr_scifi/hair__, __gkr_scifi/hair_color__, __gkr_scifi/eyes__, __gkr_scifi/expression__, __gkr_scifi/armor__, __gkr_scifi/gear__, __gkr_scifi/weapons__, __gkr_scifi/offhand__, __gkr_scifi/trinkets__, __gkr_scifi/faction__, __gkr_scifi/mood__, __gkr_scifi/lighting__, __gkr_scifi/camera__, __gkr_scifi/style__"
 
-  random_background:
+  legacy_random_ship:
+    - "__gkr_scifi/ship_combo__"
+
+  legacy_random_background:
     - "__gkr_scifi/environment__, __gkr_scifi/mood__, __gkr_scifi/lighting__, __gkr_scifi/camera__, __gkr_scifi/style__, __gkr_scifi/fx_environment__"
 
 # ---------------------------------------------------------
@@ -418,7 +832,7 @@ gkr_scifi:
     - "(gripping twin control sticks:1.2), inside a mech cockpit, __gkr_scifi/hair__, __gkr_scifi/eyes__, __gkr_scifi/expression__, (warm control panel glow:1.1)"
 
 # ---------------------------------------------------------
-# SPOTLIGHT
+# LEGACY SPOTLIGHT LIBRARIES — CONTROLLED GATEWAY + EXPLICIT OPT-IN
 # ---------------------------------------------------------
 
   spotlight_characters:

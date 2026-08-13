@@ -1,700 +1,391 @@
 # ========================================================================
-# GOTHIC — EXTENDED WILDCARDS FOR COMFYUI DYNAMIC PROMPTS
+# GOTHIC HORROR — VISUAL WILDCARDS FOR COMFYUI
+# Architecture, inheritance, repression, haunting, folklore, mortality,
+# romance, investigation, and bodily dread expressed as visible imagery.
 # ========================================================================
 
 gkr_gothic:
 
-# ---------------------------------------------------------
-# CHARACTER
-# ---------------------------------------------------------
+# ------------------------------------------------------------------------
+# VISUAL GRAMMAR
+# ------------------------------------------------------------------------
 
-  archetype:
-    - aristocratic noble ruler, opulent antique attire, condescending menacing stare
-    - ancient regal countess, opulent gown, composed deadly gaze
-    - cursed noble, tormented expression, clutching at their own throat
-    - occult sorcerer, dark robes, casting shadows
-    - doomed priest, clutching holy symbol, terrified
-    - monster hunter, weathered leather coat lined with stakes, jaw clenched
-    - graveyard keeper, holding lantern, hunched
-    - wandering medium, glassy unfocused eyes, hands trembling as if listening to voices
-    - asylum doctor, stained white coat, sinister smile
-    - grieving widow, black mourning veil, sorrowful
-    - haunted child, pale, holding old doll
-    - silent watcher, standing motionless in a doorway, unblinking stare
-    - hooded acolyte, black robes embroidered with crimson sigils, mouth open, hands raised over candles
-    - humanoid shadow wraith, edges dissolving into smoke, two dim red reflections where eyes should be
-    - stitched abomination, patchwork skin, grotesque
-    - feral figure mid-transformation, clothes tearing at the seams, snarling
-    - possessed puppeteer, jerking unnatural movements, glassy stare
-    - priest of light, chin raised, arms outstretched, faint white halo of light behind the head
-    - holy knight, polished silver plate armor engraved with prayers, longsword wrapped in blessed cloth
-    - spectral guardian, translucent silver plate armor, one hand raised in warning
-    - exorcist, holding crucifix, mouth open, one hand raised toward a recoiling shadow
-
-  race:
-    - undead, rotting flesh, shambling
-    - human with dark sigils spreading beneath cracked skin like fresh bruises
-    - revenant, clawing up through grave dirt, cloudy eyes fixed upward
-    - spectral being, ethereal mist, faint outline
-    - ghost, translucent, floating
-    - ghoul, feasting on corpse, hunched
-    - zombie, blank eyes, torn clothes
-    - vampire, elegant, fangs
-    - werewolf, bestial, full moon
-    - wraith, shadow form, black tendrils drawing pale light from a collapsed figure
-    - specter, translucent body rimmed with frost, open mouth, clawed hands reaching forward
-    - ghostly apparition, translucent figure emerging through a wall, arms outstretched
-    - human, terrified, running
-    - elf, pale, ancient, sorrowful
-    - dwarf, grim, carrying axe, rune-covered
-    - orc, dark tarnished plate armor with jagged spiked edges, brutal
-    - halfling, frightened, hiding
-    - goblin, mutated, twisted features
-    - gnome, wild frizzled hair, tinkering with a sparking brass contraption
-    - great ancient, writhing tentacles, impossible geometry warping the air around it
-    - cthulhu, massive, rising from deep
-    - lich, skeletal, crown of bones, clutching a (cracked reliquary pulsing with green light:1.3)
-    - banshee, wailing, mouth open
-    - demon spawn, small, clawed hands
-    - phantom, flickering, insubstantial
-    - poltergeist, objects flying, invisible force
-    - shadow fiend, pure darkness, solid shape
-    - revenant knight, rusted armor, sword wet with black condensation
-    - skeletal warrior, carrying sword, bone armor
-
-  # Coherent identity families for modular prompts. The legacy `race` list is
-  # retained for direct callers, but complete combos use these narrower pools.
-  humanlike_identity:
-    - mortal human, visibly exhausted, period clothing worn at the cuffs
-    - pale vampire, elegant posture, subtle fangs, old-fashioned formal dress
-    - revenant, grave-pale skin, burial dirt beneath the nails, damaged period clothing
-    - afflicted lycanthrope in mostly human form, coarse hair spreading along the jaw and hands
-    - sorrowful pale elf, ancient features, severe black mourning clothes
-    - possessed mortal, rigid posture, unfocused eyes, fingers bent at unnatural angles
-    - living porcelain doll in child-sized mourning clothes, fine cracks around the mouth
-    - stitched humanlike creation, mismatched skin seams, heavy work clothes, uncertain expression
-
-  incorporeal_identity:
-    - translucent ghost in water-stained burial clothes, feet fading before touching the floor
-    - frost-rimmed specter, elongated hands, mouth fixed in a silent warning
-    - shadow wraith, human outline breaking into smoke at the edges, no visible face
-    - drowned apparition, streaming hair and dress suspended as if underwater
-    - veiled banshee, thin translucent fabric whipping around an open mouth
-    - invisible poltergeist revealed by airborne furniture, dust, and violently drawn curtains
-    - phantom soldier, faded uniform, incomplete silhouette, broken weapon held at rest
-    - spectral child, indistinct features, old toy hanging from one hand
-
-  corporeal_monster:
-    - grave ghoul, elongated limbs, dirt-caked claws, hunched animal posture
-    - shambling corpse, water-swollen skin, torn work clothes, blank milky eyes
-    - ancient vampire beast, gaunt batlike anatomy beneath remnants of aristocratic clothing
-    - skeletal knight, corroded armor, roots threaded through the rib cage
-    - stitched abomination, asymmetrical limbs, heavy sutures, stained canvas restraints
-    - feral werewolf, matted fur, long forelimbs, scraps of clothing caught around the torso
-    - small demon spawn, soot-black claws, hairless skin, too-wide mouth
-    - corpse spider assembled from human limbs, moving low across the floor
-
-  eldritch_entity:
-    - vast tentacled presence visible only in fragments beyond rain-streaked windows
-    - many-jointed figure whose silhouette contradicts the direction of the light
-    - pale subterranean organism with a ring of closed eyes and slow breathing folds
-    - impossible floating mass bending doorframes and floorboards toward its center
-    - ancient sea-borne shape rising behind a lighthouse, scale obscured by storm clouds
-    - starved oracle transformed into a column of mouths whispering different prayers
-
-  age:
-    - youthful but timeless, ageless face
-    - middle aged, weathered face, somber
-    - elderly, wrinkled, ancient gaze
-    - ageless undead, perfect skin, hollow eyes
-
-  build:
-    - gaunt and thin, skeletal frame, angular
-    - slender and elegant, graceful, tall
-    - average build, nondescript, frightened
-    - imposing and tall, broad shoulders, looming
-
-  tone:
-    - pale lifeless skin, alabaster, like marble
-    - ashen grey skin, dust covered, petrified
-    - corpse like skin, (blue tint:1.2), decaying
-    - blood stained complexion, fresh blood, smeared
-
-# ---------------------------------------------------------
-# APPEARANCE
-# ---------------------------------------------------------
-
-  face_style:
-    - hollow cheeks, sunken features, gaunt
-    - sharp angular features, high cheekbones
-    - delicate tragic features, beautiful, sad
-    - face with sunken eyes, deep shadows
-    - face partly hidden by veil, mysterious
-
-  hair:
-    - long dark hair, flowing, straight
-    - long white hair, ethereal, ancient
-    - messy unkempt hair, tangled, wild
-    - tightly bound bun, severe, strict
-    - wet stringy hair, dripping water, lank
-    - wild frayed hair, static electricity, frazzled
-
-  hair_color:
-    - black hair, jet black, oily
-    - dark brown hair, deep brunette
-    - white hair, snow white, stark
-    - grey hair, salt and pepper, silver
-    - hair stained (blood red:1.2), dripping
-
-  eyes:
-    - hollow dark eyes, empty sockets, void
-    - deep red irises catching the candlelight, menacing, supernatural
-    - (ghostly white eyes:1.2), milky, blind
-    - (animal like yellow eyes:1.2), slit pupils, predatory
-    - empty eye sockets, dark holes, terrifying
-
-  expression:
-    - cold emotionless stare, blank face
-    - sorrowful haunted look, tear tracks, deep sadness
-    - predatory grin, (sharp teeth:1.2), sinister
-    - fearful horrified expression, wide eyes, screaming
-    - trance like gaze, unfocused, staring
-
-  clothing:
-    - tattered formal suit, torn fabric, old
-    - elegant but worn dress, faded silk, torn lace
-    - priest robes, stained, frayed edges
-    - hunter coat, heavy leather, belts and buckles
-    - nightgown with lace, thin fabric, white
-    - asylum uniform, canvas, restrained
-    - cloak with high collar, (heavy velvet:1.2), obscuring face
-    - tattered burial shrouds, wrapped
-    - rotted noble's attire, decayed finery
-
-  headwear:
-    - hooded, (dark cowl:1.2), face in shadow
-    - tattered top hat, Victorian
-    - (black mourning veil:1.2), lace
-    - (no headwear)
-    - iron helmet, rusted, pointed spiked crest
-    - (plague doctor mask:1.3), beak
-    - (horned mask:1.2), carved from bone
-    - ornate circlet with thorn-like spikes, tarnished silver
-    - crown of bones, primitive
-
-  accessories:
-    - (silver crucifix:1.2), shining
-    - tarnished amulet that feels warm through the fabric
-    - leather-bound tome, (occult symbols:1.2)
-    - monocle, (cracked lens:1.1)
-    - pocket watch, rusted chain
-    - sealed vial of dark blood, red only where held to the light
-    - lantern, (flickering candle:1.1)
-    - satchel of bones, rattling
-    - (no accessories)
-    
-  weapons:
-    - (silvered crossbow:1.2), ornate
-    - wooden stake, hammer
-    - rusted cleaver, blood-stained
-    - ritual dagger, wet engraved channels, sacrificial
-    - holy sword wrapped with faded prayer strips
-    - scythe, (pitted blade:1.1), rusted
-    - flintlock pistol, ornate carving
-    - (no weapon)
-    - gnarled wooden staff, (runes:1.1)
-    - heavy rusted chain
-
-# ---------------------------------------------------------
-# CREATURES (AMBIENT / NON-HUMANOID)
-# ---------------------------------------------------------
-
-  creatures:
-    - swarming bats, cloud of bats
-    - spectral wolf pack, eyes reflecting a distant lantern
-    - grave worm, massive, burrowing
-    - skeletal serpent, bone scales
-    - corpse spider, (made of limbs:1.2)
-    - shadow raven swarm, flock
-    - undead hound, (exposed ribs:1.1), snarling
-    - crawling severed hands, skittering
-    - pale moths clustering across portraits and mirrors
-    - black rats fleeing from an unseen presence
-    - carrion crows watching silently from bare branches
-    - eyeless cave fish circling beneath still black water
-    - funeral beetles emerging from cracks in old furniture
-    - gaunt deer standing motionless at the forest edge
-    - houseflies gathering on a spotless locked door
-    - white owl carrying a strip of black mourning ribbon
-
-# ---------------------------------------------------------
-# ENVIRONMENT
-# ---------------------------------------------------------
-
-  setting:
-    - abandoned mansion hall, dusty, cobwebs
-    - moonlit graveyard, tilted headstones, fog
-    - foggy village street, cobblestone, (dim gas lamps:1.2)
-    - crumbling cathedral interior, (broken stained glass:1.2)
-    - old forest, (twisted trees:1.2), gnarled roots
-    - decaying crypt, open coffins, bones
-    - candlelit study, old books, (occult symbols:1.2)
-    - storm battered cliff side manor, lightning, crashing waves
-    - sealed nursery, sheet-covered furniture, faded animal wallpaper, one recently disturbed toy
-    - inherited country estate, family portraits turned toward the wall, locked west wing
-    - abandoned anatomy theatre, tiered benches, stained demonstration table, cabinets of cloudy specimens
-    - isolated moorland inn, rain beating against small windows, muddy footprints ending at the stairs
-    - coastal fishing village at low tide, empty boats, salt-rotted chapel, bells sounding offshore
-    - overgrown convent garden, headless saints, thorn-choked paths, empty stone well
-    - manor portrait gallery, generations of stern faces, one fresh canvas in an antique frame
-    - flooded cellar beneath a townhouse, floating papers, iron door visible below the water
-    - remote harvest village, woven effigies above every doorway, fields cut into unfamiliar symbols
-    - shuttered opera house, dusty velvet seats, stage curtain moving without a draft
-    - snowbound railway platform, stopped clock, abandoned luggage, no tracks beyond the station
-    - narrow boarding-house corridor, identical doors, floral wallpaper repeating incorrectly
-
-  mood:
-    - tilted composition, deep shadows, distant indistinct silhouette
-    - cramped framing, low ceiling, dense black shadows pressing around the subject
-    - desaturated grey palette, collapsed doorway, lone figure with bowed head
-    - motionless figures, rigid poses, wide eyes fixed on an unseen doorway
-    - bowed figures, tear-streaked faces, wilted flowers, cold blue-grey palette
-    - long converging shadows, distant silhouette emerging through fog
-    - ordinary domestic arrangement disturbed by one impossible detail, restrained composition
-    - subject listening toward an empty adjoining room, large negative space behind them
-    - repeated objects arranged almost identically, subtle differences suggesting lost time
-    - polite rigid figures concealing fear, hands clenched below the frame
-    - warm foreground safety separated from an unreadable darkness by a thin doorway
-    - evidence of recent activity but no visible person, chair still rocking, tea still steaming
-    - intimate sorrow, withheld touch, rain tracing the window between two figures
-    - communal celebration with every face turned toward a single outsider
-
-  lighting:
-    - dim candlelight, flickering, soft shadows
-    - (moonlight:1.1) through broken windows, light rays, dust particles
-    - flickering lantern light, casting (moving shadows:1.2)
-    - (lightning flash:1.3), brief illumination, stark contrast
-    - cold blue night tones, pale light, somber
-    - weak morning light through dirty lace curtains, natural colors drained by rain
-    - single oil lamp outside the frame, uneven amber falloff, distant corners unreadable
-    - overcast daylight filling the room while one doorway remains unnaturally black
-    - dying fireplace light, red reflections on polished wood, faces mostly unlit
-    - pale winter dusk, flat exterior light, warm windows with no silhouettes inside
-    - candle extinguished moments ago, thin smoke crossing a shaft of moonlight
+  gothic_tradition:
+    - eighteenth-century literary Gothic, ruined estates, candlelit chambers, sublime landscape and restrained terror
+    - Victorian Gothic, mourning customs, gaslit institutions, industrial soot and elaborate domestic interiors
+    - Southern Gothic, decaying prosperity, oppressive heat, family relics and overgrown property
+    - Romantic Gothic, storm landscapes, doomed intimacy, pale dawn and emotionally charged architecture
+    - ecclesiastical Gothic, monumental stone, ritual objects, damaged sacred space and moral ambiguity
+    - folk Gothic, isolated community, seasonal materials, handmade ritual objects and watchful landscape
+    - maritime Gothic, salt-damaged buildings, storm signals, drowned objects and black coastal water
+    - medical Gothic, anatomy theatre, clinical restraint, specimen cabinets and bodily uncertainty
+    - urban gaslamp Gothic, crowded lodging houses, narrow streets, institutions and class separation
+    - modern domestic Gothic, ordinary home, inherited objects, architectural repetition and one impossible detail
 
   camera:
-    - (close up:1.2), haunted face, intense emotion
-    - medium shot, in dark hallway, figure centered
-    - (low angle:1.2), looming figure, imposing
-    - high angle, victim perspective, looking down
-    - (wide shot:1.1), ruins, establishing scene
-    - distant observational view through a partially open doorway
-    - over-the-shoulder view toward an ambiguous reflection
-    - symmetrical room view with one architectural inconsistency
-    - shallow-focus detail of a clue, threatening space blurred behind it
-    - static wide composition, vulnerable figure placed near the frame edge
+    - distant view through a partially open doorway, observer separated from the subject
+    - symmetrical room frame with one architectural inconsistency
+    - close view of hands, letter, key or damaged keepsake with threat blurred behind
+    - low corridor perspective, repeating doors and converging floor pattern
+    - high view exposing a vulnerable figure within monumental architecture
+    - static wide composition with the subject placed near an exit that will not open
+    - over-the-shoulder view toward a reflection that does not match the room
+    - intimate paired portrait with withheld touch and conflicting eyelines
+    - exterior long shot reducing travelers beneath hostile weather and landscape
+    - restrained portrait lit by one practical source outside the frame
 
-  style:
-    - gothic horror illustration, (high contrast:1.2), pen and ink
-    - dark painterly style, (visible brushstrokes:1.1), oil on canvas
-    - black and white horror engraving, woodcut style, detailed lines
-    - muted desaturated color palette, somber tones
-    - Victorian book illustration, fine crosshatching, restrained sepia wash
-    - faded hand-tinted photograph, soft focus, damaged emulsion edges
-    - theatrical Gothic melodrama painting, deep velvet colors, controlled candlelight
-    - stark charcoal drawing, erased highlights, rough paper texture
+  lighting:
+    - weak morning light through dirty lace curtains, natural colors drained by rain
+    - single oil lamp with uneven amber falloff and unreadable distant corners
+    - overcast daylight filling the room while one doorway remains unnaturally black
+    - dying fireplace light reflected in polished wood and mostly unlit faces
+    - pale winter dusk, flat exterior light and warm windows without silhouettes
+    - lightning revealing an unexpected figure for one instant through tall windows
+    - candle extinguished moments ago, smoke crossing a narrow moonbeam
+    - cold institutional skylight above warmer handheld lamps
+    - hard coastal dawn through salt-streaked glass
+    - practical gaslight interrupted by alternating failed fixtures
 
-  fx_environment:
-    - drifting fog, ground fog, obscuring
-    - swirling dead leaves, wind, autumn
-    - falling ash, embers, burnt
-    - translucent vapor strands moving against the draft, ethereal
-    - blood stains on floor, dark red, old
-    - (crawling shadows:1.3), moving darkness, unnatural
-    - condensation forming words on cold glass, letters slowly running together
-    - fine dust disturbed by invisible footsteps crossing the room
-    - wallpaper lifting and settling as though the wall were breathing
-    - distant door swinging shut while every curtain remains still
+  rendering:
+    - Gothic book illustration, fine crosshatching, restrained sepia wash and generous paper white
+    - dark oil painting, visible brushwork, deep earth pigments and controlled candlelight
+    - black-and-white wood engraving, carved textures and broad pools of shadow
+    - faded hand-tinted photograph, soft focus and damaged emulsion edges
+    - theatrical Gothic melodrama painting, velvet color and expressive staging
+    - stark charcoal drawing, erased highlights and rough paper grain
+    - cinematic Gothic realism, natural material decay, practical lighting and fine film grain
+    - ink-wash horror illustration, bleeding edges and one restrained spot color
 
-  fx_magic:
-    - chalk occult circle on the floor, candle flames leaning inward
-    - swirling dark smoke spiraling upward from raised hands, violet sparks within
-    - wet blood-red sigils spreading slowly across old plaster
-    - (ghostly apparitions:1.2), faint figures, appearing
-    - mirror reflection moving a moment later than the subject
-    - written lines rearranging themselves across an open book
-    - invisible pressure bowing floorboards around a motionless figure
-    - black liquid rising vertically from a ritual bowl
+# ------------------------------------------------------------------------
+# GENRE-SAFE CHARACTER FAMILIES
+# ------------------------------------------------------------------------
 
-# ---------------------------------------------------------
-# RANDOM COMBINATIONS
-# ---------------------------------------------------------
+  household_character:
+    - grieving estate heir in altered mourning clothes, sealed letter and ring of unfamiliar keys
+    - stern housekeeper carrying an inventory ledger, every room key except one
+    - aging family solicitor with document case, spectacles and a portrait wrapped in cloth
+    - child resident holding a repaired doll whose clothing matches an old family photograph
+    - impoverished aristocrat wearing carefully maintained formal clothes in a visibly decaying room
+    - distant relative arriving with one small trunk and knowledge of a forbidden room
+    - elderly tenant guarding decades of correspondence inside a worn traveling case
+    - newly married resident noticing their likeness in an ancestral portrait
 
-  hero_combo:
-    - "__gkr_gothic/archetype__, __gkr_gothic/age__, __gkr_gothic/build__, __gkr_gothic/face_style__, __gkr_gothic/expression__, __gkr_gothic/clothing__, __gkr_gothic/accessories__, __gkr_gothic/setting__, __gkr_gothic/mood__, __gkr_gothic/lighting__, __gkr_gothic/camera__, __gkr_gothic/style__"
-    - "__gkr_gothic/humanlike_identity__, __gkr_gothic/expression__, __gkr_gothic/accessories__, __gkr_gothic/setting__, __gkr_gothic/mood__, __gkr_gothic/lighting__, __gkr_gothic/camera__, __gkr_gothic/style__"
+  investigator_character:
+    - period detective with notebook, shaded lantern and mud-stained evidence envelopes
+    - physician carrying a leather diagnostic case and visibly contradictory anatomical sketches
+    - skeptical archivist with cotton gloves, magnifying lens and altered parish records
+    - occult scholar using chalk, measuring cord and translated ritual fragments
+    - coastal constable carrying tide tables beside a water-damaged missing-person notice
+    - insurance inspector photographing a fire-damaged manor where no object is burned
+    - journalist comparing witness statements beneath a wall of family photographs
+    - amateur naturalist documenting tracks that begin as animal prints and end as bare feet
 
-  monster_combo:
-    - "__gkr_gothic/corporeal_monster__, near __gkr_gothic/setting__, __gkr_gothic/mood__, __gkr_gothic/lighting__, __gkr_gothic/camera__, __gkr_gothic/style__, __gkr_gothic/fx_environment__"
-    - "__gkr_gothic/incorporeal_identity__, within __gkr_gothic/setting__, __gkr_gothic/mood__, __gkr_gothic/lighting__, __gkr_gothic/camera__, __gkr_gothic/style__, __gkr_gothic/fx_environment__"
-    - "__gkr_gothic/eldritch_entity__, __gkr_gothic/setting__, __gkr_gothic/mood__, __gkr_gothic/lighting__, __gkr_gothic/camera__, __gkr_gothic/style__"
+  religious_character:
+    - exhausted exorcist in travel-worn clerical clothing, prayer book, candle and practical medical restraints
+    - conflicted parish priest holding a damaged reliquary before an empty congregation
+    - convent gardener carrying pruning tools past headless saint statues
+    - young acolyte discovering fresh soil beneath a sealed chapel floor
+    - rural ritual keeper arranging handmade offerings according to a faded seasonal diagram
+    - hospital chaplain seated beside a patient whose reflection remains standing
+    - disgraced theologian translating marginal notes from a forbidden devotional text
+    - silent pilgrimage guide carrying votive tokens from travelers who never returned
 
-  ritual_combo:
-    - "occult practitioner in plain black robes, candlelit study, chalk ritual circle with candle flames leaning inward, distant silhouette barely visible beyond the doorway, wide eyes with dark tear tracks, high-contrast pen-and-ink illustration, __gkr_gothic/accessories__"
+  medical_character:
+    - anatomy lecturer in a stained apron, pointer paused over an impossible specimen
+    - asylum nurse carrying a key ring and folded patient drawings
+    - village healer sorting dried herbs beside a bundle containing human teeth
+    - mortuary attendant discovering fresh condensation inside an old sealed drawer
+    - surgeon washing instruments while an empty operating table slowly depresses
+    - rehabilitation patient learning to use a stitched hand with mismatched fingerprints
+    - apothecary comparing medicine bottles whose labels have exchanged names
+    - undertaker measuring an apparently empty coffin from the inside
 
-  scene_combo:
-    - "__gkr_gothic/setting__, __gkr_gothic/mood__, __gkr_gothic/lighting__, __gkr_gothic/style__, __gkr_gothic/camera__, __gkr_gothic/fx_environment__, __gkr_gothic/creatures__"
+  folk_character:
+    - harvest-master wearing ordinary work clothes and a handmade straw mask
+    - isolated innkeeper serving identical meals to silent local patrons
+    - shepherd carrying bells removed from animals that returned without shadows
+    - village bride wearing inherited flowers dried almost black
+    - woodcarver producing protective figures whose faces resemble recent visitors
+    - ferryman collecting tokens from passengers visible only in the water
+    - midwife carrying a woven basket toward a house every resident avoids
+    - traveling musician whose regional songs cause villagers to close their shutters
+
+  supernatural_character:
+    - translucent drowned bride, water-dark dress and weeds caught in streaming hair
+    - pale vampire in old formal clothes, subtle fangs and no reflection in nearby silver
+    - revenant in burial clothes, grave soil beneath intact fingernails and one personal token
+    - spectral child with indistinct face, feet fading above the floor and toy held at the side
+    - frost-rimmed soldier apparition, incomplete uniform and broken weapon lowered
+    - veiled banshee whose fabric moves while every curtain remains still
+    - humanlike shadow with edges dissolving against the direction of the room light
+    - stitched creation in heavy work clothes, uncertain expression and careful gentle hands
+
+  relationship:
+    - heir and housekeeper silently disagreeing over a locked family room
+    - investigator and witness becoming mutually dependent inside an isolated place
+    - living spouse and spectral beloved separated by glass, water or reflection
+    - parent and child concealing different knowledge of the same apparition
+    - physician and patient each doubting which body is changing
+    - priest and skeptic interpreting identical physical evidence differently
+    - siblings assigning opposite meanings to an inherited object
+    - village insider and visiting outsider exchanging suspicion through formal hospitality
+
+# ------------------------------------------------------------------------
+# ENVIRONMENTS AND PHYSICAL SUBJECTS
+# ------------------------------------------------------------------------
+
+  domestic_environment:
+    - inherited country estate, family portraits turned toward the wall and locked west wing
+    - sealed nursery, sheet-covered furniture, faded wallpaper and one recently disturbed toy
+    - manor dining room set for an absent guest, condensation forming on one untouched glass
+    - narrow boarding-house corridor, identical doors and floral wallpaper repeating incorrectly
+    - family portrait gallery, generations of stern faces and one fresh canvas in an antique frame
+    - flooded townhouse cellar, floating papers and an iron door visible below the water
+
+  institutional_environment:
+    - abandoned anatomy theatre, tiered benches, stained table and cabinets of cloudy specimens
+    - decaying asylum ward, rusted beds, observation windows and patient drawings behind plaster
+    - shuttered opera house, dusty velvet seats and stage curtain moving without a draft
+    - snowbound railway platform, stopped clock, abandoned luggage and no tracks beyond the station
+    - old courthouse archive, warped shelves, sealed testimony and water spreading from a dry wall
+    - charity hospital chapel, empty pews, medical screens and wax footprints ending at the altar
+
+  sacred_environment:
+    - crumbling cathedral nave, damaged stained glass, empty pews and translucent faces in the stone
+    - overgrown convent garden, headless saints, thorn-choked paths and an empty well
+    - rural chapel, handmade votive figures and floorboards repaired in several eras
+    - cliffside monastery, storm bells, salt-damaged manuscripts and sealed lower stairs
+    - cemetery ossuary, labeled bones, missing nameplates and one recently opened niche
+    - pilgrimage road through barren hills, abandoned offerings and footprints that never leave the path
+
+  folk_environment:
+    - remote harvest village, woven effigies above every doorway and fields cut into unfamiliar symbols
+    - isolated moorland inn, muddy footprints ending at the stairs while guests face the door
+    - sacred grove, stone altar, votive ribbons and one chair facing away from the gathering
+    - orchard after a wedding feast, identical flower crowns and abandoned shoes lined at the field edge
+    - village well surrounded by offerings of hair, toys and carefully folded letters
+    - winter procession route marked by lanterns leading into an unoccupied forest
+
+  maritime_environment:
+    - coastal fishing village at low tide, empty boats and bells sounding from offshore
+    - storm-battered cliff manor, salt-rotted windows and one upper room kept dry
+    - abandoned lighthouse interior, wet spiral stairs and keeper logs continuing after evacuation
+    - wrecked chapel revealed below the tide, pews covered in weed and candles still upright
+    - fogbound ferry landing, timetable for a route removed from every current map
+    - sea cave beneath a cemetery, coffin fragments and fresh flowers above the waterline
+
+  gothic_prop:
+    - sealed family letter with handwriting changing midway down the page
+    - iron key whose teeth match no lock but leave rust marks on one door
+    - mourning portrait where the sitter's hands occupy a different pose in reflection
+    - cracked music box playing only while the lid remains closed
+    - medical diagram with layered corrections forming a second anatomy
+    - tide ledger recording arrivals on nights when no boat sailed
+    - child's doll repaired with fabric cut from an adult burial garment
+    - ritual bundle of herbs, hair, teeth and a photograph taken decades later
+
+  creature_subject:
+    - corpse moths clustering into the outline of a missing face
+    - gaunt antlered animal standing motionless at the edge of cultivated land
+    - grave hound with exposed ribs packed with roots and cemetery flowers
+    - immense pale cave organism visible through a ring of closed eyes and breathing folds
+    - house centipede assembled from porcelain doll limbs and human hair
+    - black coastal bird carrying strips of burial cloth inland
+    - many-jointed figure whose silhouette contradicts the direction of every light
+    - living topiary shaped like generations of a family walking toward the house
+
+# ------------------------------------------------------------------------
+# AUTHORED VISUAL SCENES
+# ------------------------------------------------------------------------
+
+  haunting_scene:
+    - resident reading beside a dying fireplace while a translucent child sits unnoticed at their feet
+    - wooden horse rocking in a sealed nursery, damp footprints ending beneath the bed
+    - family dinner arranged for an absent guest, every portrait turned toward the empty chair
+    - drowned apparition beyond an upper-floor window, wet handprint appearing on the inside glass
+    - old woman folding clothes while an unseen person depresses the chair opposite her
+    - corridor lamps extinguishing one by one toward a figure who remains still
+
+  psychological_scene:
+    - solitary figure facing a mirror reflection turned in the wrong direction
+    - detective comparing two family photographs containing the same unknown child decades apart
+    - patient walking a corridor where every clock shows a different hour
+    - woman setting tea for an unseen visitor as the second cup gradually empties
+    - scholar finding notebooks that describe the room from a viewpoint inside the wall
+    - man returning home to a family calmly displaying his funeral portrait
+
+  folk_horror_scene:
+    - smiling villagers carrying woven effigies toward a hilltop fire while one outsider is held back
+    - masked residents circling an empty chair during a daylight seasonal rite
+    - rural wedding guests wearing identical crowns beside shoes lined at the field edge
+    - healer opening a charm bundle and discovering human teeth among dried plants
+    - traveler sheltering in an inn while every patron recites the same prayer
+    - children replacing village door markings as adults watch from shuttered windows
+
+  gothic_romance_scene:
+    - estranged lovers separated by a rain-streaked window, one visible only in reflection
+    - widow reading forbidden letters beside an unopened crypt at cold dawn
+    - vampire offering a gloved hand in an empty ballroom, attraction and suspicion held in posture
+    - spectral bride waiting at a ruined altar as an aged beloved approaches with a lantern
+    - heir uncovering a lost lover's portrait bearing their own face
+    - doomed couple embracing on a cliff while an ancestral manor burns far behind
+
+  investigation_scene:
+    - detective examining muddy barefoot tracks that begin inside a locked study
+    - doctor and constable inspecting a warm bed in an otherwise empty sealed room
+    - scholar mapping symbols carved beneath village thresholds while residents watch
+    - investigators opening a family archive where fresh ink covers undisturbed dust
+    - coastal priest and detective following wet footprints inland from a chapel bell heard beneath the sea
+    - anatomist comparing a missing-person sketch with a face inside an unlabeled specimen jar
+
+  medical_horror_scene:
+    - surgical team watching an empty operating table sink beneath invisible weight
+    - patient and physician comparing scans that show different skeletons at the same time
+    - anatomy students discovering the demonstration specimen has copied one observer's scars
+    - asylum nurse unlocking a room whose interior is much larger than the building
+    - undertaker measuring a coffin while tapping answers from inside match each number
+    - apothecary arranging bottles that cast shadows shaped like their former patients
+
+  maritime_horror_scene:
+    - lighthouse keeper reading a fresh log entry in their own handwriting during a storm
+    - villagers watching empty fishing boats return in formation at low tide
+    - ferry passengers waiting for a vessel visible only as lights beneath black water
+    - cliff-manor residents setting places for relatives lost at sea generations earlier
+    - investigator descending into a chapel exposed beneath the retreating tide
+    - drowned belongings washing ashore arranged in the order their owners disappeared
+
+  quiet_horror_scene:
+    - ordinary breakfast room with one chair casting the shadow of a standing person
+    - recently used washbasin in a sealed bedroom, water still circling the drain
+    - tea steaming beside a rocking chair after every resident has left the house
+    - clean locked door gathering flies while adjacent rooms remain decayed
+    - family photograph placed face-down again each time the resident leaves the room
+    - snow accumulating across a doorstep except for two bare footprints facing inward
+
+# ------------------------------------------------------------------------
+# SCENE ROUTES
+# ------------------------------------------------------------------------
 
   haunting_combo:
-    - "grieving resident seated in an inherited manor, a recently deceased relative visible only in the dark window reflection, weak morning light, restrained Gothic horror illustration"
-    - "sealed nursery at midnight, wooden horse rocking by itself, small damp footprints ending beneath the bed, distant observational view through the doorway"
-    - "family dinner arranged for an absent guest, untouched place setting slowly collecting condensation, every portrait turned toward the empty chair"
-    - "empty boarding-house corridor, muffled footsteps passing behind identical locked doors, floral wallpaper lifting as if breathing"
-    - "drowned apparition standing beyond a rain-streaked window on the upper floor, wet handprint appearing on the inside glass"
-    - "old woman reading beside a dying fireplace, translucent child seated unnoticed at her feet, intimate quiet composition"
-
-  folk_horror_combo:
-    - "isolated harvest village at dusk, smiling residents carrying woven effigies toward a hilltop fire, one visiting outsider held back from the procession"
-    - "ancient seasonal rite in a sacred grove, masked villagers circling an empty chair, ribbons tied to every branch, overcast daylight"
-    - "rural wedding feast beneath black orchard trees, guests wearing identical flower crowns, abandoned shoes lined neatly at the field edge"
-    - "village healer opening a family charm bundle, discovering human teeth sewn among dried herbs, oil-lamp close view"
-    - "stone well surrounded by offerings of hair and children's toys, villagers watching silently from distant cottage doors"
-    - "traveler sheltering in a remote inn while muddy patrons recite the same prayer in unison, storm pressing against the windows"
-
+    - "__gkr_gothic/haunting_scene__, __gkr_gothic/domestic_environment__, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/gothic_tradition__, __gkr_gothic/rendering__"
   psychological_horror_combo:
-    - "solitary figure confronting a mirror reflection that faces the wrong direction, ordinary bedroom in grey morning light, restrained composition"
-    - "detective comparing two identical family photographs taken decades apart, the same unknown child present in both, shallow-focus clue detail"
-    - "patient walking a narrow institution corridor where every clock shows a different hour, doors repeating beyond possible architectural depth"
-    - "woman setting tea for a visitor she cannot see, second cup gradually emptying, warm domestic foreground and unreadable doorway behind"
-    - "scholar discovering that every handwritten notebook page describes the current room from a viewpoint inside the wall"
-    - "man returning home to find his family calmly insisting he died years ago, polite rigid poses, large negative space between them"
-
+    - "__gkr_gothic/psychological_scene__, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/gothic_tradition__, restrained effects, __gkr_gothic/rendering__"
+  folk_horror_combo:
+    - "__gkr_gothic/folk_horror_scene__, __gkr_gothic/folk_environment__, __gkr_gothic/folk_character__, __gkr_gothic/camera__, natural daylight or firelight, __gkr_gothic/rendering__"
   gothic_romance_combo:
-    - "two estranged lovers separated by a rain-streaked manor window, one living and one faintly reflected, restrained sorrow, faded hand-tinted photograph"
-    - "mourning widow reading forbidden letters beside an unopened crypt, wilted flowers and an extinguished candle, cold dawn"
-    - "vampire countess offering a gloved hand to a frightened guest in an empty ballroom, attraction and suspicion held in rigid posture"
-    - "spectral bride waiting at a ruined chapel altar while her aged beloved approaches with a lantern, pale winter dusk"
-    - "aristocratic heir uncovering a portrait of a lost lover with their own face, inherited estate gallery, controlled candlelight"
-    - "doomed couple embracing on a storm-battered cliff as an ancestral manor burns far behind them, theatrical Gothic melodrama painting"
-
+    - "__gkr_gothic/gothic_romance_scene__, __gkr_gothic/relationship__, __gkr_gothic/camera__, __gkr_gothic/lighting__, Romantic Gothic, __gkr_gothic/rendering__"
   investigation_combo:
-    - "period detective examining muddy barefoot tracks that begin inside a locked study, assistant holding an oil lamp, culprit unseen"
-    - "doctor and constable inspecting an immaculate bedroom where the occupant vanished, bed still warm, frost forming inside the wardrobe"
-    - "occult scholar mapping recurring symbols carved beneath village doorsteps while residents watch through shutter gaps"
-    - "investigators opening a sealed family archive, documents altered with fresh ink, dust undisturbed across the desk"
-    - "coastal priest and skeptical detective searching an abandoned chapel after bells sounded beneath the sea, wet footprints leading inland"
-    - "two investigators in an anatomy theatre comparing a missing-person sketch with the face of an unnamed specimen jar"
+    - "__gkr_gothic/investigation_scene__, __gkr_gothic/investigator_character__, physical evidence clearly visible, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/rendering__"
+  medical_horror_combo:
+    - "__gkr_gothic/medical_horror_scene__, __gkr_gothic/medical_character__, __gkr_gothic/institutional_environment__, __gkr_gothic/camera__, cold practical lighting, __gkr_gothic/rendering__"
+  maritime_gothic_combo:
+    - "__gkr_gothic/maritime_horror_scene__, __gkr_gothic/maritime_environment__, __gkr_gothic/camera__, hard coastal weather, __gkr_gothic/rendering__"
+  ecclesiastical_gothic_combo:
+    - "__gkr_gothic/religious_character__, __gkr_gothic/sacred_environment__, __gkr_gothic/relationship__, one visible ritual disturbance, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/rendering__"
+  supernatural_portrait_combo:
+    - "__gkr_gothic/supernatural_character__, full-body figure with one physically impossible trait, restrained background, practical light, __gkr_gothic/rendering__"
+  quiet_horror_combo:
+    - "__gkr_gothic/quiet_horror_scene__, static composition, ordinary material detail, no visible monster, __gkr_gothic/lighting__, __gkr_gothic/rendering__"
 
-  dark_fantasy_action_combo:
-    - "monster hunter in a weathered leather coat confronting __gkr_gothic/corporeal_monster__, ruined cathedral courtyard, silvered weapon held defensively, storm light, dark fantasy action illustration"
-    - "exorcist braced in a chapel doorway while __gkr_gothic/incorporeal_identity__ bends candles and loose pages toward itself, high-contrast Gothic action scene"
+# ------------------------------------------------------------------------
+# MODULAR OUTPUT FORMATS
+# ------------------------------------------------------------------------
 
-  random:
-    - "__gkr_gothic/hero_combo__"
-    - "__gkr_gothic/monster_combo__"
-    - "__gkr_gothic/ritual_combo__"
-    - "__gkr_gothic/scene_combo__"
-    - "__gkr_gothic/random_character__"
-    - "__gkr_gothic/random_backgrounds__"
-    - "__gkr_gothic/spotlight_characters__"
-    - "__gkr_gothic/spotlight_backgrounds__"
-    - "__gkr_gothic/spotlight_monsters__"
+  standalone_character_combo:
+    - "standalone Gothic household character: __gkr_gothic/household_character__, role-defining objects, neutral domestic context, __gkr_gothic/rendering__"
+    - "standalone Gothic investigator: __gkr_gothic/investigator_character__, evidence tools visible, __gkr_gothic/rendering__"
+    - "standalone religious Gothic character: __gkr_gothic/religious_character__, ritual objects and material wear visible, __gkr_gothic/rendering__"
+    - "standalone medical Gothic character: __gkr_gothic/medical_character__, practical instruments visible, __gkr_gothic/rendering__"
+    - "standalone folk Gothic character: __gkr_gothic/folk_character__, locally made clothing and objects, __gkr_gothic/rendering__"
+    - "standalone supernatural Gothic character: __gkr_gothic/supernatural_character__, one restrained impossible trait, __gkr_gothic/rendering__"
+
+  ensemble_combo:
+    - "Gothic ensemble: __gkr_gothic/relationship__, __gkr_gothic/household_character__, __gkr_gothic/investigator_character__, and __gkr_gothic/supernatural_character__, distinct eyelines in one shared room, __gkr_gothic/rendering__"
+    - "folk Gothic ensemble: __gkr_gothic/folk_character__, __gkr_gothic/folk_character__, and a visiting __gkr_gothic/investigator_character__, formal hospitality and suspicion visible, __gkr_gothic/rendering__"
+
+  character_sheet_combo:
+    - "Gothic character sheet for __gkr_gothic/standalone_character_combo__, front, side and back views, mourning or work clothing layers, expressions and prop inset"
+    - "supernatural entity sheet for __gkr_gothic/supernatural_character__, solid and incorporeal states, scale, reflection behavior and movement studies"
+
+  costume_variant_combo:
+    - "Gothic costume variants for __gkr_gothic/household_character__, everyday, formal mourning, travel, winter and inherited ceremonial clothing"
+    - "period work-clothing study for __gkr_gothic/investigator_character__, practical layers, weather wear and equipment placement"
+
+  creature_design_combo:
+    - "Gothic creature design sheet for __gkr_gothic/creature_subject__, anatomy, locomotion, resting state, environmental trace, scale and silhouette studies"
+
+  prop_design_combo:
+    - "Gothic narrative prop sheet for __gkr_gothic/gothic_prop__, front, reverse, opened or altered state, hand interaction, age, damage and clue details"
+
+  environment_design_combo:
+    - "Gothic environment design sheet for __gkr_gothic/domestic_environment__, exterior, floor plan, principal room, hidden circulation, day and night states"
+    - "Gothic environment design sheet for __gkr_gothic/sacred_environment__, site plan, ritual path, damaged architecture, material decay and human scale"
+    - "Gothic environment design sheet for __gkr_gothic/maritime_environment__, tide or storm states, access routes, interior cutaway and weather damage"
+
+  storyboard_combo:
+    - "six-frame Gothic storyboard for __gkr_gothic/haunting_scene__, ordinary setup, physical disturbance, observation, failed explanation, reveal and quiet consequence"
+    - "six-frame Gothic storyboard for __gkr_gothic/investigation_scene__, arrival, evidence, comparison, architectural clue, discovery and unresolved final image"
+
+  key_visual_combo:
+    - "Gothic key visual based on __gkr_gothic/gothic_romance_scene__, relationship foregrounded, architecture carrying history, title-safe negative space"
+    - "Gothic key visual based on __gkr_gothic/folk_horror_scene__, community and outsider visible together, seasonal motif, restrained threat"
+
+  poster_combo:
+    - "Gothic horror poster based on __gkr_gothic/psychological_scene__, one impossible domestic detail as central metaphor, limited palette and title-safe space"
+    - "maritime Gothic poster based on __gkr_gothic/maritime_horror_scene__, human scale beneath coast and weather, restrained typography area"
+
+  book_cover_combo:
+    - "Gothic novel cover based on __gkr_gothic/domestic_environment__, one narrative prop, architectural silhouette, restrained color and title-safe upper area"
+    - "Gothic anthology cover combining __gkr_gothic/creature_subject__ with __gkr_gothic/sacred_environment__, engraved treatment and issue-title safe zone"
+
+  graphic_novel_page_combo:
+    - "complete Gothic graphic-novel page based on __gkr_gothic/quiet_horror_scene__, repeated room composition, small physical changes, page-turn reveal, restrained ink"
+    - "complete Gothic graphic-novel page based on __gkr_gothic/investigation_scene__, evidence inserts, dialogue reactions and architectural continuity"
+
+  spotlight_scenes:
     - "__gkr_gothic/haunting_combo__"
-    - "__gkr_gothic/folk_horror_combo__"
     - "__gkr_gothic/psychological_horror_combo__"
+    - "__gkr_gothic/folk_horror_combo__"
     - "__gkr_gothic/gothic_romance_combo__"
     - "__gkr_gothic/investigation_combo__"
-    - "__gkr_gothic/dark_fantasy_action_combo__"
-
-  random_character:
-    - "__gkr_gothic/humanlike_identity__, __gkr_gothic/age__, __gkr_gothic/build__, __gkr_gothic/face_style__, __gkr_gothic/expression__, __gkr_gothic/accessories__"
-    - "__gkr_gothic/incorporeal_identity__, __gkr_gothic/expression__"
-    - "__gkr_gothic/corporeal_monster__"
-
-  random_backgrounds:
-    - "__gkr_gothic/setting__, __gkr_gothic/mood__, __gkr_gothic/lighting__, __gkr_gothic/style__, __gkr_gothic/camera__, __gkr_gothic/fx_environment__, __gkr_gothic/fx_magic__"
-
-# ---------------------------------------------------------
-# SPOTLIGHT (Weighted for key features)
-# ---------------------------------------------------------
+    - "__gkr_gothic/medical_horror_combo__"
+    - "__gkr_gothic/maritime_gothic_combo__"
+    - "__gkr_gothic/ecclesiastical_gothic_combo__"
+    - "__gkr_gothic/quiet_horror_combo__"
 
   spotlight_characters:
-    - "a pale (vampire lord:1.2), aristocratic, tattered formal coat, (glowing crimson eyes:1.3), menacing gaze"
-    - "a gothic huntress, grim expression, leather coat, wielding a (silvered crossbow:1.3), moonlit ruins"
-    - "a frail necromancer, hollow cheeks, dark robes, (swirling bone fragments:1.3) in the air"
-    - "a Victorian widow, (black mourning veil:1.2), cold emotionless stare, standing in a dusty manor"
-    - "a hollow-eyed knight, (rusted gothic armor:1.2), (crimson sigils glowing:1.3), holding a broken sword"
-    - "a (plague doctor:1.1), (cracked porcelain mask:1.3), holding a lantern with eerie green light, foggy alley"
-    - "a witch of the moor, tangled hair, ragged clothes, (smoldering swamp runes:1.2) floating around"
-    - "a ghostly child, pale, holding a fading doll, (body drifting like smoke:1.3), in a dark hallway"
-    - "a hunched gravekeeper, covered in soil, carrying a (rusted lantern:1.2), moonlit graveyard"
-    - "a lycanthrope, (mid-transformation:1.3), snarling, clothes tearing, under a (full blood moon:1.2)"
-    - "a Victorian medium, in a trance, (ectoplasm swirling from fingertips:1.3), candlelit seance"
-    - "a grinning demon jester, patchwork clothes, holding bells, (clawed gloves:1.2), sinister, in a dark carnival"
-    - "a fallen cleric, haunted expression, brandishing a (cracked holy symbol:1.3), faintly glowing, in a ruined church"
-    - "a mad alchemist, stained apron, wild eyes, holding stoppered vials that steam and crack their glass, chaotic laboratory"
-    - "a shadow priest, robes made of (swirling black tendrils:1.3), face obscured by darkness, black sparks streaming from raised hands"
-    - "a pale sorceress, elegant lace dress, channeling a (frost-like death aura:1.3), particles of ice"
-    - "a blood knight, (crimson helm:1.2) with a screaming visage, brutal spiked armor, holding a gore-drenched axe"
-    - "a cursed bride, torn wedding gown, (drifting unnaturally:1.2), tragic expression, in a ruined chapel"
-    - "a Victorian scholar, clutching an (ancient tome wrapped in chains:1.2), terrified expression, locked library lined with chained books"
-    - "a nightmare beast master, cloaked in shadow, (spectral hounds circling:1.3) at his feet"
-    - "a skeletal warrior, (flickering soul fire in ribcage:1.3), ancient bone armor, wielding a pitted greatsword"
-    - "a ghoul scavenger, cracked claws, hunched gait, feasting, (piles of bones:1.1), crypt setting"
-    - "a haunted bard, playing a violin, emitting (ghostly musical notes:1.3), sorrowful melody, cemetery"
-    - "a grim witchfinder warrior, holding a (burning stake torch:1.3), steel armor, zealous expression"
-    - "a ragged cultist, (carved ritual scars:1.2) on face, mouth open, holding a rusted dagger above an altar"
-    - "a scarecrow creature, (stitched grin:1.2), straw limbs, (menacing pose:1.1), in a dead cornfield"
-    - "a terrified Victorian detective, holding a (trembling lantern:1.2), revolver drawn, staring into darkness"
-    - "a crypt sorcerer, wearing (robes stitched from grave shrouds:1.3), holding a gnarled bone staff"
-    - "a Banshee queen, hovering, (hair of mist:1.3), (wailing shriek:1.2), in a foggy moor"
-    - "a gargoyle knight, (stone skin:1.2), (glowing cracks:1.2), vigilant, perched on a cathedral"
-    - "a mad anatomist, blood-stained medical tools, (stained in dried crimson:1.2), sinister smile, laboratory"
-    - "a Vampire countess, (blood-red gown:1.2), serpent-like grace, elegant, (long fangs:1.1)"
-    - "an ancient mummy, tattered cloths, (glowing sigils:1.3) on bandages, rising from a sarcophagus"
-    - "a wailing ghost soldier, (phantom weapon:1.2), ethereal, tattered uniform, haunted battlefield"
-    - "an occult librarian, (swirling candles floating:1.3) around, surrounded by forbidden books"
-    - "a rat king magus, (vermin crawling at feet:1.3), controlling a swarm, in a dark sewer tunnel"
-    - "a Victorian painter, (possessed:1.1), painting on a canvas with (writhing shadows:1.3), manic expression"
-    - "a bone witch, forging runes, (skeletal hands:1.2), chanting, surrounded by bones and candles"
-    - "a graveyard paladin, wielding a (white-glowing lantern:1.3), radiant light pushing back black tendrils, jaw clenched"
-    - "an abomination hybrid, (twisting mismatched limbs:1.2), patchwork skin, grotesque, lurching gait"
-    - "a shadow assassin, (form dissolves into smoke:1.3), holding twin (glowing daggers:1.1), perched on a rooftop"
-    - "a Victorian surgeon, (trembling scalpel:1.2), hollow stare, madness, in a blood-stained operating theater"
-    - "a reaper spirit, cloaked in (drifting black mist:1.2), holding a (pitted scythe:1.1), spectral, silent"
-    - "a cursed minstrel, playing a broken harp, (spectral notes:1.2) weeping, in a ruined great hall"
-    - "an eldritch prophet, (eyes shine void-black:1.3), mouth open, arms outstretched beneath a spiraling storm"
-    - "a drowned ghost, covered in (dripping algae:1.2), waterlogged, rising from a dark lake"
-    - "a plague monk, covered in (runic bandages:1.2), carrying a staff, chanting, in a desolate village"
-    - "a statue maiden, (cracked stone skin:1.2), (bleeding black tears:1.3), weeping in a garden"
-    - "a grave warlock, (summoning skeletal hands from the earth:1.3), dark magic swirling, cemetery at night"
-    - "a preacher with (wild eyes:1.2), mouth open, pointing at a blood-red sky, clutching a book on a rain-soaked street"
-    - "a lupine hunter, fur-lined coat, (silvered weapons:1.2), grim, werewolf hunter, in a dark forest"
-    - "a Victorian lady, terrified, haunted by a (ghostly duplicate:1.3) standing behind her"
-    - "a bone-clad barbarian, (skull mask:1.2), primitive bone armor, wielding a massive club"
-    - "an altar priestess, wreathed in (candle-fire halos:1.3), performing a dark ritual, stone altar"
-    - "a torch-bearing exorcist, (chanting solemn rites:1.2), holding a (glowing silver cross:1.1), confronting a shadow"
-    - "a ghast puppeteer, floating, controlling (corpse marionettes:1.3) on spectral strings"
-    - "a ritual witch, (shadow moves independently:1.3), drawing sigils in the dirt, dark forest"
-    - "an ancient specter knight, (ethereal sword:1.2), ghostly armor, (faintly glowing:1.1), guarding a tomb"
-    - "a Victorian illusionist, (dissolving into smoke:1.2), cape, top hat, on a foggy stage"
-    - "a cult priest, wearing a (horned bone mask:1.3), chanting, holding a sacrificial dagger"
-    - "a rotting revenant, (crawling from grave soil:1.2), vengeful, (glowing eyes:1.1), tattered clothes"
-    - "a fog-walker spirit, (drifting through mist:1.2), indistinct, (glowing outline:1.1), silent"
-    - "a gloom knight, cloaked in (rotting velvet:1.2), carrying a heavy greatsword, head bowed"
-    - "a mad occultist, (glowing runes etched into skin:1.3), chanting wildly, surrounded by candles"
-    - "a grave-borne golem, (stitched from multiple bodies:1.2), patchwork, bulging mismatched muscles, shambling"
-    - "a child medium, translucent mouths orbiting the head, (glowing white eyes:1.2), unfocused gaze, in a nursery with floating toys"
-    - "a Victorian noble, upright and composed, with a (horned monstrous shadow silhouette:1.3) on the wall behind"
-    - "a ghostly bride, holding a (wilted bouquet:1.2), waiting, veil torn, in a ruined church"
-    - "a blood mage, drawing (crimson sigils mid-air:1.3), blood magic, intense concentration"
-    - "a crypt witch, mixing a potion, (rusted cauldron:1.2), ingredients, surrounded by skulls"
-    - "an ancient demon, (cracked stone armor:1.2), (burning eyes:1.2), massive horns, chained"
-    - "a bone collector, (rattling satchel:1.2) of skulls, cloaked, hunched, walking through a graveyard"
-    - "a phantom swordsman, (blade flickers like mist:1.3), dueling stance, translucent body, elegant"
-    - "a Vampire knight, (bat-winged helm:1.2), (blood red armor:1.1), wielding a dark blade"
-    - "a decayed monk, drifting in silent prayer, tattered robes, (hands clasped:1.1), haunted monastery"
-    - "an occult investigator, engraved flintlock pistol held low, long rain-dark coat, grim, standing on a foggy street"
-    - "a beast-witch, covered in fur and twigs, (glowing animal eyes:1.2), (spectral animal companion:1.1)"
-    - "a haunted boy, (empty eye sockets:1.2), flickering lantern, lost, in a dark, twisted forest"
-    - "a grave knight, dragging a (heavy rusted greatsword:1.2), slow, (imposing silhouette:1.1)"
-    - "a haunted constable, long coat, tarnished revolver and shaded lantern, listening on an empty cobblestone street"
-    - "a masked cult assassin, (curved ritual blades:1.2), stealthy pose, shrouded in shadows"
-    - "a possessed Victorian doll, (cracked porcelain face:1.3), small, (glowing red eyes:1.1), sitting on a chair"
-    - "a spectral wolf guardian, (looming through fog:1.2), (protective stance:1.1), glowing eyes"
-    - "an inquisitor, drenched in (white-gold fire:1.3), eyes wide and jaw clenched, holding a radiant engraved sword, high contrast"
-    - "a rotted plague victim, walking husk, (pustules:1.1), (blank stare:1.1), shambling"
-    - "a moon priestess, (pale luminescent aura:1.3), (crescent moon sigil:1.1) on forehead, serene"
-    - "a shadow witch, (swirling black feathers:1.2) cloak, (eyes glowing:1.1), in a dark forest"
-    - "a demon hunter, (silver stakes:1.2), (blessed chains:1.2), ready stance, grim"
-    - "a blood-soaked berserker, wielding a (bone club:1.2), raging, (covered in blood:1.1), battlefield"
-    - "a Victorian medium, (ghost hands growing from shadow:1.3) on the wall, at a seance table"
-    - "an eldritch scholar, (swirling void pages:1.3) from an open book, (tentacles:1.1) emerging"
-    - "a corpse bride, (stitched smile:1.2), tattered dress, (pale blue skin:1.1), holding a dead flower"
-    - "a hollow knight, (chest cavity glowing faintly:1.3), empty armor, (spectral energy:1.1), standing guard"
-    - "a gothic sorcerer, (commanding a swirling bat swarm:1.3), (arms raised:1.1), dark magic"
-    - "a night wanderer, cloaked in (creeping ground fog:1.2), face hidden, (only silhouette visible:1.1)"
+    - "__gkr_gothic/standalone_character_combo__"
+    - "__gkr_gothic/ensemble_combo__"
+    - "__gkr_gothic/character_sheet_combo__"
 
-  spotlight_backgrounds:
-    - "a (fog-drenched graveyard:1.2), tilted headstones, (eerie mist:1.1), full moon, gothic horror"
-    - "a Victorian mansion corridor, (flickering candles:1.2), (long moving shadows:1.1), dusty, desolate"
-    - "an ancient cathedral interior, (broken stained glass:1.2), (moonlight shafts:1.1), dust particles, somber"
-    - "a moonlit cobblestone street, (dim gas lamps:1.1), empty, (swirling fog:1.2), long converging shadows"
-    - "an abandoned asylum hall, lined with (rusted beds:1.1), (decaying walls:1.1), cramped framing and dense shadows"
-    - "a haunted forest, (twisted gnarled trees:1.2), drifting mist, (glowing eyes:1.1) in the dark"
-    - "a dark crypt interior, lit by a (faint blue torch flame:1.2), (piles of skulls:1.1), oppressive shadows"
-    - "a stormy cliffside, (crashing waves:1.1), (lightning flash:1.2), overlooking a dark sea, dramatic"
-    - "a rotting village, (heavy rain:1.1), (flickering lantern glow:1.1), mud, bleak atmosphere"
-    - "a moonlit battlefield, strewn with (ancient armor:1.1), (spectral mist:1.2), motionless bodies, cold blue-grey palette"
-    - "a gothic library, stacked with (dusty chained tomes:1.2), scrolls, (flickering candlelight:1.1)"
-    - "a fog-choked stone bridge leading to a (ruined fortress:1.1), empty road, motionless banners"
-    - "an underground ossuary, (skull-lined walls:1.3), bone, (dim candlelight:1.1), claustrophobic"
-    - "a cracked cathedral nave, translucent faces emerging from the walls, empty pews, (shattered altar:1.1)"
-    - "a haunted manor dining hall, (set for absent guests:1.2), dusty, (cobwebs:1.1), decaying food"
-    - "a dark forest trail, (ghostly lights:1.2) between trees, eerie, (twisted roots:1.1)"
-    - "an abandoned church, surrounded by (dying grass:1.1), (broken cross:1.1), foreboding"
-    - "an ancient tomb entrance, covered in (crawling roots:1.2), (dark opening:1.1), foreboding"
-    - "a moldy basement, (dripping pipes:1.1), (deep shadows:1.2), a single flickering lightbulb"
-    - "a graveyard hill, beneath a (swollen blood moon:1.3), red light, (silhouetted trees:1.1)"
-    - "fog-soaked docks, (rotting boats:1.1), (still black water:1.2), empty, distant hooded silhouette"
-    - "a quiet Victorian alley, lit by a (dim gas lamp:1.1), (long shadows:1.2), cobblestone"
-    - "a somber marsh, (stagnant water:1.1), (thick ground fog:1.2), dead reeds, desolate"
-    - "a cursed battleground, (swirling specters:1.3), (broken weapons:1.1), eerie glow"
-    - "a winding tower staircase, descending into a (dark abyss:1.2), (cold stone steps:1.1)"
-    - "a ruined village, (overtaken by creeping vines:1.1), (collapsed roofs:1.1), empty streets under grey light"
-    - "a coffin-lined crypt chamber, (eerie blue glow:1.2), stone walls, (dusty coffins:1.1)"
-    - "a crumbling castle courtyard, under (heavy storm clouds:1.1), (rubble:1.1), wind howling"
-    - "a forgotten monastery, deep in (snowy mountains:1.1), isolated, (dark windows:1.1), silent"
-    - "an old prison cellblock, (rusted bars:1.1), (shadowy figures:1.2) with bowed heads, dimly lit"
-    - "an overgrown churchyard, (broken angel statues:1.2), (weeping statues:1.1), desolate"
-    - "an abandoned ballroom, (torn curtains:1.1), (dusty chandelier:1.1), spectral dancers, eerie"
-    - "a shadowed cavern, (dripping water:1.1), (faint glowing fungi:1.1), deep darkness"
-    - "a Victorian street market, motionless hanging cloth and scattered wares, (abandoned stalls:1.1), empty street"
-    - "an eerie mansion attic, filled with (dusty relics:1.1), (covered furniture:1.1), shaft of moonlight"
-    - "a forest clearing, filled with (glowing spectral mushrooms:1.2), violet light radiating through mist, twisted trees"
-    - "a moonlit pier, (calm black water:1.1), (stillness:1.2), fog over water, serene but unsettling"
-    - "a candlelit ritual chamber, (carved in stone:1.2), (glowing occult symbols:1.3) on the floor"
-    - "a cracked mausoleum, surrounded by (dead trees:1.1), (imposing:1.2), faint light inside"
-    - "a gothic village square at midnight, empty cobblestones, (dry fountain:1.1), pale figures behind windows"
-    - "a collapsed mine tunnel, filled with (damp fog:1.1), (darkness:1.2), creaking supports"
-    - "ancient ruins, (swallowed by swamp:1.1), (moss-covered stones:1.1), eerie green mist"
-    - "a dusty library reading hall, lit by (moonbeams:1.1), (books scattered:1.1), shadows"
-    - "a windswept graveyard, on a cliff (overlooking the sea:1.1), (dramatic:1.2), crashing waves"
-    - "a fog-filled catacomb corridor, (echoing steps:1.2), (walls of skulls:1.3), claustrophobic"
-    - "a midnight cemetery, under (drifting clouds:1.1), (full moon:1.1), ominous"
-    - "a ruined chapel, (shattered altar:1.2), torn prayer banners, wilted flowers scattered across the floor"
-    - "a cemetery gate, (rusted iron spikes:1.1), (imposing:1.2), foggy path beyond"
-    - "a haunted wood, (hanging moss:1.1), dark, tangled, (path disappearing:1.2), glowing eyes"
-    - "an abandoned theater, (torn velvet seats:1.1), (empty stage:1.1), spotlight on a dusty chair"
-    - "a crypt stairway, (descending into darkness:1.2), (cold stone:1.1), dripping water"
-    - "a marsh bridge, crossing (stagnant black water:1.1), (twisted wood:1.1), faint glow below"
-    - "a forgotten cellar, filled with (broken crates:1.1), (ancient wine barrels:1.1), thick cobwebs"
-    - "a forest cabin, in (deep shadow:1.1), (isolated:1.2), faint light in window, smoke from chimney"
-    - "a moonlit castle tower, (overlooking a valley:1.1), (high:1.1), single silhouetted figure at the parapet"
-    - "a collapsing lighthouse, on a (stormy coast:1.1), (flickering beacon:1.2), crashing waves"
-    - "a cursed well, (pale stone:1.1), (dark water:1.1), something glowing within"
-    - "an ancient bridge, leading to a (dark forest:1.1), (stone arc:1.1), river of fog below"
-    - "a gothic mausoleum, glowing in (faint candlelight:1.2), marble, (angel statue:1.1), weeping"
-    - "a rotting windmill, under a (cloudy sky:1.1), (broken blades:1.1), eerie creaking, desolate field"
-    - "a foggy pier, (stretching to nowhere:1.2), endless, (silent:1.1), dark water"
-    - "a dusty chapel, (cracked stained windows:1.1), (shafts of light:1.1), dust particles, black stains spreading from the altar"
-    - "a shadowy ravine, filled with (swirling mist:1.1), (deep:1.2), moonlight barely reaches"
-    - "an old infirmary room, (rusted medical tools:1.2), (stained medical bed:1.1), decay"
-    - "a gothic manor garden, (overrun by dead vines:1.1), (cracked statues:1.1), desolate"
-    - "a forest ravine, (moonlight barely reaches:1.2), (dark:1.1), hidden path"
-    - "an abandoned village square, under a (full moon:1.1), (silent:1.2), eerie"
-    - "a sunken crypt, (moss-covered stones:1.1), (partially flooded:1.1), eerie green light"
-    - "a moonlit hillside, (covered in gravestones:1.1), (vast:1.1), misty, somber"
-    - "a cobweb-filled study, (abandoned for decades:1.1), (dusty books:1.1), a single skull"
-    - "a dark forest archway, formed by (twisted tree limbs:1.2), (glowing portal:1.1), dark path"
-    - "a storm battered cathedral spire, (lightning strike:1.2), (dramatic:1.1), high angle"
-    - "a chamber of ritual symbols, (carved into stone:1.2), (glowing with dark energy:1.3)"
-    - "a marble graveyard path, lit by (pale lanterns:1.1), (clean:1.1), statues, unsettlingly pristine"
-    - "an ancient gate, wrapped in (thorned vines:1.2), (locked:1.1), darkness beyond"
-    - "a forgotten cloister, (shrouded in fog:1.1), (stone arches:1.1), elongated shadows crossing the walkway"
-    - "a decayed mansion foyer, (grand staircase:1.1), collapsed plaster, chandelier crashed"
-    - "a rain-soaked cliff road beneath (lightning flashes:1.1), crumbling edge and active mudslide"
-    - "fog-laden roofless church ruins, translucent mouths appearing in the mist, (stone walls:1.1)"
-    - "a dark shoreline, (wrecked boats:1.1), (black sand:1.1), eerie calm sea"
-    - "a black forest path, lit by (pale moon shafts:1.1), (narrow:1.1), claustrophobic"
-    - "a cemetery crypt, surrounded by (swirling dead leaves:1.1), (autumn:1.1), wind"
-    - "a haunted monastery courtyard, at dusk, (dry fountain:1.1), (statue:1.1), spectral figures"
-    - "a silent alley, filled with (drifting fog:1.1), (narrow:1.1), one dim light, cobblestone"
+  spotlight_designs:
+    - "__gkr_gothic/costume_variant_combo__"
+    - "__gkr_gothic/creature_design_combo__"
+    - "__gkr_gothic/prop_design_combo__"
+    - "__gkr_gothic/environment_design_combo__"
 
-  spotlight_monsters:
-    - "a towering (bone wraith:1.3), hollow ribcage, (glowing faint blue fire:1.3) within, spectral, tattered robes"
-    - "a (skinless horror:1.2), glistening muscle, (crawling on elongated limbs:1.3), leaving a trail of blood"
-    - "a rotting (corpse giant:1.2), (dragging heavy chains:1.2), mismatched armor, dull glowing eyes"
-    - "a (shadow beast:1.2), (void-like face:1.3), dripping ink-like tendrils, amorphous, glowing red eyes"
-    - "a pale ghoul, (distended jaw:1.2), (claws like broken glass:1.2), hunched over a corpse, feasting"
-    - "a massive (wolf fiend:1.2), (exposed ribs:1.2), glowing ember eyes, snarling, matted fur"
-    - "a skeletal knight, animated by (swirling black smoke:1.3), dark magic, (rusted armor:1.1), glowing sword"
-    - "a (blood-soaked revenant:1.2), (hooks embedded in its spine:1.3), dragging chains, red eyes narrowed and teeth bared"
-    - "a (three-eyed bat monstrosity:1.3), leathery wings, (swooping through mist:1.1), glowing red eyes"
-    - "a (flesh-stitched abomination:1.3), covered in (mismatched limbs:1.3), lurching, grotesque"
-    - "a (gargoyle titan:1.2), (awakening:1.1), stone fragments falling, glowing red eyes, massive, on a cathedral"
-    - "a (hollow scarecrow demon:1.2), (crooked grin carved into bark:1.2), straw limbs, glowing orange eyes"
-    - "a (graveborn crawler:1.2), (skeletal arms growing from its back:1.3), spider-like, skittering"
-    - "a (centipede-like ghoul:1.3), composed of (fused human torsos:1.3), horrific, crawling"
-    - "a (headless knight:1.2), carrying a (glowing jack-o-lantern:1.3), flaming sword, riding a spectral horse"
-    - "a (giant shadow spider:1.2), (weaving webs of darkness:1.2), between gravestones, many red eyes"
-    - "a (bloated corpse-walker:1.1), (dripping swamp rot:1.2), slow, moaning, pale glowing eyes"
-    - "a (mist phantom:1.2), hovering, (torn shrouds trailing:1.2), faintly visible face, ethereal, translucent"
-    - "a (crypt lurker:1.1), (needle-thin teeth:1.3), pale cracked skin, glowing white eyes, crouched in shadows"
-    - "a massive (hellhound:1.2), (skull face:1.3), breathing fire, burning paws, chains on neck"
-    - "a (ghastly banshee:1.2), (hollowed chest:1.2), hair flowing like smoke, wailing mouth open"
-    - "a (vile plague creature:1.2), bubbling with (toxic green pustules:1.3), diseased, shambling"
-    - "a (bloodshadow demon:1.2), (shape constantly distorts:1.3), crimson red, glowing"
-    - "a (giant bone serpent:1.2), (slithering through graveyard soil:1.2), skeletal, glowing green eye sockets"
-    - "a (towering ghast:1.1), (lantern jaw:1.2), emitting an eerie green light, long thin claws"
-    - "a (vampiric bat lord:1.2), (wings ragged like torn parchment:1.2), humanoid, fangs, aristocratic clothes"
-    - "an (eldritch horror:1.3), (too many eyes:1.3), blinking independently, writhing tentacles"
-    - "a (rotted tree spirit:1.2), (twisted limbs:1.2), hollow face, ancient, glowing sap"
-    - "a (stitched butcher-monster:1.2), wielding (rusted cleavers:1.2), blood-stained apron, patchwork skin"
-    - "a (skeletal bird creature:1.2), (giant raven skull:1.1), perched on a broken gravestone, glowing red eyes"
-    - "a (massive grave worm:1.2), (human faces along its length:1.3), erupting from the earth"
-    - "an (ashen ghoul:1.1), (rising from burned ruins:1.2), covered in ash, glowing embers"
-    - "a (nightmare stag:1.2), (antlers made of twisted bone:1.3), dark forest, misty breath"
-    - "a (crawling devourer:1.2), (wrapped in chains:1.2), nailed metal plates to its skin, roaring"
-    - "a (ghostly widow:1.1), (torn veil:1.1), drifting unnaturally, weeping black tears"
-    - "a (moonlit beast:1.2), (spectral wolves circling:1.3), alpha, glowing eyes, snarling"
-    - "a (crypt sentinel:1.1), resembling a (rotted, armor-clad giant:1.2), guardian, glowing sword"
-    - "a (ghastly fisherman spirit:1.2), pulling a (phantom net of souls:1.3), on a foggy dock"
-    - "a (charred demon:1.2), (smoldering fissures:1.2) on skin, burning, glowing yellow eyes"
-    - "a (head-twisted ghoul:1.2), walking at (unnatural angles:1.3), broken neck, jerky movement"
-    - "a (horrific puppet:1.2), (stitched from abandoned dolls:1.3), pulled by unseen strings, jerky"
-    - "a (fog serpent:1.2), (spectral skull:1.3) floating inside vapor, huge, swirling mist"
-    - "a (bleak reaper specter:1.2), (scythe formed of darkness:1.3), hooded, no face"
-    - "a (pale crawler:1.1), (spiderlike posture:1.2), glowing white eyes, fast, long claws"
-    - "a (gravebound brute:1.2), dragging a (coffin lid as a shield:1.2), strong, zombie"
-    - "a (shadow raven beast:1.2), (blade-like feathers:1.2), sharp, flock, many red eyes"
-    - "a (multi-limbed corpse spider:1.3), made from (tangled bodies:1.3), horrific, skittering"
-    - "a (massive knight wraith:1.2), (armor corroded by centuries:1.2), giant, spectral"
-    - "a (moss-covered tomb giant:1.2), (rising from the earth:1.2), stone, glowing sigils"
-    - "a priest creature in inverted vestments, black vapor spilling from its mouth, (multiple screaming mouths:1.3), tattered robes"
-    - "a (phantom horse:1.2), (ribs exposed:1.2), eyes burning white, skeletal, galloping"
-    - "a (cracked porcelain doll monster:1.2), (crawling like a spider:1.3), eerie, glowing eyes"
-    - "a (void gargler:1.2), (expanding maw:1.3), black hole, sucking in light"
-    - "a (corpse lich:1.2), (candles burning on hunched shoulders:1.3), undead, holding a skull"
-    - "a (skeletal serpent dragon:1.2), (slithering from a crypt entrance:1.2), massive, glowing eyes"
-    - "a (window-shadow entity:1.2), (peering through glass:1.3), elongated fingers, silhouette"
-    - "an (undying scarecrow:1.2), (crows nesting in its empty chest:1.3), field, glowing red eyes"
-    - "a (thin-faced ghost woman:1.1), floating, (knife-like fingers:1.3), long dark hair, screaming"
-    - "a (gore-lantern demon:1.2), holding a (burning skull:1.3), fire, laughing"
-    - "a (grave digger beast:1.2), (massive shovel-like limbs:1.3), digging, hunched"
-    - "a (cathedral abomination:1.2), (merging with cracked stone pillars:1.3), grotesque, many faces"
-    - "a (ghost dog pack:1.2), formed of (drifting silver wisps:1.2), hunting, glowing eyes"
-    - "a (ribcage crawler:1.2), (dragging itself with bony arms:1.2), skeletal, no legs"
-    - "an (ashen widow monster:1.2), dripping soot, (tears of ink:1.3), sad, burning dress"
-    - "a (dead-eyed butcher spirit:1.2), wearing a (cracked porcelain mask:1.3), cleaver, blood-stained"
-    - "a faceless phantom swirling with (ink-like runes:1.3), translucent body with no clear outline"
-    - "a (shadow stag:1.2), (silhouette evaporates into smoke:1.3), ethereal, glowing antlers"
-    - "a (massive parasite:1.2), (emerging from a ruptured corpse:1.3), disgusting, many legs"
-    - "a (graveyard titan:1.2), composed of (layered bones and gravestones:1.3), huge, slow"
-    - "a (nightmare maiden:1.2), (hair forming writhing tendrils:1.3), medusa-like, glowing eyes"
-    - "a (blood-rune golem:1.2), (pulsating crimson lines:1.3) etched across its massive stone body"
-    - "a monk in stained inverted vestments, (empty eye sockets:1.2), arms bound in chains, mouth sewn shut"
-    - "a (crawling head demon:1.2), (dragging a distorted body:1.3), horrific, screaming"
-    - "a (faded soldier ghost:1.1), (bullet holes glowing faint blue:1.3), tattered uniform, holding rifle"
-    - "a (blighted wolf:1.2), (fungal antlers:1.2) growing from skull, diseased, glowing green"
-    - "a contorted angel, (tattered black wings:1.2), broken halo on the ground, tear-streaked face"
-    - "an (ash wraith:1.2), (drifting from a burned pyre:1.2), cinders, glowing embers"
-    - "a (crypt-fiend:1.2), (gargling black tar:1.3), dark, long claws, crouched"
-    - "a (rotted minotaur creature:1.2), (exposed spine:1.2), labyrinth, raging, broken horns"
-    - "a cracked marionette, limbs bent at sharp angles by taut strings, painted smile"
-    - "a (shadow-stitched demon:1.2), held together by (threads of darkness:1.3), patched, unraveling"
-    - "a (bone reaper:1.2), (scythe made from fused spines:1.3), death, hooded, skeletal"
-    - "a (skeletal vulture:1.1), perched motionless atop a (broken tomb:1.1), glowing red eyes"
-    - "a (sorrow wraith:1.2), muffled in (torn burial robes:1.2), weeping, spectral"
-    - "a (deep crypt worm:1.2), (glowing lantern-like eyes:1.2), burrowing, massive"
-    - "a (grave witch monster:1.2), stirring a (cauldron of ghosts:1.3), spectral faces, cackling"
-    - "a (nightmare rider:1.2), atop a (skeletal steed:1.2), dark flaming armor, glowing sword"
-    - "a (cadaver giant:1.2), shedding (clouds of black flies:1.3), swarm, rotting"
-    - "a black-fleshed altar horror, wrapped in (glowing talismans:1.2), fused to a stone altar"
-    - "a (castle gargoyle:1.1), (molten cracks glowing red:1.3), awakening, stone skin"
-    - "a (blind corpse giant:1.2), swinging a (massive stone column:1.2), raging, empty eye sockets"
-    - "a (heartless ghoul:1.2), (gaping chest cavity:1.3), empty, hunched, drooling"
-    - "a (spirit eater creature:1.2), (swallowing drifting souls:1.3), ethereal, glowing mouth"
-    - "a (moonlit harvester:1.2), reaping with (spectral blades:1.3), in a field of dead crops"
-    - "an (abomination:1.3), stitched from (countless limbs and faces:1.3), horrific, writhing"
-    - "a (shadow-crowned beast:1.2), (rising from swirling fog:1.2), crown of dark energy"
+  spotlight_outputs:
+    - "__gkr_gothic/storyboard_combo__"
+    - "__gkr_gothic/key_visual_combo__"
+    - "__gkr_gothic/poster_combo__"
+    - "__gkr_gothic/book_cover_combo__"
+    - "__gkr_gothic/graphic_novel_page_combo__"
+
+  random:
+    - "__gkr_gothic/spotlight_scenes__"
+    - "__gkr_gothic/spotlight_characters__"
+    - "__gkr_gothic/spotlight_designs__"
+    - "__gkr_gothic/spotlight_outputs__"
+    - "__gkr_gothic/haunting_combo__"
+    - "__gkr_gothic/psychological_horror_combo__"
+    - "__gkr_gothic/folk_horror_combo__"
+    - "__gkr_gothic/gothic_romance_combo__"
+    - "__gkr_gothic/investigation_combo__"
+    - "__gkr_gothic/medical_horror_combo__"
+    - "__gkr_gothic/maritime_gothic_combo__"
+    - "__gkr_gothic/ecclesiastical_gothic_combo__"
+    - "__gkr_gothic/supernatural_portrait_combo__"
+    - "__gkr_gothic/quiet_horror_combo__"
+    - "__gkr_gothic/standalone_character_combo__"
+    - "__gkr_gothic/ensemble_combo__"
+    - "__gkr_gothic/graphic_novel_page_combo__"
