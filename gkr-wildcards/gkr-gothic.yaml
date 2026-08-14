@@ -26,6 +26,14 @@
 # Router-only items contain wildcard references only. Literal text added by a composite must
 # itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
 # do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
+#
+# SINGLE-IMAGE VISUAL REPRESENTATION TEST
+# Write every scene as facts visible in one generated image. A viewer without a caption must be
+# able to identify the subject, action and important contrast from pose, placement, props, short
+# readable labels, screens, clothing, architecture, damage or lighting. Do not depend on motives,
+# memories, recognition, ownership, occupation, causality, past/future events, sound or institutional
+# meaning unless their evidence is shown. Replace each such fact with visible proof; when one frame
+# cannot show it clearly, explicitly use a diptych, sequential panels, storyboard or contact sheet.
 # ========================================================================
 
 gkr_gothic:
@@ -227,14 +235,14 @@ gkr_gothic:
     - wooden horse rocking in a sealed nursery, damp footprints ending beneath the bed
     - family dinner arranged for an absent guest, every portrait turned toward the empty chair
     - drowned apparition beyond an upper-floor window, wet handprint appearing on the inside glass
-    - old woman folding clothes while an unseen person depresses the chair opposite her
-    - corridor lamps extinguishing one by one toward a figure who remains still
+    - old woman folding clothes while the empty upholstered chair opposite her sinks beneath a human-shaped pressure, dust lifting from the cushion
+    - long corridor with a motionless figure at the far end, lamps nearest the viewer glowing while successive lamps toward the figure are dark and trailing smoke
 
   psychological_scene:
     - solitary figure facing a mirror reflection turned in the wrong direction
     - detective comparing two family photographs containing the same unknown child decades apart
     - patient walking a corridor where every clock shows a different hour
-    - woman setting tea for an unseen visitor as the second cup gradually empties
+    - three-panel sequence of a woman setting tea opposite an empty chair, the second cup dropping from full to half to empty while her pose remains unchanged
     - scholar finding notebooks that describe the room from a viewpoint inside the wall
     - man returning home to a family calmly displaying his funeral portrait
 
@@ -259,15 +267,15 @@ gkr_gothic:
     - doctor and constable inspecting a warm bed in an otherwise empty sealed room
     - scholar mapping symbols carved beneath village thresholds while residents watch
     - investigators opening a family archive where fresh ink covers undisturbed dust
-    - coastal priest and detective following wet footprints inland from a chapel bell heard beneath the sea
+    - coastal priest and detective following wet footprints from the surf toward a hill chapel, barnacled bell rope wrapped around one print and a submerged bell visible beneath clear black water behind them
     - anatomist comparing a missing-person sketch with a face inside an unlabeled specimen jar
 
   medical_horror_scene:
-    - surgical team watching an empty operating table sink beneath invisible weight
+    - surgical team recoiling from an empty operating table whose padded surface and leather restraints are compressed into a human-shaped depression
     - patient and physician comparing scans that show different skeletons at the same time
     - anatomy students surrounding a demonstration specimen whose torso bears the same branching scar as one student's exposed forearm, every gaze fixed between the two marks
     - asylum nurse unlocking a room whose interior is much larger than the building
-    - undertaker measuring a coffin while tapping answers from inside match each number
+    - three-panel sequence showing an undertaker tapping a measuring rule against a closed coffin, knocks marked from inside beneath each number, final panel showing the matching measurements written beside fresh dents in the lid
     - apothecary arranging bottles that cast shadows shaped like their former patients
 
   maritime_horror_scene:
@@ -281,7 +289,7 @@ gkr_gothic:
   quiet_horror_scene:
     - ordinary breakfast room with one chair casting the shadow of a standing person
     - recently used washbasin in a sealed bedroom, water still circling the drain
-    - tea steaming beside a rocking chair after every resident has left the house
+    - empty dust-covered parlor with packed trunks by the open door, fresh tea steaming beside a rocking chair whose runners blur against the floor
     - clean locked door gathering flies while adjacent rooms remain decayed
     - family photograph placed face-down again each time the resident leaves the room
     - snow accumulating across a doorstep except for two bare footprints facing inward

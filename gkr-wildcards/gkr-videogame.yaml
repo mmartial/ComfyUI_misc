@@ -24,6 +24,14 @@
 # Router-only items contain wildcard references only. Literal text added by a composite must
 # itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
 # do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
+#
+# SINGLE-IMAGE VISUAL REPRESENTATION TEST
+# Write every scene as facts visible in one generated image. A viewer without a caption must be
+# able to identify the subject, action and important contrast from pose, placement, props, short
+# readable labels, screens, clothing, architecture, damage or lighting. Do not depend on motives,
+# memories, recognition, ownership, occupation, causality, past/future events, sound or institutional
+# meaning unless their evidence is shown. Replace each such fact with visible proof; when one frame
+# cannot show it clearly, explicitly use a diptych, sequential panels, storyboard or contact sheet.
 # ========================================================================
 
 gkr_videogame:
@@ -1238,66 +1246,66 @@ gkr_videogame:
     - photography-exploration player framing a rare airborne creature through a camera viewfinder above alien wetlands
 
   spotlight_cinematicscenes:
-    - lone pixel hero standing before a gigantic final gate as the 8-bit sky changes color, tiny silhouette and ceremonial stillness
-    - 16-bit airship fleet emerging above cloud layers toward a floating fortress, richly painted parallax panorama
-    - arcade fighter walking away from a defeated rival beneath rain and flickering signs, tournament crowd silent behind
-    - low-poly heroine entering an enormous ancient chamber as a stone guardian's eyes illuminate one by one
-    - pre-rendered survival-horror dining hall after an unseen disturbance, overturned furniture and one slowly swinging lamp
-    - polygonal racing rivals side by side at sunset before the final mountain turn, engines reflected in wet road
-    - masked stealth operative descending upside down from a skylight above a guarded museum exhibit
-    - fantasy party watching their peaceful hometown burn beyond a ridge, individual reactions readable in silhouette
-    - young hero drawing a legendary blade from a forest pedestal as dormant stone figures awaken around the clearing
-    - rival swordsmen meeting on a narrow bridge beneath falling snow, blades still sheathed, matching old scars, weathered clan emblems and mirrored guarded stances
-    - space marine removing a damaged helmet to see an immense alien ring rising over the horizon
-    - starship captain ordering evacuation while the bridge tilts and sparks fall across failing control stations
-    - mech pilot launching from an underground hangar as blast doors reveal a city under attack
-    - android awakening alone in a flooded laboratory, emergency lights reflected across broken containment glass
-    - scientist raising one hand before a transparent enclosure while the specimen mirrors the exact pose, assistant comparing both silhouettes on a monitor
-    - first-contact delegation witnessing an alien city illuminate across an entire night hemisphere
-    - courier stepping from a battered spacecraft onto a crowded frontier landing pad with one mysterious sealed case
-    - rebel fleet arriving through multiple jump points behind an outnumbered civilian convoy
-    - colossal dormant machine rising from a desert as settlements evacuate along tiny roads below
-    - astronaut returning to an orbital home whose inhabitants have aged decades during the mission
-    - detective entering a rain-soaked apartment where every clock has stopped at a different time
-    - survivor in an abandoned decades-old facility holding a fresh family photograph that includes their own face, wall calendar and rusted equipment establishing the older date
-    - flashlight beam revealing hospital mannequins repositioned closer each time the protagonist turns around
-    - trapped protagonist listening as something heavy crosses the ceiling above a cramped maintenance room
-    - group sheltering in a roadside diner while an impossible silhouette passes through the storm outside
-    - wounded companion holding a door closed while the rest of the group escapes into morning light
-    - knight carrying a fallen monarch through a silent throne room after the battle has ended
-    - dragon landing before a tiny unarmed child in a field, both pausing in mutual curiosity
-    - ancient lich offering a peaceful bargain across a table set amid a ruined crypt
-    - adventuring party sharing food around a campfire after victory, repaired equipment and empty seat acknowledging their loss
-    - healer restoring a cursed forest as color spreads outward from each footstep through dead vegetation
-    - thief returning a stolen crown during a coronation while guards notice too late
-    - barbarian champion laying down a weapon before a defeated enemy rather than delivering the final blow
-    - floating city descending for the first time in centuries as crowds gather across the plains below
-    - ocean receding from a coastal kingdom to reveal a vast submerged road and approaching figures
-    - racing driver climbing from a wrecked car and running toward a rival trapped in flames
-    - championship team entering a stadium tunnel while generations of former players line the walls in projected portraits
-    - aging athlete making one final impossible play beneath heavy rain and silent floodlights
-    - underdog fighting-game contender rising after a knockdown as the crowd and rival recognize their resolve
-    - rhythm-game performer continuing acoustically after the entire stage loses power
-    - strategy commander erasing the planned attack route after seeing civilians crossing the battlefield
-    - city-builder mayor overlooking a metropolis recovering after disaster, cranes and temporary homes filling the sunrise skyline
-    - colony leader opening sealed doors to share dwindling heat with newly arrived refugees during a blizzard
-    - farmer standing among black leafless orchard rows except for one tree covered in fresh blossoms around a small glowing visitor, dead branches and frost surrounding the single bright canopy
-    - cozy shopkeeper placing the first handmade sign above a newly restored storefront as neighbors gather
-    - puzzle-game explorer watching an impossible chamber unfold into open sky after the final mechanism aligns
-    - platform mascot reaching the summit only to find the rescued rival calmly waiting with a picnic
-    - tiny robotic companion using its last power to open a path through a collapsing factory
-    - artificial intelligence core projecting two transfer paths, red path to a monumental war machine crossed out, green path illuminating a small maintenance robot receiving the core's light
-    - cybernetic mercenary standing in an elevator as every mirrored reflection shows a different past decision
-    - hacker broadcasting hidden evidence across every public screen while authorities close in on the rooftop transmitter
-    - detective and suspected android recognizing matching childhood memories across an interrogation table
-    - post-apocalyptic caravan entering a green valley believed to be a myth, vehicles stopping one by one in silence
-    - scavenger finding a working arcade cabinet deep inside a ruined city and watching its title screen illuminate the room
-    - wasteland factions lowering weapons as long-dormant rain begins falling across the battlefield
-    - pirate crew seeing a legendary ghost ship rise beneath moonlit waves, torn sails filling without wind
-    - explorer escaping a collapsing jungle temple by sliding beneath a closing stone gate with the recovered artifact
-    - archaeologist beneath a final mural showing the expedition's exact uniforms, vehicle and faces destroying the temple, companions comparing the painted figures with their matching gear
-    - time traveler meeting an older version of the party at a ruined monument they have not yet built
-    - player character approaching a final choice represented by two open doors while companions wait without speaking
+    - six-frame game-cinematic storyboard showing lone pixel hero standing before a gigantic final gate as the 8-bit sky changes color, tiny silhouette and ceremonial stillness
+    - six-frame game-cinematic storyboard showing 16-bit airship fleet emerging above cloud layers toward a floating fortress, richly painted parallax panorama
+    - six-frame game-cinematic storyboard showing arcade fighter walking away from a defeated rival beneath rain and flickering signs, tournament crowd silent behind
+    - six-frame game-cinematic storyboard showing low-poly heroine entering an enormous ancient chamber as a stone guardian's eyes illuminate one by one
+    - six-frame game-cinematic storyboard showing pre-rendered survival-horror dining hall after an unseen disturbance, overturned furniture and one slowly swinging lamp
+    - six-frame game-cinematic storyboard showing polygonal racing rivals side by side at sunset before the final mountain turn, engines reflected in wet road
+    - six-frame game-cinematic storyboard showing masked stealth operative descending upside down from a skylight above a guarded museum exhibit
+    - six-frame game-cinematic storyboard showing fantasy party watching their peaceful hometown burn beyond a ridge, individual reactions readable in silhouette
+    - six-frame game-cinematic storyboard showing young hero drawing a legendary blade from a forest pedestal as dormant stone figures awaken around the clearing
+    - six-frame game-cinematic storyboard showing rival swordsmen meeting on a narrow bridge beneath falling snow, blades still sheathed, matching old scars, weathered clan emblems and mirrored guarded stances
+    - six-frame game-cinematic storyboard showing space marine removing a damaged helmet to see an immense alien ring rising over the horizon
+    - six-frame game-cinematic storyboard showing starship captain ordering evacuation while the bridge tilts and sparks fall across failing control stations
+    - six-frame game-cinematic storyboard showing mech pilot launching from an underground hangar as blast doors reveal a city under attack
+    - six-frame game-cinematic storyboard showing android awakening alone in a flooded laboratory, emergency lights reflected across broken containment glass
+    - six-frame game-cinematic storyboard showing scientist raising one hand before a transparent enclosure while the specimen mirrors the exact pose, assistant comparing both silhouettes on a monitor
+    - six-frame game-cinematic storyboard showing first-contact delegation witnessing an alien city illuminate across an entire night hemisphere
+    - six-frame game-cinematic storyboard showing courier stepping from a battered spacecraft onto a crowded frontier landing pad with one mysterious sealed case
+    - six-frame game-cinematic storyboard showing rebel fleet arriving through multiple jump points behind an outnumbered civilian convoy
+    - six-frame game-cinematic storyboard showing colossal dormant machine rising from a desert as settlements evacuate along tiny roads below
+    - six-frame game-cinematic storyboard showing astronaut returning to an orbital home whose inhabitants have aged decades during the mission
+    - six-frame game-cinematic storyboard showing detective entering a rain-soaked apartment where every clock has stopped at a different time
+    - six-frame game-cinematic storyboard showing survivor in an abandoned decades-old facility holding a fresh family photograph that includes their own face, wall calendar and rusted equipment establishing the older date
+    - six-frame game-cinematic storyboard showing flashlight beam revealing hospital mannequins repositioned closer each time the protagonist turns around
+    - six-frame game-cinematic storyboard showing trapped protagonist listening as something heavy crosses the ceiling above a cramped maintenance room
+    - six-frame game-cinematic storyboard showing group sheltering in a roadside diner while an impossible silhouette passes through the storm outside
+    - six-frame game-cinematic storyboard showing wounded companion holding a door closed while the rest of the group escapes into morning light
+    - six-frame game-cinematic storyboard showing knight carrying a fallen monarch through a silent throne room after the battle has ended
+    - six-frame game-cinematic storyboard showing dragon landing before a tiny unarmed child in a field, both pausing in mutual curiosity
+    - six-frame game-cinematic storyboard showing ancient lich offering a peaceful bargain across a table set amid a ruined crypt
+    - six-frame game-cinematic storyboard showing adventuring party sharing food around a campfire after victory, repaired equipment and empty seat acknowledging their loss
+    - six-frame game-cinematic storyboard showing healer restoring a cursed forest as color spreads outward from each footstep through dead vegetation
+    - six-frame game-cinematic storyboard showing thief returning a stolen crown during a coronation while guards notice too late
+    - six-frame game-cinematic storyboard showing barbarian champion laying down a weapon before a defeated enemy rather than delivering the final blow
+    - six-frame game-cinematic storyboard showing floating city descending for the first time in centuries as crowds gather across the plains below
+    - six-frame game-cinematic storyboard showing ocean receding from a coastal kingdom to reveal a vast submerged road and approaching figures
+    - six-frame game-cinematic storyboard showing racing driver climbing from a wrecked car and running toward a rival trapped in flames
+    - six-frame game-cinematic storyboard showing championship team entering a stadium tunnel while generations of former players line the walls in projected portraits
+    - six-frame game-cinematic storyboard showing aging athlete making one final impossible play beneath heavy rain and silent floodlights
+    - six-frame game-cinematic storyboard showing underdog fighting-game contender rising after a knockdown as the crowd and rival recognize their resolve
+    - six-frame game-cinematic storyboard showing rhythm-game performer continuing acoustically after the entire stage loses power
+    - six-frame game-cinematic storyboard showing strategy commander erasing the planned attack route after seeing civilians crossing the battlefield
+    - six-frame game-cinematic storyboard showing city-builder mayor overlooking a metropolis recovering after disaster, cranes and temporary homes filling the sunrise skyline
+    - six-frame game-cinematic storyboard showing colony leader opening sealed doors to share dwindling heat with newly arrived refugees during a blizzard
+    - six-frame game-cinematic storyboard showing farmer standing among black leafless orchard rows except for one tree covered in fresh blossoms around a small glowing visitor, dead branches and frost surrounding the single bright canopy
+    - six-frame game-cinematic storyboard showing cozy shopkeeper placing the first handmade sign above a newly restored storefront as neighbors gather
+    - six-frame game-cinematic storyboard showing puzzle-game explorer watching an impossible chamber unfold into open sky after the final mechanism aligns
+    - six-frame game-cinematic storyboard showing platform mascot reaching the summit only to find the rescued rival calmly waiting with a picnic
+    - six-frame game-cinematic storyboard showing tiny robotic companion using its last power to open a path through a collapsing factory
+    - six-frame game-cinematic storyboard showing artificial intelligence core projecting two transfer paths, red path to a monumental war machine crossed out, green path illuminating a small maintenance robot receiving the core's light
+    - six-frame game-cinematic storyboard showing cybernetic mercenary standing in an elevator as every mirrored reflection shows a different past decision
+    - six-frame game-cinematic storyboard showing hacker broadcasting hidden evidence across every public screen while authorities close in on the rooftop transmitter
+    - six-frame game-cinematic storyboard showing detective and suspected android recognizing matching childhood memories across an interrogation table
+    - six-frame game-cinematic storyboard showing post-apocalyptic caravan entering a green valley believed to be a myth, vehicles stopping one by one in silence
+    - six-frame game-cinematic storyboard showing scavenger finding a working arcade cabinet deep inside a ruined city and watching its title screen illuminate the room
+    - six-frame game-cinematic storyboard showing wasteland factions lowering weapons as long-dormant rain begins falling across the battlefield
+    - six-frame game-cinematic storyboard showing pirate crew seeing a legendary ghost ship rise beneath moonlit waves, torn sails filling without wind
+    - six-frame game-cinematic storyboard showing explorer escaping a collapsing jungle temple by sliding beneath a closing stone gate with the recovered artifact
+    - six-frame game-cinematic storyboard showing archaeologist beneath a final mural showing the expedition's exact uniforms, vehicle and faces destroying the temple, companions comparing the painted figures with their matching gear
+    - six-frame game-cinematic storyboard showing time traveler meeting an older version of the party at a ruined monument they have not yet built
+    - six-frame game-cinematic storyboard showing player character approaching a final choice represented by two open doors while companions wait without speaking
 
   spotlight_characters:
     - "(JRPG sword hero:1.3), male, bright scarf, wielding a shimmering longsword, brows drawn down and eyes fixed forward, jewel-tone painted rendering, strong rim light"

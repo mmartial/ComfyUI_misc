@@ -24,6 +24,14 @@
 # Router-only items contain wildcard references only. Literal text added by a composite must
 # itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
 # do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
+#
+# SINGLE-IMAGE VISUAL REPRESENTATION TEST
+# Write every scene as facts visible in one generated image. A viewer without a caption must be
+# able to identify the subject, action and important contrast from pose, placement, props, short
+# readable labels, screens, clothing, architecture, damage or lighting. Do not depend on motives,
+# memories, recognition, ownership, occupation, causality, past/future events, sound or institutional
+# meaning unless their evidence is shown. Replace each such fact with visible proof; when one frame
+# cannot show it clearly, explicitly use a diptych, sequential panels, storyboard or contact sheet.
 # ========================================================================
 
 gkr_steampunk:
@@ -460,7 +468,7 @@ gkr_steampunk:
     - submarine researchers pressed to thick observation windows as a luminous deep-sea ruin emerges beyond the glass, survey camera active, restrained instrument light and immense ocean darkness
     - airship rescue crew transferring passengers from a damaged gondola by suspended rope cradle, strong wind and readable safety equipment
     - cartographer, local guide and naturalist studying a volcanic valley from a ridge, shared maps and specimen cases visible, scientific-romance panorama
-    - railway crew repairing a washed-out mountain bridge before an approaching mail train, cranes, timbers and urgent coordinated labor
+    - railway crew bracing a washed-out mountain bridge with cranes and fresh timbers, approaching mail train visible beyond a red stop flag while workers wave lanterns from the damaged track
     - desert archaeology team lifting a carved stone fragment with a compact steam crane, recording table and conservation tent nearby
     - maritime salvage crew opening a newly raised pressure capsule on a rain-dark dock, curiosity focused on the corroded mechanism
     - frontier town defending its water-pumping station from mechanical raiders, steam-western action staged around pipes and iron tanks
@@ -475,7 +483,7 @@ gkr_steampunk:
     - cemetery maintenance engine moving between iron memorials at midnight, low steam mingling with ground fog, gothic industrial landscape
     - masked saboteur crossing narrow foundry catwalks above dormant furnaces, a single arc lamp revealing cut control cables
     - abandoned coastal lighthouse powered by a failing clockwork lens drive, storm waves and intermittent beams exposing a figure on the stairs
-    - vast municipal archive where pneumatic message tubes continue operating without attendants, paper capsules accumulating beneath green-shaded lamps
+    - empty municipal archive beneath green-shaded lamps, pneumatic tubes ejecting paper capsules into overflowing baskets while unattended carrier mechanisms blur in motion
 
   automata_scenario:
     - painted-tin songbird automaton opening its wings beside the winding key and music cylinder, isolated product-catalogue plate

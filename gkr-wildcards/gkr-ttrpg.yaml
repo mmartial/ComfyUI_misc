@@ -24,6 +24,14 @@
 # Router-only items contain wildcard references only. Literal text added by a composite must
 # itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
 # do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
+#
+# SINGLE-IMAGE VISUAL REPRESENTATION TEST
+# Write every scene as facts visible in one generated image. A viewer without a caption must be
+# able to identify the subject, action and important contrast from pose, placement, props, short
+# readable labels, screens, clothing, architecture, damage or lighting. Do not depend on motives,
+# memories, recognition, ownership, occupation, causality, past/future events, sound or institutional
+# meaning unless their evidence is shown. Replace each such fact with visible proof; when one frame
+# cannot show it clearly, explicitly use a diptych, sequential panels, storyboard or contact sheet.
 # ========================================================================
 
 gkr_ttrpg:

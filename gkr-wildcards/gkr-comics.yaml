@@ -26,6 +26,14 @@
 # Router-only items contain wildcard references only. Literal text added by a composite must
 # itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
 # do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
+#
+# SINGLE-IMAGE VISUAL REPRESENTATION TEST
+# Write every scene as facts visible in one generated image. A viewer without a caption must be
+# able to identify the subject, action and important contrast from pose, placement, props, short
+# readable labels, screens, clothing, architecture, damage or lighting. Do not depend on motives,
+# memories, recognition, ownership, occupation, causality, past/future events, sound or institutional
+# meaning unless their evidence is shown. Replace each such fact with visible proof; when one frame
+# cannot show it clearly, explicitly use a diptych, sequential panels, storyboard or contact sheet.
 # ========================================================================
 
 gkr_comics:
@@ -190,9 +198,9 @@ gkr_comics:
     - wartime medic crossing a ruined street to reach civilians while official orders demand retreat
     - romance-comic coworkers reaching simultaneously for the same award file, competitive glares above matching private praise notes tucked into their folders
     - teen ensemble inside a threatened local venue, demolition notice on the door, one group building a benefit stage while another paints protest signs, former friends working back-to-back without eye contact
-    - funny-animal neighborhood election escalating through visual misunderstandings and an unexpectedly sincere concession
+    - six-panel funny-animal neighborhood election showing swapped campaign signs, candidates pointing at the wrong podiums, crowd laughter, one candidate lowering their banner and offering the other a ballot box, final handshake before both divided supporter groups
     - underground-comix musician watching a familiar district become unaffordable between successive gigs
-    - autobiographical creator revisiting a family argument through contradictory remembered layouts of one kitchen
+    - split-page autobiographical comic showing the same family argument in two contradictory kitchen layouts, table, doorway and each speaker changing position while one wall clock and cracked cup remain fixed
     - newspaper adventurer at a foreign port comparing a rain-damaged map with official signs pointing the wrong way while a local guide marks a hidden route toward visible hills
     - children's science club solving a local environmental problem through observation and improvised experiments
 
@@ -216,10 +224,10 @@ gkr_comics:
   european_scene:
     - reporter and local guide tracing a stolen artifact through a meticulously drawn harbor and customs district
     - eccentric village resisting an absurd administrative decree through escalating collective ingenuity
-    - aviation crew forced to land in disputed territory while weather and fuel limit every choice
-    - historical household receiving a letter that changes inheritance, alliance and an imminent marriage
+    - aviation crew over a map showing two armed border zones and one narrow landing strip, fuel gauge in red, storm filling the windscreen and pilot's hand pointing toward the only clear runway
+    - historical household gathered around an opened sealed letter, estate map and marriage miniature on the table, heir's name crossed out, signet ring passed toward a different relative as the intended couple stand apart
     - supernatural investigator in a provincial hotel lobby, guests holding incompatible photographs of the hotel while the real staircase splits into two architectural styles behind them
-    - Western travelers negotiating water rights before violence becomes inevitable
+    - Western travelers and ranchers facing each other across a dry trough, competing land deeds and a hand-drawn river map pinned beneath one hand while the other hands hover near holstered weapons
     - future-city civil servant comparing a blank sector on a glowing city map with tax records and utility bills listing crowded addresses in that same sector
     - Mediterranean family gathering revealing decades of migration through food, dialect and empty chairs
     - children's expedition crossing a familiar countryside transformed by one impossible machine

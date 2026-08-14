@@ -26,6 +26,14 @@
 # Router-only items contain wildcard references only. Literal text added by a composite must
 # itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
 # do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
+#
+# SINGLE-IMAGE VISUAL REPRESENTATION TEST
+# Write every scene as facts visible in one generated image. A viewer without a caption must be
+# able to identify the subject, action and important contrast from pose, placement, props, short
+# readable labels, screens, clothing, architecture, damage or lighting. Do not depend on motives,
+# memories, recognition, ownership, occupation, causality, past/future events, sound or institutional
+# meaning unless their evidence is shown. Replace each such fact with visible proof; when one frame
+# cannot show it clearly, explicitly use a diptych, sequential panels, storyboard or contact sheet.
 # ========================================================================
 
 gkr_cyberpunk:
@@ -263,28 +271,28 @@ gkr_cyberpunk:
 # ------------------------------------------------------------------------
 
   corporate_power_scene:
-    - executive boardroom overlooking workers leaving a darkened factory after the company logo remains illuminated
-    - corporate security replacing municipal signs with branded access instructions as residents photograph the change
+    - glass executive boardroom brightly lit above a black factory floor, suited figures seated around a polished table while uniformed workers carrying toolboxes queue at an EXIT gate below, the same corporate emblem glowing over both levels
+    - armored corporate guards unbolting a municipal station sign while technicians mount a matching corporate ACCESS PASS REQUIRED panel, residents aiming phones from behind a barrier
     - public plaza divided into premium and restricted lanes by transparent barriers and different floor materials
     - employees scanning implant licenses before entering elevators while one worker's arm displays an error
     - branded clinic presenting treatment prices beside a visibly overcrowded public waiting area
-    - office floor emptying during layoffs while automated desks continue displaying productivity targets
+    - office workers carrying archive boxes toward an exit beneath red CONTRACT TERMINATED badges while rows of empty automated desks display green productivity graphs
 
   platform_labor_scene:
     - bicycle couriers waiting beneath a wall-sized dispatch screen, timers counting down, security watching from glass booth
     - warehouse workers following projected arrows while a colleague repairs a failed exoskeleton beside the active line
     - drivers sleeping inside a charging depot, route rankings projected above parked vehicles
-    - cleaning crew watched by performance displays while polished offices remain empty
-    - food-delivery riders sheltering from toxic rain beneath an advertisement for private weather control
-    - content moderators leaving a windowless shift room while cheerful media loops continue across the walls
+    - cleaners pushing carts through an empty polished office while ceiling cameras track numbered boxes around their bodies and a wall display ranks each worker by rooms completed
+    - food-delivery riders in stained company jackets sheltering from green rain beneath a billboard showing a dry private courtyard under the label WEATHER SHIELD
+    - workers with red-rimmed eyes filing out of a windowless REVIEW FLOOR, rows of desks behind them showing censored thumbnails and warning symbols while cheerful brand mascots loop across the corridor screens
 
   surveillance_scene:
     - pedestrians crossing beneath layered biometric gates, one face producing several contradictory detection boxes
     - police drones projecting identification rectangles over a peaceful market crowd
     - protesters hiding faces with reflective umbrellas and patterned makeup beneath coordinated cameras
     - security operator monitoring hundreds of street feeds as one camera shows the operator from behind
-    - traveler detained because adjacent identity screens display different ages and names
-    - apartment residents covering corridor sensors while carrying supplies to an unseen neighbor
+    - guard gripping a traveler's shoulder between two adjacent identity screens showing the same face with different names and ages, closed gate glowing red behind them
+    - apartment residents taping metal bowls over corridor cameras while passing medicine, water bottles and a charged battery toward a partly open door
 
   augmentation_scene:
     - mechanic seated in a cramped stall, cybernetic arm locked, LICENSE EXPIRED warning beside incompatible parts
@@ -296,50 +304,50 @@ gkr_cyberpunk:
 
   synthetic_person_scene:
     - identical service androids in a secondhand shop holding different coats, hats and jewelry against their matching factory uniforms, decommission stamps visible on their neck plates
-    - synthetic care worker helping an elderly resident through a clinic that places robots in a separate queue
+    - synthetic care worker supporting an elderly resident between two clinic queue barriers, HUMAN PATIENTS arrow pointing toward open seats and SYNTHETIC STAFF arrow pointing toward a fenced inspection lane
     - machine worker repairing itself from an obsolete printed manual beside a pile of rejected components
-    - android family portrait assembled from bodies of different manufacturers and repair histories
-    - archived personality terminal included among household belongings during an apartment move
+    - posed android family portrait in a small apartment, mismatched manufacturer emblems, different replacement limbs, repair seams and personalized clothing clearly visible across the group
+    - movers carrying labeled household boxes past a portrait of an elderly resident while a face matching the portrait appears on a battered terminal packed among family keepsakes
     - decommissioned robots waiting outside a factory gate with boxes, tools and personal decorations
 
   community_scene:
-    - neighbors installing mesh antennas between rooftops during a citywide communications failure
+    - neighbors fastening mesh antennas and cables between dark apartment rooftops, commercial NETWORK OFFLINE signs below and one hand-built router showing connected green nodes
     - repair collective opening locked prosthetics across a shared workbench while owners observe
     - volunteers distributing charged batteries through a dark apartment courtyard
     - tenants physically barricading an automated property drone outside their building entrance
     - community clinic sharing calibration tools across improvised treatment stations
-    - residents painting a new pedestrian map over a predictive-policing district display
+    - residents painting bright walking routes, clinic symbols and open gates across a wall map whose original red patrol zones and camera icons remain visible underneath
 
   memory_identity_scene:
     - person comparing conflicting childhood photographs while a memory capsule reader displays both as authenticated
-    - two strangers recognizing the same recorded birthday memory at adjacent playback booths
-    - family archive containing an artificial replacement portrait where one relative should appear
-    - store selling packaged vacation memories through transparent demonstration cubicles
+    - two people in adjacent playback booths holding identical birthday photographs while both screens show the same cake, room and child from matching camera positions, duplicate capsule serial numbers enlarged between them
+    - open family album beside a glowing archive screen, the paper group photograph showing an empty chair while the digital version inserts an unfamiliar smiling figure into that exact space
+    - retail wall of sealed memory capsules beneath BEACH, MOUNTAIN and ORBIT labels, customers in transparent playback cubicles viewing matching destinations on wraparound screens
     - memory technician arranging physical capsules whose owner labels have been mechanically removed
-    - adult child confronting a household terminal that speaks in a deceased parent's reconstructed voice
+    - adult holding a funeral portrait beside a household terminal displaying the same elderly face, waveform and PARENT VOICE MODEL label, one hand reaching toward the physical power switch
 
   climate_city_scene:
     - flood barriers surrounding luxury towers while lower apartment streets remain submerged
     - cooling shelter queue beneath heat-distorted buildings and an animated cold-drink advertisement
-    - climate migrants arriving through a biometric ferry terminal carrying chargers and paper records
+    - soaked ferry passengers carrying suitcases, prosthetic chargers and paper records through biometric gates, floodwater and an evacuation vessel visible through the terminal glass
     - vertical farms operating beside abandoned drought-stricken suburbs
-    - maintenance crews clearing salt corrosion from coastal infrastructure before another storm
+    - tethered maintenance crews scraping white salt corrosion from immense floodgate joints while dark storm clouds, raised warning flags and rough water fill the horizon
     - water queue forming beneath a corporate fountain accessible only through a guarded lobby
 
   media_scene:
     - giant advertisement promising clean air above workers wearing respirators at street level
     - news presenter composited over a damaged district still visible through studio glass
-    - competing augmented messages occupying the same protest while physical signs remain consistent
-    - public screens replacing an arrested person's face as bystanders compare printed photographs
+    - protest viewed through two transparent augmented-reality visors, one overlay labeling the crowd RIOTERS and the other labeling the same outlined figures ESSENTIAL WORKERS, identical handwritten wage signs visible through both lenses
+    - public screens showing a digitally altered face beneath a WANTED label while bystanders hold printed photographs of the same person with visibly different features
     - influencer recording polished luxury content with industrial waste hidden just outside the frame
-    - newsroom staff watching an official feed while a reporter holds contradictory physical evidence
+    - newsroom staff facing an official ALL CLEAR flood report while a mud-soaked reporter places waterlogged evacuation tags, damaged respirators and photographs of submerged homes across the illuminated desk
 
   cyber_noir_scene:
     - investigator comparing rain-damaged receipts with corrupted surveillance stills in a nearly empty transit café
-    - witness interviewed behind a repair shop while security reflections reveal someone watching outside
+    - investigator and anxious witness leaning over photographs behind a repair shop, a uniformed observer visible only in the reflection of a dark display window outside
     - detective tracing camera blind spots on a printed map beneath flickering practical street lights
-    - missing-person photograph appearing inside advertisements across several unrelated districts
-    - investigator entering a sealed office where every device has been removed but warm cable impressions remain
+    - three-panel city montage showing the same missing-person photograph embedded in a transit advertisement, clinic display and luxury-tower billboard, repeated facial crop circled in warning red
+    - investigator kneeling inside a sealed empty office, rectangular dust-free patches, fresh screw holes and cable-shaped impressions marking every stripped desk while a thermal scanner shows warm connector outlines
     - public defender inside an abandoned apartment, floor covered with clinic receipts, checkpoint photographs and identity screens showing the same face under different names
 
 # ------------------------------------------------------------------------
@@ -347,25 +355,25 @@ gkr_cyberpunk:
 # ------------------------------------------------------------------------
 
   corporate_power_combo:
-    - "__gkr_cyberpunk/corporate_power_scene__, __gkr_cyberpunk/corporate_character__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/corporate_power_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   platform_labor_combo:
-    - "__gkr_cyberpunk/platform_labor_scene__, __gkr_cyberpunk/street_economy_character__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/platform_labor_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   surveillance_combo:
-    - "__gkr_cyberpunk/surveillance_scene__, __gkr_cyberpunk/security_character__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/surveillance_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   augmentation_combo:
-    - "__gkr_cyberpunk/augmentation_scene__, __gkr_cyberpunk/healthcare_character__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/augmentation_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   synthetic_person_combo:
-    - "__gkr_cyberpunk/synthetic_person_scene__, __gkr_cyberpunk/synthetic_character__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/synthetic_person_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   community_resistance_combo:
-    - "__gkr_cyberpunk/community_scene__, __gkr_cyberpunk/community_character__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/community_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   memory_identity_combo:
-    - "__gkr_cyberpunk/memory_identity_scene__, __gkr_cyberpunk/relationship__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/memory_identity_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   climate_city_combo:
-    - "__gkr_cyberpunk/climate_city_scene__, __gkr_cyberpunk/climate_environment__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/climate_city_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   media_propaganda_combo:
-    - "__gkr_cyberpunk/media_scene__, __gkr_cyberpunk/media_character__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/media_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   cyber_noir_combo:
-    - "__gkr_cyberpunk/cyber_noir_scene__, __gkr_cyberpunk/media_character__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, monochrome cyber-noir ink, one warning-color accent"
+    - "__gkr_cyberpunk/cyber_noir_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, monochrome cyber-noir ink, one warning-color accent"
   regional_city_combo:
     - "__gkr_cyberpunk/regional_environment__, __gkr_cyberpunk/infrastructure_character__, visible transport, utilities, maintenance and daily commerce, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
 
@@ -385,7 +393,7 @@ gkr_cyberpunk:
 
   ensemble_combo:
     - "cyberpunk ensemble: __gkr_cyberpunk/relationship__, one __gkr_cyberpunk/infrastructure_character__, one __gkr_cyberpunk/community_character__, and one __gkr_cyberpunk/street_economy_character__, each using a separate tool around the same open utility cabinet, __gkr_cyberpunk/rendering__"
-    - "institutional confrontation: __gkr_cyberpunk/corporate_character__, __gkr_cyberpunk/security_character__, and __gkr_cyberpunk/community_character__, spatial hierarchy and conflicting evidence visible, __gkr_cyberpunk/rendering__"
+    - "institutional confrontation: __gkr_cyberpunk/corporate_character__ seated behind a raised glass desk, __gkr_cyberpunk/security_character__ blocking the center aisle, and __gkr_cyberpunk/community_character__ standing below with printed notices and photographs spread toward them, all hands and eyelines visible, __gkr_cyberpunk/rendering__"
 
   character_sheet_combo:
     - "cyberpunk character sheet for __gkr_cyberpunk/standalone_character_combo__, front, side and back views, work pose, personal objects, clothing layers and material callouts"
@@ -409,7 +417,7 @@ gkr_cyberpunk:
 
   scene_storyboard_combo:
     - "six-frame cinematic storyboard for __gkr_cyberpunk/surveillance_scene__, wide location, camera view, detection box, subject turning, blocked camera and final damaged checkpoint"
-    - "six-frame cinematic storyboard for __gkr_cyberpunk/community_scene__, problem, coordination, physical work, institutional obstacle, adaptation and final changed environment"
+    - "six-frame cinematic storyboard for __gkr_cyberpunk/community_scene__: wide view of damaged equipment, residents pointing over a paper diagram, close view of hands repairing it, guard or locked access panel blocking the route, tools rerouted around the barrier, final wide view with working lights or open passage"
 
   key_visual_combo:
     - "cyberpunk key visual based on __gkr_cyberpunk/community_scene__, ensemble foreground, exposed city utilities behind, security barrier facing a resident barricade, title-safe negative space, one overhead work light"
@@ -431,7 +439,7 @@ gkr_cyberpunk:
 
   graphic_novel_page_combo:
     - "complete cyberpunk graphic-novel page based on __gkr_cyberpunk/platform_labor_scene__, wide location panel, close work action, warning display, worker reaction and final damaged equipment panel, black, gray and warning-orange color"
-    - "complete cyberpunk graphic-novel page based on __gkr_cyberpunk/memory_identity_scene__, repeated composition, conflicting photographs and one page-turn revelation"
+    - "complete cyberpunk graphic-novel page based on __gkr_cyberpunk/memory_identity_scene__, repeated booth composition, close panels of conflicting photographs and capsule labels, final full-width panel placing both contradictory records side by side"
 
   spotlight_scenes:
     - "__gkr_cyberpunk/corporate_power_combo__"

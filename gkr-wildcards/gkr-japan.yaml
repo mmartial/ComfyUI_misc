@@ -24,6 +24,14 @@
 # Router-only items contain wildcard references only. Literal text added by a composite must
 # itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
 # do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
+#
+# SINGLE-IMAGE VISUAL REPRESENTATION TEST
+# Write every scene as facts visible in one generated image. A viewer without a caption must be
+# able to identify the subject, action and important contrast from pose, placement, props, short
+# readable labels, screens, clothing, architecture, damage or lighting. Do not depend on motives,
+# memories, recognition, ownership, occupation, causality, past/future events, sound or institutional
+# meaning unless their evidence is shown. Replace each such fact with visible proof; when one frame
+# cannot show it clearly, explicitly use a diptych, sequential panels, storyboard or contact sheet.
 # ========================================================================
 
 gkr_japan:
@@ -1593,7 +1601,7 @@ gkr_japan:
     - (bakeneko cat spirit:1.3), forked tail, glowing paws, walking on two legs, shadowy form, supernatural, dark
     - (jorogumo spider witch:1.3), spinning silk threads, in forest temple, beautiful woman upper body, (giant spider lower body:1.2)
     - (kappa:1.3), (lurking beneath mossy riverbank:1.2), clutching cucumber, water dish on head, green skin, mythical creature
-    - (yamabiko:1.2), echo spirit, invisible, sound waves visible, shouting in mountains, abstract, fantasy
+    - (yamabiko echo spirit:1.2), translucent child-sized silhouette on a mountain ridge, concentric white sound rings repeating between cliff faces, open shouting mouth, fantasy illustration
     - (hitodama:1.2), (floating blue fire orbs:1.2), drifting through graveyard, eerie glow, ghostly, night, atmospheric
     - (noppera-bo:1.3), (faceless figure:1.2), walking calmly through night street, kimono, eerie, horror
     - (ubume ghost mother:1.3), (holding spectral infant:1.2), tattered robes, rainy night, sad expression, haunting
@@ -1618,7 +1626,7 @@ gkr_japan:
     - (kitsune shrine guardian:1.3), (manifesting from torii flames:1.2), white fox form, divine aura, protective stance
     - (goryo:1.2), noble ghost, radiating blue vengeance, court robes, haunting a palace, eerie, powerful
     - (okuri-inu:1.2), wolf spirit, stalking travelers in the dark, glowing eyes, shadowy forest, protective or malevolent
-    - (nurikabe:1.2), invisible wall spirit, blocking path, giant shadowy form, eerie, eyes in the dark, abstract
+    - (nurikabe wall spirit:1.2), giant slab-shaped shadow blocking a narrow night path, two dim eyes, traveler pressing both palms against its rippling surface, eerie folklore illustration
     - (tofu-kozo:1.2), small yokai, rain hat, offering cursed tofu, child-like, eerie smile, rainy night
     - (aka manto:1.3), (red-cloaked restroom phantom:1.2), masked, holding red and blue paper, horror, eerie
     - (ju-on:1.3), (cursed entity:1.2), crawling through shadow-flooded room, black hair, croaking sound, intense horror
@@ -1627,7 +1635,7 @@ gkr_japan:
     - (mizuchi:1.2), river dragon, coiling beneath surface, glowing scales, guardian, powerful, fantasy
     - (tesso:1.2), (iron-rat swarm spirit:1.2), consuming metal, hundreds of rats, eerie, dark fantasy
     - (shan shan dōroku:1.2), phantom drums, echoing in shrine, no visible source, eerie, atmospheric, abstract
-    - (invisible yokai:1.2), leaving wet footprints, across tatami, eerie, mysterious, minimalist horror
+    - translucent yokai distortion crossing a tatami room, wet footprints and compressed floor mats tracing its path, moonlit minimalist horror
     - (tall red oni:1.3), (laughing atop broken gate:1.2), kanabo, intimidating, moonlight, epic
     - (moonlit fox maiden:1.3), kitsune, (dancing with floating lanterns:1.2), ethereal kimono, glowing tails, magical
     - (kirin-footed celestial yokai:1.3), kirin, standing in stillness, glowing scales, divine aura, majestic

@@ -30,6 +30,14 @@
 # pools when any pairing can contradict subject, setting, era, equipment, scale or format.
 # Test composites by separating literal text from references, scanning the literal text for
 # abstractions, resolving the full route graph, and reviewing every referenced pool pairing.
+#
+# SINGLE-IMAGE VISUAL REPRESENTATION TEST
+# Write every scene as facts visible in one generated image. A viewer without a caption must be
+# able to identify the subject, action and important contrast from pose, placement, props, short
+# readable labels, screens, clothing, architecture, damage or lighting. Do not depend on motives,
+# memories, recognition, ownership, occupation, causality, past/future events, sound or institutional
+# meaning unless their evidence is shown. Replace each such fact with visible proof; when one frame
+# cannot show it clearly, explicitly use a diptych, sequential panels, storyboard or contact sheet.
 # ========================================================================
 
 gkr_anime:
@@ -121,30 +129,30 @@ gkr_anime:
     - delinquent standing between a younger student and three aggressors at a school gate, squared shoulders, open shielding arm and watching classmates forming a wide circle
 
   anime_romance_scene:
-    - shy confession beside a railway crossing, passing train separating the pair before their reactions are revealed
+    - two students facing each other on opposite sides of a railway crossing, one extending a folded note while the passing train divides the frame, both faces visible through separate carriage windows
     - adult former classmates seated stiffly across a nearly empty family-restaurant booth, untouched drinks, matching old school charms beside their phones, forced smiles and eyes fixed on opposite windows
     - two coworkers missing the last train and walking home through quiet streets, conversation gradually becoming personal
     - long-distance couple sharing the same meteor shower from different cities, parallel compositions joined by matching gestures
-    - reserved student repairing an umbrella for someone they pretend not to notice, small actions observed across several quiet cuts
+    - four-panel sequence showing a reserved student glancing sideways, tightening a loose umbrella rib, placing the repaired umbrella beside its owner, then turning away as the owner notices it
     - widowed shopkeeper receiving a familiar seasonal order in the handwriting of a deceased spouse
-    - university musicians practicing after hours, mutual affection emerging through timing and attentive listening
+    - university musicians alone in a dark rehearsal room, chairs angled toward each other, matching sheet music, one holding a final note while the other watches with lowered instrument and a small smile
     - elderly couple on a coastal station platform beside a faded photograph of their younger selves at the same bench, matching suitcase and seasonal flowers visible in both
 
   anime_slice_of_life_scene:
-    - friends sharing convenience-store food after missing the last train, jokes giving way to one honest admission
+    - friends sharing convenience-store food outside a shuttered station beneath a LAST TRAIN DEPARTED display, one holding out an opened letter while the others stop eating and turn toward it
     - family preparing dinner in a cramped kitchen, several generations moving around one another through practiced routines
     - student club cleaning an abandoned room, faded team photographs, tarnished trophies and a sealed club ledger emerging from beneath dusty sheets
     - office worker carrying groceries home in summer rain, stopping to help a neighbor secure laundry in the wind
     - children exploring drainage paths after a storm, turning ordinary infrastructure into an afternoon expedition
     - rural residents reopening a shuttered local shop, sweeping dust while older customers tell conflicting stories
     - university roommates in a shared kitchen, torn chore chart taped back together, one washing the other's dishes while the other folds their laundry, cautious sidelong glances
-    - train conductor beginning the first winter service before dawn, checking platforms known by memory
+    - train conductor walking an empty snow-covered platform before dawn, checklist and lantern in hand, gloved finger tracing numbered platform signs beside the waiting first train
 
   anime_comedy_scene:
     - carefully planned school announcement collapsing through a chain of mundane interruptions, ensemble reactions held in one wide frame
     - overconfident amateur cook hiding a ruined dish while increasingly suspicious guests arrive early
     - supernatural roommate sitting rigidly beneath an apartment rule chart while floating slippers, self-opening cupboards and an airborne toothbrush move behind them
-    - four-panel-style misunderstanding escalating because each character interprets the same ordinary object differently
+    - four-panel comedy showing one ordinary wrapped box passing between four characters, each panel with a different guessed-content sketch above a face, final panel revealing a plain rice cooker
     - student council staging a solemn ceremony while malfunctioning equipment undermines every formal gesture
     - armored fantasy adventurers crowded around a restaurant bill, empty coin purses, calculator beads and itemized plates between them, defeated monster trophy blocking the tiny table
     - timid employee mistaken for a legendary expert and repeatedly succeeding through coincidence
@@ -153,12 +161,12 @@ gkr_anime:
   anime_sports_scene:
     - volleyball team executing a rehearsed final play, every member contributing before the full-court result
     - exhausted distance runner turning back with one arm extended toward an injured rival on the track while the leading runners disappear around the bend
-    - baseball pitcher and catcher revising their strategy through signs after the batter anticipates every pitch
+    - baseball catcher flashing a new hand signal between their knees while the pitcher nods from the mound and the batter watches their hands, crossed-out pitch chart visible in the dugout
     - high-school football team defending one final attack in heavy rain, spacing and fatigue clearly staged
-    - competitive swimmer alone beneath the surface before the starting signal, crowd noise reduced to vibration
+    - competitive swimmer motionless underwater beneath the starting block, lane rope and wavering crowd silhouettes above, compressed bubbles around the ears and red starting light still unlit
     - figure skater recovering from an early mistake, choreography becoming simpler and more emotionally direct
     - cycling team rotating positions through mountain wind, strongest rider sacrificing an individual finish
-    - traditional archery competitor calming their breathing while the tournament continues out of focus
+    - traditional archery competitor holding a lowered bow with relaxed shoulders and one slow breath visible in cold air, blurred archers and targets continuing behind
 
   anime_mystery_scene:
     - student detectives reconstructing a locked-room event using classroom objects and conflicting witness positions
@@ -166,15 +174,15 @@ gkr_anime:
     - university archivist finding tomorrow's newspaper filed among century-old documents
     - passengers inside a stopped local train holding tickets printed with different terminal stations, route display flickering between incompatible maps, alarmed faces reflected in the dark windows
     - private investigator following a mundane accounting discrepancy into a network of neighborhood favors and secrets
-    - siblings mapping sounds inside an inherited house whose rooms do not match the exterior walls
-    - detective interviewing an apparently helpful witness while reflections reveal rehearsed body language
+    - siblings inside an old house marking knocks on a floor plan, measuring tape stretched across a corridor whose interior length exceeds the exterior dimension written beside a window sketch
+    - detective seated opposite a smiling witness, wall mirror showing the witness repeatedly gripping a concealed cue card beneath the table, notebook and evidence photographs between them
     - journalist tracing anonymous messages through discontinued vending machines across the city
 
   anime_horror_scene:
     - apartment resident noticing a spiral motif recurring in food, plumbing, hair and street architecture
     - school hallway extending by one door each time a student looks away, daylight remaining unnaturally constant
     - fishing village performing an ordinary morning routine while every shadow points toward the sea
-    - family portrait gaining one additional relative after each household argument
+    - three-panel horror sequence showing the same arguing family beneath one portrait, the portrait adding one pale relative in each successive panel while the living figures keep identical positions
     - commuter repeatedly seeing their sleeping body through the windows of trains passing in the opposite direction
     - shrine visitors hearing their own wishes answered from inside sealed offering boxes
     - medical team treating a patient whose internal anatomy changes to match each observer's expectations
@@ -191,14 +199,14 @@ gkr_anime:
     - cockpit team gripping paired manual controls in synchronized mirrored poses, crossed warning lights turning green as the damaged machine steadies above an evacuation corridor
 
   anime_scifi_scene:
-    - android waking in a quiet care facility and recognizing every patient except the person listed as its owner
+    - android upright in a care-facility bed, patient portraits matched by green boxes across its screen while one nearby visitor is marked OWNER / NO MATCH, disconnected charging cable across the sheets
     - cybercrime investigator walking through a translucent reconstructed street, advertisements replacing cheerful faces with the investigator's concealed crime-scene photographs as they pass
     - generation-ship residents beneath an artificial sky dome, holding an old star atlas against projected constellations that do not match, maintenance panels open along the horizon projector
     - courier transporting an illegal personality backup through a layered city transit network
     - lunar maintenance worker receiving a live radio call from Earth delayed by far more than distance allows
     - elderly engineer showing children an abandoned orbital garden designed by a forgotten culture
     - cloned coworkers comparing tiny habits to determine which memories belong to the original
-    - space-rescue crew boarding a silent vessel whose life-support system continues serving absent passengers
+    - space-rescue crew entering an empty passenger cabin, untouched meals, warm reading lamps, oxygen vents streaming condensation and occupied-seat indicators glowing above vacant chairs
 
   anime_historical_scene:
     - wandering swordswoman facing an opponent in wind-bent grass, long preparation followed by one economical exchange
@@ -206,17 +214,17 @@ gkr_anime:
     - traveling medicine seller comparing sick villagers' blackened fingertips with leaking dye barrels, shrine charms hanging untouched beside contaminated trade crates
     - village women around a dirt map of fields and lanes, placing farm tools at marked chokepoints while empty weapon racks hang behind them
     - Edo-period fire brigade racing across rooftops as wind carries embers toward crowded wooden districts
-    - court poet composing a politically dangerous verse during a moon-viewing ceremony
+    - court poet shielding a half-written verse beneath a sleeve while armed officials watch from the moon-viewing pavilion, censored poems and a broken seal visible on the low writing table
     - young craft apprentice copying an elderly master's precise hand position at a worn workbench, failed pieces piled nearby, only one finished traditional object between them
     - displaced family opening a small postwar neighborhood shop, black mourning bands beside freshly painted signage, one parent stocking salvaged goods while a child places a deceased relative's photograph behind the counter
 
   anime_music_scene:
-    - school band finding the correct tempo only after listening to the quietest member
+    - school band paused around the quietest musician, every chair and gaze turned toward their raised bow, shared metronome centered in frame and matching beat marks penciled across all music stands
     - punk trio performing at floor level in a tiny club, normally reserved singer screaming into a microphone with jacket discarded, stunned uniformed classmates pressed against the front wall
     - idol group rehearsing in plain sweat-darkened clothes before mirrored walls, one singer slumped beside water bottles while the others adjust formation marks around her
-    - jazz students trading improvised phrases after the last train, empty practice room becoming an intimate stage
+    - jazz students facing each other in an empty late-night practice room, saxophone and piano phrases shown as alternating notation across open stands, LAST TRAIN sign dark beyond the window
     - orchestra leader with wrist brace paused in the rehearsal-room doorway while a younger substitute conducts the ensemble, musicians' eyes split between both figures
-    - folk musician recording regional songs before the final residents leave a mountain village
+    - folk musician singing into a portable recorder in a mountain house, elderly residents gathered close, packed moving boxes and a bus timetable marked FINAL SERVICE beside the door
     - electronic composer sampling the mechanical rhythms of a closing factory with its workers
     - shy songwriter performing one unfinished song at a university festival as rain empties the audience area
 
@@ -653,15 +661,15 @@ gkr_anime:
     - town residents smiling identically whenever the protagonist mentions a missing family
     - medical illustration gradually replacing the reader's view of a living character
     - reflected crowd containing one figure whose face occupies progressively more of each panel
-    - diary writing new entries in the protagonist's handwriting during blank gutters
+    - four-panel horror page showing an open diary with blank line, ink strokes appearing without a hand, protagonist comparing the new sentence to a matching handwritten note, final close-up of wet ink
     - seaside staircase continuing below the water while footprints emerge upward
 
   manga_sports_scene:
     - final rally decomposed into foot placement, breath, teammate positioning and one decisive contact
     - injured captain contributing through observation and strategy from the sideline
-    - novice losing badly but recognizing the exact skill needed for the next season
+    - sports manga page showing a defeated novice kneeling beside a lopsided scoreboard, watching the winner demonstrate one precise foot position, then copying that stance beside a penciled training diagram
     - rivals reviewing the same match afterward and interpreting its turning point differently
-    - team practice during a heat wave revealing leadership through small acts of care
+    - team practice beneath a heat-warning board, one player distributing water, moving a fan toward an exhausted teammate and tightening shade cloth while others continue drills
     - student athlete asleep over textbooks in a laundromat work uniform, taped knee elevated on a sports bag, training schedule and late-shift timecard beside an alarm clock
 
   manga_yonkoma_scene:
@@ -670,11 +678,11 @@ gkr_anime:
     - cat strategically relocating objects while humans invent supernatural explanations
     - student preparing the perfect confession only to deliver it to the wrong identical locker
     - ghost levitating a chair and stretching a shadow across the ceiling while the unfazed resident points toward cracked pipes with a wrench and maintenance checklist
-    - four-panel sequence: robot studies a sarcasm phrasebook, practices a smug expression, repeats the phrase at a funeral, mourners turn in shock while the robot gives a cheerful thumbs-up
+    - four-panel sequence showing a robot studying a sarcasm phrasebook, practicing a smug expression, repeating the phrase at a funeral, mourners turning in shock while the robot gives a cheerful thumbs-up
 
   manga_historical_scene:
     - merchant household around a ledger table, new regime's seal stamped across inventory lists, debt notes and marriage contract while soldiers replace flags outside the shop
-    - traveling artist documenting communities before a new road transforms the region
+    - traveling artist sketching a village beside survey stakes and an unfinished road cutting across fields, residents and traditional buildings recorded on open pages in the foreground
     - sword school divided over whether tradition permits adaptation to unfamiliar weapons
     - court attendant using poetry and gift etiquette to prevent a factional confrontation
     - rural midwife crossing a winter pass to reach an isolated settlement
