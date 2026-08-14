@@ -19,6 +19,11 @@
 # observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
 # and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
 # A downstream LLM may clarify wording but must not invent the visual representation.
+#
+# NON-LEAF / COMPOSITE RULE
+# Router-only items contain wildcard references only. Literal text added by a composite must
+# itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
+# do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
 # ========================================================================
 
 gkr_scifi:
@@ -664,17 +669,17 @@ gkr_scifi:
     - restrained holographic annotation aligned to physical instruments and samples
 
   genre_tradition_combo:
-    - "__gkr_scifi/scientific_discovery_scenario__, hard science-fiction treatment with physically motivated equipment, practical workwear and restrained instrument light"
+    - "__gkr_scifi/scientific_discovery_scenario__, labeled equipment with visible cables and fasteners, practical workwear, one instrument lamp and shadows aligned to it"
     - "__gkr_scifi/space_opera_scenario__, operatic far-future treatment with monumental architecture, ceremonial cultures and heroic widescreen staging"
     - "__gkr_scifi/first_contact_scenario__, planetary-romance painting with exotic landscape, elegant expedition design and visible brushwork"
     - "__gkr_scifi/ship_family_combo__, 1950s pulp-science-fiction treatment with saturated primary colors, halftone texture and theatrical rocket geometry"
     - "__gkr_scifi/civilian_culture_scenario__, analog cassette-futurist treatment with molded panels, monochrome displays, labeled switches and warm practical lamps"
     - "__gkr_scifi/near_future_scenario__, clean optimistic retrofuture with geometric public infrastructure, landscaped spaces and bright diffuse daylight"
-    - "__gkr_scifi/near_future_scenario__, cybernetic near-future documentary treatment with wearable interfaces, prosthetics and dense grounded infrastructure"
+    - "__gkr_scifi/near_future_scenario__, wearable interfaces, prosthetics, transit pylons, utility pipes, service hatches and documentary camera framing"
     - "__gkr_scifi/scientific_discovery_scenario__, biopunk treatment with grown tools, translucent membranes, engineered organisms and wet laboratory materials"
     - "__gkr_scifi/near_future_scenario__, ecological science-fiction treatment emphasizing climate adaptation, restored ecosystems and visible water and energy systems"
     - "__gkr_scifi/ai_posthuman_scenario__, posthuman far-future treatment with unfamiliar bodies, minimal artifacts and immense temporal scale"
-    - "__gkr_scifi/scientific_discovery_scenario__, scientific-exploration treatment emphasizing samples, instruments, protective equipment and procedural clarity"
+    - "__gkr_scifi/scientific_discovery_scenario__, labeled samples, active instruments, sealed gloves, protective masks and numbered procedure cards visible"
     - "__gkr_scifi/first_contact_scenario__, first-contact drama with cautious body language, environmental separation, translation tools and balanced staging"
     - "__gkr_scifi/anomaly_scenario__, cosmic-horror composition with weak local light, tiny figures and oppressive negative space"
     - "__gkr_scifi/civilian_culture_scenario__, generation-ship society with layered lived-in interiors, agriculture, maintenance and multigenerational community"

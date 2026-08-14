@@ -19,6 +19,11 @@
 # observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
 # and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
 # A downstream LLM may clarify wording but must not invent the visual representation.
+#
+# NON-LEAF / COMPOSITE RULE
+# Router-only items contain wildcard references only. Literal text added by a composite must
+# itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
+# do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
 # ========================================================================
 
 gkr_popculture:
@@ -204,7 +209,7 @@ gkr_popculture:
     - small-town residents gathered at a diner after an impossible event, each concealing a different piece of information
 
   tv_ensemble_combo:
-    - "ensemble scene from a __gkr_popculture/tv_genre__, __gkr_popculture/tv_episode_scene__, practical episodic production design, readable reaction coverage, natural television lighting"
+    - "television ensemble scene: __gkr_popculture/tv_episode_scene__, practical episodic production design, readable reaction coverage, natural television lighting"
 
   manga_genre:
     - high-energy youth adventure manga
@@ -245,7 +250,7 @@ gkr_popculture:
     - delinquent protecting a younger student at a school gate, confrontation conveyed through posture, shoes, and surrounding classmates rather than powers
 
   manga_scene_combo:
-    - "scene from a __gkr_popculture/manga_genre__: __gkr_popculture/manga_scene__, __gkr_popculture/manga_rendering__, intentional manga panel composition"
+    - "manga scene: __gkr_popculture/manga_scene__, __gkr_popculture/manga_rendering__, large establishing panel, two reaction close-ups and one narrow action panel"
 
   comic_tradition:
     - modern superhero comic
@@ -283,7 +288,7 @@ gkr_popculture:
     - aging musician documenting the closure of a neighborhood venue through sketches, tickets, and overheard conversation
 
   comic_page_combo:
-    - "page from a __gkr_popculture/comic_tradition__: __gkr_popculture/comic_scene__, __gkr_popculture/comic_rendering__, clear sequential storytelling and varied panel scale"
+    - "comics page: __gkr_popculture/comic_scene__, __gkr_popculture/comic_rendering__, wide location panel, medium action panel, close reaction panel and full-width final panel"
 
   music_genre:
     - arena rock
@@ -323,21 +328,21 @@ gkr_popculture:
     - gospel choir rising row by row behind a soloist in warm morning light
 
   music_performance_combo:
-    - "__gkr_popculture/music_genre__ performance: __gkr_popculture/music_performance__, __gkr_popculture/music_venue__, correct hand placement, instrument cables, microphone stands, stage monitors and audience hands, concert photography composition"
+    - "live performance: __gkr_popculture/music_performance__, __gkr_popculture/music_venue__, correct hand placement, instrument cables, microphone stands, stage monitors and audience hands, concert photography composition"
 
   music_video_combo:
     - "music video for a __gkr_popculture/music_genre__ track, performers moving through a single evolving practical set, choreography synchronized to visual transitions, bold era-conscious styling, purposeful camera movement"
-    - "one-take music video for a __gkr_popculture/music_genre__ track, camera following the performer from backstage through __gkr_popculture/music_venue__, extras joining in timed waves, final reveal on the last chorus"
+    - "one-take music video, camera following the performer from backstage through __gkr_popculture/music_venue__, extras joining in successive visible groups, final wide view revealing the full venue"
     - "stylized __gkr_popculture/music_genre__ video where a violinist's bow strokes create visible ripples through practical dust, fabric and water sets, each musical phrase triggering a new physical reaction"
     - "retro-futurist __gkr_popculture/music_genre__ video built around chrome turntables and circular projection screens, performers passing vinyl-like discs through match cuts rather than combat"
     - "street-art __gkr_popculture/music_genre__ video in which painted figures advance across successive walls with the rhythm, live dancers matching each mural pose before moving onward"
     - "cyberpunk __gkr_popculture/music_genre__ performance staged on a moving night train, city reflections providing transitions between musicians in separate carriages"
 
   album_cover_combo:
-    - "album cover for a __gkr_popculture/music_genre__ artist, one memorable central visual metaphor, strong silhouette readable at thumbnail size, intentional negative space for typography, era-appropriate photographic or illustrative treatment"
+    - "album cover for a __gkr_popculture/music_genre__ artist, one instrument or performance prop enlarged behind a strong central silhouette, empty upper-left area for typography, photographic or illustrated treatment matching the selected genre's era"
 
   movie_scene_combo:
-    - "__gkr_popculture/movie_genre__ scene: __gkr_popculture/spotlight_cinematicscene__, __gkr_popculture/movie_camera__, __gkr_popculture/movie_color_grade__, practical environmental reactions, cinematic production design"
+    - "feature-film scene: __gkr_popculture/spotlight_cinematicscene__, __gkr_popculture/movie_camera__, __gkr_popculture/movie_color_grade__, practical environmental reactions, cinematic production design"
 
   popculture_mashup_combo:
     - "reinterpret __gkr_popculture/spotlight_cinematicscene__ as a __gkr_popculture/comic_tradition__, __gkr_popculture/comic_rendering__, retain the same character positions, eyelines, foreground objects and background landmarks"

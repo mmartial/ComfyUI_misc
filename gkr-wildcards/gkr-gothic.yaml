@@ -21,6 +21,11 @@
 # observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
 # and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
 # A downstream LLM may clarify wording but must not invent the visual representation.
+#
+# NON-LEAF / COMPOSITE RULE
+# Router-only items contain wildcard references only. Literal text added by a composite must
+# itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
+# do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
 # ========================================================================
 
 gkr_gothic:
@@ -286,23 +291,23 @@ gkr_gothic:
 # ------------------------------------------------------------------------
 
   haunting_combo:
-    - "__gkr_gothic/haunting_scene__, __gkr_gothic/domestic_environment__, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/gothic_tradition__, __gkr_gothic/rendering__"
+    - "__gkr_gothic/haunting_scene__, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/gothic_tradition__, __gkr_gothic/rendering__"
   psychological_horror_combo:
-    - "__gkr_gothic/psychological_scene__, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/gothic_tradition__, restrained effects, __gkr_gothic/rendering__"
+    - "__gkr_gothic/psychological_scene__, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/gothic_tradition__, one localized physical anomaly and no surrounding glow, __gkr_gothic/rendering__"
   folk_horror_combo:
-    - "__gkr_gothic/folk_horror_scene__, __gkr_gothic/folk_environment__, __gkr_gothic/folk_character__, __gkr_gothic/camera__, natural daylight or firelight, __gkr_gothic/rendering__"
+    - "__gkr_gothic/folk_horror_scene__, __gkr_gothic/camera__, natural daylight or firelight, __gkr_gothic/rendering__"
   gothic_romance_combo:
     - "__gkr_gothic/gothic_romance_scene__, __gkr_gothic/relationship__, __gkr_gothic/camera__, __gkr_gothic/lighting__, Romantic Gothic, __gkr_gothic/rendering__"
   investigation_combo:
     - "__gkr_gothic/investigation_scene__, __gkr_gothic/investigator_character__, physical evidence clearly visible, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/rendering__"
   medical_horror_combo:
-    - "__gkr_gothic/medical_horror_scene__, __gkr_gothic/medical_character__, __gkr_gothic/institutional_environment__, __gkr_gothic/camera__, cold practical lighting, __gkr_gothic/rendering__"
+    - "__gkr_gothic/medical_horror_scene__, __gkr_gothic/camera__, cold practical lighting, __gkr_gothic/rendering__"
   maritime_gothic_combo:
-    - "__gkr_gothic/maritime_horror_scene__, __gkr_gothic/maritime_environment__, __gkr_gothic/camera__, hard coastal weather, __gkr_gothic/rendering__"
+    - "__gkr_gothic/maritime_horror_scene__, __gkr_gothic/camera__, hard coastal weather, __gkr_gothic/rendering__"
   ecclesiastical_gothic_combo:
     - "__gkr_gothic/religious_character__, __gkr_gothic/sacred_environment__, __gkr_gothic/relationship__, one visible ritual disturbance, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/rendering__"
   supernatural_portrait_combo:
-    - "__gkr_gothic/supernatural_character__, full-body figure with one physically impossible trait, restrained background, practical light, __gkr_gothic/rendering__"
+    - "__gkr_gothic/supernatural_character__, full-body figure with one physically impossible trait, plain dark wall, one candle or window light, __gkr_gothic/rendering__"
   quiet_horror_combo:
     - "__gkr_gothic/quiet_horror_scene__, static composition, ordinary material detail, no visible monster, __gkr_gothic/lighting__, __gkr_gothic/rendering__"
 
@@ -311,12 +316,12 @@ gkr_gothic:
 # ------------------------------------------------------------------------
 
   standalone_character_combo:
-    - "standalone Gothic household character: __gkr_gothic/household_character__, role-defining objects, neutral domestic context, __gkr_gothic/rendering__"
+    - "standalone Gothic household character: __gkr_gothic/household_character__, keys, ledger or cleaning tools within reach, plain domestic room, __gkr_gothic/rendering__"
     - "standalone Gothic investigator: __gkr_gothic/investigator_character__, evidence tools visible, __gkr_gothic/rendering__"
     - "standalone religious Gothic character: __gkr_gothic/religious_character__, ritual objects and material wear visible, __gkr_gothic/rendering__"
     - "standalone medical Gothic character: __gkr_gothic/medical_character__, practical instruments visible, __gkr_gothic/rendering__"
     - "standalone folk Gothic character: __gkr_gothic/folk_character__, locally made clothing and objects, __gkr_gothic/rendering__"
-    - "standalone supernatural Gothic character: __gkr_gothic/supernatural_character__, one restrained impossible trait, __gkr_gothic/rendering__"
+    - "standalone supernatural Gothic character: __gkr_gothic/supernatural_character__, one impossible body trait isolated against a plain dark wall, __gkr_gothic/rendering__"
 
   ensemble_combo:
     - "Gothic ensemble: __gkr_gothic/relationship__, __gkr_gothic/household_character__, __gkr_gothic/investigator_character__, and __gkr_gothic/supernatural_character__, distinct eyelines in one shared room, __gkr_gothic/rendering__"
@@ -334,7 +339,7 @@ gkr_gothic:
     - "Gothic creature design sheet for __gkr_gothic/creature_subject__, anatomy, locomotion, resting state, environmental trace, scale and silhouette studies"
 
   prop_design_combo:
-    - "Gothic narrative prop sheet for __gkr_gothic/gothic_prop__, front, reverse, opened or altered state, hand interaction, age, damage and clue details"
+    - "Gothic prop sheet for __gkr_gothic/gothic_prop__, front, reverse, opened state, hand holding it, material wear, damage and hidden-compartment inset"
 
   environment_design_combo:
     - "Gothic environment design sheet for __gkr_gothic/domestic_environment__, exterior, floor plan, principal room, hidden circulation, day and night states"
@@ -342,23 +347,23 @@ gkr_gothic:
     - "Gothic environment design sheet for __gkr_gothic/maritime_environment__, tide or storm states, access routes, interior cutaway and weather damage"
 
   storyboard_combo:
-    - "six-frame Gothic storyboard for __gkr_gothic/haunting_scene__, ordinary setup, physical disturbance, observation, failed explanation, reveal and quiet consequence"
-    - "six-frame Gothic storyboard for __gkr_gothic/investigation_scene__, arrival, evidence, comparison, architectural clue, discovery and unresolved final image"
+    - "six-frame Gothic storyboard for __gkr_gothic/haunting_scene__, unchanged room, moved object, witness close-up, locked door, apparition reveal and final empty room with one new footprint"
+    - "six-frame Gothic storyboard for __gkr_gothic/investigation_scene__, exterior arrival, evidence close-up, two objects compared, hidden doorway, opened chamber and final silhouette beyond"
 
   key_visual_combo:
     - "Gothic key visual based on __gkr_gothic/gothic_romance_scene__, paired figures separated by a door, window or reflection in the foreground, family portraits, sealed masonry and weather damage behind, title-safe negative space"
-    - "Gothic key visual based on __gkr_gothic/folk_horror_scene__, community and outsider visible together, seasonal motif, restrained threat"
+    - "Gothic key visual based on __gkr_gothic/folk_horror_scene__, villagers surrounding one isolated visitor, harvested plants or snow across the foreground, masked figure partly visible behind them"
 
   poster_combo:
-    - "Gothic horror poster based on __gkr_gothic/psychological_scene__, one impossible domestic detail as central metaphor, limited palette and title-safe space"
-    - "maritime Gothic poster based on __gkr_gothic/maritime_horror_scene__, human scale beneath coast and weather, restrained typography area"
+    - "Gothic horror poster based on __gkr_gothic/psychological_scene__, one impossible domestic object enlarged behind the central figure, black, bone-white and dark red palette, title-safe space"
+    - "maritime Gothic poster based on __gkr_gothic/maritime_horror_scene__, tiny foreground figure beneath cliffs, waves and storm clouds, empty upper area for typography"
 
   book_cover_combo:
-    - "Gothic novel cover based on __gkr_gothic/domestic_environment__, one narrative prop, architectural silhouette, restrained color and title-safe upper area"
+    - "Gothic novel cover based on __gkr_gothic/domestic_environment__, one key, letter or damaged portrait in foreground, architectural silhouette, black and faded-sepia color, title-safe upper area"
     - "Gothic anthology cover combining __gkr_gothic/creature_subject__ with __gkr_gothic/sacred_environment__, engraved treatment and issue-title safe zone"
 
   graphic_novel_page_combo:
-    - "complete Gothic graphic-novel page based on __gkr_gothic/quiet_horror_scene__, repeated room composition, small physical changes, page-turn reveal, restrained ink"
+    - "complete Gothic graphic-novel page based on __gkr_gothic/quiet_horror_scene__, repeated room composition, one object changing position per panel, final apparition panel, black ink and pale gray wash"
     - "complete Gothic graphic-novel page based on __gkr_gothic/investigation_scene__, evidence inserts, dialogue reactions and architectural continuity"
 
   spotlight_scenes:

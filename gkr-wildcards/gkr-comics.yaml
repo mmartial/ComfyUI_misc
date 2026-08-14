@@ -21,6 +21,11 @@
 # observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
 # and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
 # A downstream LLM may clarify wording but must not invent the visual representation.
+#
+# NON-LEAF / COMPOSITE RULE
+# Router-only items contain wildcard references only. Literal text added by a composite must
+# itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
+# do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
 # ========================================================================
 
 gkr_comics:
@@ -202,7 +207,7 @@ gkr_comics:
   us_romance_combo:
     - "US romance comic: __gkr_comics/everyday_archetype__, __gkr_comics/relationship__, __gkr_comics/us_scene__, elegant ink, expressive close-ups, soft vintage spot colors, __gkr_comics/page_grammar__"
   us_alternative_combo:
-    - "US alternative graphic narrative: __gkr_comics/everyday_archetype__, __gkr_comics/relationship__, loose personal drawing, collage or photocopy texture, receipts, transit cards, work badges and domestic clutter, __gkr_comics/page_grammar__"
+    - "US alternative comic: __gkr_comics/everyday_archetype__, __gkr_comics/relationship__, loose personal drawing, collage or photocopy texture, receipts, transit cards, work badges and domestic clutter, __gkr_comics/page_grammar__"
 
 # ------------------------------------------------------------------------
 # EUROPEAN COMICS TRADITIONS
@@ -228,9 +233,9 @@ gkr_comics:
   british_anthology_combo:
     - "British weekly anthology installment: __gkr_comics/european_scene__, bold black-and-white art, caption-led momentum, dense economical panels, satirical edge, final-panel cliffhanger"
   european_historical_album_combo:
-    - "European painted historical album: __gkr_comics/historical_archetype__, __gkr_comics/european_scene__, researched material culture, naturalistic album color, broad environments and patient page rhythm"
+    - "European painted historical album: __gkr_comics/historical_archetype__, __gkr_comics/european_scene__, period garment closures, tools, carts and masonry, naturalistic album color, broad establishing panels and narrow reaction panels"
   european_literary_combo:
-    - "European literary graphic novel: __gkr_comics/everyday_archetype__, __gkr_comics/relationship__, __gkr_comics/european_scene__, restrained drawing, recurring visual motifs and silent transitions"
+    - "European literary graphic novel: __gkr_comics/everyday_archetype__, __gkr_comics/relationship__, __gkr_comics/european_scene__, thin black contours, one recurring object in each panel and silent location-transition panels"
 
 # ------------------------------------------------------------------------
 # WORLD COMICS TRADITIONS
@@ -249,55 +254,55 @@ gkr_comics:
     - regional musician in traditional performance clothing inside a glossy recording studio, producer pointing toward a simplified costume on a rack
 
   latin_historieta_combo:
-    - "Latin American historieta: __gkr_comics/world_scene__, literary science fiction or social realism, expressive black ink, city architecture, public notices, uniforms and protest materials, layered captions, __gkr_comics/page_grammar__"
+    - "Latin American historieta: __gkr_comics/world_scene__, speculative machinery or contemporary city streets, expressive black ink, public notices, uniforms and protest materials, layered captions, __gkr_comics/page_grammar__"
   african_graphic_narrative_combo:
-    - "African graphic narrative grounded in a specific contemporary community: __gkr_comics/world_scene__, locally observed architecture and clothing, expressive regional print influences, multilingual lettering, no genericized folklore"
+    - "African contemporary comic: __gkr_comics/world_scene__, local building materials, street signs, clothing fasteners, vehicles and work tools, expressive print textures and multilingual lettering"
   middle_eastern_memoir_combo:
-    - "Middle Eastern graphic memoir: __gkr_comics/world_scene__, personal testimony balanced with everyday family detail, restrained black-and-white drawing, maps and documents integrated carefully"
+    - "Middle Eastern graphic memoir: __gkr_comics/world_scene__, family photographs, identity documents, household objects and street maps, thin black contours, gray wash and document insets"
   indian_graphic_narrative_combo:
-    - "Indian graphic narrative: __gkr_comics/world_scene__, region-specific clothing, architecture, tools and multilingual signage, textile and print-inspired color accents, clear sequential pacing"
+    - "Indian comic: __gkr_comics/world_scene__, regional clothing, architecture, tools and multilingual signage, textile and print-inspired color accents, wide location panel followed by hand and face close-ups"
   chinese_manhua_combo:
     - "Chinese manhua chapter: __gkr_comics/world_scene__, fluid calligraphic ink or contemporary urban color, vertical and horizontal spatial rhythm, expressive environmental detail"
   hong_kong_action_combo:
-    - "Hong Kong action manhua: __gkr_comics/adventure_archetype__, urban conflict with precise martial choreography, forceful brush lines, dramatic color separations, clear approach-impact-consequence panels"
+    - "Hong Kong action manhua: __gkr_comics/adventure_archetype__, attacker approach, planted defender stance, central impact and damaged environment in adjacent panels, forceful brush lines and dramatic color separations"
   korean_webtoon_combo:
     - "Korean vertical webtoon episode: __gkr_comics/world_scene__, clean digital contours, phone-readable balloons, long-scroll pacing, repeated visual anchors and controlled episode-end reveal"
   southeast_asian_comics_combo:
-    - "Southeast Asian contemporary comic: __gkr_comics/world_scene__, humid air, region-specific buildings, clothing, vehicles and signage, local publication texture, one small supernatural detail among ordinary objects"
+    - "Southeast Asian contemporary comic: __gkr_comics/world_scene__, humid air, regional buildings, clothing, vehicles and signage, rough local print texture, one small spirit or moving shadow among ordinary objects"
   filipino_komiks_combo:
     - "Filipino komiks story: __gkr_comics/world_scene__, expressive adventure or family drama, strong brush ink, serialized pacing, vernacular signage and decisive final-panel hook"
   indigenous_graphic_narrative_combo:
-    - "Indigenous graphic narrative: __gkr_comics/world_scene__, named local landscape features, contemporary homes, clothing, work tools and family photographs, visual motifs limited to objects present in the selected scene"
+    - "Indigenous contemporary comic: __gkr_comics/world_scene__, labeled local landscape features, contemporary homes, clothing, work tools and family photographs, repeated motifs drawn only from scene objects"
 
 # ------------------------------------------------------------------------
 # UNIVERSAL OUTPUTS
 # ------------------------------------------------------------------------
 
   modular_character_combo:
-    - "standalone superhero character: __gkr_comics/superhero_archetype__, role-defining equipment, neutral contextual background, full-body design clarity, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "standalone superhero character: __gkr_comics/superhero_archetype__, rescue or investigation equipment held in both hands, plain wall background, full body visible, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
     - "standalone crime character: __gkr_comics/pulp_crime_archetype__, practical objects and natural posture, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
-    - "standalone everyday character: __gkr_comics/everyday_archetype__, social role visible through ordinary objects, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
-    - "standalone adventure character: __gkr_comics/adventure_archetype__, profession-specific tools, readable silhouette, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
-    - "standalone historical character: __gkr_comics/historical_archetype__, researched clothing and tools, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
-    - "standalone speculative character: __gkr_comics/speculative_archetype__, concept grounded in work and society, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "standalone everyday character: __gkr_comics/everyday_archetype__, work badge, transit card, keys or household object visible, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "standalone adventure character: __gkr_comics/adventure_archetype__, map plus survey, repair or navigation tools held away from the body, unobstructed silhouette, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "standalone historical character: __gkr_comics/historical_archetype__, visible garment closures and period tools held in operating position, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "standalone speculative character: __gkr_comics/speculative_archetype__, work tools, worn protective clothing and one open machine or specimen case, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
 
   ensemble_combo:
     - "four-character comics ensemble: __gkr_comics/ensemble_role__, __gkr_comics/ensemble_role__, __gkr_comics/ensemble_role__, and __gkr_comics/ensemble_role__; distinct silhouettes, separate hand actions, converging eyelines and shared central prop"
     - "paired character study: __gkr_comics/relationship__, one __gkr_comics/everyday_archetype__ and one __gkr_comics/adventure_archetype__, full hands, feet, eyelines and distance visible"
 
   comic_page_combo:
-    - "complete comics page: __gkr_comics/world_scene__, __gkr_comics/page_grammar__, __gkr_comics/lettering__, __gkr_comics/line_treatment__, __gkr_comics/color_process__, intentional reading order and consequences"
+    - "complete comics page: __gkr_comics/world_scene__, __gkr_comics/page_grammar__, __gkr_comics/lettering__, __gkr_comics/line_treatment__, __gkr_comics/color_process__, repeated screen direction and final panel showing changed object positions or damage"
     - "complete comics page: __gkr_comics/european_scene__, __gkr_comics/page_grammar__, __gkr_comics/lettering__, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
     - "complete comics page: __gkr_comics/us_scene__, __gkr_comics/page_grammar__, __gkr_comics/lettering__, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
 
   comic_cover_combo:
-    - "comic cover based on __gkr_comics/us_scene__, one iconic central metaphor, cast hierarchy readable at thumbnail size, masthead-safe upper area, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "comic cover based on __gkr_comics/us_scene__, one scene object enlarged behind the central figure, supporting cast smaller at the lower edge, masthead-safe upper area, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
     - "European album cover based on __gkr_comics/european_scene__, environment and adventure premise clearly readable, title-safe negative space, __gkr_comics/color_process__"
-    - "literary graphic-novel cover based on __gkr_comics/world_scene__, restrained visual metaphor, limited palette, typography-safe negative space"
+    - "literary graphic-novel cover based on __gkr_comics/world_scene__, one scene object enlarged behind a small central silhouette, two-color palette and typography-safe negative space"
 
   character_sheet_combo:
     - "comics character design sheet for __gkr_comics/modular_character_combo__, front, side and back views, expressions, equipment inset, silhouette and color notes"
-    - "ensemble interaction sheet for __gkr_comics/ensemble_combo__, height comparison, paired poses, eyelines, recurring props and opposing hand gestures"
+    - "ensemble pose sheet for __gkr_comics/ensemble_combo__, height comparison, paired poses, eyelines, recurring props and opposing hand gestures"
 
 # ------------------------------------------------------------------------
 # MODULAR PRODUCTION ASSETS AND OUTPUT FORMATS
@@ -354,37 +359,37 @@ gkr_comics:
     - "acting sheet for __gkr_comics/relationship__, paired reactions before, during and after a difficult conversation, hands and posture included"
 
   costume_variant_combo:
-    - "costume variant sheet for __gkr_comics/modular_character_combo__, everyday, work, formal, travel and weather-specific clothing; recurring identity motifs without changing body or role"
+    - "costume variant sheet for __gkr_comics/modular_character_combo__, everyday, work, formal, travel and rain clothing; same emblem, scarf or color stripe repeated across all five outfits"
     - "superhero costume development sheet for __gkr_comics/superhero_archetype__, initial handmade version, repaired field version, public ceremonial version and practical rescue variant"
-    - "historical clothing study for __gkr_comics/historical_archetype__, researched layers, fastenings, work wear and seasonal variation"
+    - "historical clothing study for __gkr_comics/historical_archetype__, underlayer, outer layer, visible fastenings, worn elbows and warm- versus cold-season variants"
 
   environment_design_combo:
     - "comics environment design sheet for __gkr_comics/environment_subject__, exterior establishing view, interior plan, key sightlines, recurring props, day and night lighting, routes usable for sequential staging"
-    - "regional setting study for __gkr_comics/world_scene__, architecture, utilities, transport, signage and social use observed specifically, no genericized cultural shorthand"
+    - "regional setting study for __gkr_comics/world_scene__, building materials, utilities, transport, multilingual signage, market stalls and pedestrian routes shown in exterior and street-level views"
 
   prop_design_combo:
-    - "comics prop design sheet for __gkr_comics/prop_subject__, front and back views, opened state, hand interaction, material wear, scale reference and narrative clues"
+    - "comics prop design sheet for __gkr_comics/prop_subject__, front and back views, opened state, hand holding it, material wear, scale reference and hidden-compartment inset"
 
   vehicle_design_combo:
     - "comics vehicle design sheet for __gkr_comics/vehicle_subject__, exterior turnaround, operator position, storage, maintenance access, damage states and scale beside characters"
 
   creature_design_combo:
-    - "comics creature design sheet for __gkr_comics/creature_subject__, anatomy, locomotion, resting and alert poses, scale comparison, habitat interaction and nonverbal behavior"
+    - "comics creature design sheet for __gkr_comics/creature_subject__, anatomy, walking sequence, resting and alert poses, human scale comparison, footprint and feeding-mark insets"
 
   comic_splash_combo:
-    - "issue-opening splash page based on __gkr_comics/us_scene__, central unresolved object or threat, cast facing it from distinct foreground positions, setting landmarks behind, masthead-safe area, __gkr_comics/lettering__, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "issue-opening splash page based on __gkr_comics/us_scene__, central damaged object or partly hidden threat, cast facing it from distinct foreground positions, setting landmarks behind, masthead-safe area, __gkr_comics/lettering__, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
     - "chapter-opening splash page based on __gkr_comics/european_scene__, detailed environment, small character business, album title-safe negative space, __gkr_comics/color_process__"
-    - "graphic-narrative opening image based on __gkr_comics/world_scene__, work tools, signs, documents, clothing and architecture filling the environment, restrained title treatment, __gkr_comics/line_treatment__"
+    - "graphic-story opening image based on __gkr_comics/world_scene__, work tools, signs, documents, clothing and architecture filling the environment, small title in empty upper margin, __gkr_comics/line_treatment__"
 
   double_page_spread_combo:
     - "double-page comics spread based on __gkr_comics/us_scene__, central gutter kept clear of faces and essential action, broad geography with readable inset reactions, __gkr_comics/color_process__"
     - "European album double-page spread based on __gkr_comics/european_scene__, panoramic environment continuity, several simultaneous small narratives, precise clear-line staging"
-    - "world-comics documentary spread based on __gkr_comics/world_scene__, map, testimony, observed activity and environmental evidence integrated without losing reading order"
+    - "world-comics documentary spread based on __gkr_comics/world_scene__, labeled map, portrait with speech balloon, work-action panels and environment photographs arranged left to right"
 
   newspaper_page_combo:
     - "Sunday newspaper comics page based on __gkr_comics/us_scene__, large opening panel, linked horizontal strips, recurring visual motif and final-panel payoff, vintage newsprint process"
     - "daily newspaper strip based on __gkr_comics/everyday_archetype__, three or four economical panels, clear setup and reversal, simplified recurring background, mechanical uppercase lettering"
-    - "editorial newspaper comic based on __gkr_comics/world_scene__, one legible visual argument, restrained labeling, locally grounded symbols rather than stereotypes"
+    - "editorial newspaper comic based on __gkr_comics/world_scene__, two contrasted scene objects connected by one arrow, short labels and symbols taken from visible local signs, tools or buildings"
 
   anthology_cover_combo:
     - "US genre-anthology cover based on __gkr_comics/us_scene__, one unsettling or adventurous hook, issue masthead and cover-line safe zones, vintage print color"
@@ -393,7 +398,7 @@ gkr_comics:
 
   webtoon_episode_combo:
     - "complete vertical-scroll webtoon episode based on __gkr_comics/world_scene__, opening hook, phone-readable dialogue, long pauses, repeated anchors, controlled scroll reveal and episode-end turn"
-    - "vertical-scroll romance episode based on __gkr_comics/relationship__, intimate acting, environment transitions used as pacing, restrained gradients and final silent beat"
+    - "vertical-scroll romance episode based on __gkr_comics/relationship__, close hand and eyeline panels separated by long environment panels, two-color gradients and final silent reaction face"
     - "vertical-scroll thriller episode based on __gkr_comics/pulp_crime_archetype__, evidence distributed through foreground details, long descent into one decisive reveal"
 
   graphic_novel_pitch_combo:
@@ -412,7 +417,7 @@ gkr_comics:
 
   publication_mockup_combo:
     - "publication mockup for __gkr_comics/publication_format__, front cover, open interior spread, spine or fold behavior, paper texture, trim, safe area and realistic print reproduction"
-    - "regional comics publication comparison using __gkr_comics/us_scene__, __gkr_comics/european_scene__ and __gkr_comics/world_scene__, each adapted to an appropriate format without homogenizing its visual tradition"
+    - "three-publication comparison using __gkr_comics/us_scene__, __gkr_comics/european_scene__ and __gkr_comics/world_scene__: stapled issue, hardcover album and local-format booklet shown side by side with separate paper, trim and color processes"
 
   spotlight_us_comics:
     - "__gkr_comics/us_superhero_page_combo__"

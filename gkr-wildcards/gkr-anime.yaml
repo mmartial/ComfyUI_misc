@@ -22,6 +22,14 @@
 # eyelines, documents, screens, damage, clothing, objects and spatial contrast. If a concept
 # needs multiple moments, specify a storyboard, comic panels or a split-state design sheet.
 # A downstream LLM may clarify wording but must not invent the visual representation.
+#
+# NON-LEAF / COMPOSITE RULE
+# A router-only item must contain wildcard references only. A composite item may add literal
+# text, but every added phrase must pass the same diffusion-ready rule as a leaf. Referenced
+# categories must be visually compatible in every possible expansion; do not combine broad
+# pools when any pairing can contradict subject, setting, era, equipment, scale or format.
+# Test composites by separating literal text from references, scanning the literal text for
+# abstractions, resolving the full route graph, and reviewing every referenced pool pairing.
 # ========================================================================
 
 gkr_anime:
@@ -70,6 +78,33 @@ gkr_anime:
     - vast mecha maintenance hangar, sectional scaffolding, coolant pipes and tiny technicians
     - historical castle town, workshops, canals, checkpoints and tiled roofs
     - otherworldly frontier, ruined roads crossing immense unfamiliar ecosystems
+
+  anime_everyday_environment:
+    - coastal commuter town, local train crossing, seawall and narrow hillside streets
+    - covered shopping arcade, family businesses, bicycles and afternoon foot traffic
+    - rural mountain village, terraced fields, utility wires and weathered community hall
+    - compact city apartment, low table, laundry balcony and neighboring windows
+    - public high school, shoe lockers, club rooms, gymnasium and sunlit corridors
+    - university campus, crowded cafeteria, research rooms and bicycle parking
+    - corporate office floor, fluorescent light, meeting booths and vending-machine corner
+    - neighborhood family restaurant, window booths, drink bar and evening regulars
+    - traditional hot-spring town, steep lanes, wooden inns and steam crossing lantern light
+    - convenience store after midnight, bright shelves against an empty dark street
+
+  anime_scifi_environment:
+    - orbital habitat service corridor, pressure doors, cable trays and numbered access panels
+    - vast mecha maintenance hangar, sectional scaffolding, coolant pipes and tiny technicians
+    - generation-ship greenhouse district beneath a curved artificial sky
+    - lunar industrial settlement, regolith barriers, utility tunnels and sealed tram platform
+    - layered near-future city, elevated transit, repair kiosks and restrained public interfaces
+
+  racing_archetype:
+    - formula driver in fitted fireproof suit, full-face helmet, gloves and radio earpiece
+    - rally driver in dust-marked racing suit, pace notes clipped beside the harness
+    - motorcycle racer in segmented leathers, aerodynamic helmet and reinforced gloves
+    - solar-vehicle pilot in lightweight team suit, visor and telemetry wrist display
+    - fantasy caravan racer in padded travel gear, goggles, reins and route tokens
+    - orbital racing pilot in compact pressure suit, neck restraint and maneuver controls
 
 # ------------------------------------------------------------------------
 # ANIME GENRE SCENES
@@ -358,6 +393,25 @@ gkr_anime:
     - timid dragon adapted to abandoned industrial heat rather than treasure caves
     - round child-friendly mascot creature whose expressions change through ears, tail and posture
 
+  folklore_creature:
+    - small household spirit made from folded paper and lost buttons
+    - two-tailed shrine cat carrying messages in a cloth pouch
+    - river yokai wearing found human objects as ceremonial clothing
+    - ancient mechanical fox with wooden outer plates and a winding heart spring
+    - round animal mascot with expressive ears, tail and small shrine charm
+
+  kaiju_creature:
+    - coastal kaiju resembling layered coral, fishing nets and lighthouse beams
+    - immense sky whale surrounded by migrating birds and weather balloons
+    - amphibious plated giant with barnacles, broken navigation buoys and glowing gills
+    - towering mechanical guardian with corroded armor and a lighthouse lens in its chest
+
+  ecological_creature:
+    - moss-covered forest guardian with deerlike anatomy and seasonal plants along its back
+    - river yokai tangled in discarded nets and plastic containers
+    - timid dragon nesting inside an abandoned industrial heat exchanger
+    - immense sky whale followed by migrating birds and weather instruments
+
   antagonist_archetype:
     - uniformed commander pointing armed guards toward a compulsory evacuation line, toxic storm visible beyond sealed city gates and detained residents behind barriers
     - corporate executive handing safety masks to workers while sliding toxic-discharge reports beneath a closed desk drawer, polluted river visible through the office window
@@ -388,6 +442,18 @@ gkr_anime:
     - solar racing machine, narrow aerodynamic body, repair patches from previous stages
     - small coastal research vessel, sampling crane, weather instruments and cramped crew cabin
 
+  space_vehicle:
+    - orbital utility shuttle, external cargo clamps, scuffed heat shielding and analog backup instruments
+    - long-range courier craft, narrow crew module, detachable cargo pods and patched radiator panels
+    - diplomatic cruiser, rotating habitat ring, shuttle bay and layered communication arrays
+    - fleet tender, exposed docking arms, fuel tanks, repair gantries and tiny service craft
+
+  post_apocalyptic_vehicle:
+    - customized commuter motorcycle with patched panniers, hand-painted panels and mismatched fasteners
+    - compact rescue vehicle with medical storage, winch, roof battery and deployable shelter
+    - weathered single-car train with reinforced windows, roof cargo and hand-repaired controls
+    - small coastal vessel with sampling crane replaced by water tanks, nets and solar panels
+
 # ------------------------------------------------------------------------
 # MISSING ANIME TRADITIONS: MODULAR, COHERENT ROUTES
 # ------------------------------------------------------------------------
@@ -399,7 +465,7 @@ gkr_anime:
   magical_girl_combo:
     - "ordinary schoolgirl mid-transformation, school uniform dissolving into ribbons of light, ornate layered magical costume forming around her, glowing personal emblem at her chest, jeweled wand raised above a threatened city street, __gkr_anime/anime_era_style__"
     - "ornately dressed magical heroine kneeling opposite a round cute animal mascot, glowing charm and unfurled contract between them, mascot smiling while concealing a second black-sealed contract behind its tail, hard split lighting, __gkr_anime/anime_era_style__"
-    - "exhausted magical heroine in a torn soot-stained costume, bandaged arm, cracked transformation gem leaking dark light, broken wand, empty-eyed teammates in damaged costumes behind her, smiling mascot silhouetted above, restrained horror lighting, __gkr_anime/anime_era_style__"
+    - "exhausted magical heroine in a torn soot-stained costume, bandaged arm, cracked transformation gem leaking dark light, broken wand, empty-eyed teammates in damaged costumes behind her, smiling mascot silhouetted above, one cold sidelight and weak dark glow, __gkr_anime/anime_era_style__"
   magical_team_combo:
     - "five transformation heroines in distinct motif-based costumes forming a defensive circle around civilians, coordinated wands creating one luminous shield, contrasting poses and expressions, cute mascot watching from a shadowed rooftop, __gkr_anime/anime_era_style__"
   battle_progression_combo:
@@ -417,44 +483,49 @@ gkr_anime:
     - "four girls assembling a small campsite beside a calm mountain lake, half-raised tent, compact stove, enamel mugs, sleeping rolls and scattered instruction sheet, one girl tangled in a guyline while friends reach to help, golden sunset, __gkr_anime/anime_era_style__"
     - "four-girl after-school music club inside a sunlit practice room, guitarist missing a chord, drummer laughing, keyboard player holding sheet music upside down, bassist pouring tea beside cakes and instrument cases, __gkr_anime/anime_era_style__"
   yokai_folklore_combo:
-    - "__gkr_anime/supernatural_archetype__ seated opposite __gkr_anime/anime_creature__, weapons laid aside, offering bowl, boundary stones and written terms between them in __gkr_anime/anime_environment__, ink-wash and painted-background treatment"
+    - "__gkr_anime/supernatural_archetype__ seated opposite __gkr_anime/folklore_creature__ at a rural shrine edge, weapons laid aside, offering bowl, boundary stones and written terms between them, ink-wash and painted-background treatment"
   idol_industry_combo:
     - "__gkr_anime/music_archetype__ in a mirrored rehearsal studio, taped choreography marks, open contract pages, discarded stage shoes, water bottles and one exhausted performer supported by a teammate, __gkr_anime/anime_era_style__"
   delinquent_combo:
     - "__gkr_anime/delinquent_archetype__ at a school-gate confrontation, dented bicycles, torn noticeboard, watching classmates and a younger student sheltered behind the delinquent's outstretched arm, __gkr_anime/anime_era_style__"
   military_political_combo:
-    - "ensemble led by __gkr_anime/scifi_archetype__ facing __gkr_anime/antagonist_archetype__ across a planning table, fuel tokens, casualty photographs, evacuation map and opposing unit insignia spread between them, restrained military staging, __gkr_anime/anime_era_style__"
+    - "ensemble led by __gkr_anime/scifi_archetype__ facing __gkr_anime/antagonist_archetype__ across a planning table, fuel tokens, casualty photographs, evacuation map and opposing unit insignia spread between them, static eye-level composition, __gkr_anime/anime_era_style__"
   kaiju_combo:
-    - "colossal __gkr_anime/anime_creature__ beside __gkr_anime/anime_environment__, tiny evacuation buses below, buckled power pylons, scientists aiming survey instruments from a rooftop, nests or feeding marks visible around the creature, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+    - "colossal __gkr_anime/kaiju_creature__ beside a coastal city or industrial harbor, tiny evacuation buses below, buckled power pylons, scientists aiming survey instruments from a rooftop, nests or feeding marks visible around the creature, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
   space_opera_combo:
-    - "crew including __gkr_anime/scifi_archetype__ aboard __gkr_anime/anime_vehicle__, one officer aiming at a rival flagship while another shields a family photograph attached to the targeting console, vast fleet formations beyond the viewport, __gkr_anime/anime_era_style__"
+    - "crew including __gkr_anime/scifi_archetype__ aboard __gkr_anime/space_vehicle__, one officer aiming at a rival flagship while another shields a family photograph attached to the targeting console, vast fleet formations beyond the viewport, __gkr_anime/anime_era_style__"
   cyberpunk_combo:
     - "__gkr_anime/scifi_archetype__ beneath layered rail lines and utility pipes, biometric screens showing mismatched portraits, repair workers beside open service panels, crowded checkpoint lanes, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
   post_apocalyptic_combo:
-    - "small community including __gkr_anime/adult_archetype__ and __gkr_anime/team_role__, maintaining __gkr_anime/anime_vehicle__ across reclaimed infrastructure, survival through repair, agriculture and cooperation, __gkr_anime/anime_era_style__"
+    - "small group including __gkr_anime/adult_archetype__ maintaining __gkr_anime/post_apocalyptic_vehicle__ beside reclaimed rail lines, vegetable beds between sleepers, open engine panels, shared tools and water containers, __gkr_anime/anime_era_style__"
   racing_combo:
-    - "__gkr_anime/sports_archetype__ piloting or riding __gkr_anime/anime_vehicle__, clear course geography, mechanical limits, team strategy and rival respect, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+    - "formula driver in a fitted fireproof suit inside a low racing machine, marked circuit barriers, visible next turn, red temperature gauge, pit-board signal and rival car alongside, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+    - "rally driver and navigator in a reinforced coupe, pace notes clipped beside the harness, gravel hairpin visible ahead, cracked windshield and rival headlights in the dust, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+    - "motorcycle racer in segmented leathers leaning through a wet corner, knee slider near the asphalt, braking marker, safety barrier and rival front wheel visible, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+    - "solar-vehicle pilot beneath a clear canopy, telemetry wrist display, narrow aerodynamic body, patched solar cells and competitor crossing the desert course alongside, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+    - "fantasy caravan racer in padded travel gear driving a lightweight wagon, taut reins, route tokens, broken wheel rim and rival wagon entering a mountain switchback, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+    - "orbital racing pilot in a compact pressure suit gripping maneuver controls, red propellant gauge, course rings beyond the canopy and rival craft crossing close overhead, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
   martial_arts_combo:
     - "__gkr_anime/action_archetype__ redirecting an opponent's strike through precise foot placement and wrist control, chalk stance marks, scuffed floorboards and watching students around the training hall, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
   iyashikei_combo:
-    - "__gkr_anime/adult_archetype__ preparing seasonal food beside an open window in __gkr_anime/anime_environment__, neighbor placing fresh produce at the doorway, quiet locked frame, tactile painted background, soft natural light"
+    - "__gkr_anime/adult_archetype__ preparing seasonal food beside an open window in __gkr_anime/anime_everyday_environment__, neighbor placing fresh produce at the doorway, quiet locked frame, tactile painted background, soft natural light"
   ecological_fantasy_combo:
-    - "__gkr_anime/fantasy_archetype__ standing between __gkr_anime/anime_creature__ and advancing logging machines, field sketches and damaged nests at their feet, immense forest environment, hand-painted animation background"
+    - "__gkr_anime/fantasy_archetype__ standing between __gkr_anime/ecological_creature__ and advancing logging machines, field sketches and damaged nests at their feet, immense forest environment, hand-painted animation background"
 
 # ------------------------------------------------------------------------
 # MODULAR OUTPUT FORMATS
 # ------------------------------------------------------------------------
 
   standalone_character_combo:
-    - "standalone school-drama character: __gkr_anime/school_archetype__, neutral contextual background, full-body model-sheet clarity, __gkr_anime/anime_era_style__"
-    - "standalone adult-drama character: __gkr_anime/adult_archetype__, role-defining objects, natural posture, neutral contextual background, __gkr_anime/anime_era_style__"
-    - "standalone action character: __gkr_anime/action_archetype__, equipment used credibly, readable silhouette, __gkr_anime/anime_era_style__"
-    - "standalone fantasy character: __gkr_anime/fantasy_archetype__, material-worn clothing and profession-specific tools, __gkr_anime/anime_era_style__"
-    - "standalone historical character: __gkr_anime/historical_archetype__, researched clothing and tools, restrained pose, __gkr_anime/anime_era_style__"
+    - "standalone school-drama character: __gkr_anime/school_archetype__, plain school corridor background, full body and all carried objects visible, __gkr_anime/anime_era_style__"
+    - "standalone adult-drama character: __gkr_anime/adult_archetype__, work badge, hand tools, ledger, medical case or recording equipment held or placed within reach, both feet visible, plain workplace background, __gkr_anime/anime_era_style__"
+    - "standalone action character: __gkr_anime/action_archetype__, hands correctly gripping equipment, feet planted, unobstructed silhouette, __gkr_anime/anime_era_style__"
+    - "standalone fantasy character: __gkr_anime/fantasy_archetype__, material-worn clothing with staff, blade, satchel, map or craft tools visible, __gkr_anime/anime_era_style__"
+    - "standalone historical character: __gkr_anime/historical_archetype__, visible garment closures, period tools held in operating position, upright full-body pose, __gkr_anime/anime_era_style__"
     - "standalone science-fiction character: __gkr_anime/scifi_archetype__, worn work equipment held in its operating position, cables, fasteners and access panels visible, __gkr_anime/anime_era_style__"
     - "standalone music character: __gkr_anime/music_archetype__, hands correctly placed on instrument or production controls, cables, stands and cases visible, __gkr_anime/anime_era_style__"
-    - "standalone sports character: __gkr_anime/sports_archetype__, sport-specific posture and equipment, __gkr_anime/anime_era_style__"
-    - "standalone supernatural character: __gkr_anime/supernatural_archetype__, restrained folklore cues, __gkr_anime/anime_era_style__"
+    - "standalone sports character: __gkr_anime/sports_archetype__, bent-knee athletic posture with ball, racket, bicycle, running spikes or team towel visible, __gkr_anime/anime_era_style__"
+    - "standalone supernatural character: __gkr_anime/supernatural_archetype__, one physical transformation trait, one ritual object and plain shrine or domestic background, __gkr_anime/anime_era_style__"
 
   personality_character_combo:
     - "__gkr_anime/personality_archetype__, full-body anime character portrait in a school corridor, clear hand pose, facial expression and role-defining props, __gkr_anime/anime_era_style__"
@@ -463,8 +534,8 @@ gkr_anime:
   ensemble_character_combo:
     - "four-person anime ensemble: __gkr_anime/team_role__, __gkr_anime/team_role__, __gkr_anime/team_role__, and __gkr_anime/team_role__; distinct silhouettes, separate hand actions, converging eyelines and one shared central prop, __gkr_anime/anime_era_style__"
     - "paired character study: __gkr_anime/character_relationship__, one __gkr_anime/adult_archetype__ and one __gkr_anime/school_archetype__, full hands, posture, eyelines and distance visible, __gkr_anime/anime_era_style__"
-    - "fantasy travel party including __gkr_anime/fantasy_archetype__, __gkr_anime/fantasy_archetype__, and __gkr_anime/fantasy_archetype__, complementary tools and responsibilities, __gkr_anime/anime_era_style__"
-    - "science-fiction operations crew including __gkr_anime/scifi_archetype__, __gkr_anime/scifi_archetype__, and __gkr_anime/scifi_archetype__, functional shared environment, __gkr_anime/anime_era_style__"
+    - "fantasy travel party including __gkr_anime/fantasy_archetype__, __gkr_anime/fantasy_archetype__, and __gkr_anime/fantasy_archetype__, each holding a different tool toward the same marked route on a map, __gkr_anime/anime_era_style__"
+    - "science-fiction operations crew including __gkr_anime/scifi_archetype__, __gkr_anime/scifi_archetype__, and __gkr_anime/scifi_archetype__, separate control stations, shared central display and converging eyelines, __gkr_anime/anime_era_style__"
 
   character_sheet_combo:
     - "anime character design sheet for __gkr_anime/standalone_character_combo__, front, side and back turnaround, three facial expressions, equipment detail inset, material and color callouts, clean production layout"
@@ -473,15 +544,15 @@ gkr_anime:
     - "vehicle design sheet for __gkr_anime/anime_vehicle__, exterior turnaround, operator position, storage and maintenance detail, weathering callouts"
 
   anime_key_visual_combo:
-    - "anime key visual featuring __gkr_anime/ensemble_character_combo__, all eyelines converging on one foreground object or threat, genre-specific environment behind, title-safe upper area, polished promotional composition without generic glow"
-    - "anime key visual for __gkr_anime/isekai_character_combo__, foreground cast, distant destination and one unresolved threat, title-safe negative space"
+    - "anime key visual featuring __gkr_anime/ensemble_character_combo__, all eyelines converging on one foreground object or threat, shared room, street or landscape continuing behind every figure, title-safe upper area, polished promotional composition without generic glow"
+    - "anime key visual for __gkr_anime/isekai_character_combo__, foreground cast facing a distant illuminated city while one colossal shadow blocks the road, title-safe negative space"
     - "anime key visual for __gkr_anime/anime_mecha_combo__, human crew foregrounded against __gkr_anime/mecha_design__, tiny mechanics at the feet, opposing pilot eyelines and damaged cockpit parts visible"
-    - "anime key visual for __gkr_anime/yokai_folklore_combo__, seasonal motif, human and spirit communities sharing the frame, restrained supernatural cues"
+    - "anime key visual for __gkr_anime/yokai_folklore_combo__, fallen seasonal leaves crossing the boundary stones, human figures on one side and translucent spirits on the other, limited glow around spirit edges"
 
   anime_poster_combo:
     - "theatrical anime poster based on __gkr_anime/anime_action_scene__, one central silhouette, supporting cast arranged by opposing eyelines and distance, major environment landmark and threat visible at thumbnail size, title-safe negative space"
-    - "theatrical anime poster based on __gkr_anime/anime_romance_scene__, one recurring object as visual metaphor, seasonal palette, restrained composition"
-    - "theatrical anime poster based on __gkr_anime/anime_horror_scene__, threat implied through architecture or repetition, large negative space, limited color"
+    - "theatrical anime poster based on __gkr_anime/anime_romance_scene__, one scene object enlarged behind the paired figures and repeated near both hands, seasonal palette, centered composition"
+    - "theatrical anime poster based on __gkr_anime/anime_horror_scene__, one extra doorway, window or silhouette repeated within the architecture, large negative space, limited color"
     - "theatrical anime poster based on __gkr_anime/anime_adult_drama_scene__, opposing ensemble eyelines converging on one central letter, photograph or damaged object, naturalistic color"
 
 # ------------------------------------------------------------------------
@@ -489,33 +560,33 @@ gkr_anime:
 # ------------------------------------------------------------------------
 
   anime_action_combo:
-    - "__gkr_anime/anime_action_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, attacker and defender limbs unobscured, threat and endangered subject visible in the same frame"
+    - "__gkr_anime/anime_action_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, attacker and defender limbs unobscured, threat and endangered subject visible in the same frame"
   anime_romance_combo:
-    - "__gkr_anime/anime_romance_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, restrained character acting"
+    - "__gkr_anime/anime_romance_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, hands, eyelines, blush and distance between both figures visible"
   anime_slice_of_life_combo:
-    - "__gkr_anime/anime_slice_of_life_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, observed everyday detail"
+    - "__gkr_anime/anime_slice_of_life_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, groceries, transit cards, dishes, tools or school supplies visible within reach"
   anime_comedy_combo:
-    - "__gkr_anime/anime_comedy_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, precise visual timing and reaction staging"
+    - "__gkr_anime/anime_comedy_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, cause in foreground, mistake in midground and unobscured reaction faces behind"
   anime_sports_combo:
     - "__gkr_anime/anime_sports_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, planted feet, joint alignment, ball or equipment trajectory and every teammate's court position visible"
   anime_mystery_combo:
-    - "__gkr_anime/anime_mystery_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, fair visual clues"
+    - "__gkr_anime/anime_mystery_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, clue object unobscured and repeated background detail visible"
   anime_horror_combo:
-    - "__gkr_anime/anime_horror_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, restrained supernatural effects"
+    - "__gkr_anime/anime_horror_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, one localized physical anomaly, long shadows and limited effect glow"
   anime_mecha_combo:
     - "__gkr_anime/anime_mecha_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, human scale references, articulated joints, access panels, fasteners and active control surfaces visible"
   anime_scifi_combo:
-    - "__gkr_anime/anime_scifi_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, technology embedded in daily life"
+    - "__gkr_anime/anime_scifi_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, cables, access panels, wear marks and human hand controls visible"
   anime_historical_combo:
-    - "__gkr_anime/anime_historical_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, period-specific clothing closures, tools, architecture, transport and household objects"
+    - "__gkr_anime/anime_historical_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, tied garment closures, hand-forged tools, timber or stone architecture, carts, pack animals and handmade household objects"
   anime_music_combo:
-    - "__gkr_anime/anime_music_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, correct hand placement, instrument scale, cables, stands and musicians' converging eyelines"
+    - "__gkr_anime/anime_music_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, correct hand placement, instrument scale, cables, stands and musicians' converging eyelines"
   anime_culinary_combo:
-    - "__gkr_anime/anime_culinary_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, precise food preparation and sensory detail"
+    - "__gkr_anime/anime_culinary_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, knife grip, ingredient stages, steam, browned surfaces and serving dishes visible"
   anime_adult_drama_combo:
-    - "__gkr_anime/anime_adult_drama_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, mature restrained performance"
+    - "__gkr_anime/anime_adult_drama_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, controlled facial expressions, tense hands and ordinary work or household objects visible"
   anime_childrens_combo:
-    - "__gkr_anime/anime_childrens_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, child-height perspective and gentle discovery"
+    - "__gkr_anime/anime_childrens_scene__, low child-height camera, __gkr_anime/anime_era_style__, foreground object at hand level and child's widened eyes directed toward it"
 
 # ------------------------------------------------------------------------
 # MANGA: DEMOGRAPHICS, PAGE GRAMMAR, AND SCENES
@@ -620,18 +691,18 @@ gkr_anime:
   manga_combo:
     - "shonen manga chapter: __gkr_anime/manga_shonen_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, consistent character clothing, props and left-to-right positions across panels"
     - "shojo manga chapter: __gkr_anime/manga_shojo_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, repeated flower, letter or keepsake motif and unobscured facial reaction panels"
-    - "seinen manga chapter: __gkr_anime/manga_seinen_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, mature visual storytelling"
-    - "josei manga chapter: __gkr_anime/manga_josei_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, adult clothing, workplaces, domestic props and restrained facial expressions"
+    - "seinen manga chapter: __gkr_anime/manga_seinen_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, adult clothing, documents, workplace objects and controlled facial expressions"
+    - "josei manga chapter: __gkr_anime/manga_josei_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, adult clothing, workplaces, domestic props, closed mouths, lowered brows and sidelong glances"
     - "horror manga chapter: __gkr_anime/manga_horror_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, threat partly obscured until the final large panel"
-    - "sports manga chapter: __gkr_anime/manga_sports_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, sequential motion clarity"
-    - "yonkoma manga page: __gkr_anime/manga_yonkoma_scene__, four equal horizontal panels, setup, reinforcement, reversal and silent payoff, clean expressive ink"
-    - "historical manga chapter: __gkr_anime/manga_historical_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, researched material culture"
-    - "experimental manga chapter: __gkr_anime/manga_experimental_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, medium-aware visual metaphor"
+    - "sports manga chapter: __gkr_anime/manga_sports_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, approach, contact and follow-through shown in adjacent panels with matching screen direction"
+    - "yonkoma manga page: __gkr_anime/manga_yonkoma_scene__, four equal horizontal panels, repeated background, changed prop position and final silent reaction face, clean expressive ink"
+    - "historical manga chapter: __gkr_anime/manga_historical_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, tied garment closures, hand-forged tools, carts, pack animals and timber or stone architecture"
+    - "experimental manga chapter: __gkr_anime/manga_experimental_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, panel borders, ink density or repeated objects physically altered across panels"
 
   manga_cover_combo:
     - "tankobon cover illustration based on __gkr_anime/manga_shonen_scene__, strong central silhouette, supporting cast arranged by opposing eyelines, height and distance, clear title-safe negative space, __gkr_anime/manga_rendering__"
-    - "tankobon cover illustration based on __gkr_anime/manga_shojo_scene__, symbolic seasonal motif, expressive eye lines, elegant title-safe negative space, __gkr_anime/manga_rendering__"
-    - "literary manga cover based on __gkr_anime/manga_seinen_scene__, one restrained visual metaphor, limited palette, title-safe negative space, __gkr_anime/manga_rendering__"
+    - "tankobon cover illustration based on __gkr_anime/manga_shojo_scene__, one repeated seasonal flower or keepsake around expressive eyelines, elegant title-safe negative space, __gkr_anime/manga_rendering__"
+    - "literary manga cover based on __gkr_anime/manga_seinen_scene__, one enlarged scene object casting a character-shaped shadow, limited palette, title-safe negative space, __gkr_anime/manga_rendering__"
 
 # ------------------------------------------------------------------------
 # SPOTLIGHT ROUTES

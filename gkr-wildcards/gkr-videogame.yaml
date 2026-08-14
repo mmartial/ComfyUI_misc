@@ -19,6 +19,11 @@
 # observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
 # and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
 # A downstream LLM may clarify wording but must not invent the visual representation.
+#
+# NON-LEAF / COMPOSITE RULE
+# Router-only items contain wildcard references only. Literal text added by a composite must
+# itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
+# do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
 # ========================================================================
 
 gkr_videogame:

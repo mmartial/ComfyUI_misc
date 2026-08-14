@@ -21,6 +21,11 @@
 # observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
 # and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
 # A downstream LLM may clarify wording but must not invent the visual representation.
+#
+# NON-LEAF / COMPOSITE RULE
+# Router-only items contain wildcard references only. Literal text added by a composite must
+# itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
+# do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
 # ========================================================================
 
 gkr_cyberpunk:
@@ -369,49 +374,49 @@ gkr_cyberpunk:
 # ------------------------------------------------------------------------
 
   standalone_character_combo:
-    - "standalone corporate cyberpunk character: __gkr_cyberpunk/corporate_character__, full-body role clarity, neutral institutional background, __gkr_cyberpunk/rendering__"
+    - "standalone corporate cyberpunk character: __gkr_cyberpunk/corporate_character__, full body, both hands and work badge visible against a plain office wall, __gkr_cyberpunk/rendering__"
     - "standalone street-economy character: __gkr_cyberpunk/street_economy_character__, tools and material wear visible, __gkr_cyberpunk/rendering__"
-    - "standalone infrastructure worker: __gkr_cyberpunk/infrastructure_character__, safety equipment and task context visible, __gkr_cyberpunk/rendering__"
+    - "standalone infrastructure worker: __gkr_cyberpunk/infrastructure_character__, safety equipment worn correctly, open service panel and hand tools within reach, __gkr_cyberpunk/rendering__"
     - "standalone healthcare character: __gkr_cyberpunk/healthcare_character__, clinical or repair tools visible, __gkr_cyberpunk/rendering__"
     - "standalone synthetic person: __gkr_cyberpunk/synthetic_character__, personal repairs and objects visible, __gkr_cyberpunk/rendering__"
     - "standalone media character: __gkr_cyberpunk/media_character__, recording or evidence tools visible, __gkr_cyberpunk/rendering__"
-    - "standalone community character: __gkr_cyberpunk/community_character__, shared infrastructure context, __gkr_cyberpunk/rendering__"
+    - "standalone community character: __gkr_cyberpunk/community_character__, apartment utilities, shared batteries or rooftop antennas behind, __gkr_cyberpunk/rendering__"
     - "standalone security character: __gkr_cyberpunk/security_character__, institutional equipment and body language visible, __gkr_cyberpunk/rendering__"
 
   ensemble_combo:
-    - "cyberpunk ensemble: __gkr_cyberpunk/relationship__, one __gkr_cyberpunk/infrastructure_character__, one __gkr_cyberpunk/community_character__, and one __gkr_cyberpunk/street_economy_character__, distinct actions in a shared functional environment, __gkr_cyberpunk/rendering__"
+    - "cyberpunk ensemble: __gkr_cyberpunk/relationship__, one __gkr_cyberpunk/infrastructure_character__, one __gkr_cyberpunk/community_character__, and one __gkr_cyberpunk/street_economy_character__, each using a separate tool around the same open utility cabinet, __gkr_cyberpunk/rendering__"
     - "institutional confrontation: __gkr_cyberpunk/corporate_character__, __gkr_cyberpunk/security_character__, and __gkr_cyberpunk/community_character__, spatial hierarchy and conflicting evidence visible, __gkr_cyberpunk/rendering__"
 
   character_sheet_combo:
     - "cyberpunk character sheet for __gkr_cyberpunk/standalone_character_combo__, front, side and back views, work pose, personal objects, clothing layers and material callouts"
-    - "interaction sheet for __gkr_cyberpunk/ensemble_combo__, height comparison, converging eyelines, shared tools and paired hand-to-object reactions"
+    - "paired-pose sheet for __gkr_cyberpunk/ensemble_combo__, height comparison, converging eyelines, shared tools and hands touching the same objects"
 
   augmentation_sheet_combo:
-    - "augmentation design sheet for __gkr_cyberpunk/augmentation_subject__, exterior views, attachment anatomy, control interface, maintenance access, wear, locked state and hand interaction"
+    - "augmentation design sheet for __gkr_cyberpunk/augmentation_subject__, exterior views, attachment anatomy, control interface, maintenance access, wear, locked state and hand gripping its controls"
 
   vehicle_design_combo:
     - "vehicle design sheet for __gkr_cyberpunk/vehicle_subject__, exterior turnaround, operator position, passenger or cargo use, battery access, maintenance history and damage state"
 
   infrastructure_sheet_combo:
     - "infrastructure design sheet for __gkr_cyberpunk/transit_environment__, sectional view, public and restricted circulation, utilities, maintenance access, failure state and human scale"
-    - "infrastructure design sheet for __gkr_cyberpunk/industry_environment__, process flow, worker routes, safety systems, repair access and visible failure consequences"
+    - "infrastructure design sheet for __gkr_cyberpunk/industry_environment__, numbered material-flow arrows, marked worker paths, safety barriers, repair hatches and inset of leaking or broken machinery"
 
   interface_prop_sheet_combo:
-    - "interface and prop sheet for __gkr_cyberpunk/interface_prop__, screen states, physical controls, hand interaction, warning state, damaged state and accessibility details"
+    - "interface and prop sheet for __gkr_cyberpunk/interface_prop__, screen states, physical controls, hand pressing each control, warning state, damaged state and tactile labels"
 
   city_system_map_combo:
     - "visual city-system map connecting __gkr_cyberpunk/housing_environment__, __gkr_cyberpunk/transit_environment__, __gkr_cyberpunk/healthcare_environment__ and __gkr_cyberpunk/industry_environment__; flows of people, power, water and restricted access shown pictorially"
 
   scene_storyboard_combo:
-    - "six-frame cinematic storyboard for __gkr_cyberpunk/surveillance_scene__, establishing geography, observed subject, detection, reaction, evasive action and visible consequence"
+    - "six-frame cinematic storyboard for __gkr_cyberpunk/surveillance_scene__, wide location, camera view, detection box, subject turning, blocked camera and final damaged checkpoint"
     - "six-frame cinematic storyboard for __gkr_cyberpunk/community_scene__, problem, coordination, physical work, institutional obstacle, adaptation and final changed environment"
 
   key_visual_combo:
-    - "cyberpunk key visual based on __gkr_cyberpunk/community_scene__, ensemble foreground, functional city systems behind, one clear institutional conflict, title-safe negative space, restrained lighting"
+    - "cyberpunk key visual based on __gkr_cyberpunk/community_scene__, ensemble foreground, exposed city utilities behind, security barrier facing a resident barricade, title-safe negative space, one overhead work light"
     - "cyberpunk key visual based on __gkr_cyberpunk/synthetic_person_scene__, human and synthetic figures connected by shared tools, touch or converging eyelines in the foreground, pipes, cables and worn city surfaces behind, title-safe composition"
 
   poster_combo:
-    - "cyberpunk theatrical poster based on __gkr_cyberpunk/cyber_noir_scene__, one physical clue as central metaphor, restrained palette and title-safe negative space"
+    - "cyberpunk theatrical poster based on __gkr_cyberpunk/cyber_noir_scene__, one clue enlarged behind the central silhouette, black, steel-blue and warning-red palette, title-safe negative space"
     - "cyberpunk poster based on __gkr_cyberpunk/climate_city_scene__, infrastructure and human scale equally visible, no generic neon skyline"
 
   in_world_ad_combo:
@@ -425,7 +430,7 @@ gkr_cyberpunk:
     - "surveillance-camera frame based on __gkr_cyberpunk/surveillance_scene__, timestamp, camera ID, detection boxes, blind spots, compression artifacts and observable human countermeasures"
 
   graphic_novel_page_combo:
-    - "complete cyberpunk graphic-novel page based on __gkr_cyberpunk/platform_labor_scene__, clear panel sequence, physical actions and environmental evidence, restrained color, readable consequences"
+    - "complete cyberpunk graphic-novel page based on __gkr_cyberpunk/platform_labor_scene__, wide location panel, close work action, warning display, worker reaction and final damaged equipment panel, black, gray and warning-orange color"
     - "complete cyberpunk graphic-novel page based on __gkr_cyberpunk/memory_identity_scene__, repeated composition, conflicting photographs and one page-turn revelation"
 
   spotlight_scenes:
