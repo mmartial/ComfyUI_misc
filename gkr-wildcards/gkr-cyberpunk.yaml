@@ -13,6 +13,14 @@
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
 # random: Selects one complete route for breadth; avoid stacking random routes.
+#
+# DIFFUSION-READY TRANSFORMATION RULE
+# Every generated leaf must already describe an image without requiring interpretation:
+# subject + visible pose/action + concrete setting/props + composition/light when useful.
+# Replace motives, backstory, relationships, themes, causality and time-based change with
+# observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
+# and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
+# A downstream LLM may clarify wording but must not invent the visual representation.
 # ========================================================================
 
 gkr_cyberpunk:
@@ -140,14 +148,14 @@ gkr_cyberpunk:
     - former military augment user working unarmed night security with outdated licensed hardware
 
   relationship:
-    - parent and adult child maintaining incompatible generations of implants
-    - worker and supervisor silently disagreeing beneath a performance display
+    - parent and adult child at a kitchen table covered with incompatible implant chargers, adapters and opened maintenance manuals
+    - worker pointing at a swollen exoskeleton joint while a supervisor points toward a red productivity display above the active line
     - synthetic caregiver and elderly resident moving through a crowded institution together
     - investigator and reluctant witness comparing physical evidence
-    - repairer and customer negotiating around a locked unsupported device
-    - longtime neighbors coordinating during an infrastructure failure
-    - corporate employee quietly assisting a street-level organizer
-    - migrant family and interpreter navigating a biometric checkpoint
+    - repairer displaying an open unsupported device and rejected access screen while the customer counts worn cash across the workbench
+    - longtime neighbors pulling extension cables and water hoses between dark apartment balconies during a grid failure
+    - corporate employee passing a copied access card beneath a café table to an organizer carrying lockout notices
+    - migrant family clustered behind an interpreter who points between their documents and two contradictory biometric screens
 
 # ------------------------------------------------------------------------
 # FUNCTIONAL ENVIRONMENTS
@@ -279,10 +287,10 @@ gkr_cyberpunk:
     - warehouse employee removing an employer exoskeleton, deep pressure marks visible beneath the harness
     - patient practicing grip control while a fitter adjusts mechanical finger alignment
     - underground clinic replacing a proprietary connector with a hand-machined open adapter
-    - cosmetic modification studio displaying identity choices beside clinical maintenance instructions
+    - cosmetic modification studio displaying interchangeable facial shells, pigment samples and horn shapes beside cleaning tools and anatomical fitting diagrams
 
   synthetic_person_scene:
-    - identical service androids choosing distinct secondhand clothing after a factory decommissioning
+    - identical service androids in a secondhand shop holding different coats, hats and jewelry against their matching factory uniforms, decommission stamps visible on their neck plates
     - synthetic care worker helping an elderly resident through a clinic that places robots in a separate queue
     - machine worker repairing itself from an obsolete printed manual beside a pile of rejected components
     - android family portrait assembled from bodies of different manufacturers and repair histories
@@ -327,7 +335,7 @@ gkr_cyberpunk:
     - detective tracing camera blind spots on a printed map beneath flickering practical street lights
     - missing-person photograph appearing inside advertisements across several unrelated districts
     - investigator entering a sealed office where every device has been removed but warm cable impressions remain
-    - public defender following an identity error through clinics, checkpoints and an abandoned apartment
+    - public defender inside an abandoned apartment, floor covered with clinic receipts, checkpoint photographs and identity screens showing the same face under different names
 
 # ------------------------------------------------------------------------
 # NARRATIVE COMBOS — ALL ABSTRACT THEMES EXPRESSED VISUALLY
@@ -376,7 +384,7 @@ gkr_cyberpunk:
 
   character_sheet_combo:
     - "cyberpunk character sheet for __gkr_cyberpunk/standalone_character_combo__, front, side and back views, work pose, personal objects, clothing layers and material callouts"
-    - "relationship sheet for __gkr_cyberpunk/ensemble_combo__, height comparison, eyelines, shared props and paired reactions"
+    - "interaction sheet for __gkr_cyberpunk/ensemble_combo__, height comparison, converging eyelines, shared tools and paired hand-to-object reactions"
 
   augmentation_sheet_combo:
     - "augmentation design sheet for __gkr_cyberpunk/augmentation_subject__, exterior views, attachment anatomy, control interface, maintenance access, wear, locked state and hand interaction"
@@ -400,7 +408,7 @@ gkr_cyberpunk:
 
   key_visual_combo:
     - "cyberpunk key visual based on __gkr_cyberpunk/community_scene__, ensemble foreground, functional city systems behind, one clear institutional conflict, title-safe negative space, restrained lighting"
-    - "cyberpunk key visual based on __gkr_cyberpunk/synthetic_person_scene__, human and synthetic relationships foregrounded, material city detail, title-safe composition"
+    - "cyberpunk key visual based on __gkr_cyberpunk/synthetic_person_scene__, human and synthetic figures connected by shared tools, touch or converging eyelines in the foreground, pipes, cables and worn city surfaces behind, title-safe composition"
 
   poster_combo:
     - "cyberpunk theatrical poster based on __gkr_cyberpunk/cyber_noir_scene__, one physical clue as central metaphor, restrained palette and title-safe negative space"

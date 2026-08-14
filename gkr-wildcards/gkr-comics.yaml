@@ -13,6 +13,14 @@
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
 # random: Selects one complete route for breadth; avoid stacking random routes.
+#
+# DIFFUSION-READY TRANSFORMATION RULE
+# Every generated leaf must already describe an image without requiring interpretation:
+# subject + visible pose/action + concrete setting/props + composition/light when useful.
+# Replace motives, backstory, relationships, themes, causality and time-based change with
+# observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
+# and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
+# A downstream LLM may clarify wording but must not invent the visual representation.
 # ========================================================================
 
 gkr_comics:
@@ -89,11 +97,11 @@ gkr_comics:
     - neighborhood rescuer in a handmade practical costume, repair seams and compact first-aid kit visible
     - veteran public hero wearing ceremonial colors over impact-resistant work gear
     - non-powered investigator using climbing equipment, field notes and careful preparation
-    - cosmic guardian whose translucent silhouette contains a painted starfield, solemn rather than triumphant
+    - cosmic guardian with a painted starfield visible inside a translucent silhouette, head bowed, hands lowered, drifting above a damaged orbital habitat
     - former villain performing community service in a visibly altered version of an old costume
-    - young legacy hero adapting an inherited emblem to a different body, neighborhood and responsibility
+    - young legacy hero pinning a resewn inherited emblem onto an adaptive rescue suit, neighbors watching beside a folding ramp and first-aid station
     - emergency engineer in powered rescue armor with lifting tools and high-visibility markings
-    - shapeshifting protector whose clothing and posture preserve identity across forms
+    - shapeshifting protector shown half human and half horned beast, the same striped scarf, utility belt and guarded stance visible across both forms
 
   pulp_crime_archetype:
     - private investigator in a cheap rain-dark suit, case file and camera, fatigue visible in posture
@@ -133,58 +141,58 @@ gkr_comics:
     - rural healer preserving regional knowledge during forced modernization
     - postwar printer rebuilding a neighborhood press from salvaged machinery
     - sailor documenting colonial trade from the viewpoint of the recruited crew
-    - family archivist confronting omissions in an inherited public history
+    - family archivist spreading official history books beside censored letters and group photographs with several faces cut away
 
   speculative_archetype:
     - orbital gardener maintaining a dying ecosystem inside a damaged habitat
     - obsolete service robot carrying handwritten requests from former users
     - city planner mapping neighborhoods that appear only during electrical outages
-    - folkloric guardian negotiating with residents rather than fighting them
+    - horned folkloric guardian seated across a kitchen table from residents, weapons laid aside, map, offering bowl and boundary markers between them
     - climate refugee repairing communications across floating settlements
     - dream investigator cataloging recurring architecture across unrelated sleepers
     - post-apocalyptic librarian trading practical knowledge between isolated communities
-    - scientist discovering an alien artifact designed for an ordinary domestic task
+    - scientist kneeling beside an alien artifact shaped around bowls and utensils, holographic diagram showing it heating food at a family table
 
   ensemble_role:
-    - coordinator maintaining the whole plan under pressure
-    - skeptical observer testing the group's assumptions
-    - local guide interpreting custom and place
-    - technical specialist solving material constraints
-    - emotional mediator noticing what remains unspoken
-    - impulsive initiator forcing a necessary decision
-    - experienced defender protecting retreat and civilians
-    - newcomer asking the question experts have normalized away
+    - coordinator at the center of the group, map unfolded, pointing toward three marked routes while others look on
+    - skeptical observer at the edge of the group, arms folded, magnifying glass held over disputed evidence
+    - local guide in region-specific work clothes, pointing out landmarks on a weathered hand-drawn map
+    - technical specialist kneeling over an opened machine, tools and removed panels arranged within reach
+    - mediator standing between two arguing figures, open palms separating their pointed gestures
+    - impulsive initiator already stepping through an opened doorway while the rest of the group turns in surprise
+    - experienced defender at the rear, shield raised between retreating civilians and an approaching threat
+    - inexperienced newcomer holding a notebook, pointing toward one overlooked object while experts face the opposite direction
 
   relationship:
-    - protagonist and rival whose respect complicates the conflict
-    - parent and adult child rebuilding trust through shared work
-    - mentor and successor divided over whether tradition permits change
-    - siblings assigning opposite meanings to the same family history
-    - investigator and witness becoming mutually dependent
-    - former lovers forced into a practical collaboration
-    - community leader and outsider slowly exchanging expertise
-    - creator and subject disagreeing over who owns a recorded story
+    - protagonist and rival lowering their weapons to exchange an injured civilian between them, guarded eye contact across the gap
+    - parent and adult child repairing the same shop sign from opposite ends of a ladder, matching paint on their hands
+    - elderly mentor holding an original blueprint while the successor displays a heavily revised working prototype
+    - siblings seated on opposite sides of a family archive, one holding a framed portrait, the other a bundle of censored letters
+    - injured investigator braced by a frightened witness while both compare the same blood-marked map
+    - former lovers working back-to-back at a cluttered repair bench, passing tools without meeting each other's eyes
+    - local leader demonstrating a hand-built water pump while an outsider opens a technical manual beside matching spare parts
+    - photographer and portrait subject reaching simultaneously for the same camera and memory card, tense opposing grips
 
 # ------------------------------------------------------------------------
 # US COMICS TRADITIONS
 # ------------------------------------------------------------------------
 
   us_scene:
-    - neighborhood hero choosing civilian rescue over pursuit beneath a collapsing elevated train
-    - horror-anthology heir discovering a family portrait changes between otherwise identical panels
+    - neighborhood hero lifting a collapsed beam from trapped civilians while a fleeing masked antagonist recedes beneath a collapsing elevated train
+    - horror-anthology heir holding two dated family portraits side by side, an extra pale relative visible only in the newer photograph
     - noir investigator entering an empty nightclub where one telephone rings beside untouched drinks
     - Western town confronting a railroad company through contracts, sabotage and a tense station-platform standoff
     - wartime medic crossing a ruined street to reach civilians while official orders demand retreat
-    - romance-comic coworkers misreading professional admiration as rivalry until a shared crisis clarifies both
-    - teen ensemble attempting to save a local venue while friendships fracture over competing plans
+    - romance-comic coworkers reaching simultaneously for the same award file, competitive glares above matching private praise notes tucked into their folders
+    - teen ensemble inside a threatened local venue, demolition notice on the door, one group building a benefit stage while another paints protest signs, former friends working back-to-back without eye contact
     - funny-animal neighborhood election escalating through visual misunderstandings and an unexpectedly sincere concession
     - underground-comix musician watching a familiar district become unaffordable between successive gigs
     - autobiographical creator revisiting a family argument through contradictory remembered layouts of one kitchen
-    - newspaper adventurer arriving at a foreign port with an unreliable map and a guide who knows more than officials
+    - newspaper adventurer at a foreign port comparing a rain-damaged map with official signs pointing the wrong way while a local guide marks a hidden route toward visible hills
     - children's science club solving a local environmental problem through observation and improvised experiments
 
   us_superhero_page_combo:
-    - "US superhero page: __gkr_comics/superhero_archetype__, __gkr_comics/us_scene__, __gkr_comics/page_grammar__, __gkr_comics/lettering__, bold brush contours and saturated flat color, rescue and consequence prioritized over spectacle"
+    - "US superhero page: __gkr_comics/superhero_archetype__, __gkr_comics/us_scene__, __gkr_comics/page_grammar__, __gkr_comics/lettering__, bold brush contours, saturated flat color, civilians in foreground and damaged infrastructure retained across panels"
   us_newspaper_strip_combo:
     - "US newspaper comics page: __gkr_comics/us_scene__, __gkr_comics/page_grammar__, economical linework, vintage newsprint color, precise visual payoff, __gkr_comics/lettering__"
   us_horror_anthology_combo:
@@ -194,7 +202,7 @@ gkr_comics:
   us_romance_combo:
     - "US romance comic: __gkr_comics/everyday_archetype__, __gkr_comics/relationship__, __gkr_comics/us_scene__, elegant ink, expressive close-ups, soft vintage spot colors, __gkr_comics/page_grammar__"
   us_alternative_combo:
-    - "US alternative graphic narrative: __gkr_comics/everyday_archetype__, __gkr_comics/relationship__, loose personal drawing, collage or photocopy texture, ordinary social detail, __gkr_comics/page_grammar__"
+    - "US alternative graphic narrative: __gkr_comics/everyday_archetype__, __gkr_comics/relationship__, loose personal drawing, collage or photocopy texture, receipts, transit cards, work badges and domestic clutter, __gkr_comics/page_grammar__"
 
 # ------------------------------------------------------------------------
 # EUROPEAN COMICS TRADITIONS
@@ -205,9 +213,9 @@ gkr_comics:
     - eccentric village resisting an absurd administrative decree through escalating collective ingenuity
     - aviation crew forced to land in disputed territory while weather and fuel limit every choice
     - historical household receiving a letter that changes inheritance, alliance and an imminent marriage
-    - supernatural investigator entering a provincial hotel where every guest remembers a different building
+    - supernatural investigator in a provincial hotel lobby, guests holding incompatible photographs of the hotel while the real staircase splits into two architectural styles behind them
     - Western travelers negotiating water rights before violence becomes inevitable
-    - future-city civil servant discovering one district has been deleted from all maps but not from tax records
+    - future-city civil servant comparing a blank sector on a glowing city map with tax records and utility bills listing crowded addresses in that same sector
     - Mediterranean family gathering revealing decades of migration through food, dialect and empty chairs
     - children's expedition crossing a familiar countryside transformed by one impossible machine
     - satirical space judge overwhelmed by contradictory robots, regulations and competing jurisdictions
@@ -229,25 +237,25 @@ gkr_comics:
 # ------------------------------------------------------------------------
 
   world_scene:
-    - extended family negotiating redevelopment of a shared urban property across generations
-    - journalist documenting a strike while workers debate who should speak for the group
-    - village storyteller and young illustrator adapting oral history without freezing it into folklore
-    - migrants navigating a border city through several languages, transit systems and informal networks
-    - school friends investigating why a neighborhood river disappeared beneath construction
-    - market vendors organizing against an extractive development plan while sustaining daily trade
-    - young engineer combining local repair culture with imported technology after a regional blackout
-    - former political prisoner deciding how much history to tell children who know only the official version
-    - coastal community responding to ecological change through fishing knowledge, science and conflict
-    - musician carrying a regional form into a global industry that wants only a simplified identity
+    - extended family gathered around an architectural model of their shared urban property, demolition notice pinned beside old family photographs, several hands pointing at different rooms
+    - journalist recording a factory-gate strike while several workers reach for one microphone beneath handmade banners and a locked entrance
+    - elderly village storyteller speaking beside a fire while a young illustrator sketches changing scenes across a long folding paper strip
+    - migrant family beneath layered multilingual station signs, comparing three transit maps while a bicycle courier marks an unofficial route around a closed checkpoint
+    - school friends at a fenced construction trench, holding an old river map beside a concrete culvert where water and small fish emerge
+    - market vendors serving customers beneath protest banners, development map and eviction notices pasted across the wall behind their produce stalls
+    - young engineer repairing a burned neighborhood transformer with hand-machined brackets fitted around a glossy imported control module, residents holding work lights
+    - former political prisoner opening a hidden box of prison letters before schoolchildren holding identical official textbooks
+    - fishers and marine scientists comparing empty nets, bleached shell samples and temperature charts on a storm-damaged pier
+    - regional musician in traditional performance clothing inside a glossy recording studio, producer pointing toward a simplified costume on a rack
 
   latin_historieta_combo:
-    - "Latin American historieta: __gkr_comics/world_scene__, literary science fiction or social realism, expressive black ink, urban and political context, layered captions, __gkr_comics/page_grammar__"
+    - "Latin American historieta: __gkr_comics/world_scene__, literary science fiction or social realism, expressive black ink, city architecture, public notices, uniforms and protest materials, layered captions, __gkr_comics/page_grammar__"
   african_graphic_narrative_combo:
     - "African graphic narrative grounded in a specific contemporary community: __gkr_comics/world_scene__, locally observed architecture and clothing, expressive regional print influences, multilingual lettering, no genericized folklore"
   middle_eastern_memoir_combo:
     - "Middle Eastern graphic memoir: __gkr_comics/world_scene__, personal testimony balanced with everyday family detail, restrained black-and-white drawing, maps and documents integrated carefully"
   indian_graphic_narrative_combo:
-    - "Indian graphic narrative: __gkr_comics/world_scene__, contemporary or historical social context, textile and print-inspired color accents, multilingual signage, clear sequential pacing"
+    - "Indian graphic narrative: __gkr_comics/world_scene__, region-specific clothing, architecture, tools and multilingual signage, textile and print-inspired color accents, clear sequential pacing"
   chinese_manhua_combo:
     - "Chinese manhua chapter: __gkr_comics/world_scene__, fluid calligraphic ink or contemporary urban color, vertical and horizontal spatial rhythm, expressive environmental detail"
   hong_kong_action_combo:
@@ -255,11 +263,11 @@ gkr_comics:
   korean_webtoon_combo:
     - "Korean vertical webtoon episode: __gkr_comics/world_scene__, clean digital contours, phone-readable balloons, long-scroll pacing, repeated visual anchors and controlled episode-end reveal"
   southeast_asian_comics_combo:
-    - "Southeast Asian contemporary comic: __gkr_comics/world_scene__, humid urban or rural setting observed specifically, local publication texture, social relationships and restrained supernatural possibilities"
+    - "Southeast Asian contemporary comic: __gkr_comics/world_scene__, humid air, region-specific buildings, clothing, vehicles and signage, local publication texture, one small supernatural detail among ordinary objects"
   filipino_komiks_combo:
     - "Filipino komiks story: __gkr_comics/world_scene__, expressive adventure or family drama, strong brush ink, serialized pacing, vernacular signage and decisive final-panel hook"
   indigenous_graphic_narrative_combo:
-    - "Indigenous graphic narrative centered on living community and authorship: __gkr_comics/world_scene__, land and kinship treated as present relationships, visual form guided by story context, avoiding generic pan-cultural symbols"
+    - "Indigenous graphic narrative: __gkr_comics/world_scene__, named local landscape features, contemporary homes, clothing, work tools and family photographs, visual motifs limited to objects present in the selected scene"
 
 # ------------------------------------------------------------------------
 # UNIVERSAL OUTPUTS
@@ -274,8 +282,8 @@ gkr_comics:
     - "standalone speculative character: __gkr_comics/speculative_archetype__, concept grounded in work and society, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
 
   ensemble_combo:
-    - "four-character comics ensemble with complementary roles: __gkr_comics/ensemble_role__, __gkr_comics/ensemble_role__, __gkr_comics/ensemble_role__, and __gkr_comics/ensemble_role__; distinct silhouettes, readable relationships, coherent regional publication style"
-    - "paired character study: __gkr_comics/relationship__, one character drawn from __gkr_comics/everyday_archetype__, another from __gkr_comics/adventure_archetype__, body language communicating history"
+    - "four-character comics ensemble: __gkr_comics/ensemble_role__, __gkr_comics/ensemble_role__, __gkr_comics/ensemble_role__, and __gkr_comics/ensemble_role__; distinct silhouettes, separate hand actions, converging eyelines and shared central prop"
+    - "paired character study: __gkr_comics/relationship__, one __gkr_comics/everyday_archetype__ and one __gkr_comics/adventure_archetype__, full hands, feet, eyelines and distance visible"
 
   comic_page_combo:
     - "complete comics page: __gkr_comics/world_scene__, __gkr_comics/page_grammar__, __gkr_comics/lettering__, __gkr_comics/line_treatment__, __gkr_comics/color_process__, intentional reading order and consequences"
@@ -289,7 +297,7 @@ gkr_comics:
 
   character_sheet_combo:
     - "comics character design sheet for __gkr_comics/modular_character_combo__, front, side and back views, expressions, equipment inset, silhouette and color notes"
-    - "ensemble relationship sheet for __gkr_comics/ensemble_combo__, height comparison, posture, eyelines, recurring props and conflict notes"
+    - "ensemble interaction sheet for __gkr_comics/ensemble_combo__, height comparison, paired poses, eyelines, recurring props and opposing hand gestures"
 
 # ------------------------------------------------------------------------
 # MODULAR PRODUCTION ASSETS AND OUTPUT FORMATS
@@ -319,7 +327,7 @@ gkr_comics:
 
   vehicle_subject:
     - patched neighborhood rescue van with medical storage, winch, folding shelter and local markings
-    - clear-line expedition aircraft with visible cargo access, maintenance panels and plausible controls
+    - clear-line expedition aircraft with open cargo access, labeled maintenance panels, pilot seat, dual control column, pedals and analog gauges
     - wartime courier motorcycle carrying maps, spare parts and civilian messages
     - coastal research vessel with sampling crane, cramped cabin and regional weather equipment
     - orbital utility shuttle with external cargo clamps, heat-shield repairs and analog backup controls
@@ -364,9 +372,9 @@ gkr_comics:
     - "comics creature design sheet for __gkr_comics/creature_subject__, anatomy, locomotion, resting and alert poses, scale comparison, habitat interaction and nonverbal behavior"
 
   comic_splash_combo:
-    - "issue-opening splash page based on __gkr_comics/us_scene__, one immediate narrative question, cast and setting relationship clear, masthead-safe area, __gkr_comics/lettering__, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "issue-opening splash page based on __gkr_comics/us_scene__, central unresolved object or threat, cast facing it from distinct foreground positions, setting landmarks behind, masthead-safe area, __gkr_comics/lettering__, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
     - "chapter-opening splash page based on __gkr_comics/european_scene__, detailed environment, small character business, album title-safe negative space, __gkr_comics/color_process__"
-    - "graphic-narrative opening image based on __gkr_comics/world_scene__, social context visible through place and objects, restrained title treatment, __gkr_comics/line_treatment__"
+    - "graphic-narrative opening image based on __gkr_comics/world_scene__, work tools, signs, documents, clothing and architecture filling the environment, restrained title treatment, __gkr_comics/line_treatment__"
 
   double_page_spread_combo:
     - "double-page comics spread based on __gkr_comics/us_scene__, central gutter kept clear of faces and essential action, broad geography with readable inset reactions, __gkr_comics/color_process__"
@@ -391,7 +399,7 @@ gkr_comics:
   graphic_novel_pitch_combo:
     - "graphic-novel pitch page for __gkr_comics/world_scene__, logline image, principal cast from __gkr_comics/ensemble_combo__, setting sample, tonal palette, page-layout excerpt and title-safe presentation"
     - "European album pitch sheet for __gkr_comics/european_scene__, premise, recurring characters, location study, sample tiered page and cover thumbnail"
-    - "US comics series pitch sheet for __gkr_comics/us_scene__, central conflict, cast relationships, issue arc thumbnails and representative finished panel"
+    - "US comics series pitch sheet for __gkr_comics/us_scene__, cast lineup with eyelines and shared props, six numbered issue thumbnails, recurring location strip and one representative finished panel"
 
   thumbnail_layout_combo:
     - "small sequential thumbnails for __gkr_comics/us_scene__, three alternative page solutions, balloon placement, reading flow, page-turn position and value grouping"

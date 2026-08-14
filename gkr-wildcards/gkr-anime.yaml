@@ -13,6 +13,15 @@
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
 # random: Selects one complete route for breadth; avoid stacking random routes.
+#
+# DIFFUSION-READY TRANSFORMATION RULE
+# Every generated leaf must already describe an image without requiring interpretation:
+# subject + visible pose/action + concrete setting/props + composition/light when useful.
+# Do not emit decisions, motives, backstory, relationships, themes, causality or time-based
+# change unless they are replaced by observable evidence inside one frame. Use gestures,
+# eyelines, documents, screens, damage, clothing, objects and spatial contrast. If a concept
+# needs multiple moments, specify a storyboard, comic panels or a split-state design sheet.
+# A downstream LLM may clarify wording but must not invent the visual representation.
 # ========================================================================
 
 gkr_anime:
@@ -42,7 +51,7 @@ gkr_anime:
     - long-lens view compressing crowd, weather, and distant architecture
     - subjective point of view with foreground hands or objects anchoring the scene
     - lateral composition staged like a continuous animated cut
-    - dramatic low angle reserved for one decisive emotional turn
+    - dramatic low angle with subject's face, clenched hands and raised foreground object dominating the frame
     - quiet locked frame with action entering and leaving naturally
 
   anime_environment:
@@ -67,48 +76,48 @@ gkr_anime:
 # ------------------------------------------------------------------------
 
   anime_action_scene:
-    - young team confronting a longtime rival at a ruined tournament ground, each member protecting a different route of escape
-    - veteran fighter teaching a reckless student through one restrained exchange rather than a display of power
-    - two rivals pausing mid-battle when civilians enter the danger zone, conflict shifting into an uneasy rescue partnership
+    - young team facing a longtime rival at a ruined tournament ground, members spaced before three escape routes with weapons and shields aimed outward
+    - veteran fighter redirecting a reckless student's full-force strike with two fingers, student's weapon embedded in a split practice post, dust hanging between their contrasting stances
+    - two wounded rivals lowering weapons and lifting the same collapsed beam as civilians crawl from the danger zone between them
     - courier pursued across rooftops, laundry lines and crowded balconies changing the path every few seconds
-    - swordswoman defending a narrow bridge in heavy rain, footwork and terrain more important than visual effects
-    - exhausted hero standing again after the apparent final attack, teammates' reactions carrying the emotional escalation
+    - swordswoman defending a narrow bridge in heavy rain, low planted stance, wet stone underfoot, blade braced against three approaching attackers, no energy aura
+    - exhausted hero pushing upright after a crater-forming attack, torn clothing and shaking knees, teammates reaching forward with shocked faces around the crater rim
     - coordinated team assault on a colossal creature, each role and failure visible within one clear spatial plan
-    - delinquent protecting a younger student at a school gate, confrontation conveyed through posture and surrounding witnesses
+    - delinquent standing between a younger student and three aggressors at a school gate, squared shoulders, open shielding arm and watching classmates forming a wide circle
 
   anime_romance_scene:
     - shy confession beside a railway crossing, passing train separating the pair before their reactions are revealed
-    - adult former classmates meeting by chance in a nearly empty family restaurant, polite conversation concealing unresolved history
+    - adult former classmates seated stiffly across a nearly empty family-restaurant booth, untouched drinks, matching old school charms beside their phones, forced smiles and eyes fixed on opposite windows
     - two coworkers missing the last train and walking home through quiet streets, conversation gradually becoming personal
     - long-distance couple sharing the same meteor shower from different cities, parallel compositions joined by matching gestures
     - reserved student repairing an umbrella for someone they pretend not to notice, small actions observed across several quiet cuts
     - widowed shopkeeper receiving a familiar seasonal order in the handwriting of a deceased spouse
     - university musicians practicing after hours, mutual affection emerging through timing and attentive listening
-    - elderly couple revisiting a coastal station where they once separated, present and memory sharing the same frame
+    - elderly couple on a coastal station platform beside a faded photograph of their younger selves at the same bench, matching suitcase and seasonal flowers visible in both
 
   anime_slice_of_life_scene:
     - friends sharing convenience-store food after missing the last train, jokes giving way to one honest admission
     - family preparing dinner in a cramped kitchen, several generations moving around one another through practiced routines
-    - student club restoring an abandoned room, discarded objects revealing the school's forgotten history
+    - student club cleaning an abandoned room, faded team photographs, tarnished trophies and a sealed club ledger emerging from beneath dusty sheets
     - office worker carrying groceries home in summer rain, stopping to help a neighbor secure laundry in the wind
     - children exploring drainage paths after a storm, turning ordinary infrastructure into an afternoon expedition
     - rural residents reopening a shuttered local shop, sweeping dust while older customers tell conflicting stories
-    - university roommates dividing chores after an argument, reconciliation expressed through quietly completed tasks
+    - university roommates in a shared kitchen, torn chore chart taped back together, one washing the other's dishes while the other folds their laundry, cautious sidelong glances
     - train conductor beginning the first winter service before dawn, checking platforms known by memory
 
   anime_comedy_scene:
     - carefully planned school announcement collapsing through a chain of mundane interruptions, ensemble reactions held in one wide frame
     - overconfident amateur cook hiding a ruined dish while increasingly suspicious guests arrive early
-    - supernatural roommate attempting to follow apartment rules while invisible habits betray every effort
+    - supernatural roommate sitting rigidly beneath an apartment rule chart while floating slippers, self-opening cupboards and an airborne toothbrush move behind them
     - four-panel-style misunderstanding escalating because each character interprets the same ordinary object differently
     - student council staging a solemn ceremony while malfunctioning equipment undermines every formal gesture
-    - fantasy adventurers negotiating restaurant expenses after defeating a monster, heroic poses replaced by itemized receipts
+    - armored fantasy adventurers crowded around a restaurant bill, empty coin purses, calculator beads and itemized plates between them, defeated monster trophy blocking the tiny table
     - timid employee mistaken for a legendary expert and repeatedly succeeding through coincidence
     - neighborhood pets silently coordinating around humans who misunderstand the entire situation
 
   anime_sports_scene:
     - volleyball team executing a rehearsed final play, every member contributing before the full-court result
-    - exhausted distance runner choosing whether to help an injured rival as the leaders disappear around the bend
+    - exhausted distance runner turning back with one arm extended toward an injured rival on the track while the leading runners disappear around the bend
     - baseball pitcher and catcher revising their strategy through signs after the batter anticipates every pitch
     - high-school football team defending one final attack in heavy rain, spacing and fatigue clearly staged
     - competitive swimmer alone beneath the surface before the starting signal, crowd noise reduced to vibration
@@ -120,7 +129,7 @@ gkr_anime:
     - student detectives reconstructing a locked-room event using classroom objects and conflicting witness positions
     - rural police officer comparing festival photographs and noticing the same unknown child across several decades
     - university archivist finding tomorrow's newspaper filed among century-old documents
-    - passengers trapped on a stopped local train realizing each remembers a different final station
+    - passengers inside a stopped local train holding tickets printed with different terminal stations, route display flickering between incompatible maps, alarmed faces reflected in the dark windows
     - private investigator following a mundane accounting discrepancy into a network of neighborhood favors and secrets
     - siblings mapping sounds inside an inherited house whose rooms do not match the exterior walls
     - detective interviewing an apparently helpful witness while reflections reveal rehearsed body language
@@ -138,18 +147,18 @@ gkr_anime:
 
   anime_mecha_scene:
     - inexperienced pilot seeing a giant machine awaken beneath a flooded city, maintenance bridges tearing loose around it
-    - repair crew working inside an open machine torso during an alarm, mechanic forced to choose what subsystem to leave broken
+    - repair crew inside an open machine torso during a red alarm, mechanic connecting one final power cable between damaged LIFE SUPPORT and THRUSTER modules while both warning lamps flash
     - two rival pilots communicating through precise combat maneuvers while commanders misunderstand their intent
     - obsolete worker machine defending an evacuation route against modern military units, industrial tools used intelligently
     - orbital construction mecha stabilizing a damaged habitat while civilian crews evacuate through rotating corridors
-    - pilot returning from battle to discover the machine preserved a recording of every previous operator
+    - pilot inside a dark cockpit watching rows of translucent recordings of previous operators appear across cracked monitors, their helmets and dates surrounding the pilot's reflection
     - giant robot launching from beneath an ordinary coastal town, roads and harbor structures unfolding as practical mechanisms
-    - cockpit team resolving a control conflict through trust and synchronized manual operation rather than increased power
+    - cockpit team gripping paired manual controls in synchronized mirrored poses, crossed warning lights turning green as the damaged machine steadies above an evacuation corridor
 
   anime_scifi_scene:
     - android waking in a quiet care facility and recognizing every patient except the person listed as its owner
-    - cybercrime investigator walking through a reconstructed memory where advertisements respond to hidden guilt
-    - generation ship residents discovering their artificial sky has displayed the wrong constellation for decades
+    - cybercrime investigator walking through a translucent reconstructed street, advertisements replacing cheerful faces with the investigator's concealed crime-scene photographs as they pass
+    - generation-ship residents beneath an artificial sky dome, holding an old star atlas against projected constellations that do not match, maintenance panels open along the horizon projector
     - courier transporting an illegal personality backup through a layered city transit network
     - lunar maintenance worker receiving a live radio call from Earth delayed by far more than distance allows
     - elderly engineer showing children an abandoned orbital garden designed by a forgotten culture
@@ -159,50 +168,50 @@ gkr_anime:
   anime_historical_scene:
     - wandering swordswoman facing an opponent in wind-bent grass, long preparation followed by one economical exchange
     - castle steward concealing a succession letter while rival households arrive for a formal audience
-    - traveling medicine seller investigating an illness blamed on spirits but rooted in poisoned trade goods
-    - village women organizing defenses while warriors are absent, farm tools and terrain shaping the plan
+    - traveling medicine seller comparing sick villagers' blackened fingertips with leaking dye barrels, shrine charms hanging untouched beside contaminated trade crates
+    - village women around a dirt map of fields and lanes, placing farm tools at marked chokepoints while empty weapon racks hang behind them
     - Edo-period fire brigade racing across rooftops as wind carries embers toward crowded wooden districts
     - court poet composing a politically dangerous verse during a moon-viewing ceremony
-    - young craft apprentice learning a fading technique from a difficult elderly master
-    - displaced family opening a small shop in a postwar neighborhood, hope and grief sharing ordinary labor
+    - young craft apprentice copying an elderly master's precise hand position at a worn workbench, failed pieces piled nearby, only one finished traditional object between them
+    - displaced family opening a small postwar neighborhood shop, black mourning bands beside freshly painted signage, one parent stocking salvaged goods while a child places a deceased relative's photograph behind the counter
 
   anime_music_scene:
     - school band finding the correct tempo only after listening to the quietest member
-    - punk trio performing at floor level in a tiny club while classmates discover an unexpected side of the singer
-    - idol group rehearsing without costumes or audience, conflict centered on harmony, fatigue and shared responsibility
+    - punk trio performing at floor level in a tiny club, normally reserved singer screaming into a microphone with jacket discarded, stunned uniformed classmates pressed against the front wall
+    - idol group rehearsing in plain sweat-darkened clothes before mirrored walls, one singer slumped beside water bottles while the others adjust formation marks around her
     - jazz students trading improvised phrases after the last train, empty practice room becoming an intimate stage
-    - orchestra leader returning after an injury and discovering the ensemble has developed without them
+    - orchestra leader with wrist brace paused in the rehearsal-room doorway while a younger substitute conducts the ensemble, musicians' eyes split between both figures
     - folk musician recording regional songs before the final residents leave a mountain village
     - electronic composer sampling the mechanical rhythms of a closing factory with its workers
     - shy songwriter performing one unfinished song at a university festival as rain empties the audience area
 
   anime_culinary_scene:
-    - young cook rebuilding a family recipe from several relatives' contradictory memories
+    - young cook surrounded by relatives holding conflicting handwritten recipe cards, measuring three different spice amounts over one simmering family dish
     - rival chefs preparing the same humble ingredient, technique and hospitality distinguishing the results
-    - exhausted restaurant staff serving one final table after deciding the business must close
-    - traveler learning regional preservation methods during a winter stay in a remote village
+    - exhausted restaurant staff serving one occupied table beneath a handwritten closing notice, stacked chairs and packed boxes filling the darkened dining room
+    - traveler copying an elder's hand movements while packing vegetables into ceramic fermentation jars, snow visible beyond a remote village kitchen, labeled jars lining the walls
     - school lunch club reducing food waste by redesigning a disliked dish with student feedback
     - pastry apprentice recovering from a collapsed showpiece through smaller precise work
     - fantasy party cooking an unfamiliar monster safely, anatomy and preparation treated with practical detail
-    - widower learning to make a spouse's everyday soup for visiting grandchildren
+    - widower at a home stove comparing a stained handwritten recipe card with a simmering soup pot while two grandchildren watch from the kitchen table beside a framed family photograph
 
   anime_adult_drama_scene:
     - middle-aged manager asked to dismiss a longtime colleague while their department celebrates an anniversary
     - divorced parents attending the same school event, coordinating care through restrained practical conversation
     - nurse finishing a night shift and sharing breakfast with an adult child beginning the opposite schedule
-    - former activist confronting how a youthful compromise shaped the company they now lead
+    - gray-haired executive alone in a boardroom, old protest photograph and faded armband beside a current factory-closure plan bearing their signature
     - aging performer mentoring a replacement who interprets the role in a way they initially resent
-    - siblings clearing their childhood apartment after a parent's death, each assigning different meaning to ordinary objects
-    - municipal worker balancing evacuation policy with residents refusing to abandon a declining coastal town
-    - small-business owner training an immigrant employee while both navigate assumptions and mutual dependence
+    - adult siblings packing a childhood apartment, one protecting a chipped toy in tissue paper while the other drops matching toys into a disposal box, parent's portrait between them
+    - municipal worker pinning an evacuation map inside a coastal community hall while elderly residents sit with packed bags at their feet but hold house keys toward the flooded street
+    - small-business owner guiding an employee's hands on an unfamiliar machine, bilingual instruction cards taped beside worn controls, both wearing matching stained aprons
 
   anime_childrens_scene:
     - children following a lost neighborhood cat through hidden gardens and connected rooftops before dinner
-    - shy child discovering tiny household spirits repair forgotten objects at night
+    - shy child peering beneath a blanket at night as tiny household spirits stitch a torn toy and tighten a clock spring across a moonlit bedroom floor
     - siblings building a cardboard spacecraft that transforms familiar rooms through imaginative staging
-    - young forest guide helping an injured creature return to its migration group without magical combat
+    - young forest guide bandaging an injured creature beside visible migration tracks, herd silhouettes waiting beyond the trees, no weapons or spell effects
     - classroom caring for one seedling through a difficult season, each child contributing differently
-    - child accompanying a grandparent on a slow local train journey and learning why every stop matters
+    - child and grandparent at a rural train window, grandparent pointing toward people waiting with flowers at successive tiny platforms, route scrapbook open across their knees
     - friends staging a miniature festival for residents unable to attend the town celebration
     - curious apprentice delivering packages through a city where every district follows different visual rules
 
@@ -248,7 +257,7 @@ gkr_anime:
     - veteran caravan guard, mismatched repaired armor, spear, route tokens from distant regions
     - court mage employed as a civil servant, formal layered robes, permit seals, portable writing desk
     - monster ecologist, field clothes, specimen sketches, nonlethal traps and observation lens
-    - displaced noble learning ordinary work, fine coat altered for travel, hidden signet ring
+    - displaced noble in a fine coat altered for travel, sleeves rolled while carrying flour sacks, hidden signet ring visible beneath a rough work glove
     - village shrine keeper, regional ritual clothing, weather records, bundles of protective charms
 
   historical_archetype:
@@ -310,22 +319,30 @@ gkr_anime:
     - loud comic sidekick, exaggerated hairstyle, repaired bicycle, snacks shared without comment
 
   character_relationship:
-    - protagonist and rival with mutual respect hidden beneath formal competition
-    - mentor and apprentice divided over method but aligned on responsibility
-    - siblings protecting one another through opposite coping strategies
-    - longtime friends avoiding a conversation that could change the relationship
-    - veteran and replacement learning that succession is not imitation
-    - investigator and skeptical local exchanging expertise reluctantly
-    - team leader and support specialist quietly reversing their expected roles
-    - parent and adult child rebuilding trust through shared practical work
+    - protagonist and rival exchanging a formal bow across a marked competition floor, matching bruises and tightly controlled eye contact
+    - mentor holding a traditional tool while the apprentice presents a modified version, both reaching toward the same damaged workpiece
+    - siblings standing back-to-back, one raising a shield outward while the other grips a first-aid kit and checks the shield-bearer's wound
+    - longtime friends seated with an unopened letter between them, bodies angled away while their hands nearly touch beside the envelope
+    - scarred veteran handing an old insignia to a replacement wearing different equipment and a newly designed uniform
+    - investigator spreading photographs across a table while a skeptical local adds a hand-drawn map and points to an overlooked landmark
+    - injured team leader seated against a wall while the support specialist stands over the map issuing directions to the rest of the team
+    - parent and adult child repairing the same household machine from opposite sides, passing a tool between grease-stained hands
+
+  personality_archetype:
+    - "tsundere schoolgirl, arms crossed, face turned away, flushed cheeks, sharply furrowed brows, secretly extending a carefully wrapped lunch with one hand"
+    - "kuudere student, still upright posture, neutral expression, cool steady gaze, holding an umbrella over an injured classmate while standing in the rain"
+    - "yandere schoolgirl, immaculate uniform, fixed sweet smile, unblinking eyes, gripping a love letter before a bedroom wall covered with one person's photographs"
+    - "dandere student half-hidden behind an open book, hunched shoulders, lowered gaze, blushing face, fingertips touching those of a trusted friend across a library table"
+    - "chuunibyou student in a dramatic occult pose, eyepatch over a supposedly cursed eye, bandaged arm, black improvised cape, cardboard magic sigils and theatrical hand gesture"
+    - "megane class strategist, rectangular glasses, disciplinary armband, clipboard covered in diagrams, one finger pushing the glasses up at the bridge, confident analytical stare"
 
   team_role:
     - calm coordinator tracking the whole situation
     - impulsive initiator forcing the group to act
     - technical specialist solving material constraints
-    - emotional mediator noticing unspoken conflict
+    - mediator standing between two figures with crossed arms and opposing eyelines, open palms guiding both toward the same map
     - experienced defender protecting retreat routes
-    - skeptical analyst testing every assumption
+    - skeptical analyst holding a magnifier over disputed evidence, notes covered with crossed-out diagrams and alternate routes
     - local guide reading environment and custom
     - inexperienced newcomer asking the necessary question
 
@@ -342,13 +359,13 @@ gkr_anime:
     - round child-friendly mascot creature whose expressions change through ears, tail and posture
 
   antagonist_archetype:
-    - reformist commander using coercive methods to solve a genuine systemic danger
-    - corporate executive protecting workers while concealing environmental harm
+    - uniformed commander pointing armed guards toward a compulsory evacuation line, toxic storm visible beyond sealed city gates and detained residents behind barriers
+    - corporate executive handing safety masks to workers while sliding toxic-discharge reports beneath a closed desk drawer, polluted river visible through the office window
     - immortal guardian enforcing an oath whose original context has vanished
     - charismatic rival leader offering safety in exchange for obedience
     - artificial intelligence interpreting care as permanent restriction
     - monster created by accumulated abandoned objects and neglected places
-    - respected mentor unable to accept that their tradition must change
+    - respected elderly mentor gripping a cracked traditional tool while students work successfully with redesigned tools at the opposite side of the workshop
     - frightened official escalating control to hide one irreversible mistake
 
   mecha_design:
@@ -376,33 +393,53 @@ gkr_anime:
 # ------------------------------------------------------------------------
 
   isekai_character_combo:
-    - "__gkr_anime/fantasy_archetype__, paired with __gkr_anime/character_relationship__, practical otherworld travel, unfamiliar customs treated as real social systems, __gkr_anime/anime_environment__, __gkr_anime/anime_era_style__"
+    - "modern student with schoolbag kneeling on a glowing forest road in an otherworldly frontier, circular portal closing behind them, delivery truck frozen beyond the portal at a city crosswalk, startled expression, __gkr_anime/anime_era_style__"
+    - "__gkr_anime/fantasy_archetype__ standing inside a luminous summoning circle on a stone palace floor, surrounded by robed mages, armored guards and an anxious royal court, modern personal objects scattered at their feet, __gkr_anime/anime_era_style__"
+    - "otherworld traveler touching translucent floating interface panels, portrait icon, level bar, inventory grid, locked skill icons and quest-map marker visible around their hands, immense fantasy city beyond, __gkr_anime/anime_era_style__"
+  magical_girl_combo:
+    - "ordinary schoolgirl mid-transformation, school uniform dissolving into ribbons of light, ornate layered magical costume forming around her, glowing personal emblem at her chest, jeweled wand raised above a threatened city street, __gkr_anime/anime_era_style__"
+    - "ornately dressed magical heroine kneeling opposite a round cute animal mascot, glowing charm and unfurled contract between them, mascot smiling while concealing a second black-sealed contract behind its tail, hard split lighting, __gkr_anime/anime_era_style__"
+    - "exhausted magical heroine in a torn soot-stained costume, bandaged arm, cracked transformation gem leaking dark light, broken wand, empty-eyed teammates in damaged costumes behind her, smiling mascot silhouetted above, restrained horror lighting, __gkr_anime/anime_era_style__"
   magical_team_combo:
-    - "transformation-hero ensemble with roles: __gkr_anime/team_role__, costumes derived from personal motifs rather than identical uniforms, relationship tension visible before a coordinated rescue, symbolic transformation animation, __gkr_anime/anime_era_style__"
+    - "five transformation heroines in distinct motif-based costumes forming a defensive circle around civilians, coordinated wands creating one luminous shield, contrasting poses and expressions, cute mascot watching from a shadowed rooftop, __gkr_anime/anime_era_style__"
+  battle_progression_combo:
+    - "battered novice fighter with the lowest-rank badge entering a tiered tournament arena, huge elimination bracket overhead, increasingly armored champions waiting on ascending platforms, cheering crowd, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+    - "fighter completing a new spiral strike against a split training pillar, glowing energy following the exact arm path, scorched bandages and trembling hand showing physical cost, astonished mentor and rival at the edge of the training yard, __gkr_anime/anime_era_style__"
+    - "battle hero in a newly transformed state, hair and costume reshaped by a violent luminous aura, fragments of the previous armor scattered at their feet, bleeding nose and cracked ground showing the strain, teammates shielding their faces, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+  super_robot_combo:
+    - "shouting pilot leaning into twin control levers, heroic giant robot mirroring the pose above a city, blazing chest emblem, enormous energy blade raised overhead, radiating speed lines, flames and triumphant extreme low angle, __gkr_anime/anime_era_style__"
+    - "five brightly colored machines joining in midair to form one giant humanoid robot, limbs locking into place amid lightning and concentric energy rings, five pilot portraits arranged around the frame, bold graphic effects, __gkr_anime/anime_era_style__"
+  real_robot_combo:
+    - "military pilot inside a cramped scratched cockpit operating __gkr_anime/mecha_design__, red fuel gauge, empty ammunition icons, cracked targeting display, radio waveform and evacuation map reflected across the visor, __gkr_anime/anime_era_style__"
+    - "battle-scarred __gkr_anime/mecha_design__ kneeling in a crowded hangar, armor panels removed, mechanics welding an exposed knee joint, ammunition racks nearly empty, exhausted pilot asleep against a supply crate, officers watching behind glass, __gkr_anime/anime_era_style__"
+  cgdct_combo:
+    - "four schoolgirls crowded around a craft-club table, mismatched handmade plush toys, fabric scraps, glue, tea and snacks everywhere, one girl holding up a lopsided finished toy while the others laugh, warm afternoon clubroom light, __gkr_anime/anime_era_style__"
+    - "four girls assembling a small campsite beside a calm mountain lake, half-raised tent, compact stove, enamel mugs, sleeping rolls and scattered instruction sheet, one girl tangled in a guyline while friends reach to help, golden sunset, __gkr_anime/anime_era_style__"
+    - "four-girl after-school music club inside a sunlit practice room, guitarist missing a chord, drummer laughing, keyboard player holding sheet music upside down, bassist pouring tea beside cakes and instrument cases, __gkr_anime/anime_era_style__"
   yokai_folklore_combo:
-    - "__gkr_anime/supernatural_archetype__ encountering __gkr_anime/anime_creature__, regional custom and negotiated obligation more important than combat, __gkr_anime/anime_environment__, ink-wash and painted-background anime treatment"
+    - "__gkr_anime/supernatural_archetype__ seated opposite __gkr_anime/anime_creature__, weapons laid aside, offering bowl, boundary stones and written terms between them in __gkr_anime/anime_environment__, ink-wash and painted-background treatment"
   idol_industry_combo:
-    - "__gkr_anime/music_archetype__, rehearsal or production-day scene, choreography, contracts, fatigue and ensemble trust treated alongside performance, __gkr_anime/character_relationship__, __gkr_anime/anime_era_style__"
+    - "__gkr_anime/music_archetype__ in a mirrored rehearsal studio, taped choreography marks, open contract pages, discarded stage shoes, water bottles and one exhausted performer supported by a teammate, __gkr_anime/anime_era_style__"
   delinquent_combo:
-    - "__gkr_anime/delinquent_archetype__, __gkr_anime/character_relationship__, neighborhood and school consequences surrounding a confrontation, humor and loyalty balanced with grounded physical stakes, __gkr_anime/anime_era_style__"
+    - "__gkr_anime/delinquent_archetype__ at a school-gate confrontation, dented bicycles, torn noticeboard, watching classmates and a younger student sheltered behind the delinquent's outstretched arm, __gkr_anime/anime_era_style__"
   military_political_combo:
-    - "ensemble led by __gkr_anime/scifi_archetype__, opposing __gkr_anime/antagonist_archetype__, logistics, civilian consequences and conflicting institutions visible, restrained military anime staging, __gkr_anime/anime_era_style__"
+    - "ensemble led by __gkr_anime/scifi_archetype__ facing __gkr_anime/antagonist_archetype__ across a planning table, fuel tokens, casualty photographs, evacuation map and opposing unit insignia spread between them, restrained military staging, __gkr_anime/anime_era_style__"
   kaiju_combo:
-    - "__gkr_anime/anime_creature__ at colossal scale near __gkr_anime/anime_environment__, evacuation, infrastructure and scientific observation establishing scale, creature behavior tied to ecology rather than simple destruction, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+    - "colossal __gkr_anime/anime_creature__ beside __gkr_anime/anime_environment__, tiny evacuation buses below, buckled power pylons, scientists aiming survey instruments from a rooftop, nests or feeding marks visible around the creature, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
   space_opera_combo:
-    - "crew including __gkr_anime/scifi_archetype__ and __gkr_anime/team_role__, aboard __gkr_anime/anime_vehicle__, political objective colliding with personal loyalty, vast space-opera scale grounded by operational detail, __gkr_anime/anime_era_style__"
+    - "crew including __gkr_anime/scifi_archetype__ aboard __gkr_anime/anime_vehicle__, one officer aiming at a rival flagship while another shields a family photograph attached to the targeting console, vast fleet formations beyond the viewport, __gkr_anime/anime_era_style__"
   cyberpunk_combo:
-    - "__gkr_anime/scifi_archetype__, __gkr_anime/character_relationship__, layered urban technology, labor and identity conflict, restrained interfaces and believable infrastructure, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+    - "__gkr_anime/scifi_archetype__ beneath layered rail lines and utility pipes, biometric screens showing mismatched portraits, repair workers beside open service panels, crowded checkpoint lanes, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
   post_apocalyptic_combo:
     - "small community including __gkr_anime/adult_archetype__ and __gkr_anime/team_role__, maintaining __gkr_anime/anime_vehicle__ across reclaimed infrastructure, survival through repair, agriculture and cooperation, __gkr_anime/anime_era_style__"
   racing_combo:
     - "__gkr_anime/sports_archetype__ piloting or riding __gkr_anime/anime_vehicle__, clear course geography, mechanical limits, team strategy and rival respect, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
   martial_arts_combo:
-    - "__gkr_anime/action_archetype__, paired with __gkr_anime/character_relationship__, training or confrontation centered on timing, balance and philosophy rather than energy effects, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+    - "__gkr_anime/action_archetype__ redirecting an opponent's strike through precise foot placement and wrist control, chalk stance marks, scuffed floorboards and watching students around the training hall, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
   iyashikei_combo:
-    - "gentle restorative episode featuring __gkr_anime/adult_archetype__ or __gkr_anime/school_archetype__, seasonal work, food and local relationships in __gkr_anime/anime_environment__, quiet locked frames, tactile painted background, no dramatic effects"
+    - "__gkr_anime/adult_archetype__ preparing seasonal food beside an open window in __gkr_anime/anime_environment__, neighbor placing fresh produce at the doorway, quiet locked frame, tactile painted background, soft natural light"
   ecological_fantasy_combo:
-    - "__gkr_anime/fantasy_archetype__ studying or protecting __gkr_anime/anime_creature__, ecosystem and human livelihood in tension, immense natural environment, hand-painted animation background, restrained wonder"
+    - "__gkr_anime/fantasy_archetype__ standing between __gkr_anime/anime_creature__ and advancing logging machines, field sketches and damaged nests at their feet, immense forest environment, hand-painted animation background"
 
 # ------------------------------------------------------------------------
 # MODULAR OUTPUT FORMATS
@@ -414,14 +451,18 @@ gkr_anime:
     - "standalone action character: __gkr_anime/action_archetype__, equipment used credibly, readable silhouette, __gkr_anime/anime_era_style__"
     - "standalone fantasy character: __gkr_anime/fantasy_archetype__, material-worn clothing and profession-specific tools, __gkr_anime/anime_era_style__"
     - "standalone historical character: __gkr_anime/historical_archetype__, researched clothing and tools, restrained pose, __gkr_anime/anime_era_style__"
-    - "standalone science-fiction character: __gkr_anime/scifi_archetype__, believable work equipment and subtle technology, __gkr_anime/anime_era_style__"
-    - "standalone music character: __gkr_anime/music_archetype__, believable instrument or production tools, __gkr_anime/anime_era_style__"
+    - "standalone science-fiction character: __gkr_anime/scifi_archetype__, worn work equipment held in its operating position, cables, fasteners and access panels visible, __gkr_anime/anime_era_style__"
+    - "standalone music character: __gkr_anime/music_archetype__, hands correctly placed on instrument or production controls, cables, stands and cases visible, __gkr_anime/anime_era_style__"
     - "standalone sports character: __gkr_anime/sports_archetype__, sport-specific posture and equipment, __gkr_anime/anime_era_style__"
     - "standalone supernatural character: __gkr_anime/supernatural_archetype__, restrained folklore cues, __gkr_anime/anime_era_style__"
 
+  personality_character_combo:
+    - "__gkr_anime/personality_archetype__, full-body anime character portrait in a school corridor, clear hand pose, facial expression and role-defining props, __gkr_anime/anime_era_style__"
+    - "__gkr_anime/personality_archetype__, waist-up anime reaction shot across a classroom desk, another character's hand entering the foreground, readable eyeline and expression, __gkr_anime/anime_era_style__"
+
   ensemble_character_combo:
-    - "four-person anime ensemble with complementary roles: __gkr_anime/team_role__, __gkr_anime/team_role__, __gkr_anime/team_role__, and __gkr_anime/team_role__; distinct silhouettes, visible relationships, shared genre-safe design language, __gkr_anime/anime_era_style__"
-    - "paired character study: __gkr_anime/character_relationship__, one drawn from __gkr_anime/adult_archetype__, the other from __gkr_anime/school_archetype__, body language communicating history, __gkr_anime/anime_era_style__"
+    - "four-person anime ensemble: __gkr_anime/team_role__, __gkr_anime/team_role__, __gkr_anime/team_role__, and __gkr_anime/team_role__; distinct silhouettes, separate hand actions, converging eyelines and one shared central prop, __gkr_anime/anime_era_style__"
+    - "paired character study: __gkr_anime/character_relationship__, one __gkr_anime/adult_archetype__ and one __gkr_anime/school_archetype__, full hands, posture, eyelines and distance visible, __gkr_anime/anime_era_style__"
     - "fantasy travel party including __gkr_anime/fantasy_archetype__, __gkr_anime/fantasy_archetype__, and __gkr_anime/fantasy_archetype__, complementary tools and responsibilities, __gkr_anime/anime_era_style__"
     - "science-fiction operations crew including __gkr_anime/scifi_archetype__, __gkr_anime/scifi_archetype__, and __gkr_anime/scifi_archetype__, functional shared environment, __gkr_anime/anime_era_style__"
 
@@ -432,23 +473,23 @@ gkr_anime:
     - "vehicle design sheet for __gkr_anime/anime_vehicle__, exterior turnaround, operator position, storage and maintenance detail, weathering callouts"
 
   anime_key_visual_combo:
-    - "anime key visual featuring __gkr_anime/ensemble_character_combo__, central relationship readable through eyelines, environment establishing genre, title-safe upper area, polished promotional composition without generic glow"
+    - "anime key visual featuring __gkr_anime/ensemble_character_combo__, all eyelines converging on one foreground object or threat, genre-specific environment behind, title-safe upper area, polished promotional composition without generic glow"
     - "anime key visual for __gkr_anime/isekai_character_combo__, foreground cast, distant destination and one unresolved threat, title-safe negative space"
-    - "anime key visual for __gkr_anime/anime_mecha_combo__, human crew foregrounded against __gkr_anime/mecha_design__, mechanical scale and emotional conflict equally visible"
+    - "anime key visual for __gkr_anime/anime_mecha_combo__, human crew foregrounded against __gkr_anime/mecha_design__, tiny mechanics at the feet, opposing pilot eyelines and damaged cockpit parts visible"
     - "anime key visual for __gkr_anime/yokai_folklore_combo__, seasonal motif, human and spirit communities sharing the frame, restrained supernatural cues"
 
   anime_poster_combo:
-    - "theatrical anime poster based on __gkr_anime/anime_action_scene__, one iconic silhouette, supporting cast arranged by relationship, environment and conflict readable at thumbnail size, title-safe negative space"
+    - "theatrical anime poster based on __gkr_anime/anime_action_scene__, one central silhouette, supporting cast arranged by opposing eyelines and distance, major environment landmark and threat visible at thumbnail size, title-safe negative space"
     - "theatrical anime poster based on __gkr_anime/anime_romance_scene__, one recurring object as visual metaphor, seasonal palette, restrained composition"
     - "theatrical anime poster based on __gkr_anime/anime_horror_scene__, threat implied through architecture or repetition, large negative space, limited color"
-    - "theatrical anime poster based on __gkr_anime/anime_adult_drama_scene__, ensemble eyelines and ordinary objects carrying the conflict, naturalistic color"
+    - "theatrical anime poster based on __gkr_anime/anime_adult_drama_scene__, opposing ensemble eyelines converging on one central letter, photograph or damaged object, naturalistic color"
 
 # ------------------------------------------------------------------------
 # ANIME COMBOS
 # ------------------------------------------------------------------------
 
   anime_action_combo:
-    - "__gkr_anime/anime_action_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, clear choreography and emotional stakes"
+    - "__gkr_anime/anime_action_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, attacker and defender limbs unobscured, threat and endangered subject visible in the same frame"
   anime_romance_combo:
     - "__gkr_anime/anime_romance_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, restrained character acting"
   anime_slice_of_life_combo:
@@ -456,19 +497,19 @@ gkr_anime:
   anime_comedy_combo:
     - "__gkr_anime/anime_comedy_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, precise visual timing and reaction staging"
   anime_sports_combo:
-    - "__gkr_anime/anime_sports_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, anatomically believable motion and team geography"
+    - "__gkr_anime/anime_sports_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, planted feet, joint alignment, ball or equipment trajectory and every teammate's court position visible"
   anime_mystery_combo:
     - "__gkr_anime/anime_mystery_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, fair visual clues"
   anime_horror_combo:
     - "__gkr_anime/anime_horror_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, restrained supernatural effects"
   anime_mecha_combo:
-    - "__gkr_anime/anime_mecha_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, coherent mechanical scale and operational detail"
+    - "__gkr_anime/anime_mecha_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, human scale references, articulated joints, access panels, fasteners and active control surfaces visible"
   anime_scifi_combo:
     - "__gkr_anime/anime_scifi_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, technology embedded in daily life"
   anime_historical_combo:
-    - "__gkr_anime/anime_historical_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, researched material culture and social context"
+    - "__gkr_anime/anime_historical_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, period-specific clothing closures, tools, architecture, transport and household objects"
   anime_music_combo:
-    - "__gkr_anime/anime_music_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, believable instruments and ensemble interaction"
+    - "__gkr_anime/anime_music_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, correct hand placement, instrument scale, cables, stands and musicians' converging eyelines"
   anime_culinary_combo:
     - "__gkr_anime/anime_culinary_scene__, __gkr_anime/anime_environment__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__, precise food preparation and sensory detail"
   anime_adult_drama_combo:
@@ -505,36 +546,36 @@ gkr_anime:
     - full-page mechanical or architectural reveal preceded by small scale-reference panels
 
   manga_shonen_scene:
-    - rivals confronting each other before a tournament's final exchange, damage and spectators recording the history of the fight
-    - adventure team solving a problem by combining specialized skills rather than escalating individual power
-    - reckless protagonist learning a technique through failure while a rival quietly changes strategy
-    - mentor entrusting leadership to the youngest member during an evacuation
-    - former enemy joining a rescue effort while neither side has time to resolve distrust
+    - rivals facing each other before a tournament's final exchange, matching accumulated wounds, broken weapons and spectators holding scorecards from earlier rounds
+    - adventure team crossing a collapsed bridge, scout firing a rope, shield-bearer anchoring it, healer supporting an injured member and mechanic tightening the pulley
+    - reckless protagonist repeating a failed strike against scarred training posts while a rival erases one plan and sketches a new footwork diagram nearby
+    - wounded mentor placing the evacuation map and leader's armband into the youngest member's hands as civilians crowd the marked exit
+    - former enemy lifting a fallen beam beside the heroes to free trapped civilians, both sides keeping damaged weapons lowered but within reach
     - training chapter centered on repetition, injury prevention and incremental visible improvement
 
   manga_shojo_scene:
-    - student realizing a longtime friend's feelings through objects saved across several seasons
+    - student opening a box containing every small gift given to a longtime friend across several seasons, matching dated photographs and pressed flowers spread around a handwritten confession
     - formal dance where partners repeatedly change, visual motifs tracking the person each character truly watches
-    - heroine choosing a personal ambition over an expected relationship, affection remaining without easy resolution
-    - two friends repairing trust after romantic jealousy through an ordinary shared errand
+    - heroine at a station platform gripping an art-school acceptance letter while a partner holds two unused hometown tickets, affectionate hands touching as they face opposite trains
+    - two friends carrying grocery bags together after an argument, one offering the other's favorite drink while a torn photograph remains taped inside a phone case
     - historical correspondence romance shown through letters, seasonal plants and changing handwriting
     - performer stepping onstage after a rival silently repairs a damaged costume
 
   manga_seinen_scene:
-    - detective discovering a financial crime hidden inside routine municipal contracts
-    - veteran returning to civilian work and misreading ordinary workplace conflict as tactical threat
-    - engineer investigating why an autonomous system makes compassionate but illegal decisions
-    - aging athlete confronting evidence that a celebrated victory harmed a teammate's career
-    - journalist choosing whether to publish a true story that exposes vulnerable sources
-    - criminal negotiation unfolding across a family restaurant while unrelated customers continue eating
+    - detective covering a municipal-office floor with contracts, invoices and ownership charts, the same shell-company seal circled across unrelated public projects, calculator and evidence photographs beside the files
+    - military veteran crouched behind an office cubicle with shoulders rigid and hand reaching toward an absent holster while two coworkers argue harmlessly beside a jammed printer
+    - engineer facing an autonomous security machine that shields an injured trespasser from armed officers, red violation warnings across the control screen, emergency medical kit open at the machine's feet
+    - aging athlete seated beneath championship photographs, old trophy beside medical scans and a newspaper image of the former teammate now walking with crutches
+    - investigative journalist at a cluttered newsroom desk, unpublished article proofs beside photographs of a clinic worker and a family entering a shelter, every source name blacked out in marker, one finger stopped above an illuminated upload key, other hand covering the photographs
+    - two criminals seated opposite each other in a busy family restaurant booth, sealed cash envelope and burner phone between untouched meals, one hand below the table gripping a hidden pistol while families eat in adjacent booths
 
   manga_josei_scene:
-    - coworkers in their thirties negotiating friendship after one becomes the other's supervisor
-    - woman deciding whether to leave a stable career for a craft she has practiced privately for years
+    - coworkers in their thirties after a promotion, one wearing a new supervisor badge while both hold matching old friendship photographs across a formal office desk
+    - office worker at home between a pressed business suit and a workbench covered with finished handmade ceramics, resignation envelope beside kiln invoices and an exhibition invitation
     - divorced parent dating again while maintaining boundaries around family life
-    - adult siblings disagreeing over care for an aging relative without a simple villain
-    - former university friends meeting annually as careers, relationships and expectations diverge
-    - costume designer balancing artistic credit, exploitative deadlines and loyalty to junior staff
+    - adult siblings on opposite sides of an aging relative's kitchen table, one holding home-care schedules, the other a residential-care brochure, untouched tea and medication organizer between them
+    - former university friends at their annual restaurant table, different uniforms, wedding rings, childcare bags and work badges surrounding the same old campus photograph
+    - costume designer pinning their own name and junior assistants' names onto a production credit board while a deadline clock glows above piles of unfinished costumes
 
   manga_horror_scene:
     - apartment floor plan changing subtly between panels while the resident marks every discrepancy
@@ -550,18 +591,18 @@ gkr_anime:
     - novice losing badly but recognizing the exact skill needed for the next season
     - rivals reviewing the same match afterward and interpreting its turning point differently
     - team practice during a heat wave revealing leadership through small acts of care
-    - athlete balancing school, work and recovery rather than relying on effortless talent
+    - student athlete asleep over textbooks in a laundromat work uniform, taped knee elevated on a sports bag, training schedule and late-shift timecard beside an alarm clock
 
   manga_yonkoma_scene:
     - office worker misinterpreting an automated reminder as increasingly personal criticism
     - fantasy hero's legendary weapon repeatedly used for mundane household repairs
     - cat strategically relocating objects while humans invent supernatural explanations
     - student preparing the perfect confession only to deliver it to the wrong identical locker
-    - ghost attempting to frighten a resident who keeps offering practical maintenance advice
-    - robot learning sarcasm and deploying it at the single worst possible moment
+    - ghost levitating a chair and stretching a shadow across the ceiling while the unfazed resident points toward cracked pipes with a wrench and maintenance checklist
+    - four-panel sequence: robot studies a sarcasm phrasebook, practices a smug expression, repeats the phrase at a funeral, mourners turn in shock while the robot gives a cheerful thumbs-up
 
   manga_historical_scene:
-    - merchant household navigating a political change through inventory, debts and marriage agreements
+    - merchant household around a ledger table, new regime's seal stamped across inventory lists, debt notes and marriage contract while soldiers replace flags outside the shop
     - traveling artist documenting communities before a new road transforms the region
     - sword school divided over whether tradition permits adaptation to unfamiliar weapons
     - court attendant using poetry and gift etiquette to prevent a factional confrontation
@@ -569,26 +610,26 @@ gkr_anime:
     - postwar family rebuilding a neighborhood print shop from salvaged equipment
 
   manga_experimental_scene:
-    - autobiographical memory redrawn in several incompatible styles as the narrator questions its accuracy
+    - same childhood room repeated in four adjacent manga panels with incompatible furniture, weather and drawing styles, narrator silhouette comparing four conflicting photographs in the gutter
     - city commute represented as architectural diagrams gradually invaded by human gestures
     - conversation shown only through objects moved around a shared table
     - dream narrative where panel borders become streets and characters climb between pages
     - silent chapter following a discarded object through many unrelated owners
-    - performer hearing music visualized as changes in ink density rather than literal notes
+    - performer centered across a silent manga spread, surrounding ink wash changing from pale gray to dense black bands around each instrument and gesture, no musical-note symbols
 
   manga_combo:
-    - "shonen manga chapter: __gkr_anime/manga_shonen_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, coherent sequential storytelling"
-    - "shojo manga chapter: __gkr_anime/manga_shojo_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, emotional motifs and readable panel rhythm"
+    - "shonen manga chapter: __gkr_anime/manga_shonen_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, consistent character clothing, props and left-to-right positions across panels"
+    - "shojo manga chapter: __gkr_anime/manga_shojo_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, repeated flower, letter or keepsake motif and unobscured facial reaction panels"
     - "seinen manga chapter: __gkr_anime/manga_seinen_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, mature visual storytelling"
-    - "josei manga chapter: __gkr_anime/manga_josei_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, grounded adult relationships"
-    - "horror manga chapter: __gkr_anime/manga_horror_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, controlled revelation and page-turn tension"
+    - "josei manga chapter: __gkr_anime/manga_josei_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, adult clothing, workplaces, domestic props and restrained facial expressions"
+    - "horror manga chapter: __gkr_anime/manga_horror_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, threat partly obscured until the final large panel"
     - "sports manga chapter: __gkr_anime/manga_sports_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, sequential motion clarity"
     - "yonkoma manga page: __gkr_anime/manga_yonkoma_scene__, four equal horizontal panels, setup, reinforcement, reversal and silent payoff, clean expressive ink"
     - "historical manga chapter: __gkr_anime/manga_historical_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, researched material culture"
     - "experimental manga chapter: __gkr_anime/manga_experimental_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, medium-aware visual metaphor"
 
   manga_cover_combo:
-    - "tankobon cover illustration based on __gkr_anime/manga_shonen_scene__, strong central silhouette, supporting cast arranged by relationship, clear title-safe negative space, __gkr_anime/manga_rendering__"
+    - "tankobon cover illustration based on __gkr_anime/manga_shonen_scene__, strong central silhouette, supporting cast arranged by opposing eyelines, height and distance, clear title-safe negative space, __gkr_anime/manga_rendering__"
     - "tankobon cover illustration based on __gkr_anime/manga_shojo_scene__, symbolic seasonal motif, expressive eye lines, elegant title-safe negative space, __gkr_anime/manga_rendering__"
     - "literary manga cover based on __gkr_anime/manga_seinen_scene__, one restrained visual metaphor, limited palette, title-safe negative space, __gkr_anime/manga_rendering__"
 
@@ -618,12 +659,18 @@ gkr_anime:
 
   spotlight_characters:
     - "__gkr_anime/standalone_character_combo__"
+    - "__gkr_anime/personality_character_combo__"
     - "__gkr_anime/ensemble_character_combo__"
     - "__gkr_anime/character_sheet_combo__"
 
   spotlight_anime_traditions:
     - "__gkr_anime/isekai_character_combo__"
+    - "__gkr_anime/magical_girl_combo__"
     - "__gkr_anime/magical_team_combo__"
+    - "__gkr_anime/battle_progression_combo__"
+    - "__gkr_anime/super_robot_combo__"
+    - "__gkr_anime/real_robot_combo__"
+    - "__gkr_anime/cgdct_combo__"
     - "__gkr_anime/yokai_folklore_combo__"
     - "__gkr_anime/idol_industry_combo__"
     - "__gkr_anime/delinquent_combo__"
@@ -666,6 +713,7 @@ gkr_anime:
     - "__gkr_anime/spotlight_anime_scenes__"
     - "__gkr_anime/spotlight_manga_pages__"
     - "__gkr_anime/standalone_character_combo__"
+    - "__gkr_anime/personality_character_combo__"
     - "__gkr_anime/ensemble_character_combo__"
     - "__gkr_anime/character_sheet_combo__"
     - "__gkr_anime/anime_key_visual_combo__"

@@ -11,6 +11,14 @@
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
 # random: Selects one complete route for breadth; avoid stacking random routes.
+#
+# DIFFUSION-READY TRANSFORMATION RULE
+# Every generated leaf must already describe an image without requiring interpretation:
+# subject + visible pose/action + concrete setting/props + composition/light when useful.
+# Replace motives, backstory, relationships, themes, causality and time-based change with
+# observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
+# and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
+# A downstream LLM may clarify wording but must not invent the visual representation.
 # ========================================================================
 
 gkr_ttrpg:
@@ -721,7 +729,7 @@ gkr_ttrpg:
     - "masked cultist informant, rain-dark cloak, coded parchment held beneath a stone bridge, distant lantern patrol approaching"
 
   adventure_scene_combo:
-    - "adventurers accepting a dangerous quest from a worried village council, regional map pinned beneath cups and candles, several competing clues on the table"
+    - "adventurers around a worried village council's table, one hand receiving a sealed quest writ, regional map pinned beneath cups and candles, monster track sketch, broken arrow and bloodied cloth arranged as clues"
     - "party negotiating passage with suspicious gate guards, sealed letter presented forward, crowded caravan waiting behind them"
     - "scout and scholar mapping an unexplored dungeon junction, chalk marks on stone, measured rope across the floor, companions guarding three dark passages"
     - "rogue carefully opening a trapped treasure chest while companions shelter behind shields, thin wires and pressure plates clearly visible"
@@ -757,7 +765,7 @@ gkr_ttrpg:
 
   character_output_format:
     - full-body player-character design with readable silhouette, class-defining equipment and restrained background
-    - waist-up character portrait emphasizing face, ancestry, material wear and one meaningful prop
+    - waist-up character portrait with face, ancestry traits, material wear and one class-specific tool or relic fully visible
     - front-and-rear costume sheet showing armor layers, closures, packs and weapon carry
     - character progression triptych showing novice, experienced and veteran versions of the same adventurer
     - paired character portrait emphasizing complementary roles and contrasting silhouettes
@@ -768,7 +776,7 @@ gkr_ttrpg:
     - cinematic ensemble key art with distinct silhouettes and a shared threat in the environment
     - campsite group scene with natural interaction, packs, bedrolls, food and watch duties visible
     - tactical encounter tableau with party positions, terrain elevation and immediate objectives clearly staged
-    - tavern or guild-hall group portrait showing relationships through posture and small gestures
+    - tavern guild-hall group portrait, two companions leaning together over one map, armored veteran standing behind the seated novice, rival turned away with one hand still passing a mug
     - travel panorama with the party small against a vast destination landscape
 
   monster_output_format:

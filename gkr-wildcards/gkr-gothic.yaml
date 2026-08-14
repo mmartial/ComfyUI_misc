@@ -13,6 +13,14 @@
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
 # random: Selects one complete route for breadth; avoid stacking random routes.
+#
+# DIFFUSION-READY TRANSFORMATION RULE
+# Every generated leaf must already describe an image without requiring interpretation:
+# subject + visible pose/action + concrete setting/props + composition/light when useful.
+# Replace motives, backstory, relationships, themes, causality and time-based change with
+# observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
+# and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
+# A downstream LLM may clarify wording but must not invent the visual representation.
 # ========================================================================
 
 gkr_gothic:
@@ -26,7 +34,7 @@ gkr_gothic:
     - Victorian Gothic, mourning customs, gaslit institutions, industrial soot and elaborate domestic interiors
     - Southern Gothic, decaying prosperity, oppressive heat, family relics and overgrown property
     - Romantic Gothic, storm landscapes, doomed intimacy, pale dawn and emotionally charged architecture
-    - ecclesiastical Gothic, monumental stone, ritual objects, damaged sacred space and moral ambiguity
+    - ecclesiastical Gothic, monumental stone nave, overturned altar, cracked reliquary, extinguished candles and priest kneeling between bloodied vestments and an open grave
     - folk Gothic, isolated community, seasonal materials, handmade ritual objects and watchful landscape
     - maritime Gothic, salt-damaged buildings, storm signals, drowned objects and black coastal water
     - medical Gothic, anatomy theatre, clinical restraint, specimen cabinets and bodily uncertainty
@@ -95,7 +103,7 @@ gkr_gothic:
     - exhausted exorcist in travel-worn clerical clothing, prayer book, candle and practical medical restraints
     - conflicted parish priest holding a damaged reliquary before an empty congregation
     - convent gardener carrying pruning tools past headless saint statues
-    - young acolyte discovering fresh soil beneath a sealed chapel floor
+    - young acolyte kneeling beside a lifted chapel flagstone, fresh black soil and pale roots spilling across the sealed floor, candle held close to the opening
     - rural ritual keeper arranging handmade offerings according to a faded seasonal diagram
     - hospital chaplain seated beside a patient whose reflection remains standing
     - disgraced theologian translating marginal notes from a forbidden devotional text
@@ -105,9 +113,9 @@ gkr_gothic:
     - anatomy lecturer in a stained apron, pointer paused over an impossible specimen
     - asylum nurse carrying a key ring and folded patient drawings
     - village healer sorting dried herbs beside a bundle containing human teeth
-    - mortuary attendant discovering fresh condensation inside an old sealed drawer
+    - mortuary attendant pulling open an old sealed drawer, fresh condensation and one handprint visible on the inner metal surface
     - surgeon washing instruments while an empty operating table slowly depresses
-    - rehabilitation patient learning to use a stitched hand with mismatched fingerprints
+    - rehabilitation patient stacking wooden blocks with a stitched hand, mismatched fingerprint ink tests and grip diagrams spread beside the exercise board
     - apothecary comparing medicine bottles whose labels have exchanged names
     - undertaker measuring an apparently empty coffin from the inside
 
@@ -132,14 +140,14 @@ gkr_gothic:
     - stitched creation in heavy work clothes, uncertain expression and careful gentle hands
 
   relationship:
-    - heir and housekeeper silently disagreeing over a locked family room
-    - investigator and witness becoming mutually dependent inside an isolated place
-    - living spouse and spectral beloved separated by glass, water or reflection
-    - parent and child concealing different knowledge of the same apparition
-    - physician and patient each doubting which body is changing
-    - priest and skeptic interpreting identical physical evidence differently
-    - siblings assigning opposite meanings to an inherited object
-    - village insider and visiting outsider exchanging suspicion through formal hospitality
+    - heir reaching for a locked family-room key while the housekeeper blocks the door with both hands and lowered gaze
+    - injured investigator leaning on a witness who holds the only lantern inside a flooded underground passage
+    - living spouse pressing a palm to a rain-streaked window while a spectral beloved mirrors the gesture from the reflection
+    - parent hiding a blood-marked diary behind their back while the child points toward a pale figure at the end of the corridor
+    - physician comparing their newly scarred hand with an identical scar spreading across the restrained patient's hand
+    - priest holding a scorched reliquary while a skeptic measures the same burn pattern with calipers and notebook
+    - siblings pulling the same inherited locket in opposite directions, one displaying its portrait and the other its hidden compartment
+    - village host pouring tea without smiling while a rain-soaked visitor notices every other cup placed for an empty chair
 
 # ------------------------------------------------------------------------
 # ENVIRONMENTS AND PHYSICAL SUBJECTS
@@ -229,7 +237,7 @@ gkr_gothic:
     - smiling villagers carrying woven effigies toward a hilltop fire while one outsider is held back
     - masked residents circling an empty chair during a daylight seasonal rite
     - rural wedding guests wearing identical crowns beside shoes lined at the field edge
-    - healer opening a charm bundle and discovering human teeth among dried plants
+    - healer holding an opened charm bundle above a table, human teeth dropping from dried plants onto white cloth under lamplight
     - traveler sheltering in an inn while every patron recites the same prayer
     - children replacing village door markings as adults watch from shuttered windows
 
@@ -252,7 +260,7 @@ gkr_gothic:
   medical_horror_scene:
     - surgical team watching an empty operating table sink beneath invisible weight
     - patient and physician comparing scans that show different skeletons at the same time
-    - anatomy students discovering the demonstration specimen has copied one observer's scars
+    - anatomy students surrounding a demonstration specimen whose torso bears the same branching scar as one student's exposed forearm, every gaze fixed between the two marks
     - asylum nurse unlocking a room whose interior is much larger than the building
     - undertaker measuring a coffin while tapping answers from inside match each number
     - apothecary arranging bottles that cast shadows shaped like their former patients
@@ -338,7 +346,7 @@ gkr_gothic:
     - "six-frame Gothic storyboard for __gkr_gothic/investigation_scene__, arrival, evidence, comparison, architectural clue, discovery and unresolved final image"
 
   key_visual_combo:
-    - "Gothic key visual based on __gkr_gothic/gothic_romance_scene__, relationship foregrounded, architecture carrying history, title-safe negative space"
+    - "Gothic key visual based on __gkr_gothic/gothic_romance_scene__, paired figures separated by a door, window or reflection in the foreground, family portraits, sealed masonry and weather damage behind, title-safe negative space"
     - "Gothic key visual based on __gkr_gothic/folk_horror_scene__, community and outsider visible together, seasonal motif, restrained threat"
 
   poster_combo:

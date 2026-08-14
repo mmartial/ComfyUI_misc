@@ -11,6 +11,14 @@
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
 # random: Selects one complete route for breadth; avoid stacking random routes.
+#
+# DIFFUSION-READY TRANSFORMATION RULE
+# Every generated leaf must already describe an image without requiring interpretation:
+# subject + visible pose/action + concrete setting/props + composition/light when useful.
+# Replace motives, backstory, relationships, themes, causality and time-based change with
+# observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
+# and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
+# A downstream LLM may clarify wording but must not invent the visual representation.
 # ========================================================================
 
 gkr_japan:
@@ -1182,7 +1190,7 @@ gkr_japan:
 
   output_format:
     - full-length character portrait with a clearly readable silhouette and environmental context
-    - waist-up cinematic portrait emphasizing face, garment texture and one meaningful prop
+    - waist-up cinematic portrait with face, garment texture and one occupation- or era-specific prop fully visible
     - coordinated two-person portrait showing contrasting roles, garments and posture
     - quiet daily-life scene with natural gestures and layered architectural detail
     - working craft process with hands, tools, raw materials and finished objects all visible
@@ -1349,7 +1357,7 @@ gkr_japan:
     - "__gkr_japan/random_character__, __gkr_japan/random_backgrounds__"
     - "__gkr_japan/random_character__"
     - "__gkr_japan/random_backgrounds__"
-    - "__gkr_japan/spotlight_character__"
+    - "__gkr_japan/spotlight_characters__"
     - "__gkr_japan/spotlight_backgrounds__"
     - "__gkr_japan/spotlight_yokai__"
     - "__gkr_japan/spotlight_mecha__"

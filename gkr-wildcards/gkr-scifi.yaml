@@ -11,6 +11,14 @@
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
 # random: Selects one complete route for breadth; avoid stacking random routes.
+#
+# DIFFUSION-READY TRANSFORMATION RULE
+# Every generated leaf must already describe an image without requiring interpretation:
+# subject + visible pose/action + concrete setting/props + composition/light when useful.
+# Replace motives, backstory, relationships, themes, causality and time-based change with
+# observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
+# and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
+# A downstream LLM may clarify wording but must not invent the visual representation.
 # ========================================================================
 
 gkr_scifi:
@@ -413,7 +421,7 @@ gkr_scifi:
     - orthographic spacecraft sheet with top, side, front and mechanical-detail views on a neutral background
     - spacecraft cutaway showing crew spaces, cargo, tanks, engines and pressure boundaries
     - mission-operation scene with crew, docking hardware or surface equipment establishing scale
-    - analog mission photograph with restrained color, fine grain and physically plausible lighting
+    - analog mission photograph with restrained color, fine grain, hard sunlight from one direction and shadows aligned across suits, rocks and vehicle
     - retrofuturist travel poster presenting the vehicle and destination with simplified geometric composition
 
   environment_output_format:
@@ -421,7 +429,7 @@ gkr_scifi:
     - street-level habitat scene with foreground activity and layered infrastructure
     - architectural cutaway showing pressure zones, circulation, utilities and inhabited rooms
     - orbital panorama with physically motivated sunlight, planetary shadow and recognizable construction scale
-    - environmental concept sheet showing exterior, interior and material details from one coherent location
+    - environmental concept sheet showing exterior, cutaway interior and matching material details from the same structure, repeated doors, windows and surface markings aligned between views
     - archaeological reconstruction pairing the discovered remains with a restrained visualization of their original form
 
   science_output_format:
@@ -626,14 +634,14 @@ gkr_scifi:
     - migration arrival center where families receive habitat clothing, orientation maps and medical checks after interplanetary transit
 
   first_contact_scenario:
-    - human field team and aquatic visitors meeting across the transparent wall of a shoreline habitat, shared geometric objects used to establish meaning
+    - human field team and aquatic visitors facing each other across a transparent shoreline-habitat wall, both sides arranging identical geometric objects into the same three-part pattern
     - nonhumanoid aerial organisms circling a research balloon while scientists display harmless light patterns from an open observation deck
     - robotic probe and crystalline lifeform exchanging carefully arranged mineral samples on a barren moon, no humanoid figure present
     - diplomats from incompatible atmospheres seated in adjacent pressure chambers around a shared physical model of their star system
     - farming community observing an immense living vessel take root offshore, cautious distance, emergency crews and ordinary residents sharing the frame
     - linguist recognizing intentional structure in bioluminescent reef pulses while local organisms gather beyond the submersible window
     - first exchange of art between a distributed machine intelligence and schoolchildren using modular physical shapes in a public hall
-    - archaeological team discovering that an apparently extinct city is a dormant collective organism, subtle movement beginning beneath survey lights
+    - archaeological team in an apparently extinct city as stone walls flex like muscle beneath survey lights, window openings blink in sequence and rootlike streets curl around their equipment
 
   anomaly_scenario:
     - research vessel observing gravitational lensing around an object with no visible mass, background stars forming precise distorted arcs

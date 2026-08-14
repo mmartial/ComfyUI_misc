@@ -11,6 +11,14 @@
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
 # random: Selects one complete route for breadth; avoid stacking random routes.
+#
+# DIFFUSION-READY TRANSFORMATION RULE
+# Every generated leaf must already describe an image without requiring interpretation:
+# subject + visible pose/action + concrete setting/props + composition/light when useful.
+# Replace motives, backstory, relationships, themes, causality and time-based change with
+# observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
+# and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
+# A downstream LLM may clarify wording but must not invent the visual representation.
 # ========================================================================
 
 gkr_popculture:
@@ -77,7 +85,7 @@ gkr_popculture:
     - underdog athlete entering the final round exhausted, coach shouting unheard beneath the crowd, decisive movement shown without excessive effects, cut between footwork, opponent, and family reaction
     - estranged lovers finding each other on a crowded railway platform as the final train departs, surrounding movement blurring while they remain still, restrained score-like visual rhythm and winter light
     - frightened investigator opening a familiar apartment door onto an impossible endless corridor, ordinary objects repeated at wrong intervals, slow push forward with no visible threat
-    - comic ensemble trapped at an elegant dinner where every attempt to leave creates a new social disaster, escalating physical business across one readable wide composition
+    - comic ensemble at an elegant dinner, one guest tangled in curtains beside the exit, another hiding beneath the table, spilled soup crossing formal place settings and the host blocking the doorway in one wide composition
     - resistance pilot flying through the interior of a vast mechanical structure, obstacles establishing a clear route toward a tiny target, pursuers lost one by one, cockpit reactions intercut with exterior scale
     - dancers taking over a rain-soaked city intersection at night, choreography expanding from one performer to an entire crowd, headlights and storefronts providing practical backlight
     - family escaping a prehistoric predator through an abandoned visitor complex, automatic doors and kitchen equipment becoming obstacles, threat shown in fragments at child eye level
@@ -119,8 +127,8 @@ gkr_popculture:
     - young mob heir making a life-changing decision during a quiet restaurant conversation, train passing overhead at the decisive instant, sound falling away before one sudden irreversible action
     - two aspiring performers dancing alone inside an observatory-like dream space above a city, practical color transitions moving from twilight to stars, romance expressed through choreography and distance
     - falsely accused physician escaping across a rain-slick dam, searchlights closing from both sides, choice between surrender and a dangerous leap established through vertiginous overhead views
-    - archaeologists discovering a hidden desert chamber as torchlight rolls across untouched gold objects, awe held in silence before one small movement suggests the room is not empty
-    - submarine crew waiting in silence while enemy sonar pulses pass through the hull, loose tools trembling with each echo, captain choosing not to fire as depth pressure increases
+    - archaeologists entering a hidden desert chamber, torchlight across untouched gold objects, every figure frozen as one sealed sarcophagus lid shifts and dust spills from its edge
+    - submarine crew silent at stations while enemy sonar pulses vibrate loose tools, captain's hand holding the covered fire switch shut, depth gauge deep in the red
     - astronaut entering a rotating cylindrical habitat, jogging along a floor that curves overhead, ordinary domestic details revealing impossible engineered scale in one continuous shot
     - scientists watching water ripple in a cup before an enormous predator steps into view beyond stopped vehicles, threat announced through physical vibration rather than music or effects
     - suburban family hiding a gentle extraterrestrial visitor as government search teams fill the street, children coordinating an improvised bicycle escape through backyards and construction sites
@@ -129,14 +137,14 @@ gkr_popculture:
     - prisoners completing a painstaking tunnel escape during a storm, hidden opening revealed beneath a poster, crawl through mud and sewage ending beneath cleansing rain
     - wrongfully imprisoned man playing an operatic recording across an entire prison yard, guards unable to stop it immediately, inmates standing motionless beneath loudspeakers and open sky
     - astronauts walking toward an impossible black monolith excavated beneath lunar floodlights, radio chatter fading as a piercing signal overwhelms the scene
-    - computer-controlled spacecraft refusing a crew member entry, calm mechanical voice contrasted with silent rotation against deep space, human reflection held in the window
+    - crew member outside a sealed spacecraft hatch, access panel glowing red, manual override lever locked beneath a transparent cover, their reflection drifting across the dark window against deep space
     - blue police box-like time machine opening onto an impossible interior, skeptical companion circling the ordinary exterior repeatedly before entering the immense control room
     - eccentric paranormal investigators entering a grand hotel ballroom where invisible guests gradually become visible, practical slime, overturned tables and comic scientific procedure
     - enormous friendly apparition forming above a city while investigators cross energy streams toward a rooftop gateway, miniature skyline and storm clouds framing escalating supernatural chaos
     - pale young girl spinning her head toward horrified clergy inside a cold bedroom, mundane medical equipment and restrained reactions grounding the supernatural violation
     - family trapped in a snowbound hotel navigating a hedge maze at night, pursuer following false footprints while interior corridors repeat impossible patterns
     - mother confronting an unseen force through a flickering television screen as household objects stack themselves, suburban normality invaded through practical physical effects
-    - masked killer pursuing a lone babysitter across quiet suburban lawns, porch lights switching on one house at a time while neighbors fail to understand the danger
+    - masked killer pursuing a lone babysitter across quiet suburban lawns, porch lights switching on one house at a time, neighbors watching casually through windows as she pounds on a locked door
     - swimmer alone at night viewed alternately from the calm surface and something rising beneath, moonlit water emphasizing vulnerability before sudden silence
     - investigators descending stone steps into a sealed tomb where painted figures appear one position closer whenever the torch passes, controlled darkness and archaeological detail
     - aging gunslinger entering a saloon to confront the men who brutalized a friend, rain outside, patrons clearing tables, violence delayed by measured dialogue and weary posture
@@ -144,27 +152,27 @@ gkr_popculture:
     - samurai seated motionless in a courtyard while dozens of attackers circle, falling leaves and shifting feet marking tactical decisions before one explosive exchange
     - masked avenger fighting across the rafters of an opera house while a performance continues below, ropes, curtains and chandeliers becoming part of the choreography
     - swashbuckling rivals dueling up a grand staircase while trading jokes, furniture and hanging tapestries altering the route, playful wide framing preserving both performers
-    - gladiator revealing his identity before a stunned emperor inside a vast arena, helmet lowered, crowd noise receding as personal vengeance eclipses spectacle
+    - gladiator lowering his helmet before a stunned emperor inside a vast arena, matching family emblem and old portrait medallion exposed on his chest, crowd frozen behind them
     - chariot racers circling a monumental arena, wheel hubs colliding and horses changing lanes, overhead geography intercut with dust-level danger
-    - rebel leader addressing an army before a muddy dawn battle, quiet faces and personal tokens preceding a charge into fog rather than triumphant spectacle
+    - rebel leader before an army at muddy dawn, soldiers gripping family tokens and worn letters, weapons still lowered as dense battlefield fog closes around the formation
     - doomed lovers meeting at opposite sides of a candlelit ballroom, crowd choreography repeatedly bringing them near and separating them, dialogue carried through glances
     - proud young woman overhearing a reserved man's disastrous proposal in a rain-soaked pavilion, restraint collapsing into argument as weather isolates them from the estate
     - forgotten stage actress descending a grand staircase for cameras that are no longer there, decaying mansion swallowed by one final close-up
     - nervous actor performing before a hostile royal court while a hidden friend feeds lines from behind a curtain, poetry transforming mockery into attention
     - newspaper editor and rival reporter racing through a newsroom to control one breaking story, phones ringing, presses starting below, rapid overlapping dialogue staged in depth
-    - con artists revealing an elaborate deception through repeated flashbacks, small props and earlier gestures gaining new meaning as the final mark understands the trap
+    - six-panel con-artist reveal: repeated close-ups of a switched ring, marked card and duplicate key lead to a final panel of the mark staring at an empty safe while the same props sit in the con artists' case
     - silent-era comic hero trapped inside the moving gears of an enormous factory machine, repeated mechanical timing turning danger into precisely staged physical comedy
     - elaborate hotel concierge orchestrating a lobby crisis across elevators, keys, luggage and demanding guests, symmetrical pastel production design and exact ensemble timing
     - mismatched musicians performing behind a chicken-wire barrier as an unruly roadside audience throws objects, band gradually winning the room through escalating rhythm
     - rock band playing on a city rooftop while office workers and police gather below, cold daylight and documentary camera movement making the final performance feel spontaneous
-    - soul singer recording a defining take in a cramped studio, musicians discovering the arrangement together, control-room reactions held until the final note
+    - soul singer leaning into a studio microphone, pianist and horn players turning toward her mid-phrase, handwritten arrangement crossed out on the music stand, control-room engineer frozen above the record button
     - ambitious ballerina performing a climactic transformation while stage reflections split into competing identities, theatrical lighting shifting from white to black without digital effects
     - boxer climbing museum steps before sunrise after weeks of solitary training, city opening behind as movement changes from exhaustion to confidence
     - baseball team entering a dreamlike field cut into farmland at dusk, deceased players emerging quietly from tall crops, family reconciliation carrying more weight than sport
     - race-car driver threading through a multi-vehicle crash at full speed, cockpit vibration, debris trajectories and spotter instructions preserving spatial clarity
-    - climbers trapped on a mountain face as weather closes in, rope team forced to choose between summit and rescue, immense wides contrasted with frostbitten hands
+    - climbers on a storm-dark mountain face, lead rope stretching upward toward the summit while a second rope drops toward an injured climber below, frostbitten hands gripping both lines
     - news helicopter following a white sport utility vehicle along an empty freeway while crowds watch televisions in storefronts, public spectacle overtaking the actual pursuit
-    - animated toys freezing whenever a child enters the room, one newcomer refusing to believe the rule until the door begins to open, expressive staging across a bedroom floor
+    - animated toys caught mid-motion across a bedroom floor as the door begins to open, one newcomer toy still gesturing while every veteran toy lies rigid and faces the doorway
     - elderly widower lifting his small house beneath thousands of balloons, neighborhood rooftops falling away as treasured objects slide through familiar rooms
     - young cook controlling a restaurant kitchen from beneath a chef's hat, physical comedy synchronized with precise culinary technique and skeptical staff reactions
     - masked spirit guiding a frightened child through a bathhouse crowded with strange workers and guests, hand-painted architecture unfolding through gentle lateral movement
@@ -227,13 +235,13 @@ gkr_popculture:
   manga_scene:
     - two longtime rivals pausing before the final tournament exchange, damaged arena between them, crowd reduced to silent screentone shapes
     - shy confession beneath a railway crossing at sunset, passing train dividing the characters for one panel before revealing their reactions
-    - detective discovering a contradiction in a crowded night market, background details repeating across panels until one object changes
+    - detective comparing sequential photographs of a crowded night market, identical stalls and pedestrians in each image except one clock showing a different time, changed clock circled in red
     - school team executing a rehearsed final play, each member shown contributing through narrow sequential panels before a full-page result
     - pilot seeing an unfamiliar giant machine awaken beneath a flooded city, scale revealed through infrastructure and tiny maintenance crews
     - magical heroine transformation expressed through symbolic costume fragments, personal keepsakes, ribbons, and a final confident silhouette
     - wandering swordswoman facing an opponent in wind-bent grass, long silent preparation followed by one economical exchange
     - apartment resident noticing a spiral pattern recurring in food, plumbing, hair, and street architecture, perspective tightening panel by panel
-    - group of friends sharing convenience-store food after missing the last train, comedy giving way to a quiet emotional admission
+    - group of friends sharing convenience-store food outside a shuttered station after the last train, one friend gripping an unopened letter while the others stop laughing and turn toward them
     - delinquent protecting a younger student at a school gate, confrontation conveyed through posture, shoes, and surrounding classmates rather than powers
 
   manga_scene_combo:
@@ -265,7 +273,7 @@ gkr_popculture:
     - observational drawing, quiet layouts, handwritten narration
 
   comic_scene:
-    - masked neighborhood hero choosing between pursuing a villain and helping civilians beneath a collapsing elevated train
+    - masked neighborhood hero lifting a steel beam from trapped commuters while a fleeing villain recedes beneath a collapsing elevated train
     - private investigator entering an empty nightclub where every table remains set and one telephone is ringing
     - cursed portrait changing expression between otherwise identical horror anthology panels
     - resistance courier crossing a ruined town under observation from an unseen rooftop
@@ -315,7 +323,7 @@ gkr_popculture:
     - gospel choir rising row by row behind a soloist in warm morning light
 
   music_performance_combo:
-    - "__gkr_popculture/music_genre__ performance: __gkr_popculture/music_performance__, __gkr_popculture/music_venue__, audience interaction, believable instruments and stagecraft, concert photography composition"
+    - "__gkr_popculture/music_genre__ performance: __gkr_popculture/music_performance__, __gkr_popculture/music_venue__, correct hand placement, instrument cables, microphone stands, stage monitors and audience hands, concert photography composition"
 
   music_video_combo:
     - "music video for a __gkr_popculture/music_genre__ track, performers moving through a single evolving practical set, choreography synchronized to visual transitions, bold era-conscious styling, purposeful camera movement"
@@ -332,9 +340,9 @@ gkr_popculture:
     - "__gkr_popculture/movie_genre__ scene: __gkr_popculture/spotlight_cinematicscene__, __gkr_popculture/movie_camera__, __gkr_popculture/movie_color_grade__, practical environmental reactions, cinematic production design"
 
   popculture_mashup_combo:
-    - "reinterpret __gkr_popculture/spotlight_cinematicscene__ as a __gkr_popculture/comic_tradition__, __gkr_popculture/comic_rendering__, preserve the scene geography and emotional beat"
-    - "reinterpret __gkr_popculture/tv_episode_scene__ as a __gkr_popculture/manga_genre__, __gkr_popculture/manga_rendering__, preserve the ensemble relationships"
-    - "stage a __gkr_popculture/music_genre__ performance inside the production design of a __gkr_popculture/movie_genre__, believable instruments, audience and camera placement"
+    - "reinterpret __gkr_popculture/spotlight_cinematicscene__ as a __gkr_popculture/comic_tradition__, __gkr_popculture/comic_rendering__, retain the same character positions, eyelines, foreground objects and background landmarks"
+    - "reinterpret __gkr_popculture/tv_episode_scene__ as a __gkr_popculture/manga_genre__, __gkr_popculture/manga_rendering__, retain each character's pose, eyeline, distance and shared props"
+    - "stage a __gkr_popculture/music_genre__ performance inside the production design of a __gkr_popculture/movie_genre__, correct hand placement, full instruments, cables, monitors, audience positions and visible camera platform"
 
 # ---------------------------------------------------------
 # RANDOM
@@ -369,7 +377,7 @@ gkr_popculture:
     - practical creature-feature scientist in mud-stained expedition gear, improvised tracker raised toward movement beyond the trees
     - underdog athlete after the final round, taped hands hanging at their sides, listening for the result beneath arena lights
     - romantic lead waiting alone on a winter railway platform, unopened letter in one hand, arriving crowd reflected in tearful eyes
-    - physical-comedy protagonist in formal clothes ruined by escalating accidents, attempting dignity while the room collapses behind
+    - physical-comedy protagonist standing rigidly in torn formal clothes, chin raised and tray held level while wallpaper, chandelier and folding table collapse behind
     - grounded masked vigilante in a weatherproof tactical suit, compact grappling launcher and climbing rope, observing a corrupt city office from a rain-dark rooftop
     - retro-futurist test pilot in polished pressure gear, bubble helmet beneath one arm, chrome rocket and launch gantry reflected in the visor
     - cyberpunk courier in patched street clothing, prosthetic forearm concealing stolen data, moving anonymously through a crowded night market
@@ -385,7 +393,7 @@ gkr_popculture:
     - teenage supernatural investigator with backpack, instant camera and handwritten map, closed school corridor lit by exit signs
     - color-coded transforming-hero team leader in practical armored fabric, helmet under one arm, miniature city structures behind
     - polished reality-show host holding a result card, contestants frozen between confidence and panic beneath bright studio lighting
-    - weary defense attorney at an empty courtroom table, jacket removed, discovering one overlooked line in a witness statement
+    - weary defense attorney at an empty courtroom table, jacket removed, one line circled in red across a witness statement beside contradictory timestamped photographs
     - animated-comedy neighbor with an overconfident grin and an obviously unsafe homemade invention, simplified suburban kitchen
 
   spotlight_manga_characters:
@@ -406,7 +414,7 @@ gkr_popculture:
     - cosmic martial artist holding a disciplined stance while fine stardust traces the movement of breath, restrained spot color rather than an energy aura
 
   spotlight_comic_characters:
-    - neighborhood superhero in a handmade practical costume, choosing to help trapped commuters while a fleeing antagonist recedes, bold contour ink
+    - neighborhood superhero in a handmade practical costume lifting a train door from trapped commuters while a fleeing antagonist recedes, bold contour ink
     - pulp private eye under a broken streetlamp, cheap suit and case file damp with rain, heavy chiaroscuro brushwork
     - doomed horror-anthology heiress holding a family portrait whose painted eyes have changed, engraved textures and decaying caption box
     - wartime motorcycle courier in battered period gear, map tucked into jacket, ruined bridge ahead in dusty print colors
@@ -417,10 +425,10 @@ gkr_popculture:
     - autobiographical graphic-novel artist at a cluttered kitchen table, sketching a difficult family conversation as it happens
     - satirical future-city judge overwhelmed by contradictory machines and paperwork, dense architecture and sharp black humor
     - newspaper-strip child preparing an elaborate plan while an unimpressed pet watches, clean shapes and precise comic timing
-    - Gothic graphic-novel librarian discovering a missing figure in every illustrated manuscript, muted ink wash and narrow panels
+    - Gothic graphic-novel librarian spreading illustrated manuscripts across a desk, the same human-shaped blank cut from every group portrait, muted ink wash and narrow panels
     - retro ray-gun adventurer in a chrome chest plate and glass-domed helmet, cautiously entering a hand-painted alien ruin
     - cosmic guardian whose translucent silhouette contains a painted starfield, holding a damaged spacecraft together while the crew evacuates
-    - street artist discovering that painted creatures can step beyond a mural, bright forms contrasted against a grounded neighborhood setting
+    - street artist stepping back as bright painted creatures pull three-dimensional limbs beyond a wet mural into an ordinary neighborhood street
     - armored public-safety hero bracing a physical rescue shield beneath falling masonry, civilians directing one another toward a clear exit
 
   spotlight_music_artists:
@@ -448,7 +456,7 @@ gkr_popculture:
     - abandoned coastal visitor center during a storm, emergency shutters, specimen displays, black water rising across the floor
     - elegant railway platform in winter, iron-and-glass canopy, steam obscuring arrivals, clocks and luggage establishing urgency
     - enormous concert arena before showtime, runway stage, lighting trusses, dark audience tiers and one open backstage door
-    - dense cyberpunk transit exchange at night, multilingual signs, repair kiosks, food stalls, commuters and rainwater defining believable urban layers
+    - dense cyberpunk transit exchange at night, multilingual signs, repair kiosks, food stalls, commuters on three elevated levels and rainwater draining through exposed channels
     - retro-futurist lunar terminal, curved chrome architecture, analog departure board, panoramic windows and practical miniature aesthetic
 
   spotlight_tv_backgrounds:
@@ -519,4 +527,4 @@ gkr_popculture:
     - "__gkr_popculture/spotlight_music_backgrounds__"
 
   spotlight_actionscene:
-    - "__gkr_popculture/spotlight_cinematicscene__, __gkr_popculture/movie_camera__, __gkr_popculture/movie_color_grade__, coherent geography, escalating beats, visible environmental consequences, feature-film production design"
+    - "__gkr_popculture/spotlight_cinematicscene__, __gkr_popculture/movie_camera__, __gkr_popculture/movie_color_grade__, foreground action, midground reaction and background damage aligned along one readable screen direction, feature-film production design"
