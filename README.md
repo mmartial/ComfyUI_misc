@@ -11,13 +11,11 @@
 
 # 1. ComfyUI Wildcards
 
-I recently discovered by chance that it is possible to use a structured wildcards YAML file to generate prompts for Stable Diffusion.
-
 ## 1.1. About Wildcards
 
 Wildcards are placeholders inside our prompts that get replaced automatically with words or phrases from a list.
 
-A wildcards YAML file defines reusable lists of words or phrases that ComfyUI can randomly insert into prompts. Each entry is a key followed by a list of options. When a prompt uses a wildcard such as `__hair_color__`, ComfyUI picks one item from the matching list in the YAML. It is possible to refer multiple wildcards to create a meta-wildcard, for example `__hair_color__, __eye_color__, __face_shape__` to create a `__face__` wildcard.
+A wildcards `YAML` file defines reusable lists of words or phrases that ComfyUI can randomly insert into prompts. Each entry is a key followed by a list of options. When a prompt uses a wildcard such as `__hair_color__`, ComfyUI picks one item from the matching list in the YAML. It is possible to refer multiple wildcards to create a meta-wildcard, for example `__hair_color__, __eye_color__, __face_shape__` to create a `__face__` wildcard.
 
 Using this method, we can create a large number of prompts with a small number of wildcards.
 
@@ -25,10 +23,15 @@ This allows fast variation, style mixing, and structured prompt generation witho
 
 I strarted creating a small YAML structure and used LLMs to generate prompts for a simple theme, then I refined the LLM system prompts manually.
 After a few iterations and tests, I was able to generate a few themed wildcards (present in the `gkr-wildcards` folder).
+The header of each `yaml` file contains some logic and rules that are useful to extend the files as preferred.
 
 Those wildcards are known to work with [ComfyUI](https://github.com/comfyanonymous/ComfyUI).
+I used those with [ComfyUI-Nvidia-Docker](https://github.com/mmartial/ComfyUI-Nvidia-Docker) to generate images.
 
-I used those with [ComfyUI-Nvidia-Docker](https://github.com/mmartial/ComfyUI-Nvidia-Docker) to generate images, placing the generated files in the `wildcards` folder of the ComfyUI installation within the `basedir/custom_nodes/comfyui-impact-pack/wildcards/` folder to be used with [ComfyUI-Impact-Pack](https://github.com/ltdrdata/ComfyUI-Impact-Pack) (note that restarting the container is needed for Impact Pack to pick up the new wildcards).
+You can use wildcards with various custom nodes:
+
+- [Lora Manager](https://github.com/willmiao/ComfyUI-Lora-Manager): place the YAML files in your `<LoraManager_Config>/wildcards/` folder (as described [here](https://github.com/willmiao/ComfyUI-Lora-Manager#wildcards-for-textlm--promptlm)) (no container restart needed)
+- [ComfyUI-Impact-Pack](https://github.com/ltdrdata/ComfyUI-Impact-Pack): place the generated files in the `wildcards` folder of the ComfyUI installation within the `basedir/custom_nodes/comfyui-impact-pack/wildcards/` folder (note that restarting the container is needed for Impact Pack to pick up the new wildcards).
 
 ## 1.2. gkr-wildcards
 
@@ -36,13 +39,17 @@ This folder contains the YAML files that were generated using LLMs (after multip
 
 The themes selected reflect my personal interests and the kind of images I am interested in creating.
 
+Also in the folder is a small python script to search a specfic node id (can be modified using the CLI) corresponding to the Lora Manager prompt, that would contain the wildcard name, to 1) sort them 2) if enabled, create a folder and move the corresponding generations within that folder. 
+
 ### 1.2.1. Usage
 
 The theme of each wildcard is in its name (e.g. `gkr-anime.yaml` is for anime prompts).
 Each file follows a common structure, usually when using a wildcard file, we will be able to select the sub-wildcards we want to use in the prompt.
 For example, `__gkr_japan/spotlight_kimono__` will be replaced by a random item from the `gkr_japan/spotlight_kimono` list.
 
-The most useful keywords in the wildcard files are `combo`, `random` and `spotlight`, as they allow to create more complex prompts. 
+The most useful keywords in the wildcard files are `combo`, `random` and `spotlight`, as they allow to create more complex prompts.
+
+- `scene` will build a scene matching the topic listed in the name.
 - `combo` will build a structured-but-random prompt from some specific relevant to the combo sub-wildcards.
 - `random` will build a random prompt from a list of sub-wildcards.
 - `spotlight` provide a list of randomly generated prompts that were asked to produce the best results for a specific theme.
@@ -51,7 +58,7 @@ When using a workflow that supports them, we can type the base theme (e.g. `gkr_
 
 Combination of `combo` and `random` keywords from different themes allow to create various prompts, for example `__gkr_ttrpg/random_hero_portrait__, __gkr_cyberpunk/random_backgrounds__` **might** provide a good combination for a cyberpunk Tabletop RPG hero portrait 😊 
 
-A single `negative_prompt` entry is also present in the files, it can be used to specify a theme specific negative prompts for workflows that support it.
+Note: the newer version is more tailored toward a partial narrative prompt (from bag-of-words in the past), so using a prompt enhancement node such a QwenVL one is useful to reformat the final prompt.
 
 ### 1.2.2. Availability on CivitAI
 
