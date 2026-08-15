@@ -93,18 +93,26 @@ The template instructs the LLM to create a file with these key sections:
 - Spotlight Prompts: (e.g., spotlight_prompts)
   - These are not wildcards. They are complete, highly-detailed, pre-written prompts. They are perfect for testing the "vibe" of your theme and for when you want a guaranteed high-quality result without randomization.
 
-- Negative Prompt:
-  - A ready-to-use negative prompt that includes general "bad art" terms as well as specific terms to exclude from your theme (e.g., a "Fantasy" theme's negative prompt will include "sci-fi, futuristic, spaceship").
+The template also instructs the LLM to follow two content-quality rules while it generates, so you shouldn't need a cleanup pass afterward:
+
+- Visual content only: every option should describe something the model can actually render — pose, clothing, prop, material, expression, effect, lighting, texture — not a narrative label or trope name (e.g. "shonen hero," "wizard robes"). If the LLM's output still leans on labels like that, see [Section 6](#6-cleanup-prompts).
+- Every category gets used: the LLM is told to check that every category it defines is pulled into at least one combo, so you don't end up with dead content that can never appear in a random roll.
 
 # 5. Advanced Tips
 
-- Emphasis: The (word:1.2) syntax increases the "weight" or importance of a word, just like in a normal Stable Diffusion prompt. The LLM is instructed to add this where it makes sense.
+- Emphasis: The (word:1.2) syntax increases the "weight" or importance of a word, just like in a normal Stable Diffusion prompt. The LLM is instructed to use this sparingly — capped at 1.3, and reserved for the one or two elements (a signature prop, expression, or pose) that should dominate the read of the image. Not every option needs a weight.
 
 - Nesting: You can create your own "combo" categories that reference other "combo" categories!
 
 - Iteration: Don't like the first file the LLM made? Tweak your user_theme in the template (e.g., from "Cyberpunk" to "Gritty, Noir Cyberpunk") and try again!
 
 # 6. Cleanup prompts
+
+These prompts bring an already-generated file up to the same quality bar the
+generator template now targets from the start (see [Section 4](#4-understanding-the-wildcard-file-structure)
+and [Section 5](#5-advanced-tips)): visual, concrete content and disciplined
+weighting. Use them on files generated before these rules existed, or on any
+file that still reads as label-heavy or over-weighted.
 
 ## 6.1. Global fix
 
@@ -119,11 +127,11 @@ For each line, decide if the concept should be extended to provide better image 
 
 Do not use the terms: 1boy, 1girl.
 
-Add Prompt Weighting on key features to increase their impact.
+Rewrite any pure narrative/trope labels (e.g. "shonen hero", "brooding antihero") or compound archetype+noun shorthand (e.g. "wizard robes", "noir detective coat") as concrete pose, clothing, material, prop, or expression detail. Leave well-established literal tags (specific garments, species, props) alone.
+
+Add Prompt Weighting only on the one or two features per line that must dominate the image (a signature prop, expression, or pose). Cap weight at 1.3. Do not weight filler or generic descriptors.
 
 Perform a cleanup of redundant items.
-
-Add a single "negative_prompt" at the end to use in the negative prompt field.
 
 Each line from the source file should be present in the new file. 
 
@@ -144,7 +152,9 @@ Fix the strings on each line so they are usable by sdxl or illustrious: descript
 
 Do not use the terms: 1boy, 1girl.
 
-Add Prompt Weighting on key features to increase their impact.
+Rewrite any pure narrative/trope labels or compound archetype+noun shorthand as concrete pose, clothing, material, prop, or expression detail instead of naming the trope.
+
+Add Prompt Weighting only on the one or two features per line that must dominate the image. Cap weight at 1.3. Do not weight filler or generic descriptors.
 
 Perform a cleanup of redundant items.
 

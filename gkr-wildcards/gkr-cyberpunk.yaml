@@ -1,756 +1,496 @@
 # ========================================================================
-# CYBERPUNK — EXTENDED WILDCARDS FOR COMFYUI DYNAMIC PROMPTS (SDXL-Optimized)
+# CYBERPUNK — VISUAL, SYSTEMS-BASED WILDCARDS FOR COMFYUI
+#
+# COVERS: Lives shaped by unequal technology—augmented bodies, precarious labor,
+# surveillance, corporate power, climate stress, resistance, and urban survival.
+# High technology made visible through labor, bodies, infrastructure,
+# inequality, repair, surveillance, climate, and everyday urban life.
+#
+# Theme core components: visual treatment, character/labor, environment,
+# visible technology, power system, and narrative action; show themes physically.
+#
+# ROUTE USAGE
+# combo: Composes compatible components into a coherent, production-ready prompt.
+# spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
+# random: Selects one complete route for breadth; avoid stacking random routes.
+#
+# DIFFUSION-READY TRANSFORMATION RULE
+# Every generated leaf must already describe an image without requiring interpretation:
+# subject + visible pose/action + concrete setting/props + composition/light when useful.
+# Replace motives, backstory, relationships, themes, causality and time-based change with
+# observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
+# and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
+# A downstream LLM may clarify wording but must not invent the visual representation.
+#
+# NON-LEAF / COMPOSITE RULE
+# Router-only items contain wildcard references only. Literal text added by a composite must
+# itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
+# do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
+#
+# SINGLE-IMAGE VISUAL REPRESENTATION TEST
+# Write every scene as facts visible in one generated image. A viewer without a caption must be
+# able to identify the subject, action and important contrast from pose, placement, props, short
+# readable labels, screens, clothing, architecture, damage or lighting. Do not depend on motives,
+# memories, recognition, ownership, occupation, causality, past/future events, sound or institutional
+# meaning unless their evidence is shown. Replace each such fact with visible proof; when one frame
+# cannot show it clearly, explicitly use a diptych, sequential panels, storyboard or contact sheet.
 # ========================================================================
 
 gkr_cyberpunk:
 
-# ---------------------------------------------------------
-# CHARACTER
-# ---------------------------------------------------------
-
-  archetype:
-    - "(street samurai:1.2), detailed armor, neon signs"
-    - "(netrunner hacker:1.2), datajack port, glowing code"
-    - "(cyber assassin:1.2), stealth suit, shadows"
-    - "(augmented mercenary:1.2), combat gear, gritty"
-    - "(neon punk rebel:1.2), spiked jacket, graffiti"
-    - "(megacorp agent:1.2), sleek suit, cold expression"
-    - "(chrome enhanced fighter:1.2), metallic limbs, combat stance"
-    - "(cyber detective:1.2), trench coat, scanner"
-    - "(bounty hunter:1.2), targeting reticle, armored"
-    - "(android citizen:1.2), synthetic skin, calm"
-    - "(street doc medic:1.2), cybernetic tools, alleyway clinic"
-    - "(drone operator:1.2), control gauntlet, tactical gear"
-    - "(cyber shaman:1.2), holographic symbols, digital magic"
-    - "(data courier:1.2), agile, memory chip"
-    - "(corporate executive operative:1.2), high-rise office, imposing"
-    - "(undercover infiltrator:1.2), disguised, tense"
-    - "(synth pop idol:1.2), holographic outfit, stage lights"
-    - "(augmented street racer:1.2), racing suit, neon bike"
-    - "(cyber monk:1.2), glowing tattoos, serene"
-    - "(neon vigilante:1.2), rooftop, glowing mask"
-
-  race:
-    - "(human:1.1), expressive face, detailed skin"
-    - "(android, constructed synthetic body:1.2), flawless skin, mechanical joints"
-    - "(synthetic hybrid:1.2), part human, part machine"
-    - "(augmented human:1.2), visible cybernetics, enhanced"
-    - "(heavily modded street cyborg:1.3), extensive chrome, robotic limbs"
-    - "(fully mechanical robot:1.3), armored shell, glowing optics"
-    - "(gene edited human variant:1.2), unusual features, bioluminescent"
-
-  age:
-    - "(young adult:1.1), rebellious, energetic"
-    - "(adult:1.1), experienced, determined"
-    - "(mature:1.1), veteran, scarred"
-    - "(ageless synthetic form:1.2), perfect condition, unblemished"
-
-  build:
-    - "(slender build:1.1), agile, lightweight"
-    - "(athletic build:1.1), muscular, fit"
-    - "(powerful build:1.1), strong, imposing"
-    - "(enhanced muscular frame:1.2), cybernetic muscles, powerful"
-    - "(tall imposing build:1.1), high-contrast lighting"
-    - "(compact agile build:1.1), dynamic pose"
-    - "(lightweight cyber body:1.2), sleek, robotic"
-
-  tone:
-    - "(warm tan skin:1.1), detailed skin texture"
-    - "(pale skin, neon tint:1.2), glowing highlights"
-    - "(metallic chrome skin:1.3), reflective surface, polished"
-    - "(synthetic plastic skin:1.2), smooth, artificial"
-    - "(porcelain smooth skin:1.1), flawless, clean"
-    - "(dark rich skin tone:1.1), detailed, realistic"
-    - "(ultraviolet tinted skin:1.2), bioluminescent, glowing"
-    - "(luminescent glowing skin:1.2), radiant, ethereal"
-
-# ---------------------------------------------------------
-# APPEARANCE
-# ---------------------------------------------------------
-
-  face_style:
-    - "(sharp angular face:1.2), high cheekbones, intense gaze"
-    - "(elegant refined face:1.1), symmetrical, calm"
-    - "(rugged street worn face:1.2), scars, determined expression"
-    - "(synthetic smooth face:1.2), doll-like, artificial"
-    - "(robotic minimal face:1.3), plating, optic lens"
-    - "(neon tattoo etched face:1.3), glowing circuits, facial markings"
-
-  hair:
-    - "(short hair, cyber undercut:1.2), shaved sides, futuristic"
-    - "(asymmetrical cut:1.1), stylish, punk"
-    - "(neon dyed hair:1.2), vibrant color, glowing"
-    - "(long flowing cyber hair:1.1), fiber optic strands, shimmering"
-    - "(spiked war hair:1.2), mohawk, aggressive"
-    - "(polished synthetic hair:1.2), perfect, metallic sheen"
-    - "(braided street style hair:1.1), intricate, detailed"
-    - "(layered messy hacker hair:1.1), disheveled, cool"
-    - "(shaved sides, glowing circuit lines:1.3), scalp tattoo, tech"
-
-  hair_color:
-    - "(black hair:1.1), dark, high contrast"
-    - "(white hair:1.1), stark, bright"
-    - "(metallic silver hair, cyber shine:1.2), reflective, chrome"
-    - "(neon pink hair:1.2), vibrant, glowing"
-    - "(ultraviolet purple hair:1.2), glowing, bioluminescent"
-    - "(electric blue hair:1.2), bright, shocking"
-    - "(hot red hair:1.1), fiery, intense"
-    - "(gradient neon colorful hair:1.2), rainbow, shifting colors"
-    - "(synthetic metallic hair:1.2), artificial, polished"
-
-  eyes:
-    - "(bright cybernetic eyes:1.3), (glowing:1.2), high tech"
-    - "(glowing neon eyes:1.3), vibrant color, radiant light"
-    - "(mechanical optic lens:1.3), (camera iris:1.1), robotic"
-    - "(augmented eyes, target reticle:1.3), HUD display, focused"
-    - "(holographic projection eyes:1.3), projecting light, datastream"
-    - "(shifting digital iris:1.2), glitch effect, data"
-    - "(bioluminescent eyes:1.2), soft glow, organic"
-    - "(golden synthetic eyes:1.2), metallic, flawless"
-    - "(dual tone cyber eyes:1.2), two colors, mismatched"
-
-  expression:
-    - "(calm tactical focus:1.2), focused, intense gaze"
-    - "(determined grit:1.2), scowl, resolute"
-    - "(fierce combat expression:1.2), shouting, battle cry"
-    - "(unreadable synthetic calm:1.1), neutral, robotic"
-    - "(rebellious smirk:1.2), confident, punk"
-    - "(cold corporate stoicism:1.1), emotionless, professional"
-    - "(intense hacker concentration:1.2), focused on screen, glowing reflection"
-    - "(street hardened glare:1.2), tough, intimidating"
-
-# ---------------------------------------------------------
-# ACTIONS / POSES (NEWLY ADDED)
-# ---------------------------------------------------------
-
-  character_action:
-    - "(dynamic combat pose:1.3), (motion blur:1.1)"
-    - "(hacking into a terminal:1.2), (glowing screen reflection:1.1), typing"
-    - "(aiming a pistol:1.2), (focused expression:1.1), (two-handed grip:1.1)"
-    - "(sprinting down an alleyway:1.2), (looking back:1.1), (rainy:1.1)"
-    - "(leaning against a neon sign:1.1), (casual pose:1.1), (smoking:1.1), atmospheric"
-    - "(in a firefight:1.3), (sparks flying:1.1), (taking cover:1.1)"
-    - "(riding a motorcycle:1.2), (high speed:1.1), (neon trails:1.1)"
-    - "(inspecting a data-slate:1.1), (holographic display:1.1), focused"
-    - "(drawing a glowing katana:1.3), (ready stance:1.1), (sheath:1.1)"
-    - "(meditating:1.1), (floating holographic symbols:1.2), (calm expression:1.1)"
-    - "(crouching:1.1), (stealth pose:1.2), (shadows:1.1)"
-    - "(walking through a crowd:1.1), (street level:1.1), (determined:1.1)"
-    - "(inspecting a clue:1.1), (scanner active:1.2), (detective:1.1)"
-    - "(holstering a weapon:1.1), (calm after combat:1.1)"
-    - "(looking out a high-rise window:1.1), (overlooking city:1.2), (thoughtful:1.1)"
-    - "(activating an energy shield:1.2), (glowing barrier:1.2), (defensive stance:1.1)"
-    - "(piloting a drone:1.1), (using a controller:1.2), (glowing console:1.1)"
-    - "(jumping between rooftops:1.3), (dynamic mid-air pose:1.2), (action shot:1.1)"
-
-# ---------------------------------------------------------
-# APPAREL
-# ---------------------------------------------------------
-
-  clothing:
-    - "(neon street jacket:1.2), (glowing trim:1.1), high collar"
-    - "(armored trench coat:1.2), heavy fabric, tactical"
-    - "(tactical cyber outfit:1.2), carbon fiber, modular"
-    - "(sleek megacorp suit:1.2), perfect tailoring, expensive"
-    - "(reinforced street armor:1.2), plating, worn"
-    - "(hacker hoodie with circuits:1.2), (glowing lines:1.1), hood up"
-    - "(chrome bodysuit:1.2), form-fitting, reflective"
-    - "(layered dystopian street gear:1.1), rags, functional"
-    - "(futuristic racing suit:1.2), aerodynamic, sponsor logos"
-    - "(synthetic woven coat:1.1), unusual texture, sci-fi"
-    - "(cyber shaman robes:1.2), holographic patterns, flowing"
-    - "(worn street rags:1.1), torn, patched"
-    - "(neon reflective glossy coat:1.2), wet look, vibrant"
-
-  armor:
-    - "(tactical combat armor:1.2), modular, plates, webbing"
-    - "(reinforced cyber plating:1.2), (chrome:1.1), heavy"
-    - "(lightweight kinetic armor:1.1), flexible, high tech"
-    - "(mechanical exosuit:1.3), (powered frame:1.1), pistons"
-    - "(stealth nano armor:1.2), dark, form-fitting"
-    - "(corporate armored suit:1.2), hidden plates, elegant"
-    - "(modular chrome armor:1.2), interlocking pieces, reflective"
-
-# ---------------------------------------------------------
-# AUGMENTATIONS
-# ---------------------------------------------------------
-
-  augmentation:
-    - "(chrome mechanical arm:1.3), (glowing pistons:1.1), detailed"
-    - "(synthetic limbs:1.2), robotic, articulated"
-    - "(visible circuitry veins:1.2), (glowing subdermal:1.1), tech"
-    - "(neural implant ports:1.2), side of head, datajack"
-    - "(neck data jacks:1.2), (glowing ports:1.1), base of skull"
-    - "(spine mounted interface:1.3), exposed tech, glowing"
-    - "(ocular replacement optics:1.3), (cybernetic eyes:1.1), glowing"
-    - "(metallic jaw frame:1.2), robotic, articulated"
-    - "(cybernetic torso plating:1.2), armored, chrome"
-    - "(glowing subdermal lines:1.2), (circuit patterns:1.1), bioluminescent"
-    - "(synthetic muscle weave:1.2), visible under skin, powerful"
-
-# ---------------------------------------------------------
-# WEAPONS / TOOLS / TRINKETS
-# ---------------------------------------------------------
-
-  weapons:
-    - "(glowing energy katana:1.3), (energy edge:1.1), vibrant"
-    - "(dual pistols:1.2), akimbo, dynamic pose"
-    - "(smart pistol:1.2), (targeting HUD:1.1), futuristic"
-    - "(rifle with digital scope:1.2), (glowing reticle:1.1), sniper"
-    - "(compact submachine gun smg:1.2), tactical, firing"
-    - "(shock baton:1.2), (electric arcs:1.1), stun"
-    - "(mono blade sword:1.3), (monomolecular edge:1.1), sharp"
-    - "(energy spear:1.2), (glowing tip:1.1), sci-fi"
-    - "(hacking deck gauntlet:1.2), (holographic display:1.1), data"
-    - "(plasma pistol:1.2), (glowing energy:1.1), sci-fi"
-    - "(electromagnetic rifle:1.2), (railgun:1.1), powerful"
-
-  offhand:
-    - "(data tablet:1.1), (holographic screen:1.1), glowing"
-    - "(holographic projector:1.2), (glowing hologram:1.1), map"
-    - "(neural hacking deck:1.2), wires, interface"
-    - "(surveillance drone remote:1.1), controller, small drone"
-    - "(energy shield emitter:1.2), (glowing shield:1.1), defensive"
-    - "(encrypted storage cube:1.1), data device, glowing"
-    - "(glowing cyber crystal:1.1), energy source, bright"
-
-  trinkets:
-    - "(glowing pendant:1.1), necklace, cybernetic"
-    - "(neon badge tag:1.1), corporate ID, glowing"
-    - "(corporate ID chip:1.1), access card, futuristic"
-    - "(memory shard keychain:1.1), data chip, small"
-    - "(augmented cyber rings:1.1), tech jewelry, glowing"
-    - "(scanner visor:1.2), (glowing lens:1.1), data overlay"
-    - "(retinal lens disc:1.1), contact lens, tech"
-    - "(nanotech canister:1.1), vial, glowing liquid"
-
-# ---------------------------------------------------------
-# VEHICLES
-# ---------------------------------------------------------
-
-  vehicle:
-    - "(hoverbike:1.2), (neon trails:1.1), speeding"
-    - "(street racing motorcycle:1.2), (glowing wheels:1.1), futuristic"
-    - "(armored street car:1.2), plated, heavy duty"
-    - "(neon laced drift car:1.2), (drifting:1.1), tire smoke"
-    - "(hovering taxi cab:1.1), futuristic, city"
-    - "(heavy cargo hauler:1.1), industrial, large"
-    - "(urban assault vehicle:1.2), (military:1.1), armored"
-    - "(megacorp limousine:1.2), sleek, polished, luxury"
-    - "(patrol drone unit:1.1), police, searching"
-    - "(combat mech walker:1.3), (bipedal:1.1), heavy weapons"
-    - "(sleek cyber supercar:1.2), (aerodynamic:1.1), exotic"
-    - "(industrial loader mech:1.2), (exosuit:1.1), lifting"
-    - "(reconnaissance drone:1.1), stealthy, flying"
-    - "(emergency response skimmer:1.1), ambulance, hovering"
-
-  vehicle_style:
-    - "(reflective chrome finish:1.2), (mirror-like:1.1), polished"
-    - "(neon glowing trim:1.3), (vibrant lines:1.1), light"
-    - "(scratched battle worn:1.2), (dented:1.1), grunge"
-    - "(corporate polished shell:1.1), (clean:1.1), minimalist"
-    - "(graffiti painted bodywork:1.2), (street art:1.1), colorful"
-    - "(rusted scavenger build:1.2), (makeshift:1.1), junk"
-    - "(carbon fiber matte finish:1.2), (dark:1.1), stealthy"
-    - "(synthwave themed paint:1.2), (retro futuristic:1.1), bright colors"
-    - "(glowing circuit patterns:1.3), (tech lines:1.1), data"
-
-  vehicle_fx:
-    - "(neon exhaust trail:1.3), (light streak:1.1), motion blur"
-    - "(plasma engine burn:1.2), (bright blue glow:1.1), thruster"
-    - "(holographic dashboard readouts:1.2), (glowing interior:1.1), UI"
-    - "(glitch flicker emissions:1.2), (digital static:1.1), unstable"
-    - "(drifting sparks:1.2), (friction:1.1), action"
-    - "(glowing brake flares:1.2), (red light:1.1), stopping"
-    - "(electric charge buildup:1.2), (arcing electricity:1.1), static"
-
-# ---------------------------------------------------------
-# ENVIRONMENT
-# ---------------------------------------------------------
-
-  environment:
-    - "(neon city skyline:1.2), (towering skyscrapers:1.1), night"
-    - "(rainy alleyway:1.2), (puddles:1.1), neon reflections"
-    - "(rooftop overlooking megacity:1.2), (vast view:1.1), night"
-    - "(underground hacker den:1.2), (computer screens:1.1), cables"
-    - "(wasteland scrapyard:1.1), (junk piles:1.1), desolate"
-    - "(corporate highrise office:1.2), (panoramic window:1.1), clean"
-    - "(night market bazaar:1.2), (crowded:1.1), neon signs"
-    - "(abandoned subway tunnel:1.2), (dark:1.1), flickering lights"
-    - "(neon flooded street level:1.3), (glowing signs:1.1), rain"
-    - "(synthwave desert highway:1.2), (retro grid:1.1), sunset"
-    - "(industrial factory zone:1.1), (smokestacks:1.1), smog"
-    - "(high tech laboratory:1.2), (sterile:1.1), glowing tech"
-    - "(hologram filled plaza:1.2), (giant advertisements:1.1), futuristic"
-    - "(robot assembly line:1.1), (industrial:1.1), automated"
-    - "(cyber slum shantytown:1.2), (makeshift:1.1), crowded"
-    - "(storm soaked neon bridge:1.2), (lightning:1.1), dramatic"
-    - "(floating city sector:1.2), (sky-high:1.1), futuristic"
-    - "(drone congested air lane:1.2), (flying vehicles:1.1), traffic"
-
-  city_district:
-    - "(neon entertainment district:1.2), (nightclubs:1.1), bright signs"
-    - "(corporate financial sector:1.1), (tall skyscrapers:1.1), clean"
-    - "(industrial factory zone:1.2), (smog:1.1), machinery"
-    - "(cyber slum sprawl:1.2), (dense:1.1), poverty"
-    - "(underground hacker network hub:1.2), (servers:1.1), wires"
-    - "(red light neon bazaar:1.2), (crowds:1.1), glowing lanterns"
-    - "(abandoned shipping yard:1.1), (cargo containers:1.1), desolate"
-    - "(high tech research campus:1.2), (modern architecture:1.1), labs"
-    - "(upper city luxury platforms:1.2), (wealthy:1.1), clean"
-    - "(floating megacity district:1.3), (suspended:1.1), clouds"
-
-  city_landmark:
-    - "(megacorp tower:1.3), (imposing:1.1), branded"
-    - "(hologram statue plaza:1.2), (glowing monument:1.1), public space"
-    - "(neon bridge crossing:1.2), (long:1.1), light trails"
-    - "(old abandoned subway station:1.1), (decay:1.1), graffiti"
-    - "(giant digital billboard cluster:1.2), (bright advertisements:1.1), ads"
-    - "(cyber cathedral:1.2), (neo-gothic:1.1), tech"
-    - "(drone traffic interchange:1.1), (flying:1.1), complex"
-    - "(elevated train station:1.1), (city view:1.1), futuristic"
-    - "(synthetic garden dome:1.2), (bioluminescent plants:1.1), nature"
-    - "(street market neon canopy:1.2), (glowing tarps:1.1), crowded"
-
-  city_interior:
-    - "(high tech laboratory:1.2), (sterile:1.1), equipment"
-    - "(corporate boardroom:1.1), (long table:1.1), city view"
-    - "(cyber surgery clinic:1.2), (medical tools:1.1), operating table"
-    - "(server cathedral hall:1.2), (tall servers:1.1), glowing lights"
-    - "(neon lit bar:1.2), (drinks:1.1), patrons"
-    - "(black market tech shop:1.2), (cluttered:1.1), gadgets"
-    - "(data vault chamber:1.2), (secure:1.1), glowing data"
-    - "(drone repair hangar:1.1), (mechanical parts:1.1), industrial"
-    - "(high end penthouse loft:1.2), (luxury:1.1), window view"
-    - "(underground fighting ring:1.2), (arena:1.1), crowd"
-
-# ---------------------------------------------------------
-# MOOD / LIGHTING / CAMERA / STYLE
-# ---------------------------------------------------------
-
-  mood:
-    - "(tense dangerous mood:1.2), (shadows:1.1), high contrast"
-    - "(cold corporate mood:1.1), (sterile:1.1), blue tones"
-    - "(rebellious wild mood:1.2), (dynamic:1.1), chaotic"
-    - "(mysterious coded mood:1.2), (obscured:1.1), noir"
-    - "(heroic determined mood:1.2), (strong pose:1.1), epic"
-    - "(oppressive grim mood:1.2), (dark:1.1), dystopian"
-    - "(chaotic electric mood:1.2), (motion blur:1.1), vibrant"
-    - "(analytical calm mood:1.1), (neutral:1.1), focused"
-    - "(noir detective atmosphere:1.2), (shadows:1.1), rain"
-
-  lighting:
-    - "(neon reflections:1.3), (wet surfaces:1.1), vibrant"
-    - "(harsh neon rim light:1.3), (high contrast:1.1), silhouette"
-    - "(moody lowlight contrast:1.2), (shadows:1.1), cinematic"
-    - "(holographic glow:1.3), (soft illumination:1.1), blue light"
-    - "(bioluminescent ambient light:1.2), (glowing flora:1.1), magical"
-    - "(flickering signage lighting:1.2), (unstable:1.1), dynamic"
-    - "(synthetic white light:1.1), (sterile:1.1), bright"
-    - "(neon purple haze:1.2), (fog:1.1), atmospheric"
-    - "(electric blue illumination:1.2), (tech glow:1.1), cold"
+# ------------------------------------------------------------------------
+# VISUAL TREATMENT
+# ------------------------------------------------------------------------
 
   camera:
-    - "(low angle heroic shot:1.2), (looking up:1.1), imposing"
-    - "(close up cyber detail:1.3), (macro:1.1), texture"
-    - "(wide cinematic city view:1.2), (epic scale:1.1), landscape"
-    - "(dynamic action shot:1.3), (motion blur:1.1), mid-action"
-    - "(over the shoulder shot:1.1), (perspective:1.1), engaging"
-    - "(portrait direct shot:1.1), (facing camera:1.1), character focus"
-    - "(high angle dramatic view:1.2), (looking down:1.1), establishing shot"
-    - "(street level perspective:1.1), (ground view:1.1), immersive"
+    - street-level wide view with foreground pedestrians and layered infrastructure
+    - medium ensemble frame preserving every person's action and reaction
+    - close observational portrait with role-defining tools inside the frame
+    - overhead view clarifying queues, checkpoints and restricted routes
+    - long-lens view compressing workers, advertisements and distant luxury towers
+    - low tracking angle beside moving vehicles and wet road surfaces
+    - fixed surveillance-camera view with timestamp and detection boxes
+    - documentary handheld view close to practical work
+    - symmetrical institutional frame disrupted by one improvised human action
+    - cutaway or sectional view showing connected interior systems
 
-  style:
-    - "(neon drenched cyberpunk style:1.3), (vibrant:1.1), cinematic"
-    - "(gritty dystopian realism:1.2), (detailed:1.1), dark"
-    - "(cinematic sci fi style:1.2), (epic:1.1), film grain"
-    - "(synthwave neon aesthetic:1.2), (retro futuristic:1.1), pinks and blues"
-    - "(manga cyberpunk illustration:1.2), (anime style:1.1), sharp lines"
-    - "(high tech corporate style:1.1), (clean:1.1), minimalist"
-    - "(retro futuristic vaporwave:1.2), (80s aesthetic:1.1), nostalgic"
-    - "(hyper detailed concept art:1.3), (intricate:1.1), masterpiece"
+  lighting:
+    - overcast daylight reflected from concrete, glass and standing water
+    - harsh fluorescent work light with uneven failed fixtures
+    - warm improvised task lamps inside a dark repair stall
+    - sodium-vapor street lighting with restrained colored signage
+    - sterile corporate white light behind clean glass partitions
+    - emergency-red illumination during a power or transit failure
+    - hard coastal sunlight diffused through pollution and salt haze
+    - practical vehicle headlights cutting through rain or dust
+    - pale screen light secondary to visible room illumination
+    - dawn light revealing maintenance wear hidden by the night
 
-# ---------------------------------------------------------
-# EFFECTS
-# ---------------------------------------------------------
+  rendering:
+    - cinematic concept art, realistic material wear, restrained color and clear spatial storytelling
+    - graphic-novel illustration, strong ink hierarchy, limited spot color and readable crowd staging
+    - documentary science-fiction photography, natural skin, practical technology and fine film grain
+    - industrial design visualization, crisp construction detail, scale references and maintenance access
+    - hand-painted retro-future frame, analog displays, atmospheric depth and controlled highlights
+    - architectural visualization with lived-in clutter, utilities and human circulation
+    - monochrome cyber-noir ink, broad shadows, rain texture and one warning-color accent
+    - animated science-fiction key frame, clean linework, subdued cel shading and painted background
 
-  fx_magic:
-    - "(glitch energy distortions:1.3), (digital static:1.1), vhs"
-    - "(neon particle burst:1.2), (explosion:1.1), glowing"
-    - "(digital static aura:1.2), (glowing:1.1), flickering"
-    - "(holographic symbols:1.2), (floating runes:1.1), tech magic"
-    - "(electric arc lightning:1.3), (sparking:1.1), bright"
-    - "(plasma discharge:1.2), (glowing energy:1.1), hot"
-    - "(circuit glow patterns:1.2), (glowing lines:1.1), tech"
-    - "(nanobot swarms:1.3), (cloud of particles:1.1), shimmering"
+# ------------------------------------------------------------------------
+# GENRE-SAFE CHARACTER FAMILIES
+# ------------------------------------------------------------------------
 
-  fx_environment:
-    - "(drifting holograms:1.2), (floating ads:1.1), atmospheric"
-    - "(falling sparks:1.2), (embers:1.1), industrial"
-    - "(swirling neon fog:1.2), (haze:1.1), atmospheric"
-    - "(steam vent clouds:1.1), (smoke:1.1), alleyway"
-    - "(flickering signage light:1.1), (broken neon:1.1), dynamic"
-    - "(static glitches:1.2), (visual distortion:1.1), atmospheric"
-    - "(broken hologram fragments:1.2), (flickering:1.1), tech"
+  corporate_character:
+    - compliance inspector photographing unauthorized prosthetic repairs, severe suit, evidence tablet and company badge
+    - exhausted office analyst surrounded by transparent productivity displays, lunch untouched beside the keyboard
+    - corporate physician presenting several branded implant options across a clean consultation table
+    - executive framed by panoramic city glass while physical security staff wait behind
+    - biometric courier carrying sealed medical cases through a restricted elevator lobby
+    - brand technician replacing public transit signs with corporate access instructions
+    - human-resources interviewer seated across from an applicant whose implant license flashes red
+    - facilities manager walking through a darkened office floor with a manual override kit
 
-# ---------------------------------------------------------
-# CYBERPUNK MONSTERS
-# ---------------------------------------------------------
+  street_economy_character:
+    - cybernetic repairer working beneath improvised lamps, labeled drawers of incompatible replacement parts
+    - food vendor cooking beside humming battery stacks, payment terminals from several obsolete networks
+    - data-card broker behind a crowded market counter, physical cases cataloged by hand
+    - waste sorter separating circuit boards, batteries and synthetic organs with protective tools
+    - street tailor adapting a raincoat around mismatched prosthetics, chalk marks visible on the fabric
+    - informal transit driver repairing a crowded shared vehicle at the roadside
+    - identity-photo operator maintaining old cameras beside a biometric checkpoint
+    - secondhand implant dealer testing salvaged components in front of a cautious customer
 
-  cyber_monster:
-    - "(rogue android:1.3), (glowing red eyes:1.1), damaged"
-    - "(glitch corrupted cyborg:1.3), (static:1.1), deformed"
-    - "(mechanical beast:1.3), (robotic animal:1.1), glowing optics"
-    - "(drone swarm entity:1.3), (cloud of robots:1.1), menacing"
-    - "(augmented brute:1.2), (heavy muscle:1.1), powerful"
-    - "(autonomous killbot:1.3), (heavy weapons:1.1), robotic"
-    - "(synthetic horror creature:1.3), (unstable:1.1), monstrous"
-    - "(unstable nanobot mass:1.3), (shifting shape:1.1), swarm"
-    - "(aerial attack drone:1.2), (flying:1.1), military"
+  infrastructure_character:
+    - cooling technician inside a condensation-covered server tunnel, insulated tools and leak markers
+    - power-line crew member repairing cables above a flooded street in a tethered harness
+    - water worker inspecting filtration membranes beneath a housing block
+    - drone mechanic surrounded by numbered damaged units and printed repair histories
+    - vertical-farm worker replacing nutrient tubes between tall crop racks
+    - transit technician manually opening failed platform doors during rush hour
+    - flood-barrier operator clearing salt corrosion from immense hydraulic joints
+    - waste-processing engineer tracing a blockage through transparent industrial pipes
 
-  cyber_monster_traits:
-    - "(glowing optic sensors:1.2), (red eyes:1.1), scanning"
-    - "(exposed wiring:1.2), (sparks:1.1), damaged"
-    - "(steel armor plates:1.2), (heavy:1.1), robotic"
-    - "(advanced targeting systems:1.1), (HUD:1.1), aiming"
-    - "(corrupted code aura:1.2), (glitch effect:1.1), digital"
-    - "(flickering holographic parts:1.2), (unstable:1.1), ghostly"
-    - "(heavy mechanical limbs:1.2), (pistons:1.1), powerful"
+  healthcare_character:
+    - prosthetic fitter marking joint alignment while a patient practices grip control
+    - underground surgeon sterilizing reused implant components in a converted delivery van
+    - rehabilitation patient training with an older mechanical hand and physical calibration rig
+    - technician repairing obsolete ocular hardware beneath a magnifying lamp
+    - mobile-clinic nurse checking several generations of incompatible hearing implants
+    - memory therapist arranging labeled physical storage capsules before a session
+    - occupational-health worker inspecting exoskeleton pressure injuries on warehouse staff
+    - community pharmacist dispensing anti-rejection medication from a locked market stall
 
-# ---------------------------------------------------------
-# RANDOM
-# ---------------------------------------------------------
+  synthetic_character:
+    - android applying artificial skin over a repaired forearm before a small mirror
+    - several identical service models individualizing clothing in a secondhand shop
+    - decommissioned robot carrying personal belongings from a factory gate
+    - synthetic care worker helping an elderly resident through a crowded clinic
+    - damaged android waiting quietly among human patients, temporary tape sealing one panel
+    - machine worker replacing its own unsupported component using a printed manual
+    - household intelligence housed in several mismatched appliances arranged around one family table
+    - archived personality speaking from an obsolete terminal beside boxes of a deceased owner's belongings
 
-  samurai_combo:
-    - "(street samurai:1.3), __gkr_cyberpunk/race__, __gkr_cyberpunk/age__, __gkr_cyberpunk/build__, __gkr_cyberpunk/hair__, __gkr_cyberpunk/hair_color__, (glowing neon eyes:1.2), (armored trench coat:1.1), (mono blade sword:1.2), __gkr_cyberpunk/character_action__, (scanner visor:1.1), (neon flooded street level:1.2), (tense dangerous mood:1.1), (harsh neon rim light:1.2), (low angle heroic shot:1.1), (gritty dystopian realism:1.1), __gkr_cyberpunk/fx_magic__, __gkr_cyberpunk/fx_environment__"
+  media_character:
+    - investigative journalist comparing printed photographs with corrupted surveillance frames
+    - news presenter recording a polished segment while a damaged district remains visible beyond the studio glass
+    - street documentarian carrying compact cameras beneath anti-recording signs
+    - influencer framing luxury content to hide industrial waste just outside the shot
+    - public-records clerk copying files before an automated deletion timer expires
+    - multilingual interpreter guiding travelers through contradictory border-terminal screens
+    - independent radio operator broadcasting from a rooftop mesh-network station
+    - propaganda designer reviewing several revised versions of the same public face
 
-  netrunner_combo:
-    - "(netrunner hacker:1.3), __gkr_cyberpunk/race__, (slender build:1.1), (neon dyed hair:1.1), (holographic projection eyes:1.2), (hacker hoodie with circuits:1.2), (neural hacking deck:1.2), (data tablet:1.1), __gkr_cyberpunk/character_action__, (underground hacker den:1.2), (mysterious coded atmosphere:1.1), (holographic glow lighting:1.2), (close up cyber detail:1.1), (neon drenched cyberpunk style:1.2), (glitch energy distortions:1.1)"
+  community_character:
+    - tenant organizer carrying printed lockout notices and a portable door override
+    - right-to-repair activist opening a corporate prosthetic at a shared workbench
+    - volunteer distributing charged batteries during a neighborhood grid outage
+    - community-network technician installing an antenna between apartment roofs
+    - public defender comparing two conflicting biometric identities with a detained traveler
+    - climate-shelter coordinator directing families toward available cooling bunks
+    - retired augmentation recipient teaching younger residents to maintain unsupported hardware
+    - neighborhood teacher covering classroom sensors while students assemble a local air-quality monitor
 
-  corporate_agent_combo:
-    - "(corporate executive operative:1.3), (sleek megacorp suit:1.2), (metallic implants:1.1), (glowing eye replacements:1.2), (plasma pistol:1.2), __gkr_cyberpunk/character_action__, (corporate highrise office:1.1), (cold corporate mood:1.1), (synthetic white light:1.1), (portrait direct shot:1.1), (cinematic sci fi style:1.2)"
+  security_character:
+    - checkpoint officer comparing a traveler against two mismatched identity screens
+    - drone-unit operator watching detection boxes multiply across an ordinary crowd
+    - private security guard standing between premium and public transit platforms
+    - predictive-policing analyst surrounded by maps whose highlighted zones match neglected infrastructure
+    - corporate extraction team carrying sealed equipment through an apartment corridor
+    - exhausted patrol medic treating a protester behind a transparent riot barrier
+    - internal investigator photographing evidence inside a pristine executive office
+    - former military augment user working unarmed night security with outdated licensed hardware
 
-  android_combo:
-    - "(android citizen:1.3), (synthetic body:1.2), (porcelain smooth skin:1.1), (mechanical optic lens eyes:1.2), (chrome bodysuit:1.1), (energy shield emitter:1.1), __gkr_cyberpunk/character_action__, (hologram filled plaza:1.2), (calm analytical mood:1.1), (bioluminescent ambient light:1.1), (high angle dramatic view:1.1), (hyper detailed concept art:1.2)"
+  relationship:
+    - parent and adult child at a kitchen table covered with incompatible implant chargers, adapters and opened maintenance manuals
+    - worker pointing at a swollen exoskeleton joint while a supervisor points toward a red productivity display above the active line
+    - synthetic caregiver and elderly resident moving through a crowded institution together
+    - investigator and reluctant witness comparing physical evidence
+    - repairer displaying an open unsupported device and rejected access screen while the customer counts worn cash across the workbench
+    - longtime neighbors pulling extension cables and water hoses between dark apartment balconies during a grid failure
+    - corporate employee passing a copied access card beneath a café table to an organizer carrying lockout notices
+    - migrant family clustered behind an interpreter who points between their documents and two contradictory biometric screens
 
-  racer_combo:
-    - "(augmented street racer:1.3), __gkr_cyberpunk/hair_color__, (cyber eyes:1.2), (futuristic racing suit:1.2), __gkr_cyberpunk/vehicle__, (neon street circuit environment:1.2), (chaotic electric mood:1.1), (electric blue illumination:1.1), (dynamic action shot:1.2), (synthwave neon aesthetic:1.2), __gkr_cyberpunk/vehicle_fx__"
+# ------------------------------------------------------------------------
+# FUNCTIONAL ENVIRONMENTS
+# ------------------------------------------------------------------------
 
-  cyber_shaman_combo:
-    - "(cyber shaman:1.3), (glowing subdermal lines:1.2), (braided street style hair:1.1), (spirit orb:1.2), __gkr_cyberpunk/character_action__, (neon city skyline:1.1), (mystical digital atmosphere:1.1), (holographic symbols:1.2), (neon purple haze lighting:1.1), (portrait shot:1.1)"
+  housing_environment:
+    - stacked capsule apartments, shared exterior walkways, laundry, exposed utilities and failed elevator shaft
+    - corporate dormitory, identical rooms, shift schedules projected beside secured exits
+    - improvised rooftop additions connected by patched power and water lines
+    - luxury residential level physically separated from service floors by guarded glass doors
+    - aging apartment corridor where residents cover hallway sensors with household objects
+    - automated eviction scene, belongings in the corridor, door display reading LEASE TERMINATED
 
-  bounty_hunter_combo:
-    - "(bounty hunter:1.3), (armored trench coat:1.2), (rifle with digital scope:1.2), (augmented target reticle eyes:1.3), __gkr_cyberpunk/character_action__, (storm soaked neon bridge:1.1), (tense dangerous mood:1.1), (neon reflections:1.2), (dynamic action shot:1.2)"
+  transit_environment:
+    - elevated metro interchange at rush hour, biometric gates, one failed lane opened manually by technicians
+    - ferry terminal processing climate migrants through layered identity checkpoints
+    - informal minibus depot, battery swaps, hand-painted routes and crowded repair bays
+    - autonomous taxi queue stalled behind a software failure while human drivers negotiate rides nearby
+    - freight rail terminal dividing automated cargo tracks from aging worker housing
+    - vertical cable-transit station connecting dense hillside neighborhoods
 
-  drone_operator_combo:
-    - "(drone operator:1.3), (layered street gear:1.1), (glowing cyber lenses:1.2), (surveillance drone remote:1.2), __gkr_cyberpunk/character_action__, (industrial factory zone:1.1), (chaotic electric mood:1.1), (flickering signage lighting:1.1), (wide cinematic city view:1.2)"
+  healthcare_environment:
+    - public implant clinic, long waiting area, branded treatment prices and community repair notices
+    - black-market surgery stall behind a legitimate pharmacy, reused equipment visibly sterilized
+    - rehabilitation gym with mechanical supports, calibration targets and mixed-generation prosthetics
+    - corporate hospital lobby divided into subscription tiers by physical barriers
+    - mobile clinic operating from a converted delivery vehicle during a power outage
+    - memory-treatment room, physical storage library, consent forms and isolated playback chair
 
-  cyber_monster_combo:
-    - "__gkr_cyberpunk/cyber_monster__, __gkr_cyberpunk/cyber_monster_traits__, (robot assembly line environment:1.2), (oppressive grim mood:1.1), (electric arc lighting:1.2), (dynamic action shot:1.2)"
+  industry_environment:
+    - automated warehouse, workers following projected floor arrows beneath performance timers
+    - server cooling plant, condensation, immense fans, maintenance walkways and emergency drains
+    - electronics recycling district, sorted components, protective clothing and toxic runoff controls
+    - vertical farm, stacked crops, nutrient pipes, pollination drones and human inspection platforms
+    - coastal desalination plant protected by temporary flood walls and corroded machinery
+    - implant assembly factory with clean production floor and crowded shift-change exit
 
-  vehicle_showcase_combo:
-    - "__gkr_cyberpunk/vehicle__, __gkr_cyberpunk/vehicle_style__, __gkr_cyberpunk/vehicle_fx__, (neon city skyline:1.2), (heroic determined mood:1.1), (cinematic sci fi style:1.2), (wide cinematic city view:1.2)"
+  market_environment:
+    - informal repair market under transit tracks, parts labeled across several incompatible standards
+    - dense night food market powered by shared batteries and practical task lights
+    - secondhand synthetic-body shop, replacement shells hanging beside ordinary clothing
+    - multilingual port bazaar, logistics workers, sailors, data brokers and customs patrols
+    - neighborhood exchange during a network outage, handwritten prices and physical tokens
+    - corporate retail arcade displaying pristine upgrades above residents repairing older devices
 
-  scene_combo:
-    - "__gkr_cyberpunk/environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/mood__, (drifting holograms:1.2), (wide cinematic city view:1.1), (neon drenched cyberpunk style:1.2)"
+  climate_environment:
+    - flooded lower streets beneath dry luxury skybridges, boats moving between apartment entrances
+    - public cooling shelter surrounded by heat-distorted housing blocks and water queues
+    - coastal megacity flood gates closing while maintenance crews remain on the exposed side
+    - drought suburb converted into vertical agriculture and battery storage
+    - arctic extraction settlement, insulated machinery, seasonal darkness and worker dormitories
+    - storm evacuation center processing residents, pets, prosthetic chargers and paper records
 
-  random:
-    - "__gkr_cyberpunk/samurai_combo__"
-    - "__gkr_cyberpunk/netrunner_combo__"
-    - "__gkr_cyberpunk/corporate_agent_combo__"
-    - "__gkr_cyberpunk/android_combo__"
-    - "__gkr_cyberpunk/racer_combo__"
-    - "__gkr_cyberpunk/cyber_shaman_combo__"
-    - "__gkr_cyberpunk/bounty_hunter_combo__"
-    - "__gkr_cyberpunk/drone_operator_combo__"
-    - "__gkr_cyberpunk/cyber_monster_combo__"
-    - "__gkr_cyberpunk/vehicle_showcase_combo__"
-    - "__gkr_cyberpunk/scene_combo__"
-    - "__gkr_cyberpunk/random_character__" # This will now pick one of the focused random prompts below
+  regional_environment:
+    - Southeast Asian coastal megacity, flood-adapted markets, elevated walkways and ferry logistics
+    - South Asian biometric rail terminal beside an informal electronics repair district
+    - East African mobile-finance district powered by rooftop solar and shared battery kiosks
+    - Latin American hillside housing connected by cable transit and community mesh antennas
+    - Middle Eastern heat-management city with shaded pedestrian corridors and district cooling pipes
+    - East Asian logistics port, automated freight, worker housing and multilingual control systems
+    - European automated border terminal built into aging rail infrastructure
+    - North American corporate municipality surrounding a private data center and cooling reservoir
 
-# ---------------------------------------------------------
-# RANDOM CHARACTER (OPTIMIZED)
-# ---------------------------------------------------------
+# ------------------------------------------------------------------------
+# VISIBLE TECHNOLOGY AND DESIGN SUBJECTS
+# ------------------------------------------------------------------------
 
-  random_char_core:
-    - "__gkr_cyberpunk/archetype__, __gkr_cyberpunk/clothing__, __gkr_cyberpunk/eyes__, __gkr_cyberpunk/character_action__, (cinematic portrait:1.1), (hyper detailed concept art:1.1)"
+  augmentation_subject:
+    - medical prosthetic with replaceable joints, physical calibration marks and independent controls
+    - employer-issued lifting exoskeleton, shift counter, pressure wear and remote lock indicator
+    - cosmetic facial implant with visible maintenance port and customizable outer shell
+    - obsolete ocular system, scratched lens, unsupported connector and improvised adapter
+    - neural interface with consent switch, recording indicator and removable storage capsule
+    - military limb converted for civilian work, weapon mounts removed and tool fittings added
+    - community-built hearing device assembled from open components and printed housing
+    - subscription-controlled arm locked at the elbow beneath a red LICENSE EXPIRED display
 
-  random_char_augmented:
-    - "__gkr_cyberpunk/archetype__, (heavily modded:1.1), __gkr_cyberpunk/augmentation__, __gkr_cyberpunk/weapons__, __gkr_cyberpunk/character_action__, (dynamic pose:1.1), (hyper detailed concept art:1.1)"
+  interface_prop:
+    - dispatch wrist terminal showing delivery timer, route penalty and current worker ranking
+    - biometric identity card displaying two conflicting names and photographs
+    - printed blind-spot map marked against a city surveillance plan
+    - physical memory capsule labeled with date, owner and usage permissions
+    - corporate prosthetic service tool that refuses an unlicensed component
+    - community mesh router assembled from reused consumer electronics
+    - eviction drone carrying replacement locks, property tags and inventory scanner
+    - portable air-quality monitor built by students from mismatched sensors
 
-  random_char_stealth:
-    - "__gkr_cyberpunk/archetype__, (stealth nano armor:1.2), __gkr_cyberpunk/weapons__, (crouching:1.1), (shadows:1.2), (rainy alleyway:1.1), (hyper detailed concept art:1.1)"
+  vehicle_subject:
+    - shared electric minibus with hand-painted route, battery access panels and repair history
+    - algorithm-dispatched courier bicycle carrying several competing company boxes
+    - corporate autonomous limousine with sealed passenger cell and external security sensors
+    - flood-rescue skiff carrying prosthetic chargers, medical storage and folding shelter
+    - port cargo tractor modified by workers with manual controls and shade canopy
+    - mobile implant clinic converted from an aging delivery vehicle
+    - cable-transit maintenance carriage with winch, tools and emergency evacuation seats
+    - informal neighborhood power cart transporting charged batteries during an outage
 
-  random_char_atmospheric:
-    - "__gkr_cyberpunk/archetype__, (neon flooded street level:1.2), (leaning against wall:1.1), __gkr_cyberpunk/mood__, (cinematic:1.2), (hyper detailed concept art:1.1)"
+# ------------------------------------------------------------------------
+# AUTHORED VISUAL SCENES
+# ------------------------------------------------------------------------
 
-  random_character: # This is now a list that CHOOSES one of the focused prompts above
-    - "__gkr_cyberpunk/random_char_core__"
-    - "__gkr_cyberpunk/random_char_augmented__"
-    - "__gkr_cyberpunk/random_char_stealth__"
-    - "__gkr_cyberpunk/random_char_atmospheric__"
+  corporate_power_scene:
+    - glass executive boardroom brightly lit above a black factory floor, suited figures seated around a polished table while uniformed workers carrying toolboxes queue at an EXIT gate below, the same corporate emblem glowing over both levels
+    - armored corporate guards unbolting a municipal station sign while technicians mount a matching corporate ACCESS PASS REQUIRED panel, residents aiming phones from behind a barrier
+    - public plaza divided into premium and restricted lanes by transparent barriers and different floor materials
+    - employees scanning implant licenses before entering elevators while one worker's arm displays an error
+    - branded clinic presenting treatment prices beside a visibly overcrowded public waiting area
+    - office workers carrying archive boxes toward an exit beneath red CONTRACT TERMINATED badges while rows of empty automated desks display green productivity graphs
 
-  random_backgrounds:
-    - "__gkr_cyberpunk/city_district__, __gkr_cyberpunk/city_landmark__, __gkr_cyberpunk/city_interior__, __gkr_cyberpunk/environment__, __gkr_cyberpunk/vehicle__"
+  platform_labor_scene:
+    - bicycle couriers waiting beneath a wall-sized dispatch screen, timers counting down, security watching from glass booth
+    - warehouse workers following projected arrows while a colleague repairs a failed exoskeleton beside the active line
+    - drivers sleeping inside a charging depot, route rankings projected above parked vehicles
+    - cleaners pushing carts through an empty polished office while ceiling cameras track numbered boxes around their bodies and a wall display ranks each worker by rooms completed
+    - food-delivery riders in stained company jackets sheltering from green rain beneath a billboard showing a dry private courtyard under the label WEATHER SHIELD
+    - workers with red-rimmed eyes filing out of a windowless REVIEW FLOOR, rows of desks behind them showing censored thumbnails and warning symbols while cheerful brand mascots loop across the corridor screens
 
-# ---------------------------------------------------------
-# SPOTLIGHT
-# ---------------------------------------------------------
+  surveillance_scene:
+    - pedestrians crossing beneath layered biometric gates, one face producing several contradictory detection boxes
+    - police drones projecting identification rectangles over a peaceful market crowd
+    - protesters hiding faces with reflective umbrellas and patterned makeup beneath coordinated cameras
+    - security operator monitoring hundreds of street feeds as one camera shows the operator from behind
+    - guard gripping a traveler's shoulder between two adjacent identity screens showing the same face with different names and ages, closed gate glowing red behind them
+    - apartment residents taping metal bowls over corridor cameras while passing medicine, water bottles and a charged battery toward a partly open door
+
+  augmentation_scene:
+    - mechanic seated in a cramped stall, cybernetic arm locked, LICENSE EXPIRED warning beside incompatible parts
+    - family comparing three generations of hearing implants around a kitchen table covered with adapters
+    - warehouse employee removing an employer exoskeleton, deep pressure marks visible beneath the harness
+    - patient practicing grip control while a fitter adjusts mechanical finger alignment
+    - underground clinic replacing a proprietary connector with a hand-machined open adapter
+    - cosmetic modification studio displaying interchangeable facial shells, pigment samples and horn shapes beside cleaning tools and anatomical fitting diagrams
+
+  synthetic_person_scene:
+    - identical service androids in a secondhand shop holding different coats, hats and jewelry against their matching factory uniforms, decommission stamps visible on their neck plates
+    - synthetic care worker supporting an elderly resident between two clinic queue barriers, HUMAN PATIENTS arrow pointing toward open seats and SYNTHETIC STAFF arrow pointing toward a fenced inspection lane
+    - machine worker repairing itself from an obsolete printed manual beside a pile of rejected components
+    - posed android family portrait in a small apartment, mismatched manufacturer emblems, different replacement limbs, repair seams and personalized clothing clearly visible across the group
+    - movers carrying labeled household boxes past a portrait of an elderly resident while a face matching the portrait appears on a battered terminal packed among family keepsakes
+    - decommissioned robots waiting outside a factory gate with boxes, tools and personal decorations
+
+  community_scene:
+    - neighbors fastening mesh antennas and cables between dark apartment rooftops, commercial NETWORK OFFLINE signs below and one hand-built router showing connected green nodes
+    - repair collective opening locked prosthetics across a shared workbench while owners observe
+    - volunteers distributing charged batteries through a dark apartment courtyard
+    - tenants physically barricading an automated property drone outside their building entrance
+    - community clinic sharing calibration tools across improvised treatment stations
+    - residents painting bright walking routes, clinic symbols and open gates across a wall map whose original red patrol zones and camera icons remain visible underneath
+
+  memory_identity_scene:
+    - person comparing conflicting childhood photographs while a memory capsule reader displays both as authenticated
+    - two people in adjacent playback booths holding identical birthday photographs while both screens show the same cake, room and child from matching camera positions, duplicate capsule serial numbers enlarged between them
+    - open family album beside a glowing archive screen, the paper group photograph showing an empty chair while the digital version inserts an unfamiliar smiling figure into that exact space
+    - retail wall of sealed memory capsules beneath BEACH, MOUNTAIN and ORBIT labels, customers in transparent playback cubicles viewing matching destinations on wraparound screens
+    - memory technician arranging physical capsules whose owner labels have been mechanically removed
+    - adult holding a funeral portrait beside a household terminal displaying the same elderly face, waveform and PARENT VOICE MODEL label, one hand reaching toward the physical power switch
+
+  climate_city_scene:
+    - flood barriers surrounding luxury towers while lower apartment streets remain submerged
+    - cooling shelter queue beneath heat-distorted buildings and an animated cold-drink advertisement
+    - soaked ferry passengers carrying suitcases, prosthetic chargers and paper records through biometric gates, floodwater and an evacuation vessel visible through the terminal glass
+    - vertical farms operating beside abandoned drought-stricken suburbs
+    - tethered maintenance crews scraping white salt corrosion from immense floodgate joints while dark storm clouds, raised warning flags and rough water fill the horizon
+    - water queue forming beneath a corporate fountain accessible only through a guarded lobby
+
+  media_scene:
+    - giant advertisement promising clean air above workers wearing respirators at street level
+    - news presenter composited over a damaged district still visible through studio glass
+    - protest viewed through two transparent augmented-reality visors, one overlay labeling the crowd RIOTERS and the other labeling the same outlined figures ESSENTIAL WORKERS, identical handwritten wage signs visible through both lenses
+    - public screens showing a digitally altered face beneath a WANTED label while bystanders hold printed photographs of the same person with visibly different features
+    - influencer recording polished luxury content with industrial waste hidden just outside the frame
+    - newsroom staff facing an official ALL CLEAR flood report while a mud-soaked reporter places waterlogged evacuation tags, damaged respirators and photographs of submerged homes across the illuminated desk
+
+  cyber_noir_scene:
+    - investigator comparing rain-damaged receipts with corrupted surveillance stills in a nearly empty transit café
+    - investigator and anxious witness leaning over photographs behind a repair shop, a uniformed observer visible only in the reflection of a dark display window outside
+    - detective tracing camera blind spots on a printed map beneath flickering practical street lights
+    - three-panel city montage showing the same missing-person photograph embedded in a transit advertisement, clinic display and luxury-tower billboard, repeated facial crop circled in warning red
+    - investigator kneeling inside a sealed empty office, rectangular dust-free patches, fresh screw holes and cable-shaped impressions marking every stripped desk while a thermal scanner shows warm connector outlines
+    - public defender inside an abandoned apartment, floor covered with clinic receipts, checkpoint photographs and identity screens showing the same face under different names
+
+# ------------------------------------------------------------------------
+# NARRATIVE COMBOS — ALL ABSTRACT THEMES EXPRESSED VISUALLY
+# ------------------------------------------------------------------------
+
+  corporate_power_combo:
+    - "__gkr_cyberpunk/corporate_power_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+  platform_labor_combo:
+    - "__gkr_cyberpunk/platform_labor_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+  surveillance_combo:
+    - "__gkr_cyberpunk/surveillance_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+  augmentation_combo:
+    - "__gkr_cyberpunk/augmentation_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+  synthetic_person_combo:
+    - "__gkr_cyberpunk/synthetic_person_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+  community_resistance_combo:
+    - "__gkr_cyberpunk/community_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+  memory_identity_combo:
+    - "__gkr_cyberpunk/memory_identity_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+  climate_city_combo:
+    - "__gkr_cyberpunk/climate_city_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+  media_propaganda_combo:
+    - "__gkr_cyberpunk/media_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+  cyber_noir_combo:
+    - "__gkr_cyberpunk/cyber_noir_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, monochrome cyber-noir ink, one warning-color accent"
+  regional_city_combo:
+    - "__gkr_cyberpunk/regional_environment__, __gkr_cyberpunk/infrastructure_character__, visible transport, utilities, maintenance and daily commerce, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+
+# ------------------------------------------------------------------------
+# MODULAR OUTPUT FORMATS
+# ------------------------------------------------------------------------
+
+  standalone_character_combo:
+    - "standalone corporate cyberpunk character: __gkr_cyberpunk/corporate_character__, full body, both hands and work badge visible against a plain office wall, __gkr_cyberpunk/rendering__"
+    - "standalone street-economy character: __gkr_cyberpunk/street_economy_character__, tools and material wear visible, __gkr_cyberpunk/rendering__"
+    - "standalone infrastructure worker: __gkr_cyberpunk/infrastructure_character__, safety equipment worn correctly, open service panel and hand tools within reach, __gkr_cyberpunk/rendering__"
+    - "standalone healthcare character: __gkr_cyberpunk/healthcare_character__, clinical or repair tools visible, __gkr_cyberpunk/rendering__"
+    - "standalone synthetic person: __gkr_cyberpunk/synthetic_character__, personal repairs and objects visible, __gkr_cyberpunk/rendering__"
+    - "standalone media character: __gkr_cyberpunk/media_character__, recording or evidence tools visible, __gkr_cyberpunk/rendering__"
+    - "standalone community character: __gkr_cyberpunk/community_character__, apartment utilities, shared batteries or rooftop antennas behind, __gkr_cyberpunk/rendering__"
+    - "standalone security character: __gkr_cyberpunk/security_character__, institutional equipment and body language visible, __gkr_cyberpunk/rendering__"
+
+  ensemble_combo:
+    - "cyberpunk ensemble: __gkr_cyberpunk/relationship__, one __gkr_cyberpunk/infrastructure_character__, one __gkr_cyberpunk/community_character__, and one __gkr_cyberpunk/street_economy_character__, each using a separate tool around the same open utility cabinet, __gkr_cyberpunk/rendering__"
+    - "institutional confrontation: __gkr_cyberpunk/corporate_character__ seated behind a raised glass desk, __gkr_cyberpunk/security_character__ blocking the center aisle, and __gkr_cyberpunk/community_character__ standing below with printed notices and photographs spread toward them, all hands and eyelines visible, __gkr_cyberpunk/rendering__"
+
+  character_sheet_combo:
+    - "cyberpunk character sheet for __gkr_cyberpunk/standalone_character_combo__, front, side and back views, work pose, personal objects, clothing layers and material callouts"
+    - "paired-pose sheet for __gkr_cyberpunk/ensemble_combo__, height comparison, converging eyelines, shared tools and hands touching the same objects"
+
+  augmentation_sheet_combo:
+    - "augmentation design sheet for __gkr_cyberpunk/augmentation_subject__, exterior views, attachment anatomy, control interface, maintenance access, wear, locked state and hand gripping its controls"
+
+  vehicle_design_combo:
+    - "vehicle design sheet for __gkr_cyberpunk/vehicle_subject__, exterior turnaround, operator position, passenger or cargo use, battery access, maintenance history and damage state"
+
+  infrastructure_sheet_combo:
+    - "infrastructure design sheet for __gkr_cyberpunk/transit_environment__, sectional view, public and restricted circulation, utilities, maintenance access, failure state and human scale"
+    - "infrastructure design sheet for __gkr_cyberpunk/industry_environment__, numbered material-flow arrows, marked worker paths, safety barriers, repair hatches and inset of leaking or broken machinery"
+
+  interface_prop_sheet_combo:
+    - "interface and prop sheet for __gkr_cyberpunk/interface_prop__, screen states, physical controls, hand pressing each control, warning state, damaged state and tactile labels"
+
+  city_system_map_combo:
+    - "visual city-system map connecting __gkr_cyberpunk/housing_environment__, __gkr_cyberpunk/transit_environment__, __gkr_cyberpunk/healthcare_environment__ and __gkr_cyberpunk/industry_environment__; flows of people, power, water and restricted access shown pictorially"
+
+  scene_storyboard_combo:
+    - "six-frame cinematic storyboard for __gkr_cyberpunk/surveillance_scene__, wide location, camera view, detection box, subject turning, blocked camera and final damaged checkpoint"
+    - "six-frame cinematic storyboard for __gkr_cyberpunk/community_scene__: wide view of damaged equipment, residents pointing over a paper diagram, close view of hands repairing it, guard or locked access panel blocking the route, tools rerouted around the barrier, final wide view with working lights or open passage"
+
+  key_visual_combo:
+    - "cyberpunk key visual based on __gkr_cyberpunk/community_scene__, ensemble foreground, exposed city utilities behind, security barrier facing a resident barricade, title-safe negative space, one overhead work light"
+    - "cyberpunk key visual based on __gkr_cyberpunk/synthetic_person_scene__, human and synthetic figures connected by shared tools, touch or converging eyelines in the foreground, pipes, cables and worn city surfaces behind, title-safe composition"
+
+  poster_combo:
+    - "cyberpunk theatrical poster based on __gkr_cyberpunk/cyber_noir_scene__, one clue enlarged behind the central silhouette, black, steel-blue and warning-red palette, title-safe negative space"
+    - "cyberpunk poster based on __gkr_cyberpunk/climate_city_scene__, infrastructure and human scale equally visible, no generic neon skyline"
+
+  in_world_ad_combo:
+    - "in-world corporate advertisement for __gkr_cyberpunk/augmentation_subject__, pristine product render above fine-print restrictions, street reality visible around the damaged display"
+    - "in-world housing advertisement promising comfort while __gkr_cyberpunk/housing_environment__ remains visible beyond the screen"
+
+  news_broadcast_combo:
+    - "in-world news broadcast based on __gkr_cyberpunk/media_scene__, presenter desk, official captions, live background feed and contradictory physical evidence visible within frame"
+
+  surveillance_view_combo:
+    - "surveillance-camera frame based on __gkr_cyberpunk/surveillance_scene__, timestamp, camera ID, detection boxes, blind spots, compression artifacts and observable human countermeasures"
+
+  graphic_novel_page_combo:
+    - "complete cyberpunk graphic-novel page based on __gkr_cyberpunk/platform_labor_scene__, wide location panel, close work action, warning display, worker reaction and final damaged equipment panel, black, gray and warning-orange color"
+    - "complete cyberpunk graphic-novel page based on __gkr_cyberpunk/memory_identity_scene__, repeated booth composition, close panels of conflicting photographs and capsule labels, final full-width panel placing both contradictory records side by side"
+
+  spotlight_scenes:
+    - "__gkr_cyberpunk/corporate_power_combo__"
+    - "__gkr_cyberpunk/platform_labor_combo__"
+    - "__gkr_cyberpunk/surveillance_combo__"
+    - "__gkr_cyberpunk/augmentation_combo__"
+    - "__gkr_cyberpunk/synthetic_person_combo__"
+    - "__gkr_cyberpunk/community_resistance_combo__"
+    - "__gkr_cyberpunk/memory_identity_combo__"
+    - "__gkr_cyberpunk/climate_city_combo__"
+    - "__gkr_cyberpunk/media_propaganda_combo__"
+    - "__gkr_cyberpunk/cyber_noir_combo__"
+    - "__gkr_cyberpunk/regional_city_combo__"
 
   spotlight_characters:
-    - "masterpiece, (cinematic portrait of a neon-lit street samurai:1.3), (intricate chrome jaw plating:1.2), (wielding a glowing blue energy katana:1.3), (hyper-detailed armor:1.1), concept art, (dramatic neon lighting:1.1)"
-    - "masterpiece, digital art, (a cyber witch:1.3), (casting a spell with floating holographic runes:1.2), (long neon-streaked braids:1.1), (glowing subdermal circuits:1.2), (mystical atmosphere:1.1)"
-    - "masterpiece, (a rogue netrunner:1.3), (wearing a mirrored visor mask:1.2), (data-jack port on temple:1.1), (surrounded by shifting digital glyphs:1.1), hacker, concept art, (glowing screen reflections:1.1)"
-    - "cinematic, (a battle-hardened augmented mercenary:1.3), (scarred metal limbs:1.2), (deploying energy shield bracers:1.2), (tactical gear:1.1), (intense combat expression:1.1), hyper-detailed"
-    - "masterpiece, digital magic, (a techno-mancer female:1.3), (channeling raw data:1.1), (swirling holographic spell symbols:1.2), (glowing eyes:1.1), (intricate cybernetic implants:1.1)"
-    - "concept art, (a street arcanist:1.2), (covered in glowing magical tattoos:1.3), (conjuring spell circuits in the air:1.2), (urban clothing:1.1), (neon-lit alleyway:1.1)"
-    - "masterpiece, elegant, (an android swordswoman:1.3), (long fiber-optic hair:1.2), (poised in a graceful combat stance:1.1), (sleek synthetic body:1.1), (glowing mono-blade:1.2)"
-    - "masterpiece, concept art, (a hacker mage male:1.3), (casting a digital spell:1.1), (floating digital familiars:1.2), (glowing console interface:1.1), (dark data-den:1.1)"
-    - "dynamic action shot, (a chrome-armed brawler:1.3), (glowing red cybernetic eyes:1.2), (reinforced metallic fists:1.2), (aggressive fighting stance:1.1), (underground fight ring:1.1)"
-    - "dynamic action shot, (a hoverboard courier female:1.3), (weaving through traffic:1.1), (glowing goggles:1.2), (holding a data package:1.1), (neon streaks:1.2), (motion blur:1.1)"
-    - "concept art, (a cyber paladin:1.3), (radiant energy cross shield:1.3), (heavy neo-gothic plated armor:1.1), (glowing blue eyes:1.1), (holy, determined expression:1.1)"
-    - "cinematic, stealth, (an augmented assassin:1.3), (activating a cloaking shroud:1.2), (silent foot thrusters:1.1), (perched in shadows on a rooftop:1.2), (night vision optics:1.1)"
-    - "concept art, (a bio-mage hybrid:1.3), (glowing moss-lined implants:1.2), (shifting vine circuits on skin:1.2), (organic technology:1.1), (bioluminescent:1.1)"
-    - "cinematic, (a neon ronin:1.3), (in a long, glowing trench coat:1.2), (drawing a monofilament blade:1.2), (standing in heavy rain:1.1), (neon reflections on wet pavement:1.1)"
-    - "concept art, (a rune engineer:1.3), (manipulating a giant rotating glyph gear:1.2), (tech magic:1.1), (glowing blueprints:1.1), (industrial forge:1.1)"
-    - "sci-fi concept art, (a mecha witch female:1.3), (summoned drone familiars:1.2), (floating in orbit around her:1.1), (high-tech robes:1.1), (glowing energy staff:1.1)"
-    - "concept art, (an urban druid:1.3), (manipulating holographic wildlife spirits:1.2), (a digital bird perched on cybernetic arm:1.2), (data-stream vines:1.1), (nature and tech fused:1.1)"
-    - "masterpiece, (a corporate mage:1.3), (wearing a sleek designer suit:1.1), (casting a geometric light spell:1.2), (minimalist high-rise office:1.1), (cold, analytical expression:1.1)"
-    - "dynamic pose, (a street monk:1.3), (glowing neon kanji tattoos:1.2), (fists wreathed in energy:1.2), (martial arts stance:1.1), (rooftop dojo:1.1)"
-    - "concept art, (a psychic slicer:1.3), (mind-cut blade:1.2), (surrounded by a fractal psychic aura:1.2), (intense concentration:1.1), (psionic energy:1.1)"
-    - "action shot, (a plasma archer:1.3), (aiming a radiant energy bow:1.2), (nocking a glowing plasma arrow:1.3), (focused expression:1.1), (rooftop sniper:1.1)"
-    - "masterpiece, (a cyberpunk priestess female:1.3), (a halo of rotating holographic sigils:1.2), (ornate tech-robes:1.1), (digital divine:1.1), (cyber cathedral:1.1)"
-    - "ethereal, (a data spirit child:1.3), (translucent body:1.2), (made of flowing code:1.2), (glowing in a server room:1.1), (digital ghost:1.1)"
-    - "concept art, (a nano-assassin female:1.3), (controlling clouds of shimmering nanotech particles:1.2), (form-fitting stealth suit:1.1), (silent, deadly:1.1)"
-    - "masterpiece, (a chrome barbarian:1.3), (massive reinforced spine plating:1.2), (wielding a heavy plasma hammer:1.2), (powerful, intimidating stance:1.1), (battle-worn:1.1)"
-    - "anime style, (a bio-engineered fox-girl kemonomimi female:1.3), (hacker:1.1), (shifting digital tails:1.2), (glowing data-jack ports:1.1), (hacker den:1.1)"
-    - "concept art, (an arcane sniper:1.3), (aiming a luminous, high-tech rifle:1.2), (carved runic tracers on bullets:1.1), (magic-infused tech:1.1), (glowing scope:1.1)"
-    - "powerful, sci-fi, (a golem-tech warrior:1.3), (armor made of levitating, interlocking plates:1.2), (glowing core:1.1), (imposing, futuristic:1.1)"
-    - "dark concept art, (a void caster:1.3), (manipulating dark glitch effects:1.2), (data void:1.1), (digital dark magic:1.1), (corrupted data streams:1.1)"
-    - "concept art, (a glitch mage:1.3), (unstable:1.1), (body flickering with broken light patterns:1.2), (flickering skin:1.2), (casting a chaotic spell:1.1)"
-    - "masterpiece, (a hologram bard:1.3), (projecting animated musical runes:1.2), (playing a holographic instrument:1.1), (performing on a neon street corner:1.1), (digital music:1.1)"
-    - "concept art, (a mech-aug priest:1.3), (orbiting drone censer emitting holographic smoke:1.2), (religious tech-vestments:1.1), (praying:1.1)"
-    - "concept art, (a skilled chrome swordsman:1.3), (polished metal limbs:1.2), (dual-wielding energy blades:1.1), (mid-combat dynamic pose:1.1), (motion blur:1.1)"
-    - "concept art, (a hacker female:1.3), (wearing an oversized coat:1.1), (glowing data-ports on neck:1.2), (looking at a holographic screen:1.1), (intense concentration:1.1)"
-    - "masterpiece, (a storm mage male:1.3), (surrounded by crackling neon lightning:1.3), (electric energy:1.1), (powerful stance:1.1), (dramatic, rainy skyline:1.1)"
-    - "concept art, (a bio-alchemist:1.3), (glowing vials of living liquid grafted to arms:1.2), (organic tech:1.1), (handling a bubbling potion:1.1), (bio-lab:1.1)"
-    - "fantasy sci-fi, (a cyber elf:1.3), (long, pointed ears with glowing runed implants:1.2), (luminous, searching eyes:1.1), (high-tech bow:1.1), (cyber forest:1.1)"
-    - "concept art, (a telekinetic punk female:1.3), (levitating cracked pavement and debris:1.2), (psychic energy aura:1.1), (rebellious expression:1.1), (dynamic:1.1)"
-    - "futuristic, (a quantum knight:1.3), (armor made of shifting, phasing plates:1.2), (glowing energy sword:1.1), (semi-transparent:1.1), (quantum effects:1.1)"
-    - "spiritual, tech, (an anima channeler:1.3), (radiating ghostlike digital echoes of themself:1.2), (meditating:1.1), (server room shrine:1.1)"
-    - "dynamic action shot, (a skate mage:1.3), (riding a hoverboard:1.1), (leaving glowing neon sigils as trails:1.2), (casting a spell mid-air:1.1), (urban park:1.1)"
-    - "cinematic, noir, (an augmented detective:1.3), (glowing monocle scanner:1.2), (inspecting a clue:1.1), (trench coat:1.1), (rainy night street:1.1)"
-    - "concept art, (a black market healer:1.3), (tech-infused glowing tattoos:1.2), (street doc:1.1), (using cybernetic medical tools:1.1), (alleyway clinic:1.1)"
-    - "concept art, (a tech druid female:1.3), (a holographic data-bird perched on arm:1.2), (data-vines on robes:1.1), (fusing nature and tech:1.1), (rooftop garden:1.1)"
-    - "action shot, (a chromed berserker:1.3), (retractable energy claws extended:1.2), (fierce combat expression:1.1), (battle-damaged armor:1.1), (tearing through robots:1.1)"
-    - "anime style, (a cyber catboy kemonomimi male:1.3), (thief archetype:1.1), (agile, stealth pose:1.1), (optical tail whip:1.2), (glowing cat-like cyber eyes:1.1), (rooftop:1.1)"
-    - "dynamic action shot, (a tower runner female:1.3), (kinetic boosters strapped to legs:1.2), (leaping between rooftops:1.2), (parkour:1.1), (high-altitude:1.1)"
-    - "cosmic concept art, (a psy-mage:1.3), (fractal constellations orbiting head:1.2), (psychic energy:1.1), (eyes glowing with cosmic power:1.1), (looking at the stars:1.1)"
-    - "concept art, (a bio-cyber witch:1.3), (luminescent mushrooms growing on cybernetic implants:1.2), (organic magic:1.1), (dark, eerie forest:1.1)"
-    - "concept art, (a modded samurai:1.3), (carbon fiber plating:1.1), (silent, stealthy pose:1.1), (drawing a katana:1.1), (shadows:1.1), (stealth:1.1)"
-    - "masterpiece, (a street hero:1.3), (wearing a neon scarf:1.1), (sparking power gauntlets:1.2), (determined, heroic expression:1.1), (protecting civilians:1.1)"
-    - "concept art, (an energy monk:1.3), (glowing chakra nodes on body:1.2), (martial arts pose:1.1), (spiritual energy:1.1), (serene expression:1.1)"
-    - "concept art, (a cybernetic oracle:1.3), (six floating holographic eyes:1.2), (seeing the future:1.1), (all-seeing:1.1), (ornate, futuristic robes:1.1)"
-    - "concept art, (a data swordsman:1.3), (blade glitches and reforms:1.2), (weapon made of pure data:1.1), (digital effects:1.1), (dynamic pose:1.1)"
-    - "dark concept art, (a techno-occultist:1.3), (reading floating circuit-runes:1.2), (dark magic:1.1), (tech-infused skull artifacts:1.1), (shadowy room:1.1)"
-    - "stealth concept art, (a gloom archer:1.3), (aiming a blacklight bow:1.2), (surrounded by whispering shadows:1.1), (dark, neon-lit alley:1.1)"
-    - "masterpiece, (a chrome paladin female:1.3), (shimmering energy shield generator:1.2), (full plate knight armor:1.1), (glowing sword:1.1), (noble stance:1.1)"
-    - "concept art, (a bio-engineered beast hybrid male:1.3), (LED claws extended:1.2), (animalistic, fierce stance:1.1), (cybernetic wolf features:1.1), (powerful:1.1)"
-    - "concept art, (a virtual idol mage:1.3), (projecting glyph wings:1.2), (singing:1.1), (magic:1.1), (holographic stage:1.1), (performing a spell:1.1)"
-    - "cinematic, (a masked vigilante:1.3), (neon-lined cape:1.2), (perched on a rooftop gargoyle:1.1), (overlooking the city:1.1), (mysterious, dark:1.1)"
-    - "elegant concept art, (a techno-fencer:1.3), (electrical rapier arcing with energy:1.2), (fencing stance:1.1), (stylish, high-tech suit:1.1)"
-    - "dark concept art, (a street demon:1.3), (flickering, holographic glitch horns:1.2), (supernatural:1.1), (tech:1.1), (glowing red eyes:1.1), (menacing:1.1)"
-    - "cosmic concept art, (an astro-mage:1.3), (shimmering cosmic circuitry on robes:1.2), (channeling space magic:1.1), (nebula background:1.1)"
-    - "graceful, (a plasma dancer:1.3), (swirling arcs of heated, glowing light:1.2), (elegant, dynamic pose:1.1), (energy manipulation:1.1)"
-    - "concept art, (an enchanted hacker female:1.3), (creating floating code butterflies:1.2), (magical technology:1.1), (whimsical, bright:1.1)"
-    - "dark concept art, (a shadow slicer:1.3), (wielding a corrupted glitch blade:1.2), (emerging from shadows:1.1), (stealth:1.1), (assassin:1.1)"
-    - "concept art, (an urban shaman:1.3), (channeling machine spirits:1.2), (glowing data streams rising from ground:1.1), (spiritual, tech:1.1)"
-    - "cinematic, (an augmented sniper:1.3), (telescoping optical implants:1.2), (aiming a long-range rifle:1.1), (focused:1.1), (high vantage point:1.1)"
-    - "concept art, (a gearwitch female:1.3), (magically controlling rotating spell cogs:1.2), (steampunk:0.5), (magic:1.1), (tech:1.1), (intricate:1.1)"
-    - "dynamic action shot, (a luminous martial artist:1.3), (radiant footprints:1.1), (glowing fists:1.2), (mid-air kick:1.1), (dynamic pose:1.1)"
-    - "sci-fi concept art, (a mech summoner:1.3), (commanding miniature drone beasts:1.2), (holographic command interface:1.1), (squad:1.1)"
-    - "dark concept art, (a void hacker:1.3), (pulling dark data packets from a void:1.2), (data void:1.1), (corrupted data:1.1), (digital abstract:1.1)"
-    - "dark magic, (a digital necromancer:1.3), (reanimating broken drones with code:1.2), (glowing green energy:1.1), (dark tech:1.1), (eerie:1.1)"
-    - "concept art, (a magitech soldier:1.3), (holographic riot shield:1.2), (energy rifle:1.1), (military armor:1.1), (ready stance:1.1)"
-    - "beautiful concept art, (a crystal hacker female:1.3), (shaping glowing fractal code shards:1.2), (intricate data patterns:1.1), (elegant, tech:1.1)"
-    - "concept art, (a techno-druid male:1.3), (data vines twisting on arms:1.2), (cybernetic stag companion:1.1), (nature, tech:1.1)"
-    - "cosmic concept art, (a star-linked caster:1.3), (constellation-shaped implants:1.2), (channeling cosmic magic:1.1), (glowing:1.1)"
-    - "mythical concept art, (a neon fox spirit:1.3), (conjuring glitch flames:1.2), (nine holographic tails:1.1), (tech, magic:1.1)"
-    - "powerful concept art, (a gravity mage female:1.3), (bending floating debris and cars:1.2), (psychic power:1.1), (glowing eyes:1.1), (intense:1.1)"
-    - "sci-fi concept art, (a chrome knight:1.3), (riding a mechanical wolf mount:1.2), (glowing energy lance:1.1), (dynamic charge:1.1)"
-    - "elegant concept art, (a battledancer female:1.3), (shimmering blade ribbons:1.2), (graceful, fluid motion:1.1), (combat dance:1.1)"
-    - "concept art, (a nanite swarm mage:1.3), (forming a cloak from a shifting particle swarm:1.2), (nanotech:1.1), (controlling nanobots:1.1)"
-    - "concept art, (a data-bound monk:1.3), (rotating script halos:1.2), (spiritual, tech:1.1), (meditating:1.1), (glowing energy palms:1.1)"
-    - "concept art, (a techno-archer:1.3), (aiming a luminous high-tech bow:1.2), (drawing back a glowing energy arrow:1.1), (focused, precise:1.1)"
-    - "dynamic action shot, (a hover-lancer:1.3), (riding a gravity bike:1.1), (leveling an energy spear:1.2), (jousting:1.1), (high speed:1.1)"
-    - "concept art, (a neon-masked wanderer:1.3), (glowing scarf:1.1), (walking through a desolate street:1.1), (mysterious, lone figure:1.1)"
-    - "horror concept art, (a bio-shifter:1.3), (blending flesh and circuitry:1.2), (body horror:1.1), (organic, tech:1.1), (unstable form:1.1)"
-    - "digital abstract, (a glitch spirit male:1.3), (fragmented silhouette:1.2), (ethereal, digital entity:1.1), (flickering:1.1)"
-    - "concept art, (a plasma warlock:1.3), (channeling burning neon fire:1.2), (dark robes:1.1), (magic, fire:1.1), (powerful stance:1.1)"
-    - "concept art, (a gear-aug sorceress:1.3), (weaving metallic, glowing sigils:1.2), (magic, tech:1.1), (intricate cybernetics:1.1)"
-    - "concept art, (an urban spear fighter:1.3), (wielding a neon-tipped polearm:1.2), (dynamic martial arts pose:1.1), (street warrior:1.1)"
-    - "concept art, (a circuit princess female:1.3), (glowing data-crown:1.1), (floating holographic panels:1.2), (royal, tech:1.1), (elegant:1.1)"
-    - "dynamic concept art, (a rogue slicer female:1.3), (hacking on the run:1.1), (sprinting down an alley:1.1), (glowing data-slate:1.1)"
-    - "cosmic concept art, (an astral netrunner:1.3), (hacking:1.1), (surrounded by floating star-map data:1.2), (cosmic, hacker:1.1), (digital space:1.1)"
-    - "stealth concept art, (a shadow courier:1.3), (sprinting silently:1.1), (in neon fog:1.1), (stealth:1.1), (dynamic pose:1.1), (carrying a package:1.1)"
-    - "concept art, (a tech samurai female:1.3), (flowing fiber-optic ponytail:1.2), (holding a katana:1.1), (sleek armor:1.1), (ready stance:1.1)"
-    - "concept art, (a street mage male:1.3), (casting a spell of swirling electric graffiti:1.2), (magic, art:1.1), (alleyway wall:1.1), (dynamic:1.1)"
+    - "__gkr_cyberpunk/standalone_character_combo__"
+    - "__gkr_cyberpunk/ensemble_combo__"
+    - "__gkr_cyberpunk/character_sheet_combo__"
 
-  spotlight_backgrounds:
-    - "cinematic, (a neon-drenched alleyway at night:1.3), (glowing, flickering holographic signs:1.2), (drifting rain mist:1.1), (wet pavement with neon reflections:1.2), (atmospheric:1.1), (hyper-detailed:1.1)"
-    - "cinematic masterpiece, (a vast, towering megacity skyline:1.3), (countless flying vehicles:1.1), (enormous, streaking skyscrapers:1.1), (giant holographic advertisements:1.2), (epic scale:1.1), (night time:1.1)"
-    - "atmospheric, (a street-level noodle stand:1.2), (lit by bright neon signs:1.1), (steam rising:1.1), (midnight haze:1.1), (a few patrons:1.1), (hyper-detailed:1.1)"
-    - "eerie, (an abandoned metro tunnel:1.2), (flickering, faulty light strips:1.1), (dark, damp:1.1), (graffiti-covered walls:1.1), (sense of decay:1.1)"
-    - "cinematic wide-angle shot, (a rooftop overlooking a vast cyber metropolis:1.3), (glowing billboards in the distance:1.2), (endless city lights:1.1), (night, clear sky:1.1), (epic:1.1)"
-    - "clean, sci-fi, (a corporate arcology interior:1.2), (vast open space:1.1), (glass and steel architecture:1.1), (soft blue ambient light:1.1), (sterile, minimalist:1.1)"
-    - "atmospheric, (a rain-slicked market district:1.2), (a dense canopy of neon lanterns:1.2), (crowded:1.1), (reflections in puddles:1.1), (vibrant:1.1)"
-    - "urban, dynamic, (a high-contrast bridge with glowing graffiti:1.2), (mag-lev trains roaring below:1.1), (strong perspective:1.1), (cityscape in background:1.1)"
-    - "spiritual, tech, (a cyber shrine:1.2), (stone pillars engraved with glowing circuits:1.2), (holographic offerings:1.1), (quiet, respectful atmosphere:1.1)"
-    - "magical, digital, (a glowing data forest:1.3), (trees made of light:1.1), (floating holographic leaves:1.2), (data streams as rivers:1.1), (surreal:1.1)"
-    - "cluttered, (an underground hacker den:1.2), (surrounded by countless screens and cables:1.2), (glowing server racks:1.1), (dimly lit:1.1), (hyper-detailed:1.1)"
-    - "futuristic, (a sky highway:1.2), (hovercars weaving between impossible skyscraper heights:1.2), (multiple lanes of traffic:1.1), (high-altitude:1.1), (vertigo:1.1)"
-    - "industrial, (a mech repair hangar:1.2), (glowing welding sparks:1.1), (dismantled robot parts:1.1), (heavy machinery:1.1), (detailed:1.1)"
-    - "concept art, (a digital wasteland:1.2), (corrupted glitch terrain:1.2), (desolate, empty:1.1), (flickering data-storms in the distance:1.1), (abstract:1.1)"
-    - "luxury, (a high-end sky lounge:1.2), (panoramic neon skyline view through giant window:1.3), (elegant, minimalist furniture:1.1), (interior:1.1)"
-    - "concept art, (magitech slums:1.2), (glowing runes scrawled on makeshift buildings:1.2), (poverty:1.1), (magic and tech mixed:1.1), (dense, crowded:1.1)"
-    - "dynamic, (an underground fight arena:1.2), (pulsing strobe lights:1.1), (a roaring crowd in the shadows:1.1), (blood-stained floor:1.1), (intense:1.1)"
-    - "atmospheric, (a gloomy industrial yard:1.2), (lit by flickering red warning signs:1.1), (heavy smog:1.1), (piles of cargo containers:1.1), (moody:1.1)"
-    - "sci-fi, (a sterile bio-lab:1.2), (glowing green fluid in floating pods:1.2), (robotic arms:1.1), (soft blue light:1.1), (clean, high-tech:1.1)"
-    - "bioluminescent, (a cyber forest:1.2), (trees with luminous fiber-optic trunks:1.2), (glowing moss and fungi:1.1), (nature, tech:1.1), (enchanting:1.1)"
-    - "vibrant, (a rainy city plaza:1.2), (ground reflecting all the colors:1.1), (massive holographic advertisements playing:1.2), (bustling with people:1.1)"
-    - "eerie, (a deserted shopping mall:1.2), (malfunctioning, flickering displays:1.1), (abandoned:1.1), (storefronts dark:1.1), (liminal space:1.1)"
-    - "spiritual, (a grand corporate temple:1.2), (golden runic holograms floating:1.2), (clean, minimalist architecture:1.1), (shrine to technology:1.1)"
-    - "atmospheric, (an abandoned parking tower:1.2), (covered in neon graffiti:1.2), (urban decay:1.1), (broken-down cars:1.1), (moody lighting:1.1)"
-    - "industrial, magic, (a subterranean magitech forge:1.2), (glowing molten circuits flowing in channels:1.2), (heavy machinery:1.1), (sparks:1.1)"
-    - "oasis, (high-rise rooftop gardens:1.2), (bioengineered luminous plants:1.2), (a patch of nature above the city:1.1), (city skyline view:1.1)"
-    - "abstract, digital, (a vast data canyon:1.2), (glowing streams of code flowing through:1.3), (sharp, geometric walls:1.1), (virtual reality:1.1)"
-    - "cozy, (a district of narrow, stacked houses:1.2), (lit by warm neon signs and lanterns:1.2), (dense, but welcoming:1.1), (alleyways:1.1)"
-    - "futuristic, (a monorail track stretching through city canyons:1.2), (a sleek, futuristic train speeding by:1.1), (dramatic perspective:1.1), (high-altitude:1.1)"
-    - "atmospheric, (a vast warehouse lit by purple floodlights:1.2), (drifting dust particles in the air:1.1), (rows of shelving:1.1), (interior:1.1), (moody:1.1)"
-    - "futuristic, (a busy sky port:1.2), (ships landing and taking off:1.1), (glowing landing pads:1.1), (floating vehicles:1.1), (cityscape background:1.1)"
-    - "abstract, (an electronic forest:1.2), (trees made of server racks and antennae:1.2), (blinking data nodes:1.1), (data streams:1.1), (surreal:1.1)"
-    - "interior, (a corporate war room:1.2), (a giant, floating tactical screen:1.3), (dark, moody lighting:1.1), (executives at a table:1.1), (tense:1.1)"
-    - "spiritual, (a district of cyber temples:1.2), (glowing incense smoke:1.1), (holographic buddhas:1.1), (tech, religion:1.1), (peaceful:1.1)"
-    - "vibrant, (a rainy street:1.2), (dense, bustling crowds with neon umbrellas:1.2), (shop signs glowing:1.1), (atmospheric:1.1), (street-level view:1.1)"
-    - "futuristic, (an airship dock:1.2), (a large zeppelin-like ship hovering:1.2), (glowing highway channels for vehicles:1.1), (high above the city:1.1)"
-    - "industrial, (gritty maintenance tunnels:1.2), (under the megacity:1.1), (dark, leaking pipes:1.1), (flickering service lights:1.1), (claustrophobic:1.1)"
-    - "massive scale, (an industrial bridge:1.2), (leading to towering arcology gates:1.2), (heavy vehicle traffic:1.1), (sci-fi architecture:1.1)"
-    - "cosmic, (a magitech observatory:1.2), (a giant lens scanning swirling energy storms:1.2), (holographic star charts:1.1), (tech, magic:1.1)"
-    - "dark, (a crime district alley:1.2), (lit only by a glowing red emergency light:1.2), (dangerous:1.1), (trash and debris:1.1), (noir atmosphere:1.1)"
-    - "eerie, (a glitching ghost district:1.2), (flickering, semi-transparent buildings:1.2), (desolate, empty:1.1), (digital anomalies:1.1)"
-    - "industrial, (a neon harbor at night:1.2), (floating cargo drones:1.1), (ships being loaded:1.1), (reflections in the water:1.1), (glowing cranes:1.1)"
-    - "atmospheric, (a quiet backstreet ramen shop:1.2), (lit by soft pink neon:1.1), (cozy, warm interior:1.1), (steam from bowls:1.1), (a respite:1.1)"
-    - "epic, (a massive data tower:1.3), (emitting glowing streams of code into the sky:1.2), (the heart of the network:1.1), (tech, imposing:1.1)"
-    - "beautiful, (a district with floating neon lanterns:1.2), (drifting slowly in the wind:1.1), (night market below:1.1), (atmospheric, magical:1.1)"
-    - "concept art, (a chrome marketplace:1.2), (built inside the ruins of an old subway station:1.2), (street market:1.1), (merchants selling cybernetics:1.1)"
-    - "atmospheric, (a rain-drenched cyber plaza:1.2), (beneath towering, glowing signs:1.2), (wet reflections:1.1), (pedestrians with umbrellas:1.1)"
-    - "concept art, (a dense techno-forest:1.2), (alive with glowing cables and wires:1.2), (trees made of circuits:1.1), (nature, tech:1.1)"
-    - "sci-fi, (a massive energy bridge:1.2), (pulsing light panels on the road:1.2), (connecting two skyscrapers:1.1), (futuristic:1.1)"
-    - "ethereal, (a crystal stairway:1.2), (rising into a drifting neon haze:1.2), (beautiful, surreal:1.1), (glowing steps:1.1)"
-    - "industrial, (a maintenance catwalk:1.2), (overlooking a massive, glowing reactor vortex:1.3), (dangerous, powerful:1.1), (sparks:1.1)"
-    - "surreal, (neon tunnels:1.2), (filled with swimming holographic koi fish:1.3), (pedestrian walkway:1.1), (beautiful, unique:1.1)"
-    - "sci-fi, (a vertical city:1.2), (stacked steel platforms and buildings:1.1), (dense, claustrophobic:1.1), (glowing lights:1.1), (slums:1.1)"
-    - "spiritual, (an AI temple:1.2), (bathed in warm, golden light patterns:1.2), (a central server as an altar:1.1), (tech, religious:1.1)"
-    - "cinematic, (an urban overlook:1.2), (watching a distant neon thunderstorm:1.3), (dramatic:1.1), (lightning illuminating the clouds:1.1), (city view:1.1)"
+  spotlight_designs:
+    - "__gkr_cyberpunk/augmentation_sheet_combo__"
+    - "__gkr_cyberpunk/vehicle_design_combo__"
+    - "__gkr_cyberpunk/infrastructure_sheet_combo__"
+    - "__gkr_cyberpunk/interface_prop_sheet_combo__"
+    - "__gkr_cyberpunk/city_system_map_combo__"
 
-  spotlight_vehicles:
-    - "cinematic action shot, (a sleek black hovercar:1.3) with (glowing neon blue trim:1.2), (racing at high speed through a rainy, hologram-filled city canyon:1.1), (motion blur:1.2), (dramatic splash effects:1.1), (hyper-detailed:1.1)"
-    - "cinematic, (an armored security transport:1.3), (matte black plating:1.1), (barreling through a barricade:1.2), (sparks flying:1.1), (flashing police lights:1.1), (action:1.1)"
-    - "dynamic action shot, (a customized street bike:1.3), (neon pink highlights:1.1), (glowing wheels:1.2), (popping a wheelie:1.1), (rider in stylish gear:1.1), (urban night:1.1)"
-    - "cinematic low-angle shot, (a massive, battle-worn combat mech:1.4), (armed with heavy cannons:1.2), (patrolling a desolate industrial sector:1.1), (a single glowing red optic:1.2), (imposing, powerful:1.1), (gritty, realistic texture:1.1)"
-    - "atmospheric, (an agile reconnaissance drone:1.2), (stealth camouflage:1.1), (silently scanning a dark alley:1.1), (a sharp searchlight beam:1.2), (moody, noir:1.1)"
-    - "cinematic, (a luxury corporate limousine:1.2), (polished chrome finish:1.2), (gliding silently through an upper-city skyway:1.1), (sleek, minimalist design:1.1), (city reflections:1.1)"
-    - "dynamic action shot, (a drifting race car:1.3), (vibrant synthwave paint job:1.2), (glowing neon exhaust trail:1.3), (taking a sharp corner:1.1), (billowing tire smoke:1.1), (night race:1.1)"
-    - "mad max style, (a scavenger-built buggy:1.2), (rusted metal:1.1), (spikes:1.1), (speeding through a desert wasteland:1.1), (dust clouds:1.1), (nomad:1.1)"
-    - "cinematic action, (a police interceptor hovercraft:1.3), (NCPD decals:1.1), (flashing red and blue lights:1.2), (in hot pursuit of a suspect:1.1), (weaving through traffic:1.1)"
-    - "city life, (a quad-rotor delivery drone:1.1), (carrying a glowing package:1.2), (flying past neon signs and apartment windows:1.1), (urban:1.1)"
-    - "industrial, (a heavy industrial loader mech:1.2), (yellow caution stripes:1.1), (hydraulics hissing:1.1), (lifting a heavy cargo container:1.2), (sparks:1.1), (factory setting:1.1)"
-    - "cinematic, (a nomad convoy vehicle:1.3), (a heavily modified truck:1.2), (extra armor plates:1.1), (desert highway background:1.1), (battle-worn:1.1), (family:1.1)"
-    - "masterpiece, (a luxury cyber supercar:1.3), (gull-wing doors open:1.2), (parked in a high-end garage:1.1), (reflective carbon fiber:1.2), (low-profile:1.1), (showcase shot:1.1)"
-    - "futuristic, (a flying taxi cab:1.1), (classic yellow:1.1), (hovering in dense traffic:1.1), (glowing 'TAXI' sign:1.2), (congested air lane:1.1), (Blade Runner style:1.1)"
-    - "epic action shot, (a heavy combat walker:1.3), (bipedal mech:1.2), (firing miniguns:1.2), (glowing cockpit:1.1), (warzone environment:1.1), (explosions:1.1)"
-    - "stealth, (a sleek stealth motorcycle:1.3), (matte black finish:1.2), (electric engine:1.1), (almost invisible:1.1), (speeding silently through shadows:1.1), (night:1.1)"
-    - "dystopian, (a bulky garbage hauler drone:1.1), (large, rusted:1.1), (flying low over a slum district:1.1), (leaking fluid:1.1), (polluted sky:1.1)"
-    - "action, (a paramedic response skimmer:1.2), (red and white:1.1), (glowing medical symbols:1.2), (landing in a crisis zone:1.1), (urgent:1.1), (medics ready:1.1)"
-    - "dynamic action shot, (a racing hoverbike:1.3), (aerodynamic design:1.2), (sponsor decals:1.1), (leaning hard into a turn:1.2), (on a neon race track:1.1), (motion blur:1.1)"
-    - "cinematic, (a megacorp executive skimmer:1.3), (tinted windows:1.1), (polished black finish:1.2), (flanked by security drones:1.1), (landing on a rooftop pad:1.1), (power:1.1)"
-    - "concept art, (a bipedal police enforcement unit:1.3), (mech:1.1), (non-lethal weapons:1.1), (patrolling a crowded plaza:1.1), (intimidating presence:1.2), (authoritarian:1.1)"
-    - "atmospheric, (an underground street racer:1.3), (JDM style:1.1), (massive spoiler:1.1), (glowing undercarriage neon:1.2), (at a starting line:1.1), (crowd:1.1), (anticipation:1.1)"
-    - "military, (a VTOL aircraft:1.3), (hovering:1.2), (troop bay doors open:1.1), (soldiers rappelling down:1.2), (urban warzone:1.1), (cinematic:1.1)"
-    - "cinematic action shot, (a terrifying spider-tank mech:1.4), (multi-legged:1.2), (climbing the side of a building:1.2), (glowing red optics:1.1), (chaotic:1.1)"
-    - "wasteland, (a makeshift scavenger car:1.2), (asymmetrical design:1.1), (built from junk parts:1.1), (rusted:1.1), (fleeing a massive sandstorm:1.1), (desperate:1.1)"
-    - "vibrant, (a holographic advertisement vehicle:1.2), (covered in glowing, animated screens:1.3), (projecting giant holograms:1.2), (floating through city center:1.1)"
-    - "industrial, (a construction mech:1.2), (welding torch arm:1.2), (building a new skyscraper:1.1), (high altitude:1.1), (sparks falling:1.2), (city view:1.1)"
-    - "atmospheric, (a cybernetic rickshaw:1.2), (pulled by a modified android:1.3), (glowing paper lanterns:1.1), (in a crowded night market street:1.1), (vibrant:1.1)"
-    - "wasteland, (a solar-powered desert skiff:1.2), (large, high-tech sails:1.1), (gliding silently over sand dunes:1.1), (nomad crew:1.1), (desolate:1.1)"
-    - "dynamic action shot, (a monowheel cycle:1.3), (glowing inner rim:1.2), (rider hunched over in a sleek suit:1.1), (speeding through a neon tunnel:1.1), (motion blur:1.2)"
-    - "cinematic, (an amphibious assault vehicle:1.3), (emerging from a polluted water channel:1.2), (military green:1.1), (heavy armor:1.2), (city docks:1.1), (tense:1.1)"
-    - "action shot, (a data courier's motorcycle:1.2), (extremely agile:1.1), (customized data-slate holder:1.2), (weaving through dense, gridlocked traffic:1.2), (high speed:1.1)"
-    - "sci-fi, (an AI-driven security bot:1.2), (rolling on a central sphere:1.1), (glowing blue sensor eye:1.2), (patrolling a sterile corporate lobby:1.1), (clean, minimalist:1.1)"
-    - "epic scale, (a massive mobile city-crawler:1.5), (rolling on giant tracks:1.2), (entire buildings on its back:1.3), (crossing a desolate wasteland:1.1), (dystopian:1.1)"
-    - "vibrant, (a pop-idol's limo:1.2), (holographic pink paint:1.2), (glowing, plush interior:1.1), (surrounded by screaming fans:1.1), (flashing cameras:1.1)"
-    - "action, (a fire-response drone:1.2), (red plating:1.1), (spraying coolant foam:1.2), (hovering over a burning apartment building:1.1), (emergency scene:1.1)"
-    - "eerie, (an underwater exploration mech:1.3), (heavy glass cockpit:1.2), (glowing spotlights cutting through murky water:1.2), (in a flooded, sunken city sector:1.1), (discover:1.1)"
-    - "action, (a gang-modified hovercar:1.3), (bright graffiti paint job:1.2), (mismatched parts:1.1), (guns mounted on hood:1.2), (in a chaotic firefight:1.1), (sparks:1.1)"
-    - "vibrant, (an aerial advertising drone swarm:1.2), (hundreds of small drones:1.1), (forming a glowing, shifting logo:1.3), (flying over the city skyline:1.1), (night:1.1)"
-    - "noir, (an armored taxi:1.2), (yellow with black armor plates:1.1), (bulletproof glass:1.1), (waiting in a rainy, dark alley:1.1), (moody:1.1), (steam rising:1.1)"
-    - "cinematic wide shot, (a nomad motorcycle gang:1.3), (a large convoy of customized bikes:1.2), (battle-worn:1.1), (riding on a desert highway at sunset:1.1), (freedom:1.1)"
-    - "stealth, (a covert-ops skimmer:1.2), (dark camouflage pattern:1.1), (silent engines:1.2), (inserting an agent on a dark rooftop:1.1), (night:1.1), (tense:1.1)"
-    - "dynamic action shot, (an anti-gravity race pod:1.3), (F-Zero style:1.2), (leaving plasma trails:1.2), (neck-and-neck with rivals:1.1), (futuristic race:1.1)"
-    - "atmospheric, (a mobile noodle stand vehicle:1.2), (glowing Japanese lanterns:1.2), (steam rising from the kitchen:1.1), (parked on a busy street corner:1.1), (cozy:1.1)"
-    - "epic sci-fi, (a heavy cargo hauler spacecraft:1.3), (taking off from a city spaceport:1.2), (massive engine burn:1.3), (city skyline below:1.1), (leaving atmosphere:1.1)"
-    - "cinematic, (a riot control mech:1.3), (holding a heavy shield:1.2), (water cannon:1.1), (facing a crowd of angry protestors:1.1), (tense atmosphere:1.1), (dystopian:1.1)"
-    - "concept art, (a bio-mechanical vehicle:1.3), (fused chitin and metal:1.2), (glowing organic parts:1.2), (alien design:1.1), (surreal:1.1)"
-    - "cinematic, (a mag-lev train:1.3), (streaking through a glass tunnel:1.2), (city lights reflecting on its surface:1.1), (high speed:1.2), (futuristic public transport:1.1)"
-    - "gritty, (a junkyard mech:1.2), (built from scrap:1.2), (mismatched limbs:1.1), (in a massive scrapyard:1.1), (makeshift:1.1), (pilot visible:1.1)"
-    - "atmospheric, (a small surveillance drone:1.1), (buzzing:1.1), (glowing red camera lens:1.2), (watching from a dark alley:1.1), (suspicious, paranoia:1.1)"
-    - "luxury, (a luxury hover-yacht:1.3), (sleek white design:1.1), (glowing blue underwater lights:1.1), (floating above a neon-lit bay:1.2), (party on deck:1.1)"
-    - "atmospheric, (a hacker's mobile van:1.2), (covered in antennae and satellite dishes:1.2), (glowing server racks visible inside:1.2), (parked in a dark, anonymous alley:1.1)"
-    - "war, (an armored personnel carrier (APC):1.2), (military:1.1), (rolling through a destroyed, war-torn street:1.1), (soldiers on top:1.1), (gritty:1.1)"
-    - "action, (a cyberpunk hotrod:1.3), (exposed, glowing engine:1.2), (glowing plasma exhaust:1.3), (chrome finish:1.1), (street race:1.1), (motion blur:1.1)"
-    - "sci-fi action, (an orbital drop pod:1.3), (screaming through the atmosphere:1.1), (re-entry flames:1.2), (streaking towards the city:1.2), (invasion:1.1)"
-    - "slums, (a makeshift hover platform:1.1), (rusted fans:1.1), (carrying scavengers:1.1), (floating over a giant garbage heap:1.1), (dystopian:1.1)"
-    - "military, (an anti-air mobile turret:1.2), (quad cannons:1.2), (scanning the sky for targets:1.1), (on a military base rooftop:1.1), (defensive:1.1)"
-    - "wasteland, (an all-terrain nomad vehicle:1.2), (six massive wheels:1.1), (heavy suspension:1.1), (climbing a rocky, desolate hill:1.1), (survivor:1.1)"
-    - "clean, (a sleek corporate courier bike:1.2), (white and chrome:1.1), (glowing data pouch on the back:1.2), (speeding through clean, corporate traffic:1.1)"
-    - "dystopian, (a giant mobile factory:1.4), (billowing black smoke from smokestacks:1.1), (on massive treads:1.2), (polluting the environment:1.1), (epic scale:1.1)"
-    - "cinematic, (a floating police patrol car:1.2), (hovercar:1.1), (glowing 'POLICE' text:1.2), (shining a spotlight into an alley:1.1), (rainy night:1.1), (noir:1.1)"
-    - "masterpiece, (a custom sportscar:1.2), (painted with glowing circuit patterns:1.3), (parked in a neon-lit garage:1.1), (reflective floor:1.1), (showcase shot:1.1)"
-    - "military, (a heavy cargo VTOL:1.2), (heavy lift rotors:1.1), (transporting a large shipping container:1.1), (flying over an industrial zone:1.1)"
-    - "concept art, (a cybernetic horse:1.3), (gleaming mechanical limbs:1.2), (glowing red eyes:1.2), (a rider in futuristic armor:1.1), (fantasy, sci-fi:1.1)"
-    - "city life, (a compact city car:1.1), (bubble design:1.1), (futuristic:1.1), (stuck in a massive traffic jam:1.1), (holographic ads overhead:1.1)"
-    - "action, (a brawler mech:1.3), (heavy reinforced fists:1.2), (fighting another mech:1.2), (in an underground arena:1.1), (sparks flying:1.1), (cheering crowd:1.1)"
-    - "luxury, (a deluxe flying limousine:1.3), (long, sleek design:1.1), (glowing, luxurious interior:1.1), (approaching a high-rise landing pad:1.1), (corporate power:1.1)"
-    - "chaos, (a hacked construction bot:1.2), (repainted with graffiti:1.2), (rampaging down a street:1.1), (broken hydraulics:1.1), (panicked civilians:1.1)"
-    - "concept art, (a prototype racing car:1.3), (unusual, aerodynamic shape:1.1), (carbon fiber matte finish:1.2), (in a high-tech lab:1.1), (futuristic vehicle design:1.1)"
-    - "city life, (a mobile broadcasting van:1.1), (satellite dishes on top:1.1), (glowing screens on the side:1.1), (reporting from a busy scene:1.1), (media:1.1)"
-    - "military, (an armored convoy:1.2), (multiple military vehicles:1.1), (guarding a central VIP transport:1.2), (speeding down a highway:1.1), (tense:1.1)"
-    - "cinematic, (a stealth bomber:1.3), (triangular, alien-like shape:1.1), (flying high above the city:1.1), (opening bomb bay doors:1.2), (night raid:1.1), (silent:1.1)"
-    - "slums, (a junkyard hovercraft:1.2), (mismatched fans:1.1), (scavenger pilot:1.1), (gliding over a scrap pile:1.1), (makeshift:1.1), (polluted:1.1)"
-    - "stealth, (an arachnid patrol drone:1.3), (spider-like:1.2), (glowing red multi-lensed eye:1.1), (crawling silently on a wall:1.1), (surveillance:1.1), (eerie:1.1)"
-    - "retro futuristic, (a synthwave-style supercar:1.3), (glowing pink grid lines:1.2), (driving towards a digital sunset:1.1), (80s aesthetic:1.1)"
-    - "epic scale, (a massive city-block mech:1.5), (a walking building:1.3), (glowing windows:1.1), (towering over the rest of the city:1.2), (kaiju-sized:1.1)"
-    - "industrial, (a heavy mining vehicle:1.2), (giant drill on the front:1.2), (covered in dust and grime:1.1), (in a massive open-pit quarry:1.1)"
-    - "corporate, (a private security hoverbike:1.2), (white, with corporate logos:1.1), (flashing strobe light:1.1), (patrolling a clean tech campus:1.1)"
-    - "wasteland, (a nomad sand-sailer:1.2), (wind-powered:1.1), (patched, ragged sails:1.1), (racing across a vast desert:1.1), (low-tech:1.1)"
-    - "futuristic, (an AI-controlled passenger drone:1.1), (single-seater pod:1.1), (flying in an ordered, glowing sky-lane:1.1), (futuristic public transport:1.1)"
-    - "noir, (a black market delivery van:1.2), (unmarked, anonymous:1.1), (armored:1.1), (speeding through dark slum alleys:1.1), (covert:1.1)"
-    - "military, (a combat helicopter:1.2), (advanced, stealth rotors:1.1), (rocket pods armed:1.2), (providing air support over an urban warzone:1.1)"
-    - "atmospheric, (a cyberpunk motorcycle:1.3), (glowing circuit pattern paint:1.2), (parked in a rainy, neon-lit alley:1.1), (steam rising:1.1), (moody:1.1)"
-    - "dynamic, (a customized drift car:1.3), (glowing green neon:1.2), (drifting, sparks flying:1.2), (in an underground parking garage:1.1), (synthwave style:1.1)"
-    - "city life, (a food delivery drone:1.1), (glowing restaurant logo:1.1), (carrying a small bag:1.1), (flying past an apartment window:1.1), (everyday tech:1.1)"
-    - "wasteland, (a six-wheeled armored truck:1.3), (nomad-built:1.2), (spiked bumper:1.1), (crossing a dried lake bed:1.1), (battle-worn:1.1), (survivor:1.1)"
-    - "corporate, (an executive jet:1.2), (VTOL engines rotating:1.1), (sleek, chrome finish:1.2), (taking off from a skyscraper rooftop:1.1), (power, wealth:1.1)"
-    - "city life, (an amphibious tour bus:1.2), (floating in a city canal:1.1), (filled with tourists:1.1), (holographic guide:1.1), (futuristic tourism:1.1)"
-    - "industrial, (a heavy cargo mech:1.2), (carefully carrying a glowing reactor core:1.3), (dangerous:1.2), (in an industrial facility:1.1), (warning lights:1.1)"
-    - "epic, cinematic, (a flying aircraft carrier:1.5), (a massive mobile base:1.2), (drones and VTOLs launching:1.2), (hovering over the city:1.1), (military power:1.1)"
-    - "dystopian, (a police riot control vehicle:1.2), (heavy plating:1.1), (sonic emitters deployed:1.2), (in a tense standoff with a crowd:1.1), (authoritarian:1.1)"
-    - "city life, (an auto-cleaning street sweeper drone:1.1), (robotic arms:1.1), (scrubbing neon-lit streets:1.1), (utility robot:1.1), (clean:1.1)"
-    - "mysterious, (a cybernetic animal transport:1.2), (reinforced cage:1.1), (a pair of glowing eyes visible inside:1.2), (driving through dark, foggy streets:1.1), (noir:1.1)"
+  spotlight_outputs:
+    - "__gkr_cyberpunk/scene_storyboard_combo__"
+    - "__gkr_cyberpunk/key_visual_combo__"
+    - "__gkr_cyberpunk/poster_combo__"
+    - "__gkr_cyberpunk/in_world_ad_combo__"
+    - "__gkr_cyberpunk/news_broadcast_combo__"
+    - "__gkr_cyberpunk/surveillance_view_combo__"
+    - "__gkr_cyberpunk/graphic_novel_page_combo__"
 
-# ---------------------------------------------------------
-# NEGATIVE PROMPT
-# ---------------------------------------------------------
-
-  negative_prompt: 
-    - "ugly, blurry, (deformed:1.2), (disfigured:1.2), poor quality, (bad anatomy:1.3), (extra limbs:1.3), (extra fingers:1.3), (missing limbs:1.3), (fused fingers:1.3), watermark, signature, text, (worst quality, low quality:1.2), jpeg artifacts, compression, grayscale, monochrome, (long neck:1.2), (malformed hands:1.2), (bad hands:1.2), NG_DeepNegative_V1_75T, (fused limbs:1.2), duplicate, morbid, mutilated, out of frame, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, dehydrated, bad proportions, extra legs, gross proportions, (bad-artist:1.1), (bad-hands-5:1.1), (steampunk:1.3), (cogs:1.2), (gears:1.2), (brass:1.2), (steam:1.2), (Victorian:1.1)"
+  random:
+    - "__gkr_cyberpunk/spotlight_scenes__"
+    - "__gkr_cyberpunk/spotlight_characters__"
+    - "__gkr_cyberpunk/spotlight_designs__"
+    - "__gkr_cyberpunk/spotlight_outputs__"
+    - "__gkr_cyberpunk/corporate_power_combo__"
+    - "__gkr_cyberpunk/platform_labor_combo__"
+    - "__gkr_cyberpunk/surveillance_combo__"
+    - "__gkr_cyberpunk/augmentation_combo__"
+    - "__gkr_cyberpunk/synthetic_person_combo__"
+    - "__gkr_cyberpunk/community_resistance_combo__"
+    - "__gkr_cyberpunk/memory_identity_combo__"
+    - "__gkr_cyberpunk/climate_city_combo__"
+    - "__gkr_cyberpunk/media_propaganda_combo__"
+    - "__gkr_cyberpunk/cyber_noir_combo__"
+    - "__gkr_cyberpunk/regional_city_combo__"
+    - "__gkr_cyberpunk/standalone_character_combo__"
+    - "__gkr_cyberpunk/ensemble_combo__"
+    - "__gkr_cyberpunk/graphic_novel_page_combo__"
