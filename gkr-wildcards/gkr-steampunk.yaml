@@ -7,6 +7,15 @@
 # Theme core components: character/profession, period fashion, engineered object,
 # vehicle, environment, and visual tradition; keep technology functionally plausible.
 #
+# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# THEME EXTENSION — STEAMPUNK
+# Prefer intricate steam machinery in visible operation, adventurous travel, workshops, period
+# fashion, inventors, pilots, duels, rescues and spectacular vehicles. Show pipes, joints, controls,
+# fuel, exhaust and maintenance evidence so technology appears functional.
+# Example: a goggled pilot climbing an airship spar to close a ruptured steam valve above the city.
+# Out of scope: brass gears used as decoration without function, unsupported profession labels,
+# generic Victorian nostalgia, or alternate-history politics without a visual scene.
+#
 # ROUTE USAGE
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.

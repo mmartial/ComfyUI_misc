@@ -7,6 +7,15 @@
 # Theme core components: survivor, appearance/gear, faction, vehicle,
 # environment, scarcity pressure, and visual format; make wear and survival causal.
 #
+# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# THEME EXTENSION — WASTELAND
+# Prefer weathered survivors, improvised equipment, dangerous journeys, vehicle action, ruins,
+# altered ecology, discovery, rescue, confrontation and fragile moments of beauty or humor. Wear,
+# scarcity and repair must visibly affect bodies, objects and environments.
+# Example: two travelers using a patched vehicle winch to pull a water tank from a collapsing bridge.
+# Out of scope: passive suffering as the only attraction, abstract collapse politics, pristine gear
+# without explanation, invented geopolitics, or generic brown ruins without a focal subject.
+#
 # ROUTE USAGE
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.

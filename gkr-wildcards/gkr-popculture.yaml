@@ -7,6 +7,15 @@
 # Theme core components: source medium, genre, era, cultural mode, subject,
 # scene language, and output format; build recognizable types without imitation.
 #
+# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# THEME EXTENSION — POP CULTURE
+# Prefer instantly enjoyable media archetypes, performance moments, genre poses, promotional images,
+# fandom artifacts, playful spectacle and era-specific production language without copying a named
+# person, character, franchise or composition.
+# Example: an original masked television adventurer leaping through a practical miniature explosion.
+# Out of scope: direct imitation, celebrity likeness as the concept, logos as the visual hook,
+# discourse about fandom or media institutions, and generic quality/style-name prompting.
+#
 # ROUTE USAGE
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.

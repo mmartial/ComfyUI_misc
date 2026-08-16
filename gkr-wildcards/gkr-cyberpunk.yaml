@@ -9,6 +9,15 @@
 # Theme core components: visual treatment, character/labor, environment,
 # visible technology, power system, and narrative action; show themes physically.
 #
+# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# THEME EXTENSION — CYBERPUNK
+# Prefer augmented characters, street archetypes, infiltration, chases, confrontations, strange
+# technology, dense cities and stylish action alongside grounded daily life. A role label such as
+# cyber samurai, netrunner or techno-mage must be supported by visible hardware, clothing and action.
+# Example: a cable-linked deck user crouched behind a market stall while drones close overhead.
+# Out of scope: bureaucracy as the dominant attraction, abstract political analysis, generic neon
+# skylines without a focal idea, or social systems described without visible consequences.
+#
 # ROUTE USAGE
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.

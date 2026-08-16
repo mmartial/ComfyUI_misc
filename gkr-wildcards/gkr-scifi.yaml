@@ -7,6 +7,15 @@
 # Theme core components: character/biology, role, technology, spacecraft,
 # world/environment, speculative premise, and visual tradition; enforce causality.
 #
+# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# THEME EXTENSION — SCIENCE FICTION
+# Prefer visible speculative wonder: alien ecologies, spacecraft operations, strange artifacts,
+# exploration, rescue, first contact, cosmic scale and technology performing an understandable
+# function. Grounded futures and exuberant space opera are both valid.
+# Example: a suited explorer extending a sample tray toward an alien organism beside a landed craft.
+# Out of scope: speculative politics or scientific claims without visible consequences, invented
+# geopolitics, generic glowing technology, and incompatible biology/equipment combinations.
+#
 # ROUTE USAGE
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.

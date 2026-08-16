@@ -9,6 +9,15 @@
 # Theme core components: visual grammar, character, architecture/environment,
 # supernatural pressure, narrative action, and mood; make dread visibly causal.
 #
+# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# THEME EXTENSION — GOTHIC HORROR
+# Prefer haunted architecture, forbidden rooms, candlelit pursuit, doomed romance, investigation,
+# bodily dread, folklore and decisive supernatural manifestations. Quiet beauty and oppressive
+# stillness are as valuable as overt horror when a visible anomaly anchors the image.
+# Example: a rain-soaked heir opening a sealed crypt as a second shadow rises behind the door.
+# Out of scope: abstract family secrets, repression or curses without physical evidence; generic
+# gore without gothic material culture; modern political commentary unrelated to the haunting.
+#
 # ROUTE USAGE
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.

@@ -9,6 +9,15 @@
 # Theme core components: page craft, regional tradition, genre, character,
 # sequential scene, and publication format; keep medium and story logic aligned.
 #
+# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# THEME EXTENSION — GLOBAL COMICS
+# Prefer iconic genre panels, readable character acting, decisive action, strong silhouettes,
+# page craft and region-specific drawing/publication traditions. Sequential concepts may use
+# explicit panels, but single covers, splashes and character images still depict one moment.
+# Example: a caped rescuer holding a collapsed beam above civilians in a low-angle splash panel.
+# Out of scope: named copyrighted characters, unsupported regional labels, unreadable page
+# density, or narrative meaning that exists only in captions.
+#
 # ROUTE USAGE
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.

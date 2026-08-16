@@ -9,6 +9,15 @@
 # Theme core components: era/rendering, genre/demographic, character, setting,
 # cinematic grammar, and output format; align them around one readable scene.
 #
+# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# THEME EXTENSION — ANIME & MANGA
+# Prefer recognizable anime/manga genre moments, expressive poses, strong silhouettes,
+# observed daily life, transformations, duels, races, mecha launches and quiet emotional
+# interactions. Make demographic and genre language visible through design and staging.
+# Example: a cable-linked pilot braced inside a cracked cockpit as the hangar doors open.
+# Out of scope: generic fantasy labeled anime without medium cues; exposition-led fandom or
+# industry commentary; excessive multi-panel concepts outside explicit manga/page routes.
+#
 # ROUTE USAGE
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.

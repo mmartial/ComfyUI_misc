@@ -7,6 +7,15 @@
 # Theme core components: game era, genre, character role, environment,
 # gameplay/camera language, interface cues, and output format; keep them compatible.
 #
+# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# THEME EXTENSION — VIDEO GAMES
+# Prefer recognizable gameplay moments, boss confrontations, traversal, racing, discovery, combat,
+# puzzle interaction, character selection and promotional key art. Make game language visible through
+# camera, level structure, interactable objects and restrained interface cues.
+# Example: a player-scale explorer dodging a giant mechanical hand across a collapsing arena platform.
+# Out of scope: mechanics described without visible interaction, excessive HUD text, named game or
+# character imitation, and mixed genre/camera conventions that obscure the focal action.
+#
 # ROUTE USAGE
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.

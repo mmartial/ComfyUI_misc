@@ -7,6 +7,15 @@
 # Theme core components: era/cultural context, character, clothing, prop,
 # environment, folklore, and visual format; keep details historically compatible.
 #
+# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# THEME EXTENSION — JAPAN
+# Prefer materially specific people, landscapes, streets, crafts, festivals, clothing, transport,
+# architecture and folklore across clearly compatible periods. Contemporary ordinary life, quiet
+# observation, action and supernatural encounters should all remain available.
+# Example: a shrine attendant securing storm shutters while a foxlike reflection watches in a puddle.
+# Out of scope: unsupported "Japanese" aesthetics, mixed periods without an explicit visual premise,
+# arbitrary pan-Asian blending, contemporary politics, or exoticism without material specificity.
+#
 # ROUTE USAGE
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
