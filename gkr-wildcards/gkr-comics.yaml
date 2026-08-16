@@ -39,6 +39,233 @@
 gkr_comics:
 
 # ------------------------------------------------------------------------
+# CLASSIC SUPERHERO GENERATOR (RESTORED)
+# ------------------------------------------------------------------------
+
+  hero_archetype:
+    - flowing cape, broad chest emblem, feet planted wide, chin lifted
+    - full eye mask, crouched on a shadowed ledge, narrowed eyes
+    - scuffed jacket, worn gloves, protective stance before frightened bystanders
+    - starfield backdrop, radiant body outline, fists glowing with cosmic energy
+    - thick interlocking armor plates, massive gauntlets, wide braced stance
+    - compact athletic figure caught mid-flip, curved motion streaks
+    - layered robes, raised hands, concentric glowing runes and sparks
+    - asymmetrical facial features, patched clothing, hunched shoulders, guarded gaze
+    - non-human facial structure, armored stance before a damaged city, steady unblinking gaze
+    - cybernetic implants, exposed wiring, luminous visor, metal-plated forearm
+
+  villain_archetype:
+    - downcast eyes, clenched jaw, tear track through soot, damaged ornate coat
+    - narrowed eyes, thin smirk, fingertips joined above a glowing tactical display
+    - gigantic hunched figure, coarse hide, jagged teeth, oversized clenched fists
+
+  neutral_archetype:
+    - trench coat with hidden gadget pouches, tinted goggles
+    - scarred knuckles, worn leather jacket, lowered brow, downcast gaze
+    - lab coat, safety goggles pushed up, ink-stained fingers
+    - notepad and camera in hand, trench coat, sharp focused eyes
+    - grizzled face, weathered scars, grey-streaked hair
+    - bright wide grin, energetic pose, arms thrown open
+    - confident smirk, fingerless gloves, concealed dagger
+
+  age:
+    - young adult, aged 20s
+    - adult, aged 30s to 40s
+    - aged 50s to 60s, weathered face, grey-streaked hair, deep eye creases
+    - unnaturally smooth unlined skin, pale glowing eyes, waist-length white hair
+
+  build:
+    - lean athletic build, toned and defined
+    - bulky muscular build, thick torso and heavy limbs
+    - tall broad-shouldered build filling the frame
+    - agile compact build, acrobatic
+    - long-limbed toned build, upright balanced posture
+
+  tone:
+    - light skin tone, fair skin
+    - tan skin tone, sun-kissed skin
+    - dark brown skin tone, deep skin tone
+    - freckled skin tone, light freckles
+    - stone-like skin texture, cracked skin
+    - metallic skin sheen, chrome skin, reflective
+    - glowing cosmic skin, nebula skin, ethereal
+
+  hair:
+    - short cropped textured hair
+    - messy windswept hair
+    - slicked-back wet-look hair
+    - long flowing dramatic hair
+    - tight coiled voluminous curls
+    - shaved head, clean shaven
+    - dramatic comic-book spikes
+    - neat side-parted hair with glossy comb lines
+    - tangled voluminous mane with flyaway strands
+
+  hair_color:
+    - black hair
+    - brown hair
+    - blonde hair
+    - vibrant red hair
+    - white hair
+    - silver hair
+    - blue-tinted hair with comic-book highlights
+    - purple hair
+    - fiery orange hair
+    - colorful dyed streaks
+
+  eyes:
+    - piercing blue eyes, intense gaze
+    - bright vivid green eyes
+    - warm brown eyes
+    - steely grey eyes, focused
+    - glowing white eyes without pupils
+    - menacing glowing red eyes
+    - cosmic star-filled nebula eyes
+    - masked eyes with opaque white lenses
+
+  expression:
+    - furrowed brow, set jaw, narrowed eyes
+    - level gaze, relaxed brow, closed mouth
+    - one-sided raised-lip smirk, lifted eyebrow
+    - intense battle shout, open mouth
+    - grim brooding look, shadowed face
+    - kind reassuring smile
+    - extremely wide asymmetrical grin, bared teeth, raised cheeks
+    - surprised shock expression, wide eyes
+
+  costume:
+    - skin-tight spandex suit, high boots, contrasting briefs and gloves
+    - interlocking plated bodysuit, reinforced chest and shoulders
+    - long flowing dramatic cape
+    - tactical combat suit with pouches, gear and straps
+    - trench coat, mask, turned-up collar and fedora
+    - dark hooded vigilante outfit
+    - bright colorful classic costume in primary colors
+    - dark stealth costume in muted colors
+    - cosmic armor traced with glowing lines
+    - street clothes layered over practical armor
+
+  emblem:
+    - oversized high-contrast chest symbol
+    - stylized animal emblem
+    - lightning-bolt emblem
+    - star-shaped emblem
+    - shield-shaped crest
+    - menacing skull emblem
+    - simple minimalist geometric emblem
+
+  accessories:
+    - utility belt with gadgets and pouches
+    - wrist-mounted devices and high-tech bracers
+    - high-tech visor or goggles with a glowing lens
+    - classic domino mask
+    - protective full-face mask and helmet
+    - hood and face-obscuring scarf
+    - glowing energy gauntlets
+    - heavy armored boots
+    - long leather gloves
+    - bandolier with gear and straps
+
+  powers_fx:
+    - crackling electricity around glowing fists
+    - luminous aura radiating outward
+    - concentric glowing symbol rings, orbiting glyphs and sparks
+    - flames surrounding the body, embers and heat haze
+    - icy mist, frost and visible cold breath
+    - bright lightning arcing between the hands and nearby metal
+    - concentric transparent force ripples, bent background lines and floating debris
+    - shadowy tendrils curling from raised hands, black wisps with violet rims
+    - swirling nebula dust, star particles and violet-cyan light trails
+
+  city_background:
+    - towering city skyline at night with glowing windows
+    - rain-dark alley with puddles and steam vents
+    - rooftop above the city at night, stone gargoyles at the ledge
+    - crumbling abandoned warehouse with broken windows and dust
+    - busy downtown street with cars and pedestrians
+    - foggy suspension bridge over a city river
+    - battle-torn street filled with fire, debris and damaged vehicles
+    - secret underground high-tech lair with computer screens
+    - futuristic tower city with flying vehicles
+    - ruined overgrown post-apocalyptic city
+
+  panel_style:
+    - bold ink lines and strong comic contours
+    - heavy shadows, dramatic chiaroscuro and noir contrast
+    - bright flat colors and cel shading
+    - halftone print texture and pop-art dots
+    - vintage comic printing dots on aged paper
+    - modern digital gradient shading
+    - painterly rendered comic art
+    - black-and-white noir with solid blacks
+
+  camera:
+    - dynamic low angle with foreshortened boots and raised chest
+    - dramatic overhead high angle
+    - mid-action punch shot with impact blur
+    - emotional close-up portrait
+    - wide cinematic splash-panel establishing shot
+    - over-the-shoulder confrontation
+    - tilted Dutch angle
+
+  mood:
+    - wide establishing shot with dramatic scale and sweeping vista
+    - deep shadows, high-contrast lighting and muted colors
+    - warm golden sunrise light
+    - long shadows, dim uneven lighting and narrow framing
+    - motion blur, scattered debris and jagged composition
+    - low-key lighting, drifting fog and obscured silhouettes
+    - desaturated colors, downcast lighting and rain-streaked surfaces
+
+  fx_environment:
+    - airborne debris, dust and kinetic particles
+    - shattered glass suspended midair
+    - dense swirling smoke clouds
+    - heavy rain, lightning and storm clouds
+    - rising impact dust and cracked ground
+    - sparks and arcing broken wires
+    - intense flames and drifting embers
+
+  classic_comic_style:
+    - thick black contours, retro halftone dots and saturated primary colors
+    - dense scratchy ink, muted palette, rough paper and deep shadows
+    - monochrome ink wash, hard-edged shadows and pools of solid black
+    - clean rounded linework, flat bright colors and uncluttered shapes
+    - realistic gradient shading, dramatic rim light and widescreen composition
+    - visible digital brushstrokes, layered paint and softly blended shading
+
+  classic_layout:
+    - full-bleed splash page, wide shot spanning both pages
+    - dynamic split panel with diagonal borders and simultaneous adjacent poses
+    - inset close-up panel emphasizing a crucial detail
+    - multiple-panel sequential comic-strip layout
+    - cinematic widescreen panel with panoramic crop and strong rim light
+    - modern borderless panel
+
+  onomatopoeia:
+    - KABOOM explosion lettering integrated into smoke and debris
+    - POW impact lettering behind the striking fist
+    - ZZZAP electrical lettering traced by lightning
+    - CRASH lettering broken apart with shattered material
+    - WHAM punch lettering radiating from the impact point
+    - SKRAKOOM thunder lettering across storm clouds
+
+  classic_superhero_combo:
+    - "classic superhero character: __gkr_comics/hero_archetype__, __gkr_comics/age__, __gkr_comics/build__, __gkr_comics/tone__, __gkr_comics/hair__, __gkr_comics/hair_color__, __gkr_comics/eyes__, __gkr_comics/expression__, __gkr_comics/costume__, __gkr_comics/emblem__, __gkr_comics/accessories__, __gkr_comics/powers_fx__, __gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/classic_comic_style__, __gkr_comics/camera__"
+
+  classic_vigilante_combo:
+    - "masked vigilante: __gkr_comics/hero_archetype__, __gkr_comics/build__, __gkr_comics/costume__, __gkr_comics/accessories__, __gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/panel_style__, __gkr_comics/camera__"
+
+  classic_villain_combo:
+    - "supervillain: __gkr_comics/villain_archetype__, __gkr_comics/age__, __gkr_comics/build__, __gkr_comics/expression__, __gkr_comics/costume__, __gkr_comics/emblem__, __gkr_comics/powers_fx__, __gkr_comics/city_background__, __gkr_comics/fx_environment__, __gkr_comics/classic_comic_style__, __gkr_comics/camera__"
+
+  classic_cosmic_hero_combo:
+    - "cosmic superhero: __gkr_comics/hero_archetype__, __gkr_comics/build__, __gkr_comics/tone__, __gkr_comics/eyes__, __gkr_comics/costume__, __gkr_comics/powers_fx__, __gkr_comics/city_background__, __gkr_comics/classic_layout__, __gkr_comics/classic_comic_style__"
+
+  classic_superhero_scene_combo:
+    - "superhero action panel: __gkr_comics/hero_archetype__, __gkr_comics/costume__, __gkr_comics/powers_fx__, __gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/panel_style__, __gkr_comics/fx_environment__, __gkr_comics/camera__, __gkr_comics/classic_layout__"
+
+# ------------------------------------------------------------------------
 # PAGE CRAFT
 # ------------------------------------------------------------------------
 
@@ -435,6 +662,13 @@ gkr_comics:
     - "__gkr_comics/us_romance_combo__"
     - "__gkr_comics/us_alternative_combo__"
 
+  spotlight_classic_superheroes:
+    - "__gkr_comics/classic_superhero_combo__"
+    - "__gkr_comics/classic_vigilante_combo__"
+    - "__gkr_comics/classic_villain_combo__"
+    - "__gkr_comics/classic_cosmic_hero_combo__"
+    - "__gkr_comics/classic_superhero_scene_combo__"
+
   spotlight_european_comics:
     - "__gkr_comics/franco_belgian_album_combo__"
     - "__gkr_comics/italian_fumetti_combo__"
@@ -490,6 +724,7 @@ gkr_comics:
 # ------------------------------------------------------------------------
 
   random:
+    - "__gkr_comics/spotlight_classic_superheroes__"
     - "__gkr_comics/spotlight_us_comics__"
     - "__gkr_comics/spotlight_european_comics__"
     - "__gkr_comics/spotlight_world_comics__"
