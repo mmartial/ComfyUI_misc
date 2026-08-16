@@ -659,6 +659,42 @@ gkr_cyberpunk:
   expanded_vehicle_combo:
     - "cyberpunk vehicle showcase: __gkr_cyberpunk/expanded_vehicle_subject__, parked three-quarter exterior view, operator or passenger beside it for scale, access panels, controls and maintenance wear visible, __gkr_cyberpunk/rendering__"
 
+  cyberpunk_action_scene:
+    - street samurai drawing a mono-blade while sliding beneath a descending checkpoint barrier, two guards turning from opposite sides and sparks tracing the blade against concrete
+    - netrunner crouched behind an overturned market stall, one hand connected to a street terminal while the other deploys a signal jammer against approaching security drones
+    - augmented courier sprinting across rain-dark rooftops, sealed case wrist-tethered, one foot leaving a collapsing air-conditioning unit above the alley
+    - motorcycle racer leaning between autonomous taxis as a pursuing interceptor extends a wheel clamp, wet street reflections stretched behind both vehicles
+    - chrome-armed brawler blocking a powered baton with one forearm inside an underground fight ring, cracked plating and recoiling spectators visible around the impact
+    - android swordswoman deflecting three incoming drone rounds with a heated blade, severed projectiles and precise blade positions visible in one wide frame
+    - corporate extraction team breaching an apartment door as residents pull a manual barricade into place and route children through a rear service hatch
+    - bounty investigator diving across a noodle-stall counter while the target overturns a table and reaches toward a concealed exit behind hanging kitchen curtains
+    - flood-rescue crew piloting a skiff between collapsing street signs, one member catching a falling resident while another steers around exposed power cables
+    - cybernetic martial artist redirecting a heavier exoskeleton punch into a concrete support, planted feet and failing shoulder actuator visible at the point of contact
+    - drone operator steering two repair drones through security fire while physically dragging an injured technician behind a server-rack barrier
+    - armored courier descending a vertical service ladder as pursuers enter above and a train passes through the shaft below
+    - street mechanic activating a repaired loader arm to catch a falling transit carriage while passengers climb through its emergency windows
+    - anti-surveillance runner crossing a crowded plaza as camera boxes lose tracking one by one, reflective poncho fragments scattering several false silhouettes
+    - rooftop sniper lowering the rifle to pull a maintenance worker away from a collapsing antenna, distant target escaping across the opposite tower
+    - security medic raising a transparent shield over an injured protester while impact rounds spread visible cracks outward from the shield's upper edge
+    - synthetic fugitive tearing a tracking module from an open shoulder panel while running through a biometric gate, alarm lights changing from green to red behind
+    - tunnel smugglers pushing a disabled freight cart by hand as an autonomous patrol vehicle turns into the same narrow passage
+    - cyber-creature bursting through a recycling-yard conveyor while workers leap toward marked emergency stops and a loader pivots to block its path
+    - rival aerodyne pilots banking between arcology towers, one damaged control surface shedding panels as maintenance balconies rush past at close range
+    - street samurai and corporate agent fighting back-to-back beneath a disabled surveillance tower, separate attackers closing through rain from both ends of the lane
+    - memory courier trapped inside a glass elevator, using a prosthetic hand to force the doors while security descends visibly through the transparent shaft above
+    - community defenders rolling charged battery carts downhill into a barricade gap as armored vehicles advance and residents pull cables clear of the wheels
+    - orbital dock worker in a tether suit pushing away from an exploding cargo clamp, one hand reaching toward a rotating safety rail while debris crosses the station lights
+    - augmented detective chasing a suspect through a night market, both vaulting the same food cart from opposite directions as startled vendors pull customers aside
+    - combat synthetic bracing beneath a closing blast door while civilians crawl through, exposed arm actuators bending and emergency locks sparking overhead
+    - hoverboard courier weaving through elevated pedestrian traffic, pursuer drone caught in a laundry cable while the courier reaches toward a balcony handrail
+    - exoskeleton worker swinging an industrial cutter through a locked gate during a factory fire, coworkers carrying an injured person toward the opening behind
+
+  cyberpunk_action_combo:
+    - "cyberpunk action scene: __gkr_cyberpunk/cyberpunk_action_scene__, wide readable staging, attacker and defender limbs unobscured, movement route and immediate hazard visible, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+
+  random_action_scene:
+    - "cyberpunk action scene: __gkr_cyberpunk/cyberpunk_action_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__, wide readable staging, unobscured limbs, visible movement route and immediate hazard"
+
   spotlight_expanded:
     - "__gkr_cyberpunk/modular_character_combo__"
     - "__gkr_cyberpunk/modular_character_sheet_combo__"
@@ -722,3 +758,4 @@ gkr_cyberpunk:
     - "__gkr_cyberpunk/standalone_character_combo__"
     - "__gkr_cyberpunk/ensemble_combo__"
     - "__gkr_cyberpunk/graphic_novel_page_combo__"
+    - "__gkr_cyberpunk/random_action_scene__"
