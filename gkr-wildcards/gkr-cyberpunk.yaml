@@ -77,6 +77,109 @@ gkr_cyberpunk:
     - animated science-fiction key frame, clean linework, subdued cel shading and painted background
 
 # ------------------------------------------------------------------------
+# MODULAR CYBERPUNK CHARACTER DESIGN
+# ------------------------------------------------------------------------
+
+  character_age:
+    - young adult with recently installed hardware and clean calibration marks
+    - working-age adult with repaired clothing and visibly maintained implants
+    - middle-aged veteran with obsolete licensed augmentation and accumulated repair scars
+    - elderly adult using mixed-generation assistive technology and physical control backups
+    - synthetic person with an adult face, dated casing and several owner-made alterations
+
+  character_build:
+    - compact athletic build suited to climbing crowded infrastructure
+    - lean long-limbed build beneath layered weatherproof clothing
+    - broad industrial build supported by a work exoskeleton
+    - ordinary soft build with technology fitted around natural proportions
+    - muscular security-trained build with pressure marks around augmentation mounts
+    - asymmetrical build shaped by one heavy prosthetic limb
+
+  character_face:
+    - natural face with one subtle optical implant and tired attentive eyes
+    - sharply tailored corporate appearance with concealed interface ports
+    - weathered face crossed by old surgical seams and newer adhesive sensors
+    - soft expressive face beside a rigid synthetic jaw replacement
+    - fully synthetic face with replaceable cheek panels and a personalized cosmetic finish
+    - respirator-framed face with condensation, scarred brow and physical lens controls
+
+  character_hair:
+    - close-cropped practical hair around visible interface sockets
+    - shaved sides beneath a long rain-dark top layer
+    - braided hair threaded through insulated sensor rings
+    - shoulder-length hair with faded synthetic color and visible roots
+    - severe corporate cut maintained around concealed cranial ports
+    - uneven self-cut hair above a repaired optical visor
+    - fiber-optic synthetic hair with restrained status illumination
+    - gray hair tied away from a magnifying repair lens
+
+  character_expression:
+    - guarded sideways gaze while one hand covers an identification badge
+    - exhausted focus directed toward an open machine
+    - controlled corporate smile contradicted by clenched fingers
+    - defiant stare above a rejected-access warning
+    - cautious relief while testing a newly repaired prosthetic grip
+    - flat synthetic expression with hands carefully protecting a personal object
+    - open alarm as detection boxes multiply across a nearby screen
+    - quiet concentration while using a physical manual override
+
+  character_clothing:
+    - patched weatherproof street jacket with reflective repair tape and hidden cable channels
+    - severe corporate suit with biometric badge, reinforced lining and immaculate shoes
+    - layered market clothing adapted around mismatched prosthetic mounts
+    - industrial coveralls with insulation patches, tool loops and chemical stains
+    - compact pressure suit with scratched seals and handwritten inspection dates
+    - community-clinic scrubs beneath a transparent rain shell
+    - matte security armor with removable plates and body-camera mount
+    - secondhand formal clothing altered to fit a synthetic frame
+    - motorcycle leathers reinforced at implant attachment points
+    - hooded anti-surveillance poncho with reflective fragments and conductive mesh
+
+  character_augmentation:
+    - modular mechanical forearm with exposed fasteners, calibration marks and tactile controls
+    - ocular implant with aperture lens, manual focus ring and removable data cartridge
+    - spinal interface rail beneath a transparent protective cover
+    - reinforced legs with external shock absorbers and mismatched replacement feet
+    - artificial hand fitted with interchangeable work-specific fingers
+    - subdermal identity display flashing an expired license warning
+    - jaw and throat prosthesis with physical volume wheel and maintenance hatch
+    - cranial memory port protected by a worn locking cap
+    - worker exoskeleton attached at hips, shoulders and knees with pressure padding
+    - synthetic skin patch peeling back from a repaired carbon-frame joint
+    - respiratory implant connected to a belt-mounted filter cassette
+    - detachable sensory antenna folded behind one ear
+
+  character_equipment:
+    - diagnostic tablet connected to an open implant by braided cable
+    - compact tool roll with labeled drivers, sterile picks and spare fasteners
+    - sealed biometric courier case locked to a wrist tether
+    - physical street map covered with checkpoint and camera annotations
+    - foldable surveillance drone with replaced rotors and hand-painted registration
+    - nonlethal pulse baton with charge indicator and evidence tag
+    - heavy industrial cutter powered by a backpack battery
+    - analog camera loaded with physical film beneath anti-recording signs
+    - portable mesh-network relay with antenna mast and battery gauge
+    - transparent memory capsule held inside a padded evidence box
+    - motorcycle helmet with cracked augmented-reality visor
+    - paper identity documents sealed inside a waterproof pouch
+
+  character_detail:
+    - obsolete company patch partly removed from the shoulder
+    - handmade charm tied around an industrial cable
+    - several incompatible charging adapters clipped to the belt
+    - printed repair history folded inside a transparent pocket
+    - warning labels translated by hand in three languages
+    - old family photograph taped behind a transparent device cover
+    - right-to-repair symbol painted over a locked service panel
+    - medication timer attached beside an augmentation power gauge
+
+  modular_character_combo:
+    - "full-body modular cyberpunk character: __gkr_cyberpunk/character_age__, __gkr_cyberpunk/character_build__, __gkr_cyberpunk/character_face__, __gkr_cyberpunk/character_hair__, __gkr_cyberpunk/character_expression__, __gkr_cyberpunk/character_clothing__, __gkr_cyberpunk/character_augmentation__, __gkr_cyberpunk/character_equipment__, __gkr_cyberpunk/character_detail__, plain worn wall background, __gkr_cyberpunk/rendering__"
+
+  modular_character_sheet_combo:
+    - "modular cyberpunk character sheet: __gkr_cyberpunk/modular_character_combo__, front, profile and back views, neutral stance, augmentation opened and closed, equipment inset, materials and maintenance callouts"
+
+# ------------------------------------------------------------------------
 # GENRE-SAFE CHARACTER FAMILIES
 # ------------------------------------------------------------------------
 
@@ -266,6 +369,64 @@ gkr_cyberpunk:
     - cable-transit maintenance carriage with winch, tools and emergency evacuation seats
     - informal neighborhood power cart transporting charged batteries during an outage
 
+  expanded_vehicle_subject:
+    - low armored courier motorcycle with hub motors, sealed document compartment and scarred fairings
+    - three-wheel market taxi with hand-painted route boards, removable battery rack and patched rain canopy
+    - corporate executive sedan with opaque smart glass, biometric locks and a separate service-driver console
+    - retired police interceptor converted into a volunteer ambulance with mismatched doors and medical battery ports
+    - narrow lane-splitting electric bike carrying food containers, spare cells and a rooftop antenna mast
+    - amphibious flood taxi with retractable wheels, bow lights and apartment-block route markings
+    - autonomous street sweeper sheltering a sleeping courier beneath its sensor canopy
+    - high-speed maglev maintenance car with exposed tool lockers and manual track clamps
+    - compact smuggler van lined with signal mesh, false battery housings and a mechanical steering override
+    - solar desert crawler with folding shade panels, water recovery tanks and sand-scoured sensor domes
+    - arctic extraction hauler with heated joints, ice radar and emergency worker bunks
+    - vertical-city cable car carrying commuters, market crates and external repair platforms
+    - modular rescue truck deploying flood barriers, charging stations and a mobile clinic tent
+    - luxury aerodyne hovering above ground traffic while service drones clean its intake surfaces
+    - heavy industrial loader with interchangeable arms, dented counterweights and handwritten safety limits
+    - river freight hydrofoil stacked with sealed server racks and guarded cooling pumps
+    - neighborhood battery bus assembled from several vehicle generations with adapters visible beneath the floor
+    - racing motorcycle with active aerodynamic panels, physical brake backup and sponsor decals covering repairs
+    - unmanned checkpoint vehicle unfolding camera masts, tire barriers and detention lighting
+    - orbital transfer shuttle with scratched heat shielding, cargo clamps and analog emergency controls
+
+  cyber_creature_body:
+    - feral quadruped assembled from discarded prosthetic limbs around an animal-scale machine core
+    - serpentine maintenance machine stretched through ducts, cables trailing from each joint
+    - broad-winged surveillance organism with synthetic feathers and camera clusters beneath the chest
+    - compact humanoid service chassis moving on mismatched replacement legs
+    - immense industrial kaiju formed from fused cranes, cooling towers and autonomous construction systems
+    - translucent laboratory-grown body supported by a visible carbon endoskeleton
+    - swarm body made from hundreds of palm-sized repair drones sharing one moving silhouette
+    - amphibious waste-processing organism with filtration sacs and embedded tracking tags
+
+  cyber_creature_trait:
+    - cracked optical cluster repeatedly refocusing with red calibration lines
+    - exposed power cells protected by a nest of salvaged street signs
+    - artificial skin carrying obsolete corporate logos beneath newer repair patches
+    - flexible cable tendrils ending in specialized tools rather than claws
+    - warning lights changing color with posture and proximity
+    - mechanical ribs containing collected personal objects
+    - coolant vapor venting through gill-like openings
+    - identification number repeatedly scratched away and repainted
+
+  cyber_creature_behavior:
+    - sorting discarded electronics into careful material piles
+    - following a buried utility line through a crowded street
+    - shielding smaller maintenance drones from security fire
+    - exchanging charged batteries for broken components at a market stall
+    - nesting inside an abandoned charging station while residents route cables around it
+    - copying checkpoint gestures and accidentally redirecting traffic
+    - filtering polluted canal water through visible body chambers
+    - carrying fragments of recorded voices through damaged public speakers
+
+  modular_cyber_creature_combo:
+    - "cyberpunk creature design: __gkr_cyberpunk/cyber_creature_body__, __gkr_cyberpunk/cyber_creature_trait__, __gkr_cyberpunk/cyber_creature_behavior__, human scale reference, exposed maintenance access and unobscured locomotion, __gkr_cyberpunk/rendering__"
+
+  modular_cyber_creature_sheet_combo:
+    - "cyber-creature design sheet: __gkr_cyberpunk/modular_cyber_creature_combo__, front and side anatomy, locomotion pose, resting configuration, opened service section, footprint and human scale comparison"
+
 # ------------------------------------------------------------------------
 # AUTHORED VISUAL SCENES
 # ------------------------------------------------------------------------
@@ -441,6 +602,72 @@ gkr_cyberpunk:
     - "complete cyberpunk graphic-novel page based on __gkr_cyberpunk/platform_labor_scene__, wide location panel, close work action, warning display, worker reaction and final damaged equipment panel, black, gray and warning-orange color"
     - "complete cyberpunk graphic-novel page based on __gkr_cyberpunk/memory_identity_scene__, repeated booth composition, close panels of conflicting photographs and capsule labels, final full-width panel placing both contradictory records side by side"
 
+  expanded_character_concept:
+    - street samurai in repaired lamellar body armor, mono-blade sheathed while both hands adjust a prosthetic wrist
+    - netrunner lying beneath a market counter, fiber cable connected to a physical deck and one eye watching approaching boots
+    - corporate extraction agent in an immaculate suit opening a concealed armor panel inside a restricted elevator
+    - android courier shielding a sealed case from rain beneath a transparent jacket, route timer reflected in synthetic eyes
+    - rooftop drone operator surrounded by repaired quadcopters, paper blind-spot map weighted by spare batteries
+    - cyber shaman kneeling at an altar assembled from server fans, family photographs and hand-painted circuit boards
+    - bounty investigator comparing a target photograph with three conflicting biometric profiles at a food stall
+    - augmented motorcycle racer tightening a mechanical knee brace beside a scarred low-slung bike
+    - underground surgeon holding a sterilized salvaged hand between a patient and a locked corporate replacement
+    - memory smuggler wearing a necklace of labeled storage capsules beneath checkpoint scanning light
+    - former riot officer repainting a heavy shield with neighborhood emergency-route symbols
+    - synthetic nightclub singer removing a damaged voice module before a dressing-room mirror
+    - sewer cartographer in chest waders projecting utility lines across a flooded tunnel wall
+    - elderly hacker using a mechanical keyboard beside shelves of obsolete network adapters
+    - corporate heir in formal clothing crouched to repair a service robot outside a gala entrance
+    - prosthetic martial artist practicing controlled grip pressure against a calibration dummy
+    - climate courier crossing a flooded avenue on articulated stilts with medicine cases overhead
+    - black-market optician aligning a new lens while old mechanical eyes watch from labeled drawers
+    - pirate radio host broadcasting from a cable car stopped above a district-wide blackout
+    - waste-yard mechanic operating a loader through direct neural cables and redundant hand levers
+    - border interpreter holding two identity screens toward armed officers as a family waits behind
+    - anti-surveillance tailor fitting conductive mesh into an ordinary commuter coat
+    - decommissioned combat synthetic carrying groceries and a folded neighborhood volunteer vest
+    - investigative photographer developing physical film while deletion warnings fill nearby screens
+
+  expanded_background:
+    - neon commercial canyon at dawn, delivery crews cleaning beneath dark advertising screens
+    - layered hillside settlement connected by cable cars, mesh antennas and improvised rain channels
+    - flooded financial district where boats pass beneath dry guarded skybridges
+    - underground data market occupying an abandoned metro platform, cable bundles following old track routes
+    - rooftop battery farm surrounded by laundry lines, vegetable beds and community antennas
+    - corporate arcology service level, coolant pipes and worker corridors beneath a polished public atrium
+    - narrow implant bazaar with sterile repair booths beside food vendors and recycled-parts tables
+    - storm-dark port filled with autonomous cranes, worker ferries and multilingual warning lights
+    - derelict shopping mall converted into housing, clinics, workshops and indoor agriculture
+    - desert solar city surrounded by dust barriers, condenser towers and crowded water terminals
+    - arctic server settlement glowing through blowing snow, heat-exchange pipes connecting dormitories
+    - elevated cemetery of obsolete robots overlooking active recycling furnaces
+    - border megastation containing biometric queues, sleeping areas and informal document services
+    - hospital alley crowded with mobile clinics, prosthetic chargers and medication vending cages
+    - entertainment district during daylight, exposed stage machinery and exhausted night workers heading home
+    - vertical farm tower with public market floors below restricted laboratory gardens
+    - abandoned corporate suburb occupied by repair cooperatives and shared autonomous vehicles
+    - rain-filled construction trench revealing older streets and severed fiber lines beneath the city
+    - orbital slum wrapped around a luxury habitat's waste-heat radiators and cargo locks
+    - sea-wall neighborhood during gate maintenance, market stalls raised above corroded hydraulic machinery
+
+  expanded_character_combo:
+    - "__gkr_cyberpunk/expanded_character_concept__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+
+  expanded_background_combo:
+    - "cyberpunk environment establishing frame: __gkr_cyberpunk/expanded_background__, visible circulation, utilities, maintenance access and human scale references, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+
+  expanded_vehicle_combo:
+    - "cyberpunk vehicle showcase: __gkr_cyberpunk/expanded_vehicle_subject__, parked three-quarter exterior view, operator or passenger beside it for scale, access panels, controls and maintenance wear visible, __gkr_cyberpunk/rendering__"
+
+  spotlight_expanded:
+    - "__gkr_cyberpunk/modular_character_combo__"
+    - "__gkr_cyberpunk/modular_character_sheet_combo__"
+    - "__gkr_cyberpunk/expanded_character_combo__"
+    - "__gkr_cyberpunk/expanded_background_combo__"
+    - "__gkr_cyberpunk/expanded_vehicle_combo__"
+    - "__gkr_cyberpunk/modular_cyber_creature_combo__"
+    - "__gkr_cyberpunk/modular_cyber_creature_sheet_combo__"
+
   spotlight_scenes:
     - "__gkr_cyberpunk/corporate_power_combo__"
     - "__gkr_cyberpunk/platform_labor_combo__"
@@ -458,6 +685,7 @@ gkr_cyberpunk:
     - "__gkr_cyberpunk/standalone_character_combo__"
     - "__gkr_cyberpunk/ensemble_combo__"
     - "__gkr_cyberpunk/character_sheet_combo__"
+    - "__gkr_cyberpunk/spotlight_expanded__"
 
   spotlight_designs:
     - "__gkr_cyberpunk/augmentation_sheet_combo__"
