@@ -80,6 +80,32 @@ gkr_cyberpunk:
 # MODULAR CYBERPUNK CHARACTER DESIGN
 # ------------------------------------------------------------------------
 
+  classic_cyberpunk_archetype:
+    - rain-dark armored figure in a low two-handed stance, sheathed heated mono-blade at the hip, combat-interface ports visible along the neck and wrists
+    - crouched figure typing on a rugged physical cyberdeck, braided cable running from the deck to a temple socket, access warnings reflected across a mirrored visor
+    - standing figure tracing both hands through projected circuit diagrams, finger-mounted gesture sensors leaving precise luminous paths between rotating interface panels
+    - kneeling figure connecting salvaged processors around family photographs and hand-painted circuit boards, incense smoke crossing diagnostic lights and exposed cables
+    - severe suited figure opening one jacket panel to reveal thin armor, biometric badge and encrypted wrist display held toward a restricted elevator reader
+    - coat-wearing investigator spreading a target photograph, restraint cuffs and three conflicting biometric profiles across a market counter
+    - feminine synthetic figure with exposed artificial muscle fibers, fiber-optic hair and a heated mono-blade held in a balanced two-handed guard
+    - broad figure with chrome-plated arms, reinforced elbow joints, impact plates and taped mechanical fists raised inside a marked fighting ring
+    - crouched figure in light-absorbing fabric beside a locked service door, optical camouflage emitters bending the wall pattern around the shoulders, manual bypass tools in one hand
+    - armored responder kneeling over an injured person, implant stabilizer clipped to an exposed prosthetic joint, sealed medication and folding ballistic shield within reach
+    - seated figure steering three repaired aerial drones from a rugged twin-stick console, separate camera feeds and numbered battery gauges visible across the screen
+    - long-coated figure concealing several dated memory capsules in stitched inner pockets while a checkpoint scanner illuminates one capsule through the fabric
+    - leather-suited rider tightening a spinal brace beside a scarred motorcycle, reaction cable connected at the lower neck and cracked helmet resting on the seat
+    - gloved technician aligning a sterilized salvaged hand against a patient's wrist mount, trays of labeled joints, fasteners and calibration tools surrounding both arms
+    - synthetic figure in a worn city coat aiming a telescoping optical lens at physical evidence while a handheld recorder displays matching measurement marks
+    - runner with reinforced artificial legs and a wrist-tethered delivery case, one optical lens projecting a route and closing timer across the face
+    - armored figure with a rectangular insignia visibly cut from the chest, unsupported combat hardware exposed at one shoulder and mismatched replacement plates strapped over the torso
+    - rooftop broadcaster aiming a directional antenna between towers, portable mesh transmitter open at the feet and analog headphones pressed to one ear
+    - balanced fighter striking padded calibration targets with a mechanical hand, nearby display showing grip force and joint speed while the other hand adjusts a physical limiter
+    - dust-coated traveler testing a salvaged component with a handheld probe, respiratory filters connected at the ribs and solar charging cloth unfolded across a pack
+    - office-clothed figure arranging sensor-tagged paper strips and conductive chalk around a malfunctioning street terminal, measurement tablet showing the same repeating electrical spike
+    - hooded figure projecting a small animal-shaped machine-light construct from a palm emitter, subdermal circuits glowing only along the raised arm and physical controls visible beneath the thumb
+    - former uniformed guard holding copied access cards beside an obsolete smart weapon displaying SAFE MODE LOCKED, removed unit patches lying on the table
+    - pressure-suited figure anchored by magnetic boots inside an orbital cargo bay, recoil-braced prosthetic arms holding a cutting tool as unsecured crates drift behind
+
   character_age:
     - young adult with recently installed hardware and clean calibration marks
     - working-age adult with repaired clothing and visibly maintained implants
@@ -175,6 +201,12 @@ gkr_cyberpunk:
 
   modular_character_combo:
     - "full-body modular cyberpunk character: __gkr_cyberpunk/character_age__, __gkr_cyberpunk/character_build__, __gkr_cyberpunk/character_face__, __gkr_cyberpunk/character_hair__, __gkr_cyberpunk/character_expression__, __gkr_cyberpunk/character_clothing__, __gkr_cyberpunk/character_augmentation__, __gkr_cyberpunk/character_equipment__, __gkr_cyberpunk/character_detail__, plain worn wall background, __gkr_cyberpunk/rendering__"
+
+  random_augmented_character:
+    - "full-body augmented cyberpunk character: __gkr_cyberpunk/classic_cyberpunk_archetype__, __gkr_cyberpunk/character_age__, __gkr_cyberpunk/character_build__, __gkr_cyberpunk/character_face__, __gkr_cyberpunk/character_hair__, __gkr_cyberpunk/character_expression__, __gkr_cyberpunk/character_clothing__, __gkr_cyberpunk/character_augmentation__, __gkr_cyberpunk/character_equipment__, __gkr_cyberpunk/character_detail__, both hands and augmentation attachment points visible, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+
+  augmented_character_sheet_combo:
+    - "augmented cyberpunk character sheet: __gkr_cyberpunk/random_augmented_character__, front, profile and back views, neutral stance, augmentation opened and closed, equipment separated into labeled insets, material and repair callouts"
 
   modular_character_sheet_combo:
     - "modular cyberpunk character sheet: __gkr_cyberpunk/modular_character_combo__, front, profile and back views, neutral stance, augmentation opened and closed, equipment inset, materials and maintenance callouts"
@@ -603,23 +635,23 @@ gkr_cyberpunk:
     - "complete cyberpunk graphic-novel page based on __gkr_cyberpunk/memory_identity_scene__, repeated booth composition, close panels of conflicting photographs and capsule labels, final full-width panel placing both contradictory records side by side"
 
   expanded_character_concept:
-    - street samurai in repaired lamellar body armor, mono-blade sheathed while both hands adjust a prosthetic wrist
-    - netrunner lying beneath a market counter, fiber cable connected to a physical deck and one eye watching approaching boots
+    - repaired lamellar-armored figure with a sheathed mono-blade, both hands adjusting a prosthetic wrist beneath rain-dark signage
+    - figure lying beneath a market counter, fiber cable connecting a temple socket to a physical deck, one eye watching approaching boots
     - corporate extraction agent in an immaculate suit opening a concealed armor panel inside a restricted elevator
-    - android courier shielding a sealed case from rain beneath a transparent jacket, route timer reflected in synthetic eyes
-    - rooftop drone operator surrounded by repaired quadcopters, paper blind-spot map weighted by spare batteries
-    - cyber shaman kneeling at an altar assembled from server fans, family photographs and hand-painted circuit boards
-    - bounty investigator comparing a target photograph with three conflicting biometric profiles at a food stall
+    - synthetic figure shielding a wrist-tethered sealed case from rain beneath a transparent jacket, route timer reflected in artificial eyes
+    - rooftop figure steering repaired quadcopters from a twin-stick console, paper blind-spot map weighted by spare batteries
+    - kneeling figure connecting an altar of server fans, family photographs and hand-painted circuit boards with braided data cables
+    - coat-wearing figure comparing a target photograph, restraint cuffs and three conflicting biometric profiles at a food stall
     - augmented motorcycle racer tightening a mechanical knee brace beside a scarred low-slung bike
     - underground surgeon holding a sterilized salvaged hand between a patient and a locked corporate replacement
-    - memory smuggler wearing a necklace of labeled storage capsules beneath checkpoint scanning light
+    - long-coated figure concealing a necklace of labeled memory capsules as checkpoint light reveals their shapes beneath the fabric
     - former riot officer repainting a heavy shield with neighborhood emergency-route symbols
     - synthetic nightclub singer removing a damaged voice module before a dressing-room mirror
     - sewer cartographer in chest waders projecting utility lines across a flooded tunnel wall
-    - elderly hacker using a mechanical keyboard beside shelves of obsolete network adapters
+    - elderly figure typing commands on a mechanical keyboard beside shelves of obsolete network adapters and hand-labeled terminals
     - corporate heir in formal clothing crouched to repair a service robot outside a gala entrance
     - prosthetic martial artist practicing controlled grip pressure against a calibration dummy
-    - climate courier crossing a flooded avenue on articulated stilts with medicine cases overhead
+    - stilt-legged figure crossing a flooded avenue with sealed medicine cases held overhead and a delivery route glowing across one lens
     - black-market optician aligning a new lens while old mechanical eyes watch from labeled drawers
     - pirate radio host broadcasting from a cable car stopped above a district-wide blackout
     - waste-yard mechanic operating a loader through direct neural cables and redundant hand levers
@@ -660,33 +692,33 @@ gkr_cyberpunk:
     - "cyberpunk vehicle showcase: __gkr_cyberpunk/expanded_vehicle_subject__, parked three-quarter exterior view, operator or passenger beside it for scale, access panels, controls and maintenance wear visible, __gkr_cyberpunk/rendering__"
 
   cyberpunk_action_scene:
-    - street samurai drawing a mono-blade while sliding beneath a descending checkpoint barrier, two guards turning from opposite sides and sparks tracing the blade against concrete
-    - netrunner crouched behind an overturned market stall, one hand connected to a street terminal while the other deploys a signal jammer against approaching security drones
-    - augmented courier sprinting across rain-dark rooftops, sealed case wrist-tethered, one foot leaving a collapsing air-conditioning unit above the alley
+    - lamellar-armored figure drawing a mono-blade while sliding beneath a descending checkpoint barrier, two guards turning from opposite sides and sparks tracing the blade against concrete
+    - crouched figure behind an overturned market stall, one hand cable-connected to a street terminal while the other deploys a signal jammer against approaching security drones
+    - reinforced-leg runner sprinting across rain-dark rooftops, sealed case wrist-tethered, one foot leaving a collapsing air-conditioning unit above the alley
     - motorcycle racer leaning between autonomous taxis as a pursuing interceptor extends a wheel clamp, wet street reflections stretched behind both vehicles
     - chrome-armed brawler blocking a powered baton with one forearm inside an underground fight ring, cracked plating and recoiling spectators visible around the impact
     - android swordswoman deflecting three incoming drone rounds with a heated blade, severed projectiles and precise blade positions visible in one wide frame
     - corporate extraction team breaching an apartment door as residents pull a manual barricade into place and route children through a rear service hatch
-    - bounty investigator diving across a noodle-stall counter while the target overturns a table and reaches toward a concealed exit behind hanging kitchen curtains
+    - coat-wearing figure with target photograph and restraint cuffs diving across a noodle-stall counter while the photographed person overturns a table and reaches toward a concealed exit
     - flood-rescue crew piloting a skiff between collapsing street signs, one member catching a falling resident while another steers around exposed power cables
     - cybernetic martial artist redirecting a heavier exoskeleton punch into a concrete support, planted feet and failing shoulder actuator visible at the point of contact
-    - drone operator steering two repair drones through security fire while physically dragging an injured technician behind a server-rack barrier
-    - armored courier descending a vertical service ladder as pursuers enter above and a train passes through the shaft below
+    - console-wearing figure steering two repair drones through security fire while physically dragging an injured technician behind a server-rack barrier
+    - armored figure with a wrist-tethered sealed case descending a vertical service ladder as pursuers enter above and a train passes through the shaft below
     - street mechanic activating a repaired loader arm to catch a falling transit carriage while passengers climb through its emergency windows
     - anti-surveillance runner crossing a crowded plaza as camera boxes lose tracking one by one, reflective poncho fragments scattering several false silhouettes
     - rooftop sniper lowering the rifle to pull a maintenance worker away from a collapsing antenna, distant target escaping across the opposite tower
-    - security medic raising a transparent shield over an injured protester while impact rounds spread visible cracks outward from the shield's upper edge
+    - armored responder raising a transparent shield over an injured protester, open medical kit at their feet as impact rounds spread cracks across the shield
     - synthetic fugitive tearing a tracking module from an open shoulder panel while running through a biometric gate, alarm lights changing from green to red behind
     - tunnel smugglers pushing a disabled freight cart by hand as an autonomous patrol vehicle turns into the same narrow passage
     - cyber-creature bursting through a recycling-yard conveyor while workers leap toward marked emergency stops and a loader pivots to block its path
     - rival aerodyne pilots banking between arcology towers, one damaged control surface shedding panels as maintenance balconies rush past at close range
-    - street samurai and corporate agent fighting back-to-back beneath a disabled surveillance tower, separate attackers closing through rain from both ends of the lane
-    - memory courier trapped inside a glass elevator, using a prosthetic hand to force the doors while security descends visibly through the transparent shaft above
+    - mono-blade fighter in repaired lamellar armor and a suited figure with concealed body plating fighting back-to-back beneath a disabled surveillance tower
+    - long-coated figure with labeled memory capsules trapped inside a glass elevator, prosthetic hand forcing the doors while guards descend through the transparent shaft
     - community defenders rolling charged battery carts downhill into a barricade gap as armored vehicles advance and residents pull cables clear of the wheels
     - orbital dock worker in a tether suit pushing away from an exploding cargo clamp, one hand reaching toward a rotating safety rail while debris crosses the station lights
-    - augmented detective chasing a suspect through a night market, both vaulting the same food cart from opposite directions as startled vendors pull customers aside
+    - telescopic-eyed figure clutching a target photograph while chasing the photographed person through a night market, both vaulting the same food cart from opposite directions
     - combat synthetic bracing beneath a closing blast door while civilians crawl through, exposed arm actuators bending and emergency locks sparking overhead
-    - hoverboard courier weaving through elevated pedestrian traffic, pursuer drone caught in a laundry cable while the courier reaches toward a balcony handrail
+    - hoverboard rider with a wrist-tethered delivery case weaving through elevated pedestrian traffic, pursuer drone caught in a laundry cable as one hand reaches for a balcony rail
     - exoskeleton worker swinging an industrial cutter through a locked gate during a factory fire, coworkers carrying an injured person toward the opening behind
 
   cyberpunk_action_combo:
@@ -697,6 +729,8 @@ gkr_cyberpunk:
 
   spotlight_expanded:
     - "__gkr_cyberpunk/modular_character_combo__"
+    - "__gkr_cyberpunk/random_augmented_character__"
+    - "__gkr_cyberpunk/augmented_character_sheet_combo__"
     - "__gkr_cyberpunk/modular_character_sheet_combo__"
     - "__gkr_cyberpunk/expanded_character_combo__"
     - "__gkr_cyberpunk/expanded_background_combo__"
