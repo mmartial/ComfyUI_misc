@@ -63,6 +63,16 @@ gkr_cyberpunk:
     - symmetrical institutional frame disrupted by one improvised human action
     - cutaway or sectional view showing connected interior systems
 
+  random_composition:
+    - low diagonal framing with the moving subject crossing layered street traffic
+    - centered silhouette beneath converging cables, signs and elevated walkways
+    - foreground machinery framing a small figure at the active control point
+    - compressed street depth with the focal interaction isolated by one practical light
+    - overhead view organized around a vehicle, checkpoint or open service hatch
+    - close three-quarter framing with augmentation, tool and immediate hazard together
+    - wide environmental frame with one bright moving subject against dark infrastructure
+    - surveillance-like fixed angle with the focal subject breaking the geometric pattern
+
   lighting:
     - overcast daylight reflected from concrete, glass and standing water
     - harsh fluorescent work light with uneven failed fixtures
@@ -112,22 +122,22 @@ gkr_cyberpunk:
     - dust-coated traveler testing a salvaged component with a handheld probe, respiratory filters connected at the ribs and solar charging cloth unfolded across a pack
     - office-clothed figure arranging sensor-tagged paper strips and conductive chalk around a malfunctioning street terminal, measurement tablet showing the same repeating electrical spike
     - hooded figure projecting a small animal-shaped machine-light construct from a palm emitter, subdermal circuits glowing only along the raised arm and physical controls visible beneath the thumb
-    - former uniformed guard holding copied access cards beside an obsolete smart weapon displaying SAFE MODE LOCKED, removed unit patches lying on the table
+    - figure in an altered guard uniform holding copied access cards beside an obsolete smart weapon displaying SAFE MODE LOCKED, removed unit patches lying on the table
     - pressure-suited figure anchored by magnetic boots inside an orbital cargo bay, recoil-braced prosthetic arms holding a cutting tool as unsecured crates drift behind
 
   character_age:
     - young adult with recently installed hardware and clean calibration marks
-    - working-age adult with repaired clothing and visibly maintained implants
-    - middle-aged veteran with obsolete licensed augmentation and accumulated repair scars
+    - adult with repaired clothing and visibly maintained implants
+    - middle-aged adult with obsolete licensed augmentation and accumulated repair scars
     - elderly adult using mixed-generation assistive technology and physical control backups
-    - synthetic person with an adult face, dated casing and several owner-made alterations
+    - synthetic person with an adult face, dated casing, hand-painted trim and several mismatched replacement panels
 
   character_build:
-    - compact athletic build suited to climbing crowded infrastructure
+    - compact athletic build with flexed legs and balanced climbing posture
     - lean long-limbed build beneath layered weatherproof clothing
     - broad industrial build supported by a work exoskeleton
     - ordinary soft build with technology fitted around natural proportions
-    - muscular security-trained build with pressure marks around augmentation mounts
+    - muscular build with pressure marks around augmentation mounts
     - asymmetrical build shaped by one heavy prosthetic limb
 
   character_face:
@@ -212,7 +222,7 @@ gkr_cyberpunk:
     - "full-body modular cyberpunk character: __gkr_cyberpunk/character_age__, __gkr_cyberpunk/character_build__, __gkr_cyberpunk/character_face__, __gkr_cyberpunk/character_hair__, __gkr_cyberpunk/character_expression__, __gkr_cyberpunk/character_clothing__, __gkr_cyberpunk/character_augmentation__, __gkr_cyberpunk/character_equipment__, __gkr_cyberpunk/character_detail__, plain worn wall background, __gkr_cyberpunk/rendering__"
 
   random_augmented_character:
-    - "full-body augmented cyberpunk character: __gkr_cyberpunk/classic_cyberpunk_archetype__, __gkr_cyberpunk/character_age__, __gkr_cyberpunk/character_build__, __gkr_cyberpunk/character_face__, __gkr_cyberpunk/character_hair__, __gkr_cyberpunk/character_expression__, __gkr_cyberpunk/character_clothing__, __gkr_cyberpunk/character_augmentation__, __gkr_cyberpunk/character_equipment__, __gkr_cyberpunk/character_detail__, both hands and augmentation attachment points visible, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "full-body augmented cyberpunk character: __gkr_cyberpunk/classic_cyberpunk_archetype__, __gkr_cyberpunk/character_augmentation__, visible attachment points, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
 
   augmented_character_sheet_combo:
     - "augmented cyberpunk character sheet: __gkr_cyberpunk/random_augmented_character__, front, profile and back views, neutral stance, augmentation opened and closed, equipment separated into labeled insets, material and repair callouts"
@@ -225,7 +235,7 @@ gkr_cyberpunk:
 # ------------------------------------------------------------------------
 
   corporate_character:
-    - compliance inspector photographing unauthorized prosthetic repairs, severe suit, evidence tablet and company badge
+    - severe suited inspector photographing an opened prosthetic while an evidence tablet frames its red license warning
     - exhausted office analyst surrounded by transparent productivity displays, lunch untouched beside the keyboard
     - corporate physician presenting several branded implant options across a clean consultation table
     - executive framed by panoramic city glass while physical security staff wait behind
@@ -260,7 +270,7 @@ gkr_cyberpunk:
     - rehabilitation patient training with an older mechanical hand and physical calibration rig
     - technician repairing obsolete ocular hardware beneath a magnifying lamp
     - mobile-clinic nurse checking several generations of incompatible hearing implants
-    - memory therapist arranging labeled physical storage capsules before a session
+    - clinic worker arranging labeled memory capsules beside a seated patient holding a consent form and disconnected playback cable
     - occupational-health worker inspecting exoskeleton pressure injuries on warehouse staff
     - community pharmacist dispensing anti-rejection medication from a locked market stall
 
@@ -272,13 +282,13 @@ gkr_cyberpunk:
     - damaged android waiting quietly among human patients, temporary tape sealing one panel
     - machine worker replacing its own unsupported component using a printed manual
     - household intelligence housed in several mismatched appliances arranged around one family table
-    - archived personality speaking from an obsolete terminal beside boxes of a deceased owner's belongings
+    - obsolete terminal displaying a speaking face matching a black-ribbon memorial portrait, packed boxes and labeled personal belongings stacked beside the screen
 
   media_character:
     - investigative journalist comparing printed photographs with corrupted surveillance frames
     - news presenter recording a polished segment while a damaged district remains visible beyond the studio glass
     - street documentarian carrying compact cameras beneath anti-recording signs
-    - influencer framing luxury content to hide industrial waste just outside the shot
+    - phone screen framing a smiling figure against a pristine luxury lobby while leaking waste pipes remain visible immediately beyond the phone's camera crop
     - public-records clerk copying files before an automated deletion timer expires
     - multilingual interpreter guiding travelers through contradictory border-terminal screens
     - independent radio operator broadcasting from a rooftop mesh-network station
@@ -286,29 +296,29 @@ gkr_cyberpunk:
 
   community_character:
     - tenant organizer carrying printed lockout notices and a portable door override
-    - right-to-repair activist opening a corporate prosthetic at a shared workbench
+    - repairer opening a corporate prosthetic beneath a painted right-to-repair symbol at a shared workbench
     - volunteer distributing charged batteries during a neighborhood grid outage
     - community-network technician installing an antenna between apartment roofs
-    - public defender comparing two conflicting biometric identities with a detained traveler
+    - legal-aid worker with courthouse badge comparing two conflicting biometric identities beside a detained traveler
     - climate-shelter coordinator directing families toward available cooling bunks
-    - retired augmentation recipient teaching younger residents to maintain unsupported hardware
+    - elderly augmentation user guiding younger hands across an opened obsolete joint and printed maintenance diagram
     - neighborhood teacher covering classroom sensors while students assemble a local air-quality monitor
 
   security_character:
     - checkpoint officer comparing a traveler against two mismatched identity screens
     - drone-unit operator watching detection boxes multiply across an ordinary crowd
     - private security guard standing between premium and public transit platforms
-    - predictive-policing analyst surrounded by maps whose highlighted zones match neglected infrastructure
+    - uniformed analyst between a red patrol-zone map and a maintenance map showing the same outlined blocks filled with failed lights, broken pumps and closed clinics
     - corporate extraction team carrying sealed equipment through an apartment corridor
     - exhausted patrol medic treating a protester behind a transparent riot barrier
     - internal investigator photographing evidence inside a pristine executive office
-    - former military augment user working unarmed night security with outdated licensed hardware
+    - unarmed night guard with outdated licensed hardware, removed unit patches and an obsolete prosthetic service card
 
   relationship:
     - parent and adult child at a kitchen table covered with incompatible implant chargers, adapters and opened maintenance manuals
     - worker pointing at a swollen exoskeleton joint while a supervisor points toward a red productivity display above the active line
     - synthetic caregiver and elderly resident moving through a crowded institution together
-    - investigator and reluctant witness comparing physical evidence
+    - coat-wearing investigator and guarded witness leaning over photographs and a sealed evidence bag, witness's folded arms opening only to point at one image
     - repairer displaying an open unsupported device and rejected access screen while the customer counts worn cash across the workbench
     - longtime neighbors pulling extension cables and water hoses between dark apartment balconies during a grid failure
     - corporate employee passing a copied access card beneath a café table to an organizer carrying lockout notices
@@ -328,7 +338,7 @@ gkr_cyberpunk:
 
   transit_environment:
     - elevated metro interchange at rush hour, biometric gates, one failed lane opened manually by technicians
-    - ferry terminal processing climate migrants through layered identity checkpoints
+    - ferry terminal where travelers with evacuation tags and water-damaged luggage pass through layered identity checkpoints
     - informal minibus depot, battery swaps, hand-painted routes and crowded repair bays
     - autonomous taxi queue stalled behind a software failure while human drivers negotiate rides nearby
     - freight rail terminal dividing automated cargo tracks from aging worker housing
@@ -395,7 +405,7 @@ gkr_cyberpunk:
     - biometric identity card displaying two conflicting names and photographs
     - printed blind-spot map marked against a city surveillance plan
     - physical memory capsule labeled with date, owner and usage permissions
-    - corporate prosthetic service tool that refuses an unlicensed component
+    - corporate prosthetic service tool clamped around an unlicensed component beneath a red INCOMPATIBLE lock symbol
     - community mesh router assembled from reused consumer electronics
     - eviction drone carrying replacement locks, property tags and inventory scanner
     - portable air-quality monitor built by students from mismatched sensors
@@ -454,13 +464,13 @@ gkr_cyberpunk:
 
   cyber_creature_behavior:
     - sorting discarded electronics into careful material piles
-    - following a buried utility line through a crowded street
+    - sweeping a ground scanner along a painted utility route through a crowded street
     - shielding smaller maintenance drones from security fire
     - exchanging charged batteries for broken components at a market stall
     - nesting inside an abandoned charging station while residents route cables around it
-    - copying checkpoint gestures and accidentally redirecting traffic
+    - copying a checkpoint guard's raised palm while vehicles stop in a confused arc around it
     - filtering polluted canal water through visible body chambers
-    - carrying fragments of recorded voices through damaged public speakers
+    - carrying damaged public speakers that flash mismatched face icons and broken audio waveforms
 
   modular_cyber_creature_combo:
     - "cyberpunk creature design: __gkr_cyberpunk/cyber_creature_body__, __gkr_cyberpunk/cyber_creature_trait__, __gkr_cyberpunk/cyber_creature_behavior__, human scale reference, exposed maintenance access and unobscured locomotion, __gkr_cyberpunk/rendering__"
@@ -548,7 +558,7 @@ gkr_cyberpunk:
     - investigator comparing rain-damaged receipts with corrupted surveillance stills in a nearly empty transit café
     - investigator and anxious witness leaning over photographs behind a repair shop, a uniformed observer visible only in the reflection of a dark display window outside
     - detective tracing camera blind spots on a printed map beneath flickering practical street lights
-    - three-panel city montage showing the same missing-person photograph embedded in a transit advertisement, clinic display and luxury-tower billboard, repeated facial crop circled in warning red
+    - investigator facing three adjacent city screens—a transit advertisement, clinic display and luxury-tower billboard—each containing the same face circled in warning red
     - investigator kneeling inside a sealed empty office, rectangular dust-free patches, fresh screw holes and cable-shaped impressions marking every stripped desk while a thermal scanner shows warm connector outlines
     - public defender inside an abandoned apartment, floor covered with clinic receipts, checkpoint photographs and identity screens showing the same face under different names
 
@@ -594,8 +604,8 @@ gkr_cyberpunk:
     - "standalone security character: __gkr_cyberpunk/security_character__, institutional equipment and body language visible, __gkr_cyberpunk/rendering__"
 
   ensemble_combo:
-    - "cyberpunk ensemble: __gkr_cyberpunk/relationship__, one __gkr_cyberpunk/infrastructure_character__, one __gkr_cyberpunk/community_character__, and one __gkr_cyberpunk/street_economy_character__, each using a separate tool around the same open utility cabinet, __gkr_cyberpunk/rendering__"
-    - "institutional confrontation: __gkr_cyberpunk/corporate_character__ seated behind a raised glass desk, __gkr_cyberpunk/security_character__ blocking the center aisle, and __gkr_cyberpunk/community_character__ standing below with printed notices and photographs spread toward them, all hands and eyelines visible, __gkr_cyberpunk/rendering__"
+    - "two-character cyberpunk interaction: __gkr_cyberpunk/relationship__, one shared object or open machine as the focal point, __gkr_cyberpunk/rendering__"
+    - "two-character cyberpunk confrontation: severe suited executive behind a raised glass desk, rain-coated tenant representative standing below, printed lockout notice, building photographs and portable door override spread between them, __gkr_cyberpunk/rendering__"
 
   character_sheet_combo:
     - "cyberpunk character sheet for __gkr_cyberpunk/standalone_character_combo__, front, side and back views, work pose, personal objects, clothing layers and material callouts"
@@ -646,7 +656,7 @@ gkr_cyberpunk:
   expanded_character_concept:
     - repaired lamellar-armored figure with a sheathed mono-blade, both hands adjusting a prosthetic wrist beneath rain-dark signage
     - figure lying beneath a market counter, fiber cable connecting a temple socket to a physical deck, one eye watching approaching boots
-    - corporate extraction agent in an immaculate suit opening a concealed armor panel inside a restricted elevator
+    - immaculate suited figure opening a concealed armor panel inside a restricted elevator, sealed equipment case tethered to one wrist
     - synthetic figure shielding a wrist-tethered sealed case from rain beneath a transparent jacket, route timer reflected in artificial eyes
     - rooftop figure steering repaired quadcopters from a twin-stick console, paper blind-spot map weighted by spare batteries
     - kneeling figure connecting an altar of server fans, family photographs and hand-painted circuit boards with braided data cables
@@ -654,11 +664,11 @@ gkr_cyberpunk:
     - augmented motorcycle racer tightening a mechanical knee brace beside a scarred low-slung bike
     - underground surgeon holding a sterilized salvaged hand between a patient and a locked corporate replacement
     - long-coated figure concealing a necklace of labeled memory capsules as checkpoint light reveals their shapes beneath the fabric
-    - former riot officer repainting a heavy shield with neighborhood emergency-route symbols
+    - uniformed figure with removed shoulder patches repainting a heavy shield with neighborhood emergency-route symbols
     - synthetic nightclub singer removing a damaged voice module before a dressing-room mirror
     - sewer cartographer in chest waders projecting utility lines across a flooded tunnel wall
     - elderly figure typing commands on a mechanical keyboard beside shelves of obsolete network adapters and hand-labeled terminals
-    - corporate heir in formal clothing crouched to repair a service robot outside a gala entrance
+    - formally dressed gala guest crouched to repair a service robot outside the guarded entrance
     - prosthetic martial artist practicing controlled grip pressure against a calibration dummy
     - stilt-legged figure crossing a flooded avenue with sealed medicine cases held overhead and a delivery route glowing across one lens
     - black-market optician aligning a new lens while old mechanical eyes watch from labeled drawers
@@ -697,6 +707,16 @@ gkr_cyberpunk:
   expanded_background_combo:
     - "cyberpunk environment establishing frame: __gkr_cyberpunk/expanded_background__, visible circulation, utilities, maintenance access and human scale references, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
 
+  random_environment:
+    - "cyberpunk housing environment: __gkr_cyberpunk/housing_environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "cyberpunk transit environment: __gkr_cyberpunk/transit_environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "cyberpunk clinic environment: __gkr_cyberpunk/healthcare_environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "cyberpunk industrial environment: __gkr_cyberpunk/industry_environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "cyberpunk market environment: __gkr_cyberpunk/market_environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "climate-stressed cyberpunk environment: __gkr_cyberpunk/climate_environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "materially specific cyberpunk city: __gkr_cyberpunk/regional_environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "expanded cyberpunk environment: __gkr_cyberpunk/expanded_background__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+
   expanded_vehicle_combo:
     - "cyberpunk vehicle showcase: __gkr_cyberpunk/expanded_vehicle_subject__, parked three-quarter exterior view, operator or passenger beside it for scale, access panels, controls and maintenance wear visible, __gkr_cyberpunk/rendering__"
 
@@ -714,13 +734,13 @@ gkr_cyberpunk:
     - console-wearing figure steering two repair drones through security fire while physically dragging an injured technician behind a server-rack barrier
     - armored figure with a wrist-tethered sealed case descending a vertical service ladder as pursuers enter above and a train passes through the shaft below
     - street mechanic activating a repaired loader arm to catch a falling transit carriage while passengers climb through its emergency windows
-    - anti-surveillance runner crossing a crowded plaza as camera boxes lose tracking one by one, reflective poncho fragments scattering several false silhouettes
+    - reflective-poncho runner crossing a crowded plaza beneath cameras projecting broken detection boxes around several false silhouettes
     - rooftop sniper lowering the rifle to pull a maintenance worker away from a collapsing antenna, distant target escaping across the opposite tower
     - armored responder raising a transparent shield over an injured protester, open medical kit at their feet as impact rounds spread cracks across the shield
     - synthetic fugitive tearing a tracking module from an open shoulder panel while running through a biometric gate, alarm lights changing from green to red behind
-    - tunnel smugglers pushing a disabled freight cart by hand as an autonomous patrol vehicle turns into the same narrow passage
+    - two masked figures pushing a disabled freight cart with open false compartments as an autonomous patrol vehicle turns into the same narrow passage
     - cyber-creature bursting through a recycling-yard conveyor while workers leap toward marked emergency stops and a loader pivots to block its path
-    - rival aerodyne pilots banking between arcology towers, one damaged control surface shedding panels as maintenance balconies rush past at close range
+    - two aerodynes banking toward the same narrow gap between arcology towers, one damaged control surface shedding panels beside maintenance balconies
     - mono-blade fighter in repaired lamellar armor and a suited figure with concealed body plating fighting back-to-back beneath a disabled surveillance tower
     - long-coated figure with labeled memory capsules trapped inside a glass elevator, prosthetic hand forcing the doors while guards descend through the transparent shaft
     - community defenders rolling charged battery carts downhill into a barricade gap as armored vehicles advance and residents pull cables clear of the wheels
@@ -731,23 +751,31 @@ gkr_cyberpunk:
     - exoskeleton worker swinging an industrial cutter through a locked gate during a factory fire, coworkers carrying an injured person toward the opening behind
 
   cyberpunk_action_combo:
-    - "cyberpunk action scene: __gkr_cyberpunk/cyberpunk_action_scene__, wide readable staging, attacker and defender limbs unobscured, movement route and immediate hazard visible, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "cyberpunk action scene: __gkr_cyberpunk/cyberpunk_action_scene__, __gkr_cyberpunk/random_composition__, movement route and immediate hazard visible, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
 
   random_action_scene:
-    - "cyberpunk action scene: __gkr_cyberpunk/cyberpunk_action_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__, wide readable staging, unobscured limbs, visible movement route and immediate hazard"
+    - "cyberpunk action scene: __gkr_cyberpunk/cyberpunk_action_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__, readable movement route and immediate hazard"
 
   spotlight_expanded:
-    - "__gkr_cyberpunk/modular_character_combo__"
     - "__gkr_cyberpunk/random_augmented_character__"
-    - "__gkr_cyberpunk/augmented_character_sheet_combo__"
-    - "__gkr_cyberpunk/modular_character_sheet_combo__"
     - "__gkr_cyberpunk/expanded_character_combo__"
-    - "__gkr_cyberpunk/expanded_background_combo__"
     - "__gkr_cyberpunk/expanded_vehicle_combo__"
     - "__gkr_cyberpunk/modular_cyber_creature_combo__"
-    - "__gkr_cyberpunk/modular_cyber_creature_sheet_combo__"
+    - "__gkr_cyberpunk/random_action_scene__"
+
+  spotlight_iconic:
+    - "__gkr_cyberpunk/random_action_scene__"
+    - "__gkr_cyberpunk/random_augmented_character__"
+    - "__gkr_cyberpunk/expanded_character_combo__"
+    - "__gkr_cyberpunk/expanded_vehicle_combo__"
+    - "__gkr_cyberpunk/modular_cyber_creature_combo__"
+    - "__gkr_cyberpunk/cyber_noir_combo__"
+    - "__gkr_cyberpunk/augmentation_combo__"
+    - "__gkr_cyberpunk/synthetic_person_combo__"
+    - "__gkr_cyberpunk/community_resistance_combo__"
 
   spotlight_scenes:
+    - "__gkr_cyberpunk/random_action_scene__"
     - "__gkr_cyberpunk/corporate_power_combo__"
     - "__gkr_cyberpunk/platform_labor_combo__"
     - "__gkr_cyberpunk/surveillance_combo__"
@@ -762,11 +790,13 @@ gkr_cyberpunk:
 
   spotlight_characters:
     - "__gkr_cyberpunk/standalone_character_combo__"
-    - "__gkr_cyberpunk/ensemble_combo__"
-    - "__gkr_cyberpunk/character_sheet_combo__"
-    - "__gkr_cyberpunk/spotlight_expanded__"
+    - "__gkr_cyberpunk/random_augmented_character__"
+    - "__gkr_cyberpunk/expanded_character_combo__"
 
   spotlight_designs:
+    - "__gkr_cyberpunk/augmented_character_sheet_combo__"
+    - "__gkr_cyberpunk/modular_character_sheet_combo__"
+    - "__gkr_cyberpunk/modular_cyber_creature_sheet_combo__"
     - "__gkr_cyberpunk/augmentation_sheet_combo__"
     - "__gkr_cyberpunk/vehicle_design_combo__"
     - "__gkr_cyberpunk/infrastructure_sheet_combo__"
@@ -783,22 +813,19 @@ gkr_cyberpunk:
     - "__gkr_cyberpunk/graphic_novel_page_combo__"
 
   random:
+    - "__gkr_cyberpunk/spotlight_iconic__"
     - "__gkr_cyberpunk/spotlight_scenes__"
     - "__gkr_cyberpunk/spotlight_characters__"
-    - "__gkr_cyberpunk/spotlight_designs__"
+    - "__gkr_cyberpunk/spotlight_expanded__"
     - "__gkr_cyberpunk/spotlight_outputs__"
-    - "__gkr_cyberpunk/corporate_power_combo__"
-    - "__gkr_cyberpunk/platform_labor_combo__"
-    - "__gkr_cyberpunk/surveillance_combo__"
+    - "__gkr_cyberpunk/random_action_scene__"
+    - "__gkr_cyberpunk/random_augmented_character__"
+    - "__gkr_cyberpunk/random_environment__"
+    - "__gkr_cyberpunk/expanded_vehicle_combo__"
+    - "__gkr_cyberpunk/modular_cyber_creature_combo__"
     - "__gkr_cyberpunk/augmentation_combo__"
     - "__gkr_cyberpunk/synthetic_person_combo__"
     - "__gkr_cyberpunk/community_resistance_combo__"
     - "__gkr_cyberpunk/memory_identity_combo__"
     - "__gkr_cyberpunk/climate_city_combo__"
-    - "__gkr_cyberpunk/media_propaganda_combo__"
     - "__gkr_cyberpunk/cyber_noir_combo__"
-    - "__gkr_cyberpunk/regional_city_combo__"
-    - "__gkr_cyberpunk/standalone_character_combo__"
-    - "__gkr_cyberpunk/ensemble_combo__"
-    - "__gkr_cyberpunk/graphic_novel_page_combo__"
-    - "__gkr_cyberpunk/random_action_scene__"
