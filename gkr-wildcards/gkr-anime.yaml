@@ -259,6 +259,134 @@ gkr_anime:
     - curious apprentice delivering packages through a city where every district follows different visual rules
 
 # ------------------------------------------------------------------------
+# MODULAR ANIME CHARACTER DESIGN
+# ------------------------------------------------------------------------
+
+  character_age:
+    - adolescent with youthful proportions and school-age styling
+    - young adult with independent work or travel clothing
+    - mature adult with restrained styling and visible experience
+    - elderly adult with weathered features, practical posture and carefully maintained belongings
+    - ageless supernatural figure with unlined skin and an era-incongruous personal object
+
+  character_build:
+    - slender build with long clean silhouette
+    - compact athletic build with balanced stance
+    - tall graceful build with upright posture
+    - petite build with layered clothing scaled to the frame
+    - broad powerful build with heavy planted stance
+    - muscular training-built physique with taped joints or protective gear
+    - soft ordinary build with natural posture and everyday clothing folds
+
+  character_face:
+    - soft rounded features and large attentive eyes
+    - sharp angular features and narrow focused eyes
+    - mature features with restrained brows and fine expression lines
+    - broad expressive features suited to physical comedy
+    - delicate androgynous features with mixed styling cues
+    - weathered face with healed scar and asymmetrical expression
+
+  character_hair:
+    - short cropped textured hair
+    - messy windswept layered hair
+    - long straight hime-cut hair
+    - medium fluffy layered hair
+    - long twin tails tied with practical ribbons
+    - high ponytail with loose motion strands
+    - short geometric bob cut
+    - long wavy hair with controlled silhouette
+    - spiky upswept action-hero hair
+    - ornate braid secured with a regional hairpin
+    - low ponytail tied with a plain ribbon
+    - shaved undercut beneath a longer swept top
+
+  character_hair_color:
+    - natural black hair with blue reflected highlights
+    - warm brown hair
+    - golden blonde hair
+    - silver-gray hair
+    - white hair with subtle shadow color
+    - deep red hair
+    - bright pink hair
+    - saturated blue hair
+    - teal-green hair
+    - violet hair
+    - two-tone dyed hair with visible roots
+    - luminous synthetic hair traced with restrained neon strands
+
+  character_eyes:
+    - large expressive brown eyes
+    - narrow focused gray eyes
+    - bright sparkling blue eyes
+    - lowered annoyed eyes beneath a slight pout
+    - glowing gold eyes without visible pupils
+    - sharp crimson eyes
+    - green eyes behind rectangular glasses
+    - star-shaped magical pupils with a faint glow
+    - visible heterochromia
+    - artificial eyes with aperture-like pupils and tiny status lights
+
+  character_expression:
+    - determined expression, set jaw and focused gaze
+    - bright open smile with relaxed shoulders
+    - shy blush, lowered gaze and hands held close
+    - wide-eyed shock with body recoiling from a visible cause
+    - angry shout with clenched hand and furrowed brow
+    - confident one-sided smirk
+    - calm unreadable expression and still posture
+    - tearful expression with trembling mouth
+    - exhausted half-lidded gaze and slumped shoulders
+    - quiet relief, closed eyes and released grip
+
+  character_outfit:
+    - precisely worn sailor-style school uniform with pleated skirt and neckerchief
+    - school blazer, loosened tie, indoor shoes and shoulder bag
+    - embroidered kimono with wide obi and seasonally appropriate layers
+    - white haori over red pleated hakama, sleeves tied back for work
+    - pastel magical costume with layered ribbons, structured boots and star-shaped fastening
+    - fitted travel tunic beneath a weatherproof cloak and broad utility belt
+    - matte segmented light armor over flexible underlayers
+    - padded flight suit with shoulder segments, cable ports and helmet
+    - asymmetrical near-future jacket with restrained luminous trim and utility straps
+    - idol rehearsal clothes with numbered formation tag and stage shoes carried by hand
+    - hoodie, jeans, canvas shoes and decorated phone strap
+    - indigo craft-worker clothing with apron, wrapped sleeves and repaired knees
+    - black lace-trimmed gothic dress with structured petticoat and ribbon choker
+    - long rain-dark trench coat with turned collar and concealed equipment loops
+
+  character_equipment:
+    - plain well-maintained katana held in a correct two-handed guard
+    - wooden practice sword with impact marks and repaired grip wrap
+    - long spear with leaf-shaped blade and travel cover
+    - wooden bow, thumb glove and quiver of clearly separated arrows
+    - leather-bound grimoire opened to diagrams and handwritten notes
+    - compact star-tipped wand with worn handle and ribbon charm
+    - heavy powered gauntlets with exposed joint actuators
+    - large handheld energy cannon connected to a backpack power cell
+    - mechanic's tool roll, diagnostic tablet and spare fasteners
+    - wrapped bento box and school satchel
+    - paper talismans, chalk and an offering ledger
+    - translucent handheld interface with physical backup controls
+    - field notebook, instant camera and labeled evidence envelopes
+    - microphone, in-ear monitors and marked rehearsal schedule
+
+  character_detail:
+    - small ribbon charm repeated on outfit and equipment
+    - ornate kanzashi hairpin with dangling beads
+    - repaired mascot keychain attached to a worn bag
+    - miniature fox-mask charm
+    - pendant containing a dimly glowing crystal shard
+    - old transit pass preserved inside a clear card holder
+    - team patch resewn onto a newer jacket
+    - handwritten emergency contact card tucked behind an identification badge
+
+  modular_character_combo:
+    - "full-body modular anime character: __gkr_anime/character_age__, __gkr_anime/character_build__, __gkr_anime/character_face__, __gkr_anime/character_hair__, __gkr_anime/character_hair_color__, __gkr_anime/character_eyes__, __gkr_anime/character_expression__, __gkr_anime/character_outfit__, __gkr_anime/character_equipment__, __gkr_anime/character_detail__, plain production background, __gkr_anime/anime_era_style__"
+
+  modular_character_sheet_combo:
+    - "anime modular character sheet: __gkr_anime/modular_character_combo__, front, side and back views, neutral pose, three expression insets, equipment held separately, material and color callouts"
+
+# ------------------------------------------------------------------------
 # GENRE-SAFE MODULAR CHARACTERS
 # Each family bundles identity, clothing, and role-defining visual details.
 # ------------------------------------------------------------------------
@@ -400,6 +528,52 @@ gkr_anime:
     - coastal kaiju resembling layered coral, fishing nets and lighthouse beams caught across its body
     - timid dragon adapted to abandoned industrial heat rather than treasure caves
     - round child-friendly mascot creature whose expressions change through ears, tail and posture
+
+  creature_body_plan:
+    - compact biped with oversized hands, short legs and a clearly readable silhouette
+    - long quadruped with low shoulders, flexible spine and counterbalancing tail
+    - broad winged body with folded membranes, grasping feet and lightweight hollow-looking anatomy
+    - serpentine body coiled around architecture to establish scale
+    - amphibious body with webbed limbs, translucent throat sac and wet reflective skin
+    - floating radial body with ribbonlike limbs and a visible buoyancy organ
+    - asymmetrical mechanical body assembled from mismatched replacement sections
+    - immense upright kaiju anatomy with tiny vehicles and buildings at its feet
+
+  creature_surface:
+    - overlapping lacquer-like scales with worn edges
+    - soft fur broken by leaf litter and burrs
+    - translucent skin revealing softly glowing organs
+    - bark plates supporting moss, fungi and seasonal plants
+    - coral-like armor tangled with fishing line and navigation markers
+    - folded-paper skin reinforced by thread, buttons and wax seals
+    - ceramic shell repaired with visible gold-colored seams
+    - corroded metal plates over flexible fabric bellows and exposed fasteners
+
+  creature_feature:
+    - two expressive tails moving in opposite rhythms
+    - branching antlers carrying wind chimes and nesting birds
+    - rotating halo of small eyes that all focus on the same object
+    - expandable throat fan marked with warning colors
+    - lantern organ hanging beneath the jaw
+    - small vestigial wings used for balance rather than flight
+    - masklike face plate opening to reveal a gentle mammalian face
+    - lighthouse-scale lens embedded in the chest
+
+  creature_behavior:
+    - cautiously copying a human hand gesture from several steps away
+    - carrying found objects into a carefully sorted nest
+    - shielding smaller animals beneath its body during heavy rain
+    - following painted boundary stones without crossing them
+    - repairing part of its own mechanical body with scavenged components
+    - displaying bright warning markings while backing away rather than attacking
+    - feeding on heat, electrical discharge or polluted water through a specialized organ
+    - resting beside human infrastructure that has been adapted around its migration route
+
+  modular_creature_combo:
+    - "anime creature design: __gkr_anime/creature_body_plan__, __gkr_anime/creature_surface__, __gkr_anime/creature_feature__, __gkr_anime/creature_behavior__, human scale reference and unobstructed limbs, __gkr_anime/anime_era_style__"
+
+  modular_creature_sheet_combo:
+    - "anime creature sheet: __gkr_anime/modular_creature_combo__, front and side anatomy views, walking pose, resting pose, footprint, feeding trace and human scale comparison"
 
   folklore_creature:
     - small household spirit made from folded paper and lost buttons
@@ -716,6 +890,98 @@ gkr_anime:
 # SPOTLIGHT ROUTES
 # ------------------------------------------------------------------------
 
+  expanded_character_concept:
+    - hot-blooded young fighter in a red travel jacket, taped fists raised before a scarred training wall
+    - reserved swordswoman in plain indigo hakama, one hand resting on a sheathed blade in wind-bent grass
+    - cheerful magical heroine mid-spin, star wand extended as layered ribbons trace the arc
+    - armored magical guardian with a cracked crest shield and luminous runes fading along one gauntlet
+    - street-level cyber ninja crouched above a neon alley, optical visor mapping three guarded routes
+    - veteran mecha pilot in a worn flight suit, helmet under one arm, old mission patches removed from the chest
+    - young shrine keeper holding paper seals before a translucent fox spirit reflected in rainwater
+    - elegant demon princess with small curved horns, formal black gown and an unopened peace document
+    - winged guardian descending with folded spear and open empty hand toward frightened villagers
+    - cosmic wanderer with nebula-textured skin and a cloak containing a moving starfield
+    - time-displaced samurai studying a transit map beneath electronic billboards, travel-worn armor among commuters
+    - monster ecologist kneeling beside luminous tracks, specimen notebook open and weapon still strapped shut
+    - delinquent motorcycle mechanic in modified school coat, offering a repaired helmet to a younger student
+    - quiet idol trainee alone after rehearsal, formation tape and discarded stage costume reflected in studio mirrors
+    - masked bounty hunter carrying a sealed live-specimen case through an orbital market
+    - elderly spell engineer repairing a staff with mechanical joints, handwritten diagrams pinned around the bench
+    - artificial schoolmate with subtle facial seams, holding a stack of handwritten friendship notes beside a charging cable
+    - wandering medicine seller opening a compartmented case before villagers with matching stained fingertips
+    - young airship navigator gripping a brass route instrument while storm maps cover the cabin windows
+    - tiny mascot spirit wearing a repaired satchel, straining to drag a human-sized emergency key
+    - armored rescue fighter braced beneath fallen masonry while civilians crawl through a raised shield gap
+    - rival student strategist with rectangular glasses, clipboard of crossed-out tactics and one newly drawn route
+    - underwater courier in a compact pressure suit swimming between a submerged station and a waiting research craft
+    - urban exorcist in office clothes laying a chalk boundary around a vending machine casting a human shadow
+
+  expanded_anime_setting:
+    - school rooftop at golden hour, chain-link fence, water tank and distant commuter trains
+    - rain-slicked neon alley with stacked signs, exterior stairways and humming vending machines
+    - quiet suburban crossing beneath dense utility wires and drifting summer clouds
+    - mountain shrine approached through red gates, mossy stone steps and wind-bent cedar trees
+    - night market of paper lanterns, food stalls, delivery bicycles and narrow service passages
+    - vast mecha hangar with sectional scaffolding, coolant vapor and technicians at ankle scale
+    - orbital greenhouse district beneath a curved artificial sky and visible maintenance ribs
+    - floating-island settlement connected by rope bridges, wind turbines and cargo gliders
+    - ruined fantasy capital with suspended masonry and cracks of daylight beneath the streets
+    - misty forest of luminous fungi surrounding a rusted local railway platform
+    - coastal town during a kaiju evacuation, folding barriers, fishing boats and warning loudspeakers
+    - medieval guild street grounded in workshops, drainage channels, animal carts and public notice boards
+    - lunar tram platform behind regolith walls, scratched visors and analog emergency signage
+    - traditional hot-spring lane after snowfall, wooden inns, steam and warm window light
+    - post-apocalyptic shopping arcade converted into gardens, workshops and rainwater storage
+    - festival riverbank with lantern reflections, temporary stages and an approaching storm front
+    - cramped student apartment filled with laundry, instant-food containers and model-kit tools
+    - underground supernatural station whose signs point toward districts absent from the city map
+    - airship engine room with brass access panels, canvas insulation and an open storm-lit maintenance hatch
+    - cosmic frontier where a small roadside shelter stands beneath immense ringed planets
+
+  expanded_anime_scene:
+    - rival fighters halt their duel to lift the same collapsed structure from trapped spectators
+    - magical team forms a defensive circle around evacuees while each member shields a different approach
+    - mecha pilot ejects into a maintenance gantry as the unmanned machine continues following its final command
+    - sword duel on a rain-dark bridge, both fighters frozen after one exchange as a cut banner falls between them
+    - novice hero fails to raise an oversized weapon while a practical teammate rolls a lever and fulcrum into place
+    - cyber investigator chases a copied memory through train windows that display different versions of the same passenger
+    - shrine festival continues around a translucent procession visible only in puddle reflections
+    - school band performs through a power failure using acoustic instruments and audience phone lights
+    - young cook serves rival versions of a family recipe while three elders compare stained handwritten cards
+    - exhausted sports team redraws its final play on a fogged locker-room mirror
+    - cosmic heroine braces a cracked habitat window with a force field while technicians bolt a physical patch over it
+    - delinquent rivals repair the same damaged motorcycle beneath an unsigned truce note
+    - fantasy party negotiates with a dragon by arranging maps, food samples and damaged boundary markers between them
+    - time traveler finds their own childhood drawing framed in a station that should not yet exist
+    - idol group abandons a polished formation to support one injured singer at center stage
+    - giant guardian kneels outside a coastal city while residents repaint faded protective symbols on its armor
+    - apprentice mage dispels an illusion by holding a cracked hand mirror toward mismatched background reflections
+    - two spacecraft crews meet at an airlock with incompatible star charts pressed against opposite windows
+    - household spirit repairs broken appliances at night while a child watches beneath a blanket
+    - armored villain removes a command crest and places it beside the heroes' evacuation map
+    - young courier races a closing floodgate through layered streets as residents point out connected rooftop paths
+    - adult siblings pack a family home while a tiny supernatural resident keeps returning discarded objects
+    - martial artist redirects a stronger opponent's strike into a row of marked practice targets without injuring them
+    - detective reconstructs a classroom mystery using shoe positions, chalk dust and one reversed wall clock
+
+  expanded_anime_character_combo:
+    - "__gkr_anime/expanded_character_concept__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+
+  expanded_anime_scene_combo:
+    - "__gkr_anime/expanded_anime_scene__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+
+  expanded_anime_setting_combo:
+    - "anime environment establishing frame: __gkr_anime/expanded_anime_setting__, wide composition, human scale references, navigable foreground and background routes, __gkr_anime/anime_era_style__"
+
+  spotlight_expanded_designs:
+    - "__gkr_anime/modular_character_combo__"
+    - "__gkr_anime/modular_character_sheet_combo__"
+    - "__gkr_anime/modular_creature_combo__"
+    - "__gkr_anime/modular_creature_sheet_combo__"
+    - "__gkr_anime/expanded_anime_character_combo__"
+    - "__gkr_anime/expanded_anime_scene_combo__"
+    - "__gkr_anime/expanded_anime_setting_combo__"
+
   spotlight_anime_scenes:
     - "__gkr_anime/anime_action_combo__"
     - "__gkr_anime/anime_romance_combo__"
@@ -741,6 +1007,7 @@ gkr_anime:
     - "__gkr_anime/personality_character_combo__"
     - "__gkr_anime/ensemble_character_combo__"
     - "__gkr_anime/character_sheet_combo__"
+    - "__gkr_anime/spotlight_expanded_designs__"
 
   spotlight_anime_traditions:
     - "__gkr_anime/isekai_character_combo__"
