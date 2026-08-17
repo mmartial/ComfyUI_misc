@@ -14,6 +14,15 @@
 # Prefer augmented characters, street archetypes, infiltration, chases, confrontations, strange
 # technology, dense cities and stylish action alongside grounded daily life. A role label such as
 # cyber samurai, netrunner or techno-mage must be supported by visible hardware, clothing and action.
+# CYBERPUNK TWO-SIGNAL TEST: Every authored scene, combo, spotlight or random result must show at
+# least two compatible visual signals of cyberpunk drawn from different categories: bodily augmentation
+# or synthetic anatomy; hardwired human-machine interface; autonomous sensing or surveillance;
+# biometric access or algorithmic control; layered data/power infrastructure; unequal access to
+# advanced technology. The signals must reinforce the focal subject, action or environment rather than
+# appear as unrelated decoration. The word "cyberpunk," neon lighting, a futuristic skyline or one
+# ordinary screen is insufficient. Design the signals into authored concepts; use general signature
+# pools only for modular random construction. A design sheet may focus on one signal when that
+# technology is itself the subject.
 # Example: a cable-linked deck user crouched behind a market stall while drones close overhead.
 # Out of scope: bureaucracy as the dominant attraction, abstract political analysis, generic neon
 # skylines without a focal idea, or social systems described without visible consequences.
@@ -86,14 +95,44 @@ gkr_cyberpunk:
     - dawn light revealing maintenance wear hidden by the night
 
   rendering:
-    - cinematic concept art, realistic material wear, restrained color and clear spatial storytelling
-    - graphic-novel illustration, strong ink hierarchy, limited spot color and readable crowd staging
-    - documentary science-fiction photography, natural skin, practical technology and fine film grain
-    - industrial design visualization, crisp construction detail, scale references and maintenance access
-    - hand-painted retro-future frame, analog displays, atmospheric depth and controlled highlights
-    - architectural visualization with lived-in clutter, utilities and human circulation
+    - cinematic cyberpunk concept art, realistic material wear, restrained color and clear spatial storytelling
+    - cyberpunk graphic-novel illustration, strong ink hierarchy, limited spot color and readable crowd staging
+    - documentary cyberpunk photography, natural skin, hardwired practical technology and fine film grain
+    - cyberpunk industrial design visualization, crisp construction detail, exposed sensors and maintenance access
+    - hand-painted cyberpunk retro-future frame, analog displays, atmospheric depth and controlled highlights
+    - cyberpunk architectural visualization with lived-in clutter, data utilities and human circulation
     - monochrome cyber-noir ink, broad shadows, rain texture and one warning-color accent
-    - animated science-fiction key frame, clean linework, subdued cel shading and painted background
+    - animated cyberpunk key frame, clean linework, subdued cel shading and painted background
+
+  cyberpunk_character_signature:
+    - exposed temple data port connected by braided cable to a physical handheld interface
+    - aperture-lens ocular implant with manual focus ring and translucent diagnostic overlay
+    - mechanical forearm with visible joint actuators, repair seams and tactile controls
+    - reinforced artificial legs with external shock absorbers and mismatched replacement feet
+    - synthetic jaw and throat panels beside a physical voice-control wheel
+    - protected cranial memory socket with locking cap and status lights
+    - subdermal circuit traces ending at a palm-mounted emitter
+    - transparent shoulder panel revealing artificial muscle fibers and service fasteners
+
+  cyberpunk_environment_signature:
+    - biometric gate and articulated surveillance camera projecting detection boxes across passersby
+    - layered augmentation advertisements reflected across wet pavement and exposed utility cables
+    - public prosthetic-charging kiosk beside hand-painted repair notices and incompatible adapters
+    - autonomous service drone scanning identification badges beneath a patched mesh-network antenna
+    - thick data and power bundles feeding physical terminals with mechanical override switches
+    - synthetic attendant connected to a curbside charging tether beside human foot traffic
+    - mixed analog gauges and translucent route displays mounted over aging concrete infrastructure
+    - facial-tracking camera array above a crowded access lane with one manually opened barrier
+
+  cyberpunk_vehicle_signature:
+    - operator cable linked from a neck port to physical steering controls
+    - external lidar clusters, camera eyes and hand-painted sensor calibration marks
+    - biometric ignition beside a scarred mechanical key override
+    - transparent battery access panel crossed by improvised cooling lines
+    - articulated maintenance drone attached to an open service hatch
+    - augmented-reality route display projected across a cracked windscreen
+    - corporate tracking module partly covered by a right-to-repair patch
+    - mismatched autonomous-control unit wired beside redundant pedals and steering column
 
 # ------------------------------------------------------------------------
 # MODULAR CYBERPUNK CHARACTER DESIGN
@@ -555,53 +594,61 @@ gkr_cyberpunk:
     - newsroom staff facing an official ALL CLEAR flood report while a mud-soaked reporter places waterlogged evacuation tags, damaged respirators and photographs of submerged homes across the illuminated desk
 
   cyber_noir_scene:
-    - investigator comparing rain-damaged receipts with corrupted surveillance stills in a nearly empty transit café
-    - investigator and anxious witness leaning over photographs behind a repair shop, a uniformed observer visible only in the reflection of a dark display window outside
-    - detective tracing camera blind spots on a printed map beneath flickering practical street lights
-    - investigator facing three adjacent city screens—a transit advertisement, clinic display and luxury-tower billboard—each containing the same face circled in warning red
-    - investigator kneeling inside a sealed empty office, rectangular dust-free patches, fresh screw holes and cable-shaped impressions marking every stripped desk while a thermal scanner shows warm connector outlines
-    - public defender inside an abandoned apartment, floor covered with clinic receipts, checkpoint photographs and identity screens showing the same face under different names
+    - rain-coated investigator with an aperture-lens ocular implant comparing water-damaged receipts against corrupted drone footage on a cable-linked evidence deck, nearly empty transit café behind a biometric gate
+    - ocularly augmented investigator and anxious witness leaning over photographs and a physical cyberdeck inside a cramped prosthetic-repair stall, hanging mechanical limbs and calibration rigs behind them, uniformed observer visible only in the rain-dark window reflection
+    - investigator with a telescoping artificial eye tracing surveillance blind spots on a printed map, braided cable linking a handheld scanner to a temple port beneath flickering street cameras
+    - investigator with a mechanical forearm facing three adjacent city screens—a transit advertisement, implant-clinic display and luxury-tower billboard—each containing the same face and biometric frame circled in warning red
+    - investigator kneeling inside a stripped office, thermal overlay projected from an ocular implant across warm connector outlines, severed data cables and empty autonomous-desk mounts
+    - legal-aid worker with a courthouse badge and visible cranial data port inside an abandoned apartment, clinic receipts and checkpoint photographs spread between two identity screens showing the same face under different names
+
+  cyber_noir_camera:
+    - tight over-the-shoulder view across photographs, cable-linked evidence and one reflected observer
+    - oblique medium two-shot framed by hanging prosthetics, window reflections and foreground tools
+    - low street-level angle with rain-dark foreground glass dividing investigator from surveillance camera
+    - close three-quarter view centered on augmented eye, physical clue and corrupted screen
+    - compressed view through shelving or repair machinery with the clue sharply isolated
+    - fixed booth-side composition with two figures, one evidence surface and deep reflected street space
 
 # ------------------------------------------------------------------------
 # NARRATIVE COMBOS — ALL ABSTRACT THEMES EXPRESSED VISUALLY
 # ------------------------------------------------------------------------
 
   corporate_power_combo:
-    - "__gkr_cyberpunk/corporate_power_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/corporate_power_scene__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   platform_labor_combo:
-    - "__gkr_cyberpunk/platform_labor_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/platform_labor_scene__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   surveillance_combo:
-    - "__gkr_cyberpunk/surveillance_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/surveillance_scene__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   augmentation_combo:
-    - "__gkr_cyberpunk/augmentation_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/augmentation_scene__, __gkr_cyberpunk/cyberpunk_character_signature__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   synthetic_person_combo:
-    - "__gkr_cyberpunk/synthetic_person_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/synthetic_person_scene__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   community_resistance_combo:
-    - "__gkr_cyberpunk/community_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/community_scene__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   memory_identity_combo:
-    - "__gkr_cyberpunk/memory_identity_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/memory_identity_scene__, __gkr_cyberpunk/cyberpunk_character_signature__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   climate_city_combo:
-    - "__gkr_cyberpunk/climate_city_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/climate_city_scene__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   media_propaganda_combo:
-    - "__gkr_cyberpunk/media_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/media_scene__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
   cyber_noir_combo:
-    - "__gkr_cyberpunk/cyber_noir_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, monochrome cyber-noir ink, one warning-color accent"
+    - "__gkr_cyberpunk/cyber_noir_scene__, __gkr_cyberpunk/cyberpunk_character_signature__, __gkr_cyberpunk/cyber_noir_camera__, __gkr_cyberpunk/lighting__, monochrome cyber-noir ink, one warning-color accent"
   regional_city_combo:
-    - "__gkr_cyberpunk/regional_environment__, __gkr_cyberpunk/infrastructure_character__, visible transport, utilities, maintenance and daily commerce, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/regional_environment__, __gkr_cyberpunk/infrastructure_character__, __gkr_cyberpunk/cyberpunk_environment_signature__, visible transport, utilities, maintenance and daily commerce, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
 
 # ------------------------------------------------------------------------
 # MODULAR OUTPUT FORMATS
 # ------------------------------------------------------------------------
 
   standalone_character_combo:
-    - "standalone corporate cyberpunk character: __gkr_cyberpunk/corporate_character__, full body, both hands and work badge visible against a plain office wall, __gkr_cyberpunk/rendering__"
-    - "standalone street-economy character: __gkr_cyberpunk/street_economy_character__, tools and material wear visible, __gkr_cyberpunk/rendering__"
-    - "standalone infrastructure worker: __gkr_cyberpunk/infrastructure_character__, safety equipment worn correctly, open service panel and hand tools within reach, __gkr_cyberpunk/rendering__"
-    - "standalone healthcare character: __gkr_cyberpunk/healthcare_character__, clinical or repair tools visible, __gkr_cyberpunk/rendering__"
-    - "standalone synthetic person: __gkr_cyberpunk/synthetic_character__, personal repairs and objects visible, __gkr_cyberpunk/rendering__"
-    - "standalone media character: __gkr_cyberpunk/media_character__, recording or evidence tools visible, __gkr_cyberpunk/rendering__"
-    - "standalone community character: __gkr_cyberpunk/community_character__, apartment utilities, shared batteries or rooftop antennas behind, __gkr_cyberpunk/rendering__"
-    - "standalone security character: __gkr_cyberpunk/security_character__, institutional equipment and body language visible, __gkr_cyberpunk/rendering__"
+    - "standalone corporate cyberpunk character: __gkr_cyberpunk/corporate_character__, __gkr_cyberpunk/cyberpunk_character_signature__, full body, work badge visible against a plain office wall, __gkr_cyberpunk/rendering__"
+    - "standalone street-economy character: __gkr_cyberpunk/street_economy_character__, __gkr_cyberpunk/cyberpunk_character_signature__, tools and material wear visible, __gkr_cyberpunk/rendering__"
+    - "standalone infrastructure worker: __gkr_cyberpunk/infrastructure_character__, __gkr_cyberpunk/cyberpunk_character_signature__, safety equipment and open service panel visible, __gkr_cyberpunk/rendering__"
+    - "standalone healthcare character: __gkr_cyberpunk/healthcare_character__, __gkr_cyberpunk/cyberpunk_character_signature__, clinical or repair tools visible, __gkr_cyberpunk/rendering__"
+    - "standalone synthetic person: __gkr_cyberpunk/synthetic_character__, __gkr_cyberpunk/cyberpunk_character_signature__, personal repairs and objects visible, __gkr_cyberpunk/rendering__"
+    - "standalone media character: __gkr_cyberpunk/media_character__, __gkr_cyberpunk/cyberpunk_character_signature__, recording or evidence tools visible, __gkr_cyberpunk/rendering__"
+    - "standalone community character: __gkr_cyberpunk/community_character__, __gkr_cyberpunk/cyberpunk_character_signature__, apartment utilities, shared batteries or rooftop antennas behind, __gkr_cyberpunk/rendering__"
+    - "standalone security character: __gkr_cyberpunk/security_character__, __gkr_cyberpunk/cyberpunk_character_signature__, institutional equipment and body language visible, __gkr_cyberpunk/rendering__"
 
   ensemble_combo:
     - "two-character cyberpunk interaction: __gkr_cyberpunk/relationship__, one shared object or open machine as the focal point, __gkr_cyberpunk/rendering__"
@@ -702,23 +749,23 @@ gkr_cyberpunk:
     - sea-wall neighborhood during gate maintenance, market stalls raised above corroded hydraulic machinery
 
   expanded_character_combo:
-    - "__gkr_cyberpunk/expanded_character_concept__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "__gkr_cyberpunk/expanded_character_concept__, __gkr_cyberpunk/cyberpunk_character_signature__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
 
   expanded_background_combo:
-    - "cyberpunk environment establishing frame: __gkr_cyberpunk/expanded_background__, visible circulation, utilities, maintenance access and human scale references, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "cyberpunk environment establishing frame: __gkr_cyberpunk/expanded_background__, __gkr_cyberpunk/cyberpunk_environment_signature__, visible circulation, utilities and maintenance access, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
 
   random_environment:
-    - "cyberpunk housing environment: __gkr_cyberpunk/housing_environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
-    - "cyberpunk transit environment: __gkr_cyberpunk/transit_environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
-    - "cyberpunk clinic environment: __gkr_cyberpunk/healthcare_environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
-    - "cyberpunk industrial environment: __gkr_cyberpunk/industry_environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
-    - "cyberpunk market environment: __gkr_cyberpunk/market_environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
-    - "climate-stressed cyberpunk environment: __gkr_cyberpunk/climate_environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
-    - "materially specific cyberpunk city: __gkr_cyberpunk/regional_environment__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
-    - "expanded cyberpunk environment: __gkr_cyberpunk/expanded_background__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "cyberpunk housing environment: __gkr_cyberpunk/housing_environment__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "cyberpunk transit environment: __gkr_cyberpunk/transit_environment__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "cyberpunk clinic environment: __gkr_cyberpunk/healthcare_environment__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "cyberpunk industrial environment: __gkr_cyberpunk/industry_environment__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "cyberpunk market environment: __gkr_cyberpunk/market_environment__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "climate-stressed cyberpunk environment: __gkr_cyberpunk/climate_environment__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "materially specific cyberpunk city: __gkr_cyberpunk/regional_environment__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "expanded cyberpunk environment: __gkr_cyberpunk/expanded_background__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
 
   expanded_vehicle_combo:
-    - "cyberpunk vehicle showcase: __gkr_cyberpunk/expanded_vehicle_subject__, parked three-quarter exterior view, operator or passenger beside it for scale, access panels, controls and maintenance wear visible, __gkr_cyberpunk/rendering__"
+    - "cyberpunk vehicle showcase: __gkr_cyberpunk/expanded_vehicle_subject__, __gkr_cyberpunk/cyberpunk_vehicle_signature__, parked three-quarter exterior view, operator or passenger beside it, access panels and maintenance wear visible, __gkr_cyberpunk/rendering__"
 
   cyberpunk_action_scene:
     - lamellar-armored figure drawing a mono-blade while sliding beneath a descending checkpoint barrier, two guards turning from opposite sides and sparks tracing the blade against concrete
@@ -751,10 +798,10 @@ gkr_cyberpunk:
     - exoskeleton worker swinging an industrial cutter through a locked gate during a factory fire, coworkers carrying an injured person toward the opening behind
 
   cyberpunk_action_combo:
-    - "cyberpunk action scene: __gkr_cyberpunk/cyberpunk_action_scene__, __gkr_cyberpunk/random_composition__, movement route and immediate hazard visible, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
+    - "cyberpunk action scene: __gkr_cyberpunk/cyberpunk_action_scene__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/random_composition__, movement route and immediate hazard visible, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__"
 
   random_action_scene:
-    - "cyberpunk action scene: __gkr_cyberpunk/cyberpunk_action_scene__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__, readable movement route and immediate hazard"
+    - "cyberpunk action scene: __gkr_cyberpunk/cyberpunk_action_scene__, __gkr_cyberpunk/cyberpunk_environment_signature__, __gkr_cyberpunk/camera__, __gkr_cyberpunk/lighting__, __gkr_cyberpunk/rendering__, readable movement route and immediate hazard"
 
   spotlight_expanded:
     - "__gkr_cyberpunk/random_augmented_character__"
