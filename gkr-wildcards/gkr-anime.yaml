@@ -520,6 +520,14 @@ gkr_anime:
     - rival-school negotiator, long coat, umbrella, written boundary agreement carried in one pocket
     - loud comic sidekick, exaggerated hairstyle, repaired bicycle, snacks shared without comment
 
+  gyaru_archetype:
+    - tanned gyaru with bleached loose waves, layered bracelets, glitter nails and a customized blazer with rolled sleeves
+    - gentle himekaji gyaru in soft pastel layers, curled twin-tails and a heart-shaped hand mirror
+    - kogal-style student in a shortened uniform skirt, loose leg-warmers and a decorated phone-strap collection
+    - manba-style gyaru with heavy white-and-color eye makeup, platform boots and neon leg accessories
+    - onee-gyaru salon worker, extension lashes, nail-art tools and a mirror station covered in polish samples
+    - reformed mama-gyaru balancing a toddler carrier, still-glamorous manicure and a leopard-print diaper bag
+
   character_relationship:
     - protagonist and rival exchanging a formal bow across a marked competition floor, matching bruises and tightly controlled eye contact
     - mentor holding a traditional tool while the apprentice presents a modified version, both reaching toward the same damaged workpiece
@@ -675,6 +683,9 @@ gkr_anime:
     - "modern student with schoolbag kneeling on a glowing forest road in an otherworldly frontier, circular portal closing behind them, delivery truck frozen beyond the portal at a city crosswalk, startled expression, __gkr_anime/anime_era_style__"
     - "ordinary modern-world adult in office clothes standing inside a luminous summoning circle on a stone palace floor, surrounded by robed mages, armored guards and an anxious royal court, phone and umbrella scattered at their feet, __gkr_anime/anime_era_style__"
     - "otherworld traveler touching translucent floating interface panels, portrait icon, level bar, inventory grid, locked skill icons and quest-map marker visible around their hands, immense fantasy city beyond, __gkr_anime/anime_era_style__"
+  villainess_reincarnation_combo:
+    - "elegant reincarnated noblewoman in an elaborate ruffled gown recognizing her own portrait on a floating game-style status panel labeled DOOMED VILLAINESS, ballroom of an otome-game academy behind her, startled hand raised to her own face, __gkr_anime/anime_era_style__"
+    - "reincarnated villainess redirecting a raised riding crop into offering a fallen rival's dropped fan, four nearby suitors' floating affection-gauge bars all tilting toward her instead of the game's intended heroine, __gkr_anime/anime_era_style__"
   magical_girl_combo:
     - "ordinary schoolgirl mid-transformation, school uniform dissolving into ribbons of light, ornate layered magical costume forming around her, glowing personal emblem at her chest, jeweled wand raised above a threatened city street, __gkr_anime/anime_era_style__"
     - "ornately dressed magical heroine kneeling opposite a round cute animal mascot, glowing charm and unfurled contract between them, mascot smiling while concealing a second black-sealed contract behind its tail, hard split lighting, __gkr_anime/anime_era_style__"
@@ -691,6 +702,9 @@ gkr_anime:
   real_robot_combo:
     - "military pilot inside a cramped scratched cockpit operating __gkr_anime/mecha_design__, red fuel gauge, empty ammunition icons, cracked targeting display, radio waveform and evacuation map reflected across the visor, __gkr_anime/anime_era_style__"
     - "battle-scarred __gkr_anime/mecha_design__ kneeling in a crowded hangar, armor panels removed, mechanics welding an exposed knee joint, ammunition racks nearly empty, exhausted pilot asleep against a supply crate, officers watching behind glass, __gkr_anime/anime_era_style__"
+  sentai_combo:
+    - "five color-coded ranger-suited heroes landing in a matched formation pose across a plaza, morphed helmets catching the light, unit emblem flashing on each chest, civilians pointing from behind a barricade, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+    - "sentai team leader raising a color-matched weapon overhead as four teammates brace in a defensive diamond formation around one shielded civilian, smoke and debris settling behind them, __gkr_anime/anime_era_style__"
   cgdct_combo:
     - "four schoolgirls crowded around a craft-club table, mismatched handmade plush toys, fabric scraps, glue, tea and snacks everywhere, one girl holding up a lopsided finished toy while the others laugh, warm afternoon clubroom light, __gkr_anime/anime_era_style__"
     - "four girls assembling a small campsite beside a calm mountain lake, half-raised tent, compact stove, enamel mugs, sleeping rolls and scattered instruction sheet, one girl tangled in a guyline while friends reach to help, golden sunset, __gkr_anime/anime_era_style__"
@@ -699,6 +713,12 @@ gkr_anime:
     - "__gkr_anime/supernatural_archetype__ seated opposite __gkr_anime/folklore_creature__ at a rural shrine edge, weapons laid aside, offering bowl, boundary stones and written terms between them, ink-wash and painted-background treatment"
   idol_industry_combo:
     - "__gkr_anime/music_archetype__ in a mirrored rehearsal studio, taped choreography marks, open contract pages, discarded stage shoes, water bottles and one exhausted performer supported by a teammate, __gkr_anime/anime_era_style__"
+  vtuber_combo:
+    - "streamer seated before a ring light and capture rig, animated fox-eared avatar mirroring her expressions on a monitor, chat messages scrolling beside a donation-alert banner, tangled cables across the desk, __gkr_anime/anime_era_style__"
+    - "two streamers collaborating from separate desks split across one shared monitor feed, matching donation-goal bars climbing on both screens, plush mascot merchandise stacked beside each capture rig, __gkr_anime/anime_era_style__"
+  harem_combo:
+    - "flustered protagonist seated at the center of a crowded classroom desk, four classmates leaning in from every side each offering a different token: a homemade bento, a bandaged hand, a borrowed umbrella and a folded exam-notes sheet, protagonist's hands raised between all four offers, __gkr_anime/anime_era_style__"
+    - "composed heroine standing at the center of a courtyard fountain, four suitors arranged at matching distance each presenting a different token: a rose, a bound book, a wooden practice sword and a paper lantern, heroine's eyes fixed on none of them, __gkr_anime/anime_era_style__"
   delinquent_combo:
     - "__gkr_anime/delinquent_archetype__ at a school-gate confrontation, dented bicycles, torn noticeboard, watching classmates and a younger student sheltered behind the delinquent's outstretched arm, __gkr_anime/anime_era_style__"
   military_political_combo:
@@ -740,6 +760,7 @@ gkr_anime:
     - "standalone sports character: __gkr_anime/sports_archetype__, bent-knee athletic posture with ball, racket, bicycle, running spikes or team towel visible, __gkr_anime/anime_era_style__"
     - "standalone supernatural character: __gkr_anime/supernatural_archetype__, one physical transformation trait, one ritual object and plain shrine or domestic background, __gkr_anime/anime_era_style__"
     - "standalone racing character: __gkr_anime/racing_archetype__, gloved hands correctly placed on the vehicle's controls, seated racing posture, plain garage or paddock background, __gkr_anime/anime_era_style__"
+    - "standalone gyaru character: __gkr_anime/gyaru_archetype__, full body, makeup and accessory detail visible, plain shop-window or classroom background, __gkr_anime/anime_era_style__"
 
   personality_character_combo:
     - "__gkr_anime/personality_archetype__, full-body anime character portrait in a school corridor, clear hand pose, facial expression and role-defining props, __gkr_anime/anime_era_style__"
@@ -1067,14 +1088,18 @@ gkr_anime:
 
   spotlight_anime_traditions:
     - "__gkr_anime/isekai_character_combo__"
+    - "__gkr_anime/villainess_reincarnation_combo__"
     - "__gkr_anime/magical_girl_combo__"
     - "__gkr_anime/magical_team_combo__"
     - "__gkr_anime/battle_progression_combo__"
     - "__gkr_anime/super_robot_combo__"
     - "__gkr_anime/real_robot_combo__"
+    - "__gkr_anime/sentai_combo__"
     - "__gkr_anime/cgdct_combo__"
     - "__gkr_anime/yokai_folklore_combo__"
     - "__gkr_anime/idol_industry_combo__"
+    - "__gkr_anime/vtuber_combo__"
+    - "__gkr_anime/harem_combo__"
     - "__gkr_anime/delinquent_combo__"
     - "__gkr_anime/military_political_combo__"
     - "__gkr_anime/kaiju_combo__"
