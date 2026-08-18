@@ -93,11 +93,11 @@ gkr_anime:
 
   random_composition:
     - low diagonal action framing with the focal pose crossing foreground architecture
-    - centered character silhouette framed by one recognizable environment landmark
+    - centered character silhouette set against one recognizable environment landmark
     - close three-quarter composition joining facial reaction, hand gesture and crucial object
     - wide painted-background frame with a small focal figure and clear movement direction
     - lateral animation staging with two characters facing across one shared object
-    - overhead composition organized around court lines, machinery, furniture or mapped terrain
+    - overhead composition organized around court lines, machinery, furniture or visible paths through terrain
     - foreground prop framing the subject at the decisive interaction point
     - still symmetrical frame broken by one expressive pose or physical anomaly
 
@@ -150,144 +150,144 @@ gkr_anime:
 # ------------------------------------------------------------------------
 
   anime_action_scene:
-    - finished anime scene illustration, clean stable contours, young team facing a longtime rival at a ruined tournament ground, members spaced before three escape routes with weapons and shields aimed outward
-    - finished anime scene illustration, clean stable contours, veteran fighter redirecting a reckless student's full-force strike with two fingers, student's weapon embedded in a split practice post, dust hanging between their contrasting stances
-    - finished anime scene illustration, clean stable contours, two wounded rivals lowering weapons and lifting the same collapsed beam as civilians crawl from the danger zone between them
-    - finished anime scene illustration, clean stable contours, courier pursued across rooftops, laundry lines and crowded balconies changing the path every few seconds
-    - finished anime scene illustration, clean stable contours, swordswoman defending a narrow bridge in heavy rain, low planted stance, wet stone underfoot, blade braced against three approaching attackers, no energy aura
-    - finished anime scene illustration, clean stable contours, exhausted hero pushing upright after a crater-forming attack, torn clothing and shaking knees, teammates reaching forward with shocked faces around the crater rim
-    - finished anime scene illustration, clean stable contours, coordinated team assault on a colossal creature, each role and failure visible within one clear spatial plan
-    - finished anime scene illustration, clean stable contours, delinquent standing between a younger student and three aggressors at a school gate, squared shoulders, open shielding arm and watching classmates forming a wide circle
+    - anime illustration, clean stable contours, young team facing a longtime rival at a ruined tournament ground, members spaced before three escape routes with weapons and shields aimed outward
+    - anime illustration, clean stable contours, veteran fighter redirecting a reckless student's full-force strike with two fingers, student's weapon embedded in a split practice post, dust hanging between their contrasting stances
+    - anime illustration, clean stable contours, two wounded rivals lowering weapons and lifting the same collapsed beam as civilians crawl from the danger zone between them
+    - anime illustration, clean stable contours, courier pursued across rooftops, laundry lines and crowded balconies changing the path every few seconds
+    - anime illustration, clean stable contours, swordswoman defending a narrow bridge in heavy rain, low planted stance, wet stone underfoot, blade braced against three approaching attackers, no energy aura
+    - anime illustration, clean stable contours, exhausted hero pushing upright after a crater-forming attack, torn clothing and shaking knees, teammates reaching forward with shocked faces around the crater rim
+    - anime illustration, clean stable contours, coordinated team assault on a colossal creature, each role and failure visible within one clear spatial plan
+    - anime illustration, clean stable contours, delinquent standing between a younger student and three aggressors at a school gate, squared shoulders, open shielding arm and watching classmates forming a wide circle
 
   anime_romance_scene:
-    - finished anime scene illustration, clean stable contours, two students facing each other on opposite sides of a railway crossing, one extending a folded note while the passing train divides the frame, both faces visible through separate carriage windows
-    - finished anime scene illustration, clean stable contours, adult former classmates seated stiffly across a nearly empty family-restaurant booth, untouched drinks, matching old school charms beside their phones, forced smiles and eyes fixed on opposite windows
-    - finished anime scene illustration, clean stable contours, two coworkers walking home after the last train, one holding out an old shared photograph while the other stops beneath a quiet crossing light
+    - anime illustration, clean stable contours, two students facing each other on opposite sides of a railway crossing, one extending a folded note while the passing train divides the frame, both faces visible through separate carriage windows
+    - anime illustration, clean stable contours, adult former classmates seated stiffly across a nearly empty family-restaurant booth, untouched drinks, matching old school charms beside their phones, forced smiles and eyes fixed on opposite windows
+    - anime illustration, clean stable contours, two coworkers walking home after the last train, one holding out two matching worn school charms while the other stops beneath a quiet crossing light
     - anime animation diptych, two people watching the same meteor shower from different city rooftops, matching raised hands and phone charms linking the separated frames
-    - finished anime scene illustration, clean stable contours, four-panel sequence showing a reserved student glancing sideways, tightening a loose umbrella rib, placing the repaired umbrella beside its owner, then turning away as the owner notices it
-    - finished anime scene illustration, clean stable contours, shopkeeper holding a seasonal order beside a black-ribbon portrait and an older note with matching handwriting, unopened parcel centered on the counter
-    - finished anime scene illustration, clean stable contours, university musicians alone in a dark rehearsal room, chairs angled toward each other, matching sheet music, one holding a final note while the other watches with lowered instrument and a small smile
-    - finished anime scene illustration, clean stable contours, elderly couple on a coastal station platform beside a faded photograph of their younger selves at the same bench, matching suitcase and seasonal flowers visible in both
+    - anime illustration, clean stable contours, four-panel sequence showing a reserved student glancing sideways, tightening a loose umbrella rib, placing the repaired umbrella beside its owner, then turning away as the owner notices it
+    - anime illustration, clean stable contours, shopkeeper holding a new seasonal order beside years of archived orders in matching handwriting, black mourning ribbon tied around the oldest bundle, unopened parcel centered on the counter
+    - anime illustration, clean stable contours, university musicians alone in a dark rehearsal room, chairs angled toward each other, matching sheet music, one holding a final note while the other watches with lowered instrument and a small smile
+    - anime illustration, clean stable contours, elderly couple on a coastal station platform with a decades-old date and their initials carved into the bench, one worn shared suitcase and fresh seasonal flowers between them
 
   anime_slice_of_life_scene:
-    - finished anime scene illustration, clean stable contours, friends sharing convenience-store food outside a shuttered station beneath a LAST TRAIN DEPARTED display, one holding out an opened letter while the others stop eating and turn toward it
-    - finished anime scene illustration, clean stable contours, family preparing dinner in a cramped kitchen, several generations moving around one another through practiced routines
-    - finished anime scene illustration, clean stable contours, student club cleaning an abandoned room, faded team photographs, tarnished trophies and a sealed club ledger emerging from beneath dusty sheets
-    - finished anime scene illustration, clean stable contours, office worker carrying groceries home in summer rain, stopping to help a neighbor secure laundry in the wind
-    - finished anime scene illustration, clean stable contours, children exploring drainage paths after a storm, turning ordinary infrastructure into an afternoon expedition
-    - finished anime scene illustration, clean stable contours, rural residents reopening a shuttered local shop, sweeping dust while older customers tell conflicting stories
-    - finished anime scene illustration, clean stable contours, university roommates in a shared kitchen, torn chore chart taped back together, one washing the other's dishes while the other folds their laundry, cautious sidelong glances
-    - finished anime scene illustration, clean stable contours, train conductor walking an empty snow-covered platform before dawn, checklist and lantern in hand, gloved finger tracing numbered platform signs beside the waiting first train
+    - anime illustration, clean stable contours, friends sharing convenience-store food outside a shuttered station beneath a LAST TRAIN DEPARTED display, one holding out an opened letter while the others stop eating and turn toward it
+    - anime illustration, clean stable contours, family preparing dinner in a cramped kitchen, several generations moving around one another through practiced routines
+    - anime illustration, clean stable contours, student club cleaning an abandoned room, faded team banners, tarnished trophies and a sealed club ledger emerging from beneath dusty sheets
+    - anime illustration, clean stable contours, office worker carrying groceries home in summer rain, stopping to help a neighbor secure laundry in the wind
+    - anime illustration, clean stable contours, children exploring drainage paths after a storm, turning ordinary infrastructure into an afternoon expedition
+    - anime illustration, clean stable contours, rural residents reopening a shuttered local shop, sweeping dust while older customers tell conflicting stories
+    - anime illustration, clean stable contours, university roommates in a shared kitchen, torn chore chart taped back together, one washing the other's dishes while the other folds their laundry, cautious sidelong glances
+    - anime illustration, clean stable contours, train conductor walking an empty snow-covered platform before dawn, checklist and lantern in hand, gloved finger tracing numbered platform signs beside the waiting first train
 
   anime_comedy_scene:
-    - finished anime scene illustration, clean stable contours, carefully planned school announcement collapsing through a chain of mundane interruptions, ensemble reactions held in one wide frame
-    - finished anime scene illustration, clean stable contours, overconfident amateur cook hiding a ruined dish while increasingly suspicious guests arrive early
-    - finished anime scene illustration, clean stable contours, supernatural roommate sitting rigidly beneath an apartment rule chart while floating slippers, self-opening cupboards and an airborne toothbrush move behind them
-    - finished anime scene illustration, clean stable contours, four-panel comedy showing one ordinary wrapped box passing between four characters, each panel with a different guessed-content sketch above a face, final panel revealing a plain rice cooker
-    - finished anime scene illustration, clean stable contours, student council staging a solemn ceremony while malfunctioning equipment undermines every formal gesture
-    - finished anime scene illustration, clean stable contours, armored fantasy adventurers crowded around a restaurant bill, empty coin purses, calculator beads and itemized plates between them, defeated monster trophy blocking the tiny table
-    - finished anime scene illustration, clean stable contours, timid employee frozen with two mismatched wires in hand over an open control panel, coworkers already cheering and lifting them onto their shoulders as the warning light behind switches from red to green
-    - finished anime scene illustration, clean stable contours, neighborhood pets carrying keys and dropped tools toward a locked garden gate while two humans point toward the wrong alley
+    - anime illustration, clean stable contours, carefully planned school announcement collapsing through a chain of mundane interruptions, ensemble reactions held in one wide frame
+    - anime illustration, clean stable contours, overconfident amateur cook hiding a ruined dish while increasingly suspicious guests arrive early
+    - anime illustration, clean stable contours, supernatural roommate sitting rigidly beneath an apartment rule chart while floating slippers, self-opening cupboards and an airborne toothbrush move behind them
+    - anime illustration, clean stable contours, four-panel comedy showing one ordinary wrapped box passing between four characters, each panel with a different guessed-content sketch above a face, final panel revealing a plain rice cooker
+    - anime illustration, clean stable contours, student council staging a solemn ceremony while malfunctioning equipment undermines every formal gesture
+    - anime illustration, clean stable contours, armored fantasy adventurers crowded around a restaurant bill, empty coin purses, calculator beads and itemized plates between them, defeated monster trophy blocking the tiny table
+    - anime illustration, clean stable contours, timid employee frozen with two mismatched wires in hand over an open control panel, coworkers already cheering and lifting them onto their shoulders as the warning light behind switches from red to green
+    - anime illustration, clean stable contours, neighborhood pets tugging a loose gate cord and carrying dropped tools toward a trapped kitten while two humans search the wrong alley
 
   anime_sports_scene:
-    - finished anime scene illustration, clean stable contours, volleyball setter contacting the ball at full extension while three teammates occupy marked approach lanes and blockers rise across the net
-    - finished anime scene illustration, clean stable contours, exhausted distance runner turning back with one arm extended toward an injured rival on the track while the leading runners disappear around the bend
-    - finished anime scene illustration, clean stable contours, baseball catcher flashing a new hand signal between their knees while the pitcher nods from the mound and the batter watches their hands, crossed-out pitch chart visible in the dugout
-    - finished anime scene illustration, clean stable contours, high-school football team defending one final attack in heavy rain, spacing and fatigue clearly staged
-    - finished anime scene illustration, clean stable contours, competitive swimmer motionless underwater beneath the starting block, lane rope and wavering crowd silhouettes above, compressed bubbles around the ears and red starting light still unlit
-    - finished anime scene illustration, clean stable contours, figure skater holding a restrained upright finishing pose, scraped palm and shallow skate arc visible beneath a simplified rink-side choreography diagram
-    - finished anime scene illustration, clean stable contours, cycling team rotating positions through mountain wind, strongest rider sacrificing an individual finish
-    - finished anime scene illustration, clean stable contours, traditional archery competitor holding a lowered bow with relaxed shoulders and one slow breath visible in cold air, blurred archers and targets continuing behind
+    - anime illustration, clean stable contours, volleyball setter contacting the ball at full extension while three teammates occupy marked approach lanes and blockers rise across the net
+    - anime illustration, clean stable contours, exhausted distance runner turning back with one arm extended toward an injured rival on the track while the leading runners disappear around the bend
+    - anime illustration, clean stable contours, baseball catcher flashing a new hand signal between their knees while the pitcher nods from the mound and the batter watches their hands, crossed-out pitch chart visible in the dugout
+    - anime illustration, clean stable contours, high-school football team defending one final attack in heavy rain, spacing and fatigue clearly staged
+    - anime illustration, clean stable contours, competitive swimmer motionless underwater beneath the starting block, lane rope and wavering crowd silhouettes above, compressed bubbles around the ears and red starting light still unlit
+    - anime illustration, clean stable contours, figure skater holding a restrained upright finishing pose, scraped palm, shallow skate arc and abandoned jump markers visible across the ice
+    - anime illustration, clean stable contours, cycling team rotating positions through mountain wind, strongest rider sacrificing an individual finish
+    - anime illustration, clean stable contours, traditional archery competitor holding a lowered bow with relaxed shoulders and one slow breath visible in cold air, blurred archers and targets continuing behind
 
   anime_mystery_scene:
-    - finished anime scene illustration, clean stable contours, student detectives reconstructing a locked-room event using classroom objects and conflicting witness positions
-    - finished anime scene illustration, clean stable contours, rural officer spreading festival photographs with different printed years across a desk, the same unidentified child circled in every image
-    - finished anime scene illustration, clean stable contours, university archivist holding a newspaper dated one day beyond the wall calendar among century-old bound volumes
-    - finished anime scene illustration, clean stable contours, passengers inside a stopped local train holding tickets printed with different terminal stations, route display flickering between incompatible maps, alarmed faces reflected in the dark windows
-    - finished anime scene illustration, clean stable contours, private investigator connecting one circled ledger entry to shop receipts, handwritten favors and neighborhood photographs across a café table
-    - finished anime scene illustration, clean stable contours, siblings inside an old house marking knocks on a floor plan, measuring tape stretched across a corridor whose interior length exceeds the exterior dimension written beside a window sketch
-    - finished anime scene illustration, clean stable contours, detective seated opposite a smiling witness, wall mirror showing the witness repeatedly gripping a concealed cue card beneath the table, notebook and evidence photographs between them
-    - finished anime scene illustration, clean stable contours, journalist pinning coded vending-machine receipts to a city map while one discontinued machine flashes the same symbol behind
+    - anime illustration, clean stable contours, student detectives reconstructing a locked-room event using classroom objects and conflicting witness positions
+    - anime illustration, clean stable contours, rural officer spreading festival photographs with different printed years across a desk, the same unidentified child circled in every image
+    - anime illustration, clean stable contours, university archivist holding a newspaper dated one day beyond the wall calendar among century-old bound volumes
+    - anime illustration, clean stable contours, passengers inside a stopped local train holding tickets printed with different terminal stations, route display flickering between incompatible maps, alarmed faces reflected in the dark windows
+    - anime illustration, clean stable contours, private investigator connecting one circled ledger entry to shop receipts, handwritten favors and matching loyalty-card stamps across a café table
+    - anime illustration, clean stable contours, siblings inside an old house marking knocks on a floor plan, measuring tape stretched across a corridor whose interior length exceeds the exterior dimension written beside a window sketch
+    - anime illustration, clean stable contours, detective seated opposite a smiling witness, wall mirror showing the witness gripping a concealed cue card beneath the table, notebook and sealed evidence objects between them
+    - anime illustration, clean stable contours, journalist arranging coded vending-machine receipts by matching serial numbers and timestamps while one discontinued machine flashes the same symbol behind
 
   anime_horror_scene:
-    - finished anime scene illustration, clean stable contours, apartment resident noticing a spiral motif recurring in food, plumbing, hair and street architecture
-    - finished anime scene illustration, clean stable contours, student holding a four-door floor plan inside a sunlit school hallway containing five identical doors, the extra threshold casting no shadow
-    - finished anime scene illustration, clean stable contours, fishing village performing an ordinary morning routine while every shadow points toward the sea
-    - finished anime scene illustration, clean stable contours, three-panel horror sequence showing the same arguing family beneath one portrait, the portrait adding one pale relative in each successive panel while the living figures keep identical positions
-    - finished anime scene illustration, clean stable contours, commuter repeatedly seeing their sleeping body through the windows of trains passing in the opposite direction
-    - finished anime scene illustration, clean stable contours, shrine visitors holding handwritten wishes beside sealed offering boxes whose narrow slots reveal duplicate slips written in matching hands
-    - finished anime scene illustration, clean stable contours, patient between two medical monitors displaying incompatible internal anatomies, doctors pointing at different organ positions while the same body remains centered
-    - finished anime scene illustration, clean stable contours, child drawing the apartment building accurately except for a figure occupying a nonexistent upper floor
+    - anime illustration, clean stable contours, apartment resident noticing a spiral motif recurring in food, plumbing, hair and street architecture
+    - anime illustration, clean stable contours, student counting four numbered classroom plaques inside a sunlit school hallway containing five identical doors, the unnumbered threshold casting no shadow
+    - anime illustration, clean stable contours, fishing village performing an ordinary morning routine while every shadow points toward the sea
+    - anime illustration, clean stable contours, three-panel horror sequence showing the same arguing family beneath one portrait, the portrait adding one pale relative in each successive panel while the living figures keep identical positions
+    - anime illustration, clean stable contours, commuter repeatedly seeing their sleeping body through the windows of trains passing in the opposite direction
+    - anime illustration, clean stable contours, shrine visitors holding handwritten wishes beside sealed offering boxes whose narrow slots reveal duplicate slips written in matching hands
+    - anime illustration, clean stable contours, patient between two medical monitors displaying incompatible internal anatomies, doctors pointing at different organ positions while the same body remains centered
+    - anime illustration, clean stable contours, child drawing the apartment building accurately except for a figure occupying a nonexistent upper floor
 
   anime_mecha_scene:
-    - finished anime scene illustration, clean stable contours, inexperienced pilot seeing a giant machine awaken beneath a flooded city, maintenance bridges tearing loose around it
-    - finished anime scene illustration, clean stable contours, repair crew inside an open machine torso during a red alarm, mechanic connecting one final power cable between damaged LIFE SUPPORT and THRUSTER modules while both warning lamps flash
-    - finished anime scene illustration, clean stable contours, two rival machines crossing weapons into a deliberate signal pattern while both cockpit displays show matching flight paths and a command screen marks them as hostile
-    - finished anime scene illustration, clean stable contours, obsolete worker machine defending an evacuation route against modern military units, industrial tools used intelligently
-    - finished anime scene illustration, clean stable contours, orbital construction mecha stabilizing a damaged habitat while civilian crews evacuate through rotating corridors
-    - finished anime scene illustration, clean stable contours, pilot inside a dark cockpit watching rows of translucent recordings of previous operators appear across cracked monitors, their helmets and dates surrounding the pilot's reflection
-    - finished anime scene illustration, clean stable contours, giant robot launching from beneath an ordinary coastal town, roads and harbor structures unfolding as practical mechanisms
-    - finished anime scene illustration, clean stable contours, cockpit team gripping paired manual controls in synchronized mirrored poses, crossed warning lights turning green as the damaged machine steadies above an evacuation corridor
+    - anime illustration, clean stable contours, inexperienced pilot seeing a giant machine awaken beneath a flooded city, maintenance bridges tearing loose around it
+    - anime illustration, clean stable contours, repair crew inside an open machine torso during a red alarm, mechanic connecting one final power cable between damaged LIFE SUPPORT and THRUSTER modules while both warning lamps flash
+    - anime illustration, clean stable contours, two rival machines crossing weapons into a deliberate signal pattern while both cockpit displays show matching flight paths and a command screen marks them as hostile
+    - anime illustration, clean stable contours, obsolete worker machine defending an evacuation route against modern military units, industrial tools used intelligently
+    - anime illustration, clean stable contours, orbital construction mecha stabilizing a damaged habitat while civilian crews evacuate through rotating corridors
+    - anime illustration, clean stable contours, pilot inside a dark cockpit watching rows of translucent recordings of previous operators appear across cracked monitors, their helmets and dates surrounding the pilot's reflection
+    - anime illustration, clean stable contours, giant robot launching from beneath an ordinary coastal town, roads and harbor structures unfolding as practical mechanisms
+    - anime illustration, clean stable contours, cockpit team gripping paired manual controls in synchronized mirrored poses, crossed warning lights turning green as the damaged machine steadies above an evacuation corridor
 
   anime_scifi_scene:
-    - finished anime scene illustration, clean stable contours, android upright in a care-facility bed, patient portraits matched by green boxes across its screen while one nearby visitor is marked OWNER / NO MATCH, disconnected charging cable across the sheets
-    - finished anime scene illustration, clean stable contours, cybercrime investigator walking through a translucent reconstructed street, advertisements replacing cheerful faces with the investigator's concealed crime-scene photographs as they pass
-    - finished anime scene illustration, clean stable contours, generation-ship residents beneath an artificial sky dome, holding an old star atlas against projected constellations that do not match, maintenance panels open along the horizon projector
-    - finished anime scene illustration, clean stable contours, courier ducking through a service gate to dodge a biometric scanner flashing UNLICENSED DEVICE, personality-backup case hidden inside a false-bottomed delivery box, layered city transit network behind them
-    - finished anime scene illustration, clean stable contours, lunar maintenance worker facing an Earth-call waveform beside two clocks showing an impossible delay, helmet reflection containing the blue planet
-    - finished anime scene illustration, clean stable contours, elderly engineer showing children an abandoned orbital garden designed by a forgotten culture
-    - finished anime scene illustration, clean stable contours, two identical coworkers comparing mismatched memory-capsule serials, differently worn personal objects and conflicting habit checklists across one desk
-    - finished anime scene illustration, clean stable contours, space-rescue crew entering an empty passenger cabin, untouched meals, warm reading lamps, oxygen vents streaming condensation and occupied-seat indicators glowing above vacant chairs
+    - anime illustration, clean stable contours, android upright in a care-facility bed, patient wristband codes matched by green boxes across its screen while one nearby visitor is marked OWNER / NO MATCH, disconnected charging cable across the sheets
+    - anime illustration, clean stable contours, cybercrime investigator walking through a translucent reconstructed street, advertisements replacing product slogans with concealed case numbers and evidence markers as they pass
+    - anime illustration, clean stable contours, generation-ship residents beneath an artificial sky dome, holding an old star atlas against projected constellations that do not match, maintenance panels open along the horizon projector
+    - anime illustration, clean stable contours, courier ducking through a service gate to dodge a biometric scanner flashing UNLICENSED DEVICE, personality-backup case hidden inside a false-bottomed delivery box, layered city transit network behind them
+    - anime illustration, clean stable contours, lunar maintenance worker facing an Earth-call waveform beside two clocks showing an impossible delay, helmet reflection containing the blue planet
+    - anime illustration, clean stable contours, elderly engineer showing children an abandoned orbital garden designed by a forgotten culture
+    - anime illustration, clean stable contours, two identical coworkers comparing mismatched memory-capsule serials, differently worn personal objects and conflicting habit checklists across one desk
+    - anime illustration, clean stable contours, space-rescue crew entering an empty passenger cabin, untouched meals, warm reading lamps, oxygen vents streaming condensation and occupied-seat indicators glowing above vacant chairs
 
   anime_historical_scene:
-    - finished anime scene illustration, clean stable contours, wandering swordswoman facing an opponent in wind-bent grass, long preparation followed by one economical exchange
-    - finished anime scene illustration, clean stable contours, castle steward concealing a succession letter while rival households arrive for a formal audience
-    - finished anime scene illustration, clean stable contours, traveling medicine seller comparing sick villagers' blackened fingertips with leaking dye barrels, shrine charms hanging untouched beside contaminated trade crates
-    - finished anime scene illustration, clean stable contours, village women around a dirt map of fields and lanes, placing farm tools at marked chokepoints while empty weapon racks hang behind them
-    - finished anime scene illustration, clean stable contours, Edo-period fire brigade racing across rooftops as wind carries embers toward crowded wooden districts
-    - finished anime scene illustration, clean stable contours, court poet shielding a half-written verse beneath a sleeve while armed officials watch from the moon-viewing pavilion, censored poems and a broken seal visible on the low writing table
-    - finished anime scene illustration, clean stable contours, young craft apprentice copying an elderly master's precise hand position at a worn workbench, failed pieces piled nearby, only one finished traditional object between them
-    - finished anime scene illustration, clean stable contours, displaced family opening a small postwar neighborhood shop, black mourning bands beside freshly painted signage, one parent stocking salvaged goods while a child places a deceased relative's photograph behind the counter
+    - anime illustration, clean stable contours, wandering swordswoman facing an opponent in wind-bent grass, long preparation followed by one economical exchange
+    - anime illustration, clean stable contours, castle steward concealing a succession letter while rival households arrive for a formal audience
+    - anime illustration, clean stable contours, traveling medicine seller comparing sick villagers' blackened fingertips with leaking dye barrels, shrine charms hanging untouched beside contaminated trade crates
+    - anime illustration, clean stable contours, village women blocking three narrow lanes with carts, rope and farm tools while empty weapon racks hang inside the gatehouse behind them
+    - anime illustration, clean stable contours, Edo-period fire brigade racing across rooftops as wind carries embers toward crowded wooden districts
+    - anime illustration, clean stable contours, court poet shielding a half-written verse beneath a sleeve while armed officials watch from the moon-viewing pavilion, censored poems and a broken seal visible on the low writing table
+    - anime illustration, clean stable contours, young craft apprentice copying an elderly master's precise hand position at a worn workbench, failed pieces piled nearby, only one finished traditional object between them
+    - anime illustration, clean stable contours, displaced family opening a small postwar neighborhood shop, black mourning bands beside freshly painted signage, one parent stocking salvaged goods while a child places the deceased relative's engraved trade tool behind the counter
 
   anime_music_scene:
-    - finished anime scene illustration, clean stable contours, school band paused around the quietest musician, every chair and gaze turned toward their raised bow, shared metronome centered in frame and matching beat marks penciled across all music stands
-    - finished anime scene illustration, clean stable contours, punk trio performing at floor level in a tiny club, normally reserved singer screaming into a microphone with jacket discarded, stunned uniformed classmates pressed against the front wall
-    - finished anime scene illustration, clean stable contours, idol group rehearsing in plain sweat-darkened clothes before mirrored walls, one singer slumped beside water bottles while the others adjust formation marks around her
-    - finished anime scene illustration, clean stable contours, jazz students facing each other in an empty late-night practice room, saxophone and piano phrases shown as alternating notation across open stands, LAST TRAIN sign dark beyond the window
-    - finished anime scene illustration, clean stable contours, orchestra leader with wrist brace paused in the rehearsal-room doorway while a younger substitute conducts the ensemble, musicians' eyes split between both figures
-    - finished anime scene illustration, clean stable contours, folk musician singing into a portable recorder in a mountain house, elderly residents gathered close, packed moving boxes and a bus timetable marked FINAL SERVICE beside the door
-    - finished anime scene illustration, clean stable contours, electronic composer sampling the mechanical rhythms of a closing factory with its workers
-    - finished anime scene illustration, clean stable contours, shy songwriter performing one unfinished song at a university festival as rain empties the audience area
+    - anime illustration, clean stable contours, school band paused around the quietest musician, every chair and gaze turned toward their raised bow, shared metronome centered in frame and matching beat marks penciled across all music stands
+    - anime illustration, clean stable contours, punk trio performing at floor level in a tiny club, normally reserved singer screaming into a microphone with jacket discarded, stunned uniformed classmates pressed against the front wall
+    - anime illustration, clean stable contours, idol group rehearsing in plain sweat-darkened clothes before mirrored walls, one singer slumped beside water bottles while the others adjust formation marks around her
+    - anime illustration, clean stable contours, jazz students facing each other in an empty late-night practice room, saxophone and piano phrases shown as alternating notation across open stands, LAST TRAIN sign dark beyond the window
+    - anime illustration, clean stable contours, orchestra leader with wrist brace paused in the rehearsal-room doorway while a younger substitute conducts the ensemble, musicians' eyes split between both figures
+    - anime illustration, clean stable contours, folk musician singing into a portable recorder in a mountain house, elderly residents gathered close, packed moving boxes and a bus timetable marked FINAL SERVICE beside the door
+    - anime illustration, clean stable contours, electronic composer sampling the mechanical rhythms of a closing factory with its workers
+    - anime illustration, clean stable contours, shy songwriter performing one unfinished song at a university festival as rain empties the audience area
 
   anime_culinary_scene:
-    - finished anime scene illustration, clean stable contours, young cook surrounded by relatives holding conflicting handwritten recipe cards, measuring three different spice amounts over one simmering family dish
-    - finished anime scene illustration, clean stable contours, rival chefs preparing the same humble ingredient, technique and hospitality distinguishing the results
-    - finished anime scene illustration, clean stable contours, exhausted restaurant staff serving one occupied table beneath a handwritten closing notice, stacked chairs and packed boxes filling the darkened dining room
-    - finished anime scene illustration, clean stable contours, traveler copying an elder's hand movements while packing vegetables into ceramic fermentation jars, snow visible beyond a remote village kitchen, labeled jars lining the walls
-    - finished anime scene illustration, clean stable contours, school lunch club comparing a tray of returned uneaten portions marked on a tally sheet against a redesigned version, students tasting the new dish and raising thumbs-up cards toward the kitchen window
-    - finished anime scene illustration, clean stable contours, pastry apprentice recovering from a collapsed showpiece through smaller precise work
-    - finished anime scene illustration, clean stable contours, fantasy party cooking an unfamiliar monster safely, anatomy and preparation treated with practical detail
-    - finished anime scene illustration, clean stable contours, widower at a home stove comparing a stained handwritten recipe card with a simmering soup pot while two grandchildren watch from the kitchen table beside a framed family photograph
+    - anime illustration, clean stable contours, young cook surrounded by relatives holding conflicting handwritten recipe cards, measuring three different spice amounts over one simmering family dish
+    - anime illustration, clean stable contours, rival chefs preparing the same humble ingredient, technique and hospitality distinguishing the results
+    - anime illustration, clean stable contours, exhausted restaurant staff serving one occupied table beneath a handwritten closing notice, stacked chairs and packed boxes filling the darkened dining room
+    - anime illustration, clean stable contours, traveler copying an elder's hand movements while packing vegetables into ceramic fermentation jars, snow visible beyond a remote village kitchen, labeled jars lining the walls
+    - anime illustration, clean stable contours, school lunch club comparing a tray of returned uneaten portions marked on a tally sheet against a redesigned version, students tasting the new dish and raising thumbs-up cards toward the kitchen window
+    - anime illustration, clean stable contours, pastry apprentice recovering from a collapsed showpiece through smaller precise work
+    - anime illustration, clean stable contours, fantasy party cooking an unfamiliar monster safely, anatomy and preparation treated with practical detail
+    - anime illustration, clean stable contours, widower at a home stove comparing a stained handwritten recipe card with a simmering soup pot while two grandchildren wait beside one unused place setting tied with a black ribbon
 
   anime_adult_drama_scene:
-    - finished anime scene illustration, clean stable contours, middle-aged manager holding a signed dismissal form away from a longtime colleague in a matching anniversary jacket while coworkers raise commemorative glasses around them
-    - finished anime scene illustration, clean stable contours, divorced parents at the same school event exchanging a labeled medicine pouch and pickup schedule beside their child's empty chair, restrained posture and careful distance
-    - finished anime scene illustration, clean stable contours, nurse finishing a night shift and sharing breakfast with an adult child beginning the opposite schedule
-    - finished anime scene illustration, clean stable contours, gray-haired executive alone in a boardroom, old protest photograph and faded armband beside a current factory-closure plan bearing their signature
-    - finished anime scene illustration, clean stable contours, aging performer with an old marked script watching a younger replacement demonstrate a visibly different pose, crossed-out blocking marks between them on the stage floor
-    - finished anime scene illustration, clean stable contours, adult siblings packing a childhood apartment, one protecting a chipped toy in tissue paper while the other drops matching toys into a disposal box, parent's portrait between them
-    - finished anime scene illustration, clean stable contours, municipal worker pinning an evacuation map inside a coastal community hall while elderly residents sit with packed bags at their feet but hold house keys toward the flooded street
-    - finished anime scene illustration, clean stable contours, small-business owner guiding an employee's hands on an unfamiliar machine, bilingual instruction cards taped beside worn controls, both wearing matching stained aprons
+    - anime illustration, clean stable contours, middle-aged manager holding a signed dismissal form away from a longtime colleague in a matching anniversary jacket while coworkers raise commemorative glasses around them
+    - anime illustration, clean stable contours, divorced parents at the same school event exchanging a labeled medicine pouch and pickup schedule beside their child's empty chair, restrained posture and careful distance
+    - anime illustration, clean stable contours, nurse finishing a night shift and sharing breakfast with an adult child beginning the opposite schedule
+    - anime illustration, clean stable contours, gray-haired executive alone in a boardroom, faded protest armband and battered placard beside a current factory-closure order bearing their signature
+    - anime illustration, clean stable contours, aging performer with an old marked script watching a younger replacement demonstrate a visibly different pose, crossed-out blocking marks between them on the stage floor
+    - anime illustration, clean stable contours, adult siblings packing a childhood apartment, one protecting a chipped toy in tissue paper while the other drops matching toys into a disposal box, their parent's labeled sewing kit open between them
+    - anime illustration, clean stable contours, municipal worker opening a marked evacuation bus outside a coastal community hall while elderly residents sit with packed bags but clutch muddy family nameplates toward the flooded street
+    - anime illustration, clean stable contours, small-business owner guiding an employee's hands on an unfamiliar machine, bilingual instruction cards taped beside worn controls, both wearing matching stained aprons
 
   anime_childrens_scene:
-    - finished anime scene illustration, clean stable contours, two children following a collared neighborhood cat across connected rooftop gardens, open pet carrier and hand-drawn route map held between them
-    - finished anime scene illustration, clean stable contours, shy child peering beneath a blanket at night as tiny household spirits stitch a torn toy and tighten a clock spring across a moonlit bedroom floor
-    - finished anime scene illustration, clean stable contours, siblings building a cardboard spacecraft that transforms familiar rooms through imaginative staging
-    - finished anime scene illustration, clean stable contours, young forest guide bandaging an injured creature beside visible migration tracks, herd silhouettes waiting beyond the trees, no weapons or spell effects
-    - finished anime scene illustration, clean stable contours, classroom caring for one seedling through a difficult season, each child contributing differently
-    - finished anime scene illustration, clean stable contours, child and grandparent at a rural train window, grandparent pointing toward people waiting with flowers at successive tiny platforms, route scrapbook open across their knees
-    - finished anime scene illustration, clean stable contours, friends staging a miniature festival for residents unable to attend the town celebration
-    - finished anime scene illustration, clean stable contours, curious apprentice delivering packages through a city where every district follows different visual rules
+    - anime illustration, clean stable contours, two children following a collared neighborhood cat across connected rooftop gardens, open pet carrier between them and displaced flowerpots marking the cat's path
+    - anime illustration, clean stable contours, shy child peering beneath a blanket at night as tiny household spirits stitch a torn toy and tighten a clock spring across a moonlit bedroom floor
+    - anime illustration, clean stable contours, siblings building a cardboard spacecraft that transforms familiar rooms through imaginative staging
+    - anime illustration, clean stable contours, young forest guide bandaging an injured creature beside visible migration tracks, herd silhouettes waiting beyond the trees, no weapons or spell effects
+    - anime illustration, clean stable contours, classroom caring for one seedling through a difficult season, each child contributing differently
+    - anime illustration, clean stable contours, child and grandparent at a rural train window, grandparent pointing toward people waiting with flowers at successive tiny platforms, route scrapbook open across their knees
+    - anime illustration, clean stable contours, friends staging a miniature festival for residents unable to attend the town celebration
+    - anime illustration, clean stable contours, curious apprentice delivering packages through a city where every district follows different visual rules
 
 # ------------------------------------------------------------------------
 # MODULAR ANIME CHARACTER DESIGN
@@ -390,7 +390,7 @@ gkr_anime:
     - wooden practice sword with impact marks and repaired grip wrap
     - long spear with leaf-shaped blade and travel cover
     - wooden bow, thumb glove and quiver of clearly separated arrows
-    - leather-bound grimoire opened to diagrams and handwritten notes
+    - leather-bound grimoire opened to pressed specimens, material samples and handwritten notes
     - compact star-tipped wand with worn handle and ribbon charm
     - heavy powered gauntlets with exposed joint actuators
     - large handheld energy cannon connected to a backpack power cell
@@ -435,7 +435,7 @@ gkr_anime:
   adult_archetype:
     - middle-aged municipal planner, weathered document case, reading glasses, tired attentive expression
     - night-shift nurse, wrinkled scrubs, practical watch, untouched canned coffee
-    - neighborhood shopkeeper, apron and pencil behind one ear, keys worn smooth from use
+    - neighborhood shopkeeper, apron and pencil behind one ear, worn receipt spindle and coin tray in hand
     - investigative journalist, compact recorder, rain-dark coat, several marked notebooks
     - junior corporate manager, simple suit, employee schedules, controlled worry beneath polite posture
     - divorced parent commuting from work, grocery bag, child-made charm attached to a phone
@@ -445,7 +445,7 @@ gkr_anime:
   action_archetype:
     - disciplined martial-arts student, plain training clothes, taped hands, balanced low stance
     - impulsive young team leader, reinforced travel jacket, first-aid pouch, chipped practice weapon
-    - tactical support specialist, utility vest, route map, compact rescue tools rather than heavy weapons
+    - tactical support specialist, utility vest, signal baton, compact rescue tools and color-coded team markers rather than heavy weapons
     - veteran mentor, faded training uniform, old injury supported by a brace, economical posture
     - reserved rival, immaculate fitted jacket, carefully maintained equipment, unreadable expression
     - agile urban courier, helmet and protective streetwear, climbing gloves, messenger case
@@ -507,10 +507,10 @@ gkr_anime:
     - reserved fox spirit living as a shop assistant, subtle ears visible in reflections, old coin purse
     - urban exorcist, ordinary office wear beneath a ritual overcoat, paper seals and chalk line
     - school ghost protecting one forgotten classroom, faded uniform, borrowed library book
-    - yokai researcher, field vest, audio recorder, regional folklore maps and gift offerings
+    - yokai researcher, field vest, audio recorder, labeled footprint casts and gift offerings
     - half-transformed guardian, human clothing strained around furred arms, protective rather than predatory stance
     - dream courier, layered night-blue robes, sealed letters addressed in sleeping handwriting
-    - elderly medium, modest formal wear, family altar keys, patient expression toward an unseen visitor
+    - elderly medium, modest formal wear, prayer beads and incense box from a family altar, patient expression toward an unseen visitor
 
   delinquent_archetype:
     - protective gang leader, modified school coat, scuffed boots, first-aid supplies hidden inside
@@ -534,8 +534,8 @@ gkr_anime:
     - siblings standing back-to-back, one raising a shield outward while the other grips a first-aid kit and checks the shield-bearer's wound
     - longtime friends seated with an unopened letter between them, bodies angled away while their hands nearly touch beside the envelope
     - scarred veteran handing an old insignia to a replacement wearing different equipment and a newly designed uniform
-    - investigator spreading photographs across a table while a skeptical local adds a hand-drawn map and points to an overlooked landmark
-    - injured team leader seated against a wall while the support specialist stands over the map issuing directions to the rest of the team
+    - investigator spreading numbered evidence bags across a table while a skeptical local matches one paint chip to a distinctive broken sign visible through the window
+    - injured team leader seated against a wall while the support specialist assigns color-coded signal bands and points teammates toward separate visible exits
     - parent and adult child repairing the same household machine from opposite sides, passing a tool between grease-stained hands
 
   personality_archetype:
@@ -544,15 +544,15 @@ gkr_anime:
     - "yandere schoolgirl, immaculate uniform, fixed sweet smile, unblinking eyes, gripping a love letter before a bedroom wall covered with one person's photographs"
     - "dandere student half-hidden behind an open book, hunched shoulders, lowered gaze, blushing face, fingertips touching those of a trusted friend across a library table"
     - "chuunibyou student in a dramatic occult pose, eyepatch over a supposedly cursed eye, bandaged arm, black improvised cape, cardboard magic sigils and theatrical hand gesture"
-    - "megane class strategist, rectangular glasses, disciplinary armband, clipboard covered in diagrams, one finger pushing the glasses up at the bridge, confident analytical stare"
+    - "megane class strategist, rectangular glasses, disciplinary armband, clipboard of opponent uniform numbers and color-coded timing notes, one finger pushing the glasses up at the bridge, confident analytical stare"
 
   team_role:
     - calm coordinator tracking the whole situation
     - impulsive initiator forcing the group to act
     - technical specialist solving material constraints
-    - mediator standing between two figures with crossed arms and opposing eyelines, open palms guiding both toward the same map
+    - mediator standing between two figures with crossed arms and opposing eyelines, open palms guiding both toward the same signed agreement
     - experienced defender protecting retreat routes
-    - skeptical analyst holding a magnifier over disputed evidence, notes covered with crossed-out diagrams and alternate routes
+    - skeptical analyst holding a magnifier over disputed evidence, notes covered with crossed-out timestamps and alternate object identifications
     - local guide reading environment and custom
     - inexperienced newcomer asking the necessary question
 
@@ -682,9 +682,9 @@ gkr_anime:
   isekai_character_combo:
     - "modern student with schoolbag kneeling on a glowing forest road in an otherworldly frontier, circular portal closing behind them, delivery truck frozen beyond the portal at a city crosswalk, startled expression, __gkr_anime/anime_era_style__"
     - "ordinary modern-world adult in office clothes standing inside a luminous summoning circle on a stone palace floor, surrounded by robed mages, armored guards and an anxious royal court, phone and umbrella scattered at their feet, __gkr_anime/anime_era_style__"
-    - "otherworld traveler touching translucent floating interface panels, portrait icon, level bar, inventory grid, locked skill icons and quest-map marker visible around their hands, immense fantasy city beyond, __gkr_anime/anime_era_style__"
+    - "otherworld traveler touching translucent floating interface panels, personal crest, level bar, inventory grid, locked skill icons and pulsing quest destination visible around their hands, immense fantasy city beyond, __gkr_anime/anime_era_style__"
   villainess_reincarnation_combo:
-    - "elegant reincarnated noblewoman in an elaborate ruffled gown recognizing her own portrait on a floating game-style status panel labeled DOOMED VILLAINESS, ballroom of an otome-game academy behind her, startled hand raised to her own face, __gkr_anime/anime_era_style__"
+    - "elegant reincarnated noblewoman in an elaborate ruffled gown staring at her own name and family crest on a floating game-style status panel labeled DOOMED VILLAINESS, ballroom of an otome-game academy behind her, startled hand raised to her own face, __gkr_anime/anime_era_style__"
     - "reincarnated villainess redirecting a raised riding crop into offering a fallen rival's dropped fan, four nearby suitors' floating affection-gauge bars all tilting toward her instead of the game's intended heroine, __gkr_anime/anime_era_style__"
   magical_girl_combo:
     - "ordinary schoolgirl mid-transformation, school uniform dissolving into ribbons of light, ornate layered magical costume forming around her, glowing personal emblem at her chest, jeweled wand raised above a threatened city street, __gkr_anime/anime_era_style__"
@@ -698,9 +698,9 @@ gkr_anime:
     - "battle hero in a newly transformed state, hair and costume reshaped by a violent luminous aura, fragments of the previous armor scattered at their feet, bleeding nose and cracked ground showing the strain, teammates shielding their faces, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
   super_robot_combo:
     - "shouting pilot leaning into twin control levers, heroic giant robot mirroring the pose above a city, blazing chest emblem, enormous energy blade raised overhead, flames, a clear raised-weapon silhouette and triumphant extreme low angle, __gkr_anime/anime_era_style__"
-    - "five brightly colored machines joining in midair to form one giant humanoid robot, limbs locking into place amid lightning and concentric energy rings, five pilot portraits arranged around the frame, bold graphic effects, __gkr_anime/anime_era_style__"
+    - "five brightly colored machines joining in midair to form one giant humanoid robot, limbs locking into place amid lightning and concentric energy rings, five color-coded cockpit canopies glowing across the machines, bold graphic effects, __gkr_anime/anime_era_style__"
   real_robot_combo:
-    - "military pilot inside a cramped scratched cockpit operating __gkr_anime/mecha_design__, red fuel gauge, empty ammunition icons, cracked targeting display, radio waveform and evacuation map reflected across the visor, __gkr_anime/anime_era_style__"
+    - "military pilot inside a cramped scratched cockpit operating __gkr_anime/mecha_design__, red fuel gauge, empty ammunition icons, cracked targeting display, radio waveform and flashing civilian transponder lights reflected across the visor, __gkr_anime/anime_era_style__"
     - "battle-scarred __gkr_anime/mecha_design__ kneeling in a crowded hangar, armor panels removed, mechanics welding an exposed knee joint, ammunition racks nearly empty, exhausted pilot asleep against a supply crate, officers watching behind glass, __gkr_anime/anime_era_style__"
   sentai_combo:
     - "five color-coded ranger-suited heroes landing in a matched formation pose across a plaza, morphed helmets catching the light, unit emblem flashing on each chest, civilians pointing from behind a barricade, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
@@ -722,13 +722,13 @@ gkr_anime:
   delinquent_combo:
     - "__gkr_anime/delinquent_archetype__ at a school-gate confrontation, dented bicycles, torn noticeboard, watching classmates and a younger student sheltered behind the delinquent's outstretched arm, __gkr_anime/anime_era_style__"
   military_political_combo:
-    - "ensemble led by __gkr_anime/scifi_archetype__ facing __gkr_anime/antagonist_archetype__ across a planning table, fuel tokens, casualty photographs, evacuation map and opposing unit insignia spread between them, static eye-level composition, __gkr_anime/anime_era_style__"
+    - "ensemble led by __gkr_anime/scifi_archetype__ facing __gkr_anime/antagonist_archetype__ across a planning table, fuel tokens, dented identification tags, sealed exit permits and opposing unit insignia spread between them, static eye-level composition, __gkr_anime/anime_era_style__"
   kaiju_combo:
     - "colossal __gkr_anime/kaiju_creature__ beside a coastal city or industrial harbor, tiny evacuation buses below, buckled power pylons, scientists aiming survey instruments from a rooftop, nests or feeding marks visible around the creature, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
   space_opera_combo:
-    - "crew including __gkr_anime/scifi_archetype__ aboard __gkr_anime/space_vehicle__, one officer aiming at a rival flagship while another shields a family photograph attached to the targeting console, vast fleet formations beyond the viewport, __gkr_anime/anime_era_style__"
+    - "crew including __gkr_anime/scifi_archetype__ aboard __gkr_anime/space_vehicle__, one officer aiming at a rival flagship while another shields a child's handmade mission charm attached to the targeting console, vast fleet formations beyond the viewport, __gkr_anime/anime_era_style__"
   cyberpunk_combo:
-    - "__gkr_anime/scifi_archetype__ beneath layered rail lines and utility pipes, biometric screens showing mismatched portraits, repair workers beside open service panels, crowded checkpoint lanes, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
+    - "__gkr_anime/scifi_archetype__ beneath layered rail lines and utility pipes, biometric screens showing mismatched names, handprints and access colors, repair workers beside open service panels, crowded checkpoint lanes, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
   post_apocalyptic_combo:
     - "small group including __gkr_anime/adult_archetype__ maintaining __gkr_anime/post_apocalyptic_vehicle__ beside reclaimed rail lines, vegetable beds between sleepers, open engine panels, shared tools and water containers, __gkr_anime/anime_era_style__"
   racing_combo:
@@ -753,7 +753,7 @@ gkr_anime:
     - "standalone school-drama character: __gkr_anime/school_archetype__, plain school corridor background, full body and all carried objects visible, __gkr_anime/anime_era_style__"
     - "standalone adult-drama character: __gkr_anime/adult_archetype__, work badge, hand tools, ledger, medical case or recording equipment held or placed within reach, both feet visible, plain workplace background, __gkr_anime/anime_era_style__"
     - "standalone action character: __gkr_anime/action_archetype__, hands correctly gripping equipment, feet planted, unobstructed silhouette, __gkr_anime/anime_era_style__"
-    - "standalone fantasy character: __gkr_anime/fantasy_archetype__, material-worn clothing with staff, blade, satchel, map or craft tools visible, __gkr_anime/anime_era_style__"
+    - "standalone fantasy character: __gkr_anime/fantasy_archetype__, material-worn clothing with staff, blade, satchel, trade sample or craft tools visible, __gkr_anime/anime_era_style__"
     - "standalone historical character: __gkr_anime/historical_archetype__, visible garment closures, period tools held in operating position, upright full-body pose, __gkr_anime/anime_era_style__"
     - "standalone science-fiction character: __gkr_anime/scifi_archetype__, worn work equipment held in its operating position, cables, fasteners and access panels visible, __gkr_anime/anime_era_style__"
     - "standalone music character: __gkr_anime/music_archetype__, hands correctly placed on instrument or production controls, cables, stands and cases visible, __gkr_anime/anime_era_style__"
@@ -763,13 +763,13 @@ gkr_anime:
     - "standalone gyaru character: __gkr_anime/gyaru_archetype__, full body, makeup and accessory detail visible, plain shop-window or classroom background, __gkr_anime/anime_era_style__"
 
   personality_character_combo:
-    - "__gkr_anime/personality_archetype__, full-body anime character portrait in a school corridor, clear hand pose, facial expression and role-defining props, __gkr_anime/anime_era_style__"
+    - "__gkr_anime/personality_archetype__, full-body anime character presentation in a school corridor, clear hand pose, facial expression and role-defining props, __gkr_anime/anime_era_style__"
     - "__gkr_anime/personality_archetype__, waist-up anime reaction shot across a classroom desk, another character's hand entering the foreground, readable eyeline and expression, __gkr_anime/anime_era_style__"
 
   ensemble_character_combo:
     - "four-person anime ensemble: __gkr_anime/team_role__, __gkr_anime/team_role__, __gkr_anime/team_role__, and __gkr_anime/team_role__; distinct silhouettes, separate hand actions, converging eyelines and one shared central prop, __gkr_anime/anime_era_style__"
     - "paired character study: __gkr_anime/character_relationship__, one __gkr_anime/adult_archetype__ and one __gkr_anime/school_archetype__, full hands, posture, eyelines and distance visible, __gkr_anime/anime_era_style__"
-    - "fantasy travel party including __gkr_anime/fantasy_archetype__, __gkr_anime/fantasy_archetype__, and __gkr_anime/fantasy_archetype__, each holding a different tool toward the same marked route on a map, __gkr_anime/anime_era_style__"
+    - "fantasy travel party including __gkr_anime/fantasy_archetype__, __gkr_anime/fantasy_archetype__, and __gkr_anime/fantasy_archetype__, each using a different tool to cross the same broken rope bridge, __gkr_anime/anime_era_style__"
     - "science-fiction operations crew including __gkr_anime/scifi_archetype__, __gkr_anime/scifi_archetype__, and __gkr_anime/scifi_archetype__, separate control stations, shared central display and converging eyelines, __gkr_anime/anime_era_style__"
 
   character_sheet_combo:
@@ -779,16 +779,16 @@ gkr_anime:
     - "vehicle design sheet for __gkr_anime/anime_vehicle__, exterior turnaround, operator position, storage and maintenance detail, weathering callouts"
 
   anime_key_visual_combo:
-    - "anime key visual featuring __gkr_anime/ensemble_character_combo__, all eyelines converging on one foreground object or threat, shared room, street or landscape continuing behind every figure, title-safe upper area, polished promotional composition without generic glow"
-    - "anime key visual for __gkr_anime/isekai_character_combo__, foreground cast facing a distant illuminated city while one colossal shadow blocks the road, title-safe negative space"
-    - "anime key visual for __gkr_anime/anime_mecha_combo__, human crew foregrounded against __gkr_anime/mecha_design__, tiny mechanics at the feet, opposing pilot eyelines and damaged cockpit parts visible"
-    - "anime key visual for __gkr_anime/yokai_folklore_combo__, fallen seasonal leaves crossing the boundary stones, human figures on one side and translucent spirits on the other, limited glow around spirit edges"
+    - "promotional anime illustration featuring __gkr_anime/ensemble_character_combo__, all eyelines converging on one foreground object or threat, shared room, street or landscape continuing behind every figure, title-safe upper area, polished composition without generic glow"
+    - "promotional anime illustration for __gkr_anime/isekai_character_combo__, foreground cast facing a distant illuminated city while one colossal shadow blocks the road, title-safe negative space"
+    - "promotional anime illustration for __gkr_anime/anime_mecha_combo__, human crew foregrounded against __gkr_anime/mecha_design__, tiny mechanics at the feet, opposing pilot eyelines and damaged cockpit parts visible"
+    - "promotional anime illustration for __gkr_anime/yokai_folklore_combo__, fallen seasonal leaves crossing the boundary stones, human figures on one side and translucent spirits on the other, limited glow around spirit edges"
 
   anime_poster_combo:
     - "theatrical anime poster based on __gkr_anime/anime_action_scene__, one central silhouette, supporting cast arranged by opposing eyelines and distance, major environment landmark and threat visible at thumbnail size, title-safe negative space"
     - "theatrical anime poster based on __gkr_anime/anime_romance_scene__, one scene object enlarged behind the paired figures and repeated near both hands, seasonal palette, centered composition"
     - "theatrical anime poster based on __gkr_anime/anime_horror_scene__, one extra doorway, window or silhouette repeated within the architecture, large negative space, limited color"
-    - "theatrical anime poster based on __gkr_anime/anime_adult_drama_scene__, opposing ensemble eyelines converging on one central letter, photograph or damaged object, naturalistic color"
+    - "theatrical anime poster based on __gkr_anime/anime_adult_drama_scene__, opposing ensemble eyelines converging on one central letter or damaged object, naturalistic color"
 
 # ------------------------------------------------------------------------
 # ANIME COMBOS
@@ -852,76 +852,76 @@ gkr_anime:
     - full-page mechanical or architectural reveal preceded by small scale-reference panels
 
   manga_shonen_scene:
-    - manga narrative illustration, rivals facing each other before a tournament's final exchange, matching accumulated wounds, broken weapons and spectators holding scorecards from earlier rounds
-    - manga narrative illustration, adventure team crossing a collapsed bridge, scout firing a rope, shield-bearer anchoring it, healer supporting an injured member and mechanic tightening the pulley
-    - manga narrative illustration, reckless protagonist repeating a failed strike against scarred training posts while a rival erases one plan and sketches a new footwork diagram nearby
-    - manga narrative illustration, wounded mentor placing the evacuation map and leader's armband into the youngest member's hands as civilians crowd the marked exit
-    - manga narrative illustration, former enemy lifting a fallen beam beside the heroes to free trapped civilians, both sides keeping damaged weapons lowered but within reach
-    - manga narrative illustration, training chapter centered on repetition, injury prevention and incremental visible improvement
+    - manga illustration, rivals facing each other before a tournament's final exchange, matching accumulated wounds, broken weapons and spectators holding scorecards from earlier rounds
+    - manga illustration, adventure team crossing a collapsed bridge, scout firing a rope, shield-bearer anchoring it, healer supporting an injured member and mechanic tightening the pulley
+    - manga illustration, reckless protagonist repeating a failed strike against scarred training posts while a rival resets painted foot markers and demonstrates a new stance nearby
+    - manga illustration, wounded mentor placing a leader's armband and signal flare into the youngest member's hands as civilians crowd beneath illuminated exit arrows
+    - manga illustration, former enemy lifting a fallen beam beside the heroes to free trapped civilians, both sides keeping damaged weapons lowered but within reach
+    - manga illustration, training chapter centered on repetition, injury prevention and incremental visible improvement
 
   manga_shojo_scene:
-    - manga narrative illustration, student opening a box containing every small gift given to a longtime friend across several seasons, matching dated photographs and pressed flowers spread around a handwritten confession
-    - manga narrative illustration, formal dance where partners repeatedly change, visual motifs tracking the person each character truly watches
-    - manga narrative illustration, heroine at a station platform gripping an art-school acceptance letter while a partner holds two unused hometown tickets, affectionate hands touching as they face opposite trains
-    - manga narrative illustration, two friends carrying grocery bags together after an argument, one offering the other's favorite drink while a torn photograph remains taped inside a phone case
-    - manga narrative illustration, historical correspondence romance shown through letters, seasonal plants and changing handwriting
-    - manga narrative illustration, performer stepping through a stage curtain in a visibly repaired costume while a rival kneels behind the curtain with matching thread, needle and discarded torn fabric
+    - manga illustration, student opening a box containing every small gift given to a longtime friend across several seasons, dated ticket stubs and pressed flowers spread around a handwritten confession
+    - manga illustration, formal dance where partners repeatedly change, visual motifs tracking the person each character truly watches
+    - manga illustration, heroine at a station platform gripping an art-school acceptance letter while a partner holds two unused hometown tickets, affectionate hands touching as they face opposite trains
+    - manga illustration, two friends carrying grocery bags together after an argument, one offering the other's favorite drink while a torn matching friendship charm remains tied to the phone case
+    - manga illustration, historical correspondence romance shown through letters, seasonal plants and changing handwriting
+    - manga illustration, performer stepping through a stage curtain in a visibly repaired costume while a rival kneels behind the curtain with matching thread, needle and discarded torn fabric
 
   manga_seinen_scene:
-    - manga narrative illustration, detective covering a municipal-office floor with contracts, invoices and ownership charts, the same shell-company seal circled across unrelated public projects, calculator and evidence photographs beside the files
-    - manga narrative illustration, military veteran crouched behind an office cubicle with shoulders rigid and hand reaching toward an absent holster while two coworkers argue harmlessly beside a jammed printer
-    - manga narrative illustration, engineer facing an autonomous security machine that shields an injured trespasser from armed officers, red violation warnings across the control screen, emergency medical kit open at the machine's feet
-    - manga narrative illustration, aging athlete seated beneath championship photographs, old trophy beside medical scans and a newspaper image of the former teammate now walking with crutches
-    - manga narrative illustration, investigative journalist at a cluttered newsroom desk, unpublished article proofs beside photographs of a clinic worker and a family entering a shelter, every source name blacked out in marker, one finger stopped above an illuminated upload key, other hand covering the photographs
-    - manga narrative illustration, two criminals seated opposite each other in a busy family restaurant booth, sealed cash envelope and burner phone between untouched meals, one hand below the table gripping a hidden pistol while families eat in adjacent booths
+    - manga illustration, detective covering a municipal-office floor with contracts, invoices and ownership charts, the same shell-company seal circled across unrelated public projects, calculator and stamped evidence bags beside the files
+    - manga illustration, military veteran crouched behind an office cubicle with shoulders rigid and hand reaching toward an absent holster while two coworkers argue harmlessly beside a jammed printer
+    - manga illustration, engineer facing an autonomous security machine that shields an injured trespasser from armed officers, red violation warnings across the control screen, emergency medical kit open at the machine's feet
+    - manga illustration, aging athlete seated beneath faded championship banners, old trophy beside medical scans and a newspaper headline naming the former teammate's retirement
+    - manga illustration, investigative journalist at a cluttered newsroom desk, unpublished article proofs beside a clinic badge and shelter intake bracelet, every source name blacked out in marker, one finger stopped above an illuminated SEND button, other hand covering the identifying objects
+    - manga illustration, two criminals seated opposite each other in a busy family restaurant booth, sealed cash envelope and burner phone between untouched meals, one hand below the table gripping a hidden pistol while families eat in adjacent booths
 
   manga_josei_scene:
-    - manga narrative illustration, coworkers in their thirties after a promotion, one wearing a new supervisor badge while both hold matching old friendship photographs across a formal office desk
-    - manga narrative illustration, office worker at home between a pressed business suit and a workbench covered with finished handmade ceramics, resignation envelope beside kiln invoices and an exhibition invitation
-    - manga narrative illustration, divorced parent seated with a new partner at the threshold of a family home, closed children's room beyond them, family calendar and custody schedule kept on the parent's side of the table
-    - manga narrative illustration, adult siblings on opposite sides of an aging relative's kitchen table, one holding home-care schedules, the other a residential-care brochure, untouched tea and medication organizer between them
-    - manga narrative illustration, former university friends at their annual restaurant table, different uniforms, wedding rings, childcare bags and work badges surrounding the same old campus photograph
-    - manga narrative illustration, costume designer pinning their own name and junior assistants' names onto a production credit board while a deadline clock glows above piles of unfinished costumes
+    - manga illustration, coworkers in their thirties after a promotion, one wearing a new supervisor badge while both set matching worn company pins across a formal office desk
+    - manga illustration, office worker at home between a pressed business suit and a workbench covered with finished handmade ceramics, resignation envelope beside kiln invoices and an exhibition invitation
+    - manga illustration, divorced parent seated with a new partner at the threshold of a family home, closed children's room beyond them, family calendar and custody schedule kept on the parent's side of the table
+    - manga illustration, adult siblings on opposite sides of an aging relative's kitchen table, one holding home-care schedules, the other a residential-care brochure, untouched tea and medication organizer between them
+    - manga illustration, former university friends at their annual restaurant table, different uniforms, wedding rings, childcare bags and work badges surrounding the same scratched student-club trophy
+    - manga illustration, costume designer pinning their own name and junior assistants' names onto a production credit board while a deadline clock glows above piles of unfinished costumes
 
   manga_horror_scene:
-    - manga narrative illustration, apartment floor plan changing subtly between panels while the resident marks every discrepancy
-    - manga narrative illustration, town residents smiling identically whenever the protagonist mentions a missing family
-    - manga narrative illustration, medical illustration gradually replacing the reader's view of a living character
-    - manga narrative illustration, reflected crowd containing one figure whose face occupies progressively more of each panel
-    - manga narrative illustration, four-panel horror page showing an open diary with blank line, ink strokes appearing without a hand, protagonist comparing the new sentence to a matching handwritten note, final close-up of wet ink
-    - manga narrative illustration, seaside staircase continuing below the water while footprints emerge upward
+    - manga illustration, apartment floor plan changing subtly between panels while the resident marks every discrepancy
+    - manga illustration, town residents smiling identically whenever the protagonist mentions a missing family
+    - manga illustration, medical illustration gradually replacing the reader's view of a living character
+    - manga illustration, reflected crowd containing one figure whose face occupies progressively more of each panel
+    - manga illustration, four-panel horror page showing an open diary with blank line, ink strokes appearing without a hand, protagonist comparing the new sentence to a matching handwritten note, final close-up of wet ink
+    - manga illustration, seaside staircase continuing below the water while footprints emerge upward
 
   manga_sports_scene:
-    - manga narrative illustration, final rally decomposed into foot placement, breath, teammate positioning and one decisive contact
-    - manga narrative illustration, injured captain contributing through observation and strategy from the sideline
-    - manga narrative illustration, sports manga page showing a defeated novice kneeling beside a lopsided scoreboard, watching the winner demonstrate one precise foot position, then copying that stance beside a penciled training diagram
-    - manga narrative illustration, rivals leaning over the same match photographs, each circling a different turning point on transparent overlays while contradictory tactical diagrams fill the margins
-    - manga narrative illustration, team practice beneath a heat-warning board, one player distributing water, moving a fan toward an exhausted teammate and tightening shade cloth while others continue drills
-    - manga narrative illustration, student athlete asleep over textbooks in a laundromat work uniform, taped knee elevated on a sports bag, training schedule and late-shift timecard beside an alarm clock
+    - manga illustration, final rally decomposed into foot placement, breath, teammate positioning and one decisive contact
+    - manga illustration, injured captain contributing through observation and strategy from the sideline
+    - manga illustration, sports manga page showing a defeated novice kneeling beside a lopsided scoreboard, watching the winner demonstrate one precise foot position, then copying that stance between painted training marks
+    - manga illustration, rivals leaning over a sequence of match timestamps and score sheets, each circling a different turning point and arranging player tokens in contradictory formations
+    - manga illustration, team practice beneath a heat-warning board, one player distributing water, moving a fan toward an exhausted teammate and tightening shade cloth while others continue drills
+    - manga illustration, student athlete asleep over textbooks in a laundromat work uniform, taped knee elevated on a sports bag, training schedule and late-shift timecard beside an alarm clock
 
   manga_yonkoma_scene:
-    - manga narrative illustration, office worker misinterpreting an automated reminder as increasingly personal criticism
-    - manga narrative illustration, fantasy hero's legendary weapon repeatedly used for mundane household repairs
-    - manga narrative illustration, cat strategically relocating objects while humans invent supernatural explanations
-    - manga narrative illustration, student preparing the perfect confession only to deliver it to the wrong identical locker
-    - manga narrative illustration, ghost levitating a chair and stretching a shadow across the ceiling while the unfazed resident points toward cracked pipes with a wrench and maintenance checklist
-    - manga narrative illustration, four-panel sequence showing a robot studying a sarcasm phrasebook, practicing a smug expression, repeating the phrase at a funeral, mourners turning in shock while the robot gives a cheerful thumbs-up
+    - manga illustration, office worker misinterpreting an automated reminder as increasingly personal criticism
+    - manga illustration, fantasy hero's legendary weapon repeatedly used for mundane household repairs
+    - manga illustration, cat strategically relocating objects while humans invent supernatural explanations
+    - manga illustration, student preparing the perfect confession only to deliver it to the wrong identical locker
+    - manga illustration, ghost levitating a chair and stretching a shadow across the ceiling while the unfazed resident points toward cracked pipes with a wrench and maintenance checklist
+    - manga illustration, four-panel sequence showing a robot studying a sarcasm phrasebook, practicing a smug expression, repeating the phrase at a funeral, mourners turning in shock while the robot gives a cheerful thumbs-up
 
   manga_historical_scene:
-    - manga narrative illustration, merchant household around a ledger table, new regime's seal stamped across inventory lists, debt notes and marriage contract while soldiers replace flags outside the shop
-    - manga narrative illustration, traveling artist sketching a village beside survey stakes and an unfinished road cutting across fields, residents and traditional buildings recorded on open pages in the foreground
-    - manga narrative illustration, sword school divided over whether tradition permits adaptation to unfamiliar weapons
-    - manga narrative illustration, court attendant using poetry and gift etiquette to prevent a factional confrontation
-    - manga narrative illustration, rural midwife crossing a winter pass to reach an isolated settlement
-    - manga narrative illustration, postwar family rebuilding a neighborhood print shop from salvaged equipment
+    - manga illustration, merchant household around a ledger table, new regime's seal stamped across inventory lists, debt notes and marriage contract while soldiers replace flags outside the shop
+    - manga illustration, traveling artist sketching a village beside survey stakes and an unfinished road cutting across fields, residents and traditional buildings recorded on open pages in the foreground
+    - manga illustration, sword school divided over whether tradition permits adaptation to unfamiliar weapons
+    - manga illustration, court attendant using poetry and gift etiquette to prevent a factional confrontation
+    - manga illustration, rural midwife crossing a winter pass to reach an isolated settlement
+    - manga illustration, postwar family rebuilding a neighborhood print shop from salvaged equipment
 
   manga_experimental_scene:
-    - manga narrative illustration, same childhood room repeated in four adjacent manga panels with incompatible furniture, weather and drawing styles, narrator silhouette comparing four conflicting photographs in the gutter
-    - manga narrative illustration, sequential manga page of rigid city-commute diagrams, each successive panel interrupted by more handprints, exchanged umbrellas, leaning bodies and handwritten route detours
-    - manga narrative illustration, conversation shown only through objects moved around a shared table
-    - manga narrative illustration, dream narrative where panel borders become streets and characters climb between pages
-    - manga narrative illustration, silent chapter following a discarded object through many unrelated owners
-    - manga narrative illustration, performer centered across a silent manga spread, surrounding ink wash changing from pale gray to dense black bands around each instrument and gesture, no musical-note symbols
+    - manga illustration, same childhood room repeated in four adjacent manga panels with incompatible furniture, weather and drawing styles, narrator silhouette comparing four conflicting inventories in the gutter
+    - manga illustration, sequential manga page of rigid city-commute diagrams, each successive panel interrupted by more handprints, exchanged umbrellas, leaning bodies and handwritten route detours
+    - manga illustration, conversation shown only through objects moved around a shared table
+    - manga illustration, dream narrative where panel borders become streets and characters climb between pages
+    - manga illustration, silent chapter following a discarded object through many unrelated owners
+    - manga illustration, performer centered across a silent manga spread, surrounding ink wash changing from pale gray to dense black bands around each instrument and gesture, no musical-note symbols
 
   manga_combo:
     - "shonen manga chapter: __gkr_anime/manga_shonen_scene__, __gkr_anime/manga_page_grammar__, __gkr_anime/manga_rendering__, consistent character clothing, props and left-to-right positions across panels"
@@ -948,7 +948,7 @@ gkr_anime:
     - reserved swordswoman in plain indigo hakama, one hand resting on a sheathed blade in wind-bent grass
     - cheerful magical heroine mid-spin, star wand extended as layered ribbons trace the arc
     - armored magical guardian with a cracked crest shield and luminous runes fading along one gauntlet
-    - street-level cyber ninja crouched above a neon alley, optical visor mapping three guarded routes
+    - street-level cyber ninja crouched above a neon alley, optical visor tagging three guards and their overlapping sightlines
     - veteran mecha pilot in a worn flight suit, helmet under one arm, old mission patches removed from the chest
     - young shrine keeper holding paper seals before a translucent fox spirit reflected in rainwater
     - elegant demon princess with small curved horns, formal black gown and an unopened peace document
@@ -959,11 +959,11 @@ gkr_anime:
     - delinquent motorcycle mechanic in modified school coat, offering a repaired helmet to a younger student
     - quiet idol trainee alone after rehearsal, formation tape and discarded stage costume reflected in studio mirrors
     - masked bounty hunter carrying a sealed live-specimen case through an orbital market
-    - elderly spell engineer repairing a staff with mechanical joints, handwritten diagrams pinned around the bench
+    - elderly spell engineer repairing a staff with mechanical joints, labeled replacement parts and failed prototypes spread around the bench
     - artificial schoolmate with subtle facial seams, holding a stack of handwritten friendship notes beside a charging cable
     - wandering medicine seller opening a compartmented case before villagers with matching stained fingertips
     - young airship navigator gripping a brass route instrument while storm maps cover the cabin windows
-    - tiny mascot spirit wearing a repaired satchel, straining to drag a human-sized emergency key
+    - tiny mascot spirit wearing a repaired satchel, straining to pull a human-sized emergency release handle
     - armored rescue fighter braced beneath fallen masonry while civilians crawl through a raised shield gap
     - rival student strategist with rectangular glasses, clipboard of crossed-out tactics and one newly drawn route
     - underwater courier in a compact pressure suit swimming between a submerged station and a waiting research craft
@@ -992,30 +992,30 @@ gkr_anime:
     - cosmic frontier where a small roadside shelter stands beneath immense ringed planets
 
   expanded_anime_scene:
-    - finished anime scene illustration, clean stable contours, rival fighters halt their duel to lift the same collapsed structure from trapped spectators
-    - finished anime scene illustration, clean stable contours, magical team forms a defensive circle around evacuees while each member shields a different approach
-    - finished anime scene illustration, clean stable contours, mecha pilot ejects into a maintenance gantry as the unmanned machine continues following its final command
-    - finished anime scene illustration, clean stable contours, sword duel on a rain-dark bridge, both fighters frozen after one exchange as a cut banner falls between them
-    - finished anime scene illustration, clean stable contours, novice hero fails to raise an oversized weapon while a practical teammate rolls a lever and fulcrum into place
-    - finished anime scene illustration, clean stable contours, cyber investigator chases a copied memory through train windows that display different versions of the same passenger
-    - finished anime scene illustration, clean stable contours, shrine festival continues around a translucent procession visible only in puddle reflections
-    - finished anime scene illustration, clean stable contours, school band performs through a power failure using acoustic instruments and audience phone lights
-    - finished anime scene illustration, clean stable contours, young cook serves rival versions of a family recipe while three elders compare stained handwritten cards
-    - finished anime scene illustration, clean stable contours, exhausted sports team redraws its final play on a fogged locker-room mirror
-    - finished anime scene illustration, clean stable contours, cosmic heroine braces a cracked habitat window with a force field while technicians bolt a physical patch over it
-    - finished anime scene illustration, clean stable contours, delinquent rivals repair the same damaged motorcycle beneath an unsigned truce note
-    - finished anime scene illustration, clean stable contours, fantasy party negotiates with a dragon by arranging maps, food samples and damaged boundary markers between them
-    - finished anime scene illustration, clean stable contours, time traveler holds a childhood drawing dated twenty years earlier beside a newly built station wall reproducing its impossible tower and platform symbols exactly
-    - finished anime scene illustration, clean stable contours, idol group abandons a polished formation to support one injured singer at center stage
-    - finished anime scene illustration, clean stable contours, giant guardian kneels outside a coastal city while residents repaint faded protective symbols on its armor
-    - finished anime scene illustration, clean stable contours, apprentice mage dispels an illusion by holding a cracked hand mirror toward mismatched background reflections
-    - finished anime scene illustration, clean stable contours, two spacecraft crews meet at an airlock with incompatible star charts pressed against opposite windows
-    - finished anime scene illustration, clean stable contours, household spirit repairs broken appliances at night while a child watches beneath a blanket
-    - finished anime scene illustration, clean stable contours, armored villain removes a command crest and places it beside the heroes' evacuation map
-    - finished anime scene illustration, clean stable contours, young courier races a closing floodgate through layered streets as residents point out connected rooftop paths
-    - finished anime scene illustration, clean stable contours, adult siblings packing a family home catch a tiny supernatural resident carrying a chipped toy from a labeled disposal box back toward a shelf already crowded with returned objects
-    - finished anime scene illustration, clean stable contours, martial artist redirects a stronger opponent's strike into a row of marked practice targets without injuring them
-    - finished anime scene illustration, clean stable contours, detective reconstructs a classroom mystery using shoe positions, chalk dust and one reversed wall clock
+    - anime illustration, clean stable contours, rival fighters halt their duel to lift the same collapsed structure from trapped spectators
+    - anime illustration, clean stable contours, magical team forms a defensive circle around evacuees while each member shields a different approach
+    - anime illustration, clean stable contours, mecha pilot ejects into a maintenance gantry as the unmanned machine continues following its final command
+    - anime illustration, clean stable contours, sword duel on a rain-dark bridge, both fighters frozen after one exchange as a cut banner falls between them
+    - anime illustration, clean stable contours, novice hero fails to raise an oversized weapon while a practical teammate rolls a lever and fulcrum into place
+    - anime illustration, clean stable contours, cyber investigator chases a copied memory through train windows that display different versions of the same passenger
+    - anime illustration, clean stable contours, shrine festival continues around a translucent procession visible only in puddle reflections
+    - anime illustration, clean stable contours, school band performs through a power failure using acoustic instruments and audience phone lights
+    - anime illustration, clean stable contours, young cook serves rival versions of a family recipe while three elders compare stained handwritten cards
+    - anime illustration, clean stable contours, exhausted sports team redraws its final play on a fogged locker-room mirror
+    - anime illustration, clean stable contours, cosmic heroine braces a cracked habitat window with a force field while technicians bolt a physical patch over it
+    - anime illustration, clean stable contours, delinquent rivals repair the same damaged motorcycle beneath an unsigned truce note
+    - anime illustration, clean stable contours, fantasy party negotiates with a dragon by arranging food samples, scorched livestock tags and damaged boundary stones between them
+    - anime illustration, clean stable contours, time traveler holds a childhood drawing dated twenty years earlier beside a newly built station wall reproducing its impossible tower and platform symbols exactly
+    - anime illustration, clean stable contours, idol group abandons a polished formation to support one injured singer at center stage
+    - anime illustration, clean stable contours, giant guardian kneels outside a coastal city while residents repaint faded protective symbols on its armor
+    - anime illustration, clean stable contours, apprentice mage dispels an illusion by holding a cracked hand mirror toward mismatched background reflections
+    - anime illustration, clean stable contours, two spacecraft crews meet at an airlock with incompatible star charts pressed against opposite windows
+    - anime illustration, clean stable contours, household spirit repairs broken appliances at night while a child watches beneath a blanket
+    - anime illustration, clean stable contours, armored villain removes a command crest and places it beside the heroes' illuminated corridor beacons while civilians pass through the open gate
+    - anime illustration, clean stable contours, young courier races a closing floodgate through layered streets as residents point out connected rooftop paths
+    - anime illustration, clean stable contours, adult siblings packing a family home catch a tiny supernatural resident carrying a chipped toy from a labeled disposal box back toward a shelf already crowded with returned objects
+    - anime illustration, clean stable contours, martial artist redirects a stronger opponent's strike into a row of marked practice targets without injuring them
+    - anime illustration, clean stable contours, detective reconstructs a classroom mystery using shoe positions, chalk dust and one reversed wall clock
 
   expanded_anime_character_combo:
     - "__gkr_anime/expanded_character_concept__, __gkr_anime/anime_camera__, __gkr_anime/anime_era_style__"
