@@ -186,7 +186,7 @@ gkr_anime:
     - finished anime scene illustration, clean stable contours, four-panel comedy showing one ordinary wrapped box passing between four characters, each panel with a different guessed-content sketch above a face, final panel revealing a plain rice cooker
     - finished anime scene illustration, clean stable contours, student council staging a solemn ceremony while malfunctioning equipment undermines every formal gesture
     - finished anime scene illustration, clean stable contours, armored fantasy adventurers crowded around a restaurant bill, empty coin purses, calculator beads and itemized plates between them, defeated monster trophy blocking the tiny table
-    - finished anime scene illustration, clean stable contours, timid employee mistaken for a legendary expert and repeatedly succeeding through coincidence
+    - finished anime scene illustration, clean stable contours, timid employee frozen with two mismatched wires in hand over an open control panel, coworkers already cheering and lifting them onto their shoulders as the warning light behind switches from red to green
     - finished anime scene illustration, clean stable contours, neighborhood pets carrying keys and dropped tools toward a locked garden gate while two humans point toward the wrong alley
 
   anime_sports_scene:
@@ -233,7 +233,7 @@ gkr_anime:
     - finished anime scene illustration, clean stable contours, android upright in a care-facility bed, patient portraits matched by green boxes across its screen while one nearby visitor is marked OWNER / NO MATCH, disconnected charging cable across the sheets
     - finished anime scene illustration, clean stable contours, cybercrime investigator walking through a translucent reconstructed street, advertisements replacing cheerful faces with the investigator's concealed crime-scene photographs as they pass
     - finished anime scene illustration, clean stable contours, generation-ship residents beneath an artificial sky dome, holding an old star atlas against projected constellations that do not match, maintenance panels open along the horizon projector
-    - finished anime scene illustration, clean stable contours, courier transporting an illegal personality backup through a layered city transit network
+    - finished anime scene illustration, clean stable contours, courier ducking through a service gate to dodge a biometric scanner flashing UNLICENSED DEVICE, personality-backup case hidden inside a false-bottomed delivery box, layered city transit network behind them
     - finished anime scene illustration, clean stable contours, lunar maintenance worker facing an Earth-call waveform beside two clocks showing an impossible delay, helmet reflection containing the blue planet
     - finished anime scene illustration, clean stable contours, elderly engineer showing children an abandoned orbital garden designed by a forgotten culture
     - finished anime scene illustration, clean stable contours, two identical coworkers comparing mismatched memory-capsule serials, differently worn personal objects and conflicting habit checklists across one desk
@@ -264,7 +264,7 @@ gkr_anime:
     - finished anime scene illustration, clean stable contours, rival chefs preparing the same humble ingredient, technique and hospitality distinguishing the results
     - finished anime scene illustration, clean stable contours, exhausted restaurant staff serving one occupied table beneath a handwritten closing notice, stacked chairs and packed boxes filling the darkened dining room
     - finished anime scene illustration, clean stable contours, traveler copying an elder's hand movements while packing vegetables into ceramic fermentation jars, snow visible beyond a remote village kitchen, labeled jars lining the walls
-    - finished anime scene illustration, clean stable contours, school lunch club reducing food waste by redesigning a disliked dish with student feedback
+    - finished anime scene illustration, clean stable contours, school lunch club comparing a tray of returned uneaten portions marked on a tally sheet against a redesigned version, students tasting the new dish and raising thumbs-up cards toward the kitchen window
     - finished anime scene illustration, clean stable contours, pastry apprentice recovering from a collapsed showpiece through smaller precise work
     - finished anime scene illustration, clean stable contours, fantasy party cooking an unfamiliar monster safely, anatomy and preparation treated with practical detail
     - finished anime scene illustration, clean stable contours, widower at a home stove comparing a stained handwritten recipe card with a simmering soup pot while two grandchildren watch from the kitchen table beside a framed family photograph
@@ -673,7 +673,7 @@ gkr_anime:
 
   isekai_character_combo:
     - "modern student with schoolbag kneeling on a glowing forest road in an otherworldly frontier, circular portal closing behind them, delivery truck frozen beyond the portal at a city crosswalk, startled expression, __gkr_anime/anime_era_style__"
-    - "__gkr_anime/fantasy_archetype__ standing inside a luminous summoning circle on a stone palace floor, surrounded by robed mages, armored guards and an anxious royal court, modern personal objects scattered at their feet, __gkr_anime/anime_era_style__"
+    - "ordinary modern-world adult in office clothes standing inside a luminous summoning circle on a stone palace floor, surrounded by robed mages, armored guards and an anxious royal court, phone and umbrella scattered at their feet, __gkr_anime/anime_era_style__"
     - "otherworld traveler touching translucent floating interface panels, portrait icon, level bar, inventory grid, locked skill icons and quest-map marker visible around their hands, immense fantasy city beyond, __gkr_anime/anime_era_style__"
   magical_girl_combo:
     - "ordinary schoolgirl mid-transformation, school uniform dissolving into ribbons of light, ornate layered magical costume forming around her, glowing personal emblem at her chest, jeweled wand raised above a threatened city street, __gkr_anime/anime_era_style__"
@@ -739,6 +739,7 @@ gkr_anime:
     - "standalone music character: __gkr_anime/music_archetype__, hands correctly placed on instrument or production controls, cables, stands and cases visible, __gkr_anime/anime_era_style__"
     - "standalone sports character: __gkr_anime/sports_archetype__, bent-knee athletic posture with ball, racket, bicycle, running spikes or team towel visible, __gkr_anime/anime_era_style__"
     - "standalone supernatural character: __gkr_anime/supernatural_archetype__, one physical transformation trait, one ritual object and plain shrine or domestic background, __gkr_anime/anime_era_style__"
+    - "standalone racing character: __gkr_anime/racing_archetype__, gloved hands correctly placed on the vehicle's controls, seated racing posture, plain garage or paddock background, __gkr_anime/anime_era_style__"
 
   personality_character_combo:
     - "__gkr_anime/personality_archetype__, full-body anime character portrait in a school corridor, clear hand pose, facial expression and role-defining props, __gkr_anime/anime_era_style__"
