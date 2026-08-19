@@ -546,16 +546,6 @@ gkr_anime:
     - "chuunibyou student in a dramatic occult pose, eyepatch over a supposedly cursed eye, bandaged arm, black improvised cape, cardboard magic sigils and theatrical hand gesture"
     - "megane class strategist, rectangular glasses, disciplinary armband, clipboard of opponent uniform numbers and color-coded timing notes, one finger pushing the glasses up at the bridge, confident analytical stare"
 
-  team_role:
-    - calm coordinator tracking the whole situation
-    - impulsive initiator forcing the group to act
-    - technical specialist solving material constraints
-    - mediator standing between two figures with crossed arms and opposing eyelines, open palms guiding both toward the same signed agreement
-    - experienced defender protecting retreat routes
-    - skeptical analyst holding a magnifier over disputed evidence, notes covered with crossed-out timestamps and alternate object identifications
-    - local guide reading environment and custom
-    - inexperienced newcomer asking the necessary question
-
   anime_creature:
     - small household spirit made from folded paper and lost buttons
     - two-tailed shrine cat carrying messages between visible and hidden communities
@@ -767,10 +757,14 @@ gkr_anime:
     - "__gkr_anime/personality_archetype__, waist-up anime reaction shot across a classroom desk, another character's hand entering the foreground, readable eyeline and expression, __gkr_anime/anime_era_style__"
 
   ensemble_character_combo:
-    - "four-person anime ensemble: __gkr_anime/team_role__, __gkr_anime/team_role__, __gkr_anime/team_role__, and __gkr_anime/team_role__; distinct silhouettes, separate hand actions, converging eyelines and one shared central prop, __gkr_anime/anime_era_style__"
-    - "paired character study: __gkr_anime/character_relationship__, one __gkr_anime/adult_archetype__ and one __gkr_anime/school_archetype__, full hands, posture, eyelines and distance visible, __gkr_anime/anime_era_style__"
-    - "fantasy travel party including __gkr_anime/fantasy_archetype__, __gkr_anime/fantasy_archetype__, and __gkr_anime/fantasy_archetype__, each using a different tool to cross the same broken rope bridge, __gkr_anime/anime_era_style__"
-    - "science-fiction operations crew including __gkr_anime/scifi_archetype__, __gkr_anime/scifi_archetype__, and __gkr_anime/scifi_archetype__, separate control stations, shared central display and converging eyelines, __gkr_anime/anime_era_style__"
+    - "exactly four investigators in a medium-wide group composition inside a damaged repair depot: one analyst compares a paint chip through a magnifier, one technician tightens a sparking cable clamp, one defender braces a bent security shutter, and one coordinator raises color-coded signal lights; all four complete figures, faces and separate hand actions visible, __gkr_anime/anime_era_style__"
+    - "exactly four rescue workers in a medium-wide group composition inside a flooded station: one medic fastens a leg splint, one engineer closes an electrical isolation switch, one defender holds back a buckled door, and one coordinator signals toward an illuminated exit; all four complete figures and separate actions visible, __gkr_anime/anime_era_style__"
+    - "exactly four school-club members around one worktable in a medium-wide group composition: one student solders a loose wire, one steadies the broken radio housing, one checks numbered replacement parts, and one raises the newly lit test lamp; all four faces, hands and distinct silhouettes visible, __gkr_anime/anime_era_style__"
+    - "exactly four fantasy travelers crossing a broken rope bridge in a wide group composition: one anchors a rope around a stone post, one tests the next plank with a staff, one supports an injured companion, and one holds back a pack animal; all four travelers fully visible at different points along the same bridge, __gkr_anime/anime_era_style__"
+    - "exactly four spacecraft crew members at separate control stations in a medium-wide group composition: one grips manual flight controls, one seals a leaking pipe, one aligns a docking reticle, and one pulls an emergency power lever; all four faces, hands and stations visible in the same cockpit, __gkr_anime/anime_era_style__"
+    - "exactly three musicians in a medium-wide rehearsal-room composition: seated cellist holding one sustained bow position, standing violinist lowering the instrument, and pianist with hands paused above the keyboard; all three faces, complete hand positions and converging eyelines visible, __gkr_anime/anime_era_style__"
+    - "exactly two rivals in a full-body lateral composition on a marked competition floor, exchanging a formal bow with matching bruises, different damaged equipment and tightly controlled eye contact, __gkr_anime/anime_era_style__"
+    - "exactly two family members repairing the same household machine from opposite sides in a medium composition, one guiding a replacement belt into place while the other turns the tensioning tool, both faces and grease-stained hands visible, __gkr_anime/anime_era_style__"
 
   character_sheet_combo:
     - "anime character design sheet for __gkr_anime/standalone_character_combo__, front, side and back turnaround, three facial expressions, equipment detail inset, material and color callouts, clean production layout"
@@ -779,7 +773,7 @@ gkr_anime:
     - "vehicle design sheet for __gkr_anime/anime_vehicle__, exterior turnaround, operator position, storage and maintenance detail, weathering callouts"
 
   anime_key_visual_combo:
-    - "promotional anime illustration featuring __gkr_anime/ensemble_character_combo__, all eyelines converging on one foreground object or threat, shared room, street or landscape continuing behind every figure, title-safe upper area, polished composition without generic glow"
+    - "promotional anime illustration featuring __gkr_anime/ensemble_character_combo__, preserving its exact subject count, separate actions and group-scale camera distance, shared setting continuing behind every figure, title-safe upper area, polished composition without generic glow"
     - "promotional anime illustration for __gkr_anime/isekai_character_combo__, foreground cast facing a distant illuminated city while one colossal shadow blocks the road, title-safe negative space"
     - "promotional anime illustration for __gkr_anime/anime_mecha_combo__, human crew foregrounded against __gkr_anime/mecha_design__, tiny mechanics at the feet, opposing pilot eyelines and damaged cockpit parts visible"
     - "promotional anime illustration for __gkr_anime/yokai_folklore_combo__, fallen seasonal leaves crossing the boundary stones, human figures on one side and translucent spirits on the other, limited glow around spirit edges"
