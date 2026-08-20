@@ -1,0 +1,398 @@
+# Wildcard linter
+
+`wildcard_linter.py` audits GKR wildcard YAML files in two stages:
+
+1. Deterministic parsing, reference, route, marker, forbidden-language, and heuristic checks.
+2. Optional semantic review through OpenAI or an OpenAI-compatible endpoint such as LiteLLM.
+
+The deterministic stage is always run. The LLM stage never edits files and is opt-in.
+
+## Requirements
+
+- Python 3.11 or newer
+- [`uv`](https://docs.astral.sh/uv/)
+
+The script contains PEP 723 dependency metadata, so `uv` installs `PyYAML` into its managed cache automatically. No project virtual environment or manual `pip install` is required.
+
+## Run deterministic checks
+
+From `gkr-wildcards`:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml
+```
+
+Audit every wildcard YAML file in the folder:
+
+```bash
+uv run tools/wildcard_linter.py .
+```
+
+Generate JSON or Markdown:
+
+```bash
+uv run tools/wildcard_linter.py . --format json --output audit-reports/all.json
+uv run tools/wildcard_linter.py gkr-anime.yaml --format markdown --output audit-reports/anime.md
+```
+
+By default, the command exits with status 1 for errors and succeeds when only warnings remain. Use `--fail-on warning` for strict CI or `--fail-on never` for reporting only.
+
+## Verbose mode and LLM traces
+
+Use `-v` or `--verbose` to show progress on standard error while keeping the selected report format clean on standard output:
+
+```bash
+uv run tools/wildcard_linter.py . --verbose --fail-on never
+```
+
+Verbose output includes discovered files, inventory totals, deterministic finding counts, LLM batch progress, and report destinations.
+
+When `--llm` and `--verbose` are used together, the linter automatically creates a JSON Lines trace in the operating system's temporary directory and prints its path:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml --llm --verbose \
+  --api-key-env OPENAI_API_KEY \
+  --model your-model
+```
+
+Choose a specific trace location with `--llm-log` whether or not verbose mode is enabled:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml --llm \
+  --api-key-env OPENAI_API_KEY \
+  --model your-model \
+  --llm-log audit-reports/anime-llm-trace.jsonl
+```
+
+The trace records:
+
+- Model and endpoint, without credentials
+- Review scope, batch size, and policy hash
+- Stable leaf IDs, categories, line numbers, and text sent in each batch
+- Raw assistant response returned for each batch
+
+The trace never records the API key or authorization headers. It can still contain sensitive wildcard content and model-generated text, so review it before sharing and delete it when it is no longer needed. Automatically created traces remain in the system temporary directory until the operating system or user removes them.
+
+## Report layout, differences, and color
+
+Text and Markdown reports render every finding as a separate section. When a potential fix exists, the report shows the original leaf and proposed replacement as a diff.
+
+Terminal color defaults to `auto`: ANSI colors are enabled only when text is written directly to an interactive terminal. Redirected output and `--output` files remain free of escape codes. Override detection with:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml --color always
+uv run tools/wildcard_linter.py gkr-anime.yaml --color never
+```
+
+Terminal reports use yellow for warnings, red for errors, magenta for LLM markers, green for potential fixes, and red/green diff lines.
+
+Markdown does not have portable foreground-color support across renderers. Markdown reports use colored status symbols, separate headings, horizontal rules, and fenced `diff` blocks, which supporting renderers color as removed and added lines.
+
+## LLM review tests and potential fixes
+
+The LLM stage applies all six tests defined in `prompt.md`:
+
+1. Visual test
+2. Single-moment test
+3. Theme test
+4. Focus test
+5. Appeal test
+6. Route test
+
+It is therefore broader than the Visual test alone. Each LLM finding reports the specific failed test returned by the reviewer. LLM-origin findings receive a visible `[LLM]` marker in text reports and an **LLM** marker in Markdown reports. JSON findings use `"source": "llm"`, which makes them easy to filter programmatically.
+
+Request potential fixes with `--suggest-fixes`:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml \
+  --llm \
+  --suggest-fixes \
+  --verbose \
+  --api-key-env OPENAI_API_KEY \
+  --model your-model
+```
+
+This option runs a separate remediation prompt after review. It proposes one replacement for each leaf with a deterministic or LLM finding. The remediation prompt must preserve valid visual facts, theme, subject count, actions, format, and compact wildcard style while addressing only the reported issues.
+
+Suggested rewrites appear as `potential fix:` lines in text, nested suggestions in Markdown, and the `suggestion` field in JSON. They are advisory and are never written back to a wildcard file automatically.
+
+Every item labeled `Potential fix` is generated by the second LLM pass. Deterministic rules may show a `Suggested approach` inside their explanatory message, but that is static rule guidance—not a replacement leaf—and does not produce a diff or fixed-file change.
+
+`--suggest-fixes` requires `--llm` and adds another set of model requests. When tracing is enabled, fix requests and responses are stored as `fix_request` and `fix_response` JSONL events.
+
+## Write a fixed copy
+
+Use `--fixed-output` to apply accepted LLM suggestions to a new YAML file automatically:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml \
+  --llm \
+  --suggest-fixes \
+  --fixed-output gkr-anime.fixed.yaml \
+  --verbose \
+  --api-key-env OPENAI_API_KEY \
+  --model your-model
+```
+
+Requirements and safeguards:
+
+- `--fixed-output` requires both `--llm` and `--suggest-fixes`.
+- Exactly one input YAML file is allowed.
+- The output path must differ from the original path.
+- Only leaf lines with generated suggestions are changed.
+- Comments, category ordering, router leaves, and unaffected formatting remain intact.
+- The copy is written atomically and parsed as YAML before it replaces the selected output path.
+- The original file is never modified.
+
+Potential fixes remain LLM-generated and should be reviewed by diffing the files:
+
+```bash
+diff -u gkr-anime.yaml gkr-anime.fixed.yaml
+```
+
+## Review scopes
+
+`--llm-scope` provides three mutually exclusive selection modes:
+
+- `candidates`: review only leaves already flagged by deterministic or heuristic checks.
+- `content`: review candidates plus clean leaves containing literal prompt text, while excluding pure router leaves.
+- `all`: review every leaf, including pure router leaves.
+
+Content scope excludes router-only leaves composed solely of references such as:
+
+```yaml
+- "__gkr_anime/anime_action_combo__"
+```
+
+Leaves that mix references with literal text are included because their added text can introduce incompatibilities:
+
+```yaml
+- "__gkr_anime/anime_action_scene__, preserve every subject in one wide frame"
+```
+
+Content scope is available only when LLM review, fix suggestions, and fixed-file output are enabled:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml \
+  --llm \
+  --llm-scope content \
+  --suggest-fixes \
+  --fixed-output gkr-anime.reviewed.yaml \
+  --verbose \
+  --api-key-env OPENAI_API_KEY \
+  --model your-model
+```
+
+The expanded selection uses the normal `--batch-size` mechanism. Clean leaves that pass LLM review remain unchanged in the fixed copy. Newly discovered failures receive a second-pass potential fix and are changed only in the fixed copy.
+
+This differs from `--llm-scope all`: exhaustive scope also sends pure router leaves to the model, while content scope intentionally excludes them. Because scope is a single enumerated option, conflicting selection modes cannot be combined.
+
+## OpenAI semantic review
+
+Secrets are read only from environment variables. Never put API keys in this repository, `rules.yaml`, shell history, or command arguments.
+
+```bash
+export OPENAI_API_KEY="your-key"
+export OPENAI_MODEL="your-model"
+uv run tools/wildcard_linter.py gkr-anime.yaml --llm
+```
+
+The default endpoint is `https://api.openai.com/v1/chat/completions`. `--llm` reviews deterministic warning/error candidates. For a true leaf-by-leaf semantic audit, use:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml --llm --llm-scope all
+```
+
+Full review can make many API calls. Start with one file, inspect costs for the selected model, and use `--batch-size` to tune request size.
+
+## LiteLLM or another compatible endpoint
+
+Set the compatible base URL and the model name accepted by the proxy:
+
+```bash
+export OPENAI_API_KEY="your-proxy-key"
+export OPENAI_BASE_URL="http://localhost:4000/v1"
+export OPENAI_MODEL="gpt-oss-20b"
+uv run tools/wildcard_linter.py gkr-anime.yaml --llm --llm-scope all
+```
+
+The base URL may also be passed with `--base-url`, and the model with `--model`. Keep the API key in an environment variable. If your organization uses a differently named variable:
+
+```bash
+export LITELLM_API_KEY="your-proxy-key"
+uv run tools/wildcard_linter.py gkr-anime.yaml --llm \
+  --api-key-env LITELLM_API_KEY \
+  --base-url http://localhost:4000/v1 \
+  --model gpt-oss-20b
+```
+
+The compatible server must implement `POST /v1/chat/completions` and return assistant text in `choices[0].message.content`.
+
+## OpenRouter
+
+OpenRouter exposes an OpenAI-compatible Chat Completions endpoint, so it works with the same LLM integration. Keep the OpenRouter key in an environment variable:
+
+```bash
+export OPENROUTER_API_KEY="sk-or-v1-..."
+export OPENAI_BASE_URL="https://openrouter.ai/api/v1"
+```
+
+Review only leaves selected by deterministic findings:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml \
+  --llm \
+  --api-key-env OPENROUTER_API_KEY \
+  --model openai/gpt-oss-20b
+```
+
+Perform an exhaustive semantic review of every leaf:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml \
+  --llm \
+  --llm-scope all \
+  --api-key-env OPENROUTER_API_KEY \
+  --model openai/gpt-oss-20b
+```
+
+The base URL can be supplied directly instead of exporting `OPENAI_BASE_URL`:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml \
+  --llm \
+  --api-key-env OPENROUTER_API_KEY \
+  --base-url https://openrouter.ai/api/v1 \
+  --model openai/gpt-oss-20b
+```
+
+OpenRouter model names use provider-qualified slugs. Confirm the current slug in the OpenRouter model catalog before running a large audit. For example:
+
+- `openai/gpt-oss-20b` selects the standard routed model.
+- `openai/gpt-oss-20b:free` selects the free variant when it is available and your account is eligible.
+
+Free models may have lower rate limits or less predictable availability. Begin with candidate-only review or a small wildcard file before requesting an exhaustive audit.
+
+OpenRouter supports optional attribution headers such as `HTTP-Referer` and `X-OpenRouter-Title`. The linter does not currently send them because they are not required for authentication or Chat Completions requests.
+
+Do not place an OpenRouter key in this README, `rules.yaml`, the linter source, or command-line arguments. `--api-key-env OPENROUTER_API_KEY` tells the process which environment variable to read without exposing its value.
+
+## Ollama
+
+Ollama is primarily a local model runtime, while LiteLLM is primarily a multi-provider gateway. Both expose an OpenAI-compatible Chat Completions endpoint and can therefore serve as the linter's LLM backend.
+
+Use Ollama directly when you want to run one local model:
+
+```text
+wildcard linter → Ollama → local model
+```
+
+Place LiteLLM in front of Ollama when you also need centralized routing, provider fallback, accounting, or access to several model services:
+
+```text
+wildcard linter → LiteLLM → Ollama, OpenRouter, OpenAI, or other providers
+```
+
+Install Ollama separately, download the model, and ensure its server is running:
+
+```bash
+ollama pull gpt-oss:20b
+ollama serve
+```
+
+Ollama's OpenAI-compatible endpoint is normally available at `http://localhost:11434/v1`. Ollama ignores the API-key value, but the linter requires a named environment variable so that all compatible providers use the same authentication path:
+
+```bash
+export OLLAMA_API_KEY="ollama"
+```
+
+Review deterministic candidates with a local model:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml \
+  --llm \
+  --api-key-env OLLAMA_API_KEY \
+  --base-url http://localhost:11434/v1 \
+  --model gpt-oss:20b
+```
+
+Perform an exhaustive semantic review of every leaf:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml \
+  --llm \
+  --llm-scope all \
+  --api-key-env OLLAMA_API_KEY \
+  --base-url http://localhost:11434/v1 \
+  --model gpt-oss:20b
+```
+
+Before starting a large audit, confirm that the model is available:
+
+```bash
+ollama list
+```
+
+An exhaustive review can generate many requests and may take substantially longer on local hardware. Start with candidate-only review, reduce `--batch-size` if the model runs out of memory or context, and increase `--timeout` when local generation is slow:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml \
+  --llm \
+  --api-key-env OLLAMA_API_KEY \
+  --base-url http://localhost:11434/v1 \
+  --model gpt-oss:20b \
+  --batch-size 5 \
+  --timeout 300
+```
+
+Practical example:
+
+```bash
+OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py gkr-anime.yaml -v --suggest-fixes \                                                                                           ─╯
+  --llm --llm-scope content \
+  --api-key-env OLLAMA_API_KEY \
+  --base-url http://localhost:11434/v1 \
+  --model glm-5.2:cloud \
+  --batch-size 25 --color auto --fixed-output gkr-anime.fixed.yaml \
+  --timeout 300
+```
+
+## Rules
+
+[`rules.yaml`](rules.yaml) contains reusable cross-theme patterns. Deterministic errors identify objective failures such as forbidden filler, unresolved markers, missing references, cycles, and camera/format conflicts. Semantic patterns are warnings because surrounding visible evidence can make a matched phrase valid.
+
+Sequence-related warnings are suppressed when a leaf explicitly declares panels, a page, storyboard, diptych, triptych, contact sheet, sequence, or spread.
+
+Use a custom rule file with:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml --rules path/to/rules.yaml
+```
+
+## Recommended workflow
+
+```text
+deterministic full-file scan
+        ↓
+LLM review of candidates or all leaves
+        ↓
+human approval and manual corrections
+        ↓
+deterministic scan again
+```
+
+The tool intentionally does not apply LLM rewrites automatically. JSON output includes stable leaf IDs and suggested rewrites for a separate review process.
+
+## Exit codes
+
+- `0`: checks satisfied at the configured `--fail-on` level
+- `1`: lint findings reached the configured failure level
+- `2`: configuration, file, YAML, or LLM transport failure
+
+## Tests
+
+Run the standard-library test suite from `gkr-wildcards`:
+
+```bash
+uv run tools/tests/test_wildcard_linter.py
+```

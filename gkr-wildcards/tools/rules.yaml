@@ -1,0 +1,99 @@
+authored_category_regex:
+  - "(?:scene|combo|spotlight|story|sequence|page|cover|poster|random|iconic)$"
+
+sequence_exempt_rules:
+  - temporal_progression
+  - repeated_change
+  - sequential_causality
+
+patterns:
+  forbidden_quality_filler:
+    severity: error
+    message: Generic quality filler is forbidden by the global prompt rules.
+    suggestion: Remove the filler and describe a concrete visible property only when needed.
+    regex:
+      - "\\b(?:masterpiece|best quality|amazing quality|absurdres|highres|highly detailed|ultra detailed|epic quality)\\b"
+
+  negative_prompt_fragment:
+    severity: error
+    message: Wildcard leaves must not contain negative-prompt boilerplate.
+    suggestion: Remove the negative-prompt fragment; express an explicit scene exclusion only when required.
+    regex:
+      - "\\b(?:negative prompt|worst quality|low quality|bad anatomy|bad hands|text artifacts?)\\b"
+
+  unresolved_review_marker:
+    severity: error
+    message: Temporary visual-review marker remains unresolved.
+    regex:
+      - "\\[VISUAL-REVIEW\\]"
+
+  invisible_intent:
+    severity: warning
+    authored_only: true
+    message: Intent, planning, or desired outcome may not be visible in the image.
+    suggestion: Replace intent with a visible gesture, document, tool arrangement, or current physical action.
+    regex:
+      - "\\b(?:carefully planned|planning to|plans to|trying to|attempting to|hoping to|intends? to|preparing to|decides? to|refuses? to|wants? to|seeks? to)\\b"
+
+  invisible_history_or_status:
+    severity: warning
+    authored_only: true
+    message: History, identity, status, or relationship requires observable evidence.
+    suggestion: Add visible documents, wear, matching objects, clothing, signage, damage, or spatial evidence.
+    regex:
+      - "\\b(?:former |longtime |forgotten culture|across generations|family legacy|secret identity|true identity|wrongfully|unable to|after an argument|after a promotion|before the start|final command)\\b"
+
+  temporal_progression:
+    severity: warning
+    authored_only: true
+    message: Time progression requires observable current evidence or an explicit sequential format.
+    suggestion: Freeze the concept at one visible moment or specify panels, a storyboard, diptych, or contact sheet.
+    regex:
+      - "\\b(?:eventually|gradually|over time|every few seconds|through a chain|across several seasons|through history|followed by|as they pass|becomes?|transforms?|progressively)\\b"
+
+  repeated_change:
+    severity: warning
+    authored_only: true
+    message: Repetition or changing state may require an explicit sequential format.
+    suggestion: Show visible accumulated evidence in one frame or specify repeated panels.
+    regex:
+      - "\\b(?:repeatedly|successive|incremental improvement|keeps? changing|changing positions|each time|whenever)\\b"
+
+  sequential_causality:
+    severity: warning
+    authored_only: true
+    message: Causality or a multi-step outcome is not inherently visible in one frame.
+    suggestion: Describe the cause and result as simultaneous visible evidence or use an explicit sequential format.
+    regex:
+      - "\\b(?:because|therefore|so that|leading to|resulting in|causing|undermines? every|sacrificing .* finish|recovering from)\\b"
+
+  sound_dependency:
+    severity: warning
+    authored_only: true
+    message: The central idea may depend on sound or spoken content.
+    suggestion: Replace sound with visible waveform, notation, subtitle, display, gesture, or physical response evidence.
+    regex:
+      - "\\b(?:telling (?:a )?stor(?:y|ies)|shouting unheard|phones? ringing|dialogue carried|musical phrase|mechanical rhythms|hears?|listens? to|sound of)\\b"
+
+  vague_visual_claim:
+    severity: warning
+    authored_only: true
+    message: Abstract evaluation or unspecified behavior needs concrete visual evidence.
+    suggestion: Name the exact pose, action, object, expression, material, or spatial contrast.
+    regex:
+      - "\\b(?:used intelligently|each contributing differently|different visual rules|technique and hospitality distinguishing|practical detail|carefully coordinated|meaningful interaction|important decision|mundane interruptions|ensemble reactions?)\\b"
+
+  generic_mood_language:
+    severity: warning
+    message: Mood or atmosphere wording may not identify its visible cause.
+    suggestion: Express mood through supplied light, weather, posture, materials, or spatial arrangement.
+    regex:
+      - "\\b(?:playful mood|nostalgic mood|magical atmosphere|mysterious atmosphere|welcoming atmosphere|dramatic atmosphere|tense atmosphere)\\b"
+
+  vague_reaction:
+    severity: warning
+    authored_only: true
+    message: A reaction is requested without necessarily specifying its visible form.
+    suggestion: Specify an observable gaze, facial expression, hand action, or body orientation.
+    regex:
+      - "\\b(?:reaction coverage|reaction shot|reaction face|facial reaction|every reaction)\\b"
