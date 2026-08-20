@@ -64,3 +64,16 @@ Apply stricter review to authored scenes, combos, and spotlights than to modular
 6. **Route test:** Does a composite add useful compatible variation rather than meaningless indirection?
 
 If an entry may fail a test and cannot be resolved immediately, prefix its YAML comment with `[VISUAL-REVIEW]`. The marker is temporary, searchable, and must be removed after review; uncertain entries must not silently pass.
+
+## Mandatory exhaustive review procedure
+
+These steps are mandatory whenever a task asks to review, audit, validate, check, inspect, or verify a wildcard file. A summary, spot check, or sampled review does not satisfy the task unless the user explicitly requests sampling.
+
+1. Inspect every leaf individually and apply the Review tests to it. Do not infer that nearby leaves pass because they share a category or pattern.
+2. Apply the strictest review to every authored scene, combo, spotlight, and public route. Treat modular component leaves as partial, but still verify that their literal content is concrete, theme-compatible, and safe for downstream composition.
+3. For every composite leaf, separate literal text from wildcard references. Resolve the referenced category graph and check that the literal text can coexist with every possible expansion without conflicting subject counts, actions, settings, eras, equipment, scale, composition, camera format, or output format.
+4. Flag invisible intent, decisions, backstory, causality, sound, institutional meaning, unspecified reactions, and time progression unless the leaf replaces them with observable evidence or explicitly requests a suitable multi-panel format.
+5. Record every definite or uncertain failure with its category, exact leaf text, source line, failed test, and required correction. Do not silently repair, ignore, or generalize individual failures.
+6. Report the total number of categories and leaves inspected, distinguish definite failures from uncertain entries, and state any portions that could not be resolved.
+7. Do not declare a file compliant while a definite failure or unresolved `[VISUAL-REVIEW]` marker remains.
+8. After corrections, repeat the complete audit, resolve composite routes again, validate YAML syntax, and confirm that no definite failures or temporary review markers remain.
