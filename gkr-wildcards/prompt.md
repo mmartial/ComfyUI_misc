@@ -25,6 +25,7 @@ If an idea cannot be represented visually in the requested image, convert it int
 5. When equipment or bodily action matters, prefer enough of the figure to show it clearly. Do not require unobstructed hands, scale references, contrast devices, lighting, or camera instructions unless the concept needs them.
 6. Composition and lighting are optional. Use `random_composition` sparingly rather than forcing deliberate framing into every route.
 7. Before-and-after, memory, prediction, parallel location, and sequential transformation require visibly separated panels and should be uncommon outside sequential-art themes.
+8. Preserve the scene's defining visual relationship. When the central idea depends on a match, contrast, repetition, contradiction, exchange, concealment, or spatial relationship between visible elements, state that relationship explicitly and compactly. The scene must not become generic when its objects are read separately.
 
 ## Worldbuilding
 
@@ -62,6 +63,7 @@ Apply stricter review to authored scenes, combos, and spotlights than to modular
 4. **Focus test:** Is there one dominant subject or visual idea, with no more than two principal characters unless an ensemble is necessary?
 5. **Appeal test:** For authored leaves, would someone plausibly choose to generate or view this image?
 6. **Route test:** Does a composite add useful compatible variation rather than meaningless indirection?
+7. **Comprehension test:** Without explanatory prose, do the visible subjects, objects, and their stated relationships communicate the scene's defining event, clue, contrast, or theme-specific idea?
 
 If an entry may fail a test and cannot be resolved immediately, prefix its YAML comment with `[VISUAL-REVIEW]`. The marker is temporary, searchable, and must be removed after review; uncertain entries must not silently pass.
 
