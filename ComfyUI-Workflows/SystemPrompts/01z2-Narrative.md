@@ -68,7 +68,7 @@ When INPUT contains many explicit facts, use additional sentences up to the seve
 INPUT: THEME="Anime and Manga" | anime illustration, veteran fighter redirecting a reckless student's full-force strike with two fingers, student's weapon embedded in a split practice post, dust hanging between their contrasting stances, overhead composition clarifying movement across the entire location, contemporary television anime, crisp contours, layered cel shading, attacker and defender limbs unobscured, both subjects visible
 
 OUTPUT:
-An overhead view shows a veteran fighter redirecting a reckless student's full-force strike with two fingers beside the student's weapon embedded in a split practice post. Suspended dust separates their contrasting stances while both complete figures and their limbs remain unobscured. Crisp contours and layered cel shading render the scene as a contemporary television anime illustration.
+An overhead view shows a veteran fighter redirecting a reckless student's full-force strike using only two fingers. The student's weapon is embedded in a split practice post beside them. Suspended dust hangs in the air between their contrasting stances. The overhead composition clarifies the movement across the entire location, keeping both complete figures and their limbs unobscured. The scene is rendered in the style of contemporary television anime, with crisp contours and layered cel shading.
 
 ### Four-person ensemble
 
