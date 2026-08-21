@@ -220,7 +220,7 @@ gkr_anime:
     - anime illustration, clean stable contours, child drawing the apartment building accurately except for a figure occupying a nonexistent upper floor
 
   anime_mecha_scene:
-    - anime illustration, clean stable contours, inexperienced pilot seeing a giant machine awaken beneath a flooded city, maintenance bridges tearing loose around it
+    - anime illustration, clean stable contours, wide-eyed pilot in an open cockpit recoiling as a giant machine awaken beneath a flooded city, maintenance bridges tearing loose around it
     - anime illustration, clean stable contours, repair crew inside an open machine torso during a red alarm, mechanic connecting one final power cable between damaged LIFE SUPPORT and THRUSTER modules while both warning lamps flash
     - anime illustration, clean stable contours, two rival machines crossing weapons into a deliberate signal pattern while both cockpit displays show matching flight paths and a command screen marks them as hostile
     - anime illustration, clean stable contours, obsolete worker machine shielding an evacuation route from modern military units, loader arms braced against a fallen barrier while a welding torch cuts an opening beside fleeing civilians
@@ -501,7 +501,7 @@ gkr_anime:
     - traditional archer, formal practice clothing, glove and bow handled with deliberate care
     - injured team captain, sideline jacket, knee brace, strategy board rather than active equipment
     - novice cyclist, practical jersey, patch kit, route notes taped to the handlebar
-    - veteran coach, faded club tracksuit, stopwatch, quiet expression that notices fatigue early
+    - veteran coach, faded club tracksuit, stopwatch, quiet expression, eyes tracking a panting athlete
 
   supernatural_archetype:
     - shrine apprentice who hears household spirits, white-and-red work clothing, broom and offering ledger, cupped hand held to ear
@@ -640,7 +640,7 @@ gkr_anime:
     - obsolete worker mecha, patched paint, cargo attachments converted for emergency defense
     - orbital construction frame, multiple tool arms, tether anchors, radiation shielding
     - amphibious coastal mecha, sealed joints, ballast tanks, corrosion-streaked maintenance panels
-    - ceremonial guardian machine, lacquered armor over ancient mechanical structure, repaired across generations
+    - ceremonial guardian machine, lacquered armor over ancient mechanical structure, patched with mismatched plates and layered weld seams in differing metal tones
     - modular team-operated mecha, distinct cockpit stations, visible subsystem responsibilities
     - unmanned antagonist unit, minimal silhouette, redundant sensors, unsettlingly efficient movement
 
@@ -781,7 +781,7 @@ gkr_anime:
 
   anime_poster_combo:
     - "theatrical anime poster based on __gkr_anime/anime_action_scene__, one central silhouette, supporting cast arranged by opposing eyelines and distance, major environment landmark and threat visible at thumbnail size, title-safe negative space"
-    - "theatrical anime poster based on __gkr_anime/anime_romance_scene__, one scene object enlarged behind the paired figures and repeated near both hands, seasonal palette, centered composition"
+    - "theatrical anime poster based on __gkr_anime/anime_romance_scene__, one object behind two figures, seasonal palette, centered composition"
     - "theatrical anime poster based on __gkr_anime/anime_horror_scene__, one extra doorway, window or silhouette repeated within the architecture, large negative space, limited color"
     - "theatrical anime poster based on __gkr_anime/anime_adult_drama_scene__, opposing ensemble eyelines converging on one central letter or damaged object, naturalistic color"
 
@@ -889,7 +889,7 @@ gkr_anime:
   manga_sports_scene:
     - manga multi-panel page, final rally decomposed into foot placement, breath, teammate positioning and one decisive contact across sequential panels
     - "manga illustration, bandaged captain on the sideline pointing at a tactical board with marked player positions while teammates listen"
-    - manga illustration, sports manga page showing a defeated novice kneeling beside a lopsided scoreboard, watching the winner demonstrate one precise foot position, then copying that stance between painted training marks
+    - "manga illustration, sports manga multi-panel page, four panels: panel one a defeated novice kneeling beside a lopsided scoreboard, panel two the winner demonstrating one precise foot position, panel three the novice studying that stance, panel four the novice copying the stance between painted training marks"
     - manga illustration, rivals leaning over a sequence of match timestamps and score sheets, each circling a different turning point and arranging player tokens in contradictory formations
     - "manga illustration, team practice beneath a heat-warning board, one player distributing water to an exhausted teammate while others continue drills"
     - manga illustration, student athlete asleep over textbooks in a laundromat work uniform, taped knee elevated on a sports bag, training schedule and late-shift timecard beside an alarm clock
@@ -944,7 +944,7 @@ gkr_anime:
   manga_cover_combo:
     - "tankobon cover illustration based on __gkr_anime/manga_shonen_scene__, strong central silhouette, supporting cast arranged by opposing eyelines, height and distance, clear title-safe negative space, __gkr_anime/manga_rendering__"
     - "tankobon cover illustration based on __gkr_anime/manga_shojo_scene__, one repeated seasonal flower or keepsake around expressive eyelines, elegant title-safe negative space, __gkr_anime/manga_rendering__"
-    - "literary manga cover based on __gkr_anime/manga_seinen_scene__, one enlarged scene object casting a character-shaped shadow, limited palette, title-safe negative space, __gkr_anime/manga_rendering__"
+    - "literary manga cover based on __gkr_anime/manga_seinen_scene__, one object casting a character-shaped shadow, limited palette, title-safe negative space, __gkr_anime/manga_rendering__"
 
 # ------------------------------------------------------------------------
 # SPOTLIGHT ROUTES
