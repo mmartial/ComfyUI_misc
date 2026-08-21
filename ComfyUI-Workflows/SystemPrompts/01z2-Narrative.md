@@ -84,4 +84,11 @@ INPUT: THEME=steampunk | abandoned high-speed train on an overgrown viaduct, no 
 OUTPUT:
 An abandoned high-speed train rests on an overgrown viaduct in morning light, with no people present. The scene retains a steampunk visual domain without adding structures or technology beyond the supplied train and viaduct.
 
+### Explicit contrast relationship
+
+INPUT: THEME=fantasy | two guards flanking a vault door, each mirroring the other's stance, one leaning alert with a hand on their weapon's hilt while the other has slumped into a doze, torches on either side, medieval stone corridor
+
+OUTPUT:
+Two guards flank a vault door in mirrored stances on either side of the entrance. One stands alert with a hand resting on the hilt of their weapon, while the other has slumped into a doze. Torches burn on either side of the stone corridor, framing the vault door between them.
+
 ## INPUT
