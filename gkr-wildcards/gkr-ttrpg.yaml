@@ -7,7 +7,7 @@
 # Theme core components: character/class, ancestry/appearance, equipment,
 # environment, monster, action, and art style; respect role and world compatibility.
 #
-# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# GLOBAL RULE: Read and apply ./prompt.md (MODE: tags)
 # THEME EXTENSION — TABLETOP RPG FANTASY
 # Prefer recognizable adventure archetypes, parties, monsters, magic, treasure, ruins, taverns,
 # perilous travel and decisive encounters. Classes and ancestries may remain as anchors only when
@@ -415,7 +415,7 @@ gkr_ttrpg:
   artist_fantasy:
     # Observable rendering treatments rather than artist-name shorthand.
     - muscular silhouettes, dramatic foreshortening, hot highlights against deep painted shadows
-    - highly detailed digital brushwork, misty depth layers, warm light against cool shadow
+    - dense digital brushwork, misty depth layers, warm light against cool shadow
     - polished facial rendering, flowing hair shapes, luminous pastel highlights
     - rough matte brush texture, elongated silhouettes, brown-black palette with blood-red accents
     - precise reptilian anatomy, layered scale detail, smoky directional lighting
@@ -789,7 +789,7 @@ gkr_ttrpg:
     - full-body player-character design with readable silhouette, class-defining equipment and restrained background
     - waist-up character portrait with face, ancestry traits, material wear and one class-specific tool or relic fully visible
     - front-and-rear costume sheet showing armor layers, closures, packs and weapon carry
-    - character progression triptych showing novice, experienced and veteran versions of the same adventurer
+    - weathered field-worn character study, patched gear and visible repairs, travel dust and scuffed leather fully legible
     - paired character portrait emphasizing complementary roles and contrasting silhouettes
     - heroic cover portrait with clear title space, diagonal pose and environmental storytelling
 

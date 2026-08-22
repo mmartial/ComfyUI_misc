@@ -7,12 +7,12 @@
 # Theme core components: survivor, appearance/gear, faction, vehicle,
 # environment, scarcity pressure, and visual format; make wear and survival causal.
 #
-# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# GLOBAL RULE: Read and apply ./prompt.md before this file. (MODE: tags)
 # THEME EXTENSION — WASTELAND
 # Prefer weathered survivors, improvised equipment, dangerous journeys, vehicle action, ruins,
 # altered ecology, discovery, rescue, confrontation and fragile moments of beauty or humor. Wear,
 # scarcity and repair must visibly affect bodies, objects and environments.
-# Example: two travelers using a patched vehicle winch to pull a water tank from a collapsing bridge.
+# Example: (two travelers:1.1), patched vehicle winch, pulling water tank, collapsing bridge
 # Out of scope: passive suffering as the only attraction, abstract collapse politics, pristine gear
 # without explanation, invented geopolitics, or generic brown ruins without a focal subject.
 #
@@ -21,26 +21,18 @@
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
 # random: Selects one complete route for breadth; avoid stacking random routes.
 #
-# DIFFUSION-READY TRANSFORMATION RULE
-# Every generated leaf must already describe an image without requiring interpretation:
-# subject + visible pose/action + concrete setting/props + composition/light when useful.
-# Replace motives, backstory, relationships, themes, causality and time-based change with
-# observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
-# and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
-# A downstream LLM may clarify wording but must not invent the visual representation.
+# TAGS-MODE LEAF RULE
+# Every leaf is a flat, comma-separated list of short tag phrases (1-4 words each), not a
+# sentence. Weight the 1-3 items that matter most with (term:weight), typical range 0.8-1.2,
+# reserving 1.3+/sub-0.8 for standout items. Compress subject + defining action/relationship +
+# setting into compact weighted tag clusters. No sequential/multi-panel/multi-page routes; a
+# theme medium's single-image rendering signature may survive as a style tag only.
 #
 # NON-LEAF / COMPOSITE RULE
 # Router-only items contain wildcard references only. Literal text added by a composite must
-# itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
-# do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
-#
-# SINGLE-IMAGE VISUAL REPRESENTATION TEST
-# Write every scene as facts visible in one generated image. A viewer without a caption must be
-# able to identify the subject, action and important contrast from pose, placement, props, short
-# readable labels, screens, clothing, architecture, damage or lighting. Do not depend on motives,
-# memories, recognition, ownership, occupation, causality, past/future events, sound or institutional
-# meaning unless their evidence is shown. Replace each such fact with visible proof; when one frame
-# cannot show it clearly, explicitly use a diptych, sequential panels, storyboard or contact sheet.
+# itself be diffusion-ready tags. Every possible referenced pairing must remain visually
+# compatible; do not combine broad pools when subject, setting, era, equipment, scale or format
+# can conflict.
 # ========================================================================
 
 gkr_wasteland:
@@ -422,6 +414,7 @@ gkr_wasteland:
     - "__gkr_wasteland/faction_pillar__"
     - "__gkr_wasteland/creature_pillar__"
     - "__gkr_wasteland/survival_scene_pillar__"
+    - "__gkr_wasteland/random_scene__"
     - "__gkr_wasteland/random_spotlight__"
     - "__gkr_wasteland/spotlight_combo__"
     - "__gkr_wasteland/spotlight_characters__"
@@ -434,6 +427,11 @@ gkr_wasteland:
   random_backgrounds:
     - "__gkr_wasteland/world_pillar__"
     - "__gkr_wasteland/settlement_pillar__"
+
+  random_scene:
+    - "__gkr_wasteland/survival_scene_pillar__"
+    - "__gkr_wasteland/vehicle_combo__"
+    - "__gkr_wasteland/faction_pillar__"
 
 # ---------------------------------------------------------
 # SPOTLIGHT (CONVERTED TO PROMPTS)

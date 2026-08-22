@@ -90,7 +90,7 @@ Markdown does not have portable foreground-color support across renderers. Markd
 
 ## LLM review tests and potential fixes
 
-The LLM stage applies all six tests defined in `prompt.md`:
+The LLM stage applies all seven tests defined in `prompt.md`:
 
 1. Visual test
 2. Single-moment test
@@ -98,6 +98,7 @@ The LLM stage applies all six tests defined in `prompt.md`:
 4. Focus test
 5. Appeal test
 6. Route test
+7. Comprehension test
 
 It is therefore broader than the Visual test alone. Each LLM finding reports the specific failed test returned by the reviewer. LLM-origin findings receive a visible `[LLM]` marker in text reports and an **LLM** marker in Markdown reports. JSON findings use `"source": "llm"`, which makes them easy to filter programmatically.
 
@@ -359,14 +360,22 @@ OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py gkr-anime.yaml -v --sugg
 
 ## Rules
 
-[`rules.yaml`](rules.yaml) contains reusable cross-theme patterns. Deterministic errors identify objective failures such as forbidden filler, unresolved markers, missing references, cycles, and camera/format conflicts. Semantic patterns are warnings because surrounding visible evidence can make a matched phrase valid.
+[`rules.yaml`](rules.yaml) contains reusable cross-theme patterns. [`tags-rules.yaml`](tags-rules.yaml) contains constraints applied only to files whose header declares `MODE: tags`: sequential-format rejection, tag-phrase length, sentence-connector, and emphasis-count checks. Missing mode declarations default to narrative, matching `prompt.md`.
 
-Sequence-related warnings are suppressed when a leaf explicitly declares panels, a page, storyboard, diptych, triptych, contact sheet, sequence, or spread.
+Deterministic errors identify objective failures such as forbidden filler, unresolved markers, missing references, cycles, tags-mode sequential content, and camera/format conflicts. Semantic or heuristic patterns are warnings because surrounding visible evidence can make a matched phrase valid.
+
+In narrative mode, sequence-related warnings are suppressed when a leaf explicitly declares panels, a page, storyboard, diptych, triptych, contact sheet, sequence, or spread. In tags mode those formats are errors; only single-image rendering signatures such as panel-border framing are allowed.
 
 Use a custom rule file with:
 
 ```bash
 uv run tools/wildcard_linter.py gkr-anime.yaml --rules path/to/rules.yaml
+```
+
+Override the tags-mode constraints independently with:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml --tags-rules path/to/tags-rules.yaml
 ```
 
 ## Recommended workflow

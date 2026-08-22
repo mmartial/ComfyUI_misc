@@ -7,40 +7,28 @@
 # Theme core components: character/profession, period fashion, engineered object,
 # vehicle, environment, and visual tradition; keep technology functionally plausible.
 #
-# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# GLOBAL RULE: Read and apply ./prompt.md (MODE: tags)
 # THEME EXTENSION — STEAMPUNK
 # Prefer intricate steam machinery in visible operation, adventurous travel, workshops, period
 # fashion, inventors, pilots, duels, rescues and spectacular vehicles. Show pipes, joints, controls,
 # fuel, exhaust and maintenance evidence so technology appears functional.
-# Example: a goggled pilot climbing an airship spar to close a ruptured steam valve above the city.
+# Example: (goggled pilot:1.1), climbing an airship spar, closing a ruptured steam valve, above the city.
 # Out of scope: brass gears used as decoration without function, unsupported profession labels,
 # generic Victorian nostalgia, or alternate-history politics without a visual scene.
 #
 # ROUTE USAGE
-# combo: Composes compatible components into a coherent, production-ready prompt.
-# spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
-# random: Selects one complete route for breadth; avoid stacking random routes.
+# combo: composes compatible components into one flat, production-ready weighted tag string.
+# spotlight: selects a curated, high-specificity concept; preserve its internal logic.
+# random: selects one complete route for breadth; avoid stacking random routes.
 #
-# DIFFUSION-READY TRANSFORMATION RULE
-# Every generated leaf must already describe an image without requiring interpretation:
-# subject + visible pose/action + concrete setting/props + composition/light when useful.
-# Replace motives, backstory, relationships, themes, causality and time-based change with
-# observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
-# and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
+# TAGS-MODE LEAF RULE (see ./prompt.md, MODE: tags, for the full spec)
+# Every leaf is a flat, comma-separated list of short tag phrases: subject, defining visible
+# action/relationship, setting or props. Weight syntax (term:weight) is the normal way to mark
+# priority, typical range 0.8-1.2, reserving 1.3+ or sub-0.8 for elements that must dominate or
+# recede; weight only the 1-3 items that matter most per leaf and leave the rest unweighted.
+# No full sentences except where a defining relationship cannot survive being split into tags.
+# No generic quality fillers, no negative_prompt category, no sequential/multi-panel/page routes.
 # A downstream LLM may clarify wording but must not invent the visual representation.
-#
-# NON-LEAF / COMPOSITE RULE
-# Router-only items contain wildcard references only. Literal text added by a composite must
-# itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
-# do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
-#
-# SINGLE-IMAGE VISUAL REPRESENTATION TEST
-# Write every scene as facts visible in one generated image. A viewer without a caption must be
-# able to identify the subject, action and important contrast from pose, placement, props, short
-# readable labels, screens, clothing, architecture, damage or lighting. Do not depend on motives,
-# memories, recognition, ownership, occupation, causality, past/future events, sound or institutional
-# meaning unless their evidence is shown. Replace each such fact with visible proof; when one frame
-# cannot show it clearly, explicitly use a diptych, sequential panels, storyboard or contact sheet.
 # ========================================================================
 
 gkr_steampunk:
@@ -292,81 +280,81 @@ gkr_steampunk:
     - whimsical automata, painted tin, polished wood, visible winding keys, playful proportions and warm storybook color
 
   output_format:
-    - full-body profession design with readable tools, workwear, posture and one contextual background element
-    - coordinated three-person crew portrait with distinct roles, silhouettes and equipment
-    - waist-up cinematic portrait emphasizing face, material wear and one functional mechanism
-    - active workshop scene showing hands, tools, raw materials and machinery in use
-    - street-level environmental scene with foreground activity and layered industrial architecture
-    - wide scientific-romance panorama with a small human figure establishing the scale of the machinery
-    - vehicle hero view showing the entire silhouette, propulsion system and operating environment
-    - vehicle design sheet with front, side, rear and mechanical-detail views on a neutral background
-    - patent-style technical plate with cutaway sections, numbered mechanisms and precise engraved linework
-    - fashion editorial with a complete coordinated outfit, controlled pose and restrained studio backdrop
-    - garment construction sheet showing front, rear, closures, pockets and material details
-    - prosthetic design study showing attachment points, articulation, controls and worn surface materials
-    - gaslamp mystery still with a clear visual clue, obscured suspect and deep spatial staging
-    - pulp-adventure cover with bold title space, diagonal action and a monumental machine in the distance
-    - sepia photographic plate with fine grain, period lens falloff, subject feet planted on the same floor plane and shadows aligned to one window light
-    - engraved book illustration with cross-hatching, ornamental border and restrained spot color
-    - oil-painted scientific-romance scene with visible brushwork and dramatic atmospheric depth
-    - graphic-novel splash page with bold ink masses, controlled color accents and strong silhouette design
-    - product-catalogue plate with an isolated object, scale reference and labeled material details
+    - full-body profession design, readable tools, workwear, posture, contextual background element
+    - coordinated three-person crew portrait, distinct roles, silhouettes, equipment
+    - waist-up cinematic portrait, face emphasis, material wear, one functional mechanism
+    - active workshop scene, hands, tools, raw materials, machinery in use
+    - street-level environmental scene, foreground activity, layered industrial architecture
+    - wide scientific-romance panorama, small human figure for scale
+    - vehicle hero view, entire silhouette, propulsion system, operating environment
+    - vehicle design sheet, front view, side view, rear view, mechanical-detail view, neutral background
+    - patent-style technical plate, cutaway sections, numbered mechanisms, precise engraved linework
+    - fashion editorial, complete coordinated outfit, controlled pose, restrained studio backdrop
+    - garment construction sheet, front view, rear view, closures, pockets, material details
+    - prosthetic design study, attachment points, articulation, controls, worn surface materials
+    - gaslamp mystery still, clear visual clue, obscured suspect, deep spatial staging
+    - pulp-adventure cover, bold title space, diagonal action, monumental machine in distance
+    - sepia photographic plate, fine grain, period lens falloff, feet planted on floor plane, aligned window-light shadows
+    - engraved book illustration, cross-hatching, ornamental border, restrained spot color
+    - oil-painted scientific-romance scene, visible brushwork, dramatic atmospheric depth
+    - graphic-novel splash page, bold ink masses, controlled color accents, strong silhouette design
+    - product-catalogue plate, isolated object, scale reference, labeled material details
 
   character_output_format:
-    - full-body profession design with readable tools, workwear, posture and one contextual background element
-    - coordinated three-person crew portrait with distinct roles, silhouettes and equipment
-    - waist-up cinematic portrait emphasizing face, material wear and one functional mechanism
-    - active working portrait showing hands, tools and machinery in use
-    - sepia photographic portrait with fine grain, period lens falloff, both feet or seated support visible and shadows aligned to one window light
-    - engraved character illustration with cross-hatching, ornamental border and restrained spot color
+    - full-body profession design, readable tools, workwear, posture, contextual background element
+    - coordinated three-person crew portrait, distinct roles, silhouettes, equipment
+    - waist-up cinematic portrait, face emphasis, material wear, one functional mechanism
+    - active working portrait, hands, tools, machinery in use
+    - sepia photographic portrait, fine grain, period lens falloff, feet or seated support visible, aligned window-light shadows
+    - engraved character illustration, cross-hatching, ornamental border, restrained spot color
 
   vehicle_output_format:
-    - vehicle hero view showing the entire silhouette, propulsion system and operating environment
-    - vehicle design sheet with front, side, rear and mechanical-detail views on a neutral background
-    - patent-style technical plate with cutaway sections, numbered mechanisms and precise engraved linework
-    - wide scientific-romance panorama with small operators establishing the scale of the vehicle
-    - side tracking view with visible wheel, linkage or control-surface movement
-    - sepia engineering photograph with the complete vehicle and its crew held in sharp focus
+    - vehicle hero view, entire silhouette, propulsion system, operating environment
+    - vehicle design sheet, front view, side view, rear view, mechanical-detail view, neutral background
+    - patent-style technical plate, cutaway sections, numbered mechanisms, precise engraved linework
+    - wide scientific-romance panorama, small operators for scale
+    - side tracking view, visible wheel or linkage or control-surface movement
+    - sepia engineering photograph, complete vehicle, crew, sharp focus
 
   invention_output_format:
-    - active workshop scene showing hands, tools, raw materials and machinery in use
-    - patent-style technical plate with cutaway sections, numbered mechanisms and precise engraved linework
-    - product-catalogue plate with the isolated invention, scale reference and labeled material details
-    - public demonstration scene with observers, controls and the machine's visible result
-    - engraved scientific-book illustration with cross-hatching and restrained spot color
-    - close mechanical study emphasizing controls, power transmission and worn material surfaces
+    - active workshop scene, hands, tools, raw materials, machinery in use
+    - patent-style technical plate, cutaway sections, numbered mechanisms, precise engraved linework
+    - product-catalogue plate, isolated invention, scale reference, labeled material details
+    - public demonstration scene, observers, controls, visible machine result
+    - engraved scientific-book illustration, cross-hatching, restrained spot color
+    - close mechanical study, controls, power transmission, worn material surfaces
 
   fashion_output_format:
-    - full-length fashion editorial with complete outfit visibility, controlled pose and restrained studio backdrop
-    - garment construction sheet showing front, rear, closures, pockets and material details
-    - coordinated two-person fashion portrait contrasting occupation, status and practical equipment
-    - prosthetic-integration design study showing attachment points, articulation and garment closures
-    - flat-lay wardrobe study with footwear, headwear, tools and accessories arranged by function
-    - period photographic portrait with natural fabric drape, fine grain and restrained studio furniture
+    - full-length fashion editorial, complete outfit visibility, controlled pose, restrained studio backdrop
+    - garment construction sheet, front view, rear view, closures, pockets, material details
+    - coordinated two-person fashion portrait, contrasting occupation, status, practical equipment
+    - prosthetic-integration design study, attachment points, articulation, garment closures
+    - flat-lay wardrobe study, footwear, headwear, tools, accessories arranged by function
+    - period photographic portrait, natural fabric drape, fine grain, restrained studio furniture
 
 # ---------------------------------------------------------
 # CHARACTERS & PROFESSIONS — COMPATIBILITY-SAFE SCENARIOS
 # ---------------------------------------------------------
 
   profession_scenario:
-    - locomotive engineer in a wool work jacket and striped cap, leaning from a riveted cab with one gloved hand on the regulator, analog gauges and furnace glow behind, grounded industrial realism
-    - airship navigator in a weatherproof canvas coat, plotting a route with dividers across a chart table, cloud layers visible through the observation windows, scientific-romance illustration
-    - boiler mechanic in oil-dark overalls and leather forearm guards, tightening a pressure valve beside insulated pipes, wrench kit open at the feet, practical workshop lighting
-    - watchmaker in a fitted waistcoat and magnifying loupe, assembling a miniature escapement beneath a shaded lamp, trays of springs and enamel dials arranged precisely
-    - prosthetic technician fitting an articulated steel-and-leather hand to a seated client, adjustment keys and joint diagrams visible, quiet clinical workshop
-    - telegraph operator in rolled shirtsleeves, listening at a brass receiver while paper tape spills from a relay machine, crowded communications office
-    - newspaper typesetter arranging metal type beside a steam-driven press, ink rollers and stacked broadsheets filling the print floor, documentary composition
-    - municipal pipe inspector in a rubberized coat and heavy boots, checking a gauge bank in a brick pumping station, condensed steam catching narrow skylight
-    - expedition cartographer in a sun-faded canvas coat, measuring a mountain horizon with a brass theodolite, pack animals and equipment cases nearby
-    - botanical engineer in a linen work dress and protective gloves, tending pipe-fed exotic plants inside an iron-and-glass conservatory, bright humid daylight
-    - street doctor in a wool traveling coat, opening a compact diagnostic case beside an injured bicycle courier, gaslit market traffic held in the background
-    - dockside crane operator in a knitted cap and reinforced apron, working long control levers above a steamship cargo hold, rain and wet iron surfaces
-    - academy lecturer in a dark frock coat, demonstrating a working gyroscope before attentive students, chalk diagrams and polished apparatus visible
-    - courier in a short weatherproof coat and goggles, securing a pneumatic-message capsule to a compact steam bicycle, crowded station arcade behind
-    - household automaton attendant with porcelain face plates and lacquered wood limbs, setting a breakfast tray in a sunlit apartment, winding key and quiet servomotors visible
-    - aristocratic exhibition patron in a tailored velvet coat, inspecting a new calculating engine through a monocular lens, grand public invention hall in cream and bronze
-    - mine surveyor in canvas protective clothing and a carbide lamp, marking a timber support beside compressed-air drilling equipment, damp rock and narrow shadows
-    - aerial rescue crew member in a buckled flight suit, testing a rope launcher beside a compact emergency balloon, wind whipping the landing-platform pennants
+    - (locomotive engineer:1.1), wool work jacket, striped cap, leaning from riveted cab, gloved hand on regulator, analog gauges, furnace glow behind, grounded industrial realism
+    - (airship navigator:1.1), weatherproof canvas coat, plotting route with dividers, chart table, cloud layers through observation windows, scientific-romance illustration
+    - (boiler mechanic:1.1), oil-dark overalls, leather forearm guards, tightening pressure valve, insulated pipes, open wrench kit, practical workshop lighting
+    - (watchmaker:1.1), fitted waistcoat, magnifying loupe, assembling miniature escapement, shaded lamp, trays of springs, enamel dials
+    - (prosthetic technician:1.1), fitting articulated steel-and-leather hand, seated client, adjustment keys, joint diagrams, quiet clinical workshop
+    - (telegraph operator:1.1), rolled shirtsleeves, brass receiver, paper tape spilling from relay machine, crowded communications office
+    - (newspaper typesetter:1.1), arranging metal type, steam-driven press, ink rollers, stacked broadsheets, documentary composition
+    - (municipal pipe inspector:1.1), rubberized coat, heavy boots, checking gauge bank, brick pumping station, condensed steam, narrow skylight
+    - (expedition cartographer:1.1), sun-faded canvas coat, measuring mountain horizon, brass theodolite, pack animals, equipment cases
+    - (botanical engineer:1.1), linen work dress, protective gloves, tending pipe-fed exotic plants, iron-and-glass conservatory, bright humid daylight
+    - (street doctor:1.1), wool traveling coat, compact diagnostic case, injured bicycle courier, gaslit market traffic background
+    - (dockside crane operator:1.1), knitted cap, reinforced apron, long control levers, steamship cargo hold, rain, wet iron surfaces
+    - (academy lecturer:1.1), dark frock coat, demonstrating working gyroscope, attentive students, chalk diagrams, polished apparatus
+    - (courier:1.1), short weatherproof coat, goggles, securing pneumatic-message capsule, compact steam bicycle, crowded station arcade
+    - (household automaton attendant:1.1), porcelain face plates, lacquered wood limbs, setting breakfast tray, sunlit apartment, winding key visible
+    - (aristocratic exhibition patron:1.1), tailored velvet coat, inspecting calculating engine, monocular lens, grand public invention hall, cream-and-bronze palette
+    - (mine surveyor:1.1), canvas protective clothing, carbide lamp, marking timber support, compressed-air drilling equipment, damp rock, narrow shadows
+    - (aerial rescue crew member:1.1), buckled flight suit, testing rope launcher, compact emergency balloon, wind-whipped landing-platform pennants
 
   character_combo:
     - "__gkr_steampunk/profession_scenario__, __gkr_steampunk/character_output_format__"
@@ -377,40 +365,40 @@ gkr_steampunk:
 # ---------------------------------------------------------
 
   aerial_vehicle_scenario:
-    - long-range survey dirigible with a ribbed canvas envelope, suspended timber gondola, twin propellers and external navigation platform, crossing sunlit alpine clouds, wide three-quarter view
-    - compact urban courier airship with folding control fins, enclosed mail gondola and cable winch, docking beside a rooftop pneumatic station in light rain
-    - heavy cargo aerostat carrying a riveted iron container beneath multiple gas cells, steam winches and ballast crews clearly visible above a shipyard
-    - single-seat ornithopter with varnished wood frame, fabric wings and pedal-assisted steam pistons, banking above fields at sunrise, restrained scientific-romance painting
+    - (long-range survey dirigible:1.1), ribbed canvas envelope, suspended timber gondola, twin propellers, external navigation platform, crossing sunlit alpine clouds, wide three-quarter view
+    - (compact urban courier airship:1.1), folding control fins, enclosed mail gondola, cable winch, docking beside rooftop pneumatic station, light rain
+    - (heavy cargo aerostat:1.1), riveted iron container, multiple gas cells, steam winches, ballast crew, shipyard backdrop
+    - (single-seat ornithopter:1.1), varnished wood frame, fabric wings, pedal-assisted steam pistons, banking above fields, sunrise, scientific-romance painting
 
   rail_vehicle_scenario:
-    - articulated express locomotive with blued-steel boiler, polished connecting rods and enclosed passenger coaches, crossing a high iron viaduct through morning fog
-    - compact municipal tram powered by an underfloor steam accumulator, cream enamel body and open rear platform, moving through a crowded market boulevard
-    - armored frontier train with reinforced plate sides, water tender and observation cupola, crossing a dry timber trestle beneath a vast copper sky
-    - narrow-gauge mining locomotive hauling ore wagons from a mountain tunnel, practical iron construction, condensation and wet rock under cold daylight
+    - (articulated express locomotive:1.1), blued-steel boiler, polished connecting rods, enclosed passenger coaches, high iron viaduct, morning fog
+    - (compact municipal tram:1.1), underfloor steam accumulator, cream enamel body, open rear platform, crowded market boulevard
+    - (armored frontier train:1.1), reinforced plate sides, water tender, observation cupola, dry timber trestle, vast copper sky
+    - (narrow-gauge mining locomotive:1.1), hauling ore wagons, mountain tunnel, practical iron construction, condensation, wet rock, cold daylight
 
   road_vehicle_scenario:
-    - enclosed steam taxi with varnished wood cabin, compact rear boiler and rubber-clad wheels, waiting beneath gas lamps on a rain-dark boulevard
-    - three-wheeled delivery carriage with chain drive, canvas cargo cover and pressure gauge beside the driver, turning through a busy warehouse district
-    - long-distance touring automobile with brass radiator, folding canvas roof and luggage strapped to the rear, stopped beside a windswept coastal road
-    - steam-western stage carriage with iron suspension, armored water tank and dust-coated boiler, approaching a timber rail town at sunset
+    - (enclosed steam taxi:1.1), varnished wood cabin, compact rear boiler, rubber-clad wheels, gas lamps, rain-dark boulevard
+    - (three-wheeled delivery carriage:1.1), chain drive, canvas cargo cover, pressure gauge beside driver, busy warehouse district
+    - (long-distance touring automobile:1.1), brass radiator, folding canvas roof, strapped rear luggage, windswept coastal road
+    - (steam-western stage carriage:1.1), iron suspension, armored water tank, dust-coated boiler, timber rail town, sunset
 
   walking_vehicle_scenario:
-    - four-legged forestry hauler with broad steel feet, cable winch and log cradle, moving carefully across a muddy mountain track
-    - compact municipal maintenance walker with articulated tool arms and enamel service markings, repairing elevated pipes above a narrow city lane
-    - armored two-legged siege engine with external piston joints and protected boiler, advancing slowly across churned earth beneath low smoke
-    - delicate clockwork promenade carriage on six articulated legs, lacquered passenger cabin and spring-balanced gait, crossing a formal exhibition garden
+    - (four-legged forestry hauler:1.1), broad steel feet, cable winch, log cradle, muddy mountain track
+    - (compact municipal maintenance walker:1.1), articulated tool arms, enamel service markings, repairing elevated pipes, narrow city lane
+    - (armored two-legged siege engine:1.2), external piston joints, protected boiler, churned earth, low smoke
+    - (clockwork promenade carriage:1.1), six articulated legs, lacquered passenger cabin, spring-balanced gait, formal exhibition garden
 
   maritime_vehicle_scenario:
-    - deep-sea research submarine with riveted steel hull, thick observation windows and external sampling arms, descending through green-grey water above a reef
-    - steam-powered canal packet with narrow iron hull, folding smokestack and warm passenger cabin, passing warehouses in early fog
-    - polar exploration ship with reinforced bow, auxiliary canvas sails and steam capstan, forcing through fractured sea ice beneath a pale sky
-    - compact harbor salvage submersible with spherical pressure cabin, mechanical claws and tethered air hose, working beside a sunken paddle steamer
+    - (deep-sea research submarine:1.1), riveted steel hull, thick observation windows, external sampling arms, descending, green-grey water, reef below
+    - (steam-powered canal packet:1.1), narrow iron hull, folding smokestack, warm passenger cabin, warehouses, early fog
+    - (polar exploration ship:1.1), reinforced bow, auxiliary canvas sails, steam capstan, fractured sea ice, pale sky
+    - (harbor salvage submersible:1.1), spherical pressure cabin, mechanical claws, tethered air hose, sunken paddle steamer
 
   personal_vehicle_scenario:
-    - courier riding a compact steam bicycle with chain-driven rear wheel, insulated knee boiler and canvas message case, side tracking view through a station district
-    - aviator wearing a restrained twin-fan flight harness with articulated control vanes, launching from a dedicated tower platform above the city
-    - mechanic operating a single-wheel inspection cycle along an elevated factory rail, tool case balanced below the axle, low industrial camera angle
-    - explorer using a lightweight tracked steam sledge with enclosed boiler and supply rack, crossing a snowy plateau beneath wind-blown canvas flags
+    - (courier:1.1), riding compact steam bicycle, chain-driven rear wheel, insulated knee boiler, canvas message case, station district, side tracking view
+    - (aviator:1.1), twin-fan flight harness, articulated control vanes, launching from tower platform, city skyline
+    - (mechanic:1.1), single-wheel inspection cycle, elevated factory rail, tool case, low industrial camera angle
+    - (explorer:1.1), tracked steam sledge, enclosed boiler, supply rack, snowy plateau, wind-blown canvas flags
 
   vehicle_family_combo:
     - "__gkr_steampunk/aerial_vehicle_scenario__, __gkr_steampunk/vehicle_output_format__"
@@ -425,96 +413,96 @@ gkr_steampunk:
 # ---------------------------------------------------------
 
   environment_scenario:
-    - crowded workers' courtyard surrounded by soot-dark brick housing, shared wash lines, repair benches and overhead steam pipes, overcast documentary view
-    - grand railway dining car with carved walnut booths, cream enamel lamps and rain moving across broad windows, intimate interior composition
-    - iron-and-glass department arcade filled with fabric shops, mechanical displays and pneumatic payment tubes, bright civic daylight
-    - sprawling shipyard dry dock containing a half-built riveted submarine, cranes, scaffolds and worker crews providing scale
-    - canal district of narrow warehouses, iron footbridges and steam packet boats, wet brick reflecting early gaslight
-    - hilltop observatory with rotating copper dome, clock-driven telescope and wind instruments beneath a clear night sky
-    - charitable hospital ward with enamel medical apparatus, wheeled privacy screens and tall windows, clean restrained retrofuturism
-    - newspaper printing floor alive with belt-driven presses, hanging lamps, paper stacks and coordinated workers, high oblique view
-    - central telegraph exchange lined with switchboards, message tubes, relay cabinets and operators at long desks
-    - terraced underground settlement built around a geothermal pumping shaft, iron balconies and warm domestic windows receding into rock
-    - rural estate using a compact traction engine to power threshing machinery, canvas belts and workers clearly visible in golden field light
-    - alpine aerial station anchored to a cliff, dirigible mast, weather instruments and snow-coated iron walkways above the clouds
-    - desert excavation camp organized around a steam crane and canvas laboratory tents, archaeological fragments recorded on worktables
-    - polar research camp with insulated timber huts, pressure instruments and a tethered observation balloon under green aurora
-    - public botanical conservatory crossed by elevated walkways, pipe-fed tropical foliage and small maintenance automatons in humid sunbeams
-    - neighborhood bathhouse heated by a municipal steam network, tiled pools, copper pipes and frosted windows, calm early-morning interior
-    - mechanical theater backstage filled with fly systems, counterweights, painted scenery and clockwork stage effects before a performance
-    - civic pumping station with immense flywheels, tiled gauge hall and arched windows, optimistic public-engineering architecture
+    - (workers' courtyard:1.1), soot-dark brick housing, shared wash lines, repair benches, overhead steam pipes, overcast documentary view
+    - (grand railway dining car:1.1), carved walnut booths, cream enamel lamps, rain on broad windows, intimate interior composition
+    - (iron-and-glass department arcade:1.1), fabric shops, mechanical displays, pneumatic payment tubes, bright civic daylight
+    - (shipyard dry dock:1.1), half-built riveted submarine, cranes, scaffolds, worker crews for scale
+    - (canal district:1.1), narrow warehouses, iron footbridges, steam packet boats, wet brick, early gaslight
+    - (hilltop observatory:1.1), rotating copper dome, clock-driven telescope, wind instruments, clear night sky
+    - (charitable hospital ward:1.1), enamel medical apparatus, wheeled privacy screens, tall windows, clean restrained retrofuturism
+    - (newspaper printing floor:1.1), belt-driven presses, hanging lamps, paper stacks, coordinated workers, high oblique view
+    - (central telegraph exchange:1.1), switchboards, message tubes, relay cabinets, operators at long desks
+    - (terraced underground settlement:1.1), geothermal pumping shaft, iron balconies, warm domestic windows, rock walls receding
+    - rural estate, (compact traction engine:1.1), threshing machinery, canvas belts, workers, golden field light
+    - (alpine aerial station:1.1), cliffside anchor, dirigible mast, weather instruments, snow-coated iron walkways, above clouds
+    - (desert excavation camp:1.1), steam crane, canvas laboratory tents, archaeological fragments, worktables
+    - (polar research camp:1.1), insulated timber huts, pressure instruments, tethered observation balloon, green aurora
+    - (public botanical conservatory:1.1), elevated walkways, pipe-fed tropical foliage, small maintenance automatons, humid sunbeams
+    - (neighborhood bathhouse:1.1), municipal steam network, tiled pools, copper pipes, frosted windows, calm early-morning interior
+    - (mechanical theater backstage:1.1), fly systems, counterweights, painted scenery, clockwork stage effects, pre-performance
+    - (civic pumping station:1.1), immense flywheels, tiled gauge hall, arched windows, optimistic public-engineering architecture
 
   invention_scenario:
-    - engineer testing a centrifugal governor on a compact stationary engine, flywheel turning behind a protective rail, patent drawings pinned nearby
-    - public demonstration of a difference engine, numbered brass wheels advancing while clerks compare the printed result, exhibition-hall lighting
-    - experimental arc-light array powered by a belt-driven dynamo, ceramic insulators and switchgear clearly visible in a dark laboratory
-    - pneumatic postal exchange routing metal capsules through labeled glass-fronted tubes, operators working at a circular control desk
-    - prosthetic workshop displaying articulated hands made from blued steel, leather sockets and tension cables, clinical product-study lighting
-    - weather station using clock-driven recording drums, barometers and roof-mounted anemometers during an approaching storm
-    - mechanical kitchen with flywheel-powered mixers, insulated steam kettles and a compact dishwashing apparatus, busy staff demonstrating its use
-    - portable field camera with folding bellows, clockwork shutter and magnesium flash equipment, photographer preparing a formal plate
-    - compact agricultural traction engine powering a threshing drum through a long canvas belt, chaff and sunlight revealing the motion
-    - diving suit with copper helmet, weighted boots and articulated sampling claw being checked beside an air pump on a research vessel
-    - automated library catalogue machine delivering index cards through a chain-driven cabinet, librarian and reader observing the mechanism
-    - mechanical orchestra of punched-paper instruments performing inside a public pavilion, visible bellows, cams and rotating music drums
+    - engineer, testing (centrifugal governor:1.1), compact stationary engine, flywheel behind protective rail, patent drawings pinned nearby
+    - (difference engine demonstration:1.1), numbered brass wheels advancing, clerks comparing printed result, exhibition-hall lighting
+    - (experimental arc-light array:1.1), belt-driven dynamo, ceramic insulators, switchgear, dark laboratory
+    - (pneumatic postal exchange:1.1), metal capsules, labeled glass-fronted tubes, operators, circular control desk
+    - (prosthetic workshop:1.1), articulated blued-steel hands, leather sockets, tension cables, clinical product-study lighting
+    - (weather station:1.1), clock-driven recording drums, barometers, roof-mounted anemometers, approaching storm
+    - (mechanical kitchen:1.1), flywheel-powered mixers, insulated steam kettles, compact dishwashing apparatus, busy staff
+    - (portable field camera:1.1), folding bellows, clockwork shutter, magnesium flash equipment, photographer preparing plate
+    - (agricultural traction engine:1.1), threshing drum, long canvas belt, chaff, sunlight
+    - (diving suit:1.1), copper helmet, weighted boots, articulated sampling claw, air pump, research vessel
+    - (automated library catalogue machine:1.1), index cards, chain-driven cabinet, librarian, reader observing
+    - (mechanical orchestra:1.1), punched-paper instruments, public pavilion, bellows, cams, rotating music drums
 
   fashion_scenario:
-    - airship captain in a navy wool greatcoat with storm collar, leather harness, chart pockets and restrained brass closures, full-length flight-deck editorial
-    - locomotive engineer's indigo work jacket and striped trousers, heat-resistant gloves, cap and practical tool roll, garment construction sheet
-    - aristocratic evening ensemble in deep burgundy velvet, silk waistcoat, engraved watch chain and polished formal shoes, restrained salon portrait
-    - female academy lecturer in a high-collared wool walking suit with notebook pockets, fitted jacket and sensible boots, bright institutional interior
-    - expedition outfit of sun-faded canvas, ventilated shirt, wrapped gaiters and weatherproof map case, equipment arranged beside the full figure
-    - dockworker's reinforced apron, knitted layers, rubberized boots and heavy gloves, wet maritime materials under cool studio light
-    - gaslamp detective in a charcoal overcoat with concealed notebook pocket, soft felt hat and worn leather gloves, street-level mystery still
-    - prosthetic-integrated formal suit tailored around an articulated mechanical forearm, accessible closures and coordinated metal cuff details
-    - steam-western travel coat in dust-colored canvas with water-flask harness, broad hat and protective goggles stored at the collar
-    - theatrical clockwork couture gown with enamel dial motifs, spring-steel structure and articulated bustle, explicitly fantastical runway presentation
-    - household mechanic's layered work dress with removable sleeves, reinforced pockets and compact belt tools, practical workshop portrait
-    - children's winter travel outfit with wool cape, knitted cap, sturdy boots and a small painted-tin automaton companion, railway-platform editorial
+    - (airship captain:1.1), navy wool greatcoat, storm collar, leather harness, chart pockets, brass closures, full-length flight-deck editorial
+    - (locomotive engineer outfit:1.1), indigo work jacket, striped trousers, heat-resistant gloves, cap, tool roll, garment construction sheet
+    - (aristocratic evening ensemble:1.1), deep burgundy velvet, silk waistcoat, engraved watch chain, polished formal shoes, restrained salon portrait
+    - academy lecturer, high-collared wool walking suit, notebook pockets, fitted jacket, sensible boots, bright institutional interior
+    - (expedition outfit:1.1), sun-faded canvas, ventilated shirt, wrapped gaiters, weatherproof map case, equipment beside figure
+    - dockworker outfit, reinforced apron, knitted layers, rubberized boots, heavy gloves, wet maritime materials, cool studio light
+    - (gaslamp detective:1.1), charcoal overcoat, concealed notebook pocket, soft felt hat, worn leather gloves, street-level mystery still
+    - (prosthetic-integrated formal suit:1.2), articulated mechanical forearm, accessible closures, coordinated metal cuff details
+    - (steam-western travel coat:1.1), dust-colored canvas, water-flask harness, broad hat, goggles at collar
+    - (theatrical clockwork couture gown:1.2), enamel dial motifs, spring-steel structure, articulated bustle, fantastical runway presentation
+    - (household mechanic's work dress:1.1), removable sleeves, reinforced pockets, compact belt tools, practical workshop portrait
+    - children's winter travel outfit, wool cape, knitted cap, sturdy boots, (small painted-tin automaton companion:1.1), railway-platform editorial
 
   adventure_scenario:
-    - mixed expedition crew raising a weather balloon from an alpine camp while a storm approaches, instruments, ropes and individual tasks clearly staged
-    - submarine researchers pressed to thick observation windows as a luminous deep-sea ruin emerges beyond the glass, survey camera active, restrained instrument light and immense ocean darkness
-    - airship rescue crew transferring passengers from a damaged gondola by suspended rope cradle, strong wind and readable safety equipment
-    - cartographer, local guide and naturalist studying a volcanic valley from a ridge, shared maps and specimen cases visible, scientific-romance panorama
-    - railway crew bracing a washed-out mountain bridge with cranes and fresh timbers, approaching mail train visible beyond a red stop flag while workers wave lanterns from the damaged track
-    - desert archaeology team lifting a carved stone fragment with a compact steam crane, recording table and conservation tent nearby
-    - maritime salvage crew opening a newly raised pressure capsule on a rain-dark dock, curiosity focused on the corroded mechanism
-    - frontier town defending its water-pumping station from mechanical raiders, steam-western action staged around pipes and iron tanks
-    - polar explorers sheltering beside a disabled traction sledge while an observation airship searches through snow overhead
-    - scientific delegation unveiling a peaceful civic automaton at a world's fair, diverse audience gathered beneath iron-and-glass arches
+    - (expedition crew:1.1), raising weather balloon, alpine camp, approaching storm, instruments, ropes, individual tasks staged
+    - (submarine researchers:1.1), pressed to observation windows, (luminous deep-sea ruin beyond glass:1.2), active survey camera, restrained instrument light, immense ocean darkness
+    - (airship rescue crew:1.1), transferring passengers, damaged gondola, suspended rope cradle, strong wind, visible safety equipment
+    - cartographer, local guide, naturalist, studying volcanic valley from ridge, shared maps, specimen cases, scientific-romance panorama
+    - (railway crew:1.1), bracing washed-out mountain bridge, cranes, fresh timbers, approaching mail train, red stop flag, waving lanterns
+    - (desert archaeology team:1.1), lifting carved stone fragment, compact steam crane, recording table, conservation tent
+    - (maritime salvage crew:1.1), opening raised pressure capsule, rain-dark dock, corroded mechanism, focused curiosity
+    - frontier town, defending water-pumping station, mechanical raiders, steam-western action, pipes, iron tanks
+    - (polar explorers:1.1), sheltering beside disabled traction sledge, observation airship searching overhead, falling snow
+    - scientific delegation, unveiling peaceful civic automaton, world's fair, diverse audience, iron-and-glass arches
 
   gothic_scenario:
-    - detective examining a stopped mechanical watch beside an abandoned body in a fog-bound railway compartment, gaslamp mystery with a precise visual clue
-    - cathedral clock chamber transformed into an illicit laboratory, blackened gears crossing stained-glass moonlight, solitary figure at a vacuum apparatus
-    - plague physician adjusting a pneumatic respirator in a tiled underground clinic, deep shadows and restrained medical detail
-    - aristocratic mansion whose silent household automatons all face the same locked door, polished wood, cold fireplace and unsettling symmetry
-    - cemetery maintenance engine moving between iron memorials at midnight, low steam mingling with ground fog, gothic industrial landscape
-    - masked saboteur crossing narrow foundry catwalks above dormant furnaces, a single arc lamp revealing cut control cables
-    - abandoned coastal lighthouse powered by a failing clockwork lens drive, storm waves and intermittent beams exposing a figure on the stairs
-    - empty municipal archive beneath green-shaded lamps, pneumatic tubes ejecting paper capsules into overflowing baskets while unattended carrier mechanisms blur in motion
+    - (detective:1.1), examining stopped mechanical watch, sheet-draped body, fog-bound railway compartment, gaslamp mystery, precise visual clue
+    - (cathedral clock chamber:1.1), illicit laboratory, blackened gears, stained-glass moonlight, solitary figure, vacuum apparatus
+    - (plague physician:1.1), adjusting pneumatic respirator, tiled underground clinic, deep shadows, restrained medical detail
+    - aristocratic mansion, silent household automatons facing locked door, polished wood, cold fireplace, unsettling symmetry
+    - (cemetery maintenance engine:1.1), moving between iron memorials, midnight, low steam, ground fog, gothic industrial landscape
+    - (masked saboteur:1.2), crossing narrow foundry catwalks, dormant furnaces, single arc lamp, cut control cables
+    - (abandoned coastal lighthouse:1.1), failing clockwork lens drive, storm waves, intermittent beams, figure on stairs
+    - empty municipal archive, green-shaded lamps, pneumatic tubes, ejecting paper capsules, overflowing baskets, motion-blurred carrier mechanisms
 
   automata_scenario:
-    - painted-tin songbird automaton opening its wings beside the winding key and music cylinder, isolated product-catalogue plate
-    - porcelain-faced household automaton folding linen in a bright domestic room, lacquered wood joints and quiet belt drive visible
-    - life-sized chess automaton demonstrating articulated hands before a skeptical exhibition audience, cutaway cabinet revealing legitimate machinery
-    - small clockwork fox guiding lost children through a foggy station arcade, warm enamel lantern in its mouth, whimsical storybook illustration
-    - industrial riveter automaton working beside human shipwrights on a steel hull, functional proportions and clear safety markings
-    - botanical pollination automata shaped like copper insects moving among conservatory flowers, delicate spring mechanisms in sunlight
-    - theatrical dragon automaton unfolding across a mechanical stage, painted silk skin, timber ribs and coordinated puppeteers visible
-    - damaged military automaton repurposed as a rural field worker, patched iron plating and gentle interaction with farm animals
+    - (painted-tin songbird automaton:1.1), opening wings, winding key, music cylinder, isolated product-catalogue plate
+    - (porcelain-faced household automaton:1.1), folding linen, bright domestic room, lacquered wood joints, quiet belt drive
+    - (life-sized chess automaton:1.1), articulated hands, skeptical exhibition audience, cutaway cabinet, legitimate machinery
+    - (clockwork fox:1.1), guiding lost children, foggy station arcade, warm enamel lantern in mouth, whimsical storybook illustration
+    - industrial riveter automaton, human shipwrights, steel hull, functional proportions, clear safety markings
+    - (botanical pollination automata:1.1), copper insect shapes, conservatory flowers, delicate spring mechanisms, sunlight
+    - (theatrical dragon automaton:1.2), mechanical stage, painted silk skin, timber ribs, coordinated puppeteers
+    - (damaged military automaton:1.1), repurposed rural field worker, patched iron plating, gentle interaction, farm animals
 
   daily_life_scenario:
-    - family eating breakfast in a compact apartment while a kettle warms on the municipal steam line, newspaper, school satchel and domestic automaton visible
-    - commuters boarding a cream enamel steam tram beneath an iron arcade, conductor checking tickets in soft morning rain
-    - market vendor repairing a small weighing automaton between customers, produce baskets and pneumatic payment terminal filling the stall
-    - schoolchildren watching a teacher demonstrate a safe tabletop engine, chalkboard diagrams and protective screen clearly visible
-    - laundress operating a belt-driven wringer in a shared courtyard washhouse, steam pipes overhead and neighbors working nearby
-    - evening café where writers, mechanics and aircrew share small tables beneath slowly turning ventilation fans, warm social interior
-    - street photographer arranging a family portrait beside a painted backdrop, folding camera and flash apparatus in clear view
-    - public park containing coin-operated mechanical amusements, parents resting beneath iron pergolas and children gathering around a walking toy
-    - railway porter loading trunks with a compact lifting exoskeleton while passengers wait beneath the departure board
-    - rooftop residents tending vegetables in heated glass frames above a dense industrial neighborhood, sunset catching pipes and laundry lines
+    - family breakfast, compact apartment, kettle on municipal steam line, newspaper, school satchel, domestic automaton
+    - commuters, boarding cream enamel steam tram, iron arcade, conductor checking tickets, soft morning rain
+    - (market vendor:1.1), repairing small weighing automaton, produce baskets, pneumatic payment terminal, market stall
+    - schoolchildren, watching teacher demonstrate tabletop engine, chalkboard diagrams, protective screen
+    - (laundress:1.1), operating belt-driven wringer, shared courtyard washhouse, steam pipes overhead, neighbors working
+    - evening café, writers, mechanics, aircrew sharing small tables, turning ventilation fans, warm social interior
+    - (street photographer:1.1), arranging family portrait, painted backdrop, folding camera, flash apparatus
+    - public park, coin-operated mechanical amusements, resting parents, iron pergolas, children, walking toy
+    - (railway porter:1.1), loading trunks, compact lifting exoskeleton, waiting passengers, departure board
+    - rooftop residents, tending vegetables, heated glass frames, dense industrial neighborhood, sunset, pipes, laundry lines
 
 # ---------------------------------------------------------
 # DECLARED THEME PILLARS
