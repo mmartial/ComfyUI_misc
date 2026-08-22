@@ -25,6 +25,7 @@ SPEC.loader.exec_module(LINTER)
 class WildcardLinterTests(unittest.TestCase):
     def setUp(self) -> None:
         self.rules = LINTER.load_rules(Path(__file__).resolve().parents[1] / "rules.yaml")
+        self.tags_rules = LINTER.load_rules(Path(__file__).resolve().parents[1] / "tags-rules.yaml")
 
     def inventory(self, content: str):
         temporary = tempfile.TemporaryDirectory()
@@ -49,6 +50,46 @@ class WildcardLinterTests(unittest.TestCase):
         )
         findings = initial + LINTER.pattern_findings(leaves, self.rules)
         self.assertNotIn("temporal_progression", {finding.rule for finding in findings})
+
+    def test_mode_is_read_from_header(self):
+        leaves, _, _ = self.inventory(
+            "# GLOBAL RULE: Read prompt.md (MODE: tags)\ngkr_test:\n  subject:\n    - red coat, raised sword\n"
+        )
+        self.assertEqual(leaves[0].mode, "tags")
+
+    def test_missing_mode_defaults_to_narrative(self):
+        leaves, _, _ = self.inventory("gkr_test:\n  subject:\n    - red coat\n")
+        self.assertEqual(leaves[0].mode, "narrative")
+
+    def test_tags_mode_rejects_sequential_format(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  action_scene:\n    - four-panel sequence, changing face\n"
+        )
+        findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
+        self.assertIn("tags_sequential_format", {finding.rule for finding in findings})
+
+    def test_tags_mode_allows_panel_border_rendering_signature(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  style:\n    - panel-border framing, single image, no sequential panels, screentone\n"
+        )
+        findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
+        self.assertNotIn("tags_sequential_format", {finding.rule for finding in findings})
+
+    def test_tags_mode_flags_long_phrase_and_excess_weights(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  subject:\n"
+            "    - (very tall armored knight:1.1), (red cape:1.1), (raised sword:1.1), "
+            "(burning shield:1.1), standing beside the ruined castle gate\n"
+        )
+        rules = {finding.rule for finding in LINTER.tags_mode_findings(leaves, self.tags_rules)}
+        self.assertIn("tags_long_phrase", rules)
+        self.assertIn("tags_excessive_weights", rules)
+
+    def test_narrative_mode_skips_tags_checks(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: narrative\ngkr_test:\n  scene:\n    - a knight is standing beside the ruined castle gate\n"
+        )
+        self.assertFalse(LINTER.tags_mode_findings(leaves, self.tags_rules))
 
     def test_spatial_from_to_is_not_temporal(self):
         leaves, _, initial = self.inventory(

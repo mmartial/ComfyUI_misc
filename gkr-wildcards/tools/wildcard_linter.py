@@ -34,6 +34,14 @@ SEQUENCE_RE = re.compile(
     re.IGNORECASE,
 )
 CAMERA_CATEGORY_RE = re.compile(r"(?:^|_)(camera|composition|framing)$", re.I)
+MODE_RE = re.compile(r"\bMODE\s*:\s*(narrative|tags)\b", re.I)
+WEIGHT_RE = re.compile(r"\(([^()]+):(-?(?:\d+(?:\.\d+)?|\.\d+))\)")
+TAG_SEQUENCE_RE = re.compile(
+    r"\b(?:multi[- ]?panel|split comic panels?|sequential panels?|\w+-panel (?:page|sequence)|"
+    r"comic page|manga page|double[- ]page(?: comics?)? spread|storyboard|diptych|triptych|"
+    r"contact sheet|frame-by-frame|before[- /]and[- /]after|walking sequence|panel sequence|in sequence)\b",
+    re.I,
+)
 
 
 @dataclass(frozen=True)
@@ -46,6 +54,7 @@ class Leaf:
     line: int
     text: str
     references: tuple[tuple[str, str], ...]
+    mode: str = "narrative"
 
 
 @dataclass
@@ -68,6 +77,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("paths", nargs="+", help="YAML file(s) or directories")
     parser.add_argument("--rules", type=Path, help="Rules YAML (defaults beside script)")
+    parser.add_argument("--tags-rules", type=Path, help="Tags-mode rules YAML (defaults beside script)")
     parser.add_argument("--format", choices=("text", "json", "markdown"), default="text")
     parser.add_argument("--output", type=Path, help="Write report to this path")
     parser.add_argument("--fail-on", choices=("error", "warning", "never"), default="error")
@@ -121,8 +131,11 @@ def load_inventory(paths: list[Path]) -> tuple[list[Leaf], dict[tuple[str, str],
     categories: dict[tuple[str, str], list[Leaf]] = {}
     findings: list[Finding] = []
     for path in paths:
+        source = path.read_text(encoding="utf-8")
+        mode_match = MODE_RE.search(source)
+        mode = mode_match.group(1).lower() if mode_match else "narrative"
         try:
-            data = yaml.safe_load(path.read_text(encoding="utf-8"))
+            data = yaml.safe_load(source)
         except (OSError, yaml.YAMLError) as exc:
             findings.append(Finding("error", "yaml_syntax", str(exc), str(path)))
             continue
@@ -148,7 +161,7 @@ def load_inventory(paths: list[Path]) -> tuple[list[Leaf], dict[tuple[str, str],
                     continue
                 refs = tuple(REFERENCE_RE.findall(value))
                 digest = hashlib.sha1(f"{path}:{category}:{index}:{value}".encode()).hexdigest()[:12]
-                leaf = Leaf(digest, str(path), namespace, str(category), index, line, value, refs)
+                leaf = Leaf(digest, str(path), namespace, str(category), index, line, value, refs, mode)
                 leaves.append(leaf)
                 categories.setdefault((namespace, str(category)), []).append(leaf)
     return leaves, categories, findings
@@ -181,7 +194,7 @@ def pattern_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Finding]
             severity = rule.get("severity", "warning")
             if rule.get("authored_only") and not authored_category(leaf.category, rules):
                 continue
-            if name in sequence_exceptions and SEQUENCE_RE.search(literal):
+            if leaf.mode == "narrative" and name in sequence_exceptions and SEQUENCE_RE.search(literal):
                 continue
             for expression in rule.get("regex", []):
                 match = re.search(expression, literal, re.IGNORECASE)
@@ -195,6 +208,55 @@ def pattern_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Finding]
                         leaf.line, leaf.category, leaf.uid, match.group(0)
                     ))
                     break
+    return findings
+
+
+def tags_mode_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Finding]:
+    """Apply deterministic checks that are meaningful only for tags-mode files."""
+    findings: list[Finding] = []
+    max_words = int(rules.get("max_phrase_words", 4))
+    max_weights = int(rules.get("max_weighted_terms", 3))
+    sentence_re = re.compile(rules.get("sentence_connector_regex", r"\b(?:is|are|was|were|while|whereas)\b"), re.I)
+    for leaf in leaves:
+        if leaf.mode != "tags" or not has_literal_content(leaf):
+            continue
+        literal = " ".join(literal_text(leaf.text).split())
+        sequence_text = re.sub(
+            r"\b(?:panel[- ]border(?:ed)?(?: framing)?|no sequential panels?)\b", "", literal, flags=re.I
+        )
+        match = TAG_SEQUENCE_RE.search(sequence_text)
+        if match:
+            findings.append(Finding(
+                "error", "tags_sequential_format",
+                "Tags mode forbids sequential, multi-panel, and multi-page content; keep only a single-image rendering signature.",
+                leaf.file, leaf.line, leaf.category, leaf.uid, match.group(0),
+            ))
+        weights = WEIGHT_RE.findall(literal)
+        if len(weights) > max_weights:
+            findings.append(Finding(
+                "warning", "tags_excessive_weights",
+                f"Tags mode allows emphasis on at most {max_weights} important items per leaf.",
+                leaf.file, leaf.line, leaf.category, leaf.uid, str(len(weights)),
+            ))
+        connector = sentence_re.search(WEIGHT_RE.sub(lambda m: m.group(1), literal))
+        if connector:
+            findings.append(Finding(
+                "warning", "tags_sentence_connector",
+                "Tags mode should use flat tag phrases; sentence connectors require a scene-defining relationship that cannot survive splitting.",
+                leaf.file, leaf.line, leaf.category, leaf.uid, connector.group(0),
+            ))
+        for phrase in (part.strip(" .;:-") for part in literal.split(",")):
+            if not phrase:
+                continue
+            unweighted = WEIGHT_RE.sub(lambda m: m.group(1), phrase)
+            words = re.findall(r"[A-Za-z0-9]+(?:['’-][A-Za-z0-9]+)*", unweighted)
+            if len(words) > max_words:
+                findings.append(Finding(
+                    "warning", "tags_long_phrase",
+                    f"Tag phrase has {len(words)} words; tags mode normally limits phrases to {max_words} words.",
+                    leaf.file, leaf.line, leaf.category, leaf.uid, phrase,
+                ))
+                break
     return findings
 
 
@@ -298,11 +360,13 @@ def llm_review(leaves: list[Leaf], args: argparse.Namespace, policy: str, trace_
         batch_number = offset // args.batch_size + 1
         batch_total = (len(leaves) + args.batch_size - 1) // args.batch_size
         verbose(args, f"LLM batch {batch_number}/{batch_total}: {len(batch)} leaves")
-        payload_items = [{"id": leaf.uid, "category": leaf.category, "line": leaf.line, "text": leaf.text} for leaf in batch]
+        payload_items = [{"id": leaf.uid, "file": Path(leaf.file).name, "namespace": leaf.namespace,
+                          "mode": leaf.mode, "category": leaf.category, "line": leaf.line, "text": leaf.text} for leaf in batch]
         instruction = (
             "Audit every supplied wildcard leaf against the policy. Return JSON only as an array with one object per input ID. "
             "Each object must contain id, classification (pass, definite_failure, uncertain), failed_test, and reason. "
-            "Do not omit IDs and do not add IDs. Modular leaves may be partial.\n\nPOLICY:\n" + policy
+            "Apply the prompt-language section matching each item's mode. Do not omit IDs and do not add IDs. "
+            "Modular leaves may be partial.\n\nPOLICY:\n" + policy
         )
         body = json.dumps({
             "model": model,
@@ -367,6 +431,7 @@ def llm_suggest_fixes(
         verbose(args, f"fix-suggestion batch {batch_number}/{batch_total}: {len(batch)} leaves")
         items = [{
             "id": leaf.uid,
+            "mode": leaf.mode,
             "category": leaf.category,
             "text": leaf.text,
             "issues": [{"rule": finding.rule, "message": finding.message, "evidence": finding.evidence} for finding in issues[leaf.uid]],
@@ -374,7 +439,9 @@ def llm_suggest_fixes(
         instruction = (
             "Propose one replacement wildcard leaf for every supplied item. Fix only the listed issues while preserving all valid visible facts, "
             "theme, subject count, distinct actions, format, and compact wildcard style. Do not add decorative detail, generic quality terms, "
-            "negative prompts, new people, or a new camera. A sequential rewrite is allowed only when the original requires multiple moments. "
+            "negative prompts, new people, or a new camera. Preserve the item's declared mode. For tags mode, return a flat comma-separated "
+            "tag list and never return sequential, multi-panel, or multi-page content. For narrative mode, a sequential rewrite is allowed only "
+            "when the original requires multiple moments. "
             "Return JSON only as an array with exactly one object per input ID containing id, suggested_rewrite, and rationale. "
             "Do not modify files and do not omit IDs."
         )
@@ -525,6 +592,10 @@ def main() -> int:
         pattern_results = pattern_findings(leaves, rules)
         findings.extend(pattern_results)
         verbose(args, f"pattern checks produced {len(pattern_results)} finding(s)")
+        tags_rules_path = args.tags_rules or script_dir / "tags-rules.yaml"
+        tags_results = tags_mode_findings(leaves, load_rules(tags_rules_path))
+        findings.extend(tags_results)
+        verbose(args, f"tags-mode checks produced {len(tags_results)} finding(s)")
         graph_results = graph_findings(leaves, categories)
         findings.extend(graph_results)
         verbose(args, f"reference and route checks produced {len(graph_results)} finding(s)")

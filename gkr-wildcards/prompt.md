@@ -2,6 +2,15 @@
 
 This rule applies to every wildcard YAML file in this folder. Theme-specific header rules refine it and may override it only where they say so explicitly.
 
+## Mode
+
+Every theme file declares one authoring mode in its header, right next to the "Read and apply ./prompt.md" line:
+
+- `MODE: narrative` — leaves are dense diffusion-ready prose clauses. No weight syntax, no negative prompts. This is the default when a file states no mode.
+- `MODE: tags` — leaves are compact comma-separated Danbooru/booru-style tag phrases with optional `(term:weight)` emphasis. See **Tags Mode** below for its own prompt-language rules, which replace the Narrative-mode "Prompt language" section for that file only.
+
+Everything in this document applies to both modes except where a section says otherwise. The two modes exist because the downstream LLM rewrite step (`01z1`/`01z2`/`01z3`) reads either style of input and adapts its output accordingly — the wildcard file only needs to commit to one authoring style per theme.
+
 ## Primary goal
 
 Generate visually engaging, theme-faithful images that a person would intentionally choose to create or view. Engaging may mean spectacular, adventurous, beautiful, humorous, mysterious, frightening, tragic, strange, or quietly observational, as appropriate to the theme. Prefer a decisive, visually memorable moment, but allow posed subjects, landscapes, artifacts, ordinary life, setup, and aftermath when they remain visually worthwhile.
@@ -46,12 +55,25 @@ If an idea cannot be represented visually in the requested image, convert it int
 - Practical sheets for characters, creatures, props, vehicles, and environments may use neutral views and production annotations rather than narrative staging.
 - Composite compatibility is best effort. Avoid obviously contradictory cross-pool combinations.
 
-## Prompt language
+## Prompt language (Narrative Mode)
+
+Applies only to files declaring `MODE: narrative`.
 
 - Write compact visual language suitable for LLM expansion; complete prose is optional.
 - Do not use generic quality fillers such as `masterpiece`, `best quality`, `highly detailed`, or `epic`.
 - Prompt weights such as `(subject:1.2)` are allowed only for genuinely critical elements and should be uncommon.
 - Do not add negative prompts to these wildcard files.
+- A concept that would require sequential panels to show (before/after, memory, prediction, parallel location) uses an explicit multi-panel, storyboard, comic-page, or diptych format per the Single-image construction rules above.
+
+## Prompt language (Tags Mode)
+
+Applies only to files declaring `MODE: tags`. Leaves are comma-separated Danbooru/booru-style tag phrases, not sentences — this replaces the Narrative-mode prompt-language rules above for that file, not the rest of this document.
+
+- Every leaf is a flat, comma-separated list of short tag phrases (1-4 words each). Full sentences and connecting prose (verbs like "is," "while," "as") are the exception, not the rule — used only inside a literal phrase when a relationship genuinely cannot survive being split into separate tags (see Preserve scene-defining relationships and the Comprehension test below).
+- Weight syntax `(term:weight)` is the normal way to express priority, not a rare exception. Typical range is `0.8`-`1.2`; reserve `1.3`+ and sub-`0.8` for elements that must clearly dominate or recede. Do not weight every item in a leaf — weight only the 1-3 items that matter most, and leave the rest unweighted.
+- Do not use generic quality fillers such as `masterpiece`, `best quality`, `highly detailed`, or `epic`.
+- Do not add a `negative_prompt` category to these wildcard files; negative prompting is handled elsewhere in the workflow.
+- A concept that would require sequential panels or a multi-page layout in Narrative Mode (manga panel grammar, page-by-page storytelling, before/after progressions) has no flat-tag equivalent and must not be authored as a route. Where a theme's medium has a recognizable single-image rendering signature (e.g. manga's black-and-white ink/screentone look), keep only that as a style/rendering tag variant applied to an ordinary single-image leaf — drop the panel, page, and sequence content itself.
 
 ## Review tests
 

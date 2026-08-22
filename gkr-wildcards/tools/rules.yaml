@@ -47,7 +47,7 @@ patterns:
     severity: warning
     authored_only: true
     message: Time progression requires observable current evidence or an explicit sequential format.
-    suggestion: Freeze the concept at one visible moment or specify panels, a storyboard, diptych, or contact sheet.
+    suggestion: Freeze the concept at one visible moment. Narrative mode may instead specify panels, a storyboard, diptych, or contact sheet; tags mode may not.
     regex:
       - "\\b(?:eventually|gradually|over time|every few seconds|through a chain|across several seasons|through history|followed by|as they pass|becomes?|transforms?|progressively)\\b"
 
@@ -55,7 +55,7 @@ patterns:
     severity: warning
     authored_only: true
     message: Repetition or changing state may require an explicit sequential format.
-    suggestion: Show visible accumulated evidence in one frame or specify repeated panels.
+    suggestion: Show visible accumulated evidence in one frame. Repeated panels are available only in narrative mode.
     regex:
       - "\\b(?:repeatedly|successive|incremental improvement|keeps? changing|changing positions|each time|whenever)\\b"
 
@@ -63,7 +63,7 @@ patterns:
     severity: warning
     authored_only: true
     message: Causality or a multi-step outcome is not inherently visible in one frame.
-    suggestion: Describe the cause and result as simultaneous visible evidence or use an explicit sequential format.
+    suggestion: Describe the cause and result as simultaneous visible evidence. Explicit sequential formats are available only in narrative mode.
     regex:
       - "\\b(?:because|therefore|so that|leading to|resulting in|causing|undermines? every|sacrificing .* finish|recovering from)\\b"
 

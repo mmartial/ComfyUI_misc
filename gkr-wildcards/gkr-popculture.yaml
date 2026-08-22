@@ -1,52 +1,41 @@
 # ========================================================================
-# POPCULTURE — EXTENDED WILDCARDS FOR COMFYUI DYNAMIC PROMPTS
+# POPCULTURE — MEDIUM-FIRST WILDCARDS FOR COMFYUI DYNAMIC PROMPTS
 #
-# COVERS: Popular-culture modes across film, television, music, print, advertising,
-# celebrity, fandom, and internet culture without copying specific works.
+# COVERS: Popular-culture modes across film, television, music, print, and
+# advertising — genre archetypes, performance moments, character design, and
+# production formats — without copying specific works.
 #
-# Theme core components: source medium, genre, era, cultural mode, subject,
+# Theme core components: source medium, genre, era/rendering, subject,
 # scene language, and output format; build recognizable types without imitation.
 #
-# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# GLOBAL RULE: Read and apply ./prompt.md (MODE: tags)
 # THEME EXTENSION — POP CULTURE
 # Prefer instantly enjoyable media archetypes, performance moments, genre poses, promotional images,
 # fandom artifacts, playful spectacle and era-specific production language without copying a named
 # person, character, franchise or composition.
-# Example: an original masked television adventurer leaping through a practical miniature explosion.
+# Example: (masked urban rescuer:1.2), swinging on cable beneath collapsing elevated rail line,
+# catching falling passenger mid-air, wide tracking shot.
 # Out of scope: direct imitation, celebrity likeness as the concept, logos as the visual hook,
-# discourse about fandom or media institutions, and generic quality/style-name prompting.
+# discourse about fandom or media institutions, generic quality/style-name prompting, and
+# multi-panel or sequential-page routes (see Tags Mode note below).
 #
 # ROUTE USAGE
 # combo: Composes compatible components into a coherent, production-ready prompt.
 # spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
 # random: Selects one complete route for breadth; avoid stacking random routes.
 #
-# DIFFUSION-READY TRANSFORMATION RULE
-# Every generated leaf must already describe an image without requiring interpretation:
-# subject + visible pose/action + concrete setting/props + composition/light when useful.
-# Replace motives, backstory, relationships, themes, causality and time-based change with
-# observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
-# and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
-# A downstream LLM may clarify wording but must not invent the visual representation.
-#
-# NON-LEAF / COMPOSITE RULE
-# Router-only items contain wildcard references only. Literal text added by a composite must
-# itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
-# do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
-#
-# SINGLE-IMAGE VISUAL REPRESENTATION TEST
-# Write every scene as facts visible in one generated image. A viewer without a caption must be
-# able to identify the subject, action and important contrast from pose, placement, props, short
-# readable labels, screens, clothing, architecture, damage or lighting. Do not depend on motives,
-# memories, recognition, ownership, occupation, causality, past/future events, sound or institutional
-# meaning unless their evidence is shown. Replace each such fact with visible proof; when one frame
-# cannot show it clearly, explicitly use a diptych, sequential panels, storyboard or contact sheet.
+# TAGS MODE NOTE
+# Every leaf is a flat, comma-separated tag phrase with optional (term:weight) emphasis; see
+# prompt.md's "Prompt language (Tags Mode)" section. The manga/comic page-sequence and film/television
+# storyboard content from the prior narrative draft of this file has been collapsed into single
+# decisive-moment leaves; only each medium's single-image rendering signature (screentone ink,
+# panel-border inking, film color grade, and so on) survives, applied as a style tag.
 # ========================================================================
 
 gkr_popculture:
 
 # ---------------------------------------------------------
-# MEDIUM-FIRST POP CULTURE LIBRARIES
+# FILM
 # ---------------------------------------------------------
 
   movie_genre:
@@ -67,137 +56,141 @@ gkr_popculture:
     - neo-western
 
   movie_camera:
-    - wide symmetrical master shot establishing every participant and exit
-    - low tracking shot moving beside the performers
-    - long-lens view compressing the crowd behind the subject
-    - handheld shoulder-level camera close to the action
-    - overhead shot revealing choreography across the entire location
-    - slow push toward a decisive facial reaction
-    - locked-off wide frame allowing the action to cross naturally
-    - sweeping crane shot descending from the skyline to the participants
-    - shallow-focus close-up with the consequence visible behind
-    - canted medium-wide frame during a sudden reversal
+    - wide symmetrical master shot, every participant and exit visible
+    - low tracking shot, moving beside performers
+    - long-lens compression, crowd behind subject
+    - handheld shoulder-level camera, close to action
+    - overhead shot, full choreography visible
+    - slow push-in, decisive facial reaction
+    - locked-off wide frame, action crossing naturally
+    - sweeping crane shot, skyline to participants
+    - shallow-focus close-up, consequence visible behind
+    - canted medium-wide frame, sudden reversal
 
   movie_color_grade:
-    - restrained green-grey palette, polished stone and black clothing
-    - warm amber highlights against deep teal shadows
-    - dusty sun-bleached earth tones with hard noon light
-    - silver-blue night photography with practical street lighting
-    - saturated primary colors shaped by theatrical spotlights
-    - desaturated wartime palette with smoke-softened contrast
-    - rich golden period color with deep crimson accents
-    - stark monochrome with one restrained spot color
-    - cool fluorescent interiors broken by emergency-red light
-    - naturalistic daylight with fine cinematic grain
+    - restrained green-grey palette, polished stone, black clothing
+    - warm amber highlights, deep teal shadows
+    - dusty sun-bleached earth tones, hard noon light
+    - silver-blue night photography, practical street lighting
+    - saturated primary colors, theatrical spotlights
+    - desaturated wartime palette, smoke-softened contrast
+    - rich golden period color, deep crimson accents
+    - stark monochrome, one restrained spot color
+    - cool fluorescent interiors, emergency-red light
+    - naturalistic daylight, fine cinematic grain
 
-  spotlight_cinematicscene:
-    - six-frame cinematic storyboard showing two black-clad infiltrators advancing through a monumental marble security lobby, synchronized close-range choreography, stone columns disintegrating into white dust, dropped weapons sliding across the polished floor, wide symmetrical framing
-    - six-frame cinematic storyboard showing lone martial artist surrounded in a narrow restaurant kitchen, improvised fight moving across steel counters and hanging cookware, every impact changing the geography, fluid lateral tracking shot
-    - six-frame cinematic storyboard showing expert thief descending on a cable into a silent high-security vault, body held horizontally above a pressure-sensitive floor, one bead of sweat falling toward a sensor, severe overhead composition
-    - six-frame cinematic storyboard showing motorcycle pursuit against traffic through a rain-dark tunnel, pursuer weaving between headlights while a larger vehicle closes from behind, low wheel-level tracking camera and hard practical light
-    - six-frame cinematic storyboard showing two rival swordspeople dueling across a roof during a thunderstorm, footwork shifting over loose tiles, lightning briefly revealing their positions, alternating wide silhouettes and precise hand close-ups
-    - six-frame cinematic storyboard showing explorers fleeing a colossal rolling stone mechanism through a collapsing underground temple, traps activating in sequence, dust filling a narrow torchlit passage, camera retreating directly before them
-    - six-frame cinematic storyboard showing small fishing boat dwarfed by an unseen creature circling beneath black water, improvised equipment breaking one piece at a time, horizon held unnaturally still in a wide frame
-    - six-frame cinematic storyboard showing desperate defenders holding a narrow fortress breach against an overwhelming army, shields splintering, banners disappearing into smoke, high-angle geography followed by intimate exhausted faces
-    - six-frame cinematic storyboard showing astronaut crossing the exterior of a damaged orbital station while debris rotates past in silence, distant planet filling half the frame, slow controlled camera movement and cold reflected sunlight
-    - six-frame cinematic storyboard showing survivors racing through a collapsing city street as the ground folds behind them, recognizable landmarks tilting out of alignment, falling glass and papers showing scale, long-lens pursuit view
-    - six-frame cinematic storyboard showing tense three-way standoff in an empty sun-baked courtyard, hands hovering near holsters, wind moving dust and coat hems, extreme close-ups separated by vast silent wides
-    - six-frame cinematic storyboard showing covert operative navigating a crowded formal reception while security quietly seals exits, coded glances across dancers, concealed objective changing hands, elegant moving camera disguising the suspense
-    - six-frame cinematic storyboard showing singer stepping onto an enormous stage before a silent arena, first unaccompanied note followed by the audience illuminating row by row, crane shot rising into the rafters
-    - six-frame cinematic storyboard showing underdog athlete entering the final round exhausted, coach shouting unheard beneath the crowd, decisive movement shown without excessive effects, cut between footwork, opponent, and family reaction
-    - six-frame cinematic storyboard showing estranged lovers finding each other on a crowded railway platform as the final train departs, surrounding movement blurring while they remain still, restrained score-like visual rhythm and winter light
-    - six-frame cinematic storyboard showing frightened investigator opening a familiar apartment door onto an impossible endless corridor, ordinary objects repeated at wrong intervals, slow push forward with no visible threat
-    - six-frame cinematic storyboard showing comic ensemble at an elegant dinner, one guest tangled in curtains beside the exit, another hiding beneath the table, spilled soup crossing formal place settings and the host blocking the doorway in one wide composition
-    - six-frame cinematic storyboard showing resistance pilot flying through the interior of a vast mechanical structure, obstacles establishing a clear route toward a tiny target, pursuers lost one by one, cockpit reactions intercut with exterior scale
-    - six-frame cinematic storyboard showing dancers taking over a rain-soaked city intersection at night, choreography expanding from one performer to an entire crowd, headlights and storefronts providing practical backlight
-    - six-frame cinematic storyboard showing family escaping a prehistoric predator through an abandoned visitor complex, automatic doors and kitchen equipment becoming obstacles, threat shown in fragments at child eye level
-    - six-frame cinematic storyboard showing masked urban rescuer swinging beneath a collapsing elevated rail line, releasing the cable to catch a falling passenger before landing on a moving service vehicle, geography established in one wide tracking shot
-    - six-frame cinematic storyboard showing armored public-safety hero holding a fractured building beam while trapped civilians crawl toward daylight, suit mechanisms failing visibly one by one, rescue effort emphasized over combat
-    - six-frame cinematic storyboard showing cyberpunk courier racing a customized motorcycle through a multilayer night market, shutters closing ahead and pursuers forced onto parallel walkways, route readable through signs and crowd movement
-    - six-frame cinematic storyboard showing retro rocket crew launching from a chrome spaceport as the gantry collapses, practical miniature fire and smoke, analog cockpit reactions intercut with a steep exterior ascent
-    - six-frame cinematic storyboard showing giant machine awakening beneath a flooded metropolis, maintenance bridges tearing loose as its head rises above the water, tiny evacuation boats establishing scale
-    - six-frame cinematic storyboard showing neighborhood artist pursued through an underpass while painted animals peel from successive murals to block the pursuers, transformation accomplished through practical match cuts
-    - six-frame cinematic storyboard showing cosmic guardian guiding a damaged passenger ship through a meteor field, body used as a physical navigation marker while the bridge crew follows precise instructions
-    - six-frame cinematic storyboard showing masked vigilante infiltrating a charity gala above the city, moving through service passages and elevator machinery while a public speech continues uninterrupted below
-    - six-frame cinematic storyboard showing weary synthetic investigator pursuing a fugitive through a rain-soaked megacity market, colossal animated advertisements reflected in puddles, crowds parting beneath umbrellas, blue-orange night photography and slow existential close-ups
-    - six-frame cinematic storyboard showing artificial laborer delivering a final monologue on a rooftop in relentless rain, white bird released as distant industrial flames fade, intimate close-up contrasting fragile memory with the immense city
-    - six-frame cinematic storyboard showing two understated government agents entering a noisy roadside diner after an unexplained impact, questioning witnesses while a disguised extraterrestrial quietly consumes an impossible meal, dry reaction coverage and practical creature effects
-    - six-frame cinematic storyboard showing secret immigration terminal hidden beneath an ordinary city landmark, hundreds of unusual visitors moving through customs queues, veteran agent guiding a stunned recruit in one sweeping reveal
-    - six-frame cinematic storyboard showing eloquent swordsman concealed beneath a balcony composing a love declaration for another man, moonlit courtyard, unseen listener leaning toward the voice, language and longing carried through restrained theatrical staging
-    - six-frame cinematic storyboard showing gifted poet-duelist answering insults while fencing several opponents across a crowded playhouse stage, completing each improvised verse exactly as the blade lands, audience reactions building the rhythm
-    - six-frame cinematic storyboard showing cargo-ship crew searching dark industrial corridors, handheld motion detector accelerating, steam vents opening unpredictably, creature revealed only as a reflection behind the final searcher
-    - six-frame cinematic storyboard showing lone survivor preparing an escape shuttle during a mechanical countdown, unseen organism moving among hanging chains, warning strobes and claustrophobic handheld framing
-    - six-frame cinematic storyboard showing survey team entering a biomechanical chamber built around an enormous fossilized pilot, human lamps dwarfed by ribbed architecture, mist obscuring the scale of an unopened organic vessel
-    - six-frame cinematic storyboard showing small fellowship retreating across a narrow stone bridge above a fiery abyss while an ancient horned shadow rises behind, elderly guide holding the center alone as companions call back from safety
-    - six-frame cinematic storyboard showing armored cavalry assembling along a ridge at sunrise before descending toward a besieged city, ranks gathering speed from a walk to a thunderous charge, aerial wides alternating with frightened defenders below
-    - six-frame cinematic storyboard showing defenders on a rain-lashed fortress wall watching thousands of torches approach through darkness, ladders and siege engines slowly emerging, geography established before the first impact
-    - six-frame cinematic storyboard showing tiny fellowship crossing a vast snow-covered mountain ridge in single file, wind erasing their tracks, monumental landscape reducing the quest to fragile moving silhouettes
-    - six-frame cinematic storyboard showing exhausted warrior standing alone before a black city gate as allied forces arrive unexpectedly behind the enemy, disbelief passing across every face before the final advance
-    - six-frame cinematic storyboard showing ancient tree-like beings marching against a fortified industrial complex, breaking a dam so floodwater carries machinery away, smoke replaced by reflected daylight across the valley
-    - six-frame cinematic storyboard showing desert convoy pursued into a violent dust storm by improvised armored vehicles, attackers transferring between machines on flexible poles, route and vehicle damage remaining readable through orange haze
-    - six-frame cinematic storyboard showing urban bank robbers emerging into a daylight street battle, disciplined movement between abandoned cars, police pinned across a broad intersection, long-lens documentary intensity and overwhelming practical sound
-    - six-frame cinematic storyboard showing young fugitive on a motorcycle pursued by a heavy truck through a concrete flood channel at night, vehicle scale emphasized by low tracking shots and sparks along the retaining wall
-    - six-frame cinematic storyboard showing soldiers approaching a fortified beach through cold surf, obstacles and smoke obscuring the route inland, handheld perspective shifting from disorientation to a single desperate objective
-    - six-frame cinematic storyboard showing luxury ocean liner tilting steeply into darkness as passengers climb across decks becoming vertical walls, loose furniture cascading toward black water, distant rescue lights unable to reach them
-    - six-frame cinematic storyboard showing hotel corridor struck by a sudden wall of water while a caretaker runs toward the camera, patterned carpet disappearing beneath the flood, locked symmetrical framing turning architecture into a trap
-    - six-frame cinematic storyboard showing weary detective hanging from a rooftop while an artificial fugitive unexpectedly pulls him to safety, cold rain, industrial flame and a quiet reversal of hunter and hunted
-    - six-frame cinematic storyboard showing seven defenders protecting a farming village in heavy rain, attackers entering through mapped lanes and barricades, mud and exhaustion replacing heroic spectacle, ensemble geography always clear
-    - six-frame cinematic storyboard showing giant ape revealed atop a skyscraper through crossing searchlights and circling aircraft, tiny figure protected in one hand, city crowds far below establishing tragic scale
-    - six-frame cinematic storyboard showing disparate heroes assembling in a ruined city intersection as threats close from every direction, camera circling the group once before each member takes a distinct defensive route
-    - six-frame cinematic storyboard showing covert operative clinging to the exterior of a transport aircraft during takeoff, runway shrinking beneath, gloved grip failing one finger at a time before a service door comes within reach
-    - six-frame cinematic storyboard showing demanding conductor and ambitious drummer locked in an escalating performance duel, tempo accelerating beyond the ensemble, blood and exhaustion conveyed through hands, cymbals and uncompromising reaction close-ups
-    - six-frame cinematic storyboard showing young mob heir making a life-changing decision during a quiet restaurant conversation, train passing overhead at the decisive instant, sound falling away before one sudden irreversible action
-    - six-frame cinematic storyboard showing two aspiring performers dancing alone inside an observatory-like dream space above a city, practical color transitions moving from twilight to stars, romance expressed through choreography and distance
-    - six-frame cinematic storyboard showing falsely accused physician escaping across a rain-slick dam, searchlights closing from both sides, choice between surrender and a dangerous leap established through vertiginous overhead views
-    - six-frame cinematic storyboard showing archaeologists entering a hidden desert chamber, torchlight across untouched gold objects, every figure frozen as one sealed sarcophagus lid shifts and dust spills from its edge
-    - six-frame cinematic storyboard showing submarine crew silent at stations while enemy sonar pulses vibrate loose tools, captain's hand holding the covered fire switch shut, depth gauge deep in the red
-    - six-frame cinematic storyboard showing astronaut entering a rotating cylindrical habitat, jogging along a floor that curves overhead, ordinary domestic details revealing impossible engineered scale in one continuous shot
-    - six-frame cinematic storyboard showing scientists watching water ripple in a cup before an enormous predator steps into view beyond stopped vehicles, threat announced through physical vibration rather than music or effects
-    - six-frame cinematic storyboard showing suburban family hiding a gentle extraterrestrial visitor as government search teams fill the street, children coordinating an improvised bicycle escape through backyards and construction sites
-    - six-frame cinematic storyboard showing police chief confronting a predator on a sinking fishing boat, compressed-air cylinder lodged in its jaws, rifle slipping across the deck as the mast descends toward the water
-    - six-frame cinematic storyboard showing archaeological adventurer facing a ceremonial swordsman in a crowded desert street, elaborate challenge interrupted by one exhausted practical decision, crowd reacting in stunned silence
-    - six-frame cinematic storyboard showing prisoners completing a painstaking tunnel escape during a storm, hidden opening revealed beneath a poster, crawl through mud and sewage ending beneath cleansing rain
-    - six-frame cinematic storyboard showing wrongfully imprisoned man playing an operatic recording across an entire prison yard, guards unable to stop it immediately, inmates standing motionless beneath loudspeakers and open sky
-    - six-frame cinematic storyboard showing astronauts walking toward an impossible black monolith excavated beneath lunar floodlights, radio chatter fading as a piercing signal overwhelms the scene
-    - six-frame cinematic storyboard showing crew member outside a sealed spacecraft hatch, access panel glowing red, manual override lever locked beneath a transparent cover, their reflection drifting across the dark window against deep space
-    - six-frame cinematic storyboard showing blue police box-like time machine opening onto an impossible interior, skeptical companion circling the ordinary exterior repeatedly before entering the immense control room
-    - six-frame cinematic storyboard showing eccentric paranormal investigators entering a grand hotel ballroom where invisible guests gradually become visible, practical slime, overturned tables and comic scientific procedure
-    - six-frame cinematic storyboard showing enormous friendly apparition forming above a city while investigators cross energy streams toward a rooftop gateway, miniature skyline and storm clouds framing escalating supernatural chaos
-    - six-frame cinematic storyboard showing pale young girl spinning her head toward horrified clergy inside a cold bedroom, mundane medical equipment and restrained reactions grounding the supernatural violation
-    - six-frame cinematic storyboard showing family trapped in a snowbound hotel navigating a hedge maze at night, pursuer following false footprints while interior corridors repeat impossible patterns
-    - six-frame cinematic storyboard showing mother confronting an unseen force through a flickering television screen as household objects stack themselves, suburban normality invaded through practical physical effects
-    - six-frame cinematic storyboard showing masked killer pursuing a lone babysitter across quiet suburban lawns, porch lights switching on one house at a time, neighbors watching casually through windows as she pounds on a locked door
-    - six-frame cinematic storyboard showing swimmer alone at night viewed alternately from the calm surface and something rising beneath, moonlit water emphasizing vulnerability before sudden silence
-    - six-frame cinematic storyboard showing investigators descending stone steps into a sealed tomb where painted figures appear one position closer whenever the torch passes, controlled darkness and archaeological detail
-    - six-frame cinematic storyboard showing aging gunslinger entering a saloon to confront the men who brutalized a friend, rain outside, patrons clearing tables, violence delayed by measured dialogue and weary posture
-    - six-frame cinematic storyboard showing lawman and outlaw facing each other across railway tracks as a train repeatedly blocks their view, confrontation revealed in rhythmic fragments between passing cars
-    - six-frame cinematic storyboard showing samurai seated motionless in a courtyard while dozens of attackers circle, falling leaves and shifting feet marking tactical decisions before one explosive exchange
-    - six-frame cinematic storyboard showing masked avenger fighting across the rafters of an opera house while a performance continues below, ropes, curtains and chandeliers becoming part of the choreography
-    - six-frame cinematic storyboard showing swashbuckling rivals dueling up a grand staircase while trading jokes, furniture and hanging tapestries altering the route, playful wide framing preserving both performers
-    - six-frame cinematic storyboard showing gladiator lowering his helmet before a stunned emperor inside a vast arena, matching family emblem and old portrait medallion exposed on his chest, crowd frozen behind them
-    - six-frame cinematic storyboard showing chariot racers circling a monumental arena, wheel hubs colliding and horses changing lanes, overhead geography intercut with dust-level danger
-    - six-frame cinematic storyboard showing rebel leader before an army at muddy dawn, soldiers gripping family tokens and worn letters, weapons still lowered as dense battlefield fog closes around the formation
-    - six-frame cinematic storyboard showing doomed lovers meeting at opposite sides of a candlelit ballroom, crowd choreography repeatedly bringing them near and separating them, dialogue carried through glances
-    - six-frame cinematic storyboard showing proud young woman overhearing a reserved man's disastrous proposal in a rain-soaked pavilion, restraint collapsing into argument as weather isolates them from the estate
-    - six-frame cinematic storyboard showing forgotten stage actress descending a grand staircase for cameras that are no longer there, decaying mansion swallowed by one final close-up
-    - six-frame cinematic storyboard showing nervous actor performing before a hostile royal court while a hidden friend feeds lines from behind a curtain, poetry transforming mockery into attention
-    - six-frame cinematic storyboard showing newspaper editor and rival reporter racing through a newsroom to control one breaking story, phones ringing, presses starting below, rapid overlapping dialogue staged in depth
-    - six-frame cinematic storyboard showing a con-artist reveal through repeated close-ups of a switched ring, marked card and duplicate key, final panel of the mark staring at an empty safe while the same props sit in the con artists' case
-    - six-frame cinematic storyboard showing silent-era comic hero trapped inside the moving gears of an enormous factory machine, repeated mechanical timing turning danger into precisely staged physical comedy
-    - six-frame cinematic storyboard showing elaborate hotel concierge orchestrating a lobby crisis across elevators, keys, luggage and demanding guests, symmetrical pastel production design and exact ensemble timing
-    - six-frame cinematic storyboard showing mismatched musicians performing behind a chicken-wire barrier as an unruly roadside audience throws objects, band gradually winning the room through escalating rhythm
-    - six-frame cinematic storyboard showing rock band playing on a city rooftop while office workers and police gather below, cold daylight and documentary camera movement making the final performance feel spontaneous
-    - six-frame cinematic storyboard showing soul singer leaning into a studio microphone, pianist and horn players turning toward her mid-phrase, handwritten arrangement crossed out on the music stand, control-room engineer frozen above the record button
-    - six-frame cinematic storyboard showing ambitious ballerina performing a climactic transformation while stage reflections split into competing identities, theatrical lighting shifting from white to black without digital effects
-    - six-frame cinematic storyboard showing boxer climbing museum steps before sunrise after weeks of solitary training, city opening behind as movement changes from exhaustion to confidence
-    - six-frame cinematic storyboard showing baseball team entering a dreamlike field cut into farmland at dusk, deceased players emerging quietly from tall crops, family reconciliation carrying more weight than sport
-    - six-frame cinematic storyboard showing race-car driver threading through a multi-vehicle crash at full speed, cockpit vibration, debris trajectories and spotter instructions preserving spatial clarity
-    - six-frame cinematic storyboard showing climbers on a storm-dark mountain face, lead rope stretching upward toward the summit while a second rope drops toward an injured climber below, frostbitten hands gripping both lines
-    - six-frame cinematic storyboard showing news helicopter following a white sport utility vehicle along an empty freeway while crowds watch televisions in storefronts, public spectacle overtaking the actual pursuit
-    - six-frame cinematic storyboard showing animated toys caught mid-motion across a bedroom floor as the door begins to open, one newcomer toy still gesturing while every veteran toy lies rigid and faces the doorway
-    - six-frame cinematic storyboard showing elderly widower lifting his small house beneath thousands of balloons, neighborhood rooftops falling away as treasured objects slide through familiar rooms
-    - six-frame cinematic storyboard showing young cook controlling a restaurant kitchen from beneath a chef's hat, physical comedy synchronized with precise culinary technique and skeptical staff reactions
-    - six-frame cinematic storyboard showing masked spirit guiding a frightened child through a bathhouse crowded with strange workers and guests, hand-painted architecture unfolding through gentle lateral movement
+  spotlight_movie_scene:
+    - (two black-clad infiltrators:1.1), close-range synchronized combat, disintegrating marble column, dropped weapon sliding across polished floor, monumental security lobby, wide symmetrical framing
+    - (lone martial artist:1.1), improvised fight, steel counters and hanging cookware, narrow restaurant kitchen, lateral tracking angle
+    - (expert thief:1.1), descending on a cable, body held horizontal above a pressure-sensitive floor, (bead of sweat falling toward the sensor:1.2), silent high-security vault, severe overhead composition
+    - motorcycle pursuit, weaving between oncoming headlights, larger vehicle closing from behind, rain-dark tunnel, low wheel-level tracking camera
+    - (two rival swordfighters dueling:1.1), footwork over loose roof tiles, lightning revealing silhouettes, thunderstorm, wide silhouette framing
+    - (explorers fleeing a giant rolling boulder:1.2), collapsing underground temple, spear trap triggering underfoot, dust-filled torchlit passage
+    - small fishing boat, (dark shape circling beneath black water:1.1), improvised equipment breaking apart, unnaturally still horizon, wide frame
+    - (defenders holding a narrow fortress breach:1.1), splintering shields, overwhelming army beyond, banners vanishing into smoke, exhausted faces
+    - astronaut crossing the exterior of a damaged orbital station, debris rotating past in silence, distant planet filling half the frame, cold reflected sunlight
+    - (survivors racing through a collapsing city street:1.1), ground folding behind them, tilting landmarks, falling glass and papers, long-lens pursuit view
+    - (tense three-way standoff:1.1), hands hovering near holsters, wind-blown dust and coat hems, sun-baked empty courtyard
+    - covert operative navigating a crowded formal reception, coded glances across dancers, (concealed object changing hands:1.1), security quietly sealing exits
+    - singer stepping onto an enormous empty-feeling stage, (silent arena illuminating row by row:1.1), crane shot rising into the rafters
+    - (exhausted underdog athlete:1.1), final round, decisive punch, coach shouting from the corner, family reaction in the crowd
+    - (estranged lovers reuniting:1.1), crowded railway platform, final train departing behind them, surrounding crowd blurred, winter light
+    - frightened investigator opening an apartment door onto an (impossible endless corridor:1.2), ordinary objects repeated at wrong intervals, no visible threat
+    - (comic ensemble chaos at an elegant dinner:1.1), guest tangled in curtains, another hiding beneath the table, spilled soup across place settings, host blocking the doorway, wide composition
+    - resistance pilot flying a starfighter through the interior of a vast mechanical structure, obstacles marking a route to a distant target, pursuing ships falling behind, cockpit reaction
+    - (dancers taking over a rain-soaked intersection:1.1), choreography spreading through the crowd, night, headlights and storefront backlight
+    - family escaping a (prehistoric predator:1.1), abandoned visitor complex, automatic doors and kitchen equipment as obstacles, threat glimpsed at child eye level
+    - (masked urban rescuer:1.2), swinging on a cable beneath a collapsing elevated rail line, catching a falling passenger mid-air, landing on a moving vehicle, wide tracking shot
+    - (armored hero holding a fractured building beam:1.2), trapped civilians crawling toward daylight, suit mechanisms sparking and failing, rescue-focused staging
+    - cyberpunk courier racing a customized motorcycle, multilayer night market, shutters closing ahead, pursuers on parallel walkways, neon signage
+    - retro rocket crew launching, chrome spaceport, collapsing gantry, practical fire and smoke, analog cockpit gauges, steep ascent
+    - (giant machine awakening:1.2) beneath a flooded metropolis, maintenance bridges tearing loose, head rising above the water, tiny evacuation boats for scale
+    - neighborhood artist pursued through an underpass, (painted animals peeling off murals to block pursuers:1.2), practical creature-effect chase
+    - (cosmic guardian:1.1) guiding a damaged passenger ship through a meteor field, body used as a physical navigation marker, bridge crew watching through the viewport
+    - masked vigilante infiltrating a charity gala, moving through service passages and elevator machinery, public speech continuing below, city skyline visible
+    - (weary synthetic investigator:1.1) pursuing a fugitive, rain-soaked megacity market, animated advertisements reflected in puddles, umbrella crowd, blue-orange night photography
+    - artificial laborer, (final monologue on a rain-soaked rooftop:1.1), white bird released, distant industrial flames fading, intimate close-up
+    - (two government agents in dark suits:1.1) questioning witnesses in a roadside diner, disguised extraterrestrial quietly eating an impossible meal nearby, dry reaction shots
+    - (secret alien immigration terminal:1.1) beneath an ordinary city landmark, hundreds of unusual visitors in customs queues, veteran agent guiding a stunned recruit, sweeping reveal
+    - eloquent swordsman concealed beneath a balcony, composing a love declaration, moonlit courtyard, hidden listener leaning toward the voice, theatrical staging
+    - (poet-duelist fencing multiple opponents:1.1) on a crowded playhouse stage, composing verse mid-duel, audience reaction, theatrical lighting
+    - cargo-ship crew searching dark industrial corridors, motion detector accelerating, steam vents opening unpredictably, (creature reflected behind the final searcher:1.2)
+    - lone survivor preparing an escape shuttle, mechanical countdown, shadowy organism moving among hanging chains, warning strobes, claustrophobic framing
+    - survey team entering a biomechanical chamber, (enormous fossilized alien pilot:1.2), ribbed architecture dwarfing human lamps, mist obscuring scale
+    - (elderly guide holding a stone bridge alone:1.2), fellowship retreating across a narrow bridge above a fiery abyss, ancient horned shadow rising behind, companions calling from safety
+    - armored cavalry charge, gathering speed from a ridge toward a besieged city, sunrise, aerial wide shot, frightened defenders below
+    - defenders on a rain-lashed fortress wall, thousands of torches approaching through darkness, siege ladders and engines emerging, tense anticipation
+    - tiny fellowship crossing a vast snow-covered mountain ridge, single file, wind erasing tracks, (monumental landscape dwarfing the figures:1.1)
+    - exhausted warrior standing alone before a black city gate, allied forces arriving unexpectedly behind the enemy, disbelief on every face
+    - (ancient tree-like beings marching:1.1) against a fortified industrial complex, breaking a dam, floodwater carrying machinery away, daylight reflected on water
+    - desert convoy pursued through a violent dust storm, (improvised armored vehicles:1.1), attackers transferring between vehicles on flexible poles, orange haze
+    - (urban bank robbers in a daylight street battle:1.1), disciplined movement between abandoned cars, police pinned across an intersection, long-lens documentary style
+    - young fugitive on a motorcycle pursued by a heavy truck, concrete flood channel, night, low tracking shot, sparks along the retaining wall
+    - (soldiers approaching a fortified beach through cold surf:1.1), obstacles and smoke obscuring the route inland, handheld disorientation
+    - (ocean liner tilting steeply into darkness:1.2), passengers climbing decks turned vertical, furniture cascading toward black water, distant rescue lights
+    - hotel corridor, (sudden wall of water:1.2), caretaker running toward camera, patterned carpet vanishing beneath the flood, locked symmetrical framing
+    - weary detective hanging from a rooftop edge, (artificial fugitive pulling him to safety:1.1), cold rain, industrial flame in the background
+    - (seven defenders protecting a farming village:1.1), heavy rain, attackers entering through barricaded lanes, mud and exhaustion, clear ensemble geography
+    - (giant ape atop a skyscraper:1.3), crossing searchlights, circling aircraft, tiny figure protected in one hand, city crowds far below
+    - (disparate hero team assembling:1.1), ruined city intersection, threats closing from every direction, circling group shot, each taking a defensive position
+    - covert operative clinging to the exterior of an aircraft during takeoff, runway shrinking below, (gloved grip failing finger by finger:1.2), service door just out of reach
+    - (demanding conductor and drummer locked in a performance duel:1.1), tempo accelerating, blood on hands, cymbals, exhausted close-up
+    - young mob heir at a quiet restaurant table, (hand tightening around a knife:1.1), train passing overhead, tense stillness
+    - (two performers dancing inside an observatory-like dream space:1.1) above the city, color transitioning from twilight to stars, distance between them
+    - falsely accused man escaping across a rain-slick dam, searchlights closing from both sides, (vertiginous leap or surrender:1.1), overhead framing
+    - archaeologists entering a hidden desert chamber, torchlight across untouched gold objects, (sarcophagus lid shifting:1.2), dust spilling from the edge, frozen reactions
+    - submarine crew silent at stations, sonar pulses vibrating loose tools, (captain's hand holding the covered fire switch shut:1.2), depth gauge deep in the red
+    - astronaut jogging along the curved interior floor of a (rotating cylindrical space habitat:1.2), domestic details revealing impossible engineered scale
+    - scientists watching water ripple in a cup, (enormous predator stepping into view:1.2) beyond stopped vehicles, tense anticipation
+    - suburban family hiding a (gentle extraterrestrial visitor:1.1), government search teams filling the street outside, children coordinating a bicycle escape through backyards
+    - police chief confronting a shark on a sinking fishing boat, (compressed-air cylinder lodged in its jaws:1.2), rifle sliding across the deck, mast descending toward the water
+    - (archaeological adventurer facing a ceremonial swordsman:1.1) in a crowded desert street market, exhausted dismissive gesture, stunned crowd reaction
+    - prisoners completing a tunnel escape during a storm, hidden opening beneath a poster, crawling through mud and sewage, emerging beneath cleansing rain
+    - wrongfully imprisoned man playing an operatic recording over prison loudspeakers, (inmates standing motionless in the yard:1.1), guards frozen mid-stride, open sky
+    - astronauts walking toward an (impossible black monolith:1.2) excavated beneath lunar floodlights, piercing signal, radio chatter fading
+    - crew member outside a sealed spacecraft hatch, (access panel glowing red:1.1), manual override lever locked beneath a transparent cover, reflection against deep space
+    - (blue police-box time machine:1.2), skeptical companion circling the small exterior, doorway opening onto an immense impossible control room
+    - eccentric paranormal investigators entering a grand hotel ballroom, (translucent ghostly guests becoming visible:1.1), overturned tables, practical slime, proton-pack style equipment
+    - (enormous ghostly apparition forming above the city:1.2), investigators crossing energy-beam streams toward a rooftop gateway, storm clouds, miniature skyline
+    - pale young girl in a cold bedroom, (head turning unnaturally toward horrified clergy:1.2), medical equipment nearby, restrained horrified reactions
+    - family navigating a snowbound hedge maze at night, pursuer following false footprints, isolated hotel exterior, moonlit snow
+    - mother confronting a flickering television screen, (household objects stacking themselves:1.2), suburban living room invaded by an unseen force
+    - (masked killer pursuing a babysitter:1.2) across suburban lawns at night, porch lights switching on, fist pounding a locked door, oblivious neighbors watching from windows
+    - swimmer alone at night, (shadowy shape rising beneath calm moonlit water:1.2), vulnerability, sudden stillness
+    - investigators descending stone steps into a sealed tomb, (painted wall figures standing unnervingly close to the torchlight:1.1), uncanny repetition down the corridor, controlled darkness
+    - aging gunslinger entering a saloon, patrons clearing tables, rain outside, weary confrontational stance, tension before violence
+    - lawman and outlaw facing off across railway tracks, (freight train repeatedly blocking their view:1.1), fragmented standoff between passing cars
+    - samurai seated motionless in a courtyard, dozens of attackers circling, falling leaves, tense stillness before the strike
+    - masked avenger fighting across (opera house rafters:1.1), swinging on ropes and curtains, chandeliers as obstacles, performance continuing below
+    - (swashbuckling rivals dueling up a grand staircase:1.1), furniture and hanging tapestries as obstacles, playful energetic framing
+    - gladiator lowering his helmet before a stunned emperor, (family emblem medallion exposed on his chest:1.2), vast arena, crowd frozen in silence
+    - (chariot racers colliding wheel hubs:1.1), horses changing lanes, monumental arena, dust and speed
+    - rebel leader addressing an army at muddy dawn, soldiers gripping family tokens and worn letters, weapons lowered, dense fog closing in
+    - (doomed lovers exchanging glances:1.1) across a candlelit ballroom, dancing crowd repeatedly separating them, period costume
+    - proud young woman and reserved man arguing in a rain-soaked garden pavilion, restraint collapsing, isolated from the estate behind them
+    - forgotten stage actress descending a grand staircase in a (theatrical silent-film pose:1.1), decaying mansion interior, empty room, dust drifting in the light
+    - nervous actor performing before a hostile royal court, (hidden friend feeding lines from behind a curtain:1.1), court attention shifting
+    - newspaper editor and rival reporter racing through a busy newsroom, ringing phones, printing presses starting below, staged in depth
+    - con artist's mark staring into an empty safe, (matching switched ring, marked card and duplicate key inside the con artists' open case:1.1) nearby, deception exposed
+    - silent-era comic hero trapped inside the moving gears of an enormous factory machine, precise physical-comedy timing, mechanical danger
+    - elaborate hotel concierge orchestrating a lobby crisis, elevators, keys and luggage, demanding guests, symmetrical pastel production design
+    - mismatched musicians performing behind a chicken-wire barrier, unruly roadside audience throwing objects, escalating rhythm
+    - rock band playing on a city rooftop, office workers and police gathering on the street below, cold daylight, documentary camera feel
+    - soul singer leaning into a studio microphone, (pianist and horn players turning toward her mid-phrase:1.1), handwritten arrangement on the music stand, engineer frozen above the record button
+    - ambitious ballerina mid-performance, (stage reflections splitting into competing identities:1.2), theatrical lighting shifting from white to black
+    - boxer climbing museum steps at sunrise, solitary training, city skyline opening behind, exhaustion turning to confidence
+    - baseball team on a dreamlike field cut into farmland at dusk, (figures emerging quietly from the tall crops:1.1), quiet family reconciliation
+    - race-car driver threading through a multi-vehicle crash at full speed, flying debris, cockpit vibration, spatial clarity preserved
+    - climbers on a storm-dark mountain face, (frostbitten hands gripping two ropes:1.1), one stretching toward the summit, one dropping toward an injured climber below
+    - news helicopter following a white SUV along an empty freeway, crowds watching televisions in storefronts below, public spectacle
+    - animated toys frozen mid-motion across a bedroom floor, (one newcomer toy still gesturing:1.1), veteran toys lying rigid, door beginning to open
+    - elderly widower's small house lifting beneath (thousands of colorful balloons:1.2), neighborhood rooftops falling away below, objects sliding through the rooms
+    - young cook controlling a restaurant kitchen from beneath an oversized chef's hat, precise culinary technique, skeptical staff reactions, physical comedy
+    - masked spirit guiding a frightened child through a bathhouse crowded with strange workers and guests, hand-painted architecture, gentle lateral composition
+
+# ---------------------------------------------------------
+# TELEVISION
+# ---------------------------------------------------------
 
   tv_genre:
     - prestige crime drama
@@ -213,20 +206,24 @@ gkr_popculture:
     - transforming-hero team adventure
     - serialized small-town mystery
 
-  tv_episode_scene:
-    - six-frame television storyboard showing mismatched detectives reconstructing a case across a wall of photographs while their suspect waits calmly in the next room
-    - six-frame television storyboard showing exhausted hospital team making a difficult decision around an empty operating table after the emergency has passed
-    - six-frame television storyboard showing office coworkers silently reacting as a routine presentation reveals an absurd mistake, static ensemble framing allowing every expression to register
-    - six-frame television storyboard showing family crowded into a kitchen for a serious announcement that keeps being interrupted by mundane household problems
-    - six-frame television storyboard showing political staff walking rapidly through adjoining corridors, exchanging revised talking points as a live broadcast counts down nearby
-    - six-frame television storyboard showing teenagers searching a closed school after hours, familiar hallways transformed by emergency lighting and distant sounds
-    - six-frame television storyboard showing historical household receiving a letter that changes inheritance, alliances, and an imminent marriage, reactions distributed across the room
-    - six-frame television storyboard showing masked color-coded hero team assembling in a quarry as an oversized practical-effect creature rises behind industrial structures
-    - six-frame television storyboard showing contestants confronting an unexpectedly elaborate final challenge while the host explains rules from a bright studio platform
-    - six-frame television storyboard showing small-town residents gathered at a diner after an impossible event, each concealing a different piece of information
+  spotlight_tv_scene:
+    - mismatched detective partners, wall covered in case photographs, (suspect waiting calmly in the next room:1.1), glass partition
+    - exhausted hospital team standing around an empty operating table, difficult decision, quiet aftermath
+    - office coworkers silently reacting to an absurd mistake on a presentation screen, static ensemble framing, deadpan expressions
+    - family crowded into a kitchen for a serious announcement, mundane household interruption, sitcom framing
+    - political staff walking rapidly through corridors, exchanging revised talking points, broadcast countdown visible nearby
+    - teenagers searching a closed school after hours, familiar hallways lit by emergency lighting, flashlights
+    - historical household receiving a life-changing letter, reactions distributed across the drawing room, formal dress
+    - (color-coded masked hero team assembling:1.1) in a quarry, oversized creature rising behind industrial structures
+    - contestants facing an elaborate final challenge, host explaining rules from a bright studio platform, dramatic stage lighting
+    - small-town residents gathered at a diner after an impossible event, guarded expressions, each concealing information
 
   tv_ensemble_combo:
-    - "television ensemble scene: __gkr_popculture/tv_episode_scene__, practical episodic production design, readable reaction coverage, natural television lighting"
+    - "television ensemble scene, __gkr_popculture/spotlight_tv_scene__, episodic production design, readable reaction coverage, natural television lighting"
+
+# ---------------------------------------------------------
+# MANGA
+# ---------------------------------------------------------
 
   manga_genre:
     - high-energy youth adventure manga
@@ -245,29 +242,33 @@ gkr_popculture:
     - high-contrast black ink, tapered action lines, coarse screentone shadows
     - delicate linework, floral framing, luminous white negative space
     - cinematic realistic anatomy, dense urban crosshatching, restrained expressions
-    - clean everyday backgrounds, subtle screentones, quiet observational panels
+    - clean everyday backgrounds, subtle screentones, quiet observational composition
     - intricate mechanical linework, explosive debris, extreme foreshortening
     - elegant transformation ribbons, symbolic motifs, bright limited spot color
-    - compressed speed lines, sweat and fabric motion, decisive impact panel
+    - compressed speed lines, sweat and fabric motion, decisive impact moment
     - obsessive fine hatching, distorted perspective, large areas of solid black
     - rough brush ink, bold sound-effect shapes, confrontational low angles
     - woodblock-influenced landscapes, controlled sword arcs, wind through fabric
-    - super-deformed reaction inset beside a carefully rendered main panel
+    - super-deformed reaction inset beside the main figure, bold contour ink
 
-  manga_scene:
-    - manga page sequence showing two longtime rivals pausing before the final tournament exchange, damaged arena between them, crowd reduced to silent screentone shapes
-    - manga page sequence showing shy confession beneath a railway crossing at sunset, passing train dividing the characters for one panel before revealing their reactions
-    - manga page sequence showing detective comparing sequential photographs of a crowded night market, identical stalls and pedestrians in each image except one clock showing a different time, changed clock circled in red
-    - manga page sequence showing school team executing a rehearsed final play, each member shown contributing through narrow sequential panels before a full-page result
-    - manga page sequence showing pilot seeing an unfamiliar giant machine awaken beneath a flooded city, scale revealed through infrastructure and tiny maintenance crews
-    - manga page sequence showing magical heroine transformation expressed through symbolic costume fragments, personal keepsakes, ribbons, and a final confident silhouette
-    - manga page sequence showing wandering swordswoman facing an opponent in wind-bent grass, long silent preparation followed by one economical exchange
-    - manga page sequence showing apartment resident noticing a spiral pattern recurring in food, plumbing, hair, and street architecture, perspective tightening panel by panel
-    - manga page sequence showing group of friends sharing convenience-store food outside a shuttered station after the last train, one friend gripping an unopened letter while the others stop laughing and turn toward them
-    - manga page sequence showing delinquent protecting a younger student at a school gate, confrontation conveyed through posture, shoes, and surrounding classmates rather than powers
+  spotlight_manga_scene:
+    - (two rivals facing off:1.1) before the final tournament exchange, damaged arena between them, crowd rendered as silent screentone shapes
+    - shy confession at a railway crossing, sunset, passing train, nervous reactions
+    - detective comparing two photographs of a crowded night market side by side, (one clock circled in red showing a different time:1.2), identical stalls and pedestrians otherwise
+    - school team executing a rehearsed final play, each member's contribution visible in the same moment, decisive result
+    - pilot staring up at a giant machine awakening beneath a flooded city, scale established through infrastructure and tiny maintenance crews
+    - magical heroine mid-transformation, symbolic costume fragments and personal keepsakes swirling around her, ribbons, confident silhouette
+    - wandering swordswoman facing an opponent in wind-bent grass, drawn blade, tense silent standoff
+    - apartment resident noticing a spiral pattern repeating across food, plumbing, hair and street architecture, unsettled expression, obsessive detail
+    - (group of friends sharing convenience-store food:1.1) outside a shuttered station after the last train, one gripping an unopened letter, others turning with concern
+    - delinquent protecting a younger student at the school gate, tense posture, surrounding classmates watching, confrontation without powers
 
   manga_scene_combo:
-    - "manga scene: __gkr_popculture/manga_scene__, __gkr_popculture/manga_rendering__, large establishing panel, two reaction close-ups and one narrow action panel"
+    - "manga-style scene, __gkr_popculture/spotlight_manga_scene__, __gkr_popculture/manga_rendering__, single decisive panel composition"
+
+# ---------------------------------------------------------
+# COMICS
+# ---------------------------------------------------------
 
   comic_tradition:
     - modern superhero comic
@@ -283,29 +284,33 @@ gkr_popculture:
     - satirical British science-fiction comic
 
   comic_rendering:
-    - bold contour inks, halftone shadows, saturated flat color, dynamic panel borders
+    - bold contour inks, halftone shadows, saturated flat color, dynamic panel border
     - heavy chiaroscuro brushwork, rain-slicked streets, limited red accents
     - engraved textures, decaying caption boxes, sickly muted colors
     - economical ink lines, period print dots, dusty restrained palette
     - elegant faces, decorative clothing folds, soft vintage spot colors
-    - clean simplified forms, precise timing across four horizontal panels
+    - clean simplified forms, precise character timing, bold single-panel composition
     - scratchy personal linework, collage textures, hand-lettered captions
     - precise uniform line weight, flat clear colors, detailed architectural backgrounds
-    - fully painted panels, atmospheric scale, borderless page composition
-    - observational drawing, quiet layouts, handwritten narration
+    - fully painted single-panel illustration, atmospheric scale, borderless composition
+    - observational drawing, quiet single-panel layout, handwritten narration
 
-  comic_scene:
-    - comics page sequence showing masked neighborhood hero lifting a steel beam from trapped commuters while a fleeing villain recedes beneath a collapsing elevated train
-    - comics page sequence showing private investigator entering an empty nightclub where every table remains set and one telephone is ringing
-    - comics page sequence showing cursed portrait changing expression between otherwise identical horror anthology panels
-    - comics page sequence showing resistance courier crossing a ruined town under observation from an unseen rooftop
-    - comics page sequence showing former lovers meeting unexpectedly at a crowded department store, dialogue balloons contradicting their expressions
-    - comics page sequence showing child repeatedly asking a simple question while increasingly impossible events unfold silently in the background
-    - comics page sequence showing eccentric explorers arriving in a meticulously drawn foreign port with a suspicious guide and an unreliable map
-    - comics page sequence showing aging musician documenting the closure of a neighborhood venue through sketches, tickets, and overheard conversation
+  spotlight_comic_scene:
+    - (masked neighborhood hero lifting a steel beam:1.2) off trapped commuters, fleeing villain receding in the background, collapsing elevated train
+    - private investigator entering an empty nightclub, every table still set, one telephone ringing, dim atmospheric light
+    - cursed portrait with a subtly wrong expression on the wall, otherwise ordinary room, horror anthology framing
+    - resistance courier crossing a ruined town, unseen watcher's viewpoint from a rooftop above, wartime atmosphere
+    - former lovers meeting unexpectedly at a crowded department store counter, forced polite expressions, restrained body language
+    - child asking a simple question in the foreground, (increasingly impossible events unfolding silently in the background:1.1)
+    - eccentric explorers arriving at a meticulously drawn foreign port, suspicious guide, unrolled unreliable map
+    - aging musician sketching the closure of a neighborhood venue, old tickets and stubs scattered nearby, overheard conversation in the background
 
-  comic_page_combo:
-    - "comics page: __gkr_popculture/comic_scene__, __gkr_popculture/comic_rendering__, wide location panel, medium action panel, close reaction panel and full-width final panel"
+  comic_scene_combo:
+    - "comic-style scene, __gkr_popculture/spotlight_comic_scene__, __gkr_popculture/comic_rendering__, single full-width panel composition"
+
+# ---------------------------------------------------------
+# MUSIC
+# ---------------------------------------------------------
 
   music_genre:
     - arena rock
@@ -323,48 +328,52 @@ gkr_popculture:
     - alternative indie
 
   music_venue:
-    - enormous stadium stage with a runway extending into the audience
-    - cramped basement club with sticker-covered walls and a low ceiling
-    - outdoor festival at dusk with flags and distant food stalls
-    - intimate jazz room with small tables and warm practical lamps
-    - ornate concert hall with tiered balconies and acoustic panels
-    - neighborhood block party centered on portable turntables and stacked speakers
-    - recording studio crowded with cables, isolation booths, and handwritten charts
-    - stripped rehearsal warehouse with marked floors and mismatched amplifiers
+    - enormous stadium stage, runway extending into audience
+    - cramped basement club, sticker-covered walls, low ceiling
+    - outdoor festival at dusk, flags, distant food stalls
+    - intimate jazz room, small tables, warm practical lamps
+    - ornate concert hall, tiered balconies, acoustic panels
+    - neighborhood block party, portable turntables, stacked speakers
+    - recording studio, cables, isolation booths, handwritten charts
+    - stripped rehearsal warehouse, marked floors, mismatched amplifiers
 
   music_performance:
-    - vocalist holding the final note while the band and audience fall completely still
-    - guitarist crossing the stage during an extended solo as the rhythm section locks into a visible groove
-    - rapper leading a call-and-response cipher surrounded closely by performers and audience
-    - drummer beginning an unexpected solo that pulls the entire ensemble back in one instrument at a time
-    - jazz quartet exchanging improvised phrases through eye contact and subtle gestures
-    - pop ensemble executing precise choreography while practical set pieces transform behind them
-    - orchestra reaching a dramatic final movement under an intensely focused conductor
-    - singer-songwriter performing one unamplified song at the edge of a darkened stage
-    - punk band playing at floor level as the crowd surrounds the microphones
-    - gospel choir rising row by row behind a soloist in warm morning light
+    - vocalist holding the final note, band and audience completely still
+    - guitarist crossing the stage mid-solo, rhythm section locked into a visible groove
+    - rapper leading a call-and-response cipher, performers and audience close around
+    - drummer mid-unexpected-solo, other musicians turning to rejoin the rhythm
+    - jazz quartet, improvised phrase exchange, eye contact, subtle gestures
+    - pop ensemble, precise choreography, transforming set pieces behind
+    - orchestra, dramatic final movement, intensely focused conductor
+    - singer-songwriter, unamplified performance, edge of a darkened stage
+    - punk band playing at floor level, crowd surrounding the microphones
+    - gospel choir rising row by row behind a soloist, warm morning light
 
   music_performance_combo:
-    - "live performance: __gkr_popculture/music_performance__, __gkr_popculture/music_venue__, correct hand placement, instrument cables, microphone stands, stage monitors and audience hands, concert photography composition"
+    - "live performance, __gkr_popculture/music_performance__, __gkr_popculture/music_venue__, correct hand placement, instrument cables, microphone stands, stage monitors, audience hands visible, concert photography composition"
 
   music_video_combo:
-    - "music video for a __gkr_popculture/music_genre__ track, performers moving through a single evolving practical set, choreography synchronized to visual transitions, bold era-conscious styling, purposeful camera movement"
-    - "one-take music video, camera following the performer from backstage through __gkr_popculture/music_venue__, extras joining in successive visible groups, final wide view revealing the full venue"
-    - "stylized __gkr_popculture/music_genre__ video where a violinist's bow strokes create visible ripples through practical dust, fabric and water sets, each musical phrase triggering a new physical reaction"
-    - "retro-futurist __gkr_popculture/music_genre__ video built around chrome turntables and circular projection screens, performers passing vinyl-like discs through match cuts rather than combat"
-    - "street-art __gkr_popculture/music_genre__ video in which painted figures advance across successive walls with the rhythm, live dancers matching each mural pose before moving onward"
-    - "cyberpunk __gkr_popculture/music_genre__ performance staged on a moving night train, city reflections providing transitions between musicians in separate carriages"
+    - "music video still, __gkr_popculture/music_genre__ track, performer mid-choreography inside one practical set, (bold era-conscious styling:1.1), purposeful camera angle"
+    - "one-take music video still, performer moving through __gkr_popculture/music_venue__, extras joining around them, wide view revealing the full venue"
+    - "stylized __gkr_popculture/music_genre__ music video still, violinist's bow stroke, (visible ripple through dust, fabric and water:1.2), practical set"
+    - "retro-futurist __gkr_popculture/music_genre__ music video still, chrome turntables, circular projection screens, performer holding a vinyl-like disc"
+    - "street-art __gkr_popculture/music_genre__ music video still, (live dancer matching a painted mural's pose:1.2), one wall, motion-blurred rhythm"
+    - "cyberpunk __gkr_popculture/music_genre__ performance still, moving night train interior, musician playing, city lights reflected in the window"
 
   album_cover_combo:
-    - "album cover for a __gkr_popculture/music_genre__ artist, one instrument or performance prop enlarged behind a strong central silhouette, empty upper-left area for typography, photographic or illustrated treatment matching the selected genre's era"
+    - "album cover, __gkr_popculture/music_genre__ artist, one instrument or performance prop enlarged behind a strong central silhouette, empty upper-left area for typography, era-appropriate photographic or illustrated treatment"
+
+# ---------------------------------------------------------
+# CROSS-MEDIUM COMBOS
+# ---------------------------------------------------------
 
   movie_scene_combo:
-    - "feature-film scene: __gkr_popculture/spotlight_cinematicscene__, __gkr_popculture/movie_camera__, __gkr_popculture/movie_color_grade__, practical environmental reactions, cinematic production design"
+    - "feature-film scene, __gkr_popculture/spotlight_movie_scene__, __gkr_popculture/movie_camera__, __gkr_popculture/movie_color_grade__, cinematic production design"
 
   popculture_mashup_combo:
-    - "reinterpret __gkr_popculture/spotlight_cinematicscene__ as a __gkr_popculture/comic_tradition__, __gkr_popculture/comic_rendering__, retain the same character positions, eyelines, foreground objects and background landmarks"
-    - "reinterpret __gkr_popculture/tv_episode_scene__ as a __gkr_popculture/manga_genre__, __gkr_popculture/manga_rendering__, retain each character's pose, eyeline, distance and shared props"
-    - "stage a __gkr_popculture/music_genre__ performance inside the production design of a __gkr_popculture/movie_genre__, correct hand placement, full instruments, cables, monitors, audience positions and visible camera platform"
+    - "reinterpret __gkr_popculture/spotlight_movie_scene__ as __gkr_popculture/comic_tradition__, __gkr_popculture/comic_rendering__, same character positions, eyelines and background landmarks"
+    - "reinterpret __gkr_popculture/spotlight_tv_scene__ as __gkr_popculture/manga_genre__, __gkr_popculture/manga_rendering__, same pose, eyeline, distance and shared props"
+    - "__gkr_popculture/music_genre__ performance staged inside __gkr_popculture/movie_genre__ production design, correct hand placement, instruments, cables, monitors, audience, visible camera platform"
 
 # ---------------------------------------------------------
 # RANDOM
@@ -374,7 +383,7 @@ gkr_popculture:
     - "__gkr_popculture/movie_scene_combo__"
     - "__gkr_popculture/tv_ensemble_combo__"
     - "__gkr_popculture/manga_scene_combo__"
-    - "__gkr_popculture/comic_page_combo__"
+    - "__gkr_popculture/comic_scene_combo__"
     - "__gkr_popculture/music_performance_combo__"
     - "__gkr_popculture/music_video_combo__"
     - "__gkr_popculture/album_cover_combo__"
@@ -388,151 +397,151 @@ gkr_popculture:
 # ---------------------------------------------------------
 
   spotlight_movie_characters:
-    - veteran intelligence operative in an immaculate dinner jacket, concealed earpiece, calm gaze scanning a crowded diplomatic reception
-    - dust-covered archaeologist in practical field clothes, weathered journal and broken temple key in hand, torchlit ruins behind
-    - determined martial artist in a plain training jacket, bruised knuckles, balanced stance inside a wrecked restaurant kitchen
-    - exhausted starship commander in a worn uniform, studying a damaged tactical display while the bridge crew await a decision
-    - sharp-eyed private detective in a rain-dark overcoat, notebook and unlit cigarette, nightclub reflections fractured across the window
-    - fearless wartime radio operator wearing a headset and rolled sleeves, smoke entering the command room as a final message is transmitted
-    - charismatic outlaw in a sun-faded coat and low hat, hand resting near a holster, empty frontier street stretching behind
-    - composed historical queen in embroidered court dress, sealed letter held at her side, rival factions watching from the throne room
-    - practical creature-feature scientist in mud-stained expedition gear, improvised tracker raised toward movement beyond the trees
-    - underdog athlete after the final round, taped hands hanging at their sides, listening for the result beneath arena lights
-    - romantic lead waiting alone on a winter railway platform, unopened letter in one hand, arriving crowd reflected in tearful eyes
-    - physical-comedy protagonist standing rigidly in torn formal clothes, chin raised and tray held level while wallpaper, chandelier and folding table collapse behind
-    - grounded masked vigilante in a weatherproof tactical suit, compact grappling launcher and climbing rope, observing a corrupt city office from a rain-dark rooftop
-    - retro-futurist test pilot in polished pressure gear, bubble helmet beneath one arm, chrome rocket and launch gantry reflected in the visor
-    - cyberpunk courier in patched street clothing, prosthetic forearm concealing stolen data, moving anonymously through a crowded night market
+    - (veteran intelligence operative:1.1), immaculate dinner jacket, concealed earpiece, calm gaze, crowded diplomatic reception
+    - dust-covered archaeologist, practical field clothes, weathered journal, broken temple key in hand, torchlit ruins
+    - (determined martial artist:1.1), plain training jacket, bruised knuckles, balanced stance, wrecked restaurant kitchen
+    - exhausted starship commander, worn uniform, (studying a damaged tactical display:1.1), bridge crew waiting behind
+    - sharp-eyed private detective, rain-dark overcoat, notebook, unlit cigarette, fractured nightclub reflections in the window
+    - fearless wartime radio operator, headset, rolled sleeves, (transmitting a final message:1.1), smoke filling the command room
+    - (charismatic outlaw:1.1), sun-faded coat, low hat, hand near holster, empty frontier street
+    - composed historical queen, embroidered court dress, sealed letter in hand, rival factions watching, throne room
+    - creature-feature scientist, mud-stained expedition gear, (improvised tracker raised toward the trees:1.1)
+    - underdog athlete, taped hands hanging at sides, listening for the result, arena lights
+    - romantic lead alone on a winter railway platform, unopened letter in hand, (tearful eyes:1.1), arriving crowd reflected behind
+    - physical-comedy protagonist, torn formal clothes, rigid posture, tray held level, (wallpaper and chandelier collapsing behind:1.2)
+    - (grounded masked vigilante:1.1), weatherproof tactical suit, grappling launcher, climbing rope, rain-dark rooftop, city office below
+    - retro-futurist test pilot, polished pressure gear, bubble helmet under one arm, (chrome rocket reflected in the visor:1.1), launch gantry
+    - cyberpunk courier, patched street clothing, prosthetic forearm concealing stolen data, crowded night market
 
   spotlight_tv_characters:
-    - mismatched detective partners at a precinct desk, one methodically arranging evidence while the other notices a crucial mundane detail
-    - emergency physician in wrinkled scrubs pointing between two treatment diagrams while an anxious family grips a signed consent form, untouched coffee beside the monitor
-    - ambitious political aide walking quickly with three phones and marked-up speech pages, broadcast studio visible through glass
-    - deadpan office manager holding an absurd motivational poster, coworkers exchanging reactions behind in static ensemble framing
-    - multigenerational sitcom family squeezed onto one sofa, every person responding differently to an unexpected visitor
-    - small-town sheriff in a practical uniform, flashlight and thermos in hand, staring at an impossible object beside a quiet road
-    - historical household steward carrying a silver tray, concealed opened letter reflected beneath its lid, formal diners visible through the doorway while servants prepare the room
-    - teenage supernatural investigator with backpack, instant camera and handwritten map, closed school corridor lit by exit signs
-    - color-coded transforming-hero team leader in practical armored fabric, helmet under one arm, miniature city structures behind
-    - polished reality-show host holding a result card, contestants frozen between confidence and panic beneath bright studio lighting
-    - weary defense attorney at an empty courtroom table, jacket removed, one line circled in red across a witness statement beside contradictory timestamped photographs
-    - animated-comedy neighbor with an overconfident grin and an obviously unsafe homemade invention, simplified suburban kitchen
+    - mismatched detective partners at a precinct desk, (one arranging evidence, one noticing a crucial detail:1.1)
+    - emergency physician, wrinkled scrubs, pointing between two treatment diagrams, anxious family gripping a signed consent form, untouched coffee beside the monitor
+    - ambitious political aide, three phones, marked-up speech pages, hurried walk, broadcast studio visible through glass
+    - deadpan office manager holding an absurd motivational poster, coworkers reacting behind, static ensemble framing
+    - multigenerational sitcom family squeezed onto one sofa, (varied reactions to an unexpected visitor:1.1)
+    - small-town sheriff, practical uniform, flashlight and thermos in hand, (staring at an impossible object:1.1), quiet roadside
+    - historical household steward carrying a silver tray, (opened letter concealed beneath the lid:1.1), formal diners visible through the doorway
+    - teenage supernatural investigator, backpack, instant camera, handwritten map, closed school corridor, exit-sign lighting
+    - color-coded transforming-hero team leader, practical armored fabric, helmet under one arm, miniature city set behind
+    - polished reality-show host holding a result card, contestants frozen between confidence and panic, bright studio lighting
+    - weary defense attorney at an empty courtroom table, jacket removed, (line circled in red on a witness statement:1.1), contradictory timestamped photographs
+    - animated-comedy neighbor, overconfident grin, obviously unsafe homemade invention, simplified suburban kitchen
 
   spotlight_manga_characters:
-    - determined youth-adventure rival with torn school jacket and taped hands, silent stare across a damaged tournament arena, bold black ink
-    - shy romance lead clutching a school bag beneath falling petals, words caught before confession, delicate linework and open white space
-    - adult crime investigator in an ordinary suit, tired eyes reflected in train glass, dense realistic city crosshatching
-    - quiet office worker carrying convenience-store dinner home in the rain, subtle expression, observational slice-of-life panels
-    - young giant-robot pilot dwarfed by mechanical gantries and the machine's enormous hand, intricate technical linework
-    - magical heroine at the final moment of transformation, costume motifs derived from personal keepsakes, elegant ribbons and spot color
-    - high-school athlete at the service line, sweat falling from the chin, teammates and scoreboard compressed behind by speed lines
-    - psychological-horror protagonist seeing the same unfamiliar face in every apartment window, obsessive hatching and warped perspective
-    - delinquent student with pompadour and scuffed uniform, standing protectively before a smaller classmate, rough brush ink
-    - wandering historical swordswoman beneath a straw travel hat, one hand near the scabbard, wind moving tall grass across a silent panel
-    - comedy protagonist rendered normally while a tiny exaggerated reaction version argues from the page margin
-    - mature musician practicing alone after the last train, instrument case open, quiet screentones and handwritten sound effects
-    - mecha field mechanic in grease-stained coveralls, standing inside an open machine torso surrounded by cables and intricate structural linework
-    - cybernetic street racer in an asymmetric jacket, helmet visor raised, custom motorcycle covered with hand-painted sponsor marks
-    - cosmic martial artist holding a disciplined stance while fine stardust traces the movement of breath, restrained spot color rather than an energy aura
+    - (determined youth-adventure rival:1.1), torn school jacket, taped hands, silent stare, damaged tournament arena, bold black ink
+    - shy romance lead clutching a school bag, falling petals, (words caught before confession:1.1), delicate linework, open white space
+    - adult crime investigator, ordinary suit, tired eyes reflected in train glass, dense realistic crosshatching
+    - quiet office worker carrying convenience-store dinner home in the rain, subtle expression, observational slice-of-life style
+    - young giant-robot pilot, (dwarfed by the machine's enormous hand:1.1), mechanical gantries, intricate technical linework
+    - magical heroine, final moment of transformation, costume motifs from personal keepsakes, elegant ribbons, spot color
+    - high-school athlete at the service line, sweat falling from the chin, teammates and scoreboard behind, speed lines
+    - psychological-horror protagonist, (same unfamiliar face repeated in every apartment window:1.2), obsessive hatching, warped perspective
+    - delinquent student, pompadour, scuffed uniform, (standing protectively before a smaller classmate:1.1), rough brush ink
+    - wandering historical swordswoman, straw travel hat, hand near scabbard, wind-blown tall grass
+    - comedy protagonist rendered normally, (tiny exaggerated super-deformed reaction version beside them:1.2), comic contrast
+    - mature musician practicing alone after the last train, open instrument case, quiet screentones, handwritten sound effects
+    - mecha field mechanic, grease-stained coveralls, standing inside an open machine torso, cables, intricate structural linework
+    - cybernetic street racer, asymmetric jacket, helmet visor raised, custom motorcycle, hand-painted sponsor marks
+    - cosmic martial artist, disciplined stance, (fine stardust tracing the breath:1.1), restrained spot color, no energy aura
 
   spotlight_comic_characters:
-    - neighborhood superhero in a handmade practical costume lifting a train door from trapped commuters while a fleeing antagonist recedes, bold contour ink
-    - pulp private eye under a broken streetlamp, cheap suit and case file damp with rain, heavy chiaroscuro brushwork
-    - doomed horror-anthology heiress holding a family portrait whose painted eyes have changed, engraved textures and decaying caption box
-    - wartime motorcycle courier in battered period gear, map tucked into jacket, ruined bridge ahead in dusty print colors
-    - vintage romance-comic protagonist reading an unexpected letter at a department-store counter, elegant face and soft spot colors
-    - clear-line young reporter with notebook, practical coat and expressive companion animal, meticulously drawn foreign harbor behind
-    - underground-comic musician carrying an amplifier through a changing neighborhood, scratchy personal linework and collage textures
-    - painted science-fiction pilgrim in layered pressure clothing, tiny against an immense abandoned orbital garden
-    - autobiographical graphic-novel artist at a cluttered kitchen table, sketching a difficult family conversation as it happens
-    - satirical future-city judge overwhelmed by contradictory machines and paperwork, dense architecture and sharp black humor
-    - newspaper-strip child preparing an elaborate plan while an unimpressed pet watches, clean shapes and precise comic timing
-    - Gothic graphic-novel librarian spreading illustrated manuscripts across a desk, the same human-shaped blank cut from every group portrait, muted ink wash and narrow panels
-    - retro ray-gun adventurer in a chrome chest plate and glass-domed helmet, cautiously entering a hand-painted alien ruin
-    - cosmic guardian whose translucent silhouette contains a painted starfield, holding a damaged spacecraft together while the crew evacuates
-    - street artist stepping back as bright painted creatures pull three-dimensional limbs beyond a wet mural into an ordinary neighborhood street
-    - armored public-safety hero bracing a physical rescue shield beneath falling masonry, civilians directing one another toward a clear exit
+    - neighborhood superhero, handmade practical costume, (lifting a train door off trapped commuters:1.2), fleeing antagonist receding, bold contour ink
+    - pulp private eye under a broken streetlamp, cheap suit, rain-damp case file, heavy chiaroscuro brushwork
+    - doomed horror-anthology heiress holding a family portrait, (painted eyes subtly changed:1.2), engraved textures, decaying caption box
+    - wartime motorcycle courier, battered period gear, map tucked into jacket, ruined bridge ahead, dusty print colors
+    - vintage romance-comic protagonist reading an unexpected letter, department-store counter, elegant face, soft spot colors
+    - clear-line young reporter, notebook, practical coat, expressive companion animal, meticulously drawn foreign harbor
+    - underground-comic musician carrying an amplifier through a changing neighborhood, scratchy personal linework, collage textures
+    - painted science-fiction pilgrim, layered pressure clothing, (tiny against an immense abandoned orbital garden:1.1)
+    - autobiographical graphic-novel artist at a cluttered kitchen table, sketching mid-conversation, family nearby
+    - satirical future-city judge, overwhelmed by contradictory machines and paperwork, dense architecture, sharp black humor
+    - newspaper-strip child preparing an elaborate plan, unimpressed pet watching, clean shapes, precise comic timing
+    - Gothic graphic-novel librarian spreading illustrated manuscripts across a desk, (same human-shaped blank cut from every group portrait:1.2), muted ink wash
+    - retro ray-gun adventurer, chrome chest plate, glass-domed helmet, cautiously entering a hand-painted alien ruin
+    - cosmic guardian, (translucent silhouette containing a painted starfield:1.2), holding a damaged spacecraft together, crew evacuating
+    - street artist stepping back, (painted creatures pulling three-dimensional limbs off a wet mural:1.2), ordinary neighborhood street
+    - armored public-safety hero bracing a rescue shield beneath falling masonry, civilians directing each other toward a clear exit
 
   spotlight_music_artists:
-    - arena-rock vocalist at the end of a long runway stage, microphone lowered as an entire stadium sings the chorus back
-    - punk trio performing at floor level in a cramped basement club, crowd surrounding the drum kit and sharing the microphones
-    - heavy-metal guitarist beneath a wall of practical amplifiers, hair and coat lifted by stage fans, dramatic low concert angle
-    - hip-hop performer leading a neighborhood cipher around portable turntables, audience forming a close expressive circle
-    - synth-pop duo posed inside a geometric practical-light set, period keyboards and sharply coordinated wardrobe
-    - jazz saxophonist trading improvised phrases with a pianist in an intimate club, warm table lamps and attentive silence
-    - blues singer seated alone with a worn guitar, one spotlight, small audience visible only through hands resting on tables
-    - classical soloist taking a breath before the first note in an ornate concert hall, conductor and orchestra waiting behind
-    - electronic producer controlling layered hardware at an outdoor dusk festival, crowd silhouettes and flags extending to the horizon
-    - folk ensemble gathered around one overhead microphone in a wooden studio, instruments visibly weathered and well used
-    - glam-rock performer in theatrical metallic tailoring, descending a mirrored staircase while the band plays below
-    - gospel soloist supported by a choir rising row by row, warm morning light passing through high church windows
+    - arena-rock vocalist at the end of a long runway stage, microphone lowered, (entire stadium singing the chorus back:1.1)
+    - punk trio performing at floor level, cramped basement club, crowd surrounding the drum kit, shared microphones
+    - heavy-metal guitarist, wall of amplifiers behind, hair and coat lifted by stage fans, dramatic low angle
+    - hip-hop performer leading a cipher around portable turntables, audience forming a close circle
+    - synth-pop duo, geometric practical-light set, period keyboards, coordinated wardrobe
+    - jazz saxophonist trading phrases with a pianist, intimate club, warm table lamps
+    - blues singer seated alone with a worn guitar, single spotlight, audience hands resting on tables
+    - classical soloist taking a breath before the first note, ornate concert hall, conductor and orchestra waiting
+    - electronic producer controlling layered hardware, outdoor dusk festival, crowd silhouettes and flags to the horizon
+    - folk ensemble gathered around one overhead microphone, wooden studio, weathered well-used instruments
+    - glam-rock performer, theatrical metallic tailoring, descending a mirrored staircase, band playing below
+    - gospel soloist, (choir rising row by row behind:1.1), warm morning light through high church windows
 
   spotlight_movie_backgrounds:
     - monumental marble security lobby, geometric columns, metal detectors, polished reflective floor, readable entrances and balcony
     - silent high-security vault chamber, pressure-sensitive floor grid, suspended access rig, severe white overhead lighting
     - crowded diplomatic ballroom, mirrored walls, service corridors, security checkpoints hidden behind floral arrangements
-    - collapsing underground temple passage, carved mechanisms, rolling counterweights, dust-filled torchlight and visible escape route
-    - sun-baked frontier main street, wooden facades, water trough, distant clock tower, wind carrying dust through empty space
-    - damaged orbital-station exterior, rotating solar structures, loose debris, immense planet horizon and hard unfiltered sunlight
+    - collapsing underground temple passage, carved mechanisms, rolling counterweights, dust-filled torchlight, visible escape route
+    - sun-baked frontier main street, wooden facades, water trough, distant clock tower, wind carrying dust
+    - damaged orbital-station exterior, rotating solar structures, loose debris, immense planet horizon, hard unfiltered sunlight
     - wartime command bunker, layered maps, field telephones, exhausted staff, smoke and vibration shaking dust from the ceiling
     - abandoned coastal visitor center during a storm, emergency shutters, specimen displays, black water rising across the floor
-    - elegant railway platform in winter, iron-and-glass canopy, steam obscuring arrivals, clocks and luggage establishing urgency
-    - enormous concert arena before showtime, runway stage, lighting trusses, dark audience tiers and one open backstage door
-    - dense cyberpunk transit exchange at night, multilingual signs, repair kiosks, food stalls, commuters on three elevated levels and rainwater draining through exposed channels
-    - retro-futurist lunar terminal, curved chrome architecture, analog departure board, panoramic windows and practical miniature aesthetic
+    - elegant railway platform in winter, iron-and-glass canopy, steam obscuring arrivals, clocks and luggage
+    - enormous concert arena before showtime, runway stage, lighting trusses, dark audience tiers, one open backstage door
+    - dense cyberpunk transit exchange at night, multilingual signs, repair kiosks, food stalls, commuters on three elevated levels
+    - retro-futurist lunar terminal, curved chrome architecture, analog departure board, panoramic windows, practical miniature aesthetic
 
   spotlight_tv_backgrounds:
-    - lived-in family sitcom kitchen, crowded refrigerator, breakfast table, multiple entrances designed for ensemble movement
-    - open-plan workplace comedy office, aging carpet, glass meeting room, personal desk clutter and awkward motivational signage
-    - busy hospital emergency department, curtained bays, central nurses' station, practical fluorescent lighting and layered activity
-    - detective precinct bullpen, evidence boards, interview-room windows, ringing desk phones and night-shift coffee
-    - political communications corridor connecting offices to a live television studio, staff moving in both directions
-    - small-town diner after closing, red booths, pie case, local noticeboard and one unexplained object on the counter
-    - historical estate drawing room prepared for visitors, formal seating arrangements, family portraits and strategically open doors
-    - closed secondary school at night, trophy cases, classroom windows, emergency lighting and long familiar sightlines
-    - bright reality-competition studio, modular challenge platforms, host mark, contestant stations and visible countdown display
-    - miniature industrial district for a practical transforming-hero battle, pipes, tanks and quarry walls under dramatic daylight
+    - lived-in family sitcom kitchen, crowded refrigerator, breakfast table, multiple entrances for ensemble movement
+    - open-plan workplace comedy office, aging carpet, glass meeting room, personal desk clutter, awkward motivational signage
+    - busy hospital emergency department, curtained bays, central nurses' station, practical fluorescent lighting, layered activity
+    - detective precinct bullpen, evidence boards, interview-room windows, ringing desk phones, night-shift coffee
+    - political communications corridor connecting offices to a live television studio
+    - small-town diner after closing, red booths, pie case, local noticeboard, one unexplained object on the counter
+    - historical estate drawing room prepared for visitors, formal seating arrangements, family portraits, strategically open doors
+    - closed secondary school at night, trophy cases, classroom windows, emergency lighting, long familiar sightlines
+    - bright reality-competition studio, modular challenge platforms, host mark, contestant stations, visible countdown display
+    - miniature industrial district for a practical transforming-hero battle, pipes, tanks, quarry walls, dramatic daylight
 
   spotlight_manga_backgrounds:
-    - school rooftop beside a chain-link fence, water tank, distant commuter skyline, clouds reserved as open white space
-    - railway crossing at sunset, warning lights, bicycles, narrow residential streets and layered screentone sky
-    - damaged tournament arena, cracked tiles, silent crowd rendered as graphic masses, banners moving across speed-line perspective
+    - school rooftop beside a chain-link fence, water tank, distant commuter skyline, clouds as open white space
+    - railway crossing at sunset, warning lights, bicycles, narrow residential streets, layered screentone sky
+    - damaged tournament arena, cracked tiles, silent crowd rendered as graphic masses, banners in speed-line perspective
     - convenience store after midnight, bright shelves against an empty dark street, clean observational linework
-    - giant-machine launch hangar, maintenance scaffolds, floodwater, tiny technicians and dense mechanical cross-sections
-    - traditional town street in rain, tiled roofs, paper signs, drainage channels and cinematic realistic crosshatching
-    - high-school gym during a championship point, scoreboard, bench reactions and compressed crowd patterns
+    - giant-machine launch hangar, maintenance scaffolds, floodwater, tiny technicians, dense mechanical cross-sections
+    - traditional town street in rain, tiled roofs, paper signs, drainage channels, cinematic realistic crosshatching
+    - high-school gym during a championship point, scoreboard, bench reactions, compressed crowd patterns
     - ordinary apartment corridor distorted by repeating doors and spiral-patterned wallpaper, obsessive horror hatching
-    - riverside embankment after school, parked bicycles, utility towers and broad quiet sky
+    - riverside embankment after school, parked bicycles, utility towers, broad quiet sky
     - crowded urban night market, layered signs and faces, one recurring figure subtly repeated throughout the composition
-    - underground mecha maintenance bay, sectional scaffolding, coolant pipes, tool carts and tiny workers defining the machine's scale
-    - elevated expressway through a dense future city, hand-painted advertisements, customized motorcycles and compressed perspective
+    - underground mecha maintenance bay, sectional scaffolding, coolant pipes, tool carts, tiny workers defining scale
+    - elevated expressway through a dense future city, hand-painted advertisements, customized motorcycles, compressed perspective
 
   spotlight_comic_backgrounds:
-    - neighborhood city block beneath an elevated train, corner store, fire escapes and readable civilian activity, modern superhero inks
-    - rain-soaked pulp nightclub exterior, broken marquee, alley service door, black shadows and one red reflected sign
-    - decaying ancestral portrait gallery, ornate frames and warped floorboards, Gothic anthology engraving texture
-    - meticulously drawn clear-line seaport, cargo cranes, customs hall, ferries and pedestrians following distinct routes
-    - four-panel newspaper-strip suburban yard, simple recurring props arranged for visual comedic payoff
-    - alternative-comic music venue during closure, handwritten flyers, stacked chairs and neighborhood construction visible outside
+    - neighborhood city block beneath an elevated train, corner store, fire escapes, readable civilian activity, modern superhero inks
+    - rain-soaked pulp nightclub exterior, broken marquee, alley service door, black shadows, one red reflected sign
+    - decaying ancestral portrait gallery, ornate frames, warped floorboards, Gothic anthology engraving texture
+    - meticulously drawn clear-line seaport, cargo cranes, customs hall, ferries, pedestrians following distinct routes
+    - newspaper-strip suburban yard, simple recurring props, (single comedic payoff visible in frame:1.1), clean strip inking
+    - alternative-comic music venue during closure, handwritten flyers, stacked chairs, neighborhood construction visible outside
     - vast painted orbital garden, dead trees beneath fractured glass, distant maintenance structures showing scale
-    - autobiographical kitchen interior accumulated across decades, family photographs, bills, medicine and ordinary wear
-    - wartime railway junction after evacuation, abandoned luggage, damaged signs and restrained period-print palette
-    - romance-comic department store during holiday season, decorated counters, escalators and emotionally charged crowd staging
-    - rain-dark superhero rooftop network, water towers, fire escapes, maintenance doors and clear traversal routes above an active neighborhood
-    - pulp rocketport rendered like a painted mid-century magazine cover, chrome fins, observation deck and dramatic planetary sky
-    - cosmic tribunal chamber suspended above a starfield, immense abstract seats and tiny delegations arranged for readable sequential storytelling
+    - autobiographical kitchen interior accumulated across decades, family photographs, bills, medicine, ordinary wear
+    - wartime railway junction after evacuation, abandoned luggage, damaged signs, restrained period-print palette
+    - romance-comic department store during holiday season, decorated counters, escalators, emotionally charged crowd staging
+    - rain-dark superhero rooftop network, water towers, fire escapes, maintenance doors, clear traversal routes
+    - pulp rocketport rendered like a painted mid-century magazine cover, chrome fins, observation deck, dramatic planetary sky
+    - cosmic tribunal chamber suspended above a starfield, immense abstract seats, tiny delegations, readable staging
 
   spotlight_music_backgrounds:
-    - stadium concert stage with long audience runway, stacked video surfaces, practical flame positions and immense seating bowl
-    - cramped basement punk club, low pipes, stickered walls, improvised stage and crowd pressed around the performers
-    - intimate jazz room, small round tables, upright piano, curtained back wall and warm shaded lamps
-    - neighborhood hip-hop block party, portable turntables, stacked speakers, basketball court and surrounding apartment windows
-    - ornate classical concert hall, acoustic shell, tiered balconies, orchestra seating and a single soloist mark
-    - outdoor electronic festival at dusk, layered speaker towers, flags, food stalls and audience extending toward the horizon
-    - analog recording studio, isolation booths, mixing desk, cable-covered floor and handwritten arrangement charts
-    - stripped rehearsal warehouse, mismatched amplifiers, taped floor positions, folding chairs and afternoon window light
-    - theatrical glam-rock set with mirrored stairs, velvet curtains, practical star fixtures and visible backing band platforms
-    - small wooden folk studio arranged around one overhead microphone, instrument cases, rugs and sound-dampening quilts
+    - stadium concert stage with a long audience runway, stacked video surfaces, practical flame positions, immense seating bowl
+    - cramped basement punk club, low pipes, stickered walls, improvised stage, crowd pressed around the performers
+    - intimate jazz room, small round tables, upright piano, curtained back wall, warm shaded lamps
+    - neighborhood hip-hop block party, portable turntables, stacked speakers, basketball court, surrounding apartment windows
+    - ornate classical concert hall, acoustic shell, tiered balconies, orchestra seating, single soloist mark
+    - outdoor electronic festival at dusk, layered speaker towers, flags, food stalls, audience extending toward the horizon
+    - analog recording studio, isolation booths, mixing desk, cable-covered floor, handwritten arrangement charts
+    - stripped rehearsal warehouse, mismatched amplifiers, taped floor positions, folding chairs, afternoon window light
+    - theatrical glam-rock set with mirrored stairs, velvet curtains, practical star fixtures, visible backing band platforms
+    - small wooden folk studio arranged around one overhead microphone, instrument cases, rugs, sound-dampening quilts
 
   spotlight_characters:
     - "__gkr_popculture/spotlight_movie_characters__"
@@ -549,4 +558,4 @@ gkr_popculture:
     - "__gkr_popculture/spotlight_music_backgrounds__"
 
   spotlight_actionscene:
-    - "__gkr_popculture/spotlight_cinematicscene__, __gkr_popculture/movie_camera__, __gkr_popculture/movie_color_grade__, foreground action, midground reaction and background damage aligned along one readable screen direction, feature-film production design"
+    - "__gkr_popculture/spotlight_movie_scene__, __gkr_popculture/movie_camera__, __gkr_popculture/movie_color_grade__, foreground action, midground reaction, background damage aligned along one screen direction, feature-film production design"

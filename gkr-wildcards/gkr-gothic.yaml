@@ -9,40 +9,28 @@
 # Theme core components: visual grammar, character, architecture/environment,
 # supernatural pressure, narrative action, and mood; make dread visibly causal.
 #
-# GLOBAL RULE: Read and apply ./prompt.md before this file.
+# GLOBAL RULE: Read and apply ./prompt.md (MODE: tags)
 # THEME EXTENSION — GOTHIC HORROR
 # Prefer haunted architecture, forbidden rooms, candlelit pursuit, doomed romance, investigation,
 # bodily dread, folklore and decisive supernatural manifestations. Quiet beauty and oppressive
 # stillness are as valuable as overt horror when a visible anomaly anchors the image.
-# Example: a rain-soaked heir opening a sealed crypt as a second shadow rises behind the door.
+# Example: (rain-soaked heir:1.1), opening a sealed crypt, second shadow rising behind the door.
 # Out of scope: abstract family secrets, repression or curses without physical evidence; generic
 # gore without gothic material culture; modern political commentary unrelated to the haunting.
 #
 # ROUTE USAGE
-# combo: Composes compatible components into a coherent, production-ready prompt.
-# spotlight: Selects a curated, high-specificity concept; preserve its internal logic.
-# random: Selects one complete route for breadth; avoid stacking random routes.
+# combo: composes compatible components into one flat, production-ready weighted tag string.
+# spotlight: selects a curated, high-specificity concept; preserve its internal logic.
+# random: selects one complete route for breadth; avoid stacking random routes.
 #
-# DIFFUSION-READY TRANSFORMATION RULE
-# Every generated leaf must already describe an image without requiring interpretation:
-# subject + visible pose/action + concrete setting/props + composition/light when useful.
-# Replace motives, backstory, relationships, themes, causality and time-based change with
-# observable evidence. Use gestures, eyelines, documents, screens, damage, clothing, objects
-# and spatial contrast. Use explicit panels/storyboards for concepts needing multiple moments.
+# TAGS-MODE LEAF RULE (see ./prompt.md, MODE: tags, for the full spec)
+# Every leaf is a flat, comma-separated list of short tag phrases: subject, defining visible
+# action/relationship, setting or props. Weight syntax (term:weight) is the normal way to mark
+# priority, typical range 0.8-1.2, reserving 1.3+ or sub-0.8 for elements that must dominate or
+# recede; weight only the 1-3 items that matter most per leaf and leave the rest unweighted.
+# No full sentences except where a defining relationship cannot survive being split into tags.
+# No generic quality fillers, no negative_prompt category, no sequential/multi-panel/page routes.
 # A downstream LLM may clarify wording but must not invent the visual representation.
-#
-# NON-LEAF / COMPOSITE RULE
-# Router-only items contain wildcard references only. Literal text added by a composite must
-# itself be diffusion-ready. Every possible referenced pairing must remain visually compatible;
-# do not combine broad pools when subject, setting, era, equipment, scale or format can conflict.
-#
-# SINGLE-IMAGE VISUAL REPRESENTATION TEST
-# Write every scene as facts visible in one generated image. A viewer without a caption must be
-# able to identify the subject, action and important contrast from pose, placement, props, short
-# readable labels, screens, clothing, architecture, damage or lighting. Do not depend on motives,
-# memories, recognition, ownership, occupation, causality, past/future events, sound or institutional
-# meaning unless their evidence is shown. Replace each such fact with visible proof; when one frame
-# cannot show it clearly, explicitly use a diptych, sequential panels, storyboard or contact sheet.
 # ========================================================================
 
 gkr_gothic:
@@ -52,187 +40,187 @@ gkr_gothic:
 # ------------------------------------------------------------------------
 
   gothic_tradition:
-    - eighteenth-century literary Gothic, ruined estates, candlelit chambers, sublime landscape and restrained terror
-    - Victorian Gothic, mourning customs, gaslit institutions, industrial soot and elaborate domestic interiors
-    - Southern Gothic, decaying prosperity, oppressive heat, family relics and overgrown property
-    - Romantic Gothic, storm landscapes, doomed intimacy, pale dawn and emotionally charged architecture
-    - ecclesiastical Gothic, monumental stone nave, overturned altar, cracked reliquary, extinguished candles and priest kneeling between bloodied vestments and an open grave
-    - folk Gothic, isolated community, seasonal materials, handmade ritual objects and watchful landscape
-    - maritime Gothic, salt-damaged buildings, storm signals, drowned objects and black coastal water
-    - medical Gothic, anatomy theatre, clinical restraint, specimen cabinets and bodily uncertainty
-    - urban gaslamp Gothic, crowded lodging houses, narrow streets, institutions and class separation
-    - modern domestic Gothic, ordinary home, inherited objects, architectural repetition and one impossible detail
+    - eighteenth-century literary gothic, ruined estate, candlelit chamber, (sublime landscape:1.1), restrained terror
+    - Victorian gothic, mourning customs, gaslit institution, industrial soot, elaborate interior
+    - Southern gothic, decaying prosperity, oppressive heat, family relics, overgrown property
+    - Romantic gothic, storm landscape, doomed intimacy, pale dawn, (charged architecture:1.1)
+    - ecclesiastical gothic, monumental stone nave, overturned altar, cracked reliquary, (extinguished candles:1.1), kneeling priest
+    - folk gothic, isolated community, seasonal materials, handmade ritual objects, watchful landscape
+    - maritime gothic, salt-damaged buildings, storm signal, drowned objects, black coastal water
+    - medical gothic, anatomy theatre, clinical restraint, specimen cabinet, bodily uncertainty
+    - urban gaslamp gothic, crowded lodging house, narrow street, class separation
+    - modern domestic gothic, ordinary home, inherited objects, architectural repetition, (one impossible detail:1.2)
 
   camera:
-    - distant view through a partially open doorway, observer separated from the subject
-    - symmetrical room frame with one architectural inconsistency
-    - close view of hands, letter, key or damaged keepsake with threat blurred behind
-    - low corridor perspective, repeating doors and converging floor pattern
-    - high view exposing a vulnerable figure within monumental architecture
-    - static wide composition with the subject placed near an exit that will not open
-    - over-the-shoulder view toward a reflection that does not match the room
-    - intimate paired portrait with withheld touch and conflicting eyelines
-    - exterior long shot reducing travelers beneath hostile weather and landscape
-    - restrained portrait lit by one practical source outside the frame
+    - distant doorway framing, observer separated from subject
+    - symmetrical room frame, (one architectural inconsistency:1.1)
+    - close-up hands, letter or key, threat blurred behind
+    - low corridor perspective, repeating doors, converging floor pattern
+    - high angle, vulnerable figure, monumental architecture
+    - static wide shot, subject near a sealed exit
+    - over-the-shoulder view, (mismatched reflection:1.2)
+    - intimate paired portrait, withheld touch, conflicting eyelines
+    - exterior long shot, travelers dwarfed by weather and landscape
+    - restrained portrait, single off-frame practical light source
 
   lighting:
-    - weak morning light through dirty lace curtains, natural colors drained by rain
-    - single oil lamp with uneven amber falloff and unreadable distant corners
-    - overcast daylight filling the room while one doorway remains unnaturally black
-    - dying fireplace light reflected in polished wood and mostly unlit faces
-    - pale winter dusk, flat exterior light and warm windows without silhouettes
-    - lightning revealing an unexpected figure for one instant through tall windows
-    - candle extinguished moments ago, smoke crossing a narrow moonbeam
-    - cold institutional skylight above warmer handheld lamps
-    - hard coastal dawn through salt-streaked glass
-    - practical gaslight interrupted by alternating failed fixtures
+    - weak morning light, dirty lace curtains, rain-drained color
+    - single oil lamp, uneven amber falloff, unreadable dark corners
+    - overcast daylight, (one unnaturally black doorway:1.2)
+    - dying fireplace glow, polished-wood reflection, mostly unlit faces
+    - pale winter dusk, flat exterior light, warm windows, no silhouettes
+    - lightning flash, (figure revealed for an instant:1.2), tall windows
+    - just-extinguished candle, smoke crossing a narrow moonbeam
+    - cold institutional skylight, warmer handheld lamp below
+    - hard coastal dawn, salt-streaked glass
+    - practical gaslight, alternating failed fixtures
 
   rendering:
-    - Gothic book illustration, fine crosshatching, restrained sepia wash and generous paper white
-    - dark oil painting, visible brushwork, deep earth pigments and controlled candlelight
-    - black-and-white wood engraving, carved textures and broad pools of shadow
-    - faded hand-tinted photograph, soft focus and damaged emulsion edges
-    - theatrical Gothic melodrama painting, velvet color and expressive staging
-    - stark charcoal drawing, erased highlights and rough paper grain
-    - cinematic Gothic realism, natural material decay, practical lighting and fine film grain
-    - ink-wash horror illustration, bleeding edges and one restrained spot color
+    - gothic book illustration, fine crosshatching, restrained sepia wash, generous paper white
+    - dark oil painting, visible brushwork, deep earth pigments, controlled candlelight
+    - black-and-white wood engraving, carved texture, broad shadow pools
+    - faded hand-tinted photograph, soft focus, damaged emulsion edges
+    - theatrical gothic melodrama painting, velvet color, expressive staging
+    - stark charcoal drawing, erased highlights, rough paper grain
+    - cinematic gothic realism, natural material decay, practical lighting, fine film grain
+    - ink-wash horror illustration, bleeding edges, one restrained spot color
 
 # ------------------------------------------------------------------------
 # GENRE-SAFE CHARACTER FAMILIES
 # ------------------------------------------------------------------------
 
   household_character:
-    - grieving estate heir in altered mourning clothes, sealed letter and ring of unfamiliar keys
-    - stern housekeeper carrying an inventory ledger, every room key except one
-    - aging family solicitor with document case, spectacles and a portrait wrapped in cloth
-    - child resident holding a repaired doll whose clothing matches an old family photograph
-    - impoverished aristocrat wearing carefully maintained formal clothes in a visibly decaying room
-    - distant relative arriving with one small trunk and knowledge of a forbidden room
-    - elderly tenant guarding decades of correspondence inside a worn traveling case
-    - newly married resident noticing their likeness in an ancestral portrait
+    - grieving estate heir, altered mourning clothes, sealed letter, ring of unfamiliar keys
+    - stern housekeeper, inventory ledger, every room key except one
+    - aging family solicitor, document case, spectacles, cloth-wrapped portrait
+    - child resident, repaired doll matching an old family photograph
+    - impoverished aristocrat, maintained formal clothes, visibly decaying room
+    - distant relative, one small trunk, knowledge of a forbidden room
+    - elderly tenant, decades of correspondence, worn traveling case
+    - newly married resident, noticing their likeness in an ancestral portrait
 
   investigator_character:
-    - period detective with notebook, shaded lantern and mud-stained evidence envelopes
-    - physician carrying a leather diagnostic case and visibly contradictory anatomical sketches
-    - skeptical archivist with cotton gloves, magnifying lens and altered parish records
-    - occult scholar using chalk, measuring cord and translated ritual fragments
-    - coastal constable carrying tide tables beside a water-damaged missing-person notice
-    - insurance inspector photographing a fire-damaged manor where no object is burned
-    - journalist comparing witness statements beneath a wall of family photographs
-    - amateur naturalist documenting tracks that begin as animal prints and end as bare feet
+    - period detective, notebook, shaded lantern, mud-stained evidence envelope
+    - physician, leather diagnostic case, contradictory anatomical sketches
+    - skeptical archivist, cotton gloves, magnifying lens, altered parish records
+    - occult scholar, chalk, measuring cord, translated ritual fragments
+    - coastal constable, tide tables, water-damaged missing-person notice
+    - insurance inspector, photographing a fire-damaged manor, (no object actually burned:1.2)
+    - journalist, comparing witness statements, wall of family photographs
+    - amateur naturalist, tracks beginning as animal prints, ending as bare feet
 
   religious_character:
-    - exhausted exorcist in travel-worn clerical clothing, prayer book, candle and practical medical restraints
-    - conflicted parish priest holding a damaged reliquary before an empty congregation
-    - convent gardener carrying pruning tools past headless saint statues
-    - young acolyte kneeling beside a lifted chapel flagstone, fresh black soil and pale roots spilling across the sealed floor, candle held close to the opening
-    - rural ritual keeper arranging handmade offerings according to a faded seasonal diagram
-    - hospital chaplain seated beside a patient whose reflection remains standing
-    - disgraced theologian translating marginal notes from a forbidden devotional text
-    - silent pilgrimage guide carrying votive tokens from travelers who never returned
+    - exhausted exorcist, travel-worn clerical clothing, prayer book, candle, practical restraints
+    - conflicted parish priest, damaged reliquary, empty congregation
+    - convent gardener, pruning tools, headless saint statues
+    - young acolyte, kneeling beside a lifted chapel flagstone, (fresh black soil and pale roots:1.2), candle held close
+    - rural ritual keeper, handmade offerings, faded seasonal diagram
+    - hospital chaplain, seated beside a patient, (patient's reflection standing:1.2)
+    - disgraced theologian, translating marginal notes, forbidden devotional text
+    - silent pilgrimage guide, votive tokens from travelers who never returned
 
   medical_character:
-    - anatomy lecturer in a stained apron, pointer paused over an impossible specimen
-    - asylum nurse carrying a key ring and folded patient drawings
-    - village healer sorting dried herbs beside a bundle containing human teeth
-    - mortuary attendant pulling open an old sealed drawer, fresh condensation and one handprint visible on the inner metal surface
-    - surgeon washing instruments while an empty operating table slowly depresses
-    - rehabilitation patient stacking wooden blocks with a stitched hand, mismatched fingerprint ink tests and grip diagrams spread beside the exercise board
-    - apothecary comparing medicine bottles whose labels have exchanged names
-    - undertaker measuring an apparently empty coffin from the inside
+    - anatomy lecturer, stained apron, pointer paused over an impossible specimen
+    - asylum nurse, key ring, folded patient drawings
+    - village healer, dried herbs, bundle containing human teeth
+    - mortuary attendant, pulling open a sealed drawer, (fresh condensation and one handprint on the metal:1.3)
+    - surgeon washing instruments, (empty padded operating table visibly dented as if under unseen weight:1.2)
+    - rehabilitation patient, stacking wooden blocks, stitched hand, mismatched fingerprint tests
+    - apothecary, medicine bottles with exchanged labels
+    - undertaker, measuring an apparently empty coffin from the inside
 
   folk_character:
-    - harvest-master wearing ordinary work clothes and a handmade straw mask
-    - isolated innkeeper serving identical meals to silent local patrons
-    - shepherd carrying bells removed from animals that returned without shadows
-    - village bride wearing inherited flowers dried almost black
-    - woodcarver producing protective figures whose faces resemble recent visitors
-    - ferryman collecting tokens from passengers visible only in the water
-    - midwife carrying a woven basket toward a house every resident avoids
-    - traveling musician whose regional songs cause villagers to close their shutters
+    - harvest-master, ordinary work clothes, handmade straw mask
+    - isolated innkeeper, identical meals, silent local patrons
+    - shepherd, bells removed from animals that returned without shadows
+    - village bride, inherited flowers dried almost black
+    - woodcarver, protective figures resembling recent visitors
+    - ferryman, collecting tokens from passengers visible only in the water
+    - midwife, woven basket, house every resident avoids
+    - traveling musician, regional songs, villagers closing their shutters
 
   supernatural_character:
-    - translucent drowned bride, water-dark dress and weeds caught in streaming hair
-    - pale vampire in old formal clothes, subtle fangs and no reflection in nearby silver
-    - revenant in burial clothes, grave soil beneath intact fingernails and one personal token
-    - spectral child with indistinct face, feet fading above the floor and toy held at the side
-    - frost-rimmed soldier apparition, incomplete uniform and broken weapon lowered
-    - veiled banshee whose fabric moves while every curtain remains still
-    - humanlike shadow with edges dissolving against the direction of the room light
-    - stitched creation in heavy work clothes, uncertain expression and careful gentle hands
+    - translucent drowned bride, water-dark dress, weeds in streaming hair
+    - pale vampire, old formal clothes, subtle fangs, (no reflection in nearby silver:1.2)
+    - revenant, burial clothes, grave soil beneath intact fingernails, one personal token
+    - spectral child, indistinct face, (feet fading above the floor:1.2), toy held at side
+    - frost-rimmed soldier apparition, incomplete uniform, broken weapon lowered
+    - veiled banshee, fabric moving, (every curtain still:1.1)
+    - humanlike shadow, edges dissolving against the room light direction
+    - stitched creation, heavy work clothes, uncertain expression, careful gentle hands
 
   relationship:
-    - heir reaching for a locked family-room key while the housekeeper blocks the door with both hands and lowered gaze
-    - injured investigator leaning on a witness who holds the only lantern inside a flooded underground passage
-    - living spouse pressing a palm to a rain-streaked window while a spectral beloved mirrors the gesture from the reflection
-    - parent hiding a blood-marked diary behind their back while the child points toward a pale figure at the end of the corridor
-    - physician comparing their newly scarred hand with an identical scar spreading across the restrained patient's hand
-    - priest holding a scorched reliquary while a skeptic measures the same burn pattern with calipers and notebook
-    - siblings pulling the same inherited locket in opposite directions, one displaying its portrait and the other its hidden compartment
-    - village host pouring tea without smiling while a rain-soaked visitor notices every other cup placed for an empty chair
+    - heir reaching for a locked key, housekeeper blocking the door, (lowered gaze:1.1)
+    - injured investigator leaning on a witness, one shared lantern, flooded underground passage
+    - living spouse pressing a palm to a rain-streaked window, (mirrored spectral gesture in reflection:1.2)
+    - parent hiding a blood-marked diary, child pointing at a pale corridor figure
+    - physician comparing a newly scarred hand, (identical scar on a restrained patient's hand:1.3)
+    - priest holding a scorched reliquary, skeptic measuring the same burn with calipers
+    - siblings pulling an inherited locket apart, (portrait side vs hidden-compartment side:1.2)
+    - village host pouring tea without smiling, visitor noticing an extra cup for an empty chair
 
 # ------------------------------------------------------------------------
 # ENVIRONMENTS AND PHYSICAL SUBJECTS
 # ------------------------------------------------------------------------
 
   domestic_environment:
-    - inherited country estate, family portraits turned toward the wall and locked west wing
-    - sealed nursery, sheet-covered furniture, faded wallpaper and one recently disturbed toy
-    - manor dining room set for an absent guest, condensation forming on one untouched glass
-    - narrow boarding-house corridor, identical doors and floral wallpaper repeating incorrectly
-    - family portrait gallery, generations of stern faces and one fresh canvas in an antique frame
-    - flooded townhouse cellar, floating papers and an iron door visible below the water
+    - inherited country estate, family portraits turned to the wall, locked west wing
+    - sealed nursery, sheet-covered furniture, faded wallpaper, one disturbed toy
+    - manor dining room, place set for an absent guest, condensation on one glass
+    - narrow boarding-house corridor, identical doors, (misaligned repeating wallpaper:1.1)
+    - family portrait gallery, generations of stern faces, one fresh canvas in an antique frame
+    - flooded townhouse cellar, floating papers, iron door beneath the water
 
   institutional_environment:
-    - abandoned anatomy theatre, tiered benches, stained table and cabinets of cloudy specimens
-    - decaying asylum ward, rusted beds, observation windows and patient drawings behind plaster
-    - shuttered opera house, dusty velvet seats and stage curtain moving without a draft
-    - snowbound railway platform, stopped clock, abandoned luggage and no tracks beyond the station
-    - old courthouse archive, warped shelves, sealed testimony and water spreading from a dry wall
-    - charity hospital chapel, empty pews, medical screens and wax footprints ending at the altar
+    - abandoned anatomy theatre, tiered benches, stained table, cloudy specimen cabinets
+    - decaying asylum ward, rusted beds, observation windows, patient drawings behind plaster
+    - shuttered opera house, dusty velvet seats, (stage curtain moving without a draft:1.2)
+    - snowbound railway platform, stopped clock, abandoned luggage, no tracks beyond
+    - old courthouse archive, warped shelves, sealed testimony, water seeping from a dry wall
+    - charity hospital chapel, empty pews, medical screens, wax footprints ending at the altar
 
   sacred_environment:
-    - crumbling cathedral nave, damaged stained glass, empty pews and translucent faces in the stone
-    - overgrown convent garden, headless saints, thorn-choked paths and an empty well
-    - rural chapel, handmade votive figures and floorboards repaired in several eras
-    - cliffside monastery, storm bells, salt-damaged manuscripts and sealed lower stairs
-    - cemetery ossuary, labeled bones, missing nameplates and one recently opened niche
-    - pilgrimage road through barren hills, abandoned offerings and footprints that never leave the path
+    - crumbling cathedral nave, damaged stained glass, empty pews, (translucent faces in the stone:1.2)
+    - overgrown convent garden, headless saints, thorn-choked paths, empty well
+    - rural chapel, handmade votive figures, floorboards repaired across eras
+    - cliffside monastery, storm bells, salt-damaged manuscripts, sealed lower stairs
+    - cemetery ossuary, labeled bones, missing nameplates, one recently opened niche
+    - pilgrimage road, barren hills, abandoned offerings, footprints never leaving the path
 
   folk_environment:
-    - remote harvest village, woven effigies above every doorway and fields cut into unfamiliar symbols
-    - isolated moorland inn, muddy footprints ending at the stairs while guests face the door
-    - sacred grove, stone altar, votive ribbons and one chair facing away from the gathering
-    - orchard after a wedding feast, identical flower crowns and abandoned shoes lined at the field edge
-    - village well surrounded by offerings of hair, toys and carefully folded letters
-    - winter procession route marked by lanterns leading into an unoccupied forest
+    - remote harvest village, woven effigies above every doorway, fields cut into symbols
+    - isolated moorland inn, muddy footprints ending at the stairs, guests facing the door
+    - sacred grove, stone altar, votive ribbons, one chair facing away
+    - orchard after a wedding feast, identical flower crowns, abandoned shoes at the field edge
+    - village well, offerings of hair, toys, folded letters
+    - winter procession route, lanterns leading into an unoccupied forest
 
   maritime_environment:
-    - coastal fishing village at low tide, empty boats and bells sounding from offshore
-    - storm-battered cliff manor, salt-rotted windows and one upper room kept dry
-    - abandoned lighthouse interior, wet spiral stairs and keeper logs continuing after evacuation
-    - wrecked chapel revealed below the tide, pews covered in weed and candles still upright
-    - fogbound ferry landing, timetable for a route removed from every current map
-    - sea cave beneath a cemetery, coffin fragments and fresh flowers above the waterline
+    - coastal fishing village, low tide, empty boats, bells sounding from offshore
+    - storm-battered cliff manor, salt-rotted windows, one dry upper room
+    - abandoned lighthouse interior, wet spiral stairs, keeper logs continuing after evacuation
+    - wrecked chapel below the tide, weed-covered pews, candles still upright
+    - fogbound ferry landing, timetable for a route on no current map
+    - sea cave beneath a cemetery, coffin fragments, fresh flowers above the waterline
 
   gothic_prop:
-    - sealed family letter with handwriting changing midway down the page
-    - iron key whose teeth match no lock but leave rust marks on one door
-    - mourning portrait where the sitter's hands occupy a different pose in reflection
-    - cracked music box playing only while the lid remains closed
-    - medical diagram with layered corrections forming a second anatomy
-    - tide ledger recording arrivals on nights when no boat sailed
-    - child's doll repaired with fabric cut from an adult burial garment
-    - ritual bundle of herbs, hair, teeth and a photograph taken decades later
+    - sealed family letter, (handwriting changing midway down the page:1.2)
+    - iron key, teeth matching no lock, rust marks on one door
+    - mourning portrait, (sitter's hands in a different pose in reflection:1.2)
+    - cracked music box, playing only while the lid stays closed
+    - medical diagram, layered corrections forming a second anatomy
+    - tide ledger, arrivals recorded on nights no boat sailed
+    - child's doll, repaired with fabric cut from a burial garment
+    - ritual bundle, herbs, hair, teeth, a photograph taken decades later
 
   creature_subject:
     - corpse moths clustering into the outline of a missing face
-    - gaunt antlered animal standing motionless at the edge of cultivated land
-    - grave hound with exposed ribs packed with roots and cemetery flowers
-    - immense pale cave organism visible through a ring of closed eyes and breathing folds
+    - gaunt antlered animal, motionless at the edge of cultivated land
+    - grave hound, exposed ribs packed with roots and cemetery flowers
+    - immense pale cave organism, ring of closed eyes, breathing folds
     - house centipede assembled from porcelain doll limbs and human hair
     - black coastal bird carrying strips of burial cloth inland
-    - many-jointed figure whose silhouette contradicts the direction of every light
+    - many-jointed figure, (silhouette contradicting the light direction:1.2)
     - living topiary shaped like generations of a family walking toward the house
 
 # ------------------------------------------------------------------------
@@ -240,68 +228,68 @@ gkr_gothic:
 # ------------------------------------------------------------------------
 
   haunting_scene:
-    - resident reading beside a dying fireplace while a translucent child sits unnoticed at their feet
+    - resident reading beside a dying fireplace, (unnoticed translucent child at their feet:1.3)
     - wooden horse rocking in a sealed nursery, damp footprints ending beneath the bed
-    - family dinner arranged for an absent guest, every portrait turned toward the empty chair
-    - drowned apparition beyond an upper-floor window, wet handprint appearing on the inside glass
-    - old woman folding clothes while the empty upholstered chair opposite her sinks beneath a human-shaped pressure, dust lifting from the cushion
-    - long corridor with a motionless figure at the far end, lamps nearest the viewer glowing while successive lamps toward the figure are dark and trailing smoke
+    - family dinner set for an absent guest, every portrait turned toward the empty chair
+    - drowned apparition beyond an upper window, (wet handprint appearing on the inside glass:1.3)
+    - old woman folding clothes, (empty chair sinking under unseen weight:1.3), lifting dust
+    - long corridor, figure motionless at the far end, foreground lamps lit, (distant lamps darkened and smoking:1.2)
 
   psychological_scene:
-    - solitary figure facing a mirror reflection turned in the wrong direction
-    - detective comparing two family photographs containing the same unknown child decades apart
-    - patient walking a corridor where every clock shows a different hour
-    - three-panel sequence of a woman setting tea opposite an empty chair, the second cup dropping from full to half to empty while her pose remains unchanged
-    - scholar finding notebooks that describe the room from a viewpoint inside the wall
-    - man returning home to a family calmly displaying his funeral portrait
+    - solitary figure facing a mirror, (reflection turned the wrong direction:1.3)
+    - detective comparing two family photographs, same unknown child decades apart
+    - patient walking a corridor, every clock showing a different hour
+    - woman setting a second teacup opposite an empty chair, (cup already half-empty though untouched:1.3)
+    - scholar reading a notebook, open page showing a hand-drawn diagram of the room from a viewpoint inside the wall
+    - man returning home, family calmly displaying his funeral portrait
 
   folk_horror_scene:
-    - smiling villagers carrying woven effigies toward a hilltop fire while one outsider is held back
-    - masked residents circling an empty chair during a daylight seasonal rite
-    - rural wedding guests wearing identical crowns beside shoes lined at the field edge
-    - healer holding an opened charm bundle above a table, human teeth dropping from dried plants onto white cloth under lamplight
-    - traveler sheltering in an inn while every patron recites the same prayer
-    - children replacing village door markings as adults watch from shuttered windows
+    - smiling villagers carrying woven effigies toward a hilltop fire, one outsider held back
+    - masked residents circling an empty chair, daylight seasonal rite
+    - rural wedding guests, identical crowns, shoes lined at the field edge
+    - healer holding an opened charm bundle, (human teeth dropping from dried plants:1.2), white cloth, lamplight
+    - traveler sheltering in an inn, every patron reciting the same prayer
+    - children replacing village door markings, adults watching from shuttered windows
 
   gothic_romance_scene:
-    - estranged lovers separated by a rain-streaked window, one visible only in reflection
-    - widow reading forbidden letters beside an unopened crypt at cold dawn
-    - vampire offering a gloved hand in an empty ballroom, attraction and suspicion held in posture
-    - spectral bride waiting at a ruined altar as an aged beloved approaches with a lantern
-    - heir uncovering a lost lover's portrait bearing their own face
-    - doomed couple embracing on a cliff while an ancestral manor burns far behind
+    - estranged lovers separated by a rain-streaked window, (one visible only in reflection:1.2)
+    - widow reading forbidden letters beside an unopened crypt, cold dawn
+    - vampire offering a gloved hand in an empty ballroom, attraction and suspicion in posture
+    - spectral bride waiting at a ruined altar, aged beloved approaching with a lantern
+    - heir uncovering a lost lover's portrait, (bearing their own face:1.3)
+    - doomed couple embracing on a cliff, ancestral manor burning far behind
 
   investigation_scene:
-    - detective examining muddy barefoot tracks that begin inside a locked study
-    - doctor and constable inspecting a warm bed in an otherwise empty sealed room
-    - scholar mapping symbols carved beneath village thresholds while residents watch
-    - investigators opening a family archive where fresh ink covers undisturbed dust
-    - coastal priest and detective following wet footprints from the surf toward a hill chapel, barnacled bell rope wrapped around one print and a submerged bell visible beneath clear black water behind them
-    - anatomist comparing a missing-person sketch with a face inside an unlabeled specimen jar
+    - detective examining muddy barefoot tracks beginning inside a locked study
+    - doctor and constable inspecting a warm bed in an empty sealed room
+    - scholar mapping symbols carved beneath village thresholds, watching residents
+    - investigators opening a family archive, fresh ink over undisturbed dust
+    - coastal priest and detective following wet footprints from the surf toward a hill chapel, (barnacled bell rope around one print, submerged bell visible beneath:1.3)
+    - anatomist comparing a missing-person sketch with a face in an unlabeled specimen jar
 
   medical_horror_scene:
-    - surgical team recoiling from an empty operating table whose padded surface and leather restraints are compressed into a human-shaped depression
-    - patient and physician comparing scans that show different skeletons at the same time
-    - anatomy students surrounding a demonstration specimen whose torso bears the same branching scar as one student's exposed forearm, every gaze fixed between the two marks
-    - asylum nurse unlocking a room whose interior is much larger than the building
-    - three-panel sequence showing an undertaker tapping a measuring rule against a closed coffin, knocks marked from inside beneath each number, final panel showing the matching measurements written beside fresh dents in the lid
-    - apothecary arranging bottles that cast shadows shaped like their former patients
+    - surgical team recoiling from an empty operating table, (restraints compressed into a human shape:1.3)
+    - patient and physician comparing scans, (two different skeletons at the same time:1.2)
+    - anatomy students surrounding a demonstration specimen, (matching branching scar on a student's forearm:1.3)
+    - asylum nurse unlocking a room, interior far larger than the building
+    - undertaker's measuring rule against a closed coffin, (fresh dents matching the marked measurements:1.3)
+    - apothecary arranging bottles, shadows shaped like former patients
 
   maritime_horror_scene:
-    - lighthouse keeper reading a fresh log entry in their own handwriting during a storm
-    - villagers watching empty fishing boats return in formation at low tide
-    - ferry passengers waiting for a vessel visible only as lights beneath black water
+    - lighthouse keeper reading a fresh log entry in their own handwriting, storm outside
+    - villagers watching empty fishing boats return in formation, low tide
+    - ferry passengers waiting for a vessel, (lights visible beneath black water:1.2)
     - cliff-manor residents setting places for relatives lost at sea generations earlier
     - investigator descending into a chapel exposed beneath the retreating tide
-    - drowned belongings washing ashore arranged in the order their owners disappeared
+    - drowned belongings washed ashore, arranged in the order their owners disappeared
 
   quiet_horror_scene:
-    - ordinary breakfast room with one chair casting the shadow of a standing person
+    - ordinary breakfast room, (one chair casting a standing person's shadow:1.3)
     - recently used washbasin in a sealed bedroom, water still circling the drain
-    - empty dust-covered parlor with packed trunks by the open door, fresh tea steaming beside a rocking chair whose runners blur against the floor
-    - clean locked door gathering flies while adjacent rooms remain decayed
-    - family photograph placed face-down again each time the resident leaves the room
-    - snow accumulating across a doorstep except for two bare footprints facing inward
+    - dust-covered parlor, packed trunks by the open door, (steaming tea beside a blurred rocking chair:1.2)
+    - clean locked door gathering flies, adjacent rooms decayed
+    - family photograph placed face-down again each time the resident leaves
+    - snow across a doorstep, (two bare footprints facing inward:1.2)
 
 # ------------------------------------------------------------------------
 # SCENE ROUTES
@@ -310,21 +298,21 @@ gkr_gothic:
   haunting_combo:
     - "__gkr_gothic/haunting_scene__, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/gothic_tradition__, __gkr_gothic/rendering__"
   psychological_horror_combo:
-    - "__gkr_gothic/psychological_scene__, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/gothic_tradition__, one localized physical anomaly and no surrounding glow, __gkr_gothic/rendering__"
+    - "__gkr_gothic/psychological_scene__, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/gothic_tradition__, (one localized physical anomaly:1.2), no surrounding glow, __gkr_gothic/rendering__"
   folk_horror_combo:
     - "__gkr_gothic/folk_horror_scene__, __gkr_gothic/camera__, natural daylight or firelight, __gkr_gothic/rendering__"
   gothic_romance_combo:
-    - "__gkr_gothic/gothic_romance_scene__, __gkr_gothic/relationship__, __gkr_gothic/camera__, __gkr_gothic/lighting__, Romantic Gothic, __gkr_gothic/rendering__"
+    - "__gkr_gothic/gothic_romance_scene__, __gkr_gothic/relationship__, __gkr_gothic/camera__, __gkr_gothic/lighting__, Romantic gothic, __gkr_gothic/rendering__"
   investigation_combo:
-    - "__gkr_gothic/investigation_scene__, __gkr_gothic/investigator_character__, physical evidence clearly visible, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/rendering__"
+    - "__gkr_gothic/investigation_scene__, __gkr_gothic/investigator_character__, (physical evidence clearly visible:1.1), __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/rendering__"
   medical_horror_combo:
     - "__gkr_gothic/medical_horror_scene__, __gkr_gothic/camera__, cold practical lighting, __gkr_gothic/rendering__"
   maritime_gothic_combo:
     - "__gkr_gothic/maritime_horror_scene__, __gkr_gothic/camera__, hard coastal weather, __gkr_gothic/rendering__"
   ecclesiastical_gothic_combo:
-    - "__gkr_gothic/religious_character__, __gkr_gothic/sacred_environment__, __gkr_gothic/relationship__, one visible ritual disturbance, __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/rendering__"
+    - "__gkr_gothic/religious_character__, __gkr_gothic/sacred_environment__, __gkr_gothic/relationship__, (one visible ritual disturbance:1.2), __gkr_gothic/camera__, __gkr_gothic/lighting__, __gkr_gothic/rendering__"
   supernatural_portrait_combo:
-    - "__gkr_gothic/supernatural_character__, full-body figure with one physically impossible trait, plain dark wall, one candle or window light, __gkr_gothic/rendering__"
+    - "__gkr_gothic/supernatural_character__, full-body figure, (one physically impossible trait:1.3), plain dark wall, one candle or window light, __gkr_gothic/rendering__"
   quiet_horror_combo:
     - "__gkr_gothic/quiet_horror_scene__, static composition, ordinary material detail, no visible monster, __gkr_gothic/lighting__, __gkr_gothic/rendering__"
 
@@ -333,55 +321,47 @@ gkr_gothic:
 # ------------------------------------------------------------------------
 
   standalone_character_combo:
-    - "standalone Gothic household character: __gkr_gothic/household_character__, keys, ledger or cleaning tools within reach, plain domestic room, __gkr_gothic/rendering__"
-    - "standalone Gothic investigator: __gkr_gothic/investigator_character__, evidence tools visible, __gkr_gothic/rendering__"
-    - "standalone religious Gothic character: __gkr_gothic/religious_character__, ritual objects and material wear visible, __gkr_gothic/rendering__"
-    - "standalone medical Gothic character: __gkr_gothic/medical_character__, practical instruments visible, __gkr_gothic/rendering__"
-    - "standalone folk Gothic character: __gkr_gothic/folk_character__, locally made clothing and objects, __gkr_gothic/rendering__"
-    - "standalone supernatural Gothic character: __gkr_gothic/supernatural_character__, one impossible body trait isolated against a plain dark wall, __gkr_gothic/rendering__"
+    - "standalone gothic household character, __gkr_gothic/household_character__, keys ledger or cleaning tools in reach, plain domestic room, __gkr_gothic/rendering__"
+    - "standalone gothic investigator, __gkr_gothic/investigator_character__, evidence tools visible, __gkr_gothic/rendering__"
+    - "standalone religious gothic character, __gkr_gothic/religious_character__, ritual objects, visible material wear, __gkr_gothic/rendering__"
+    - "standalone medical gothic character, __gkr_gothic/medical_character__, practical instruments visible, __gkr_gothic/rendering__"
+    - "standalone folk gothic character, __gkr_gothic/folk_character__, locally made clothing and objects, __gkr_gothic/rendering__"
+    - "standalone supernatural gothic character, __gkr_gothic/supernatural_character__, (one impossible body trait isolated:1.2), plain dark wall, __gkr_gothic/rendering__"
 
   ensemble_combo:
-    - "Gothic ensemble: __gkr_gothic/relationship__, __gkr_gothic/household_character__, __gkr_gothic/investigator_character__, and __gkr_gothic/supernatural_character__, distinct eyelines in one shared room, __gkr_gothic/rendering__"
-    - "folk Gothic ensemble: __gkr_gothic/folk_character__, __gkr_gothic/folk_character__, and a visiting __gkr_gothic/investigator_character__, formal hospitality and suspicion visible, __gkr_gothic/rendering__"
+    - "gothic ensemble, __gkr_gothic/relationship__, __gkr_gothic/household_character__, __gkr_gothic/investigator_character__, __gkr_gothic/supernatural_character__, distinct eyelines, one shared room, __gkr_gothic/rendering__"
+    - "folk gothic ensemble, __gkr_gothic/folk_character__, __gkr_gothic/folk_character__, visiting __gkr_gothic/investigator_character__, formal hospitality, visible suspicion, __gkr_gothic/rendering__"
 
   character_sheet_combo:
-    - "Gothic character sheet for __gkr_gothic/standalone_character_combo__, front, side and back views, mourning or work clothing layers, expressions and prop inset"
-    - "supernatural entity sheet for __gkr_gothic/supernatural_character__, solid and incorporeal states, scale, reflection behavior and movement studies"
+    - "gothic character sheet, __gkr_gothic/standalone_character_combo__, front side and back views, mourning or work clothing layers, expression and prop inset"
+    - "supernatural entity sheet, __gkr_gothic/supernatural_character__, solid and incorporeal states, scale, reflection behavior, movement studies"
 
   costume_variant_combo:
-    - "Gothic costume variants for __gkr_gothic/household_character__, everyday, formal mourning, travel, winter and inherited ceremonial clothing"
-    - "period work-clothing study for __gkr_gothic/investigator_character__, practical layers, weather wear and equipment placement"
+    - "gothic costume variants, __gkr_gothic/household_character__, everyday formal-mourning travel winter and inherited ceremonial clothing"
+    - "period work-clothing study, __gkr_gothic/investigator_character__, practical layers, weather wear, equipment placement"
 
   creature_design_combo:
-    - "Gothic creature design sheet for __gkr_gothic/creature_subject__, anatomy, locomotion, resting state, environmental trace, scale and silhouette studies"
+    - "gothic creature design sheet, __gkr_gothic/creature_subject__, anatomy, locomotion, resting state, environmental trace, scale and silhouette studies"
 
   prop_design_combo:
-    - "Gothic prop sheet for __gkr_gothic/gothic_prop__, front, reverse, opened state, hand holding it, material wear, damage and hidden-compartment inset"
+    - "gothic prop sheet, __gkr_gothic/gothic_prop__, front, reverse, opened state, hand holding it, material wear, damage, hidden-compartment inset"
 
   environment_design_combo:
-    - "Gothic environment design sheet for __gkr_gothic/domestic_environment__, exterior, floor plan, principal room, hidden circulation, day and night states"
-    - "Gothic environment design sheet for __gkr_gothic/sacred_environment__, site plan, ritual path, damaged architecture, material decay and human scale"
-    - "Gothic environment design sheet for __gkr_gothic/maritime_environment__, tide or storm states, access routes, interior cutaway and weather damage"
-
-  storyboard_combo:
-    - "six-frame Gothic storyboard for __gkr_gothic/haunting_scene__, unchanged room, moved object, witness close-up, locked door, apparition reveal and final empty room with one new footprint"
-    - "six-frame Gothic storyboard for __gkr_gothic/investigation_scene__, exterior arrival, evidence close-up, two objects compared, hidden doorway, opened chamber and final silhouette beyond"
+    - "gothic environment design sheet, __gkr_gothic/domestic_environment__, exterior, floor plan, principal room, hidden circulation, day and night states"
+    - "gothic environment design sheet, __gkr_gothic/sacred_environment__, site plan, ritual path, damaged architecture, material decay, human scale"
+    - "gothic environment design sheet, __gkr_gothic/maritime_environment__, tide or storm states, access routes, interior cutaway, weather damage"
 
   key_visual_combo:
-    - "Gothic key visual based on __gkr_gothic/gothic_romance_scene__, paired figures separated by a door, window or reflection in the foreground, family portraits, sealed masonry and weather damage behind, title-safe negative space"
-    - "Gothic key visual based on __gkr_gothic/folk_horror_scene__, villagers surrounding one isolated visitor, harvested plants or snow across the foreground, masked figure partly visible behind them"
+    - "gothic key visual, __gkr_gothic/gothic_romance_scene__, paired figures separated by a door window or reflection in the foreground, family portraits, sealed masonry and weather damage behind, title-safe negative space"
+    - "gothic key visual, __gkr_gothic/folk_horror_scene__, villagers surrounding one isolated visitor, harvested plants or snow across the foreground, (masked figure partly visible behind them:1.1)"
 
   poster_combo:
-    - "Gothic horror poster based on __gkr_gothic/psychological_scene__, one impossible domestic object enlarged behind the central figure, black, bone-white and dark red palette, title-safe space"
-    - "maritime Gothic poster based on __gkr_gothic/maritime_horror_scene__, tiny foreground figure beneath cliffs, waves and storm clouds, empty upper area for typography"
+    - "gothic horror poster, __gkr_gothic/psychological_scene__, (one impossible domestic object enlarged behind the figure:1.2), black bone-white and dark-red palette, title-safe space"
+    - "maritime gothic poster, __gkr_gothic/maritime_horror_scene__, tiny foreground figure beneath cliffs, waves and storm clouds, empty upper area for typography"
 
   book_cover_combo:
-    - "Gothic novel cover based on __gkr_gothic/domestic_environment__, one key, letter or damaged portrait in foreground, architectural silhouette, black and faded-sepia color, title-safe upper area"
-    - "Gothic anthology cover combining __gkr_gothic/creature_subject__ with __gkr_gothic/sacred_environment__, engraved treatment and issue-title safe zone"
-
-  graphic_novel_page_combo:
-    - "complete Gothic graphic-novel page based on __gkr_gothic/quiet_horror_scene__, repeated room composition, one object changing position per panel, final apparition panel, black ink and pale gray wash"
-    - "complete Gothic graphic-novel page based on __gkr_gothic/investigation_scene__, evidence inserts, dialogue reactions and architectural continuity"
+    - "gothic novel cover, __gkr_gothic/domestic_environment__, one key letter or damaged portrait in foreground, architectural silhouette, black and faded-sepia color, title-safe upper area"
+    - "gothic anthology cover, __gkr_gothic/creature_subject__, __gkr_gothic/sacred_environment__, engraved treatment, issue-title safe zone"
 
   spotlight_scenes:
     - "__gkr_gothic/haunting_combo__"
@@ -406,11 +386,9 @@ gkr_gothic:
     - "__gkr_gothic/environment_design_combo__"
 
   spotlight_outputs:
-    - "__gkr_gothic/storyboard_combo__"
     - "__gkr_gothic/key_visual_combo__"
     - "__gkr_gothic/poster_combo__"
     - "__gkr_gothic/book_cover_combo__"
-    - "__gkr_gothic/graphic_novel_page_combo__"
 
   random:
     - "__gkr_gothic/spotlight_scenes__"
@@ -429,4 +407,3 @@ gkr_gothic:
     - "__gkr_gothic/quiet_horror_combo__"
     - "__gkr_gothic/standalone_character_combo__"
     - "__gkr_gothic/ensemble_combo__"
-    - "__gkr_gothic/graphic_novel_page_combo__"

@@ -1,0 +1,5 @@
+# Deterministic constraints used only for files declaring MODE: tags.
+# Semantic exceptions remain warnings for human/LLM review.
+max_phrase_words: 4
+max_weighted_terms: 3
+sentence_connector_regex: "\\b(?:is|are|was|were|while|whereas)\\b"
