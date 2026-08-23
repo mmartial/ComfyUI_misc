@@ -1,6 +1,8 @@
-# Geekier Workflow: README First
+<h1>Geekier Workflow</h1>
 
 (copied from the Workflow for easy review in `simpler` version)
+
+# READ ME FIRST
 
 ## General Information
 
@@ -114,3 +116,75 @@ The final image size will depend on your available VRAM, so test to find your ca
 
 Multiple "comparer" nodes will show the difference between the various stages and their steps. Those serve as quick methods to understand the interaction of a given step and its parameters on the selected base-model and can be bypassed to speed up batch processing if preferred.
 
+# Extras
+
+## Prompts & LLM
+
+⚠️ **Disable 01a + 01b not to use LLMs to generate a prompt, and 01x to not use LLM to optimize the final prompt. 01c (image to prompt) can only be used if 01a+01b are disabled.**<br>
+ℹ️ An "Image to Prompt" (using a local QwenVL model) is possible in 01c (click the arrow next to the `LLM/VLM Positive Prompt` `01c` entry to jump to the node definition)<br>
+⚠️ Make sure  "Only 1" is respected 
+
+It is possible to enable LLM Prompt Generation (using local models with Ollama [requires an external installation], QwenVL or Online models) to optimize results.
+Those are useful for recent image generation models (note: use "bag of words" for Anima/SDXL and Pony).
+
+When using LLMs, you can generate an initial prompt (01a) then fine tune it (01a + 01b) using the "user" prompts in each group. After final prompt assembly (01x) a final prompt enhancement using LLM can be performed in 01z (will reorganize the various components as needed).
+
+ℹ️ Multiple "system" prompts are available to select from (🟪), adapt as preferred, enable only one.<br>
+ℹ️ The Prompt "concatenation" logic is detailed in 01x.<br>
+ℹ️ A LoRA Manager "Randomizer" (01l) can be enabled.<br>
+ℹ️ An "image to prompt" option is possible using QwenVL in 01c. It can only be used if 01a and 01b are disabled. The system prompt used in that step is available and can be customized as needed.<br>
+ℹ️ A "Final Prompt Enhancer" is available in 01z.
+
+ℹ️ `Ollama` requires an external service to be installed, "Other LLM" requires an external service to be configured, while `QwenVL` will download a model to be used locally (try the `2b-instruct` first, consider `fp8` as well)
+
+### ComfyUI_LLM_Party (01a+b+z "Processing: Other LLM" groups)
+
+⚠️ **The workflow is forcing the use of the `Load Model Name in config.ini` node. This is done to avoid publishing your API keys in the workflow saved in the generated image.**
+See [ComfyUI_LLM_Party](https://github.com/heshengtao/comfyui_LLM_party)'s `README.md` for details on how to modify your `config.ini` file (ComfyUI will need to be restarted to make use of the updated file).
+
+You can use 3rd party entries to point to alternate OpenAI compatible endpoints. For example to use [OpenRouter.ai](https://openrouter.ai/) (giving you access to multi-vendor LLMs through a common payment system) through a [LiteLLM Proxy](https://docs.litellm.ai/docs/simple_proxy) (i.e. a consolidated front end for all your LLM API keys, and another method to control usage limits) you could add something like the following to your `config.ini`:
+
+```toml
+[openrouter/openai/gpt-4.1-mini]
+base_url=http://<LITELLM_IP>:4000/
+api_key=sk-YOUR_LITELLM_API_KEY
+```
+
+## Sampler Selection & Initial Image generation
+
+⚠️ Make sure  "Only 1" is respected 
+
+Each model group has model-specific parameters to select the model to load as well as other relevant parameters such as VAE, CFG, steps, sampler,  scheduler or CLIP(s). 
+Use the arrow next to the toggle to be transported to the specific model group and alter its parameters.
+
+Additional initial generation parameters, such as batch size, resolution, LoRA selection is performed in the 🟩 groups. Most common settings are set in 01x (check the blue boxes).
+
+The Positive prompt is a concatenation of various prompts (some might be the result of LLM generations). Refer to the "prompt concatenation logic" note in 01x for additional details.
+
+The Negative prompt is set in 01x.
+
+An additional step performing LLM prompt optimization is possible using 01z. The system prompt used for the optimization can be customized in that group.
+
+Prompt auto-completion is supported natively by LoRA Manager; type `/character` in a compatible node to see its usage.<br>
+ℹ️ Note: To use tags autocomplete in other prompt nodes, install and follow instructions from the [comfyui-custom-scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts?tab=readme-ov-file#autocomplete)'s custom node (used in this workflow). 
+
+ℹ️ We are attempting to be aggressive in freeing VRAM, it is recommended to start with no VRAM used before using the worflow and to use attention with a recent version of ComfyUI.
+
+## Stages
+
+✅ **See "README ME FIRST" for complete detail on setup and recommended usage.**<br>
+ℹ️ Various toggles are available to quickly enable or disable some features of the workflow.<br> 
+⚠️ Make sure  "Only 1" is respected for those toggles.
+
+ℹ️ "Bypass Candidate Selection" will skip interactive review for each image (or batch of) being generated (useful for wildcard run with dozens of jobs).<br>
+`batch_size` (from 01x) controls the number of images generated for each "job".<br>
+Each job will run the entire workflow.<br>
+If using "external LLM"'s "bring your API key", you pay per job.<br>
+Each job might call those "external LLMs" up to three times (01a+b+z).<br>
+Having multiple images (`batch_size`) generated per job might help. Saving the LLM generated prompt to perform a re-run is a good option as well.
+
+ℹ️ "Image Saver" save images at each stage unless muted. We are using [LoRA Manager](https://github.com/willmiao/ComfyUI-Lora-Manager) (LM, at minimum v1.20) to maintain our models/LoRA library and look up information about the models and parameters used in the workflow. In particular it is possible to convert known models to `nvfp4` format (for Blackwell hardware usage, see [Comfy Kitchen](https://github.com/tritant/ComfyUI_Kitchen_nvfp4_Converter)) and relink the new files to the original model on CivitAI using LM's interface<br> 
+ℹ️ "Stage Selection" enables skipping individual stages. Make sure to save your images in an earlier stage if disabling later stages.
+
+ℹ️ "Reduce Stage 3 VRAM" is useful if the image regeneration/detailers cause "Out of VRAM" issues (and can speed up processing) but will NOT use any added LoRAs.<br>
+ℹ️ Individual steps of Stage 3 can be bypassed. 
