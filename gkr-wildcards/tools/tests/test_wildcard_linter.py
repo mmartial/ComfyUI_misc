@@ -68,6 +68,30 @@ class WildcardLinterTests(unittest.TestCase):
         findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
         self.assertIn("tags_sequential_format", {finding.rule for finding in findings})
 
+    def test_tags_mode_rejects_two_page_and_adjacent_poses(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  layout:\n"
+            "    - wide two-page shot, simultaneous adjacent poses\n"
+        )
+        findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
+        self.assertIn("tags_sequential_format", {finding.rule for finding in findings})
+
+    def test_tags_mode_rejects_page_spanning_and_gutter_language(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  layout:\n"
+            "    - wide shot spanning both pages, central gutter clear\n"
+        )
+        findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
+        self.assertIn("tags_sequential_format", {finding.rule for finding in findings})
+
+    def test_tags_mode_rejects_multi_view_design_sheet(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  layout:\n"
+            "    - character design sheet, front, side and back views\n"
+        )
+        findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
+        self.assertIn("tags_multi_view_format", {finding.rule for finding in findings})
+
     def test_tags_mode_allows_panel_border_rendering_signature(self):
         leaves, _, _ = self.inventory(
             "# MODE: tags\ngkr_test:\n  style:\n    - panel-border framing, single image, no sequential panels, screentone\n"
@@ -79,7 +103,7 @@ class WildcardLinterTests(unittest.TestCase):
         leaves, _, _ = self.inventory(
             "# MODE: tags\ngkr_test:\n  subject:\n"
             "    - (very tall armored knight:1.1), (red cape:1.1), (raised sword:1.1), "
-            "(burning shield:1.1), standing beside the ruined castle gate\n"
+            "(burning shield:1.1), ruined ancient castle gate under crimson twilight\n"
         )
         rules = {finding.rule for finding in LINTER.tags_mode_findings(leaves, self.tags_rules)}
         self.assertIn("tags_long_phrase", rules)
@@ -90,6 +114,28 @@ class WildcardLinterTests(unittest.TestCase):
             "# MODE: narrative\ngkr_test:\n  scene:\n    - a knight is standing beside the ruined castle gate\n"
         )
         self.assertFalse(LINTER.tags_mode_findings(leaves, self.tags_rules))
+
+    def test_tags_mode_allows_long_visible_relationship(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  action:\n"
+            "    - bright lightning arcing between both hands and nearby metal\n"
+        )
+        findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
+        self.assertNotIn("tags_long_phrase", {finding.rule for finding in findings})
+
+    def test_top_level_comma_split_preserves_weighted_phrase(self):
+        parts = LINTER.split_top_level_commas(
+            "(prison tattoos, worn prison garment:1.1), box of letters"
+        )
+        self.assertEqual(parts, ["(prison tattoos, worn prison garment:1.1)", " box of letters"])
+
+    def test_tags_mode_flags_dangling_relation_fragment(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  subject:\n"
+            "    - obsolete robot, handwritten notes, clutched in claw hand\n"
+        )
+        findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
+        self.assertIn("tags_dangling_relation", {finding.rule for finding in findings})
 
     def test_spatial_from_to_is_not_temporal(self):
         leaves, _, initial = self.inventory(
@@ -123,6 +169,20 @@ class WildcardLinterTests(unittest.TestCase):
         )
         findings = initial + LINTER.graph_findings(leaves, categories)
         self.assertFalse([finding for finding in findings if finding.severity == "error"])
+
+    def test_route_motif_probability_accounts_for_nested_routes(self):
+        leaves, categories, _ = self.inventory(
+            "gkr_test:\n"
+            "  scenes:\n    - folded map\n    - empty street\n"
+            "  random:\n    - \"__gkr_test/scenes__\"\n    - quiet portrait\n"
+        )
+        rules = {"route_motifs": {"maps": {
+            "roots": ["random"], "max_probability": 0.20,
+            "regex": [r"\bmaps?\b"],
+        }}}
+        findings = LINTER.route_motif_findings(categories, rules)
+        self.assertEqual(len(findings), 1)
+        self.assertIn("25.0%", findings[0].message)
 
     def test_trace_event_writes_jsonl(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -194,6 +254,54 @@ class WildcardLinterTests(unittest.TestCase):
         source = Path(leaves[0].file)
         with self.assertRaisesRegex(ValueError, "must not overwrite"):
             LINTER.write_fixed_file(source, source, leaves, {leaves[0].uid: "replacement"})
+
+    def test_validation_rejects_changed_wildcard_reference(self):
+        leaves, _, findings = self.inventory(
+            '# MODE: tags\ngkr_test:\n  camera:\n    - close-up\n  combo:\n    - "subject, __gkr_test/camera__"\n'
+        )
+        leaf = next(item for item in leaves if item.category == "combo")
+        accepted, rejected = LINTER.validate_suggestions(
+            leaves, {leaf.uid: "subject, full body shot"}, findings,
+            self.rules, self.tags_rules,
+        )
+        self.assertNotIn(leaf.uid, accepted)
+        self.assertIn("wildcard references or their weights changed", rejected[leaf.uid])
+
+    def test_validation_rejects_changed_alternative(self):
+        leaves, _, findings = self.inventory(
+            "# MODE: tags\ngkr_test:\n  accessory:\n"
+            "    - high-tech visor or goggles, glowing lens\n"
+        )
+        accepted, rejected = LINTER.validate_suggestions(
+            leaves, {leaves[0].uid: "high-tech visor, goggles, glowing lens"}, findings,
+            self.rules, self.tags_rules,
+        )
+        self.assertNotIn(leaves[0].uid, accepted)
+        self.assertIn("alternative-choice markers changed", rejected[leaves[0].uid])
+
+    def test_validation_rejects_new_dangling_relation(self):
+        leaves, _, findings = self.inventory(
+            "# MODE: tags\ngkr_test:\n  subject:\n"
+            "    - obsolete robot, handwritten notes clutched in claw hand\n"
+        )
+        accepted, rejected = LINTER.validate_suggestions(
+            leaves, {leaves[0].uid: "obsolete robot, handwritten notes, clutched in claw hand"}, findings,
+            self.rules, self.tags_rules,
+        )
+        self.assertNotIn(leaves[0].uid, accepted)
+        self.assertTrue(any("tags_dangling_relation" in reason for reason in rejected[leaves[0].uid]))
+
+    def test_validation_rejects_sequential_paraphrase(self):
+        leaves, _, initial = self.inventory(
+            "# MODE: tags\ngkr_test:\n  layout:\n    - double-page spread\n"
+        )
+        findings = initial + LINTER.tags_mode_findings(leaves, self.tags_rules)
+        accepted, rejected = LINTER.validate_suggestions(
+            leaves, {leaves[0].uid: "wide two-page shot"}, findings,
+            self.rules, self.tags_rules,
+        )
+        self.assertNotIn(leaves[0].uid, accepted)
+        self.assertTrue(any("targeted error remains" in reason for reason in rejected[leaves[0].uid]))
 
 
 if __name__ == "__main__":

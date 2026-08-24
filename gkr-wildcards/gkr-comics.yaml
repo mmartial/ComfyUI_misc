@@ -40,26 +40,26 @@ gkr_comics:
 
   hero_archetype:
     - flowing cape, broad chest emblem, feet planted wide, chin lifted
-    - full eye mask, crouched on a shadowed ledge, narrowed eyes
-    - scuffed jacket, worn gloves, protective stance before frightened bystanders
-    - starfield backdrop, radiant body outline, fists glowing with cosmic energy
+    - "full eye mask, crouching, shadowed ledge, narrowed eyes"
+    - "scuffed jacket, worn gloves, protective stance, frightened bystanders"
+    - "starfield backdrop, radiant body outline, glowing fists, cosmic energy"
     - thick interlocking armor plates, massive gauntlets, wide braced stance
-    - compact athletic figure caught mid-flip, curved motion streaks
-    - layered robes, raised hands, concentric glowing runes and sparks
+    - "compact athletic figure, mid-flip, curved motion streaks"
+    - "layered robes, raised hands, concentric glowing runes, sparks"
     - asymmetrical facial features, patched clothing, hunched shoulders, guarded gaze
-    - non-human facial structure, armored stance before a damaged city, steady unblinking gaze
+    - "non-human facial structure, armored stance, damaged city, steady unblinking gaze"
     - cybernetic implants, exposed wiring, luminous visor, metal-plated forearm
 
   villain_archetype:
-    - downcast eyes, clenched jaw, tear track through soot, damaged ornate coat
-    - narrowed eyes, thin smirk, fingertips joined above a glowing tactical display
+    - "downcast eyes, clenched jaw, tear track, soot, damaged ornate coat"
+    - "narrowed eyes, thin smirk, fingertips joined, glowing tactical display"
     - gigantic hunched figure, coarse hide, jagged teeth, oversized clenched fists
 
   neutral_archetype:
-    - trench coat with hidden gadget pouches, tinted goggles
+    - "trench coat, hidden gadget pouches, tinted goggles"
     - scarred knuckles, worn leather jacket, lowered brow, downcast gaze
     - lab coat, safety goggles pushed up, ink-stained fingers
-    - notepad and camera in hand, trench coat, sharp focused eyes
+    - "holding notepad, camera, trench coat, sharp focused eyes"
     - grizzled face, weathered scars, grey-streaked hair
     - bright wide grin, energetic pose, arms thrown open
     - confident smirk, fingerless gloves, concealed dagger
@@ -72,7 +72,7 @@ gkr_comics:
 
   build:
     - lean athletic build, toned and defined
-    - bulky muscular build, thick torso and heavy limbs
+    - bulky muscular build, thick torso, heavy limbs
     - tall broad-shouldered build filling the frame
     - agile compact build, acrobatic
     - long-limbed toned build, upright balanced posture
@@ -94,8 +94,8 @@ gkr_comics:
     - tight coiled voluminous curls
     - shaved head, clean shaven
     - dramatic comic-book spikes
-    - neat side-parted hair with glossy comb lines
-    - tangled voluminous mane with flyaway strands
+    - neat side-parted hair, glossy finish
+    - tangled voluminous hair, flyaway strands
 
   hair_color:
     - black hair
@@ -104,7 +104,7 @@ gkr_comics:
     - vibrant red hair
     - white hair
     - silver hair
-    - blue-tinted hair with comic-book highlights
+    - blue-tinted hair, comic-book highlights hair
     - purple hair
     - fiery orange hair
     - colorful dyed streaks
@@ -114,10 +114,10 @@ gkr_comics:
     - bright vivid green eyes
     - warm brown eyes
     - steely grey eyes, focused
-    - glowing white eyes without pupils
+    - glowing white eyes, no pupils
     - menacing glowing red eyes
     - cosmic star-filled nebula eyes
-    - masked eyes with opaque white lenses
+    - masked eyes, white lenses eyes
 
   expression:
     - furrowed brow, set jaw, narrowed eyes
@@ -133,13 +133,13 @@ gkr_comics:
     - skin-tight spandex suit, high boots, contrasting briefs and gloves
     - interlocking plated bodysuit, reinforced chest and shoulders
     - long flowing dramatic cape
-    - tactical combat suit with pouches, gear and straps
+    - tactical combat suit, pouches
     - trench coat, mask, turned-up collar and fedora
     - dark hooded vigilante outfit
-    - bright colorful classic costume in primary colors
-    - dark stealth costume in muted colors
-    - cosmic armor traced with glowing lines
-    - street clothes layered over practical armor
+    - "bright classic costume, primary colors"
+    - "dark stealth costume, muted colors"
+    - cosmic armor, glowing lines
+    - "street clothes over armor"
 
   emblem:
     - oversized high-contrast chest symbol
@@ -151,111 +151,111 @@ gkr_comics:
     - simple minimalist geometric emblem
 
   accessories:
-    - utility belt with gadgets and pouches
-    - wrist-mounted devices and high-tech bracers
+    - utility belt, gadgets, pouches
+    - wrist-mounted devices, high-tech bracers
     - high-tech visor or goggles with a glowing lens
     - classic domino mask
-    - protective full-face mask and helmet
+    - protective full-face mask, helmet
     - hood and face-obscuring scarf
     - glowing energy gauntlets
     - heavy armored boots
     - long leather gloves
-    - bandolier with gear and straps
+    - bandolier, straps
 
   powers_fx:
-    - crackling electricity around glowing fists
+    - crackling electricity, glowing fists
     - luminous aura radiating outward
     - concentric glowing symbol rings, orbiting glyphs and sparks
     - flames surrounding the body, embers and heat haze
-    - icy mist, frost and visible cold breath
+    - icy mist, frost, visible breath
     - bright lightning arcing between the hands and nearby metal
     - concentric transparent force ripples, bent background lines and floating debris
-    - shadowy tendrils curling from raised hands, black wisps with violet rims
-    - swirling nebula dust, star particles and violet-cyan light trails
+    - shadowy tendrils curling from raised hands, black wisps, violet rims
+    - swirling nebula dust, star particles, violet-cyan light trails
 
   city_background:
-    - towering city skyline at night with glowing windows
-    - rain-dark alley with puddles and steam vents
-    - rooftop above the city at night, stone gargoyles at the ledge
-    - crumbling abandoned warehouse with broken windows and dust
-    - busy downtown street with cars and pedestrians
-    - foggy suspension bridge over a city river
+    - "towering city skyline, night, glowing windows"
+    - "rain-dark alley, puddles, steam vents"
+    - "rooftop above the city at night, stone gargoyles, ledge"
+    - "crumbling abandoned warehouse, broken windows, dust"
+    - "busy downtown street, cars, pedestrians"
+    - "foggy suspension bridge, city river"
     - battle-torn street filled with fire, debris and damaged vehicles
-    - secret underground high-tech lair with computer screens
-    - futuristic tower city with flying vehicles
+    - "secret underground high-tech lair, computer screens"
+    - "futuristic tower city, flying vehicles"
     - ruined overgrown post-apocalyptic city
 
   panel_style:
-    - bold ink lines and strong comic contours
-    - heavy shadows, dramatic chiaroscuro and noir contrast
-    - bright flat colors and cel shading
-    - halftone print texture and pop-art dots
-    - vintage comic printing dots on aged paper
+    - "bold ink lines, strong comic contours"
+    - "heavy shadows, dramatic chiaroscuro, noir contrast"
+    - "bright flat colors, cel shading"
+    - "halftone print texture, pop-art dots"
+    - "vintage comic printing dots, aged paper"
     - modern digital gradient shading
     - painterly rendered comic art
-    - black-and-white noir with solid blacks
+    - "black-and-white noir, solid blacks"
 
   camera:
-    - dynamic low angle with foreshortened boots and raised chest
+    - "dynamic low angle, foreshortened boots, raised chest"
     - dramatic overhead high angle
-    - mid-action punch shot with impact blur
+    - "mid-action punch shot, impact blur"
     - emotional close-up portrait
-    - wide cinematic splash-panel establishing shot
+    - "wide cinematic splash-panel, establishing shot"
     - over-the-shoulder confrontation
     - tilted Dutch angle
 
   mood:
-    - wide establishing shot with dramatic scale and sweeping vista
-    - deep shadows, high-contrast lighting and muted colors
+    - "dramatic scale, sweeping vista"
+    - "deep shadows, high-contrast lighting, muted colors"
     - warm golden sunrise light
-    - long shadows, dim uneven lighting and narrow framing
-    - motion blur, scattered debris and jagged composition
-    - low-key lighting, drifting fog and obscured silhouettes
-    - desaturated colors, downcast lighting and rain-streaked surfaces
+    - "long shadows, dim uneven lighting, narrow framing"
+    - "motion blur, scattered debris, jagged composition"
+    - "low-key lighting, drifting fog, obscured silhouettes"
+    - "desaturated colors, downcast lighting, rain-streaked surfaces"
 
   fx_environment:
     - airborne debris, dust and kinetic particles
     - shattered glass suspended midair
     - dense swirling smoke clouds
     - heavy rain, lightning and storm clouds
-    - rising impact dust and cracked ground
+    - rising impact dust, cracked ground
     - sparks and arcing broken wires
-    - intense flames and drifting embers
+    - intense flames, drifting embers
 
   classic_comic_style:
-    - thick black contours, retro halftone dots and saturated primary colors
-    - dense scratchy ink, muted palette, rough paper and deep shadows
-    - monochrome ink wash, hard-edged shadows and pools of solid black
-    - clean rounded linework, flat bright colors and uncluttered shapes
-    - realistic gradient shading, dramatic rim light and widescreen composition
-    - visible digital brushstrokes, layered paint and softly blended shading
+    - "thick black contours, retro halftone dots, saturated primary colors"
+    - "dense scratchy ink, muted palette, rough paper, deep shadows"
+    - "monochrome ink wash, hard-edged shadows, solid black pools"
+    - "clean rounded linework, flat bright colors, uncluttered shapes"
+    - "realistic gradient shading, dramatic rim light, widescreen composition"
+    - "visible digital brushstrokes, layered paint, softly blended shading"
 
   classic_layout:
-    - full-bleed splash page, wide shot spanning both pages
+    - "full-bleed splash, wide shot"
     - dynamic split panel with diagonal borders and simultaneous adjacent poses
-    - inset close-up panel emphasizing a crucial detail
+    - inset close-up
     - cinematic widescreen panel with panoramic crop and strong rim light
     - modern borderless panel
 
   onomatopoeia:
     - KABOOM explosion lettering integrated into smoke and debris
     - POW impact lettering behind the striking fist
-    - ZZZAP electrical lettering traced by lightning
-    - CRASH lettering broken apart with shattered material
+    - "ZZZAP lettering, lightning-traced electrical"
+    - "CRASH lettering, shattered broken material"
     - WHAM punch lettering radiating from the impact point
     - SKRAKOOM thunder lettering across storm clouds
-    - THWIP lettering stretched along a web line
+    - "THWIP lettering, stretched web line"
 
   artist_style:
-    - detailed crosshatched ink, sharp anatomy, 1990s coloring and diagonal action composition
-    - blocky silhouettes, broad pools of black and angular gothic architecture
-    - retro thick contours, foreshortened anatomy and clustered black energy dots
-    - hyperrealistic gouache painting, modeled skin and luminous highlights
-    - stark black-and-white ink, sliced silhouettes and extreme contrast
-    - fine clean contours, flat pastel colors and intricate alien machinery
-    - exaggerated anatomy, dense scratchy ink and looping threadlike webbing
-    - loose painterly digital color, economical contours and expressive faces
-    - splattered ink and charcoal, torn-paper collage texture and distorted anatomy
+    - "detailed crosshatched ink, sharp anatomy, 1990s coloring, diagonal action composition"
+    - "blocky silhouettes, broad black pools, angular gothic architecture"
+    - "retro thick contours, foreshortened anatomy, clustered black energy dots"
+    - "hyperrealistic gouache painting, modeled skin, luminous highlights"
+    - "stark black-and-white ink, sliced silhouettes, extreme contrast"
+    - "fine clean contours, flat pastel colors, intricate alien machinery"
+    - "exaggerated anatomy, dense scratchy ink, looping threadlike webbing"
+    - "loose painterly digital color, economical contours, expressive faces"
+    - "splattered ink and charcoal, torn-paper collage texture, distorted anatomy"
     - "__gkr_comics/classic_comic_style__"
 
   classic_superhero_combo:
@@ -268,13 +268,13 @@ gkr_comics:
     - "supervillain: (__gkr_comics/villain_archetype__:1.1), __gkr_comics/age__, __gkr_comics/build__, __gkr_comics/expression__, __gkr_comics/costume__, __gkr_comics/emblem__, (__gkr_comics/powers_fx__:1.1), __gkr_comics/city_background__, __gkr_comics/fx_environment__, __gkr_comics/classic_comic_style__, __gkr_comics/camera__"
 
   classic_cosmic_hero_combo:
-    - "(radiant cosmic hero:1.2) floating above the skyline, unlined face, pale glowing eyes, nebula-textured glowing skin, armor traced with luminous lines, glass-and-chrome tower city, swirling star particles, violet nebula dust, bright flat colors, __gkr_comics/mood__, __gkr_comics/camera__"
+    - "(radiant cosmic hero:1.2) floating above the skyline, unlined face, pale glowing eyes, nebula-textured glowing skin, armor, luminous lines, glass-and-chrome tower city, swirling star particles, violet nebula dust, bright flat colors, __gkr_comics/mood__, __gkr_comics/camera__"
 
   classic_superhero_scene_combo:
     - "superhero action panel: (__gkr_comics/hero_archetype__:1.1), __gkr_comics/costume__, (__gkr_comics/powers_fx__:1.2), __gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/panel_style__, __gkr_comics/fx_environment__, __gkr_comics/camera__, __gkr_comics/classic_layout__"
 
   noir_detective_combo:
-    - "noir detective: __gkr_comics/neutral_archetype__, grey-streaked hair, weathered face, __gkr_comics/city_background__, (monochrome ink with hard-edged shadows:1.1), __gkr_comics/mood__, __gkr_comics/camera__, swirling smoke"
+    - "noir detective: __gkr_comics/neutral_archetype__, grey-streaked hair, weathered face, __gkr_comics/city_background__, (monochrome ink, hard-edged shadows:1.1), __gkr_comics/mood__, __gkr_comics/camera__, swirling smoke"
 
   comic_scene_combo:
     - "__gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/panel_style__, __gkr_comics/fx_environment__, __gkr_comics/camera__, __gkr_comics/classic_layout__, __gkr_comics/artist_style__"
@@ -290,31 +290,31 @@ gkr_comics:
 # ------------------------------------------------------------------------
 
   line_treatment:
-    - bold brush contours, broad spot blacks and controlled feathering
-    - fine uniform clear-line drawing with detailed architecture and uncluttered silhouettes
-    - dense crosshatching, dry-brush shadows and worn paper texture
-    - loose autobiographical pencil and ink with visible corrections
-    - expressive charcoal, torn-paper collage and photocopied textures
-    - elegant pen line, decorative fabric folds and restrained facial detail
-    - woodcut-like marks, carved silhouettes and limited tonal modeling
-    - fluid calligraphic brushwork with ink-wash atmosphere
-    - precise mechanical linework and large painted environmental shapes
-    - clean webtoon contours, restrained gradients and readable mobile silhouettes
+    - "bold brush contours, broad spot blacks, controlled feathering"
+    - "fine uniform clear-line, detailed architecture, uncluttered silhouettes"
+    - "dense crosshatching, dry-brush shadows, worn paper texture"
+    - "loose autobiographical pencil, ink, visible corrections"
+    - "expressive charcoal, torn-paper collage, photocopied textures"
+    - "elegant pen line, decorative fabric folds, restrained facial detail"
+    - "woodcut-like marks, carved silhouettes, limited tonal modeling"
+    - "fluid calligraphic brushwork, ink-wash atmosphere"
+    - "precise mechanical linework, large painted environmental shapes"
+    - "clean webtoon contours, restrained gradients, readable mobile silhouettes"
 
   color_process:
-    - vintage newsprint palette, visible registration drift and coarse halftone dots
-    - saturated flat color with limited shadow shapes and bright paper white
+    - "vintage newsprint palette, visible registration drift, coarse halftone dots"
+    - "saturated flat color, limited shadow shapes, bright paper white"
     - muted watercolor washes over visible ink lines
-    - painted gouache panels with modeled light and opaque texture
-    - limited two-color risograph palette with overlapping ink artifacts
-    - black and white with screentone, spot blacks and selective white correction
-    - European album color, natural materials, atmospheric distance and clear local color
+    - "painted gouache, modeled light, opaque texture"
+    - "limited two-color risograph, overlapping ink artifacts"
+    - "black and white, screentone, spot blacks, selective white correction"
+    - "European album color, natural materials, atmospheric distance, clear local color"
     - luminous digital color restrained by strong ink hierarchy
-    - earth pigments and textile-inspired pattern accents
+    - "earth pigments, textile-inspired pattern accents"
     - monochrome ink wash with one narrative spot color
 
   lettering_style:
-    - hand-lettered dialogue balloon, tail pointing at the speaker
+    - "hand-lettered dialogue balloon, tail toward speaker"
     - restrained rectangular narration box, generous margin
     - sound-effect lettering integrated into debris and motion
     - mechanical uppercase lettering, vintage newsprint texture
@@ -328,42 +328,42 @@ gkr_comics:
 
   superhero_archetype:
     - (neighborhood rescuer:1.1), handmade practical costume, visible repair seams, compact first-aid kit
-    - veteran public hero, ceremonial colors over impact-resistant work gear
+    - veteran public hero, ceremonial colors, impact-resistant work gear
     - non-powered investigator, climbing equipment, field notes, careful preparation
-    - (cosmic guardian:1.1), starfield visible inside translucent silhouette, head bowed, hands lowered, drifting above damaged orbital habitat
+    - (cosmic guardian:1.1), starfield, translucent silhouette, head bowed, hands lowered, damaged orbital habitat
     - former villain, community service, visibly altered old costume
-    - young legacy hero, pinning resewn inherited emblem onto adaptive rescue suit, neighbors watching, folding ramp, first-aid station
+    - young legacy hero, emblem onto adaptive rescue suit, neighbors watching, folding ramp, first-aid station
     - emergency engineer, powered rescue armor, lifting tools, high-visibility markings
-    - (shapeshifting protector:1.1), half human half horned beast, same striped scarf and utility belt across both forms, guarded stance
+    - (shapeshifting protector:1.1), half human, half horned beast, guarded stance
 
   pulp_crime_archetype:
     - private investigator, cheap rain-dark suit, case file, camera, fatigued posture
-    - nightclub singer, quietly collecting evidence between performances, stage backdrop
-    - reforming safecracker, ordinary locksmith tools, one concealed lockpick tucked in sleeve
-    - investigative reporter, notebook, transit map, damaged press camera
-    - (weary homicide detective:1.1), case file in one hand, badge held toward a dismissive official
+    - nightclub singer, performance costume, stage backdrop
+    - reforming safecracker, ordinary locksmith tools, one concealed lockpick
+    - investigative reporter, notebook, folded transit timetable, damaged press camera
+    - (weary homicide detective:1.1), case file in hand, badge held toward a dismissive official
     - neighborhood witness, pointing out overlooked detail, skeptical detective looking away
-    - defense attorney, courtroom table covered in records, contradictory statements pinned side by side
+    - defense attorney, courtroom table covered in records
     - organized-crime accountant, gripping ledger tightly, nervous glance toward the door
 
   everyday_archetype:
     - multigenerational shopkeeper, shop counter, inventory shelves, family photographs, unpaid bills
-    - schoolchild, elaborate hidden project inside ordinary backpack
+    - schoolchild, open backpack
     - middle-aged office worker, phone camera raised, familiar commute street
     - retired factory worker, organizing boxes of neighborhood archive photographs
     - immigrant restaurant owner, municipal paperwork on counter, translating between staff and inspector
     - touring musician, damaged equipment case, changing city street behind
     - nurse in scrubs, tired posture, sunrise kitchen, family beginning breakfast
-    - (elderly tenant:1.1), eviction notice in hand, neighbors gathered in support, tenancy records spread on table
+    - (elderly person:1.1), eviction notice in hand, neighbors gathered in support
 
   adventure_archetype:
     - clear-line young reporter, notebook, practical coat, expressive animal companion
-    - aviation mechanic pilot, maps, repair tools within reach, cockpit
+    - aviation mechanic pilot, instrument checklist, repair tools within reach, cockpit
     - maritime cartographer, hand-drawn chart, island absent from official map
-    - archaeological translator, correcting inscription reading, explorer's notebook held open beside her
-    - desert caravan guide, scanning horizon, camel train, sandstorm approaching
+    - archaeological translator, correcting inscription reading, explorer's notebook
+    - desert caravan guide, scanning horizon, camel train, sandstorm
     - railway courier, document satchel clutched close, border checkpoint, armed guards
-    - naturalist, sketchbook, unfamiliar creature observed calmly at a respectful distance
+    - naturalist, sketchbook, unfamiliar creature
     - teenage inventor, jury-rigged vehicle, smoking engine, wrench in hand
 
   historical_archetype:
@@ -378,18 +378,18 @@ gkr_comics:
 
   speculative_archetype:
     - orbital gardener, wilting plants, damaged habitat dome, patched hull panel
-    - obsolete service robot, handwritten notes clutched in claw hand, rust and dust
-    - city planner, glowing map overlay, dark blacked-out neighborhood grid
-    - (horned folkloric guardian:1.1), seated at kitchen table across from residents, weapons set aside, map and offering bowl between them
+    - obsolete service robot, handwritten notes, claw hand, rust and dust
+    - city planner, glowing infrastructure model, dark blacked-out neighborhood sector
+    - (horned folkloric guardian:1.1) seated, kitchen table, residents, weapons set aside
     - climate refugee, repairing antenna rig, floating settlement platforms
     - dream investigator, notebook of sketched recurring architecture, surreal doorway
     - post-apocalyptic librarian, salvaged books in cart, isolated settlement gate
-    - scientist kneeling beside alien artifact shaped like bowls and utensils, holographic diagram of it warming food at a family table
+    - scientist kneeling beside alien artifact, holographic diagram
 
   ensemble_role:
-    - (coordinator:1.1), center of group, unfolded map, pointing at marked route, others watching
+    - (coordinator:1.1), center of group, portable task board, pointing at marked assignments, others watching
     - skeptical observer, edge of group, arms folded, magnifying glass over evidence
-    - local guide, region-specific work clothes, pointing at landmark on hand-drawn map
+    - local guide, region-specific work clothes, pointing toward distant landmark, trail markers visible
     - technical specialist, kneeling over opened machine, tools and removed panels in reach
     - mediator, standing between two arguing figures, open palms raised between them
     - impulsive initiator, stepping through opened doorway, group turning in surprise behind
@@ -401,9 +401,9 @@ gkr_comics:
     - parent and adult child, repairing same shop sign from opposite ends of a ladder, matching paint on hands
     - elderly mentor holding original blueprint, successor displaying revised working prototype
     - siblings on opposite sides of family archive table, one holding framed portrait, other holding censored letters
-    - injured investigator braced by frightened witness, both examining same blood-marked map
+    - injured investigator braced by frightened witness, both examining same blood-marked photograph
     - (former lovers:1.1), working back-to-back at cluttered repair bench, passing tools, avoiding eye contact
-    - local leader demonstrating hand-built water pump, outsider opening technical manual, matching spare parts between them
+    - local leader,  hand-built water pump, outsider opening technical manual, matching spare parts between them
     - photographer and portrait subject, both reaching for same camera and memory card, tense opposing grips
 
 # ------------------------------------------------------------------------
@@ -412,16 +412,16 @@ gkr_comics:
 
   us_scene:
     - (neighborhood hero:1.1), lifting collapsed beam off trapped civilians, masked antagonist fleeing beneath collapsing elevated train
-    - horror-anthology heir, holding two dated family portraits side by side, extra pale relative visible only in newer photograph
+    - horror-anthology heir, holding two dated family portraits side by side, extra pale relative only in newer photograph
     - noir investigator, entering empty nightclub, ringing telephone beside untouched drinks
     - Western town standoff, ranchers confronting railroad agents, torn contracts, station platform
     - (wartime medic:1.1), crossing ruined street toward civilians, retreat order flare overhead
-    - romance-comic coworkers, reaching for same award file, competitive glares, matching praise notes tucked in folders
-    - teen ensemble, threatened venue, demolition notice on door, benefit stage being built, protest signs painted, former friends working back-to-back without eye contact
-    - funny-animal neighborhood election rally, rival candidates pointing at swapped podiums, crowd laughing, campaign signs crossed out
+    - romance-comic coworkers, reaching for same object, competitive glares
+    - teen ensemble, threatened venue, demolition notice on door, benefit stage being built, protest signs painted, back-to-back
+    - funny-animal neighborhood election rally, rival candidates, pointing at swapped podiums, crowd laughing, campaign signs crossed out
     - underground-comix musician, guitar case over shoulder, gentrifying district storefronts, for-lease signs
     - autobiographical cartoonist sketching own kitchen argument from a chair in the corner, notebook open, family mid-argument at the table, cracked cup and wall clock visible
-    - newspaper adventurer, foreign port, rain-damaged map, official signs pointing wrong way, local guide marking hidden route toward hills
+    - newspaper adventurer, foreign port, rain-damaged shipping manifest, official signs, pointing wrong way, local guide marking hidden route toward hills
     - children's science club, improvised experiment table, local creek water samples, notebook of observations
 
   us_superhero_scene_combo:
@@ -443,15 +443,15 @@ gkr_comics:
 
   european_scene:
     - reporter and local guide, tracing stolen artifact, harbor customs district, detailed architecture
-    - eccentric village council, absurd administrative decree pinned to wall, villagers plotting elaborate scheme
-    - (aviation crew:1.1), map showing armed border zones and narrow landing strip, fuel gauge in red, storm filling windscreen, pilot pointing toward clear runway
-    - historical household gathered around opened sealed letter, estate map, marriage miniature on table, heir's name crossed out, signet ring passed to different relative, intended couple standing apart
+    - "eccentric village council, post on wall, huddled villagers, whispering, scheming gestures"
+    - "(aviation crew:1.1), airspace warning display, narrow landing strip ahead, fuel gauge in red, storm filling windscreen, pilot pointing toward clear runway"
+    - historical household gathered around opened sealed letter, property deeds, architectural model, marriage miniature on table, heir's name crossed out, signet ring passed to different relative, intended couple standing apart
     - supernatural investigator, provincial hotel lobby, guests holding incompatible photographs of the building, staircase splitting into two architectural styles
-    - Western travelers and ranchers, facing off across dry trough, competing land deeds, hand-drawn river map, hands hovering near holstered weapons
-    - future-city civil servant, glowing city map with blank sector, tax records and utility bills listing crowded addresses in same sector
-    - Mediterranean family gathering, long table of regional dishes, empty chairs left for absent relatives
+    - Western travelers and ranchers, facing off across dry trough, competing land deeds, river survey stakes, hands hovering near holstered weapons
+    - future-city civil servant, glowing infrastructure display, records and bills
+    - Mediterranean family gathering, long table, regional dishes, empty chairs left for absent relatives
     - children's expedition, familiar countryside, one impossible machine looming in a field
-    - satirical space judge, overwhelmed desk, contradictory robots presenting competing regulation scrolls
+    - satirical space judge, overwhelmed desk, contradictory robots
 
   franco_belgian_album_combo:
     - "Franco-Belgian clear-line panel: __gkr_comics/adventure_archetype__, __gkr_comics/european_scene__, (precise architecture:1.1), flat clear color, readable crowd business"
@@ -459,7 +459,7 @@ gkr_comics:
   italian_fumetti_combo:
     - "Italian black-and-white fumetti panel: __gkr_comics/pulp_crime_archetype__, __gkr_comics/european_scene__, realistic brush ink, atmospheric location"
   british_anthology_combo:
-    - "British weekly anthology panel: __gkr_comics/european_scene__, bold black-and-white art, caption-led momentum, satirical edge"
+    - "British weekly anthology panel: __gkr_comics/european_scene__, bold black-and-white art, caption-led momentum, exangered caricature"
   european_historical_album_combo:
     - "European painted historical panel: __gkr_comics/historical_archetype__, __gkr_comics/european_scene__, period garment closures, tools, carts, masonry, naturalistic album color"
   european_literary_combo:
@@ -471,61 +471,61 @@ gkr_comics:
 
   world_scene:
     - extended family gathered around architectural model of shared property, demolition notice beside old family photographs, several hands pointing at different rooms
-    - journalist recording factory-gate strike, workers reaching for one microphone, handmade banners, locked entrance
-    - elderly village storyteller beside fire, young illustrator sketching on long folding paper strip
-    - migrant family beneath multilingual station signs, comparing transit maps, bicycle courier marking unofficial route around closed checkpoint
-    - school friends at fenced construction trench, old river map, concrete culvert with water and small fish emerging
-    - market vendors beneath protest banners, development map and eviction notices pasted on wall behind produce stalls
-    - young engineer repairing burned transformer, hand-machined brackets around glossy imported control module, residents holding work lights
+    - journalist, factory-gate strike, workers reaching for microphone, handmade banners, locked entrance
+    - elderly village storyteller, fire, young illustrator sketching
+    - migrant family, multilingual station signs, departure timetables, bicycle courier, closed checkpoint
+    - school friends, fenced construction trench, old river photograph, small fish
+    - market vendors, protest banners, eviction orders on wall, produce stalls
+    - young engineer, repairing burned transformer, hand-machined brackets around glossy imported control module, residents holding work lights
     - (former political prisoner:1.1), opening hidden box of prison letters, schoolchildren holding identical official textbooks
-    - fishers and marine scientists, empty nets, bleached shell samples, temperature charts, storm-damaged pier
-    - regional musician in traditional performance clothing, glossy recording studio, producer pointing at simplified costume on rack
+    - fishers and marine scientists, empty nets, bleached shell samples, thermometer logs, storm-damaged pier
+    - regional musician, traditional performance clothing, recording studio,
 
   latin_historieta_combo:
-    - "Latin American historieta panel: __gkr_comics/world_scene__, speculative machinery or contemporary city street, expressive black ink, public notices, uniforms, protest materials"
+    - "Latin American historieta: __gkr_comics/world_scene__, speculative machinery or contemporary city street, expressive black ink, public notices, uniforms, protest materials"
   african_graphic_narrative_combo:
-    - "African contemporary comic panel: __gkr_comics/world_scene__, local building materials, street signs, clothing fasteners, vehicles, work tools, expressive print texture"
+    - "African contemporary comic: __gkr_comics/world_scene__, local building materials, street signs, clothing fasteners, vehicles, work tools, expressive print texture"
   middle_eastern_memoir_combo:
-    - "Middle Eastern graphic memoir panel: __gkr_comics/world_scene__, family photographs, identity documents, household objects, street map, thin black contours, gray wash"
+    - "Middle Eastern graphic memoir: __gkr_comics/world_scene__, family photographs, identity documents, household keys, street signs, thin black contours, gray wash"
   indian_graphic_narrative_combo:
-    - "Indian comic panel: __gkr_comics/world_scene__, regional clothing, architecture, tools, multilingual signage, textile-inspired color accents"
+    - "Indian comic: __gkr_comics/world_scene__, regional clothing, architecture, tools, multilingual signage, textile-inspired color accents"
   chinese_manhua_combo:
-    - "Chinese manhua panel: __gkr_comics/world_scene__, fluid calligraphic ink or contemporary urban color, expressive environmental detail"
+    - "Chinese manhua: __gkr_comics/world_scene__, fluid calligraphic ink or contemporary urban color, expressive environmental detail"
   hong_kong_action_combo:
-    - "Hong Kong action manhua panel: __gkr_comics/adventure_archetype__, mid-strike impact against planted defender, damaged environment, forceful brush lines, dramatic color separation"
+    - "Hong Kong action manhua: __gkr_comics/adventure_archetype__, mid-strike impact against planted defender, damaged environment, forceful brush lines, dramatic color separation"
   korean_webtoon_combo:
-    - "Korean webtoon-style panel: __gkr_comics/world_scene__, clean digital contours, phone-readable balloon, controlled highlight moment"
+    - "Korean webtoon-style: __gkr_comics/world_scene__, clean digital contours, phone-readable balloon, controlled highlight moment"
   southeast_asian_comics_combo:
-    - "Southeast Asian contemporary comic panel: __gkr_comics/world_scene__, humid air, regional buildings, clothing, vehicles, signage, rough local print texture, one small spirit or moving shadow among ordinary objects"
+    - "Southeast Asian contemporary comic: __gkr_comics/world_scene__, humid air, regional buildings, clothing, vehicles, signage, rough local print texture, one small spirit or moving shadow among ordinary objects"
   filipino_komiks_combo:
-    - "Filipino komiks panel: __gkr_comics/world_scene__, expressive adventure or family drama, strong brush ink, vernacular signage"
+    - "Filipino komiks: __gkr_comics/world_scene__, expressive adventure or family drama, strong brush ink, vernacular signage"
   indigenous_graphic_narrative_combo:
-    - "Indigenous contemporary comic panel: __gkr_comics/world_scene__, labeled local landscape features, contemporary homes, clothing, work tools, family photographs, repeated motifs drawn from scene objects"
+    - "Indigenous contemporary comic: __gkr_comics/world_scene__, labeled local landscape features, contemporary homes, clothing, work tools, family photographs, repeated motifs drawn from scene objects"
 
 # ------------------------------------------------------------------------
 # UNIVERSAL CHARACTER AND COVER OUTPUTS
 # ------------------------------------------------------------------------
 
   modular_character_combo:
-    - "standalone superhero character: __gkr_comics/superhero_archetype__, rescue or investigation equipment held in both hands, plain wall background, full body visible, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
-    - "standalone crime character: __gkr_comics/pulp_crime_archetype__, practical objects and natural posture, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
-    - "standalone everyday character: __gkr_comics/everyday_archetype__, work badge, transit card, keys or household object visible, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
-    - "standalone adventure character: __gkr_comics/adventure_archetype__, map plus survey, repair or navigation tools held away from the body, unobstructed silhouette, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
-    - "standalone historical character: __gkr_comics/historical_archetype__, visible garment closures and period tools held in operating position, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "standalone superhero character: __gkr_comics/superhero_archetype__, plain wall background, full body visible, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "standalone crime character: __gkr_comics/pulp_crime_archetype__, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "standalone everyday character: __gkr_comics/everyday_archetype__, work badge, transit card, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "standalone adventure character: __gkr_comics/adventure_archetype__, survey notebook, compass or repair tools held away from the body, unobstructed silhouette, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "standalone historical character: __gkr_comics/historical_archetype__, period tools , operating position, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
     - "standalone speculative character: __gkr_comics/speculative_archetype__, work tools, worn protective clothing and one open machine or specimen case, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
 
   ensemble_combo:
-    - "four-character comics ensemble team lineup: __gkr_comics/ensemble_role__, __gkr_comics/ensemble_role__, __gkr_comics/ensemble_role__, and __gkr_comics/ensemble_role__; distinct silhouettes, separate hand actions, converging eyelines and shared central prop"
+    - "four-character comics ensemble lineup: __gkr_comics/ensemble_role__, __gkr_comics/ensemble_role__, __gkr_comics/ensemble_role__, and __gkr_comics/ensemble_role__; distinct silhouettes, separate hand actions, converging eyelines and shared central prop"
     - "paired character study: __gkr_comics/relationship__, one __gkr_comics/everyday_archetype__ and one __gkr_comics/adventure_archetype__, full hands, feet, eyelines and distance visible"
 
   comic_cover_combo:
-    - "comic cover based on __gkr_comics/us_scene__, (one scene object enlarged:1.1) behind the central figure, supporting cast smaller at the lower edge, masthead-safe upper area, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
-    - "European album cover based on __gkr_comics/european_scene__, environment and adventure premise clearly readable, title-safe negative space, __gkr_comics/color_process__"
-    - "literary graphic-novel cover based on __gkr_comics/world_scene__, one scene object enlarged behind a small central silhouette, two-color palette, typography-safe negative space"
+    - "comic cover based on __gkr_comics/us_scene__, (one scene object enlarged:1.1) behind the central figure, masthead-safe upper area, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "European album cover, __gkr_comics/european_scene__, __gkr_comics/color_process__"
+    - "literary graphic-novel cover, __gkr_comics/world_scene__, one scene object enlarged behind a small central silhouette, two-color palette, typography-safe negative space"
 
   character_sheet_combo:
     - "comics character design sheet for __gkr_comics/modular_character_combo__, front, side and back views, expressions, equipment inset, silhouette and color notes"
-    - "ensemble pose sheet for __gkr_comics/ensemble_combo__, height comparison, paired poses, eyelines, recurring props and opposing hand gestures"
+    - "ensemble pose, __gkr_comics/ensemble_combo__, height comparison, paired poses, eyelines, opposing hand gestures"
 
 # ------------------------------------------------------------------------
 # MODULAR PRODUCTION ASSETS AND DESIGN-SHEET OUTPUTS
@@ -539,14 +539,14 @@ gkr_comics:
     - multigenerational family home, mismatched renovation eras, patched additions
     - orbital habitat garden, maintenance corridors, residential ring, damaged exterior shell
     - historic print shop, printing press, type storage, paper racks, street-facing counter
-    - compact city apartment, connected to transit and late-night commercial street below
+    - compact city apartment, late-night commercial street below
     - contemporary market district, local signage, exposed utilities, daily trade stalls
     - speculative settlement, repaired and reused infrastructure, locally sourced building materials
 
   prop_subject:
-    - investigative case file, maps, photographs, receipts, contradictory handwritten notes
+    - investigative case file, maps, photographs, receipts, crossed-out handwritten notes
     - handmade superhero utility kit, climbing gear, first aid, communicator, rescue tools
-    - inherited family archive box, letters, legal records, photographs, one unexplained missing item
+    - family archive box, letters, legal records, photographs, visible empty slot
     - reporter's field kit, notebook, compact camera, recorder, press identification, transit maps
     - historical craft-worker tool roll, visible wear, repairs, material-specific instruments
     - speculative domestic device, ordinary household task, non-combat design
@@ -565,30 +565,30 @@ gkr_comics:
 
   creature_subject:
     - neighborhood guardian creature, assembled from discarded household objects
-    - immense coastal organism, migrating past fishing boats and shipping lanes, storm clouds overhead
+    - "immense coastal organism, migrating past fishing boats, shipping lanes, storm clouds overhead"
     - expressive all-ages animal companion, readable body-language posture
     - alien domestic creature, maintenance tunnel habitat, human settlement waste nearby
-    - folkloric creature, seated among community members, offering bowl and boundary markers between them
-    - horror-anthology creature, faint distortion visible in photograph reflection, warped architecture edge
-    - speculative ecosystem creature, feeding posture, human figure for scale comparison
-    - (satirical bureaucratic monster:1.1), anatomy made of rubber stamps, forms, queue-rope limbs, contradictory signage
+    - folkloric creature seated, crowd, offering bowl
+    - "horror-anthology creature, faint distortion, photograph reflection, warped architecture edge"
+    - "speculative ecosystem creature, feeding posture, human figure, scale comparison"
+    - "(satirical bureaucratic monster:1.1), rubber-stamp anatomy, forms, queue-rope limbs, contradictory signage"
 
   character_turnaround_combo:
-    - "character turnaround for __gkr_comics/modular_character_combo__, front, three-quarter, side and back views, consistent proportions, neutral pose, silhouette and material callouts"
-    - "ensemble turnaround for __gkr_comics/ensemble_combo__, aligned height chart, front and profile views, shared design language and individual silhouette notes"
+    - "character turnaround: __gkr_comics/modular_character_combo__, neutral pose, silhouette, material callouts"
+    - "ensemble turnaround: __gkr_comics/ensemble_combo__, aligned height chart, front and profile views, shared design language,  individual silhouette notes"
 
   expression_sheet_combo:
-    - "expression sheet for __gkr_comics/modular_character_combo__, neutral, guarded, amused, frightened, angry, exhausted, grieving and quietly resolved; consistent facial construction and regional drawing treatment"
-    - "paired reaction sheet for __gkr_comics/relationship__, matching close-up expressions, hands and posture, consistent facial construction"
+    - "expression sheet: __gkr_comics/modular_character_combo__, neutral, guarded, amused, frightened, angry, exhausted, grieving and quietly resolved; consistent facial construction"
+    - "paired reaction sheet: __gkr_comics/relationship__, matching close-up expressions, hands and posture, consistent facial construction"
 
   costume_variant_combo:
-    - "costume variant sheet for __gkr_comics/modular_character_combo__, everyday, work, formal, travel and rain clothing; same emblem, scarf or color stripe repeated across all five outfits"
-    - "superhero costume development sheet for __gkr_comics/superhero_archetype__, initial handmade version, repaired field version, public ceremonial version and practical rescue variant"
-    - "historical clothing study for __gkr_comics/historical_archetype__, underlayer, outer layer, visible fastenings, worn elbows and warm- versus cold-season variants"
+    - "costume variants sheet for __gkr_comics/modular_character_combo__, everyday, work, formal, travel, rain clothing"
+    - "superhero costume sheet for __gkr_comics/superhero_archetype__, initial handmade version, repaired field version, public ceremonial version, practical rescue variant"
+    - "historical clothing study for __gkr_comics/historical_archetype__, underlayer, outer layer, visible fastenings, worn elbows"
 
   environment_design_combo:
     - "comics environment design sheet for __gkr_comics/environment_subject__, exterior establishing view, interior plan, key sightlines, recurring props, day and night lighting variants"
-    - "regional setting study for __gkr_comics/world_scene__, building materials, utilities, transport, multilingual signage, market stalls and pedestrian routes shown in exterior and street-level views"
+    - "regional setting study for __gkr_comics/world_scene__, building materials, utilities, transport, multilingual signage, market stalls, pedestrian routes, street-level views"
 
   prop_design_combo:
     - "comics prop design sheet for __gkr_comics/prop_subject__, front and back views, opened state, hand holding it, material wear, scale reference and hidden-compartment inset"
@@ -597,39 +597,39 @@ gkr_comics:
     - "comics vehicle design sheet for __gkr_comics/vehicle_subject__, exterior turnaround, operator position, storage, maintenance access, damage states and scale beside characters"
 
   creature_design_combo:
-    - "comics creature design sheet for __gkr_comics/creature_subject__, anatomy, walking sequence, resting and alert poses, human scale comparison, footprint and feeding-mark insets"
+    - "comics creature for __gkr_comics/creature_subject__, anatomy, walking, resting, human scale comparison, footprint"
 
   comic_splash_combo:
-    - "issue-opening splash page based on __gkr_comics/us_scene__, central damaged object or partly hidden threat, cast facing it from distinct foreground positions, setting landmarks behind, masthead-safe area, __gkr_comics/lettering_style__, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
-    - "chapter-opening splash page based on __gkr_comics/european_scene__, detailed environment, small character business, album title-safe negative space, __gkr_comics/color_process__"
-    - "graphic-story opening image based on __gkr_comics/world_scene__, work tools, signs, documents, clothing and architecture filling the environment, small title in empty upper margin, __gkr_comics/line_treatment__"
+    - "issue-opening splash page, __gkr_comics/us_scene__, central damaged object or partly hidden threat, cast facing it from distinct foreground positions, setting landmarks behind, masthead-safe area, __gkr_comics/lettering_style__, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "chapter-opening splash page, __gkr_comics/european_scene__, detailed environment, small character business, album title-safe negative space, __gkr_comics/color_process__"
+    - "graphic-story opening image, __gkr_comics/world_scene__, work tools, signs, documents, clothing and architecture filling the environment, small title in empty upper margin, __gkr_comics/line_treatment__"
 
   double_page_spread_combo:
     - "double-page comics spread based on __gkr_comics/us_scene__, wide continuous scene spanning both pages, central gutter clear of faces and essential action, broad geography, __gkr_comics/color_process__"
-    - "European album double-page spread based on __gkr_comics/european_scene__, panoramic environment continuity, one continuous wide scene, precise clear-line staging"
+    - "European album panorama, __gkr_comics/european_scene__, environment continuity, one continuous wide scene, precise clear-line staging"
 
   anthology_cover_combo:
-    - "US genre-anthology cover based on __gkr_comics/us_scene__, one unsettling or adventurous hook, issue masthead and cover-line safe zones, vintage print color"
-    - "British weekly anthology cover based on __gkr_comics/european_scene__, several story teases organized around one dominant image, painted or bold-ink treatment"
-    - "international comics anthology cover based on __gkr_comics/world_scene__, multiple traditions linked through one visual motif, multilingual title-safe structure"
+    - "US genre-anthology cover, __gkr_comics/us_scene__, vintage print color"
+    - "British weekly anthology cover, __gkr_comics/european_scene__, painted or bold-ink treatment"
+    - "international comics anthology cover, __gkr_comics/world_scene__, one visual motif, multilingual title-safe structure"
 
   spotlight_characters:
-    - caped hero, glowing fists, strong jawline, bold comic style with sharp ink shadows
+    - "caped hero, glowing fists, strong jawline, bold comic style, sharp ink shadows"
     - masked vigilante, perched on rooftop edge, fluttering cloak, noir comic style
-    - musclebound barbarian, wielding a crackling thunder axe, dynamic comic style, bold ink highlights
-    - cosmic sorceress, star-infused hair, casting bright neon spell circles
+    - "musclebound barbarian, wielding crackling thunder axe, dynamic comic style, bold ink highlights"
+    - cosmic sorceress, star-infused hair, spell circles, bright neon
     - techno-mage, plated armor with runic power, glowing gauntlets
     - street-level detective, glowing monocle, enchanted revolver, noir comic style, heavy shadows
     - shadow manipulator, forming drifting ink tendrils, dark comic style
     - thunder paladin, summoning divine lightning, raised storm hammer
-    - speedster, leaving a streaking energy trail, dynamic pose, comic style
-    - armored sentinel, heavy pauldrons, glowing crest emblem on chest
+    - "speedster, streaking energy trail, dynamic pose, comic style"
+    - "armored sentinel, heavy pauldrons, glowing chest crest emblem"
     - necromancer villain, summoning skeletal ink silhouettes, dark comic style
     - winged avenger, broad feathered wings, wearing a radiant helm, heroic pose
     - dark sorcerer villain, cape made of fire, ominous floating sigils
-    - rune fencer, blade glowing with magic runes, sharp graphic strokes, dynamic sword pose
+    - "rune fencer, blade glowing magic runes, sharp graphic strokes, dynamic sword pose"
     - cosmic guardian, wearing shimmering nebula armor, heroic stance, cosmic background
-    - mystic monk, glowing glyph tattoos on body, swirling wind fists, martial arts pose
+    - "mystic monk, glowing glyph body tattoos, swirling wind fists, martial arts pose"
     - elastic shapeshifter, exaggerated mid-stretch pose, dynamic comic book style
     - half-dragon hero, scale-lined arms, breathing smoldering smoke
     - masked beast vigilante, clawed gauntlets, hunched feral silhouette
@@ -640,26 +640,26 @@ gkr_comics:
     - martial arts heroine, dynamic kicking pose, trailing motion streaks
     - rock titan, jagged stone plating skin, massive earth elemental
     - stealth rogue, dissolving into an ink-smudge shadow, stealthy pose, dark
-    - time-bending hero, frozen mid-motion, background dissolving in split comic panels
-    - cosmic phoenix villain, erupting with radiant solar flames, cosmic comic style
+    - "time-bending hero, frozen mid-motion, background dissolving into fragments"
+    - "cosmic phoenix villain, erupting radiant solar flames, cosmic comic style"
     - armored guardian knight, heroic gold outlines, massive armor, heroic pose
     - feral wolf-themed hero, shredded coat, glowing feral eyes, werewolf
-    - smug sorcerer, levitating, surrounded by swirling comic sound effects
+    - "smug sorcerer, levitating, swirling comic sound effects"
     - heavy gunner, holding runic-etched cannons, bold black shading, massive gun
     - ink mage, forming weapons from swirling dark ink, monochrome comic style
     - celestial champion, wielding starfire spear, cosmic armor, heroic
     - retro comic barbarian, holding a giant sword, bright halftone shading, retro style
-    - steam-powered armored hero, glowing furnace in chest plate, steampunk comic style
-    - urban saint, casting radiant light in a gritty alley, holy magic
+    - "steam-powered armored hero, glowing furnace chest plate, steampunk comic style"
+    - "urban saint, casting radiant light, gritty alley, holy magic"
     - shadow reaper, oversized scythe, dramatic villain silhouette, grim reaper
     - comic angel, descending from a glowing panel break, radiant wings
     - acrobatic trickster, mid-flip, throwing floating glowing cards, agile
     - giant serpent-themed villain, forked neon tongue, snake monster
     - stylized sorceress, layered robes, dramatic ink contours, casting magic
-    - comic druid, swirling leaves and nature glyphs, casting nature magic
+    - "comic druid, swirling leaves, nature glyphs, casting nature magic"
     - giant brute villain, smashing the ground, massive fists, monster
     - frost knight, cape made of ice, trailing snowflakes, ice magic armor
-    - arcane librarian, orbiting by stacks of glowing books, scholar
+    - "arcane librarian, orbiting glowing book stacks, scholar"
     - cyber-vigilante, glowing visor, sharp angular silhouette, cyborg
     - stormcaller villain, spiraling storm clouds overhead, bold lightning strokes
     - comic cleric, holding a radiant staff, shining halo lines, healer
@@ -669,31 +669,31 @@ gkr_comics:
     - werewolf hero, mid-transformation, dynamic split panel effect
     - moonlight assassin, curved daggers glowing silver, night scene, stealth
     - gladiator heroine, glowing shield, gold edged cape, warrior
-    - giant golem, carved glowing runes on stone body, stone monster
+    - "giant golem, carved glowing runes, stone body, stone monster"
     - comic psion, rippling telekinetic energy, psychic power
     - feather-cloaked avian hero, piercing comic eyes, bird-like, wings
     - ink-ghost villain, hollow white outline, trailing ink drips, ghost
-    - spell-flame rogue, daggers burning with magic fire, angular stance
-    - water elemental, body made of flowing stylized waves, water magic
+    - "spell-flame rogue, daggers burning magic fire, angular stance"
+    - "water elemental, stylized flowing wave body, water magic"
     - meteor-powered champion, blazing hair streak, wreathed in fire, cosmic hero
     - grizzled antihero, smoking gun, torn jacket, gritty comic style
     - siren-voiced villainess, projecting sonic soundwave halos, sonic power
     - forest guardian hero, bark-plated armor, nature spirit, druid
     - masked scholar mage, floating quill, glowing magic tome
     - shadow-crowned villain, radiating a dark aura, spiked crown, dark magic
-    - valiant swordsman, bathed in heroic rim light, holding sword, hero
+    - "valiant swordsman, heroic rim light, holding sword, hero"
     - illusion hero, fragmenting into multiple comic silhouettes, illusion magic
     - plasma gauntlet brawler, crackling energy fists, fighting stance
     - crystal sorceress, casting prismatic light bursts, crystal magic
     - comic knight, exaggerated heroic proportions, shining armor, hero
     - smoke conjurer villain, drifting ink tendrils, smoke magic
     - fiend-masked demon hunter, flame-carved spear, demon mask
-    - cosmic elder hero, cloak made of a swirling galaxy, old, space
+    - "cosmic elder hero, swirling galaxy cloak, old, space"
     - knotted-wood druid, arms like living branches, casting nature magic
     - raging titan villain, towering over buildings, smashing pavement, giant monster
-    - wind dancer, swirling stylized arcs of wind, wind magic, agile pose
+    - wind dancer, swirling stylized arcs, wind, wind magic, agile pose
     - lightweaver, projecting radiant blades of light, light magic, hero
-    - tech-rune hybrid, runes pulsing on high-tech armor, magitech cyborg
+    - "tech-rune hybrid, pulsing runes, high-tech armor, magitech cyborg"
     - ancient guardian spirit, glowing comic outline, ghostly, magic
     - bold street hero, bright graffiti-style cape, urban setting
     - comic gunslinger, firing golden revolvers, drifting smoke, cowboy
@@ -701,27 +701,27 @@ gkr_comics:
     - feline heroine, razor sharp comic silhouette, cat-like, agile pose
     - ice witch villainess, breathing swirling frost, ice magic, cold
     - spark mage, projecting arcs of stylized electricity, lightning magic
-    - masked defender, massive shield with painted icon, defensive hero
+    - "masked defender, massive shield, painted icon, defensive hero"
     - comic bard, floating music glyphs, playing instrument, music magic
     - brimstone brute villain, glowing cracks in skin, fire demon
     - winged herald, radiant feathers, angelic hero, wings
     - gargoyle knight, perched on a ledge, drifting stone dust, moody comic style
-    - comic prophet, glowing third eye, surrounded by floating psychic symbols
+    - comic prophet, glowing third eye, floating psychic symbols
 
   spotlight_classicscenes:
-    - superhero landing, epic three-point pose, debris flying everywhere, dynamic comic style
-    - masked vigilante, on a rooftop overlooking a neon city at night, moody noir style
-    - powerful punch, creating a bursting comic book shockwave, action scene, bold ink lines
-    - caped figure bracing beneath a collapsing bus while civilians flee, full-page low-angle panel
+    - "superhero landing, three-point landing pose, debris flying everywhere, dynamic comic style"
+    - "masked vigilante, rooftop, neon city, night, moody noir style"
+    - "powerful punch, bursting comic shockwave, action scene, bold ink lines"
+    - "caped figure, bracing beneath collapsing bus, civilians fleeing, low-angle"
     - cloaked figure emerging from swirling smoke, glowing red eyes, harsh underlighting
     - dynamic mid-air chase, flying between skyscrapers, action-packed comic style, motion blur
     - hero, blocking a laser beam, glowing energy shield, action scene
-    - noir detective, walking in a rain-soaked alley, dim streetlights, moody shadows, noir comic style
+    - "noir detective, walking, rain-soaked alley, dim streetlights, moody shadows, noir comic style"
     - cyber hero, jumping between rooftop antennas, during a lightning storm, futuristic comic style
     - muscular figure catching a falling steel beam, bent knees, bulging arms, flying dust
-    - two costumed figures facing each other across a bridge at sunset, fists raised
-    - cloaked figure raising a crackling black-violet energy orb, head thrown back, mouth wide
-    - comic panel, hero walking away from an exploding car, explosion, action hero
+    - "two costumed figures facing each other, bridge, sunset, fists raised"
+    - "cloaked figure, raising energy orb, crackling black-violet, head thrown back, mouth wide"
+    - "hero walking away from an exploding car, explosion, action hero"
     - masked archer, firing an arrow mid-leap, between rooftops, action pose
     - giant robot, smashing through a skyscraper, glass shattering everywhere, mecha destruction
     - street brawl, hero fighting a gang of masked thugs, urban alley, action
@@ -729,30 +729,30 @@ gkr_comics:
     - hero, tearing open mechanical armor, fighting a robot, sparks flying
     - speedster, racing through the city, leaving glowing streaks, blur effect
     - armored woman crouched over a child before an explosion, glowing forcefield arcing around them
-    - scarred figure sitting on a throne of broken machinery, ranks of bowed silhouettes in a dark lair
-    - epic clash of fists, two heroes collide mid-air, energy shockwave, dynamic action
+    - "scarred figure, broken machinery throne, ranks of bowed silhouettes, dark lair"
+    - "clash of fists, two heroes collide mid-air, energy shockwave, dynamic action"
     - comic splash page, a meteor crashing into the city, massive destruction, disaster scene
     - masked heroine, swinging on a cable, high above city traffic, action pose
     - giant monster, looming over the skyline, heroes assembling to fight, kaiju attack
     - superhero, punching through a warehouse door, splintering wood, dramatic entrance
     - face-obscuring cloaked figure stepping from a solid black doorway, stark monochrome ink
-    - costumed figure climbing a burning tower toward silhouettes at a window, flames and smoke
-    - cosmic titan, gripping a shattered moon fragment, epic space scene, giant
+    - "costumed figure climbing burning tower, silhouettes at window, flames and smoke"
+    - "cosmic titan, gripping a shattered moon fragment, space scene, giant"
     - hero, gripping a ledge with one hand, lightning flashes in background, dramatic peril
-    - armored figure extending one hand as hundreds of red-eyed robotic drones fill the sky
+    - armored figure extending one hand, red-eyed robotic drones in the sky
     - sidekick duo, leaping toward the camera, dynamic foreshortening, action pose
-    - hero, standing in a crater, from a superhero landing, smoking ground
-    - detective, shining flashlight in abandoned subway tunnel, dark and moody, noir style
-    - hero, confronting villain on city hall steps, public standoff
+    - hero, standing in a crater, superhero landing, smoking ground
+    - detective, shining flashlight, abandoned subway tunnel, dark and moody, noir style
+    - "hero, confronting villain, city hall steps, public standoff"
     - alien invaders, descending from a glowing rift in the sky, sci-fi invasion
     - masked hero, perched on a gargoyle, under a full moon, moody night scene
-    - battle on top of a runaway subway train, dynamic action, fighting
-    - heroine, unleashing a massive energy blast, ripples across the page, magic power
-    - villain, manipulating a holographic map in a dark lair, high-tech base
+    - "runaway subway train battle, dynamic action, fighting"
+    - "heroine, unleashing massive energy blast, ripples across the page, magic power"
+    - villain, manipulating a holographic tactical display, dark lair, high-tech base
     - super team, assembling, dramatic hero lineup pose, team shot
     - gritty fistfight, inside a dim warehouse, dark action scene, brawl
-    - villain, firing chaos energy in a shattered lab, destruction, magic
-    - massive explosion, with exaggerated comic sound effect, onomatopoeia, KABOOM
+    - "villain, firing chaos energy, shattered lab, destruction, magic"
+    - "massive explosion, exaggerated comic sound effect, onomatopoeia, KABOOM"
     - hero, leaping from fiery wreckage, dramatic escape, explosion
     - cybernetic villain, crawling out of a destroyed robot shell, cyborg, damaged
     - gritty rooftop interrogation, under a stormy sky, noir scene, rain
@@ -762,48 +762,48 @@ gkr_comics:
     - duel, hero and villain fighting atop a skyscraper antenna, high-altitude battle
     - hero, outrunning a collapsing highway, destruction chase, action
     - faceted relic glowing between a masked figure's hands, runes reflected across the face
-    - detective, silhouetted by flashing police lights, noir crime scene
+    - "detective, silhouetted, flashing police lights, noir crime scene"
     - armored antihero, charging through enemy gunfire, bullets sparking off armor
     - comic freeze-frame, speedster dodging bullets, slow motion effect
-    - hero, swinging a huge car door like a shield, improvised weapon, action
+    - hero, swinging a huge car door, action
     - villain, flying backward from a massive punch, impact frame, action
     - masked heroine, breaking through a stained-glass window, dynamic entry, glass shattering
-    - flying caped figure braced beneath the nose of a falling passenger plane, engines smoking
+    - flying caped figure, under passenger plane, engines smoking
     - hero, firing a grappling hook through a shattered window, action pose
-    - black-armored figure raising both arms beneath a spiraling storm over the city, forked lightning
-    - intense stare-down, hero and villain in close-up panel, dramatic confrontation
+    - black-armored figure raising both arms , storm over the city, forked lightning
+    - "intense stare-down, hero, villain, close-up, dramatic confrontation"
     - masked figure slipping through the doorway of a neon-lit hideout, crouched beneath scanning beams
     - cosmic heroine, channeling stellar energy, glowing hair, space magic
     - giant mechanical octopus, attacking the harbor, robot monster, tentacles
     - team of heroes, charging forward together, unified splash page, team shot
     - masked antihero, walking away from a burning building, cool explosion
     - villain, absorbing power from a cracked reactor core, glowing with energy
-    - hero, dodging a laser grid in a high-security vault, stealth action
+    - "hero, dodging laser grid, high-security vault, stealth action"
     - comic-style onomatopoeia, bursting across the action scene, POW, WHAM
-    - cliffside battle, crashing waves below, dramatic fight scene
+    - "cliffside battle, two warriors clashing swords, crashing waves below, dramatic fight scene"
     - masked martial artist, delivering a spinning kick, dynamic action pose
-    - caped figure diving headfirst with arms extended toward a falling civilian, speed lines below
-    - colossal luminous figure spreading galaxy-textured wings across a violet nebula
+    - "caped figure, diving headfirst, arms extended, falling civilian, speed lines"
+    - "colossal luminous figure, galaxy-textured wings, violet nebula"
     - villain, escaping through a swirling energy portal, magic escape
-    - hero, soaring out of an explosion cloud, dynamic action, smoke
-    - detective, confronting a masked figure on a foggy pier, noir mystery
+    - "hero, soaring, explosion cloud, dynamic action, smoke"
+    - "detective, confronting masked figure, foggy pier, noir mystery"
     - hero, glowing armor plates activating, mid-transformation state
     - antihero, firing grappling guns in two directions, dual wielding, action pose
     - giant tank mecha, rolling through city streets, war machine, destruction
-    - five menacing costumed figures in a triangular lineup inside a dark lair, low-angle group shot
+    - "five menacing costumed figures, triangular lineup, dark lair, low-angle group shot"
     - hero, standing in the spotlight of hovering police drones, futuristic police
     - comic noir bar, lit by neon signs, cigarette haze, moody interior
-    - armored hero, blocking a meteor with a shield, epic defense, space
-    - armored figure seated on a levitating throne high above the city, citizens tiny below
-    - wide-legged raised-fist pose, cape flowing dramatically, bold contour lines and saturated colors
-    - hero, punching a villain through a concrete wall, epic impact, super strength
+    - "armored hero, blocking a meteor with a shield, shield glowing from impact, space"
+    - "armored figure seated, levitating throne, high above city, tiny citizens below"
+    - wide-legged raised-fist pose, cape flowing dramatically, bold contour lines, saturated colors
+    - "hero, punching a villain through a concrete wall, shattered concrete, super strength"
     - energy mage, hovering above the city, casting a massive shield bubble, magic defense
     - masked vigilante, sprinting across rooftops in the rain, night action
-    - hero, charging a glowing energy punch, illuminating the entire scene, power up
-    - cosmic battle, unfolding above a ringed planet, spaceships and lasers, sci-fi war
+    - hero, glowing energy punch, illuminating the entire scene, power up
+    - "spaceships firing lasers above a ringed planet, cosmic battle, sci-fi war"
     - underwater heroine, fighting robotic serpents, ocean battle, action
-    - upright caped figure in the foreground while masked opponents flee into deep shadows
-    - full-bleed splash page, caped figure raising a fist as warm sunrise breaks over the city
+    - "upright caped figure, foreground, masked opponents fleeing, deep shadows"
+    - "full-bleed splash page, caped figure, raised fist, warm sunrise, city skyline"
 
   spotlight_us_comics:
     - "__gkr_comics/us_superhero_scene_combo__"

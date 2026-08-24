@@ -38,10 +38,30 @@ MODE_RE = re.compile(r"\bMODE\s*:\s*(narrative|tags)\b", re.I)
 WEIGHT_RE = re.compile(r"\(([^()]+):(-?(?:\d+(?:\.\d+)?|\.\d+))\)")
 TAG_SEQUENCE_RE = re.compile(
     r"\b(?:multi[- ]?panel|split comic panels?|sequential panels?|\w+-panel (?:page|sequence)|"
-    r"comic page|manga page|double[- ]page(?: comics?)? spread|storyboard|diptych|triptych|"
-    r"contact sheet|frame-by-frame|before[- /]and[- /]after|walking sequence|panel sequence|in sequence)\b",
+    r"comic page|manga page|(?:two|three|four|five|six|seven|eight|nine|\d+)[- ]page|"
+    r"double[- ]page(?: comics?)? spread|storyboard|diptych|triptych|contact sheet|frame-by-frame|"
+    r"before[- /]and[- /]after|walking sequence|panel sequence|in sequence|adjacent poses?|simultaneous poses?|"
+    r"both pages|spanning (?:(?:both|two|three|four|\d+) pages|pages)|"
+    r"across (?:(?:both|two|three|four|\d+) pages|pages)|central gutter|gutter clear|page pair)\b",
     re.I,
 )
+TAG_MULTI_VIEW_RE = re.compile(
+    r"\b(?:character|creature|costume|prop|environment)?[- ]?(?:design |variant )?sheet\b|"
+    r"\bturnaround\b|\bmultiple views?\b|\bfront(?:,| and) (?:three-quarter, )?side(?:,| and) back views?\b|"
+    r"\bfront and back views?\b|\b(?:all |\w+ )?(?:five|four|three|\d+) outfits?\b|"
+    r"\b(?:resting|alert|walking) poses?.*\b(?:resting|alert|walking) poses?\b",
+    re.I,
+)
+TAG_DANGLING_RELATION_RE = re.compile(
+    r"^(?:clutched|held|seated|placed|positioned|located|braced|tucked|hung|hidden|trapped|"
+    r"surrounded|covered|filled|attached|fastened|pinned)\b\s+(?:in|inside|on|onto|at|by|"
+    r"beneath|behind|beside|between|against|around|from|to|with|under|over|among)\b",
+    re.I,
+)
+ALTERNATIVE_RE = re.compile(r"\b(?:or|either)\b", re.I)
+STRUCTURAL_FIX_RULES = {
+    "camera_format_conflict", "unrestricted_camera_composite", "missing_reference", "reference_cycle",
+}
 
 
 @dataclass(frozen=True)
@@ -87,10 +107,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--llm-scope", choices=("candidates", "content", "all"), default="candidates", help="LLM selection: flagged candidates, all literal-content leaves, or every leaf")
     parser.add_argument("--suggest-fixes", action="store_true", help="Run a second LLM pass proposing rewrites for found leaf issues; requires --llm")
     parser.add_argument("--fixed-output", type=Path, help="Write suggested rewrites to a new YAML file; requires --llm and --suggest-fixes")
+    parser.add_argument("--fix-severity", choices=("error", "warning", "both"), default="error", help="Fix errors only (default), warnings only, or both")
+    parser.add_argument("--fix-rules", help="Comma-separated rule allowlist for fixes; overrides --fix-severity")
+    parser.add_argument("--fix-manifest", type=Path, help="Write accepted and rejected fix details as JSON")
+    parser.add_argument("--skip-fix-verification", action="store_true", help="Skip the final LLM semantic-preservation check (not recommended)")
     parser.add_argument("--model", help="Model name; defaults to OPENAI_MODEL")
     parser.add_argument("--base-url", help="API base URL; defaults to OPENAI_BASE_URL")
     parser.add_argument("--api-key-env", default="OPENAI_API_KEY", help="Environment variable containing the API key")
     parser.add_argument("--batch-size", type=int, default=20)
+    parser.add_argument("--verification-batch-size", type=int, default=15, help="Items per semantic fix-verification request")
     parser.add_argument("--timeout", type=int, default=120)
     parser.add_argument("--prompt", type=Path, help="Review policy Markdown; defaults to ../prompt.md")
     parser.add_argument("--llm-log", type=Path, help="Write sanitized LLM requests and responses as JSON Lines")
@@ -185,6 +210,25 @@ def has_literal_content(leaf: Leaf) -> bool:
     return bool(remainder)
 
 
+def split_top_level_commas(text: str) -> list[str]:
+    """Split a leaf on commas except those nested inside brackets or parentheses."""
+    parts: list[str] = []
+    start = 0
+    depth = 0
+    pairs = {"(": ")", "[": "]", "{": "}"}
+    closers = set(pairs.values())
+    for index, character in enumerate(text):
+        if character in pairs:
+            depth += 1
+        elif character in closers and depth:
+            depth -= 1
+        elif character == "," and depth == 0:
+            parts.append(text[start:index])
+            start = index + 1
+    parts.append(text[start:])
+    return parts
+
+
 def pattern_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Finding]:
     findings: list[Finding] = []
     sequence_exceptions = set(rules.get("sequence_exempt_rules", []))
@@ -217,6 +261,11 @@ def tags_mode_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Findin
     max_words = int(rules.get("max_phrase_words", 4))
     max_weights = int(rules.get("max_weighted_terms", 3))
     sentence_re = re.compile(rules.get("sentence_connector_regex", r"\b(?:is|are|was|were|while|whereas)\b"), re.I)
+    relationship_re = re.compile(rules.get(
+        "relationship_regex",
+        r"\b(?:between|beneath|above|below|behind|before|toward|against|holding|gripping|protecting|fighting|facing|chasing|blocking|catching|carrying|surrounding|arcing|projecting)\b",
+    ), re.I)
+    relationship_max_words = int(rules.get("relationship_max_phrase_words", max_words + 6))
     for leaf in leaves:
         if leaf.mode != "tags" or not has_literal_content(leaf):
             continue
@@ -230,6 +279,13 @@ def tags_mode_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Findin
                 "error", "tags_sequential_format",
                 "Tags mode forbids sequential, multi-panel, and multi-page content; keep only a single-image rendering signature.",
                 leaf.file, leaf.line, leaf.category, leaf.uid, match.group(0),
+            ))
+        multi_view = TAG_MULTI_VIEW_RE.search(sequence_text)
+        if multi_view:
+            findings.append(Finding(
+                "error", "tags_multi_view_format",
+                "Tags mode forbids design sheets, turnarounds, and multiple-view or multiple-variant layouts.",
+                leaf.file, leaf.line, leaf.category, leaf.uid, multi_view.group(0),
             ))
         weights = WEIGHT_RE.findall(literal)
         if len(weights) > max_weights:
@@ -245,15 +301,24 @@ def tags_mode_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Findin
                 "Tags mode should use flat tag phrases; sentence connectors require a scene-defining relationship that cannot survive splitting.",
                 leaf.file, leaf.line, leaf.category, leaf.uid, connector.group(0),
             ))
-        for phrase in (part.strip(" .;:-") for part in literal.split(",")):
+        for phrase in (part.strip(" .;:-") for part in split_top_level_commas(literal)):
             if not phrase:
                 continue
             unweighted = WEIGHT_RE.sub(lambda m: m.group(1), phrase)
+            dangling = TAG_DANGLING_RELATION_RE.search(unweighted)
+            if dangling:
+                findings.append(Finding(
+                    "warning", "tags_dangling_relation",
+                    "Tags mode should not detach a relational action into a prose fragment; attach it to its visible subject or object.",
+                    leaf.file, leaf.line, leaf.category, leaf.uid, phrase,
+                ))
+                break
             words = re.findall(r"[A-Za-z0-9]+(?:['’-][A-Za-z0-9]+)*", unweighted)
-            if len(words) > max_words:
+            limit = relationship_max_words if relationship_re.search(unweighted) else max_words
+            if len(words) > limit:
                 findings.append(Finding(
                     "warning", "tags_long_phrase",
-                    f"Tag phrase has {len(words)} words; tags mode normally limits phrases to {max_words} words.",
+                    f"Tag phrase has {len(words)} words; tags mode limits this phrase to {limit} words.",
                     leaf.file, leaf.line, leaf.category, leaf.uid, phrase,
                 ))
                 break
@@ -309,6 +374,55 @@ def graph_findings(leaves: list[Leaf], categories: dict[tuple[str, str], list[Le
             findings.append(Finding("error", "camera_format_conflict", "unrestricted camera pool can conflict with sequential or multi-panel content", leaf.file, leaf.line, leaf.category, leaf.uid, ", ".join(f"{a}/{b}" for a, b in camera_refs)))
         elif len(other_refs) or len(literal_text(leaf.text).split()) > 10:
             findings.append(Finding("warning", "unrestricted_camera_composite", "completed content references an unrestricted camera pool; verify every expansion preserves subject count and visibility", leaf.file, leaf.line, leaf.category, leaf.uid, ", ".join(f"{a}/{b}" for a, b in camera_refs)))
+    return findings
+
+
+def route_motif_findings(
+    categories: dict[tuple[str, str], list[Leaf]], rules: dict[str, Any]
+) -> list[Finding]:
+    """Estimate exact motif presence probability through uniformly selected wildcard routes."""
+    findings: list[Finding] = []
+    for name, policy in rules.get("route_motifs", {}).items():
+        expressions = [re.compile(value, re.I) for value in policy.get("regex", [])]
+        if not expressions:
+            continue
+        maximum = float(policy.get("max_probability", 0.15))
+        roots = policy.get("roots", ["random"])
+        memo: dict[tuple[str, str], float] = {}
+
+        def probability(key: tuple[str, str], visiting: set[tuple[str, str]]) -> float:
+            if key in memo:
+                return memo[key]
+            if key in visiting or key not in categories:
+                return 0.0
+            visiting = visiting | {key}
+            chances: list[float] = []
+            for leaf in categories[key]:
+                if any(expression.search(literal_text(leaf.text)) for expression in expressions):
+                    chances.append(1.0)
+                    continue
+                miss = 1.0
+                for reference in leaf.references:
+                    miss *= 1.0 - probability(reference, visiting)
+                chances.append(1.0 - miss)
+            result = sum(chances) / len(chances) if chances else 0.0
+            memo[key] = result
+            return result
+
+        namespaces = sorted({namespace for namespace, _ in categories})
+        for namespace in namespaces:
+            for root in roots:
+                key = (namespace, str(root))
+                if key not in categories:
+                    continue
+                chance = probability(key, set())
+                if chance > maximum:
+                    leaf = categories[key][0]
+                    findings.append(Finding(
+                        policy.get("severity", "warning"), "route_motif_overrepresentation",
+                        f"Motif '{name}' appears in approximately {chance:.1%} of expansions from {namespace}/{root}; configured maximum is {maximum:.1%}.",
+                        leaf.file, category=str(root), evidence=f"{name}: {chance:.1%}",
+                    ))
     return findings
 
 
@@ -410,7 +524,7 @@ def llm_review(leaves: list[Leaf], args: argparse.Namespace, policy: str, trace_
 
 def llm_suggest_fixes(
     leaves: list[Leaf], findings: list[Finding], args: argparse.Namespace, trace_path: Path | None = None
-) -> dict[str, str]:
+) -> tuple[dict[str, str], dict[str, str]]:
     model = args.model or os.getenv("OPENAI_MODEL")
     base_url = (args.base_url or os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1").rstrip("/")
     api_key = os.getenv(args.api_key_env)
@@ -418,12 +532,20 @@ def llm_suggest_fixes(
         raise ValueError("model and API key are required for fix suggestions")
     endpoint = base_url if base_url.endswith("/chat/completions") else f"{base_url}/chat/completions"
     leaf_by_id = {leaf.uid: leaf for leaf in leaves}
+    selected_rules = {name.strip() for name in (args.fix_rules or "").split(",") if name.strip()}
+    eligible_severities = {"error", "warning"} if args.fix_severity == "both" else {args.fix_severity}
+    eligible = [
+        finding for finding in findings
+        if finding.rule not in STRUCTURAL_FIX_RULES
+        and (finding.rule in selected_rules if selected_rules else finding.severity in eligible_severities)
+    ]
     issues: dict[str, list[Finding]] = {}
-    for finding in findings:
+    for finding in eligible:
         if finding.leaf_id in leaf_by_id:
             issues.setdefault(finding.leaf_id, []).append(finding)
     targets = [leaf_by_id[uid] for uid in issues]
     suggestions: dict[str, str] = {}
+    rationales: dict[str, str] = {}
     for offset in range(0, len(targets), args.batch_size):
         batch = targets[offset:offset + args.batch_size]
         batch_number = offset // args.batch_size + 1
@@ -439,8 +561,10 @@ def llm_suggest_fixes(
         instruction = (
             "Propose one replacement wildcard leaf for every supplied item. Fix only the listed issues while preserving all valid visible facts, "
             "theme, subject count, distinct actions, format, and compact wildcard style. Do not add decorative detail, generic quality terms, "
-            "negative prompts, new people, or a new camera. Preserve the item's declared mode. For tags mode, return a flat comma-separated "
-            "tag list and never return sequential, multi-panel, or multi-page content. For narrative mode, a sequential rewrite is allowed only "
+            "negative prompts, new people, or a new camera. Preserve every __namespace/category__ wildcard reference and its weight exactly; "
+            "never replace a reference with literal text. Preserve the item's declared mode. For tags mode, return a flat comma-separated "
+            "tag list without dangling mini-prose fragments such as 'clutched in one hand'; keep each relationship attached to its subject or "
+            "object. Never return sequential, multi-panel, or multi-page content. For narrative mode, a sequential rewrite is allowed only "
             "when the original requires multiple moments. "
             "Return JSON only as an array with exactly one object per input ID containing id, suggested_rewrite, and rationale. "
             "Do not modify files and do not omit IDs."
@@ -469,12 +593,183 @@ def llm_suggest_fixes(
             uid = str(item.get("id", ""))
             rewrite = " ".join(str(item.get("suggested_rewrite", "")).split())
             if uid in expected and rewrite:
-                suggestions[uid] = rewrite
+                if rewrite != leaf_by_id[uid].text:
+                    suggestions[uid] = rewrite
+                rationales[uid] = " ".join(str(item.get("rationale", "")).split())
                 received.add(uid)
         if received != expected:
             missing = ", ".join(sorted(expected - received))
             raise RuntimeError(f"fix-suggestion response omitted or returned an empty rewrite for: {missing}")
-    return suggestions
+    return suggestions, rationales
+
+
+def reference_tokens(text: str) -> tuple[str, ...]:
+    """Return exact wildcard references, including any surrounding weight syntax."""
+    tokens: list[str] = []
+    for match in REFERENCE_RE.finditer(text):
+        start, end = match.span()
+        weighted = re.search(r"\(__[A-Za-z0-9_-]+/[A-Za-z0-9_-]+__:-?(?:\d+(?:\.\d+)?|\.\d+)\)", text[max(0, start - 1):end + 16])
+        tokens.append(weighted.group(0) if weighted else match.group(0))
+    return tuple(tokens)
+
+
+def validate_suggestions(
+    leaves: list[Leaf], suggestions: dict[str, str], findings: list[Finding],
+    rules: dict[str, Any], tags_rules: dict[str, Any],
+) -> tuple[dict[str, str], dict[str, list[str]]]:
+    """Reject structural changes and rewrites that leave or introduce targeted errors."""
+    leaf_by_id = {leaf.uid: leaf for leaf in leaves}
+    targeted_errors: dict[str, set[str]] = {}
+    deterministic_errors: dict[str, set[str]] = {}
+    for finding in findings:
+        if finding.severity == "error" and finding.leaf_id:
+            targeted_errors.setdefault(finding.leaf_id, set()).add(finding.rule)
+            if finding.source == "deterministic":
+                deterministic_errors.setdefault(finding.leaf_id, set()).add(finding.rule)
+    accepted: dict[str, str] = {}
+    rejected: dict[str, list[str]] = {}
+    for uid, rewrite in suggestions.items():
+        leaf = leaf_by_id[uid]
+        reasons: list[str] = []
+        if sorted(reference_tokens(leaf.text)) != sorted(reference_tokens(rewrite)):
+            reasons.append("wildcard references or their weights changed")
+        if len(ALTERNATIVE_RE.findall(leaf.text)) != len(ALTERNATIVE_RE.findall(rewrite)):
+            reasons.append("alternative-choice markers changed")
+        candidate = Leaf(
+            leaf.uid, leaf.file, leaf.namespace, leaf.category, leaf.index, leaf.line,
+            rewrite, tuple(REFERENCE_RE.findall(rewrite)), leaf.mode,
+        )
+        post = pattern_findings([candidate], rules) + tags_mode_findings([candidate], tags_rules)
+        baseline_local = pattern_findings([leaf], rules) + tags_mode_findings([leaf], tags_rules)
+        locally_evaluable = {finding.rule for finding in baseline_local}
+        unsupported = deterministic_errors.get(uid, set()) - locally_evaluable
+        if unsupported:
+            reasons.append("structural error is not safely auto-fixable: " + ", ".join(sorted(unsupported)))
+        post_errors = {finding.rule for finding in post if finding.severity == "error"}
+        unresolved = targeted_errors.get(uid, set()) & post_errors
+        if unresolved:
+            reasons.append("targeted error remains: " + ", ".join(sorted(unresolved)))
+        baseline_rules = {
+            finding.rule for finding in findings
+            if finding.leaf_id == uid and finding.source == "deterministic"
+        }
+        introduced = {finding.rule for finding in post if finding.rule not in baseline_rules}
+        if introduced:
+            reasons.append("new deterministic finding: " + ", ".join(sorted(introduced)))
+        if reasons:
+            rejected[uid] = reasons
+        else:
+            accepted[uid] = rewrite
+    return accepted, rejected
+
+
+def llm_verify_fixes(
+    leaves: list[Leaf], suggestions: dict[str, str], findings: list[Finding],
+    args: argparse.Namespace, trace_path: Path | None = None,
+) -> tuple[dict[str, str], dict[str, list[str]]]:
+    """Use a separate LLM pass to reject rewrites that change valid semantics."""
+    if not suggestions:
+        return {}, {}
+    model = args.model or os.getenv("OPENAI_MODEL")
+    base_url = (args.base_url or os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1").rstrip("/")
+    api_key = os.getenv(args.api_key_env)
+    if not model or not api_key:
+        raise ValueError("model and API key are required for fix verification")
+    endpoint = base_url if base_url.endswith("/chat/completions") else f"{base_url}/chat/completions"
+    leaf_by_id = {leaf.uid: leaf for leaf in leaves}
+    issues: dict[str, list[Finding]] = {}
+    for finding in findings:
+        if finding.leaf_id in suggestions:
+            issues.setdefault(finding.leaf_id, []).append(finding)
+    targets = [leaf_by_id[uid] for uid in suggestions]
+    accepted: dict[str, str] = {}
+    rejected: dict[str, list[str]] = {}
+    verification_batch_size = args.verification_batch_size
+    for offset in range(0, len(targets), verification_batch_size):
+        batch = targets[offset:offset + verification_batch_size]
+        batch_number = offset // verification_batch_size + 1
+        batch_total = (len(targets) + verification_batch_size - 1) // verification_batch_size
+        verbose(args, f"fix-verification batch {batch_number}/{batch_total}: {len(batch)} leaves")
+        items = [{
+            "id": leaf.uid, "mode": leaf.mode, "category": leaf.category,
+            "original": leaf.text, "rewrite": suggestions[leaf.uid],
+            "issues": [{"rule": finding.rule, "message": finding.message} for finding in issues.get(leaf.uid, [])],
+        } for leaf in batch]
+        instruction = (
+            "Act as a strict preservation verifier for wildcard rewrites. Compare every original and rewrite. A rewrite passes only when it "
+            "fixes the listed issue while preserving every valid visible subject, object, attribute, relationship, action, alternative choice "
+            "(especially 'or'), and compositional fact. Reject removal of supporting details, invention of replacement details, conversion of "
+            "alternatives into simultaneous requirements, weakened or changed relationships, and semantic evasion through paraphrase. Changes "
+            "strictly necessary to replace an explicitly listed invisible/abstract failure with minimal visible evidence are allowed. Formatting "
+            "and compact wording changes alone are allowed. Return JSON only as an array with exactly one object per input ID containing id, "
+            "classification (pass or reject), reason, and violations (an array chosen from fact_removed, fact_added, alternative_changed, "
+            "relationship_changed, subject_or_action_changed, format_evasion, other). Do not omit IDs."
+        )
+        body = json.dumps({
+            "model": model, "temperature": 0,
+            "messages": [{"role": "system", "content": instruction}, {"role": "user", "content": json.dumps(items, ensure_ascii=False)}],
+        }).encode("utf-8")
+        trace_event(trace_path, {"event": "verify_request", "batch": batch_number, "items": items})
+        request = urllib.request.Request(endpoint, data=body, headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"})
+        try:
+            with urllib.request.urlopen(request, timeout=args.timeout) as response:
+                response_data = json.loads(response.read().decode("utf-8"))
+            content = response_data["choices"][0]["message"]["content"].strip()
+            trace_event(trace_path, {"event": "verify_response", "batch": batch_number, "content": content})
+            content = re.sub(r"^```(?:json)?\s*|\s*```$", "", content, flags=re.I)
+            reviewed = json.loads(content)
+        except (urllib.error.URLError, KeyError, json.JSONDecodeError, TimeoutError) as exc:
+            raise RuntimeError(f"fix verification failed for batch starting at {offset}: {exc}") from exc
+        if not isinstance(reviewed, list) or not all(isinstance(item, dict) for item in reviewed):
+            raise RuntimeError(f"fix verification response for batch starting at {offset} must be a JSON array of objects")
+        expected = {leaf.uid for leaf in batch}
+        received: set[str] = set()
+        for item in reviewed:
+            uid = str(item.get("id", ""))
+            if uid not in expected:
+                continue
+            received.add(uid)
+            if item.get("classification") == "pass":
+                accepted[uid] = suggestions[uid]
+            else:
+                violations = item.get("violations", [])
+                labels = ", ".join(str(value) for value in violations) if isinstance(violations, list) else str(violations)
+                reason = " ".join(str(item.get("reason", "semantic preservation check failed")).split())
+                rejected[uid] = [f"semantic verification: {labels}: {reason}" if labels else f"semantic verification: {reason}"]
+        for uid in expected - received:
+            rejected[uid] = ["semantic verification response omitted this rewrite"]
+    return accepted, rejected
+
+
+def write_fix_manifest(
+    path: Path, leaves: list[Leaf], proposed: dict[str, str], accepted: dict[str, str],
+    rejected: dict[str, list[str]], rationales: dict[str, str], findings: list[Finding],
+) -> None:
+    leaf_by_id = {leaf.uid: leaf for leaf in leaves}
+    issues: dict[str, list[dict[str, str]]] = {}
+    for finding in findings:
+        if finding.leaf_id in proposed:
+            issues.setdefault(finding.leaf_id, []).append({
+                "severity": finding.severity, "rule": finding.rule,
+                "message": finding.message, "source": finding.source,
+            })
+    records = []
+    for uid, rewrite in proposed.items():
+        leaf = leaf_by_id[uid]
+        records.append({
+            "id": uid, "file": leaf.file, "line": leaf.line, "category": leaf.category,
+            "status": "accepted" if uid in accepted else "rejected",
+            "original": leaf.text, "suggested_rewrite": rewrite,
+            "rationale": rationales.get(uid, ""), "issues": issues.get(uid, []),
+            "rejection_reasons": rejected.get(uid, []),
+        })
+    payload = {
+        "summary": {"proposed": len(proposed), "accepted": len(accepted), "rejected": len(rejected)},
+        "fixes": records,
+    }
+    path = path.expanduser().resolve()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
 def unified_leaf_diff(original: str, suggestion: str) -> str:
@@ -573,12 +868,16 @@ def main() -> int:
     try:
         if args.batch_size < 1:
             raise ValueError("--batch-size must be at least 1")
+        if args.verification_batch_size < 1:
+            raise ValueError("--verification-batch-size must be at least 1")
         if args.timeout < 1:
             raise ValueError("--timeout must be at least 1 second")
         if args.suggest_fixes and not args.llm:
             raise ValueError("--suggest-fixes requires --llm")
         if args.fixed_output and (not args.llm or not args.suggest_fixes):
             raise ValueError("--fixed-output requires --llm and --suggest-fixes")
+        if args.fix_manifest and (not args.llm or not args.suggest_fixes):
+            raise ValueError("--fix-manifest requires --llm and --suggest-fixes")
         if args.llm_scope == "content" and (not args.llm or not args.suggest_fixes or not args.fixed_output):
             raise ValueError("--llm-scope content requires --llm, --suggest-fixes, and --fixed-output")
         paths = discover_paths(args.paths)
@@ -586,20 +885,28 @@ def main() -> int:
             raise ValueError("--fixed-output requires exactly one input YAML file")
         verbose(args, f"discovered {len(paths)} YAML file(s)")
         rules = load_rules(rules_path)
-        verbose(args, f"loaded rules from {rules_path}")
+        verbose(args, f"loaded general rules from {rules_path}")
         leaves, categories, findings = load_inventory(paths)
         verbose(args, f"inventoried {len(categories)} categories and {len(leaves)} leaves")
         pattern_results = pattern_findings(leaves, rules)
         findings.extend(pattern_results)
         verbose(args, f"pattern checks produced {len(pattern_results)} finding(s)")
         tags_rules_path = args.tags_rules or script_dir / "tags-rules.yaml"
-        tags_results = tags_mode_findings(leaves, load_rules(tags_rules_path))
+        tags_rules = load_rules(tags_rules_path)
+        verbose(args, f"loaded tags-mode rules from {tags_rules_path}")
+        tags_results = tags_mode_findings(leaves, tags_rules)
         findings.extend(tags_results)
         verbose(args, f"tags-mode checks produced {len(tags_results)} finding(s)")
         graph_results = graph_findings(leaves, categories)
         findings.extend(graph_results)
         verbose(args, f"reference and route checks produced {len(graph_results)} finding(s)")
+        motif_results = route_motif_findings(categories, rules)
+        findings.extend(motif_results)
+        verbose(args, f"route motif checks produced {len(motif_results)} finding(s)")
         suggestions: dict[str, str] = {}
+        proposed_suggestions: dict[str, str] = {}
+        rejected_suggestions: dict[str, list[str]] = {}
+        fix_rationales: dict[str, str] = {}
         if args.llm:
             candidate_ids = {finding.leaf_id for finding in findings if finding.leaf_id}
             if args.llm_scope == "all":
@@ -627,11 +934,26 @@ def main() -> int:
             verbose(args, f"LLM review produced {len(llm_results)} finding(s)")
             if args.suggest_fixes:
                 verbose(args, "requesting potential fixes for found leaf issues")
-                suggestions = llm_suggest_fixes(leaves, findings, args, trace_path)
+                proposed_suggestions, fix_rationales = llm_suggest_fixes(leaves, findings, args, trace_path)
+                suggestions, rejected_suggestions = validate_suggestions(
+                    leaves, proposed_suggestions, findings, rules, tags_rules
+                )
+                verbose(args, f"deterministic validation accepted {len(suggestions)} of {len(proposed_suggestions)} potential fixes")
+                if not args.skip_fix_verification:
+                    suggestions, semantic_rejections = llm_verify_fixes(
+                        leaves, suggestions, findings, args, trace_path
+                    )
+                    rejected_suggestions.update(semantic_rejections)
                 for finding in findings:
                     if finding.leaf_id in suggestions:
                         finding.suggestion = suggestions[finding.leaf_id]
-                verbose(args, f"received potential fixes for {len(suggestions)} leaves")
+                verbose(args, f"accepted {len(suggestions)} of {len(proposed_suggestions)} potential fixes; rejected {len(rejected_suggestions)}")
+                if args.fix_manifest:
+                    write_fix_manifest(
+                        args.fix_manifest, leaves, proposed_suggestions, suggestions,
+                        rejected_suggestions, fix_rationales, findings,
+                    )
+                    verbose(args, f"wrote fix manifest to {args.fix_manifest.expanduser().resolve()}")
         if args.fixed_output:
             applied = write_fixed_file(paths[0], args.fixed_output, leaves, suggestions)
             verbose(args, f"wrote fixed copy to {args.fixed_output.expanduser().resolve()} with {applied} replacement(s)")

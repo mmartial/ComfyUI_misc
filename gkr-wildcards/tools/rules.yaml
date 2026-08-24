@@ -6,6 +6,16 @@ sequence_exempt_rules:
   - repeated_change
   - sequential_causality
 
+# Exact probabilities are calculated through uniformly selected nested wildcard
+# routes, so repeated references and routing pools count more than raw text hits.
+route_motifs:
+  maps_and_charts:
+    severity: warning
+    roots: [random]
+    max_probability: 0.08
+    regex:
+      - "\\b(?:maps?|atlas|atlases|cartographic|charts?)\\b"
+
 patterns:
   forbidden_quality_filler:
     severity: error
