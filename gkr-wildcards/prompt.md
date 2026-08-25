@@ -52,6 +52,9 @@ If an idea cannot be represented visually in the requested image, convert it int
 - Every theme should expose character, environment, action-scene, iconic/spotlight, and relevant design-output coverage. Include `random_action_scene` or an equivalent public route.
 - `spotlight` represents the most recognizable and desirable visual examples of the theme.
 - `random` should emphasize scenes, combos, spotlights, and iconic theme content. Limit technical sheets and weak institutional/documentary material in its probability path.
+- Keep output families structurally separate. A theme may expose `random_design` for production sheets and `random_complex` for ensembles, spreads, and other deliberately dense outputs; neither route is implicitly part of `random`.
+- A normal scene composite should select one subject or relationship, one setting, and only the minimum supporting style or composition. Do not stack multiple independently complete scenes merely to increase variety.
+- Treat prompt budgets as route-level constraints after recursive wildcard expansion, not as per-leaf limits. Prefer a coherent selection within the route's budget over retaining every compatible detail; linters may initially report budget excesses as warnings.
 - Practical sheets for characters, creatures, props, vehicles, and environments may use neutral views and production annotations rather than narrative staging.
 - Composite compatibility is best effort. Avoid obviously contradictory cross-pool combinations.
 
@@ -73,7 +76,7 @@ Applies only to files declaring `MODE: tags`. Leaves are comma-separated Danboor
 - Weight syntax `(term:weight)` is the normal way to express priority, not a rare exception. Typical range is `0.8`-`1.2`; reserve `1.3`+ and sub-`0.8` for elements that must clearly dominate or recede. Do not weight every item in a leaf — weight only the 1-3 items that matter most, and leave the rest unweighted.
 - Do not use generic quality fillers such as `masterpiece`, `best quality`, `highly detailed`, or `epic`.
 - Do not add a `negative_prompt` category to these wildcard files; negative prompting is handled elsewhere in the workflow.
-- A concept that would require sequential panels or a multi-page layout in Narrative Mode (manga panel grammar, page-by-page storytelling, before/after progressions) has no flat-tag equivalent and must not be authored as a route. Where a theme's medium has a recognizable single-image rendering signature (e.g. manga's black-and-white ink/screentone look), keep only that as a style/rendering tag variant applied to an ordinary single-image leaf — drop the panel, page, and sequence content itself.
+- A concept that would require sequential panels or a multi-page layout in Narrative Mode (manga panel grammar, page-by-page storytelling, before/after progressions) has no flat-tag equivalent in an ordinary scene route. Keep such layouts out of `random`. A theme may expose a deliberately selected `random_complex` route for page/spread outputs and a `random_design` route for multi-view production sheets when its machine rules declare those category exemptions. Otherwise keep only the medium's single-image rendering signature (for example, black-and-white ink or screentone) and drop panel, page, sequence, or multi-view content.
 
 ## Review tests
 

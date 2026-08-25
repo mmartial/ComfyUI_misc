@@ -153,7 +153,8 @@ gkr_comics:
   accessories:
     - utility belt, gadgets, pouches
     - wrist-mounted devices, high-tech bracers
-    - high-tech visor or goggles with a glowing lens
+    - high-tech visor, glowing lens
+    - high-tech goggles, glowing lenses
     - classic domino mask
     - protective full-face mask, helmet
     - hood and face-obscuring scarf
@@ -232,12 +233,11 @@ gkr_comics:
 
   classic_layout:
     - "full-bleed splash, wide shot"
-    - dynamic split panel with diagonal borders and simultaneous adjacent poses
     - inset close-up
     - cinematic widescreen panel with panoramic crop and strong rim light
     - modern borderless panel
 
-  onomatopoeia:
+  superhero_onomatopoeia:
     - KABOOM explosion lettering integrated into smoke and debris
     - POW impact lettering behind the striking fist
     - "ZZZAP lettering, lightning-traced electrical"
@@ -259,25 +259,25 @@ gkr_comics:
     - "__gkr_comics/classic_comic_style__"
 
   classic_superhero_combo:
-    - "classic superhero character: (__gkr_comics/hero_archetype__:1.1), __gkr_comics/age__, __gkr_comics/build__, __gkr_comics/tone__, __gkr_comics/hair__, __gkr_comics/hair_color__, __gkr_comics/eyes__, __gkr_comics/expression__, __gkr_comics/costume__, __gkr_comics/emblem__, __gkr_comics/accessories__, (__gkr_comics/powers_fx__:1.1), __gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/classic_comic_style__, __gkr_comics/camera__"
+    - "classic superhero character: (__gkr_comics/hero_archetype__:1.1), __gkr_comics/costume__, (__gkr_comics/powers_fx__:1.1), __gkr_comics/city_background__, __gkr_comics/classic_comic_style__"
 
   classic_vigilante_combo:
-    - "masked vigilante: (__gkr_comics/hero_archetype__:1.1), __gkr_comics/build__, __gkr_comics/costume__, __gkr_comics/accessories__, __gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/panel_style__, __gkr_comics/camera__"
+    - "masked vigilante: (__gkr_comics/hero_archetype__:1.1), __gkr_comics/costume__, __gkr_comics/city_background__, __gkr_comics/panel_style__"
 
   classic_villain_combo:
-    - "supervillain: (__gkr_comics/villain_archetype__:1.1), __gkr_comics/age__, __gkr_comics/build__, __gkr_comics/expression__, __gkr_comics/costume__, __gkr_comics/emblem__, (__gkr_comics/powers_fx__:1.1), __gkr_comics/city_background__, __gkr_comics/fx_environment__, __gkr_comics/classic_comic_style__, __gkr_comics/camera__"
+    - "supervillain: (__gkr_comics/villain_archetype__:1.1), __gkr_comics/costume__, (__gkr_comics/powers_fx__:1.1), __gkr_comics/city_background__, __gkr_comics/classic_comic_style__"
 
   classic_cosmic_hero_combo:
-    - "(radiant cosmic hero:1.2) floating above the skyline, unlined face, pale glowing eyes, nebula-textured glowing skin, armor, luminous lines, glass-and-chrome tower city, swirling star particles, violet nebula dust, bright flat colors, __gkr_comics/mood__, __gkr_comics/camera__"
+    - "(radiant cosmic hero:1.2) floating above skyline, unlined face, pale glowing eyes, nebula-textured skin, luminous armor, glass-and-chrome tower city, swirling star particles, violet nebula dust, bright flat colors"
 
   classic_superhero_scene_combo:
-    - "superhero action panel: (__gkr_comics/hero_archetype__:1.1), __gkr_comics/costume__, (__gkr_comics/powers_fx__:1.2), __gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/panel_style__, __gkr_comics/fx_environment__, __gkr_comics/camera__, __gkr_comics/classic_layout__"
+    - "superhero action panel: (__gkr_comics/hero_archetype__:1.1), __gkr_comics/costume__, (__gkr_comics/powers_fx__:1.2), __gkr_comics/city_background__, __gkr_comics/panel_style__"
 
   noir_detective_combo:
     - "noir detective: __gkr_comics/neutral_archetype__, grey-streaked hair, weathered face, __gkr_comics/city_background__, (monochrome ink, hard-edged shadows:1.1), __gkr_comics/mood__, __gkr_comics/camera__, swirling smoke"
 
   comic_scene_combo:
-    - "__gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/panel_style__, __gkr_comics/fx_environment__, __gkr_comics/camera__, __gkr_comics/classic_layout__, __gkr_comics/artist_style__"
+    - "__gkr_comics/city_background__, __gkr_comics/mood__, __gkr_comics/artist_style__"
 
   random_comic_character:
     - "(__gkr_comics/hero_archetype__:1.1), __gkr_comics/age__, __gkr_comics/build__, __gkr_comics/tone__, __gkr_comics/hair__, __gkr_comics/hair_color__, __gkr_comics/eyes__, __gkr_comics/expression__, __gkr_comics/costume__, __gkr_comics/emblem__, __gkr_comics/accessories__, __gkr_comics/powers_fx__, __gkr_comics/artist_style__"
@@ -286,7 +286,7 @@ gkr_comics:
     - "__gkr_comics/comic_scene_combo__"
 
 # ------------------------------------------------------------------------
-# RENDERING, PRINT PROCESS, AND LETTERING STYLE
+# RENDERING AND PRINT PROCESS
 # ------------------------------------------------------------------------
 
   line_treatment:
@@ -312,15 +312,6 @@ gkr_comics:
     - luminous digital color restrained by strong ink hierarchy
     - "earth pigments, textile-inspired pattern accents"
     - monochrome ink wash with one narrative spot color
-
-  lettering_style:
-    - "hand-lettered dialogue balloon, tail toward speaker"
-    - restrained rectangular narration box, generous margin
-    - sound-effect lettering integrated into debris and motion
-    - mechanical uppercase lettering, vintage newsprint texture
-    - elegant mixed-case balloon, literary letter spacing
-    - multilingual signage lettering, harmonious character sets
-    - digital vertical-scroll balloon, phone-readable sizing
 
 # ------------------------------------------------------------------------
 # GENRE-SAFE CHARACTER FAMILIES
@@ -425,17 +416,19 @@ gkr_comics:
     - children's science club, improvised experiment table, local creek water samples, notebook of observations
 
   us_superhero_scene_combo:
-    - "US superhero comic panel: __gkr_comics/superhero_archetype__, __gkr_comics/us_scene__, __gkr_comics/lettering_style__, (bold brush contours:1.1), saturated flat color, civilians in foreground, damaged infrastructure"
+    - "US superhero comic panel: __gkr_comics/superhero_archetype__, (bold brush contours:1.1), saturated flat color, damaged infrastructure"
+  superhero_onomatopoeia_combo:
+    - "__gkr_comics/us_superhero_scene_combo__, __gkr_comics/superhero_onomatopoeia__"
   us_newspaper_panel_combo:
-    - "US newspaper comic panel: __gkr_comics/us_scene__, economical linework, vintage newsprint color, precise visual payoff, __gkr_comics/lettering_style__"
+    - "US newspaper comic panel: __gkr_comics/us_scene__, economical linework, vintage newsprint color, precise visual payoff"
   us_horror_anthology_combo:
-    - "US horror anthology panel: __gkr_comics/us_scene__, (engraved shadows:1.1), decaying caption box, limited sickly color"
+    - "US horror anthology panel: __gkr_comics/us_scene__, (engraved shadows:1.1), distressed panel border, limited sickly color"
   us_crime_combo:
-    - "US crime comic panel: __gkr_comics/pulp_crime_archetype__, __gkr_comics/relationship__, __gkr_comics/us_scene__, heavy spot blacks, rain, practical evidence"
+    - "US crime comic panel: __gkr_comics/pulp_crime_archetype__, heavy spot blacks, rain, practical evidence"
   us_romance_combo:
-    - "US romance comic panel: __gkr_comics/everyday_archetype__, __gkr_comics/relationship__, __gkr_comics/us_scene__, elegant ink, expressive close-up, soft vintage spot color"
+    - "US romance comic panel: __gkr_comics/relationship__, medium two-person composition, elegant ink, soft vintage spot color"
   us_alternative_combo:
-    - "US alternative comic panel: __gkr_comics/everyday_archetype__, __gkr_comics/relationship__, loose personal drawing, collage or photocopy texture, receipts, transit card, work badge, domestic clutter"
+    - "US alternative comic panel: __gkr_comics/everyday_archetype__, loose personal drawing, collage or photocopy texture, receipts, transit card, work badge, domestic clutter"
 
 # ------------------------------------------------------------------------
 # EUROPEAN COMICS TRADITIONS
@@ -454,16 +447,16 @@ gkr_comics:
     - satirical space judge, overwhelmed desk, contradictory robots
 
   franco_belgian_album_combo:
-    - "Franco-Belgian clear-line panel: __gkr_comics/adventure_archetype__, __gkr_comics/european_scene__, (precise architecture:1.1), flat clear color, readable crowd business"
+    - "Franco-Belgian clear-line panel: __gkr_comics/european_scene__, (precise architecture:1.1), flat clear color, readable crowd business"
     - "expressive Franco-Belgian humor panel: __gkr_comics/european_scene__, elastic acting, lively brush contours, detailed setting"
   italian_fumetti_combo:
-    - "Italian black-and-white fumetti panel: __gkr_comics/pulp_crime_archetype__, __gkr_comics/european_scene__, realistic brush ink, atmospheric location"
+    - "Italian black-and-white fumetti panel: __gkr_comics/european_scene__, realistic brush ink, atmospheric location"
   british_anthology_combo:
-    - "British weekly anthology panel: __gkr_comics/european_scene__, bold black-and-white art, caption-led momentum, exangered caricature"
+    - "British weekly anthology panel: __gkr_comics/european_scene__, bold black-and-white art, brisk visual momentum, exaggerated caricature"
   european_historical_album_combo:
-    - "European painted historical panel: __gkr_comics/historical_archetype__, __gkr_comics/european_scene__, period garment closures, tools, carts, masonry, naturalistic album color"
+    - "European painted historical panel: __gkr_comics/historical_archetype__, period garment closures, tools, carts, masonry, naturalistic album color"
   european_literary_combo:
-    - "European literary graphic-novel panel: __gkr_comics/everyday_archetype__, __gkr_comics/relationship__, __gkr_comics/european_scene__, thin black contours, one recurring object"
+    - "European literary graphic-novel panel: __gkr_comics/european_scene__, thin black contours, one recurring object"
 
 # ------------------------------------------------------------------------
 # WORLD COMICS TRADITIONS
@@ -494,7 +487,7 @@ gkr_comics:
   hong_kong_action_combo:
     - "Hong Kong action manhua: __gkr_comics/adventure_archetype__, mid-strike impact against planted defender, damaged environment, forceful brush lines, dramatic color separation"
   korean_webtoon_combo:
-    - "Korean webtoon-style: __gkr_comics/world_scene__, clean digital contours, phone-readable balloon, controlled highlight moment"
+    - "Korean webtoon-style: __gkr_comics/world_scene__, clean digital contours, phone-readable composition, controlled highlight moment"
   southeast_asian_comics_combo:
     - "Southeast Asian contemporary comic: __gkr_comics/world_scene__, humid air, regional buildings, clothing, vehicles, signage, rough local print texture, one small spirit or moving shadow among ordinary objects"
   filipino_komiks_combo:
@@ -600,7 +593,7 @@ gkr_comics:
     - "comics creature for __gkr_comics/creature_subject__, anatomy, walking, resting, human scale comparison, footprint"
 
   comic_splash_combo:
-    - "issue-opening splash page, __gkr_comics/us_scene__, central damaged object or partly hidden threat, cast facing it from distinct foreground positions, setting landmarks behind, masthead-safe area, __gkr_comics/lettering_style__, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
+    - "issue-opening splash page, __gkr_comics/us_scene__, central damaged object or partly hidden threat, cast facing it from distinct foreground positions, setting landmarks behind, masthead-safe area, __gkr_comics/line_treatment__, __gkr_comics/color_process__"
     - "chapter-opening splash page, __gkr_comics/european_scene__, detailed environment, small character business, album title-safe negative space, __gkr_comics/color_process__"
     - "graphic-story opening image, __gkr_comics/world_scene__, work tools, signs, documents, clothing and architecture filling the environment, small title in empty upper margin, __gkr_comics/line_treatment__"
 
@@ -819,6 +812,7 @@ gkr_comics:
     - "__gkr_comics/classic_villain_combo__"
     - "__gkr_comics/classic_cosmic_hero_combo__"
     - "__gkr_comics/classic_superhero_scene_combo__"
+    - "__gkr_comics/superhero_onomatopoeia_combo__"
     - "__gkr_comics/noir_detective_combo__"
     - "__gkr_comics/comic_scene_combo__"
     - "__gkr_comics/random_comic_character__"
@@ -845,15 +839,11 @@ gkr_comics:
     - "__gkr_comics/filipino_komiks_combo__"
     - "__gkr_comics/indigenous_graphic_narrative_combo__"
 
-  spotlight_character_outputs:
-    - "__gkr_comics/modular_character_combo__"
-    - "__gkr_comics/ensemble_combo__"
-    - "__gkr_comics/character_sheet_combo__"
-
   spotlight_covers:
     - "__gkr_comics/comic_cover_combo__"
 
-  spotlight_designs:
+  random_design:
+    - "__gkr_comics/character_sheet_combo__"
     - "__gkr_comics/character_turnaround_combo__"
     - "__gkr_comics/expression_sheet_combo__"
     - "__gkr_comics/costume_variant_combo__"
@@ -862,7 +852,8 @@ gkr_comics:
     - "__gkr_comics/vehicle_design_combo__"
     - "__gkr_comics/creature_design_combo__"
 
-  spotlight_publication_formats:
+  random_complex:
+    - "__gkr_comics/ensemble_combo__"
     - "__gkr_comics/comic_splash_combo__"
     - "__gkr_comics/double_page_spread_combo__"
     - "__gkr_comics/anthology_cover_combo__"
@@ -877,10 +868,5 @@ gkr_comics:
     - "__gkr_comics/spotlight_european_comics__"
     - "__gkr_comics/spotlight_world_comics__"
     - "__gkr_comics/modular_character_combo__"
-    - "__gkr_comics/ensemble_combo__"
     - "__gkr_comics/comic_cover_combo__"
-    - "__gkr_comics/character_sheet_combo__"
-    - "__gkr_comics/spotlight_character_outputs__"
     - "__gkr_comics/spotlight_covers__"
-    - "__gkr_comics/spotlight_designs__"
-    - "__gkr_comics/spotlight_publication_formats__"

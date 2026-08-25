@@ -91,11 +91,20 @@ class Finding:
     source: str = "deterministic"
 
 
+@dataclass
+class PromptAudit:
+    image: str
+    mode: str
+    status: str
+    issues: list[str]
+    post_prompt: str
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Lint wildcard YAML structure, language, and composite routes."
     )
-    parser.add_argument("paths", nargs="+", help="YAML file(s) or directories")
+    parser.add_argument("paths", nargs="*", help="YAML file(s) or directories")
     parser.add_argument("--rules", type=Path, help="Rules YAML (defaults beside script)")
     parser.add_argument("--tags-rules", type=Path, help="Tags-mode rules YAML (defaults beside script)")
     parser.add_argument("--format", choices=("text", "json", "markdown"), default="text")
@@ -119,6 +128,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--timeout", type=int, default=120)
     parser.add_argument("--prompt", type=Path, help="Review policy Markdown; defaults to ../prompt.md")
     parser.add_argument("--llm-log", type=Path, help="Write sanitized LLM requests and responses as JSON Lines")
+    parser.add_argument("--validate-post-prompts", type=Path, metavar="DETAILS_MD", help="Audit final post-LLM prompts recorded by theme_organizer.py")
+    parser.add_argument("--annotated-details", type=Path, help="Write a copy of details.md with audit results appended; requires --validate-post-prompts")
     return parser.parse_args()
 
 
@@ -273,15 +284,18 @@ def tags_mode_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Findin
         sequence_text = re.sub(
             r"\b(?:panel[- ]border(?:ed)?(?: framing)?|no sequential panels?)\b", "", literal, flags=re.I
         )
+        exemptions = rules.get("format_exemptions", {}).get(leaf.namespace, {})
+        sequence_exempt = leaf.category in set(exemptions.get("sequential_categories", []))
+        multi_view_exempt = leaf.category in set(exemptions.get("multi_view_categories", []))
         match = TAG_SEQUENCE_RE.search(sequence_text)
-        if match:
+        if match and not sequence_exempt:
             findings.append(Finding(
                 "error", "tags_sequential_format",
                 "Tags mode forbids sequential, multi-panel, and multi-page content; keep only a single-image rendering signature.",
                 leaf.file, leaf.line, leaf.category, leaf.uid, match.group(0),
             ))
         multi_view = TAG_MULTI_VIEW_RE.search(sequence_text)
-        if multi_view:
+        if multi_view and not multi_view_exempt:
             findings.append(Finding(
                 "error", "tags_multi_view_format",
                 "Tags mode forbids design sheets, turnarounds, and multiple-view or multiple-variant layouts.",
@@ -423,6 +437,130 @@ def route_motif_findings(
                         f"Motif '{name}' appears in approximately {chance:.1%} of expansions from {namespace}/{root}; configured maximum is {maximum:.1%}.",
                         leaf.file, category=str(root), evidence=f"{name}: {chance:.1%}",
                     ))
+    return findings
+
+
+def namespace_policy_findings(
+    leaves: list[Leaf], categories: dict[tuple[str, str], list[Leaf]], rules: dict[str, Any]
+) -> list[Finding]:
+    """Apply namespace-specific route, content, and expanded-size contracts."""
+    findings: list[Finding] = []
+    leaves_by_namespace: dict[str, list[Leaf]] = {}
+    for leaf in leaves:
+        leaves_by_namespace.setdefault(leaf.namespace, []).append(leaf)
+
+    for namespace, policy in rules.get("namespace_policies", {}).items():
+        namespace_leaves = leaves_by_namespace.get(namespace, [])
+        if not namespace_leaves:
+            continue
+
+        def reachable(root: tuple[str, str]) -> set[tuple[str, str]]:
+            found: set[tuple[str, str]] = set()
+            pending = [root]
+            while pending:
+                key = pending.pop()
+                if key in found or key not in categories:
+                    continue
+                found.add(key)
+                pending.extend(ref for leaf in categories[key] for ref in leaf.references)
+            return found
+
+        for root, excluded in policy.get("route_exclusions", {}).items():
+            root_key = (namespace, str(root))
+            reached = reachable(root_key)
+            for category in excluded:
+                if (namespace, str(category)) in reached:
+                    anchor = categories[root_key][0]
+                    findings.append(Finding(
+                        "error", "route_contract_violation",
+                        f"{namespace}/{root} must not reach the '{category}' output family.",
+                        anchor.file, anchor.line, str(root), anchor.uid, str(category),
+                    ))
+
+        for name, content_policy in policy.get("forbidden_content", {}).items():
+            expression = re.compile(str(content_policy["regex"]), re.I)
+            for leaf in namespace_leaves:
+                match = expression.search(literal_text(leaf.text))
+                if match:
+                    findings.append(Finding(
+                        content_policy.get("severity", "error"), f"namespace_{name}",
+                        content_policy.get("message", f"Content is forbidden in {namespace}."),
+                        leaf.file, leaf.line, leaf.category, leaf.uid, match.group(0),
+                    ))
+
+        for name, content_policy in policy.get("restricted_content", {}).items():
+            expression = re.compile(str(content_policy["regex"]), re.I)
+            allowed = {str(value) for value in content_policy.get("allowed_categories", [])}
+            for leaf in namespace_leaves:
+                match = expression.search(literal_text(leaf.text))
+                if match and leaf.category not in allowed:
+                    findings.append(Finding(
+                        content_policy.get("severity", "error"), f"namespace_{name}",
+                        content_policy.get("message", f"Content is restricted in {namespace}."),
+                        leaf.file, leaf.line, leaf.category, leaf.uid, match.group(0),
+                    ))
+
+        memo: dict[tuple[str, str], dict[tuple[int, int], float]] = {}
+
+        def distribution(key: tuple[str, str], visiting: set[tuple[str, str]]) -> dict[tuple[int, int], float]:
+            if key in memo:
+                return memo[key]
+            if key in visiting or key not in categories:
+                return {(0, 0): 1.0}
+            leaf_distributions: list[dict[tuple[int, int], float]] = []
+            for leaf in categories[key]:
+                literal = literal_text(leaf.text).strip(" ,;:-")
+                items = len([part for part in split_top_level_commas(literal) if part.strip()]) if literal else 0
+                words = len(re.findall(r"[A-Za-z0-9]+(?:['’-][A-Za-z0-9]+)*", literal))
+                combined = {(items, words): 1.0}
+                for reference in leaf.references:
+                    next_dist = distribution(reference, visiting | {key})
+                    expanded: dict[tuple[int, int], float] = {}
+                    for (left_i, left_w), left_p in combined.items():
+                        for (right_i, right_w), right_p in next_dist.items():
+                            result_key = (left_i + right_i, left_w + right_w)
+                            expanded[result_key] = expanded.get(result_key, 0.0) + left_p * right_p
+                    combined = expanded
+                leaf_distributions.append(combined)
+            result: dict[tuple[int, int], float] = {}
+            divisor = len(leaf_distributions) or 1
+            for leaf_dist in leaf_distributions:
+                for size, chance in leaf_dist.items():
+                    result[size] = result.get(size, 0.0) + chance / divisor
+            memo[key] = result
+            return result
+
+        def percentile(dist: dict[tuple[int, int], float], dimension: int, threshold: float = 0.9) -> int:
+            marginal: dict[int, float] = {}
+            for size, chance in dist.items():
+                marginal[size[dimension]] = marginal.get(size[dimension], 0.0) + chance
+            cumulative = 0.0
+            for value, chance in sorted(marginal.items()):
+                cumulative += chance
+                if cumulative >= threshold:
+                    return value
+            return max(marginal, default=0)
+
+        for root, budget in policy.get("prompt_budgets", {}).items():
+            key = (namespace, str(root))
+            if key not in categories:
+                continue
+            dist = distribution(key, set())
+            max_items = int(budget["max_items"])
+            max_words = int(budget["max_words"])
+            over = sum(chance for (items, words), chance in dist.items() if items > max_items or words > max_words)
+            p90_items, p90_words = percentile(dist, 0), percentile(dist, 1)
+            actual_max_items = max((size[0] for size in dist), default=0)
+            actual_max_words = max((size[1] for size in dist), default=0)
+            if over > 0:
+                over_label = "<0.1%" if over < 0.001 else f"{over:.1%}"
+                anchor = categories[key][0]
+                findings.append(Finding(
+                    budget.get("severity", "warning"), "route_prompt_budget",
+                    f"Expanded {namespace}/{root} prompts exceed {max_items} items or {max_words} words in approximately {over_label} of routes.",
+                    anchor.file, anchor.line, str(root), anchor.uid,
+                    f"p90={p90_items} items/{p90_words} words; max={actual_max_items}/{actual_max_words}; target={budget.get('target_items', max_items)} items",
+                ))
     return findings
 
 
@@ -860,12 +998,137 @@ def render(findings: list[Finding], leaves: list[Leaf], fmt: str, color: bool = 
     return "\n".join(lines) + "\n"
 
 
+DETAIL_SECTION_RE = re.compile(r"^## `([^`]+)`\s*$", re.M)
+
+
+def parse_details_prompts(path: Path) -> list[dict[str, str]]:
+    text = path.read_text(encoding="utf-8")
+    matches = list(DETAIL_SECTION_RE.finditer(text))
+    records: list[dict[str, str]] = []
+    for index, match in enumerate(matches):
+        section = text[match.end():matches[index + 1].start() if index + 1 < len(matches) else len(text)]
+        mode_match = re.search(r"^- Prompt mode: `([^`]+)`", section, re.M)
+        post_match = re.search(r"^### Post-LLM prompt\s*\n+```text\n(.*?)\n```", section, re.M | re.S)
+        records.append({
+            "image": match.group(1),
+            "mode": mode_match.group(1).strip() if mode_match else "Not found",
+            "post_prompt": post_match.group(1).strip() if post_match else "",
+        })
+    return records
+
+
+def validate_tag_prompt(prompt: str, max_items: int = 24) -> list[str]:
+    issues: list[str] = []
+    if "\n" in prompt:
+        issues.append("tags output must be exactly one line")
+    items = [item.strip() for item in split_top_level_commas(prompt) if item.strip()]
+    if len(items) > max_items:
+        issues.append(f"tags output has {len(items)} items; soft maximum is {max_items}")
+    if not items or not re.match(r"^(?:no_humans|\d+(?:others?|girls?|boys?|women|men)|solo)\b", items[0], re.I):
+        issues.append("first item does not declare an exact subject count or no_humans")
+    if ALTERNATIVE_RE.search(prompt):
+        issues.append("unresolved or/either alternative remains")
+    camera_terms = {
+        name for name, expression in {
+            "close": r"\b(?:close[- ]?up|macro)\b",
+            "medium": r"\bmedium(?:[- ]wide)?(?: shot| view| group)?\b",
+            "wide": r"\b(?:wide|panoramic|full[- ]body|long shot)\b",
+            "overhead": r"\b(?:overhead|top[- ]down|bird['’]?s[- ]eye)\b",
+            "low-angle": r"\blow[- ]angle\b",
+        }.items() if re.search(expression, prompt, re.I)
+    }
+    distance_terms = camera_terms & {"close", "medium", "wide"}
+    if len(distance_terms) > 1:
+        issues.append(f"competing camera distances remain: {', '.join(sorted(distance_terms))}")
+    if re.search(r"[.!?]\s+[A-Z]", prompt):
+        issues.append("sentence-like prose remains in tags output")
+    without_valid_weights = WEIGHT_RE.sub("", prompt)
+    malformed = re.search(r"(?:^|,)\s*[^,()]+:\d+(?:\.\d+)?(?:\s*,|$)", without_valid_weights)
+    if malformed:
+        issues.append("weighted tag is missing outer parentheses")
+    return issues
+
+
+def audit_post_prompts(path: Path) -> list[PromptAudit]:
+    audits: list[PromptAudit] = []
+    for record in parse_details_prompts(path):
+        mode = record["mode"]
+        prompt = record["post_prompt"]
+        issues: list[str] = []
+        if not prompt or prompt == "_Not found_" or mode == "Not found":
+            status = "unable"
+            issues.append("prompt mode or post-LLM prompt is missing")
+        elif mode == "Tags":
+            issues = validate_tag_prompt(prompt)
+            status = "noncompliant" if issues else "compliant"
+        elif mode == "Narrative":
+            if len([part for part in prompt.split("\n\n") if part.strip()]) != 1:
+                issues.append("narrative output must contain exactly one prose block")
+            status = "noncompliant" if issues else "compliant"
+        elif mode == "Narrative and Tags":
+            blocks = [part.strip() for part in prompt.split("\n\n") if part.strip()]
+            if len(blocks) != 2:
+                issues.append("combined output must contain exactly two blocks")
+            else:
+                issues.extend(validate_tag_prompt(blocks[1]))
+            status = "noncompliant" if issues else "compliant"
+        else:
+            status = "unable"
+            issues.append(f"unrecognized prompt mode: {mode}")
+        audits.append(PromptAudit(record["image"], mode, status, issues, prompt))
+    return audits
+
+
+def render_prompt_audit(audits: list[PromptAudit], fmt: str) -> str:
+    counts = {status: sum(a.status == status for a in audits) for status in ("compliant", "noncompliant", "unable")}
+    if fmt == "json":
+        return json.dumps({"summary": counts, "images": [asdict(audit) for audit in audits]}, indent=2, ensure_ascii=False) + "\n"
+    if fmt == "markdown":
+        lines = ["# Post-prompt validation", "", f"Audited {len(audits)} generated image prompt(s): {counts['compliant']} compliant, {counts['noncompliant']} noncompliant, {counts['unable']} unable to validate.", "", "> This is a post-generation audit. It does not reject an image or alter workflow output."]
+        for audit in audits:
+            lines.extend(["", f"## `{audit.image}`", "", f"- Mode: `{audit.mode}`", f"- Audit status: **{audit.status}**"])
+            if audit.issues:
+                lines.extend(["", *[f"- {issue}" for issue in audit.issues]])
+        return "\n".join(lines) + "\n"
+    lines = [f"Audited {len(audits)} generated image prompt(s): {counts['compliant']} compliant, {counts['noncompliant']} noncompliant, {counts['unable']} unable"]
+    for audit in audits:
+        lines.append(f"{audit.status.upper()} {audit.image} [{audit.mode}]")
+        lines.extend(f"  - {issue}" for issue in audit.issues)
+    return "\n".join(lines) + "\n"
+
+
 def main() -> int:
     args = parse_args()
     script_dir = Path(__file__).resolve().parent
     rules_path = args.rules or script_dir / "rules.yaml"
     prompt_path = args.prompt or script_dir.parent / "prompt.md"
     try:
+        if args.annotated_details and not args.validate_post_prompts:
+            raise ValueError("--annotated-details requires --validate-post-prompts")
+        if args.validate_post_prompts:
+            if args.paths:
+                raise ValueError("YAML paths cannot be combined with --validate-post-prompts")
+            audits = audit_post_prompts(args.validate_post_prompts.expanduser().resolve())
+            report = render_prompt_audit(audits, args.format)
+            if args.output:
+                args.output.parent.mkdir(parents=True, exist_ok=True)
+                args.output.write_text(report, encoding="utf-8")
+            else:
+                sys.stdout.write(report)
+            if args.annotated_details:
+                original = args.validate_post_prompts.read_text(encoding="utf-8").rstrip()
+                annotation = render_prompt_audit(audits, "markdown")
+                args.annotated_details.parent.mkdir(parents=True, exist_ok=True)
+                args.annotated_details.write_text(original + "\n\n---\n\n" + annotation, encoding="utf-8")
+            if args.fail_on == "never":
+                return 0
+            if any(audit.status == "unable" for audit in audits):
+                return 1
+            if args.fail_on == "warning" and any(audit.status == "noncompliant" for audit in audits):
+                return 1
+            return 0
+        if not args.paths:
+            raise ValueError("provide at least one YAML path or --validate-post-prompts")
         if args.batch_size < 1:
             raise ValueError("--batch-size must be at least 1")
         if args.verification_batch_size < 1:
@@ -903,6 +1166,9 @@ def main() -> int:
         motif_results = route_motif_findings(categories, rules)
         findings.extend(motif_results)
         verbose(args, f"route motif checks produced {len(motif_results)} finding(s)")
+        policy_results = namespace_policy_findings(leaves, categories, rules)
+        findings.extend(policy_results)
+        verbose(args, f"namespace policy checks produced {len(policy_results)} finding(s)")
         suggestions: dict[str, str] = {}
         proposed_suggestions: dict[str, str] = {}
         rejected_suggestions: dict[str, list[str]] = {}

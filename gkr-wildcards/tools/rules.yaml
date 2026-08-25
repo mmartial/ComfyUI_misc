@@ -16,6 +16,32 @@ route_motifs:
     regex:
       - "\\b(?:maps?|atlas|atlases|cartographic|charts?)\\b"
 
+# Policies whose meaning belongs to one wildcard namespace. General route-design
+# principles live in prompt.md; these concrete contracts are machine-checkable.
+namespace_policies:
+  gkr_comics:
+    route_exclusions:
+      random:
+        - design
+        - random_design
+        - complex
+        - random_complex
+    prompt_budgets:
+      random: {target_items: 16, max_items: 24, max_words: 60, severity: warning}
+      random_design: {target_items: 24, max_items: 36, max_words: 90, severity: warning}
+      random_complex: {target_items: 24, max_items: 36, max_words: 90, severity: warning}
+    forbidden_content:
+      speech_containers:
+        severity: error
+        message: gkr-comics globally excludes speech balloons, dialogue balloons, and narrative captions.
+        regex: "\\b(?:speech|dialogue|word|thought) balloons?\\b|\\bnarrative captions?\\b|\\bcaption boxes?\\b"
+    restricted_content:
+      superhero_onomatopoeia:
+        severity: error
+        message: Onomatopoeia is allowed only in the dedicated superhero pool and superhero spotlight leaves.
+        regex: "\\b(?:KABOOM|POW|ZZZAP|CRASH|WHAM|SKRAKOOM|THWIP|onomatopoeia)\\b"
+        allowed_categories: [superhero_onomatopoeia, spotlight_classicscenes]
+
 patterns:
   forbidden_quality_filler:
     severity: error

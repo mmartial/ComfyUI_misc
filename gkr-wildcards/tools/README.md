@@ -37,6 +37,21 @@ uv run tools/wildcard_linter.py gkr-anime.yaml --format markdown --output audit-
 
 By default, the command exits with status 1 for errors and succeeds when only warnings remain. Use `--fail-on warning` for strict CI or `--fail-on never` for reporting only.
 
+## Audit generated post-LLM prompts
+
+`theme_organizer.py` records the prompt mode and final positive prompt in `details.md`. Audit those completed generations without loading wildcard source files:
+
+```bash
+uv run tools/wildcard_linter.py \
+  --validate-post-prompts details.md \
+  --format markdown \
+  --output post-prompt-audit.md \
+  --annotated-details details.audited.md \
+  --fail-on warning
+```
+
+This mode is an offline, post-generation audit. It reports each prompt as `compliant`, `noncompliant`, or `unable`; it does not retry generation, reject an image, modify the original `details.md`, or change the workflow's positive prompt. `--annotated-details` writes an optional copy with the audit appended. With the default `--fail-on error`, a noncompliant prompt is reported but does not fail the command; `unable` does. Use `--fail-on warning` to fail for noncompliance or `--fail-on never` for reporting only.
+
 ## Verbose mode and LLM traces
 
 Use `-v` or `--verbose` to show progress on standard error while keeping the selected report format clean on standard output:
@@ -381,10 +396,13 @@ THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
   --timeout 300 \
   --fixed-output gkr-$THEME.fixed.yaml \
   --fix-manifest gkr-$THEME.fixed-manifest.json \
+  --validate-post-prompts details.md \
+  --annotated-details details.audited.md \
   --format markdown \
   --output gkr-$THEME.fixed-report.md \
   --color auto \
   --fail-on never
+
 ```
 
 ## Rules
@@ -392,6 +410,8 @@ THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
 [`rules.yaml`](rules.yaml) contains reusable cross-theme patterns. [`tags-rules.yaml`](tags-rules.yaml) contains constraints applied only to files whose header declares `MODE: tags`: sequential-format rejection, tag-phrase length, sentence-connector, and emphasis-count checks. Missing mode declarations default to narrative, matching `prompt.md`.
 
 `route_motifs` entries in `rules.yaml` detect overrepresented concrete objects through configured roots such as `random`. The linter calculates the exact probability of a motif appearing through uniformly selected nested routes, including repeated references, and warns when it exceeds the configured threshold.
+
+`namespace_policies` contains theme-specific, machine-checkable contracts: recursively excluded output families, expanded route budgets, forbidden content, and category-scoped content. General authoring principles remain in `prompt.md`; concrete category names and limits belong here. Route budgets are calculated after recursive expansion and report p90, maximum size, and the probability of exceeding the configured item or word ceiling.
 
 Deterministic errors identify objective failures such as forbidden filler, unresolved markers, missing references, cycles, tags-mode sequential content, and camera/format conflicts. Semantic or heuristic patterns are warnings because surrounding visible evidence can make a matched phrase valid.
 

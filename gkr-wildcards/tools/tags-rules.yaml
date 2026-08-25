@@ -7,3 +7,19 @@ relationship_max_phrase_words: 10
 relationship_regex: "\\b(?:between|beneath|above|below|behind|before|toward|against|from|into|through|across|among|holding|gripping|protecting|fighting|facing|chasing|blocking|catching|carrying|surrounding|arcing|projecting|showing|listing|reaching|passed|passing|braced|covered|filled|filling|cut|left|repeated|standing|kneeling|crouching|climbing|crawling|extending|hovering|floating|dissolving|splitting)\\b"
 max_weighted_terms: 3
 sentence_connector_regex: "\\b(?:is|are|was|were|while|whereas)\\b"
+
+# Explicit output families may opt into layouts that are unsuitable for a
+# theme's ordinary random route. These exemptions do not make them reachable
+# from random; that separation is enforced by namespace_policies in rules.yaml.
+format_exemptions:
+  gkr_comics:
+    sequential_categories: [comic_splash_combo, double_page_spread_combo]
+    multi_view_categories:
+      - character_sheet_combo
+      - character_turnaround_combo
+      - expression_sheet_combo
+      - costume_variant_combo
+      - environment_design_combo
+      - prop_design_combo
+      - vehicle_design_combo
+      - creature_design_combo

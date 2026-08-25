@@ -184,6 +184,47 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertEqual(len(findings), 1)
         self.assertIn("25.0%", findings[0].message)
 
+    def test_namespace_route_exclusion_is_recursive(self):
+        leaves, categories, _ = self.inventory(
+            "gkr_test:\n"
+            "  design:\n    - character sheet\n"
+            '  middle:\n    - "__gkr_test/design__"\n'
+            '  random:\n    - "__gkr_test/middle__"\n'
+        )
+        rules = {"namespace_policies": {"gkr_test": {
+            "route_exclusions": {"random": ["design"]}
+        }}}
+        findings = LINTER.namespace_policy_findings(leaves, categories, rules)
+        self.assertIn("route_contract_violation", {finding.rule for finding in findings})
+
+    def test_namespace_budget_uses_recursive_expansion_probability(self):
+        leaves, categories, _ = self.inventory(
+            "gkr_test:\n"
+            "  scene:\n    - one, two, three\n    - one\n"
+            '  random:\n    - "__gkr_test/scene__"\n'
+        )
+        rules = {"namespace_policies": {"gkr_test": {"prompt_budgets": {
+            "random": {"max_items": 2, "max_words": 20, "target_items": 1}
+        }}}}
+        findings = LINTER.namespace_policy_findings(leaves, categories, rules)
+        self.assertEqual(len(findings), 1)
+        self.assertIn("50.0%", findings[0].message)
+
+    def test_details_audit_is_mode_aware(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "details.md"
+            path.write_text(
+                "# Image prompt details\n\n## `image.png`\n\n- Prompt mode: `Tags`\n\n"
+                "### Post-LLM prompt\n\n```text\n1other, hero, raised sword, wide shot\n```\n",
+                encoding="utf-8",
+            )
+            audits = LINTER.audit_post_prompts(path)
+            self.assertEqual(audits[0].status, "compliant")
+
+    def test_details_audit_flags_unresolved_tags_alternative(self):
+        issues = LINTER.validate_tag_prompt("1other, red or blue coat, close-up")
+        self.assertTrue(any("alternative" in issue for issue in issues))
+
     def test_trace_event_writes_jsonl(self):
         with tempfile.TemporaryDirectory() as temporary:
             path = Path(temporary) / "trace.jsonl"
