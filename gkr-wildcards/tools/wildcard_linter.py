@@ -1097,36 +1097,54 @@ def render_prompt_audit(audits: list[PromptAudit], fmt: str) -> str:
     return "\n".join(lines) + "\n"
 
 
+def combine_reports(lint_report: str, audits: list[PromptAudit], fmt: str) -> str:
+    audit_report = render_prompt_audit(audits, fmt)
+    if fmt == "json":
+        return json.dumps({
+            "wildcard_lint": json.loads(lint_report),
+            "post_prompt_validation": json.loads(audit_report),
+        }, indent=2, ensure_ascii=False) + "\n"
+    separator = "\n---\n\n" if fmt == "markdown" else "\n" + "=" * 88 + "\n"
+    return lint_report.rstrip() + separator + audit_report
+
+
+def write_annotated_details(source: Path, destination: Path, audits: list[PromptAudit]) -> None:
+    original = source.read_text(encoding="utf-8").rstrip()
+    annotation = render_prompt_audit(audits, "markdown")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_text(original + "\n\n---\n\n" + annotation, encoding="utf-8")
+
+
 def main() -> int:
     args = parse_args()
     script_dir = Path(__file__).resolve().parent
     rules_path = args.rules or script_dir / "rules.yaml"
     prompt_path = args.prompt or script_dir.parent / "prompt.md"
+    audits: list[PromptAudit] = []
     try:
         if args.annotated_details and not args.validate_post_prompts:
             raise ValueError("--annotated-details requires --validate-post-prompts")
         if args.validate_post_prompts:
-            if args.paths:
-                raise ValueError("YAML paths cannot be combined with --validate-post-prompts")
             audits = audit_post_prompts(args.validate_post_prompts.expanduser().resolve())
-            report = render_prompt_audit(audits, args.format)
-            if args.output:
-                args.output.parent.mkdir(parents=True, exist_ok=True)
-                args.output.write_text(report, encoding="utf-8")
-            else:
-                sys.stdout.write(report)
             if args.annotated_details:
-                original = args.validate_post_prompts.read_text(encoding="utf-8").rstrip()
-                annotation = render_prompt_audit(audits, "markdown")
-                args.annotated_details.parent.mkdir(parents=True, exist_ok=True)
-                args.annotated_details.write_text(original + "\n\n---\n\n" + annotation, encoding="utf-8")
-            if args.fail_on == "never":
+                write_annotated_details(
+                    args.validate_post_prompts.expanduser().resolve(),
+                    args.annotated_details.expanduser().resolve(), audits,
+                )
+            if not args.paths:
+                report = render_prompt_audit(audits, args.format)
+                if args.output:
+                    args.output.parent.mkdir(parents=True, exist_ok=True)
+                    args.output.write_text(report, encoding="utf-8")
+                else:
+                    sys.stdout.write(report)
+                if args.fail_on == "never":
+                    return 0
+                if any(audit.status == "unable" for audit in audits):
+                    return 1
+                if args.fail_on == "warning" and any(audit.status == "noncompliant" for audit in audits):
+                    return 1
                 return 0
-            if any(audit.status == "unable" for audit in audits):
-                return 1
-            if args.fail_on == "warning" and any(audit.status == "noncompliant" for audit in audits):
-                return 1
-            return 0
         if not args.paths:
             raise ValueError("provide at least one YAML path or --validate-post-prompts")
         if args.batch_size < 1:
@@ -1226,6 +1244,8 @@ def main() -> int:
         findings.sort(key=lambda f: (f.file, f.line, f.severity, f.rule))
         use_color = args.format == "text" and not args.output and (args.color == "always" or (args.color == "auto" and sys.stdout.isatty()))
         report = render(findings, leaves, args.format, use_color)
+        if audits:
+            report = combine_reports(report, audits, args.format)
         if args.output:
             args.output.parent.mkdir(parents=True, exist_ok=True)
             args.output.write_text(report, encoding="utf-8")
@@ -1239,7 +1259,11 @@ def main() -> int:
         return 0
     if any(f.severity == "error" for f in findings):
         return 1
+    if any(audit.status == "unable" for audit in audits):
+        return 1
     if args.fail_on == "warning" and any(f.severity == "warning" for f in findings):
+        return 1
+    if args.fail_on == "warning" and any(audit.status == "noncompliant" for audit in audits):
         return 1
     return 0
 

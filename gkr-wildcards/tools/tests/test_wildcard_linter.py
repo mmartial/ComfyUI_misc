@@ -225,6 +225,19 @@ class WildcardLinterTests(unittest.TestCase):
         issues = LINTER.validate_tag_prompt("1other, red or blue coat, close-up")
         self.assertTrue(any("alternative" in issue for issue in issues))
 
+    def test_combined_markdown_report_contains_both_sections(self):
+        audits = [LINTER.PromptAudit("image.png", "Tags", "compliant", [], "1other, hero")]
+        report = LINTER.combine_reports("# Wildcard lint\n", audits, "markdown")
+        self.assertIn("# Wildcard lint", report)
+        self.assertIn("# Post-prompt validation", report)
+
+    def test_combined_json_report_is_valid_json(self):
+        audits = [LINTER.PromptAudit("image.png", "Tags", "compliant", [], "1other, hero")]
+        report = LINTER.combine_reports('{"summary": {}}\n', audits, "json")
+        parsed = json.loads(report)
+        self.assertIn("wildcard_lint", parsed)
+        self.assertIn("post_prompt_validation", parsed)
+
     def test_trace_event_writes_jsonl(self):
         with tempfile.TemporaryDirectory() as temporary:
             path = Path(temporary) / "trace.jsonl"

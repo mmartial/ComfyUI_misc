@@ -52,6 +52,8 @@ uv run tools/wildcard_linter.py \
 
 This mode is an offline, post-generation audit. It reports each prompt as `compliant`, `noncompliant`, or `unable`; it does not retry generation, reject an image, modify the original `details.md`, or change the workflow's positive prompt. `--annotated-details` writes an optional copy with the audit appended. With the default `--fail-on error`, a noncompliant prompt is reported but does not fail the command; `unable` does. Use `--fail-on warning` to fail for noncompliance or `--fail-on never` for reporting only.
 
+The audit options may also be combined with ordinary YAML linting and LLM fixes. In that form, `--output` contains the wildcard lint followed by post-prompt validation (or two named objects for JSON), while `--annotated-details` still contains only the copied details and its audit.
+
 ## Verbose mode and LLM traces
 
 Use `-v` or `--verbose` to show progress on standard error while keeping the selected report format clean on standard output:
