@@ -1,0 +1,39 @@
+# ========================================================================
+# EXAMPLE SKELETON FOR tools/wildcard_generator.py
+#
+# Copy this file, replace the theme and namespace, then edit the GENERATOR
+# comments and empty categories. The generator reads only comments beginning
+# with `GENERATOR:` as instructions. Other comments are documentation.
+#
+# Every declared category is required in the generated wildcard. Categories
+# must be empty lists. The generator may add a limited number of supporting
+# categories when they are needed for coherent combinations and routes.
+#
+# GLOBAL RULE: Read and apply ./prompt.md (MODE: tags)
+#
+# GENERATOR: THEME: Original superhero worlds and decisive superhero imagery.
+# GENERATOR: Cover heroic action, civilian rescue, investigation, secret bases, villains, and quiet public moments after danger.
+# GENERATOR: Avoid named characters, franchises, recognizable costumes, logos, and direct imitation.
+# GENERATOR: Keep powers visually understandable through anatomy, pose, material effects, damaged objects, or environmental consequences.
+# ========================================================================
+
+gkr_superhero:
+
+  # A component pool defaults to 20 leaves. An explicit count in a GENERATOR
+  # instruction overrides that default.
+  # GENERATOR: Create 30 leaves with visually distinct costumes, anatomy, equipment, or power evidence; do not rely on personality labels alone.
+  superhero_archetype: []
+
+  # Categories containing "scene" are public scene routes and default to 12.
+  # GENERATOR: Balance combat, rescue, investigation, public protection, and aftermath. Each leaf must show one decisive single-image moment.
+  superhero_scene: []
+
+  # Spotlight categories default to 50 complete, curated prompts.
+  # GENERATOR: Showcase the theme's most recognizable and desirable images without copying existing intellectual property.
+  spotlight: []
+
+  # Routers have no fixed leaf count. They contain only wildcard references.
+  # The planner should wire this route to complete scene, combo, and spotlight
+  # categories while keeping technical or design-only output families separate.
+  # GENERATOR: Select all ordinary production-ready routes with useful breadth and no decorative literal text.
+  random: []

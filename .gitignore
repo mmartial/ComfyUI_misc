@@ -6,6 +6,7 @@ details.md
 details.audited.md
 *.fixed.yaml
 *.fixed-manifest.json
-*.fixed-report.md
+*report.md
 safebooru_general_tags.*
 *-audit.md
+gkr-wildcards/*.json

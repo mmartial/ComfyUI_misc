@@ -1,4 +1,89 @@
-# Wildcard linter
+<h1>>Wildcard tools</h1>
+
+# Generate a new wildcard with an LLM
+
+`wildcard_generator.py` creates a complete tags-mode wildcard from a valid YAML
+skeleton. The skeleton contains one namespace, empty category lists, the normal
+`MODE: tags` header, and instructions written as `# GENERATOR:` comments. See
+[`../../howto/wildcard-generator-skeleton.yaml`](../../howto/wildcard-generator-skeleton.yaml)
+for a documented example.
+
+The generator uses a staged plan, bounded category batches, deterministic
+assembly, the same OpenAI-compatible interface as the linter, and iterative
+lint/review/repair passes. Required skeleton categories cannot be removed or
+renamed. Supporting categories are added by default, subject to graph-depth and
+category-count limits.
+
+Default category sizes are 20 component leaves, 12 combo/public-scene leaves,
+50 spotlight leaves, and as many reference-only router leaves as needed. Put an
+explicit count such as `# GENERATOR: Create 30 leaves ...` immediately above a
+category to override its default.
+
+From `gkr-wildcards`:
+
+```bash
+uv run tools/wildcard_generator.py \
+  ../howto/wildcard-generator-skeleton.yaml \
+  --output gkr-superhero.yaml \
+  --danbooru-tags safebooru_general_tags.csv \
+  --model "$OPENAI_MODEL" \
+  --base-url "$OPENAI_BASE_URL" \
+  --api-key-env OPENAI_API_KEY \
+  --verbose
+```
+
+The tool preserves the initial generated draft at `gkr-superhero.yaml` and
+always writes the best post-repair copy to `gkr-superhero.fixed.yaml`. Remaining
+errors and warnings are marked `[UNRESOLVED]` in the matching
+`gkr-superhero.fixed-report.md`. It also writes
+`gkr-superhero.generation.json` with the accepted plan, generation-call
+metadata, reported token usage, and unresolved findings. API credentials are
+never written. Use `--fixed-output` and `--report` to override the corresponding
+paths.
+
+Useful limits and controls:
+
+```text
+--batch-categories 3
+--max-generation-calls 20
+--max-repair-passes 2
+--max-category-depth 6
+--max-added-categories 30
+--max-total-tokens 100000
+```
+
+`--max-category-depth` measures the longest category-reference chain, including
+its starting category. `--max-total-tokens` uses `usage.total_tokens` when the
+endpoint reports it; an endpoint that omits usage cannot be stopped at an exact
+token boundary. Canonical Danbooru tags are preferred when a semantically exact
+match exists, while short literal visual phrases remain allowed so vocabulary
+coverage never removes theme content.
+
+## Practical example:
+
+### Obtain the safebooru_general_tags.csv file
+
+```bash
+python3 tools/download_danbooru_tags.py \
+  --output safebooru_general_tags.csv \
+  --min-post-count 100 \
+  --verbose
+```
+
+### Obtain a test file
+
+```bash
+OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
+  ../howto/wildcard-generator-skeleton.yaml \
+  --output gkr-superhero.yaml \
+  --danbooru-tags safebooru_general_tags.csv \
+  --api-key-env OLLAMA_API_KEY \
+  --base-url http://localhost:11434/v1 \
+  --model gemma4:cloud \
+  --verbose
+```
+
+# Lint an existing wildcard
 
 `wildcard_linter.py` audits GKR wildcard YAML files in two stages:
 

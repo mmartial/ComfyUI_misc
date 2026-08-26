@@ -744,6 +744,9 @@ def llm_json_request(
             status = getattr(response, "status", None)
             raw_response = response.read().decode("utf-8", errors="replace")
         response_data = json.loads(raw_response)
+        usage_callback = getattr(args, "llm_usage_callback", None)
+        if callable(usage_callback) and isinstance(response_data.get("usage"), dict):
+            usage_callback(response_data["usage"])
         content = response_data["choices"][0]["message"]["content"].strip()
         trace_event(trace_path, {"event": response_event, "batch": batch_number, "content": content})
         cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", content, flags=re.I)
