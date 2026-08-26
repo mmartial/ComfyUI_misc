@@ -50,9 +50,114 @@ uv run tools/wildcard_linter.py \
   --fail-on warning
 ```
 
-This mode is an offline, post-generation audit. It reports each prompt as `compliant`, `noncompliant`, or `unable`; it does not retry generation, reject an image, modify the original `details.md`, or change the workflow's positive prompt. `--annotated-details` writes an optional copy with the audit appended. With the default `--fail-on error`, a noncompliant prompt is reported but does not fail the command; `unable` does. Use `--fail-on warning` to fail for noncompliance or `--fail-on never` for reporting only.
+This mode is an offline, post-generation audit. It reports each prompt as `compliant`, `noncompliant`, or `unable`; it does not retry generation, reject an image, modify the original `details.md`, or change the workflow's positive prompt. `--annotated-details` writes an optional copy with `Audit status` and any `Audit issue` entries inserted into each corresponding image section. With the default `--fail-on error`, a noncompliant prompt is reported but does not fail the command; `unable` does. Use `--fail-on warning` to fail for noncompliance or `--fail-on never` for reporting only.
 
-The audit options may also be combined with ordinary YAML linting and LLM fixes. In that form, `--output` contains the wildcard lint followed by post-prompt validation (or two named objects for JSON), while `--annotated-details` still contains only the copied details and its audit.
+Post-prompt issues are classified as format, subject-count, unresolved-alternative, camera, weight-syntax, representability, temporal-transition, unknown-canonical-tag, or invalid-service-response failures. Summaries report both generated-image totals and unique pre/post prompt-pair totals, so repeated generations do not inflate issue frequency.
+
+Danbooru subject counters use a strict built-in vocabulary (`1`-`5`, `6+`, and `multiple` for girls, boys, and others, plus `no_humans`). Invalid constructions such as `1family`, `3men`, or `7others` fail validation. `crowd` and `people` are accepted for indefinite unnamed groups, which Danbooru does not count as foreground characters.
+
+Optionally provide a local one-tag-per-line or CSV tag list:
+
+```bash
+uv run tools/wildcard_linter.py \
+  --validate-post-prompts details.md \
+  --danbooru-tags danbooru-tags.csv \
+  --format markdown --output post-prompt-audit.md
+```
+
+`--danbooru-tags` is usable with YAML paths, post-prompt auditing, or both. For Tags-mode YAML leaves, the linter reports:
+
+- `canonical_tag_normalization` when a literal phrase has an exact underscore-form tag in the vocabulary;
+- `canonical_tag_alias` when an alias maps unambiguously to one canonical tag and the source CSV includes aliases;
+- `canonical_tag_separator_normalization` when a hyphenated phrase has an exact space-equivalent canonical tag (`high-contrast` → `high_contrast`);
+- `canonical_tag_contained_span` when a longer comma-separated item contains one or more exact multiword tags;
+- `unknown_canonical_tag` for an unknown canonical-looking underscore token, with a small ranked candidate list.
+
+Contained-span matching searches longest, non-overlapping spans of at least two words. Single-word tags remain in the vocabulary for complete-item validation but are not used to decompose longer phrases. Exact matches always win. When exact and alias lookup fail, candidate retrieval also tests conservative singular/plural variants of the final component (`holding_books` → `holding_book`, `blue_eye` → `blue_eyes`). These are candidates, not unconditional rewrites, because plurality can be visually meaningful. For example, `vibrant red hair` reports canonical identity `red_hair` and unmatched word `vibrant`; it does not infer `colorful` or recommend the hybrid `vibrant red_hair`.
+
+During LLM visual review, an exact complete comma-separated Tags-mode item from this vocabulary is supplied as a verified visual tag. Thus `dreaming` passes the representability test when it is its own item and exists in the CSV. A larger phrase such as `detective dreaming of victory` receives no such exemption merely because it contains that word. Structural and composition checks still apply to verified items.
+
+Hyphen normalization is also exact-first. A literal canonical tag that contains a hyphen remains unchanged. Otherwise ASCII hyphens and common Unicode dash forms are treated as word separators for lookup, allowing `high-contrast`, `high‑contrast`, and `high—contrast` to discover `high_contrast` without globally rewriting legitimate hyphenated canonical tags.
+
+The Tags-mode `canonical_composition` policy also recognizes overlapping modifier tags that share the final noun. When at least two vocabulary-backed components exist, `glowing red eye` yields `glowing_eye` (exact) and `red_eyes` (conservative inflection from `red eye`) under `canonical_tag_composition`. The components are passed to the constrained LLM and must remain represented in an accepted rewrite. The analysis is disabled outside Tags mode, does not fire for only one component, and never treats candidate existence alone as permission to change semantics.
+
+Narrative-mode YAML leaves are not canonicalized. Fuzzy candidates are advisory and never become automatic replacements solely because of string similarity. Short literal phrases remain allowed when no canonical tag expresses the relationship.
+
+Tags-mode style text is also checked for medium words that diffusion models commonly literalize as objects. The `ambiguous_brush_medium` rule flags style shorthand such as `bold brush contours`, `dry-brush shadows`, and `visible brushwork`, and recommends the intended visible mark instead. It does not flag a brush explicitly held, used, or depicted as an object. Configure this vocabulary under `literalized_style_terms` in `tags-rules.yaml`.
+
+To let the existing LLM fix stage choose from constrained candidates, add:
+
+```text
+--danbooru-tags safebooru_general_tags.csv
+--canonical-tag-suggestions
+--canonical-tag-candidate-count 5
+--canonical-tag-style underscore
+```
+
+`--canonical-tag-suggestions` requires `--llm --suggest-fixes`. It makes canonical-tag findings eligible for that fix pass even when `--fix-severity error` is otherwise in effect; an explicit `--fix-rules` allowlist still takes precedence. For each questionable Tags-mode item, the LLM receives only the retrieved candidates and may select one when semantically equivalent, retain a short literal phrase, or omit an unsupported/nonvisual concept. It is explicitly prohibited from inventing another underscore tag. Deterministic fix validation then rejects a rewrite that retains the targeted canonical issue or introduces a new canonical-tag finding. The normal semantic verification pass still checks preservation of visible facts.
+
+`--canonical-tag-style underscore` renders canonical suggestions as database identifiers such as `red_hair`. Use `--canonical-tag-style spaces` for models whose documented tag syntax uses `red hair`; matching and verification still retain `red_hair` internally as the canonical identity.
+
+During post-prompt auditing, unknown underscore-style output tokens receive soft `unknown_canonical_tag` warnings. These warnings leave the per-image status compliant by themselves, but count under `--fail-on warning`.
+
+Create or refresh the local vocabulary with:
+
+```bash
+python3 tools/download_danbooru_tags.py \
+  --output safebooru_general_tags.csv \
+  --min-post-count 100 \
+  --verbose
+```
+
+The default `--source auto` mode first downloads the small `danbooru_tags.csv` snapshot from `newtextdoc1111/danbooru-tag-csv` at a pinned Hugging Face revision. It verifies the published SHA-256, retains only General tags (`category == 0`) meeting `--min-post-count`, and normalizes the result to the linter's `name,post_count,alias` format. Pinning and checksum verification make repeated downloads reproducible and prevent a changed or incomplete remote file from silently replacing the vocabulary. API sources do not provide aliases and therefore emit `name,post_count` instead.
+
+If Hugging Face is unavailable, automatic mode tries the Donmai Safebooru API and finally Safebooru.org's XML tag API. Safebooru.org is not count-ordered, so that last fallback must scan every page before applying the threshold and can take substantially longer. Select one source explicitly when desired:
+
+```bash
+python3 tools/download_danbooru_tags.py --source huggingface --output safebooru_general_tags.csv --verbose
+python3 tools/download_danbooru_tags.py --source donmai --output safebooru_general_tags.csv --verbose
+python3 tools/download_danbooru_tags.py --source safebooru-org --output safebooru_general_tags.csv --verbose
+```
+
+The CSV is atomically replaced only after a successful download. The downloader also writes `safebooru_general_tags.csv.metadata.json` with the actual source, retrieval time, threshold, tag count, and provenance. The default threshold is 100 posts; use `--min-post-count 1` to retain every General tag in the selected source. `--max-pages` applies only to API sources and records that the output is partial.
+
+Use the downloaded copy in a standalone post-prompt audit:
+
+```bash
+uv run tools/wildcard_linter.py \
+  --validate-post-prompts details.md \
+  --danbooru-tags safebooru_general_tags.csv \
+  --annotated-details details.audited.md \
+  --format markdown \
+  --output post-prompt-audit.md \
+  --fail-on never
+```
+
+Or add these two options to a wildcard lint/fix run:
+
+```text
+--validate-post-prompts details.md --danbooru-tags safebooru_general_tags.csv
+```
+
+For retrieval-assisted YAML fixes in that combined run, also add:
+
+```text
+--canonical-tag-suggestions --canonical-tag-candidate-count 5
+```
+
+When YAML paths and `--validate-post-prompts` are used together, ordinary `--output` contains only the YAML lint/fix report. `--annotated-details` carries per-image audit entries in the copied details file. To also write a standalone audit summary, use a distinct destination:
+
+```text
+--post-prompt-output post-prompt-report.md
+```
+
+To deliberately restore the former combined report, use:
+
+```text
+--include-post-prompt-report
+```
+
+`--post-prompt-output` and `--include-post-prompt-report` are mutually exclusive. In audit-only mode with no YAML paths, `--output` continues to mean the post-prompt report; `--post-prompt-output` may be used instead for naming consistency.
 
 ## Verbose mode and LLM traces
 
@@ -62,7 +167,7 @@ Use `-v` or `--verbose` to show progress on standard error while keeping the sel
 uv run tools/wildcard_linter.py . --verbose --fail-on never
 ```
 
-Verbose output includes discovered files, inventory totals, deterministic finding counts, LLM batch progress, and report destinations.
+Verbose output includes discovered files, inventory totals, deterministic finding counts, LLM batch progress, elapsed time and HTTP status for every completed LLM call, cache hits, and report destinations. Failed HTTP calls report the endpoint, batch and offset, elapsed time, status/reason, and server response body. The full untruncated body is also written to the trace when tracing is active.
 
 When `--llm` and `--verbose` are used together, the linter automatically creates a JSON Lines trace in the operating system's temporary directory and prints its path:
 
@@ -90,9 +195,36 @@ The trace records:
 
 The trace never records the API key or authorization headers. It can still contain sensitive wildcard content and model-generated text, so review it before sharing and delete it when it is no longer needed. Automatically created traces remain in the system temporary directory until the operating system or user removes them.
 
+## LLM response cache
+
+Successful review, fix-suggestion, and fix-verification results are cached per item by default in the system temporary directory under `wildcard-linter-cache`. Each new entry is named `item-<sha256>.json` and keyed by the phase, endpoint, model, instructions, and one prompt's semantic inputs—including mode, category, text, issues, or proposed rewrite as applicable. File path, source line, list index, and transient leaf ID are excluded, so an unchanged prompt remains reusable after reordering. Before each LLM call, the linter resolves individual hits and submits only missing items as a batch. Failed, malformed, omitted, and incomplete item responses are not cached. Cache files created by the older batch-level implementation do not have the `item-` prefix and are not reused; they may be deleted.
+
+A cache hit requires every key component for that phase and item to remain identical. In particular:
+
+- Changing `prompt.md` changes the complete review instruction and invalidates all `LLM batch` review entries, even for unchanged YAML leaves.
+- Changing built-in fix instructions or the per-item issue/canonical guidance invalidates affected `fix-suggestion batch` entries.
+- Changing the original text, proposed rewrite, or verification issues invalidates affected `fix-verification batch` entries.
+- Changing `--model` or `--base-url` invalidates entries for every phase.
+- Changing `--canonical-tag-style`, candidate count, vocabulary-derived candidates, or applicable rules can change fix inputs and therefore invalidate their entries.
+- Changing only file paths, line numbers, list positions, leaf IDs, batch size, or harmless YAML ordering does not invalidate an otherwise identical per-item entry.
+
+This conservative instruction-level invalidation is intentional: a response produced under an older policy must not hide a finding introduced by the new policy. After one complete run under the new policy, immediately repeating the same command and inputs should normally show all eligible items as cached.
+
+Choose another cache folder or disable caching with:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml --llm --llm-cache-dir audit-cache
+uv run tools/wildcard_linter.py gkr-anime.yaml --llm --no-llm-cache
+uv run tools/wildcard_linter.py gkr-anime.yaml --llm --llm-cache-max-age-minutes 1440
+```
+
+`--llm-cache-max-age-minutes` is disabled by default. When set, the cache is swept at the start of the LLM stage; entries older than the given number of minutes are deleted, and any needed items are requested again. Delete the displayed cache directory to force a completely fresh run. Cache files contain model-generated audit or rewrite content but never the API key or authorization header.
+
 ## Report layout, differences, and color
 
 Text and Markdown reports render every finding as a separate section. When a potential fix exists, the report shows the original leaf and proposed replacement as a diff.
+
+When `--fixed-output` is generated, findings whose leaves were not included in the accepted replacements are marked `[UNRESOLVED]` in text and Markdown reports. The report summary includes the unresolved count, making `rg '\[UNRESOLVED\]' gkr-comics.fixed-report.md` a quick review filter. JSON reports expose the same state as `fix_status` (`fixed`, `unresolved`, or `not_attempted`) and include `summary.unresolved`. The marker is report metadata only; it is never inserted into wildcard YAML content.
 
 Terminal color defaults to `auto`: ANSI colors are enabled only when text is written directly to an interactive terminal. Redirected output and `--output` files remain free of escape codes. Override detection with:
 
@@ -380,9 +512,24 @@ uv run tools/wildcard_linter.py gkr-anime.yaml \
   --timeout 300
 ```
 
-Practical example:
+## Practical example:
+
+### Obtain the safebooru_general_tags.csv file
 
 ```bash
+python3 tools/download_danbooru_tags.py \
+  --output safebooru_general_tags.csv \
+  --min-post-count 100 \
+  --verbose
+```
+
+### Fix a theme file (with LLM)
+
+```bash
+# Delete and re-create the wildcard-linter-cache folder to start a full llm step (otherwise it will use the cache)
+rm -rf wildcard-linter-cache
+mkdir wildcard-linter-cache
+
 THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
   gkr-$THEME.yaml \
   --verbose \
@@ -390,21 +537,45 @@ THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
   --llm-scope content \
   --suggest-fixes \
   --fix-severity both \
+  --danbooru-tags safebooru_general_tags.csv \
+  --canonical-tag-suggestions \
+  --canonical-tag-candidate-count 5 \
+  --canonical-tag-style underscore \
   --api-key-env OLLAMA_API_KEY \
   --base-url http://localhost:11434/v1 \
-  --model glm-5.2:cloud \
-  --batch-size 50 \
+  --model gemma4:cloud \
+  --batch-size 15 \
   --verification-batch-size 15 \
   --timeout 300 \
+  --llm-cache-dir wildcard-linter-cache \
   --fixed-output gkr-$THEME.fixed.yaml \
-  --fix-manifest gkr-$THEME.fixed-manifest.json \
-  --validate-post-prompts details.md \
-  --annotated-details details.audited.md \
   --format markdown \
   --output gkr-$THEME.fixed-report.md \
   --color auto \
   --fail-on never
+```
 
+After completion:
+
+1. Compare the bsase YAML against the `.fixed` YAML and make decisions
+2. Review the `.fixed-report.md` for `UNRESOLVED` entries
+
+### Analyze the details.md file
+
+```bash
+## 1. Generate the details.md file
+# In the folder with all our PNGS, move the files and generate the md file
+
+uv run --with pillow <TOOL_PATH>/theme_organizer.py *.png -m --details details.md
+
+## 2. Analyse the md file
+
+uv run <TOOL_PATH>/wildcard_linter.py \
+  --validate-post-prompts details.md \
+  --format markdown \
+  --output post-prompt-audit.md \
+  --annotated-details details.audited.md \
+  --fail-on warning
 ```
 
 ## Rules
@@ -416,6 +587,10 @@ THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
 `namespace_policies` contains theme-specific, machine-checkable contracts: recursively excluded output families, expanded route budgets, forbidden content, and category-scoped content. General authoring principles remain in `prompt.md`; concrete category names and limits belong here. Route budgets are calculated after recursive expansion and report p90, maximum size, and the probability of exceeding the configured item or word ceiling.
 
 Deterministic errors identify objective failures such as forbidden filler, unresolved markers, missing references, cycles, tags-mode sequential content, and camera/format conflicts. Semantic or heuristic patterns are warnings because surrounding visible evidence can make a matched phrase valid.
+
+Representability warnings identify interpretive modifiers (`familiar`, `eccentric`, `historical`, `recurring`), unspecified `impossible` or `looming` claims, time-dependent state transitions, and ambiguous `crashing` shorthand. They are candidates rather than blanket `-ing` bans: directly visible poses and states such as holding, kneeling, glowing, and floating remain valid. When automatic fixing targets one of these warnings, the accepted rewrite must remove the triggering shorthand and preserve only a stable, concrete visible state.
+
+The `underspecified_specificity` warning similarly rejects hyphenated shorthand such as `region-specific`, `setting-specific`, `mission-specific`, `sport-specific`, `material-specific`, and `class-specific`. A fix must remove the label and retain only concrete visual evidence already present; it may not invent clothing, tools, materials, architecture, or equipment to fill the gap. Plain uses of the word `specific` are not matched by this rule.
 
 In narrative mode, sequence-related warnings are suppressed when a leaf explicitly declares panels, a page, storyboard, diptych, triptych, contact sheet, sequence, or spread. In tags mode those formats are errors; only single-image rendering signatures such as panel-border framing are allowed.
 

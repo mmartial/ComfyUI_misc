@@ -1,3 +1,11 @@
 *.zip
 .DS_Store
 __pycache__/
+wildcard-linter-cache/
+details.md
+details.audited.md
+*.fixed.yaml
+*.fixed-manifest.json
+*.fixed-report.md
+safebooru_general_tags.*
+*-audit.md

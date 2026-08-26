@@ -8,6 +8,28 @@ relationship_regex: "\\b(?:between|beneath|above|below|behind|before|toward|agai
 max_weighted_terms: 3
 sentence_connector_regex: "\\b(?:is|are|was|were|while|whereas)\\b"
 
+# Some rendering-medium words are strongly literalized by diffusion models.
+# Flag style uses while preserving an actual depicted tool in a subject's hand.
+literalized_style_terms:
+  ambiguous_brush_medium:
+    severity: warning
+    rewrite_must_resolve: true
+    regex: "\\b(?:brushwork|brush[ -]?strokes?|dry[ -]?brush(?:ed)?(?:\\s+(?:shadows?|texture|ink))?|(?:(?:bold|broad|rough|strong|forceful|realistic|visible|painterly|digital|textured|expressive|fluid|calligraphic|fast|soft)\\s+)+brush(?:\\s+(?:contours?|lines?|edges?|ink|shadows?|texture|strokes?))?)\\b"
+    literal_object_regex: "\\b(?:holding|gripping|carrying|using|wielding|painting with|brushing with)\\b.{0,32}\\bbrush(?:es)?\\b|\\bbrush(?:es)?\\b.{0,32}\\b(?:in (?:a |the )?hand|gears?|bristles?|handle)\\b"
+    message: Style wording containing “brush” may be rendered as a literal brush object instead of a mark-making effect.
+    suggestion: Replace the medium/tool word with the visible result already intended, such as bold ink contours, varied-width ink lines, broken ink texture, layered paint texture, opaque painted edges, soft tonal blending, or feathered shadows. Keep brush only when an actual brush is visibly held, used, or depicted.
+
+# When two or more modifiers form known tags with the same final noun, expose
+# the overlapping canonical components to the constrained LLM fix stage.
+canonical_composition:
+  enabled: true
+  severity: warning
+  rewrite_must_resolve: true
+  shared_head_attributes: true
+  minimum_matches: 2
+  require_vocabulary_match: true
+  allow_inflection_match: true
+
 # Explicit output families may opt into layouts that are unsuitable for a
 # theme's ordinary random route. These exemptions do not make them reachable
 # from random; that separation is enforced by namespace_policies in rules.yaml.

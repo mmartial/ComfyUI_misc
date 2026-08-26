@@ -7,11 +7,15 @@
 from __future__ import annotations
 
 import importlib.util
+import io
 import json
 import sys
 import tempfile
 import unittest
+import urllib.error
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 
 
 MODULE_PATH = Path(__file__).resolve().parents[1] / "wildcard_linter.py"
@@ -44,6 +48,52 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertIn("temporal_progression", rules)
         self.assertFalse([finding for finding in findings if finding.suggestion])
 
+    def test_interpretive_modifier_and_transition_are_flagged(self):
+        leaves, _, initial = self.inventory(
+            "gkr_test:\n  story_scene:\n"
+            "    - familiar hero fragmenting into multiple silhouettes beneath a looming tower\n"
+        )
+        findings = initial + LINTER.pattern_findings(leaves, self.rules)
+        found = {finding.rule for finding in findings}
+        self.assertIn("interpretive_visual_modifier", found)
+        self.assertIn("temporal_state_transition", found)
+        self.assertIn("ambiguous_looming", found)
+
+    def test_concrete_ing_pose_is_not_a_transition(self):
+        leaves, _, initial = self.inventory(
+            "gkr_test:\n  story_scene:\n    - courier holding sealed case, kneeling beside damaged bicycle\n"
+        )
+        findings = initial + LINTER.pattern_findings(leaves, self.rules)
+        self.assertNotIn("temporal_state_transition", {finding.rule for finding in findings})
+
+    def test_hyphenated_specificity_shorthand_must_be_resolved(self):
+        leaves, _, initial = self.inventory(
+            "gkr_test:\n  scene:\n    - operative, mission-specific equipment, compact rifle, radio harness\n"
+        )
+        findings = initial + LINTER.pattern_findings(leaves, self.rules)
+        self.assertIn("underspecified_specificity", {finding.rule for finding in findings})
+        post = LINTER.representability_issues("operative, mission-specific equipment, compact rifle")
+        self.assertIn("underspecified_specificity", {code for code, _ in post})
+
+    def test_plain_specific_does_not_trigger_hyphenated_specificity_rule(self):
+        leaves, _, initial = self.inventory(
+            "gkr_test:\n  scene:\n    - conservator holding a specific labeled brush beside a numbered tray\n"
+        )
+        findings = initial + LINTER.pattern_findings(leaves, self.rules)
+        self.assertNotIn("underspecified_specificity", {finding.rule for finding in findings})
+
+    def test_fix_validation_requires_representability_warning_to_be_resolved(self):
+        leaves, _, initial = self.inventory(
+            "gkr_test:\n  story_scene:\n    - familiar street, red storefront\n"
+        )
+        findings = initial + LINTER.pattern_findings(leaves, self.rules)
+        accepted, rejected = LINTER.validate_suggestions(
+            leaves, {leaves[0].uid: "familiar street, blue storefront"},
+            findings, self.rules, self.tags_rules,
+        )
+        self.assertFalse(accepted)
+        self.assertIn("targeted representability warning remains", rejected[leaves[0].uid][0])
+
     def test_explicit_panels_suppress_temporal_warning(self):
         leaves, _, initial = self.inventory(
             "gkr_test:\n  horror_scene:\n    - four-panel page progressively replacing a face with an anatomy diagram\n"
@@ -56,6 +106,25 @@ class WildcardLinterTests(unittest.TestCase):
             "# GLOBAL RULE: Read prompt.md (MODE: tags)\ngkr_test:\n  subject:\n    - red coat, raised sword\n"
         )
         self.assertEqual(leaves[0].mode, "tags")
+
+    def test_exact_canonical_item_is_supplied_to_visual_review(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  subject:\n"
+            "    - sleeping detective, dreaming, notebook with sketches\n"
+        )
+        vocabulary = LINTER.DanbooruVocabulary({"dreaming", "sleeping_detective"})
+        self.assertEqual(
+            LINTER.exact_canonical_tag_items(leaves[0], vocabulary),
+            ["dreaming", "sleeping_detective"],
+        )
+
+    def test_canonical_word_inside_larger_phrase_is_not_visual_exception(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  subject:\n"
+            "    - detective dreaming of victory\n"
+        )
+        vocabulary = LINTER.DanbooruVocabulary({"dreaming"})
+        self.assertEqual(LINTER.exact_canonical_tag_items(leaves[0], vocabulary), [])
 
     def test_missing_mode_defaults_to_narrative(self):
         leaves, _, _ = self.inventory("gkr_test:\n  subject:\n    - red coat\n")
@@ -108,6 +177,24 @@ class WildcardLinterTests(unittest.TestCase):
         rules = {finding.rule for finding in LINTER.tags_mode_findings(leaves, self.tags_rules)}
         self.assertIn("tags_long_phrase", rules)
         self.assertIn("tags_excessive_weights", rules)
+
+    def test_tags_mode_flags_brush_used_as_style_shorthand(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  style:\n"
+            "    - bold brush contours, dry-brush shadows, visible brushwork\n"
+        )
+        findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
+        brush = [finding for finding in findings if finding.rule == "ambiguous_brush_medium"]
+        self.assertEqual(len(brush), 1)
+        self.assertIn("bold brush contours", brush[0].evidence)
+
+    def test_tags_mode_allows_a_literal_brush_object(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  subject:\n"
+            "    - calligrapher holding broad brush, ink-stained fingers\n"
+        )
+        findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
+        self.assertNotIn("ambiguous_brush_medium", {finding.rule for finding in findings})
 
     def test_narrative_mode_skips_tags_checks(self):
         leaves, _, _ = self.inventory(
@@ -225,6 +312,28 @@ class WildcardLinterTests(unittest.TestCase):
         issues = LINTER.validate_tag_prompt("1other, red or blue coat, close-up")
         self.assertTrue(any("alternative" in issue for issue in issues))
 
+    def test_annotated_details_inserts_status_in_matching_section(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            source = Path(temporary) / "details.md"
+            destination = Path(temporary) / "details.audited.md"
+            source.write_text(
+                "# Image prompt details\n\n## `one.png`\n\n- Prompt mode: `Tags`\n\n"
+                "### Post-LLM prompt\n\n```text\n1other, hero\n```\n\n"
+                "## `two.png`\n\n- Prompt mode: `Narrative`\n",
+                encoding="utf-8",
+            )
+            audits = [
+                LINTER.PromptAudit("one.png", "Tags", "noncompliant", ["too many tags"], ""),
+                LINTER.PromptAudit("two.png", "Narrative", "compliant", [], ""),
+            ]
+            LINTER.write_annotated_details(source, destination, audits)
+            result = destination.read_text(encoding="utf-8")
+            one_section, two_section = result.split("## `two.png`")
+            self.assertIn("- Audit status: **noncompliant**", one_section)
+            self.assertIn("- Audit issue `audit_issue`: too many tags", one_section)
+            self.assertIn("- Audit status: **compliant**", two_section)
+            self.assertNotIn("# Post-prompt validation", result)
+
     def test_combined_markdown_report_contains_both_sections(self):
         audits = [LINTER.PromptAudit("image.png", "Tags", "compliant", [], "1other, hero")]
         report = LINTER.combine_reports("# Wildcard lint\n", audits, "markdown")
@@ -237,6 +346,361 @@ class WildcardLinterTests(unittest.TestCase):
         parsed = json.loads(report)
         self.assertIn("wildcard_lint", parsed)
         self.assertIn("post_prompt_validation", parsed)
+
+    def test_combined_run_keeps_post_prompt_audit_out_of_default_output(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = root / "gkr-test.yaml"
+            details = root / "details.md"
+            report = root / "fixed-report.md"
+            annotated = root / "details.audited.md"
+            source.write_text("# MODE: tags\ngkr_test:\n  scene:\n    - red_hair\n", encoding="utf-8")
+            details.write_text(
+                "## `image.png`\n\n- Prompt mode: `Tags`\n\n### Post-LLM prompt\n\n```text\n1other, red_hair\n```\n",
+                encoding="utf-8",
+            )
+            argv = [
+                "wildcard_linter.py", str(source), "--validate-post-prompts", str(details),
+                "--annotated-details", str(annotated), "--format", "markdown",
+                "--output", str(report), "--fail-on", "never",
+            ]
+            with patch.object(sys, "argv", argv):
+                self.assertEqual(LINTER.main(), 0)
+            self.assertNotIn("# Post-prompt validation", report.read_text(encoding="utf-8"))
+            self.assertIn("- Audit status: **compliant**", annotated.read_text(encoding="utf-8"))
+
+    def test_combined_run_can_write_separate_or_explicitly_combined_post_report(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = root / "gkr-test.yaml"
+            details = root / "details.md"
+            lint_report = root / "lint.md"
+            post_report = root / "post.md"
+            source.write_text("# MODE: tags\ngkr_test:\n  scene:\n    - red_hair\n", encoding="utf-8")
+            details.write_text(
+                "## `image.png`\n\n- Prompt mode: `Tags`\n\n### Post-LLM prompt\n\n```text\n1other, red_hair\n```\n",
+                encoding="utf-8",
+            )
+            separate_argv = [
+                "wildcard_linter.py", str(source), "--validate-post-prompts", str(details),
+                "--post-prompt-output", str(post_report), "--format", "markdown",
+                "--output", str(lint_report), "--fail-on", "never",
+            ]
+            with patch.object(sys, "argv", separate_argv):
+                self.assertEqual(LINTER.main(), 0)
+            self.assertNotIn("# Post-prompt validation", lint_report.read_text(encoding="utf-8"))
+            self.assertIn("# Post-prompt validation", post_report.read_text(encoding="utf-8"))
+            combined_argv = [
+                "wildcard_linter.py", str(source), "--validate-post-prompts", str(details),
+                "--include-post-prompt-report", "--format", "markdown",
+                "--output", str(lint_report), "--fail-on", "never",
+            ]
+            with patch.object(sys, "argv", combined_argv):
+                self.assertEqual(LINTER.main(), 0)
+            self.assertIn("# Post-prompt validation", lint_report.read_text(encoding="utf-8"))
+
+    def test_fix_report_marks_only_unfixed_findings_unresolved(self):
+        leaves = [
+            LINTER.Leaf("fixed", "test.yaml", "gkr", "scene", 0, 1, "old", (), "tags"),
+            LINTER.Leaf("open", "test.yaml", "gkr", "scene", 1, 2, "other", (), "tags"),
+        ]
+        findings = [
+            LINTER.Finding("warning", "first", "fixed issue", "test.yaml", 1, "scene", "fixed"),
+            LINTER.Finding("warning", "second", "open issue", "test.yaml", 2, "scene", "open"),
+        ]
+        markdown = LINTER.render(
+            findings, leaves, "markdown", fix_attempted=True, fixed_leaf_ids={"fixed"},
+        )
+        self.assertEqual(markdown.count("[UNRESOLVED]"), 2)  # summary hint plus one finding
+        self.assertNotIn("`first` · **[UNRESOLVED]**", markdown)
+        self.assertIn("`second` · **[UNRESOLVED]**", markdown)
+        payload = json.loads(LINTER.render(
+            findings, leaves, "json", fix_attempted=True, fixed_leaf_ids={"fixed"},
+        ))
+        self.assertEqual(payload["summary"]["unresolved"], 1)
+        self.assertEqual([item["fix_status"] for item in payload["findings"]], ["fixed", "unresolved"])
+
+    def test_report_without_fix_attempt_has_no_unresolved_marker(self):
+        finding = LINTER.Finding("warning", "rule", "message", "test.yaml", 1, "scene", "id")
+        report = LINTER.render([finding], [], "markdown")
+        self.assertNotIn("[UNRESOLVED]", report)
+
+    def test_danbooru_subject_counter_whitelist(self):
+        self.assertFalse(LINTER.validate_tag_prompt("2others, family, long table"))
+        self.assertFalse(LINTER.validate_tag_prompt("multiple_others, crowd, town square"))
+        self.assertTrue(any("invalid Danbooru" in issue for issue in LINTER.validate_tag_prompt("1family, long table")))
+        self.assertTrue(any("invalid Danbooru" in issue for issue in LINTER.validate_tag_prompt("7others, group shot")))
+        self.assertTrue(any("cannot replace" in issue for issue in LINTER.validate_tag_prompt("solo, portrait")))
+
+    def test_post_prompt_audit_classifies_service_and_representability_failures(self):
+        service = LINTER.representability_issues("404 page not found")
+        abstract = LINTER.representability_issues("familiar street, impossible machine looming")
+        self.assertEqual(service[0][0], "invalid_service_response")
+        self.assertIn("nonvisual_modifier", {code for code, _ in abstract})
+        self.assertIn("unspecified_impossibility", {code for code, _ in abstract})
+        self.assertIn("ambiguous_scale", {code for code, _ in abstract})
+
+    def test_optional_danbooru_vocabulary_warns_only_unknown_underscore_tags(self):
+        known = {"1other", "holding_book"}
+        detailed = LINTER.validate_tag_prompt_detailed(
+            "1other, holding_book, invented_visual_tag, literal visual phrase", danbooru_tags=known
+        )
+        unknown = [message for code, message in detailed if code == "unknown_canonical_tag"]
+        self.assertEqual(unknown, ["unknown underscore-style Danbooru tag: invented_visual_tag"])
+
+    def test_danbooru_vocabulary_loads_counts_and_aliases(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "tags.csv"
+            path.write_text(
+                'tag,category,count,alias\nholding_book,0,500,"book holding,holding a book"\n',
+                encoding="utf-8",
+            )
+            vocabulary = LINTER.load_danbooru_tags(path)
+        self.assertIn("holding_book", vocabulary)
+        self.assertEqual(vocabulary.post_counts["holding_book"], 500)
+        self.assertEqual(vocabulary.aliases["holding_a_book"], {"holding_book"})
+
+    def test_canonical_tag_findings_apply_only_to_tags_mode(self):
+        vocabulary = LINTER.DanbooruVocabulary(
+            {"holding_book", "old_book", "red_hair"},
+            {"holding_book": 500, "old_book": 200, "red_hair": 400}, {},
+        )
+        tags_leaf = LINTER.Leaf(
+            "tags", "test.yaml", "gkr", "scene", 0, 1,
+            "1other, holding book, vibrant red hair, holding_old_book", (), "tags",
+        )
+        narrative_leaf = LINTER.Leaf("narrative", "test.yaml", "gkr", "scene", 1, 2, "holding_old_book", (), "narrative")
+        findings = LINTER.canonical_tag_findings([tags_leaf, narrative_leaf], vocabulary, 2)
+        self.assertEqual({finding.leaf_id for finding in findings}, {"tags"})
+        self.assertEqual(
+            {finding.rule for finding in findings},
+            {"canonical_tag_normalization", "canonical_tag_contained_span", "unknown_canonical_tag"},
+        )
+        unknown = next(finding for finding in findings if finding.rule == "unknown_canonical_tag")
+        self.assertIn("holding_book", unknown.message)
+        contained = next(finding for finding in findings if finding.rule == "canonical_tag_contained_span")
+        self.assertIn("red_hair", contained.message)
+        self.assertIn("unmatched words: vibrant", contained.message)
+
+    def test_contained_tag_search_uses_longest_multiword_nonoverlapping_spans(self):
+        vocabulary = LINTER.DanbooruVocabulary(
+            {"red", "red_hair", "hair", "blue_eyes"},
+            {"red_hair": 500, "blue_eyes": 400}, {},
+        )
+        spans = LINTER.contained_canonical_spans("vibrant red hair and blue eyes", vocabulary)
+        self.assertEqual([span["canonical"] for span in spans], ["red_hair", "blue_eyes"])
+        self.assertNotIn("red", {span["canonical"] for span in spans})
+
+    def test_canonical_tag_style_can_render_spaces(self):
+        vocabulary = LINTER.DanbooruVocabulary({"red_hair"}, {"red_hair": 500}, {})
+        leaf = LINTER.Leaf("id", "test.yaml", "gkr", "hair", 0, 1, "vibrant red hair", (), "tags")
+        guidance = LINTER.canonical_tag_guidance(leaf, vocabulary, 5, "spaces")
+        self.assertEqual(guidance[0]["canonical_ids"], ["red_hair"])
+        self.assertEqual(guidance[0]["candidates"], ["red hair"])
+
+    def test_canonical_candidate_recognizes_conservative_plural_variants(self):
+        vocabulary = LINTER.DanbooruVocabulary(
+            {"holding_book", "blue_eyes", "witch", "gloves"},
+            {"holding_book": 500, "blue_eyes": 400, "witch": 300, "gloves": 200}, {},
+        )
+        self.assertEqual(LINTER.canonical_candidates("holding_books", vocabulary), ["holding_book"])
+        self.assertEqual(LINTER.canonical_candidates("blue_eye", vocabulary), ["blue_eyes"])
+        self.assertEqual(LINTER.canonical_candidates("witches", vocabulary), ["witch"])
+        self.assertEqual(LINTER.canonical_candidates("glove", vocabulary), ["gloves"])
+
+    def test_contained_span_can_recognize_plural_as_singular(self):
+        vocabulary = LINTER.DanbooruVocabulary({"red_hair"}, {"red_hair": 500}, {})
+        spans = LINTER.contained_canonical_spans("vibrant red hairs", vocabulary)
+        self.assertEqual([span["canonical"] for span in spans], ["red_hair"])
+
+    def test_hyphenated_phrase_matches_space_equivalent_canonical_tag(self):
+        vocabulary = LINTER.DanbooruVocabulary({"high_contrast"}, {"high_contrast": 500}, {})
+        for phrase in ("high-contrast", "high‑contrast", "high–contrast", "high—contrast"):
+            leaf = LINTER.Leaf("id", "test.yaml", "gkr", "style", 0, 1, phrase, (), "tags")
+            guidance = LINTER.canonical_tag_guidance(leaf, vocabulary, 5, "underscore")
+            self.assertEqual(guidance[0]["status"], "separator_normalized_match")
+            self.assertEqual(guidance[0]["candidates"], ["high_contrast"])
+
+    def test_literal_hyphenated_canonical_tag_wins_before_separator_normalization(self):
+        vocabulary = LINTER.DanbooruVocabulary(
+            {"x-ray", "x_ray"}, {"x-ray": 500, "x_ray": 400}, {},
+        )
+        leaf = LINTER.Leaf("id", "test.yaml", "gkr", "style", 0, 1, "x-ray", (), "tags")
+        self.assertEqual(LINTER.canonical_tag_guidance(leaf, vocabulary, 5, "underscore"), [])
+
+    def test_shared_head_composition_finds_overlapping_attribute_tags(self):
+        vocabulary = LINTER.DanbooruVocabulary(
+            {"glowing_eye", "red_eyes"}, {"glowing_eye": 500, "red_eyes": 1000}, {},
+        )
+        policy = {"enabled": True, "shared_head_attributes": True, "minimum_matches": 2, "allow_inflection_match": True}
+        leaf = LINTER.Leaf("id", "test.yaml", "gkr", "eyes", 0, 1, "glowing red eye", (), "tags")
+        guidance = LINTER.canonical_tag_guidance(leaf, vocabulary, 5, "underscore", policy)
+        self.assertEqual(guidance[0]["status"], "shared_head_composition")
+        self.assertEqual(guidance[0]["candidates"], ["glowing_eye", "red_eyes"])
+        self.assertEqual(guidance[0]["components"][0]["match"], "exact")
+        self.assertEqual(guidance[0]["components"][1]["match"], "inflection")
+        self.assertEqual(guidance[0]["unmatched_words"], [])
+
+    def test_shared_head_composition_requires_configured_minimum_matches(self):
+        vocabulary = LINTER.DanbooruVocabulary({"red_eyes"}, {"red_eyes": 1000}, {})
+        policy = {"enabled": True, "minimum_matches": 2, "allow_inflection_match": True}
+        self.assertIsNone(LINTER.shared_head_canonical_composition("glowing red eye", vocabulary, policy))
+
+    def test_shared_head_composition_is_a_canonical_finding(self):
+        vocabulary = LINTER.DanbooruVocabulary(
+            {"glowing_eye", "red_eyes"}, {"glowing_eye": 500, "red_eyes": 1000}, {},
+        )
+        policy = {"enabled": True, "minimum_matches": 2, "allow_inflection_match": True}
+        leaf = LINTER.Leaf("id", "test.yaml", "gkr", "eyes", 0, 1, "glowing red eye", (), "tags")
+        findings = LINTER.canonical_tag_findings([leaf], vocabulary, 5, "underscore", policy)
+        self.assertEqual(findings[0].rule, "canonical_tag_composition")
+        self.assertIn("glowing_eye, red_eyes", findings[0].message)
+
+    def test_canonical_rewrite_must_resolve_targeted_issue(self):
+        vocabulary = LINTER.DanbooruVocabulary({"holding_book"}, {"holding_book": 500}, {})
+        leaf = LINTER.Leaf("id", "test.yaml", "gkr", "scene", 0, 1, "1other, holding_old_book", (), "tags")
+        findings = LINTER.canonical_tag_findings([leaf], vocabulary)
+        accepted, rejected = LINTER.validate_suggestions(
+            [leaf], {"id": "1other, holding_older_book"}, findings,
+            self.rules, self.tags_rules, vocabulary,
+        )
+        self.assertFalse(accepted)
+        self.assertTrue(any("targeted canonical-tag issue remains" in reason for reason in rejected["id"]))
+
+    def test_unknown_canonical_tag_is_a_nonblocking_audit_warning(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            details = Path(temporary) / "details.md"
+            details.write_text(
+                "## `image.png`\n\n- Prompt mode: `Tags`\n\n"
+                "### Pre-LLM prompt\n\n```text\nsource\n```\n\n"
+                "### Post-LLM prompt\n\n```text\n1other, invented_visual_tag\n```\n",
+                encoding="utf-8",
+            )
+            audits = LINTER.audit_post_prompts(details, {"1other"})
+        self.assertEqual(audits[0].status, "compliant")
+        self.assertTrue(LINTER.prompt_audit_has_warning(audits))
+
+    def test_prompt_audit_summary_counts_unique_pairs(self):
+        audits = [
+            LINTER.PromptAudit("one.png", "Tags", "noncompliant", ["bad"], "1family", ["subject_count_failure"], "family"),
+            LINTER.PromptAudit("two.png", "Tags", "noncompliant", ["bad"], "1family", ["subject_count_failure"], "family"),
+        ]
+        summary = json.loads(LINTER.render_prompt_audit(audits, "json"))["summary"]
+        self.assertEqual(summary["images"]["total"], 2)
+        self.assertEqual(summary["unique_prompt_pairs"]["total"], 1)
+        self.assertEqual(summary["issues_by_unique_pair"]["subject_count_failure"], 1)
+
+    def test_llm_response_cache_avoids_second_request(self):
+        class Response:
+            status = 200
+            def __enter__(self):
+                return self
+            def __exit__(self, *_):
+                return False
+            def read(self):
+                return json.dumps({"choices": [{"message": {"content": '[{"id":"one"}]'}}]}).encode()
+
+        with tempfile.TemporaryDirectory() as temporary:
+            args = SimpleNamespace(
+                no_llm_cache=False, llm_cache_dir=Path(temporary),
+                llm_cache_max_age_minutes=None, timeout=10, verbose=False,
+            )
+            kwargs = dict(
+                args=args, endpoint="http://example.test/v1/chat/completions", api_key="secret",
+                model="test", instruction="review", items=[{"id": "one", "text": "hero"}],
+                call_name="LLM batch", batch_number=1,
+                batch_total=1, offset=0, trace_path=None, response_event="response",
+            )
+            with patch.object(LINTER.urllib.request, "urlopen", return_value=Response()) as opened:
+                first = LINTER.llm_json_request(**kwargs)
+            with patch.object(LINTER.urllib.request, "urlopen", side_effect=AssertionError("network used")):
+                second = LINTER.llm_json_request(**kwargs)
+            self.assertEqual(first, second)
+            self.assertEqual(opened.call_count, 1)
+
+    def test_llm_http_error_includes_response_body(self):
+        args = SimpleNamespace(
+            no_llm_cache=True, llm_cache_dir=None,
+            llm_cache_max_age_minutes=None, timeout=10, verbose=False,
+        )
+        error = urllib.error.HTTPError(
+            "http://example.test", 500, "Internal Server Error", {}, io.BytesIO(b'{"error":"out of memory"}')
+        )
+        with patch.object(LINTER.urllib.request, "urlopen", side_effect=error):
+            with self.assertRaisesRegex(RuntimeError, "out of memory"):
+                LINTER.llm_json_request(
+                    args=args, endpoint="http://example.test", api_key="secret",
+                    model="test", instruction="review", items=[{"id": "one", "text": "hero"}],
+                    call_name="LLM batch", batch_number=3, batch_total=58, offset=20,
+                    trace_path=None, response_event="response",
+                )
+
+    def test_llm_cache_reuses_unchanged_items_across_changed_batch(self):
+        class Response:
+            status = 200
+            def __init__(self, request):
+                body = json.loads(request.data)
+                items = json.loads(body["messages"][1]["content"])
+                self.payload = {"choices": [{"message": {"content": json.dumps([
+                    {"id": item["id"], "classification": "pass"} for item in items
+                ])}}]}
+            def __enter__(self): return self
+            def __exit__(self, *_): return False
+            def read(self): return json.dumps(self.payload).encode()
+
+        requests = []
+        def respond(request, timeout):
+            requests.append(json.loads(json.loads(request.data)["messages"][1]["content"]))
+            return Response(request)
+
+        with tempfile.TemporaryDirectory() as temporary:
+            args = SimpleNamespace(
+                no_llm_cache=False, llm_cache_dir=Path(temporary),
+                llm_cache_max_age_minutes=None, timeout=10, verbose=False,
+            )
+            common = dict(
+                args=args, endpoint="http://example.test", api_key="secret", model="test",
+                instruction="review", call_name="LLM batch", batch_number=1,
+                batch_total=1, offset=0, trace_path=None, response_event="response",
+            )
+            with patch.object(LINTER.urllib.request, "urlopen", side_effect=respond):
+                LINTER.llm_json_request(items=[{"id": "a", "text": "hero"}, {"id": "b", "text": "castle"}], **common)
+                result = LINTER.llm_json_request(items=[{"id": "new-a", "text": "hero"}, {"id": "b", "text": "forest"}], **common)
+            self.assertEqual(len(requests), 2)
+            self.assertEqual([item["id"] for item in requests[1]], ["b"])
+            self.assertEqual([item["id"] for item in result], ["new-a", "b"])
+
+    def test_llm_cache_max_age_deletes_expired_entry(self):
+        class Response:
+            status = 200
+            def __enter__(self): return self
+            def __exit__(self, *_): return False
+            def read(self):
+                return json.dumps({"choices": [{"message": {"content": '[{"id":"one"}]'}}]}).encode()
+
+        with tempfile.TemporaryDirectory() as temporary:
+            cache_dir = Path(temporary)
+            args = SimpleNamespace(
+                no_llm_cache=False, llm_cache_dir=cache_dir,
+                llm_cache_max_age_minutes=None, timeout=10, verbose=False,
+            )
+            kwargs = dict(
+                args=args, endpoint="http://example.test", api_key="secret", model="test",
+                instruction="review", items=[{"id": "one", "text": "hero"}],
+                call_name="LLM batch", batch_number=1, batch_total=1, offset=0,
+                trace_path=None, response_event="response",
+            )
+            with patch.object(LINTER.urllib.request, "urlopen", return_value=Response()):
+                LINTER.llm_json_request(**kwargs)
+            cache_file = next(cache_dir.glob("*.json"))
+            cached = json.loads(cache_file.read_text())
+            cached["created"] = 0
+            cache_file.write_text(json.dumps(cached))
+            args.llm_cache_max_age_minutes = 5
+            with patch.object(LINTER.urllib.request, "urlopen", return_value=Response()) as opened:
+                LINTER.llm_json_request(**kwargs)
+            self.assertEqual(opened.call_count, 1)
+            self.assertEqual(len(list(cache_dir.glob("*.json"))), 1)
 
     def test_trace_event_writes_jsonl(self):
         with tempfile.TemporaryDirectory() as temporary:
