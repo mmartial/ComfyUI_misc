@@ -1,0 +1,210 @@
+# ========================================================================
+# EXAMPLE SKELETON FOR tools/wildcard_generator.py
+#
+# Copy this file, replace the theme and namespace, then edit the GENERATOR
+# comments and empty categories. The generator reads only comments beginning
+# with `GENERATOR:` as instructions. Other comments are documentation.
+#
+# Every declared category is required in the generated wildcard. Categories
+# must be empty lists. The generator may add a limited number of supporting
+# categories when they are needed for coherent combinations and routes.
+#
+# GLOBAL RULE: Read and apply ./prompt.md (MODE: tags)
+#
+# GENERATOR: THEME: Original superhero worlds and decisive superhero imagery.
+# GENERATOR: Cover heroic action, civilian rescue, investigation, secret bases, villains, and quiet public moments after danger.
+# GENERATOR: Avoid named characters, franchises, recognizable costumes, logos, and direct imitation.
+# GENERATOR: Keep powers visually understandable through anatomy, pose, material effects, damaged objects, or environmental consequences.
+# ========================================================================
+gkr_superhero:
+
+  # GENERATOR: Create 30 leaves with visually distinct costumes, anatomy, equipment, or power evidence; do not rely on personality labels alone.
+  superhero_archetype:
+    - "heavy plated armor, matte black finish, glowing visor"
+    - "spandex suit, primary colors, high_collar, utility_belt"
+    - "tattered cloak, leather tunic, ancient bronze bracers"
+    - "sleek metallic bodysuit, iridescent scales, no_mask"
+    - "oversized mechanical exoskeleton, hydraulic pistons"
+    - "white flowing robes, gold embroidery, floating halo"
+    - "tactical gear, kevlar vest, night_vision_device"
+    - "symbiote, insect_wings"
+    - "steampunk, brass gears, leather goggles, corset"
+    - "cybernetic limbs, exposed wiring, chrome plating"
+    - "deep sea, diving_suit, glass helmet, brass valves"
+    - "monk clothes, wrapped hands, prayer_beads, bare feet"
+    - "stealth suit, hexagonal patterns, matte grey"
+    - "cape, velvet fabric, ornate chest plate"
+    - "streetwear, oversized hoodie, glowing sneakers, mask"
+    - "crystalline skin, translucent body, internal light"
+    - "fur_cloak, bone armor, tribal paint"
+    - "neoprene suit, neon_lights, aerodynamic fins"
+    - "tuxedo, gadgets, monocle, white_gloves"
+    - "asymmetrical_armor, one metallic arm, scarred face"
+    - "gothic, spiked_pauldrons, dark makeup"
+    - "white spandex, gold accents, silk cape"
+    - "jumpsuit, tool pouches, welding_mask"
+    - "ethereal form, transparent, starry nebula skin"
+    - "heavy riot gear, reinforced shield, full face helmet"
+    - "traditional kimono, reinforced fabric, glowing runes"
+    - "metallic gold skin, sculpted muscles"
+    - "flight_suit, oxygen_mask, jetpack"
+    - "dark hooded_robe, silver masks, floating sigils"
+    - "padded bodysuit, visor"
+
+  # Added by wildcard_generator.py to support the requested theme and routes.
+  power_effect:
+    - "blue electric arcs, sparks from fingers"
+    - "wind vortex, lifting debris"
+    - "lava from hands, glowing orange"
+    - "crystal shards explosion"
+    - "invisibility cloak, refracted light"
+    - "golden energy aura, radiating light, heat haze"
+    - "purple tendrils, root in floor"
+    - "frozen, ice spikes, cold mist"
+    - "plasma spheres"
+    - "floating rocks, warped space"
+    - "emerald, green energy_beams, focused blast"
+    - "liquid metal_skin, reflective chrome surface"
+    - "ring, sound_wave, blur"
+    - "nanobot swarm, metallic cloud"
+    - "white flames, heat haze, scorched earth"
+    - "magnetic pulses, floating metal scraps, iron filings"
+    - "veins, bioluminescence, glowing_skin"
+    - "translucent geometric shields"
+    - "dark matter void, black_hole"
+    - "vines from ground"
+
+  # Added by wildcard_generator.py to support the requested theme and routes.
+  superhero_setting:
+    - "city street, shattered glass, overturned yellow taxis, smoke"
+    - "command center, holographic maps, blue_light"
+    - "underground bunker, concrete walls, weapon racks, sidelighting"
+    - "rooftop edge, city skyline, dark clouds, smoke"
+    - "collapsed bridge, river"
+    - "luxury room, windows, paintings"
+    - "warehouse, god rays"
+    - "city park, grass, meteor"
+    - "subway_station, fluorescent lights, cracked tiles, graffiti"
+    - "laboratory, wire"
+    - "alley, rain, signs, neon_lights, puddles, brick_wall"
+    - "museum, smashed display_case, statues"
+    - "boat, massive cranes, shipping_container, mist"
+    - "highway, sun, cracked asphalt, distant mountains"
+    - "plaza, flags"
+    - "clock_tower interior, massive brass gears, wooden beams, dust"
+    - "floating fortress, metallic platforms, clouds"
+    - "shopping mall, crowd running, bright lights"
+    - "forest, burning trees, fog"
+    - "cathedral, ruins, gothic, stained_glass, ivy"
+
+  # Added by wildcard_generator.py to support the requested theme and routes.
+  heroic_action:
+    - "carrying_person, bride, midair"
+    - "punching concrete wall, debris flying"
+    - "blocking steel_beam, muscles, kneeling"
+    - "superhero_landing, pavement crack, dust_cloud"
+    - "flying up, boom_barrier, clouds"
+    - "holding two vehicles, outstretched_arms"
+    - "protecting crowd, translucent energy dome"
+    - "jumping buildings"
+    - "speed_lines, car, tire smoke"
+    - "meditation, floating pebble"
+    - "diving from rooftop,"
+    - "carrying_person from fire"
+    - "fist clash, shockwave ripples"
+    - "crime scene, glowing eyes, holographic_interface"
+    - "on gargoyle, cape, wind, city view"
+    - "running, motion_blur, distortion, sparks"
+    - "lifting vault door, muscles, veins"
+    - "catching missile"
+    - "floating, handshake"
+    - "throwing vehicle"
+
+  # Added by wildcard_generator.py to support the requested theme and routes.
+  superhero_combo:
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/power_effect__, close-up portrait"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/power_effect__, full_body"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/power_effect__, motion_blur, dynamic pose"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/power_effect__, low angle"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/power_effect__, candid shot"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/power_effect__, aura"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/power_effect__, floating, smile"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/power_effect__, energy_sword"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/power_effect__, landing, dust_cloud"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/power_effect__, energy_barrier"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/power_effect__, high angle"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/power_effect__, silhouette, sunset"
+
+  # GENERATOR: Balance combat, rescue, investigation, public protection, and aftermath. Each leaf must show one decisive single-image moment.
+  superhero_scene:
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/heroic_action__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__"
+    - "__gkr_superhero/superhero_archetype__, catching person, __gkr_superhero/superhero_setting__, floating"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/heroic_action__, __gkr_superhero/superhero_setting__, dust_cloud, debris, cinematic low angle"
+    - "__gkr_superhero/superhero_archetype__, kneeling, head bowed, __gkr_superhero/superhero_setting__, rain, puddles"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/power_effect__, muscles, __gkr_superhero/superhero_setting__"
+    - "__gkr_superhero/superhero_archetype__, standing, building edge, wind, __gkr_superhero/superhero_setting__"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/heroic_action__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, broken street"
+    - "__gkr_superhero/superhero_archetype__, investigating crime scene, holding glowing artifact, __gkr_superhero/superhero_setting__"
+    - "__gkr_superhero/superhero_archetype__, shockwave, __gkr_superhero/superhero_setting__"
+    - "__gkr_superhero/superhero_archetype__, 1other handshake, smile, __gkr_superhero/superhero_setting__, sunlight"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/power_effect__, floating in meditation, __gkr_superhero/superhero_setting__"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/heroic_action__, __gkr_superhero/superhero_setting__, sparks, smoke"
+
+  # GENERATOR: Showcase the theme's most recognizable and desirable images without copying existing intellectual property.
+  spotlight:
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, superhero_landing"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, floating, looking_down, cape in wind"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, charging_forward, motion_blur"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, muscles"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, standing, skyscraper, long hair, city_lights"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, energy_shield"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, smoke, glowing_eyes, silhouette"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, impact shockwave, debris flying"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, ruins, hand_on_ground"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, crowd, outstretched_hand"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, protecting crowd"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, flying in clouds"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, flying in space"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, flying toward sun"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, standing, rain"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, laser_sight"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, catching person"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, meditation, magic_circle"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, breaking wall"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, looking at camera, low angle"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, sliding"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, weapons"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, punch, sound_wave"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, sound_effects"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, holding orb, light reflection"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, diving through window"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, sparks"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, motion_blur"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, outdoor portrait"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, floating, zero_gravity, space"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, space"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, standing on gargoyle, night_sky, moonlight"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, fire"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, ice_crystal"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, transparent body"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, lightning, dark_clouds, electric arcs"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, lifting car"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, energy_wings"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, standing, storm"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, portal, void"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, circuit_board_print on skin"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, cyberpunk"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, riding dragon, breathing_fire"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, eye_beam"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, standing in fire"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, sound_waves, shattered glass"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, floating_rock, rain"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, clone, afterimage"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__, godrays"
+    - "__gkr_superhero/superhero_archetype__, __gkr_superhero/superhero_setting__, __gkr_superhero/power_effect__"
+
+  # GENERATOR: Select all ordinary production-ready routes with useful breadth and no decorative literal text.
+  random:
+    - "__gkr_superhero/superhero_scene__"
+    - "__gkr_superhero/superhero_combo__"
+    - "__gkr_superhero/spotlight__"
