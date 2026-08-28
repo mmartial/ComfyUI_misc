@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["PyYAML>=6.0.2"]
+# dependencies = ["PyYAML>=6.0.2", "numpy>=2.0"]
 # ///
 
 """Generate a complete tags-mode wildcard from a commented YAML skeleton."""
@@ -25,12 +25,16 @@ from typing import Any, Iterable
 import yaml
 
 import wildcard_linter as linter
+from danbooru_index import DanbooruIndex, EmbeddingClient, SearchResult, build_index
 
 
 GENERATOR_RE = re.compile(r"^\s*#\s*GENERATOR\s*:\s*(.*?)\s*$", re.I)
 CATEGORY_RE = re.compile(r"^  ([A-Za-z0-9_-]+)\s*:\s*(?:\[\s*\])?\s*(?:#.*)?$")
 ROOT_RE = re.compile(r"^([A-Za-z0-9_-]+)\s*:\s*$")
 REFERENCE_RE = re.compile(r"__([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)__")
+UNDERSCORE_TAG_RE = re.compile(
+    r"(?<![A-Za-z0-9_-])([a-z0-9][a-z0-9_-]*_[a-z0-9_-]+)(?![A-Za-z0-9_-])"
+)
 SAFE_NAME_RE = re.compile(r"^[A-Za-z0-9_-]+$")
 KINDS = {"component", "combo", "scene", "spotlight", "router"}
 DEFAULT_COUNTS = {"component": 20, "combo": 12, "scene": 12, "spotlight": 50, "router": 0}
@@ -70,6 +74,20 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", type=Path, required=True, help="Destination for the initial generated YAML")
     parser.add_argument("--fixed-output", type=Path, help="Repaired YAML (defaults to <output-stem>.fixed.yaml)")
     parser.add_argument("--danbooru-tags", type=Path, required=True, help="Local Danbooru-compatible tag CSV")
+    parser.add_argument("--danbooru-index", type=Path, help="Reusable SQLite tag index (defaults beside CSV)")
+    parser.add_argument(
+        "--content-profile", choices=("general", "sensitive", "unrestricted"), default="general",
+        help="Candidate-vocabulary content profile (default: general)",
+    )
+    parser.add_argument(
+        "--retrieval", choices=("auto", "lexical", "hybrid"), default="auto",
+        help="Use embeddings when available (auto), disable them, or require them",
+    )
+    parser.add_argument("--embedding-model", help="Query embedding model; defaults to index metadata")
+    parser.add_argument("--embedding-base-url", help="Query embedding base URL; defaults to index metadata")
+    parser.add_argument("--embedding-api-key-env", default="OLLAMA_API_KEY")
+    parser.add_argument("--embedding-query-prefix", help="Query prefix; defaults to index metadata")
+    parser.add_argument("--retrieval-candidates", type=int, default=12)
     parser.add_argument("--prompt", type=Path, help="Policy Markdown (defaults to ../prompt.md)")
     parser.add_argument("--rules", type=Path, help="General linter rules (defaults beside script)")
     parser.add_argument("--tags-rules", type=Path, help="Tags-mode rules (defaults beside script)")
@@ -78,6 +96,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--api-key-env", default="OPENAI_API_KEY")
     parser.add_argument("--batch-categories", type=int, default=3)
     parser.add_argument("--max-generation-calls", type=int, default=20)
+    parser.add_argument(
+        "--max-category-retries", type=int, default=1,
+        help="Corrective retries for a category whose generated leaves fail validation (default: 1)",
+    )
+    parser.add_argument(
+        "--interactive", action="store_true",
+        help="After retries fail, prompt to accept or replace invalid tags without palette checks",
+    )
     parser.add_argument("--max-repair-passes", type=int, default=2)
     parser.add_argument("--max-category-depth", type=int, default=6)
     parser.add_argument("--max-added-categories", type=int, default=30)
@@ -300,6 +326,8 @@ class Session:
         self.calls = 0
         self.reported_tokens = 0
         self.events: list[dict[str, Any]] = []
+        self.provenance: dict[str, list[dict[str, Any]]] = {}
+        self.interactive_overrides: dict[str, dict[str, str]] = {}
         self.linter_args.llm_usage_callback = self.record_usage
 
     def record_usage(self, usage: dict[str, Any]) -> None:
@@ -350,16 +378,107 @@ def generation_instruction(policy: str, vocabulary: linter.DanbooruVocabulary) -
         "tag. Use a compact literal phrase with spaces whenever no canonical tag exists or canonicalization would lose content."
     )
     return (
-        "Generate wildcard leaves for every supplied category. Return JSON only as an array with exactly one object per input ID, "
-        "containing id and leaves (an array of strings). Return exactly requested_count leaves, except a router should return the "
-        "minimum useful set of reference-only leaves. A wildcard reference has exact form __namespace/category__. Reference only "
+        "Realize supplied visual concepts as wildcard leaves. Return JSON only as an array with exactly one object per input ID, "
+        "containing id, leaves (an array of strings), and provenance (one entry per leaf listing canonical_tags and literal_fallbacks). "
+        "Return exactly requested_count leaves. A wildcard reference has exact form __namespace/category__. Reference only "
         "allowed_dependencies. Component leaves must contain literal visible content and no references unless the category purpose "
         "explicitly requires composition. Combo/scene leaves may combine allowed references with compact literal tag phrases. Router "
-        "leaves contain references only. Spotlight leaves are complete, high-specificity, single-image prompts. All literal output is "
+        "leaves are generated deterministically and are not supplied. Spotlight leaves are complete, high-specificity, single-image prompts. "
+        "Use the candidate palette for each concept as the primary vocabulary. Every underscore-form token must be an exact canonical "
+        "tag from that palette. Prefer a canonical candidate whenever it preserves the concept. A literal fallback is allowed only when "
+        "no candidate preserves necessary visible meaning; record its text and a brief reason in literal_fallbacks. All literal output is "
         "tags mode: flat comma-separated short visual phrases, 1-3 meaningful weights, no prose, quality filler, negative prompt, or "
-        "sequential/multi-panel content. Avoid duplicate or near-duplicate leaves. Follow the global and local GENERATOR instructions. "
+        "sequential/multi-panel content. Respect content_profile: general forbids mature, suggestive, explicit, fetish, or graphic "
+        "content; sensitive permits non-explicit mature material but not explicit sexual content; unrestricted adds no content "
+        "restriction. Avoid duplicate or near-duplicate leaves. Follow the global and local GENERATOR instructions. "
         + sample_note + "\n\nPOLICY:\n" + policy
     )
+
+
+def concept_instruction(policy: str) -> str:
+    return (
+        "Design concise visual concepts for each supplied wildcard category; do not write final prompts or Danbooru tags yet. "
+        "Return JSON only as an array with exactly one object per input ID containing id and concepts. Each concepts entry contains "
+        "summary and search_queries (1-4 short natural-language queries). Return exactly requested_count distinct concepts. Preserve "
+        "the category purpose, theme, compatibility requirements, and single-image rule. Focus on the minimum visible ideas needed; "
+        "avoid decorative prose and generic quality language. Respect content_profile: general forbids mature, suggestive, explicit, "
+        "fetish, or graphic content; sensitive permits non-explicit mature material but not explicit sexual content; unrestricted "
+        "adds no content restriction.\n\nPOLICY:\n" + policy
+    )
+
+
+def generate_concepts(
+    session: Session, skeleton: Skeleton, batch: list[CategoryPlan], policy: str,
+) -> dict[str, list[dict[str, Any]]]:
+    items = []
+    for plan in batch:
+        skeleton_category = next((item for item in skeleton.categories if item.name == plan.name), None)
+        items.append({
+            "id": plan.name, "kind": plan.kind, "purpose": plan.purpose,
+            "requested_count": plan.count, "dependencies": plan.dependencies,
+            "content_profile": session.args.content_profile,
+            "generator_instructions": skeleton_category.directives if skeleton_category else [],
+            "global_generator_instructions": skeleton.global_directives,
+        })
+    results = session.request("concept generation", concept_instruction(policy), items)
+    by_id = {str(item.get("id", "")): item for item in results}
+    concepts_by_category: dict[str, list[dict[str, Any]]] = {}
+    for plan in batch:
+        raw = by_id.get(plan.name, {}).get("concepts", [])
+        concepts: list[dict[str, Any]] = []
+        for item in raw:
+            if isinstance(item, str):
+                summary = " ".join(item.split())
+                queries = [summary]
+            elif isinstance(item, dict):
+                summary = " ".join(str(item.get("summary", "")).split())
+                queries = [
+                    " ".join(value.split()) for value in item.get("search_queries", [])
+                    if isinstance(value, str) and value.strip()
+                ]
+            else:
+                continue
+            if summary:
+                concepts.append({"summary": summary, "search_queries": list(dict.fromkeys(queries or [summary]))[:4]})
+        unique: list[dict[str, Any]] = []
+        seen: set[str] = set()
+        for concept in concepts:
+            key = concept["summary"].lower()
+            if key not in seen:
+                unique.append(concept)
+                seen.add(key)
+        if len(unique) != plan.count:
+            raise RuntimeError(f"category {plan.name} returned {len(unique)} unique concepts; expected {plan.count}")
+        concepts_by_category[plan.name] = unique
+    return concepts_by_category
+
+
+def retrieve_concepts(
+    concepts_by_category: dict[str, list[dict[str, Any]]], index: DanbooruIndex,
+    embedding_client: EmbeddingClient | None, query_prefix: str, limit: int,
+) -> None:
+    queries: list[str] = []
+    for concepts in concepts_by_category.values():
+        for concept in concepts:
+            queries.extend(concept["search_queries"])
+    unique_queries = list(dict.fromkeys(queries))
+    vectors: dict[str, list[float]] = {}
+    if embedding_client and unique_queries:
+        embedded = embedding_client.embed([query_prefix + query for query in unique_queries])
+        vectors = dict(zip(unique_queries, embedded))
+    for concepts in concepts_by_category.values():
+        for concept in concepts:
+            merged: dict[str, SearchResult] = {}
+            for query in concept["search_queries"]:
+                for candidate in index.hybrid_search(query, vectors.get(query), limit):
+                    current = merged.get(candidate.tag)
+                    if current is None or candidate.score > current.score:
+                        merged[candidate.tag] = candidate
+            ranked = sorted(merged.values(), key=lambda item: (-item.score, -item.post_count, item.tag))[:limit]
+            concept["candidates"] = [
+                {"tag": item.tag, "match": item.match, "score": round(item.score, 4), "post_count": item.post_count}
+                for item in ranked
+            ]
 
 
 def category_batches(plans: list[CategoryPlan], size: int) -> list[list[CategoryPlan]]:
@@ -379,15 +498,141 @@ def category_batches(plans: list[CategoryPlan], size: int) -> list[list[Category
     return [ordered[index:index + size] for index in range(0, len(ordered), size)]
 
 
+class CategoryValidationError(RuntimeError):
+    """A generated category response that can be corrected by another LLM call."""
+
+    def __init__(self, message: str, invalid_tags: set[str] | None = None):
+        super().__init__(message)
+        self.invalid_tags = invalid_tags or set()
+
+
+def validate_category_response(
+    category: str, result: dict[str, Any], expected_count: int,
+    namespace: str, dependencies: list[str], allowed_canonical: set[str],
+) -> tuple[list[str], list[dict[str, Any]]]:
+    raw = result.get("leaves", [])
+    provenance = result.get("provenance", [])
+    leaves = [" ".join(value.split()) for value in raw if isinstance(value, str) and value.strip()]
+    leaves = list(dict.fromkeys(leaves))
+    errors: list[str] = []
+    if len(leaves) != expected_count:
+        errors.append(f"returned {len(leaves)} unique leaves; expected {expected_count}")
+    if not isinstance(provenance, list) or not all(isinstance(item, dict) for item in provenance):
+        errors.append("provenance must be an array containing one object per leaf")
+        provenance = []
+    elif len(provenance) != len(leaves):
+        errors.append(f"returned {len(provenance)} provenance objects for {len(leaves)} leaves")
+
+    invalid_provenance: set[str] = set()
+    for entry in provenance:
+        canonical_tags = entry.get("canonical_tags", [])
+        literal_fallbacks = entry.get("literal_fallbacks", [])
+        if not isinstance(canonical_tags, list) or not isinstance(literal_fallbacks, list):
+            errors.append("provenance fields canonical_tags and literal_fallbacks must be arrays")
+            continue
+        invalid_provenance.update(
+            str(tag) for tag in canonical_tags if str(tag) not in allowed_canonical
+        )
+    if invalid_provenance:
+        errors.append(
+            "provenance cites tags outside the retrieved palette: "
+            + ", ".join(sorted(invalid_provenance))
+        )
+
+    allowed_refs = {(namespace, dependency) for dependency in dependencies}
+    invalid_refs: set[str] = set()
+    invalid_output_tags: set[str] = set()
+    for leaf in leaves:
+        invalid_refs.update(
+            f"__{ref_namespace}/{ref_category}__"
+            for ref_namespace, ref_category in set(REFERENCE_RE.findall(leaf)) - allowed_refs
+        )
+        literal = linter.literal_text(leaf)
+        invalid_output_tags.update(
+            token
+            for token in UNDERSCORE_TAG_RE.findall(literal)
+            if token not in allowed_canonical
+        )
+    if invalid_refs:
+        errors.append("uses undeclared references: " + ", ".join(sorted(invalid_refs)))
+    if invalid_output_tags:
+        errors.append(
+            "uses underscore tags outside the retrieved palette: "
+            + ", ".join(sorted(invalid_output_tags))
+        )
+    if errors:
+        raise CategoryValidationError(
+            f"category {category}: " + "; ".join(errors),
+            invalid_provenance | invalid_output_tags,
+        )
+    return leaves, provenance
+
+
+def apply_interactive_tag_overrides(
+    category: str, result: dict[str, Any], invalid_tags: set[str],
+    input_fn: Any = input,
+) -> tuple[dict[str, Any], dict[str, str]]:
+    """Prompt for explicit tag overrides and apply them to leaves and provenance."""
+    replacements: dict[str, str] = {}
+    print(f"[wildcard-generator] interactive overrides for category {category}", file=sys.stderr)
+    for invalid_tag in sorted(invalid_tags):
+        replacement = input_fn(
+            f"Invalid tag '{invalid_tag}'. Enter a replacement, or press Enter to accept it unchanged: "
+        ).strip()
+        replacements[invalid_tag] = replacement or invalid_tag
+
+    corrected = dict(result)
+    leaves = result.get("leaves", [])
+    def replace_leaf_tags(leaf: str) -> str:
+        for old, new in replacements.items():
+            leaf = re.sub(
+                rf"(?<![A-Za-z0-9_-]){re.escape(old)}(?![A-Za-z0-9_-])", new, leaf,
+            )
+        return leaf
+
+    corrected["leaves"] = [
+        replace_leaf_tags(leaf) if isinstance(leaf, str) else leaf for leaf in leaves
+    ] if isinstance(leaves, list) else leaves
+    provenance = result.get("provenance", [])
+    corrected_provenance: list[Any] = []
+    if isinstance(provenance, list):
+        for entry in provenance:
+            if not isinstance(entry, dict):
+                corrected_provenance.append(entry)
+                continue
+            corrected_entry = dict(entry)
+            canonical_tags = entry.get("canonical_tags", [])
+            if isinstance(canonical_tags, list):
+                corrected_entry["canonical_tags"] = [
+                    replacements.get(str(tag), str(tag)) for tag in canonical_tags
+                ]
+            corrected_provenance.append(corrected_entry)
+        corrected["provenance"] = corrected_provenance
+    return corrected, replacements
+
+
 def generate_categories(
     session: Session, skeleton: Skeleton, plans: list[CategoryPlan], policy: str,
-    vocabulary: linter.DanbooruVocabulary,
+    vocabulary: linter.DanbooruVocabulary, index: DanbooruIndex,
+    embedding_client: EmbeddingClient | None, embedding_query_prefix: str,
 ) -> dict[str, list[str]]:
     generated: dict[str, list[str]] = {}
     plan_by_name = {plan.name: plan for plan in plans}
     for batch in category_batches(plans, session.args.batch_categories):
+        routers = [plan for plan in batch if plan.kind == "router"]
+        content_batch = [plan for plan in batch if plan.kind != "router"]
+        for plan in routers:
+            generated[plan.name] = [f"__{skeleton.namespace}/{name}__" for name in plan.dependencies]
+            log(session.args, f"generated {plan.name}: {len(generated[plan.name])} router leaves")
+        if not content_batch:
+            continue
+        concepts_by_category = generate_concepts(session, skeleton, content_batch, policy)
+        retrieve_concepts(
+            concepts_by_category, index, embedding_client, embedding_query_prefix,
+            session.args.retrieval_candidates,
+        )
         items: list[dict[str, Any]] = []
-        for plan in batch:
+        for plan in content_batch:
             skeleton_category = next((item for item in skeleton.categories if item.name == plan.name), None)
             dependency_examples = {name: generated.get(name, [])[:3] for name in plan.dependencies}
             items.append({
@@ -395,27 +640,63 @@ def generate_categories(
                 "purpose": plan.purpose, "requested_count": plan.count,
                 "allowed_dependencies": plan.dependencies,
                 "dependency_examples": dependency_examples,
+                "concepts": concepts_by_category[plan.name],
                 "generator_instructions": skeleton_category.directives if skeleton_category else [],
                 "global_generator_instructions": skeleton.global_directives,
+                "content_profile": session.args.content_profile,
             })
         results = session.request("category generation", generation_instruction(policy, vocabulary), items)
         by_id = {str(item.get("id", "")): item for item in results}
-        for plan in batch:
-            raw = by_id.get(plan.name, {}).get("leaves", [])
-            leaves = [" ".join(value.split()) for value in raw if isinstance(value, str) and value.strip()]
-            leaves = list(dict.fromkeys(leaves))
-            if plan.kind != "router" and len(leaves) != plan.count:
-                raise RuntimeError(f"category {plan.name} returned {len(leaves)} unique leaves; expected {plan.count}")
-            if plan.kind == "router" and not leaves:
-                leaves = [f"__{skeleton.namespace}/{name}__" for name in plan.dependencies]
-            allowed = {(skeleton.namespace, dep) for dep in plan.dependencies}
-            for leaf in leaves:
-                refs = set(REFERENCE_RE.findall(leaf))
-                if not refs <= allowed:
-                    raise RuntimeError(f"category {plan.name} returned an undeclared reference in: {leaf}")
-                if plan.kind == "router" and linter.has_literal_content(SimpleNamespace(text=leaf)):
-                    raise RuntimeError(f"router {plan.name} returned literal content: {leaf}")
+        for plan in content_batch:
+            allowed_canonical = {
+                str(candidate["tag"])
+                for concept in concepts_by_category[plan.name]
+                for candidate in concept.get("candidates", [])
+            }
+            result = by_id.get(plan.name, {})
+            item = next(item for item in items if item["id"] == plan.name)
+            for retry in range(session.args.max_category_retries + 1):
+                try:
+                    leaves, provenance = validate_category_response(
+                        plan.name, result, plan.count, skeleton.namespace,
+                        plan.dependencies, allowed_canonical,
+                    )
+                    break
+                except CategoryValidationError as exc:
+                    if retry >= session.args.max_category_retries:
+                        if session.args.interactive and exc.invalid_tags:
+                            result, replacements = apply_interactive_tag_overrides(
+                                plan.name, result, exc.invalid_tags,
+                            )
+                            leaves, provenance = validate_category_response(
+                                plan.name, result, plan.count, skeleton.namespace,
+                                plan.dependencies, allowed_canonical | set(replacements.values()),
+                            )
+                            vocabulary.tags.update(replacements.values())
+                            session.interactive_overrides[plan.name] = replacements
+                            log(
+                                session.args,
+                                f"accepted {len(replacements)} interactive tag override(s) for {plan.name}",
+                            )
+                            break
+                        raise
+                    log(session.args, f"{exc}; corrective retry {retry + 1}/{session.args.max_category_retries}")
+                    correction_item = dict(item)
+                    correction_item["rejected_response"] = result
+                    correction_item["validation_error"] = str(exc)
+                    correction_item["correction_attempt"] = retry + 1
+                    correction_instruction = generation_instruction(policy, vocabulary) + (
+                        "\n\nCORRECTION: The previous response for this single category was rejected by deterministic "
+                        "validation. Fix every issue reported in validation_error. Use only canonical tags present in the "
+                        "supplied concept candidate palettes, keep exactly requested_count unique leaves, and return the full "
+                        "corrected object with matching provenance."
+                    )
+                    corrected = session.request("category correction", correction_instruction, [correction_item])
+                    result = next(
+                        (entry for entry in corrected if str(entry.get("id", "")) == plan.name), {}
+                    )
             generated[plan.name] = leaves
+            session.provenance[plan.name] = provenance
             log(session.args, f"generated {plan.name}: {len(leaves)} leaves")
     # Retain planner order in rendering, while keeping this sanity check explicit.
     missing = set(plan_by_name) - set(generated)
@@ -499,16 +780,78 @@ def main() -> int:
     plans: list[CategoryPlan] = []
     skeleton: Skeleton | None = None
     session: Session | None = None
+    tag_index: DanbooruIndex | None = None
     final_findings: list[linter.Finding] = []
     leaves: list[linter.Leaf] = []
     try:
-        if args.max_category_depth < 1 or args.max_added_categories < 0 or args.max_generation_calls < 1:
-            raise ValueError("generation limits must be positive (added-category limit may be zero)")
+        if (
+            args.max_category_depth < 1 or args.max_added_categories < 0
+            or args.max_generation_calls < 1 or args.max_category_retries < 0
+        ):
+            raise ValueError(
+                "generation limits must be positive (added-category and category-retry limits may be zero)"
+            )
         skeleton = parse_skeleton(args.skeleton.expanduser().resolve())
         policy = prompt_path.read_text(encoding="utf-8")
         rules = linter.load_rules(rules_path)
         tags_rules = linter.load_rules(tags_rules_path)
-        vocabulary = linter.load_danbooru_tags(args.danbooru_tags.expanduser().resolve())
+        csv_path = args.danbooru_tags.expanduser().resolve()
+        full_vocabulary = linter.load_danbooru_tags(csv_path)
+        index_path = (args.danbooru_index or csv_path.with_suffix(".index.sqlite")).expanduser().resolve()
+        if not index_path.exists():
+            info = build_index(csv_path, index_path, args.content_profile)
+            log(args, f"built lexical tag index with {info['tag_count']} tags")
+        tag_index = DanbooruIndex(index_path)
+        if (
+            not tag_index.compatible_with_csv(csv_path)
+            or tag_index.metadata.get("content_profile") != args.content_profile
+        ):
+            tag_index.close()
+            info = build_index(csv_path, index_path, args.content_profile)
+            log(args, f"rebuilt stale lexical tag index with {info['tag_count']} tags")
+            tag_index = DanbooruIndex(index_path)
+        allowed_tags = tag_index.canonical_names()
+        vocabulary = linter.DanbooruVocabulary(
+            allowed_tags,
+            {name: count for name, count in full_vocabulary.post_counts.items() if name in allowed_tags},
+            {
+                alias: targets & allowed_tags for alias, targets in full_vocabulary.aliases.items()
+                if targets & allowed_tags
+            },
+        )
+        embedding_client: EmbeddingClient | None = None
+        embedding_query_prefix = str(
+            args.embedding_query_prefix
+            if args.embedding_query_prefix is not None
+            else tag_index.metadata.get("embedding_query_prefix", "")
+        )
+        retrieval_mode = "lexical"
+        if args.retrieval == "hybrid" and not tag_index.has_embeddings:
+            raise ValueError("--retrieval hybrid requires a complete embedding index")
+        if args.retrieval != "lexical" and tag_index.has_embeddings:
+            embedding_model = args.embedding_model or tag_index.metadata.get("embedding_model")
+            embedding_base_url = args.embedding_base_url or tag_index.metadata.get("embedding_base_url")
+            if not embedding_model or not embedding_base_url:
+                if args.retrieval == "hybrid":
+                    raise ValueError("embedding index lacks model or base-URL metadata")
+                log(args, "embedding metadata is incomplete; using lexical retrieval")
+            else:
+                candidate_client = EmbeddingClient(
+                    str(embedding_base_url), str(embedding_model),
+                    os.getenv(args.embedding_api_key_env, ""), args.timeout,
+                    int(tag_index.metadata.get("embedding_dimensions", 0)) or None,
+                )
+                try:
+                    probe = candidate_client.embed([embedding_query_prefix + "superhero landing"])[0]
+                    expected = int(tag_index.metadata.get("embedding_dimensions", 0))
+                    if len(probe) != expected:
+                        raise RuntimeError(f"query embedding has {len(probe)} dimensions; index requires {expected}")
+                    embedding_client = candidate_client
+                    retrieval_mode = "hybrid"
+                except RuntimeError as exc:
+                    if args.retrieval == "hybrid":
+                        raise
+                    log(args, f"embedding query probe failed; using lexical retrieval: {exc}")
         output.parent.mkdir(parents=True, exist_ok=True)
         fixed_output.parent.mkdir(parents=True, exist_ok=True)
         manifest_path.parent.mkdir(parents=True, exist_ok=True)
@@ -523,7 +866,10 @@ def main() -> int:
             raise RuntimeError("planner did not return exactly one plan")
         plans = parse_plan(planned[0], skeleton, args)
         log(args, f"accepted plan with {len(plans)} categories ({sum(not plan.required for plan in plans)} added)")
-        content = generate_categories(session, skeleton, plans, policy, vocabulary)
+        content = generate_categories(
+            session, skeleton, plans, policy, vocabulary, tag_index,
+            embedding_client, embedding_query_prefix,
+        )
         output.write_text(render_wildcard(skeleton, plans, content), encoding="utf-8")
         fixed_output.write_text(render_wildcard(skeleton, plans, content), encoding="utf-8")
 
@@ -571,6 +917,17 @@ def main() -> int:
             "generation_calls": session.events,
             "generation_call_count": session.calls,
             "reported_tokens": session.reported_tokens,
+            "tag_provenance": session.provenance,
+            "interactive_tag_overrides": session.interactive_overrides,
+            "retrieval": {
+                "mode": retrieval_mode,
+                "index": str(index_path),
+                "content_profile": args.content_profile,
+                "indexed_tag_count": tag_index.metadata.get("tag_count"),
+                "excluded_tag_count": tag_index.metadata.get("excluded_tag_count"),
+                "source_csv_sha256": tag_index.metadata.get("source_csv_sha256"),
+                "embedding_model": tag_index.metadata.get("embedding_model") if retrieval_mode == "hybrid" else None,
+            },
             "category_count": len(plans),
             "leaf_count": sum(len(values) for values in content.values()),
             "unresolved": [asdict(finding) for finding in final_findings],
@@ -582,6 +939,8 @@ def main() -> int:
         print(f"fixed: {fixed_output} ({manifest['leaf_count']} leaves, {len(final_findings)} unresolved findings)")
         print(f"report: {report_path}")
         print(f"manifest: {manifest_path}")
+        if retrieval_mode == "lexical":
+            print("retrieval: lexical only (build embeddings for better semantic candidate discovery)")
         return 1 if any(finding.severity == "error" for finding in final_findings) else 0
     except (OSError, ValueError, RuntimeError) as exc:
         # Once assembly has begun, retain the best draft as requested.
@@ -605,6 +964,9 @@ def main() -> int:
             pass
         print(f"wildcard_generator: {exc}", file=sys.stderr)
         return 2
+    finally:
+        if tag_index is not None:
+            tag_index.close()
 
 
 if __name__ == "__main__":

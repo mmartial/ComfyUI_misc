@@ -27,6 +27,7 @@ def load_module(name: str, path: Path):
 
 
 load_module("wildcard_linter", TOOLS / "wildcard_linter.py")
+load_module("danbooru_index", TOOLS / "danbooru_index.py")
 GENERATOR = load_module("wildcard_generator", TOOLS / "wildcard_generator.py")
 
 
@@ -149,6 +150,140 @@ class WildcardGeneratorTests(unittest.TestCase):
         )
         self.assertIn("[UNRESOLVED]", report)
         self.assertIn("Unresolved after fixed-output generation: 1", report)
+
+    def test_generation_is_concept_then_retrieval_then_realization(self):
+        index_module = sys.modules["danbooru_index"]
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        csv_path = root / "tags.csv"
+        index_path = root / "tags.sqlite"
+        csv_path.write_text("name,post_count\nsuperhero_landing,1000\n", encoding="utf-8")
+        index_module.build_index(csv_path, index_path)
+        index = index_module.DanbooruIndex(index_path)
+        self.addCleanup(index.close)
+        skeleton = self.skeleton("# MODE: tags\ngkr_hero:\n  scene: []\n  random: []\n")
+        plans = [
+            GENERATOR.CategoryPlan("scene", "scene", "hero scene", 1, [], True),
+            GENERATOR.CategoryPlan("random", "router", "", 0, ["scene"], True),
+        ]
+
+        class FakeSession:
+            def __init__(self):
+                self.args = SimpleNamespace(
+                    batch_categories=3, retrieval_candidates=5, content_profile="general", verbose=False,
+                    max_category_retries=1, interactive=False,
+                )
+                self.calls = []
+                self.provenance = {}
+
+            def request(self, name, instruction, items):
+                self.calls.append(name)
+                if name == "concept generation":
+                    return [{"id": "scene", "concepts": [{
+                        "summary": "three point hero landing", "search_queries": ["superhero landing"]
+                    }]}]
+                candidates = items[0]["concepts"][0]["candidates"]
+                self.assert_candidate = candidates[0]["tag"]
+                return [{
+                    "id": "scene", "leaves": ["superhero_landing"],
+                    "provenance": [{"canonical_tags": ["superhero_landing"], "literal_fallbacks": []}],
+                }]
+
+        session = FakeSession()
+        vocabulary = sys.modules["wildcard_linter"].DanbooruVocabulary({"superhero_landing"})
+        generated = GENERATOR.generate_categories(
+            session, skeleton, plans, "policy", vocabulary, index, None, ""
+        )
+        self.assertEqual(session.calls, ["concept generation", "category generation"])
+        self.assertEqual(session.assert_candidate, "superhero_landing")
+        self.assertEqual(generated["scene"], ["superhero_landing"])
+        self.assertEqual(generated["random"], ["__gkr_hero/scene__"])
+
+    def test_invalid_palette_tag_is_reported_and_corrected(self):
+        index_module = sys.modules["danbooru_index"]
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        csv_path = root / "tags.csv"
+        index_path = root / "tags.sqlite"
+        csv_path.write_text("name,post_count\nsuperhero_landing,1000\n", encoding="utf-8")
+        index_module.build_index(csv_path, index_path)
+        index = index_module.DanbooruIndex(index_path)
+        self.addCleanup(index.close)
+        skeleton = self.skeleton("# MODE: tags\ngkr_hero:\n  hero_action: []\n")
+        plans = [GENERATOR.CategoryPlan("hero_action", "component", "hero action", 1, [], True)]
+
+        class FakeSession:
+            def __init__(self):
+                self.args = SimpleNamespace(
+                    batch_categories=3, retrieval_candidates=5, content_profile="general", verbose=False,
+                    max_category_retries=1, interactive=False,
+                )
+                self.calls = []
+                self.provenance = {}
+
+            def request(self, name, instruction, items):
+                self.calls.append((name, items))
+                if name == "concept generation":
+                    return [{"id": "hero_action", "concepts": [{
+                        "summary": "superhero landing", "search_queries": ["superhero landing"]
+                    }]}]
+                if name == "category generation":
+                    return [{
+                        "id": "hero_action", "leaves": ["invented_hero_tag"],
+                        "provenance": [{"canonical_tags": ["invented_hero_tag"], "literal_fallbacks": []}],
+                    }]
+                self.validation_error = items[0]["validation_error"]
+                return [{
+                    "id": "hero_action", "leaves": ["superhero_landing"],
+                    "provenance": [{"canonical_tags": ["superhero_landing"], "literal_fallbacks": []}],
+                }]
+
+        session = FakeSession()
+        vocabulary = sys.modules["wildcard_linter"].DanbooruVocabulary({"superhero_landing"})
+        generated = GENERATOR.generate_categories(session, skeleton, plans, "policy", vocabulary, index, None, "")
+        self.assertEqual(generated["hero_action"], ["superhero_landing"])
+        self.assertIn("invented_hero_tag", session.validation_error)
+        self.assertEqual(session.calls[-1][1][0]["correction_attempt"], 1)
+        self.assertEqual([name for name, _ in session.calls], [
+            "concept generation", "category generation", "category correction",
+        ])
+
+    def test_invalid_palette_error_names_all_tags(self):
+        response = {
+            "leaves": ["outside_one, outside_two"],
+            "provenance": [{"canonical_tags": ["outside_two", "outside_one"], "literal_fallbacks": []}],
+        }
+        with self.assertRaisesRegex(
+            GENERATOR.CategoryValidationError, "outside_one, outside_two"
+        ):
+            GENERATOR.validate_category_response("hero_action", response, 1, "gkr_hero", [], {"inside_tag"})
+
+    def test_hyphenated_underscore_tag_is_validated_as_a_complete_tag(self):
+        response = {
+            "leaves": ["heads-up_display, goggles"],
+            "provenance": [{"canonical_tags": ["heads-up_display"], "literal_fallbacks": []}],
+        }
+        leaves, _ = GENERATOR.validate_category_response(
+            "superhero_gear", response, 1, "gkr_hero", [], {"heads-up_display"}
+        )
+        self.assertEqual(leaves, ["heads-up_display, goggles"])
+
+    def test_interactive_override_can_accept_or_replace_invalid_tags(self):
+        response = {
+            "leaves": ["mask, heads-up_display"],
+            "provenance": [{
+                "canonical_tags": ["mask", "heads-up_display"], "literal_fallbacks": []
+            }],
+        }
+        answers = iter(["face_mask", ""])
+        corrected, replacements = GENERATOR.apply_interactive_tag_overrides(
+            "superhero_gear", response, {"mask", "heads-up_display"}, lambda _: next(answers)
+        )
+        self.assertEqual(replacements, {"heads-up_display": "face_mask", "mask": "mask"})
+        self.assertEqual(corrected["leaves"], ["mask, face_mask"])
+        self.assertEqual(corrected["provenance"][0]["canonical_tags"], ["mask", "face_mask"])
 
 
 if __name__ == "__main__":

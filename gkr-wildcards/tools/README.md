@@ -22,10 +22,30 @@ category to override its default.
 From `gkr-wildcards`:
 
 ```bash
+python3 tools/download_danbooru_tags.py \
+  --output safebooru_general_tags.csv \
+  --min-post-count 100 \
+  --verbose
+
+OLLAMA_API_KEY=ollama uv run tools/classify_danbooru_tags.py \
+  safebooru_general_tags.csv \
+  --output safebooru_general_tags.classified.csv \
+  --model qwen3:latest \
+  --base-url http://localhost:11434/v1 \
+  --api-key-env OLLAMA_API_KEY \
+  --verbose
+
+uv run tools/build_danbooru_index.py \
+  safebooru_general_tags.classified.csv \
+  --output safebooru_general_tags.index.sqlite \
+  --content-profile general
+
 uv run tools/wildcard_generator.py \
   ../howto/wildcard-generator-skeleton.yaml \
   --output gkr-superhero.yaml \
-  --danbooru-tags safebooru_general_tags.csv \
+  --danbooru-tags safebooru_general_tags.classified.csv \
+  --danbooru-index safebooru_general_tags.index.sqlite \
+  --content-profile general \
   --model "$OPENAI_MODEL" \
   --base-url "$OPENAI_BASE_URL" \
   --api-key-env OPENAI_API_KEY \
@@ -46,6 +66,8 @@ Useful limits and controls:
 ```text
 --batch-categories 3
 --max-generation-calls 20
+--max-category-retries 1
+--interactive
 --max-repair-passes 2
 --max-category-depth 6
 --max-added-categories 30
@@ -59,20 +81,109 @@ token boundary. Canonical Danbooru tags are preferred when a semantically exact
 match exists, while short literal visual phrases remain allowed so vocabulary
 coverage never removes theme content.
 
+When a generated category fails deterministic validation, the generator reports
+the exact invalid tags or references and retries only that category. The default
+is one corrective retry; use `--max-category-retries 0` to disable it. Corrective
+requests count toward `--max-generation-calls`.
+
+With `--interactive`, exhausting those retries prompts once for every invalid
+tag. Press Enter to accept the displayed tag unchanged, or type a replacement.
+Explicitly accepted and replacement tags bypass palette and subsequent canonical
+vocabulary membership checks; the chosen mapping is recorded under
+`interactive_tag_overrides` in the generation manifest. Structural checks such
+as leaf counts, provenance shape, and declared wildcard references still apply.
+
+## Tag indexing, content profiles, and local embeddings
+
+The generator retrieves candidates from a reusable SQLite index before asking
+the LLM to realize final tag leaves. It first generates minimal visual concepts,
+searches the index for each concept, and supplies a bounded canonical palette to
+the realization call. Unknown or unavailable underscore-form output is rejected
+immediately.
+
+The default `general` content profile requires a CSV containing a
+`content_class` column. `classify_danbooru_tags.py` creates that enriched CSV in
+restartable OpenAI-compatible batches. It classifies tags as `general`,
+`sensitive`, `explicit`, or `ambiguous`; a general index includes only
+`general`. Use a reviewed YAML `--overrides` mapping for human corrections.
+Selecting `--content-profile unrestricted` explicitly permits building from the
+original unclassified CSV.
+
+Optional semantic embeddings use the OpenAI-compatible `/v1/embeddings`
+endpoint with portable array inputs. For Ollama:
+
+```bash
+ollama pull embeddinggemma
+export OLLAMA_API_KEY=ollama
+
+uv run tools/build_danbooru_index.py \
+  safebooru_general_tags.classified.csv \
+  --output safebooru_general_tags.index.sqlite \
+  --content-profile general \
+  --embeddings \
+  --embedding-model embeddinggemma \
+  --embedding-base-url http://localhost:11434/v1 \
+  --embedding-batch-size 512 \
+  --verbose
+```
+
+Embedding progress is committed after every request, so repeating the command
+resumes missing vectors. Model, endpoint, prefixes, dimensions, CSV checksum,
+and content profile are stored in the index. Incompatible partial embeddings
+are rejected; use `--no-resume` to rebuild vectors deliberately.
+
+Retrieval modes are:
+
+```text
+--retrieval auto      # default: hybrid when a compatible endpoint responds
+--retrieval lexical   # deliberately disable semantic retrieval
+--retrieval hybrid    # require a complete index and live embedding endpoint
+```
+
+`embeddinggemma` is the recommended Ollama starting point. `all-minilm` is a
+lighter alternative; `qwen3-embedding` is a quality-oriented alternative to
+evaluate against curated correction examples. Indexing and querying must use
+the same embedding model and prefixes.
+
 ## Practical example:
 
-### Obtain the safebooru_general_tags.csv file
+### Obtain the safebooru_general_tags.csv file and prepare it for use
 
 ```bash
 python3 tools/download_danbooru_tags.py \
   --output safebooru_general_tags.csv \
   --min-post-count 100 \
   --verbose
+
+# classify the tags for use
+# once concluded, feel free to review the created CSV's ambiguous tags
+OLLAMA_API_KEY=ollama uv run tools/classify_danbooru_tags.py \
+  safebooru_general_tags.csv \
+  --output safebooru_general_tags.classified.csv \
+  --api-key-env OLLAMA_API_KEY \
+  --base-url http://localhost:11434/v1 \
+  --model gemma4:cloud \
+  --batch-size 100 \
+  --verbose
+
+# Generate a database with embeddings
+OLLAMA_API_KEY="ollama" uv run tools/build_danbooru_index.py \
+  safebooru_general_tags.classified.csv \
+  --output safebooru_general_tags.index.sqlite \
+  --content-profile general \
+  --embeddings \
+  --embedding-api-key-env OLLAMA_API_KEY \
+  --embedding-base-url http://localhost:11434/v1 \
+  --embedding-model embeddinggemma:latest \
+  --embedding-batch-size 512 \
+  --verbose
+
 ```
 
 ### Obtain a test file
 
 ```bash
+# Without Sqlite and embeddings
 OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
   ../howto/wildcard-generator-skeleton.yaml \
   --output gkr-superhero.yaml \
@@ -80,6 +191,20 @@ OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
   --api-key-env OLLAMA_API_KEY \
   --base-url http://localhost:11434/v1 \
   --model gemma4:cloud \
+  --verbose
+
+# WITH both
+OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
+  ../howto/wildcard-generator-skeleton.yaml \
+  --output gkr-superhero.yaml \
+  --danbooru-tags safebooru_general_tags.classified.csv \
+  --danbooru-index safebooru_general_tags.index.sqlite \
+  --content-profile general \
+  --api-key-env OLLAMA_API_KEY \
+  --base-url http://localhost:11434/v1 \
+  --model gemma4:cloud \
+  --max-category-retries 3 \
+  --interactive \
   --verbose
 ```
 
