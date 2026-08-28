@@ -257,6 +257,22 @@ class WildcardLinterTests(unittest.TestCase):
         findings = initial + LINTER.graph_findings(leaves, categories)
         self.assertFalse([finding for finding in findings if finding.severity == "error"])
 
+    def test_tags_mode_reports_empty_comma_phrase(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  action:\n    - diving from rooftop,\n"
+        )
+        findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
+        self.assertIn("tags_empty_phrase", {finding.rule for finding in findings})
+
+    def test_duplicate_check_normalizes_tag_order_weights_and_underscores(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n"
+            "  first:\n    - muscles, (dynamic_pose:1.2)\n"
+            "  second:\n    - dynamic pose, muscles\n"
+        )
+        findings = LINTER.duplicate_leaf_findings(leaves)
+        self.assertEqual([finding.rule for finding in findings], ["cross_category_duplicate_leaf"])
+
     def test_route_motif_probability_accounts_for_nested_routes(self):
         leaves, categories, _ = self.inventory(
             "gkr_test:\n"

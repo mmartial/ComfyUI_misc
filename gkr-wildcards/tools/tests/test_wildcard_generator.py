@@ -79,7 +79,7 @@ class WildcardGeneratorTests(unittest.TestCase):
         result = {
             "categories": [
                 {"name": "archetype", "kind": "component", "count": 5, "dependencies": []},
-                {"name": "spotlight", "kind": "spotlight", "dependencies": []},
+                {"name": "spotlight", "kind": "spotlight", "dependencies": ["archetype"]},
                 {"name": "random", "kind": "router", "dependencies": []},
             ]
         }
@@ -88,6 +88,54 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertEqual(by_name["archetype"].count, 30)
         self.assertEqual(by_name["spotlight"].count, 50)
         self.assertEqual(by_name["random"].dependencies, ["spotlight"])
+
+    def test_namespaced_random_is_forced_to_required_router(self):
+        skeleton = self.skeleton(
+            "# MODE: tags\ngkr_villains:\n  villain_scene: []\n  superhero_villains_random: []\n"
+        )
+        result = {"categories": [
+            {"name": "villain_scene", "kind": "scene", "dependencies": []},
+            {
+                "name": "superhero_villains_random", "kind": "component",
+                "dependencies": ["villain_scene"],
+            },
+        ]}
+        plan = GENERATOR.parse_plan(result, skeleton, args())
+        router = next(item for item in plan if item.name == "superhero_villains_random")
+        self.assertEqual(router.kind, "router")
+        self.assertEqual(router.count, 0)
+
+    def test_invalid_plan_is_corrected_with_validation_feedback(self):
+        skeleton = self.skeleton(
+            "# MODE: tags\ngkr_test:\n  scene: []\n  random: []\n"
+        )
+
+        class FakeSession:
+            def __init__(self):
+                self.args = args(max_planner_retries=1, verbose=False)
+                self.calls = []
+
+            def request(self, name, instruction, items):
+                self.calls.append((name, items))
+                categories = [
+                    {"name": "scene", "kind": "scene", "dependencies": []},
+                    {"name": "orphan", "kind": "component", "dependencies": []},
+                    {"name": "random", "kind": "router", "dependencies": ["scene"]},
+                ]
+                if name == "generation plan correction":
+                    self.validation_error = items[0]["validation_error"]
+                    self.correction_attempt = items[0]["correction_attempt"]
+                    categories[-1]["dependencies"].append("orphan")
+                return [{"id": "plan", "categories": categories}]
+
+        session = FakeSession()
+        plan = GENERATOR.generate_valid_plan(session, skeleton, "policy")
+        self.assertIn("unreachable", session.validation_error)
+        self.assertEqual(session.correction_attempt, 1)
+        self.assertEqual([name for name, _ in session.calls], [
+            "generation plan", "generation plan correction",
+        ])
+        self.assertEqual(next(item for item in plan if item.name == "random").dependencies, ["scene", "orphan"])
 
     def test_required_categories_are_restored_and_added_categories_are_capped(self):
         skeleton = self.skeleton("# MODE: tags\ngkr_hero:\n  required_scene: []\n")
@@ -110,6 +158,15 @@ class WildcardGeneratorTests(unittest.TestCase):
         chain[-1].dependencies = ["a"]
         with self.assertRaisesRegex(ValueError, "cycle"):
             GENERATOR.validate_plan_depth(chain, 6)
+
+    def test_categories_unreachable_from_router_are_rejected(self):
+        plans = [
+            GENERATOR.CategoryPlan("used", "scene", "", 1, []),
+            GENERATOR.CategoryPlan("unused", "component", "", 1, []),
+            GENERATOR.CategoryPlan("random", "router", "", 0, ["used"]),
+        ]
+        with self.assertRaisesRegex(ValueError, "unreachable.*unused"):
+            GENERATOR.validate_plan_routes(plans)
 
     def test_rendered_output_is_valid_yaml_and_preserves_directives(self):
         skeleton = self.skeleton(
@@ -269,6 +326,52 @@ class WildcardGeneratorTests(unittest.TestCase):
             "superhero_gear", response, 1, "gkr_hero", [], {"heads-up_display"}
         )
         self.assertEqual(leaves, ["heads-up_display, goggles"])
+
+    def test_generated_category_must_use_every_declared_dependency(self):
+        response = {
+            "leaves": ["street, dynamic_pose"],
+            "provenance": [{"canonical_tags": ["street", "dynamic_pose"], "literal_fallbacks": []}],
+        }
+        with self.assertRaisesRegex(
+            GENERATOR.CategoryValidationError,
+            "does not use declared dependencies: hero_action, superhero_combo",
+        ):
+            GENERATOR.validate_category_response(
+                "superhero_scene", response, 1, "gkr_hero",
+                ["superhero_combo", "hero_action"], {"street", "dynamic_pose"},
+            )
+
+    def test_generated_category_rejects_normalized_duplicate_leaves(self):
+        response = {
+            "leaves": ["muscles, (dynamic_pose:1.2)", "dynamic pose, muscles"],
+            "provenance": [
+                {"canonical_tags": ["muscles", "dynamic_pose"], "literal_fallbacks": []},
+                {"canonical_tags": ["muscles", "dynamic_pose"], "literal_fallbacks": []},
+            ],
+        }
+        with self.assertRaisesRegex(
+            GENERATOR.CategoryValidationError, "normalized duplicate leaves at positions 1 and 2"
+        ):
+            GENERATOR.validate_category_response(
+                "hero_action", response, 2, "gkr_hero", [], {"muscles", "dynamic_pose"}
+            )
+
+    def test_generated_category_can_use_dependencies_across_different_leaves(self):
+        response = {
+            "leaves": [
+                "__gkr_hero/superhero_combo__, street",
+                "__gkr_hero/hero_action__, rooftop",
+            ],
+            "provenance": [
+                {"canonical_tags": ["street"], "literal_fallbacks": []},
+                {"canonical_tags": ["rooftop"], "literal_fallbacks": []},
+            ],
+        }
+        leaves, _ = GENERATOR.validate_category_response(
+            "superhero_scene", response, 2, "gkr_hero",
+            ["superhero_combo", "hero_action"], {"street", "rooftop"},
+        )
+        self.assertEqual(len(leaves), 2)
 
     def test_interactive_override_can_accept_or_replace_invalid_tags(self):
         response = {

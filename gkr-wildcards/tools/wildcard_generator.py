@@ -97,6 +97,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--batch-categories", type=int, default=3)
     parser.add_argument("--max-generation-calls", type=int, default=20)
     parser.add_argument(
+        "--max-planner-retries", type=int, default=1,
+        help="Corrective retries when the generated category plan fails graph validation (default: 1)",
+    )
+    parser.add_argument(
         "--max-category-retries", type=int, default=1,
         help="Corrective retries for a category whose generated leaves fail validation (default: 1)",
     )
@@ -175,7 +179,10 @@ def parse_skeleton(path: Path) -> Skeleton:
 
 def infer_kind(name: str) -> str:
     lowered = name.lower()
-    if lowered == "random" or lowered.startswith("random_") or lowered.endswith("_router"):
+    if (
+        lowered == "random" or lowered.startswith("random_")
+        or lowered.endswith("_random") or lowered.endswith("_router")
+    ):
         return "router"
     if "spotlight" in lowered or "iconic" in lowered:
         return "spotlight"
@@ -236,6 +243,9 @@ def parse_plan(result: dict[str, Any], skeleton: Skeleton, args: argparse.Namesp
         kind = str(raw.get("kind", infer_kind(name))).lower()
         if kind not in KINDS:
             kind = infer_kind(name)
+        if name in required_by_name and infer_kind(name) == "router":
+            # A required public route is structural, not a planner preference.
+            kind = "router"
         directive_source = required_by_name[name].directives if name in required_by_name else []
         fallback_count = requested_count(directive_source, kind)
         if has_explicit_count(directive_source):
@@ -277,8 +287,30 @@ def parse_plan(result: dict[str, Any], skeleton: Skeleton, args: argparse.Namesp
     for plan in plans:
         if plan.kind == "router" and not plan.dependencies:
             plan.dependencies = [name for name in complete_routes if name != plan.name]
+    validate_plan_routes(plans)
     validate_plan_depth(plans, args.max_category_depth)
     return plans
+
+
+def validate_plan_routes(plans: list[CategoryPlan]) -> None:
+    """Require every planned category to contribute to a router-reachable route."""
+    by_name = {plan.name: plan for plan in plans}
+    roots = [plan.name for plan in plans if plan.kind == "router"]
+    if not roots:
+        return
+    reachable: set[str] = set()
+    pending = list(roots)
+    while pending:
+        name = pending.pop()
+        if name in reachable:
+            continue
+        reachable.add(name)
+        pending.extend(by_name[name].dependencies)
+    unused = sorted(set(by_name) - reachable)
+    if unused:
+        raise ValueError(
+            "planner produced categories unreachable from any router: " + ", ".join(unused)
+        )
 
 
 def validate_plan_depth(plans: list[CategoryPlan], maximum: int) -> None:
@@ -365,10 +397,49 @@ def planning_instruction(policy: str) -> str:
         "one object with id='plan' and a categories array. Every category object contains name, kind "
         "(component, combo, scene, spotlight, or router), purpose, count, and dependencies (category names). "
         "Preserve every required category exactly. Add only useful supporting categories and stay within the supplied limits. "
-        "A dependency means that the category may reference that category. Routers select complete routes. Combos and scenes "
+        "A dependency means that the category must reference that category at least once across its leaves. Routers select complete routes. Combos and scenes "
         "must resolve to coherent single images. Keep the graph acyclic and no deeper than the supplied limit. This generator "
         "supports tags mode only. Do not generate leaves yet. Follow all GENERATOR instructions.\n\nPOLICY:\n" + policy
     )
+
+
+def generate_valid_plan(
+    session: Session, skeleton: Skeleton, policy: str,
+) -> list[CategoryPlan]:
+    """Request a plan and retry with deterministic graph-validation feedback."""
+    item = planner_items(skeleton, session.args)[0]
+    result: dict[str, Any] = {}
+    for attempt in range(session.args.max_planner_retries + 1):
+        if attempt == 0:
+            response = session.request("generation plan", planning_instruction(policy), [item])
+        else:
+            correction_item = dict(item)
+            correction_item["rejected_response"] = result
+            correction_item["validation_error"] = validation_error
+            correction_item["correction_attempt"] = attempt
+            instruction = planning_instruction(policy) + (
+                "\n\nCORRECTION: The previous plan failed deterministic graph validation. Fix every issue in "
+                "validation_error. Preserve all required categories, classify public random routes as routers, ensure every "
+                "category is reachable from a router through dependencies, keep the graph acyclic, and return the complete "
+                "corrected plan object."
+            )
+            response = session.request("generation plan correction", instruction, [correction_item])
+        if len(response) != 1:
+            validation_error = "planner did not return exactly one plan"
+            result = response[0] if response else {}
+        else:
+            result = response[0]
+            try:
+                return parse_plan(result, skeleton, session.args)
+            except ValueError as exc:
+                validation_error = str(exc)
+        if attempt >= session.args.max_planner_retries:
+            raise ValueError(validation_error)
+        log(
+            session.args,
+            f"plan rejected: {validation_error}; corrective retry {attempt + 1}/{session.args.max_planner_retries}",
+        )
+    raise AssertionError("planner retry loop exhausted unexpectedly")
 
 
 def generation_instruction(policy: str, vocabulary: linter.DanbooruVocabulary) -> str:
@@ -384,6 +455,7 @@ def generation_instruction(policy: str, vocabulary: linter.DanbooruVocabulary) -
         "allowed_dependencies. Component leaves must contain literal visible content and no references unless the category purpose "
         "explicitly requires composition. Combo/scene leaves may combine allowed references with compact literal tag phrases. Router "
         "leaves are generated deterministically and are not supplied. Spotlight leaves are complete, high-specificity, single-image prompts. "
+        "Use every allowed dependency at least once somewhere in the category's leaves so all planned categories contribute to output routes. "
         "Use the candidate palette for each concept as the primary vocabulary. Every underscore-form token must be an exact canonical "
         "tag from that palette. Prefer a canonical candidate whenever it preserves the concept. A literal fallback is allowed only when "
         "no candidate preserves necessary visible meaning; record its text and a brief reason in literal_fallbacks. All literal output is "
@@ -517,6 +589,19 @@ def validate_category_response(
     errors: list[str] = []
     if len(leaves) != expected_count:
         errors.append(f"returned {len(leaves)} unique leaves; expected {expected_count}")
+    signatures: dict[str, int] = {}
+    normalized_duplicates: list[str] = []
+    for index, leaf in enumerate(leaves, 1):
+        signature = linter.duplicate_leaf_signature(leaf, "tags")
+        if signature in signatures:
+            normalized_duplicates.append(f"{signatures[signature]} and {index}")
+        else:
+            signatures[signature] = index
+    if normalized_duplicates:
+        errors.append(
+            "contains normalized duplicate leaves at positions "
+            + ", ".join(normalized_duplicates)
+        )
     if not isinstance(provenance, list) or not all(isinstance(item, dict) for item in provenance):
         errors.append("provenance must be an array containing one object per leaf")
         provenance = []
@@ -541,11 +626,16 @@ def validate_category_response(
 
     allowed_refs = {(namespace, dependency) for dependency in dependencies}
     invalid_refs: set[str] = set()
+    used_dependencies: set[str] = set()
     invalid_output_tags: set[str] = set()
     for leaf in leaves:
+        refs = set(REFERENCE_RE.findall(leaf))
         invalid_refs.update(
             f"__{ref_namespace}/{ref_category}__"
-            for ref_namespace, ref_category in set(REFERENCE_RE.findall(leaf)) - allowed_refs
+            for ref_namespace, ref_category in refs - allowed_refs
+        )
+        used_dependencies.update(
+            ref_category for ref_namespace, ref_category in refs if ref_namespace == namespace
         )
         literal = linter.literal_text(leaf)
         invalid_output_tags.update(
@@ -555,6 +645,11 @@ def validate_category_response(
         )
     if invalid_refs:
         errors.append("uses undeclared references: " + ", ".join(sorted(invalid_refs)))
+    missing_dependencies = sorted(set(dependencies) - used_dependencies)
+    if missing_dependencies:
+        errors.append(
+            "does not use declared dependencies: " + ", ".join(missing_dependencies)
+        )
     if invalid_output_tags:
         errors.append(
             "uses underscore tags outside the retrieved palette: "
@@ -688,7 +783,8 @@ def generate_categories(
                     correction_instruction = generation_instruction(policy, vocabulary) + (
                         "\n\nCORRECTION: The previous response for this single category was rejected by deterministic "
                         "validation. Fix every issue reported in validation_error. Use only canonical tags present in the "
-                        "supplied concept candidate palettes, keep exactly requested_count unique leaves, and return the full "
+                        "supplied concept candidate palettes, use every allowed dependency at least once across the leaves, "
+                        "keep exactly requested_count unique leaves, and return the full "
                         "corrected object with matching provenance."
                     )
                     corrected = session.request("category correction", correction_instruction, [correction_item])
@@ -741,6 +837,7 @@ def deterministic_findings(
     leaves, categories, findings = linter.load_inventory([path])
     findings.extend(linter.pattern_findings(leaves, rules))
     findings.extend(linter.tags_mode_findings(leaves, tags_rules))
+    findings.extend(linter.duplicate_leaf_findings(leaves))
     findings.extend(linter.canonical_tag_findings(
         leaves, vocabulary, candidate_count, style, tags_rules.get("canonical_composition")
     ))
@@ -787,9 +884,10 @@ def main() -> int:
         if (
             args.max_category_depth < 1 or args.max_added_categories < 0
             or args.max_generation_calls < 1 or args.max_category_retries < 0
+            or args.max_planner_retries < 0
         ):
             raise ValueError(
-                "generation limits must be positive (added-category and category-retry limits may be zero)"
+                "generation limits must be positive (added-category, planner-retry, and category-retry limits may be zero)"
             )
         skeleton = parse_skeleton(args.skeleton.expanduser().resolve())
         policy = prompt_path.read_text(encoding="utf-8")
@@ -861,10 +959,7 @@ def main() -> int:
             trace_path.write_text("", encoding="utf-8")
         session = Session(args, trace_path)
         log(args, f"loaded skeleton {skeleton.namespace} with {len(skeleton.categories)} required categories")
-        planned = session.request("generation plan", planning_instruction(policy), planner_items(skeleton, args))
-        if len(planned) != 1:
-            raise RuntimeError("planner did not return exactly one plan")
-        plans = parse_plan(planned[0], skeleton, args)
+        plans = generate_valid_plan(session, skeleton, policy)
         log(args, f"accepted plan with {len(plans)} categories ({sum(not plan.required for plan in plans)} added)")
         content = generate_categories(
             session, skeleton, plans, policy, vocabulary, tag_index,

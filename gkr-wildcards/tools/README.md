@@ -66,6 +66,7 @@ Useful limits and controls:
 ```text
 --batch-categories 3
 --max-generation-calls 20
+--max-planner-retries 1
 --max-category-retries 1
 --interactive
 --max-repair-passes 2
@@ -86,6 +87,11 @@ the exact invalid tags or references and retries only that category. The default
 is one corrective retry; use `--max-category-retries 0` to disable it. Corrective
 requests count toward `--max-generation-calls`.
 
+Invalid plans also receive bounded corrective retries before leaf generation.
+The planner receives the exact graph-validation error and its rejected plan.
+Required categories named `random`, `random_*`, `*_random`, or `*_router` are
+deterministically treated as routers even when the model labels them otherwise.
+
 With `--interactive`, exhausting those retries prompts once for every invalid
 tag. Press Enter to accept the displayed tag unchanged, or type a replacement.
 Explicitly accepted and replacement tags bypass palette and subsequent canonical
@@ -100,6 +106,17 @@ the LLM to realize final tag leaves. It first generates minimal visual concepts,
 searches the index for each concept, and supplies a bounded canonical palette to
 the realization call. Unknown or unavailable underscore-form output is rejected
 immediately.
+
+The planned and realized category graphs are both validated. When routers are
+present, every planned category must be reachable from at least one router, and
+every generated category must reference each dependency declared in its plan at
+least once across its leaves. Missing dependency usage enters the same bounded
+category-correction flow, preventing generated but unreachable category pools.
+Generated leaves are also compared using a normalized tags-mode signature that
+ignores tag order, weights, underscore/hyphen spelling, and whitespace. This
+prevents cosmetically different duplicates from satisfying requested leaf counts.
+The linter reports duplicates across categories as warnings and rejects them
+within one category; it also reports empty phrases caused by stray commas.
 
 The default `general` content profile requires a CSV containing a
 `content_class` column. `classify_danbooru_tags.py` creates that enriched CSV in
@@ -203,6 +220,7 @@ OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
   --api-key-env OLLAMA_API_KEY \
   --base-url http://localhost:11434/v1 \
   --model gemma4:cloud \
+  --max-planner-retries 3 \
   --max-category-retries 3 \
   --interactive \
   --verbose

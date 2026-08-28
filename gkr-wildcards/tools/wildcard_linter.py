@@ -267,6 +267,50 @@ def split_top_level_commas(text: str) -> list[str]:
     return parts
 
 
+def duplicate_leaf_signature(text: str, mode: str) -> str:
+    """Normalize non-semantic tags-mode spelling, weighting, order, and spacing."""
+    compact = " ".join(text.lower().split())
+    if mode != "tags":
+        return compact
+    references = sorted(f"{namespace}/{category}" for namespace, category in REFERENCE_RE.findall(compact))
+    literal = literal_text(compact)
+    phrases: list[str] = []
+    for phrase in split_top_level_commas(literal):
+        phrase = WEIGHT_RE.sub(lambda match: match.group(1), phrase)
+        phrase = re.sub(r"[_-]+", " ", phrase)
+        phrase = re.sub(r"[^a-z0-9()]+", " ", phrase)
+        phrase = " ".join(phrase.split())
+        if phrase:
+            phrases.append(phrase)
+    return "refs:" + "|".join(references) + ";tags:" + "|".join(sorted(phrases))
+
+
+def duplicate_leaf_findings(leaves: list[Leaf]) -> list[Finding]:
+    """Report normalized duplicates within a category and across categories."""
+    findings: list[Finding] = []
+    seen: dict[tuple[str, str], Leaf] = {}
+    for leaf in leaves:
+        signature = duplicate_leaf_signature(leaf.text, leaf.mode)
+        if not signature:
+            continue
+        key = (leaf.namespace, signature)
+        prior = seen.get(key)
+        if prior is None:
+            seen[key] = leaf
+            continue
+        same_category = prior.category == leaf.category
+        findings.append(Finding(
+            "error" if same_category else "warning",
+            "duplicate_leaf" if same_category else "cross_category_duplicate_leaf",
+            (
+                f"Leaf duplicates {prior.category} line {prior.line} after normalizing tag order, "
+                "weights, underscores, hyphens, and spacing."
+            ),
+            leaf.file, leaf.line, leaf.category, leaf.uid, leaf.text,
+        ))
+    return findings
+
+
 def pattern_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Finding]:
     findings: list[Finding] = []
     sequence_exceptions = set(rules.get("sequence_exempt_rules", []))
@@ -308,6 +352,12 @@ def tags_mode_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Findin
         if leaf.mode != "tags" or not has_literal_content(leaf):
             continue
         literal = " ".join(literal_text(leaf.text).split())
+        if any(not phrase.strip() for phrase in split_top_level_commas(literal)):
+            findings.append(Finding(
+                "warning", "tags_empty_phrase",
+                "Tags-mode leaf contains an empty comma-separated phrase; remove the leading, trailing, or repeated comma.",
+                leaf.file, leaf.line, leaf.category, leaf.uid, leaf.text,
+            ))
         sequence_text = re.sub(
             r"\b(?:panel[- ]border(?:ed)?(?: framing)?|no sequential panels?)\b", "", literal, flags=re.I
         )
@@ -1913,6 +1963,9 @@ def main() -> int:
         tags_results = tags_mode_findings(leaves, tags_rules)
         findings.extend(tags_results)
         verbose(args, f"tags-mode checks produced {len(tags_results)} finding(s)")
+        duplicate_results = duplicate_leaf_findings(leaves)
+        findings.extend(duplicate_results)
+        verbose(args, f"duplicate checks produced {len(duplicate_results)} finding(s)")
         if danbooru_vocabulary is not None:
             canonical_results = canonical_tag_findings(
                 leaves, danbooru_vocabulary, args.canonical_tag_candidate_count, args.canonical_tag_style,
