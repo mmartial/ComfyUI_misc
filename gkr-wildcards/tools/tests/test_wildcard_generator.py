@@ -381,6 +381,20 @@ class WildcardGeneratorTests(unittest.TestCase):
                 "hero_action", response, 2, "gkr_hero", [], {"muscles", "dynamic_pose"}
             )
 
+    def test_excess_leaves_are_trimmed_with_aligned_provenance(self):
+        response = {
+            "leaves": ["first", "second", "excess"],
+            "provenance": [
+                {"canonical_tags": ["first"], "literal_fallbacks": []},
+                {"canonical_tags": ["second"], "literal_fallbacks": []},
+            ],
+        }
+        trimmed, removed = GENERATOR.trim_excess_category_response(response, 2)
+        self.assertEqual(trimmed["leaves"], ["first", "second"])
+        self.assertEqual(len(trimmed["provenance"]), 2)
+        self.assertEqual(removed, ["excess"])
+        self.assertEqual(response["leaves"], ["first", "second", "excess"])
+
     def test_generated_category_can_use_dependencies_across_different_leaves(self):
         response = {
             "leaves": [

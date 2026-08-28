@@ -710,6 +710,24 @@ def validate_category_response(
     return leaves, provenance
 
 
+def trim_excess_category_response(
+    result: dict[str, Any], expected_count: int,
+) -> tuple[dict[str, Any], list[str]]:
+    """Deterministically align and trim an otherwise structured overlong response."""
+    leaves = result.get("leaves", [])
+    provenance = result.get("provenance", [])
+    if (
+        not isinstance(leaves, list) or len(leaves) <= expected_count
+        or not isinstance(provenance, list) or len(provenance) < expected_count
+    ):
+        return result, []
+    removed = [str(leaf) for leaf in leaves[expected_count:]]
+    trimmed = dict(result)
+    trimmed["leaves"] = leaves[:expected_count]
+    trimmed["provenance"] = provenance[:expected_count]
+    return trimmed, removed
+
+
 def apply_interactive_tag_overrides(
     category: str, result: dict[str, Any], invalid_tags: set[str],
     input_fn: Any = input, existing: dict[str, str] | None = None,
@@ -830,7 +848,25 @@ def generate_categories(
             }
             result = by_id.get(plan.name, {})
             item = next(item for item in items if item["id"] == plan.name)
+            excess_issue: dict[str, Any] | None = None
             for retry in range(session.args.max_category_retries + 1):
+                result, removed_leaves = trim_excess_category_response(result, plan.count)
+                if removed_leaves:
+                    if excess_issue is None:
+                        excess_issue = {
+                            "category": plan.name,
+                            "rule": "trimmed_excess_generated_leaves",
+                            "expected_count": plan.count,
+                            "removed_leaves": removed_leaves,
+                        }
+                        session.generation_issues.append(excess_issue)
+                    else:
+                        excess_issue["removed_leaves"] = removed_leaves
+                    log(
+                        session.args,
+                        f"category {plan.name} returned excess leaves; deterministically kept the first "
+                        f"{plan.count} and recorded {len(removed_leaves)} removed leaf/leaves for review",
+                    )
                 try:
                     leaves, provenance = validate_category_response(
                         plan.name, result, plan.count, skeleton.namespace,
@@ -1080,15 +1116,27 @@ def main() -> int:
                 args.canonical_tag_candidate_count, args.canonical_tag_style,
             )
             for issue in session.generation_issues:
-                missing = ", ".join(issue["missing_dependencies"])
-                findings.append(linter.Finding(
-                    "warning", str(issue["rule"]),
-                    f"Generated category '{issue['category']}' did not reference these declared dependencies after "
-                    f"corrective retries: {missing}. This may leave category pools unreachable from public routes. "
-                    "Manual review: add the appropriate __namespace/category__ references to this or another reachable "
-                    "composite/router, or remove dependencies and pools that are not intended for output.",
-                    str(fixed_output), category=str(issue["category"]), evidence=missing,
-                ))
+                if issue["rule"] == "trimmed_excess_generated_leaves":
+                    removed = " | ".join(issue["removed_leaves"])
+                    findings.append(linter.Finding(
+                        "warning", str(issue["rule"]),
+                        f"Generated category '{issue['category']}' returned more than its requested "
+                        f"{issue['expected_count']} leaves. The generator retained the first "
+                        f"{issue['expected_count']} aligned leaf/provenance pairs and removed the following excess "
+                        f"output: {removed}. Manual review: restore or replace an omitted concept only if it is more "
+                        "valuable than one of the retained leaves.",
+                        str(fixed_output), category=str(issue["category"]), evidence=removed,
+                    ))
+                else:
+                    missing = ", ".join(issue["missing_dependencies"])
+                    findings.append(linter.Finding(
+                        "warning", str(issue["rule"]),
+                        f"Generated category '{issue['category']}' did not reference these declared dependencies after "
+                        f"corrective retries: {missing}. This may leave category pools unreachable from public routes. "
+                        "Manual review: connect required pools through an appropriate reachable composite/router. Only "
+                        "a planner-added pool confirmed to be unnecessary should be manually removed.",
+                        str(fixed_output), category=str(issue["category"]), evidence=missing,
+                    ))
             if not args.skip_semantic_review:
                 session.check_token_budget()
                 review_leaves = [leaf for leaf in leaves if linter.has_literal_content(leaf)]

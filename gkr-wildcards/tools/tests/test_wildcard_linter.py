@@ -107,6 +107,21 @@ class WildcardLinterTests(unittest.TestCase):
         )
         self.assertEqual(leaves[0].mode, "tags")
 
+    def test_json_response_parser_uses_last_valid_array_amid_commentary(self):
+        content = (
+            "```json\n[{\"id\": \"first\"}]\n```\n"
+            "I noticed a mistake and corrected it.\n"
+            "```json\n[{\"id\": \"corrected\", \"leaves\": []}]\n```"
+        )
+        self.assertEqual(
+            LINTER.parse_json_array_response(content),
+            [{"id": "corrected", "leaves": []}],
+        )
+
+    def test_json_response_parser_accepts_malformed_single_backtick_fence(self):
+        content = "`json\n[{\"id\": \"item\"}]\n`\nextra explanation"
+        self.assertEqual(LINTER.parse_json_array_response(content), [{"id": "item"}])
+
     def test_exact_canonical_item_is_supplied_to_visual_review(self):
         leaves, _, _ = self.inventory(
             "# MODE: tags\ngkr_test:\n  subject:\n"

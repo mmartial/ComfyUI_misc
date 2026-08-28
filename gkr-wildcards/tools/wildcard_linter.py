@@ -709,6 +709,31 @@ def trace_event(path: Path | None, event: dict[str, Any]) -> None:
         handle.write(json.dumps(event, ensure_ascii=False) + "\n")
 
 
+def parse_json_array_response(content: str) -> list[dict[str, Any]]:
+    """Parse a JSON object array, recovering from fences, commentary, or repeated answers."""
+    cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", content.strip(), flags=re.I)
+    try:
+        parsed = json.loads(cleaned)
+        if isinstance(parsed, list) and parsed and all(isinstance(item, dict) for item in parsed):
+            return parsed
+    except json.JSONDecodeError:
+        pass
+    decoder = json.JSONDecoder()
+    candidates: list[list[dict[str, Any]]] = []
+    for index, character in enumerate(content):
+        if character != "[":
+            continue
+        try:
+            parsed, _ = decoder.raw_decode(content[index:])
+        except json.JSONDecodeError:
+            continue
+        if isinstance(parsed, list) and parsed and all(isinstance(item, dict) for item in parsed):
+            candidates.append(parsed)
+    if candidates:
+        return candidates[-1]
+    raise json.JSONDecodeError("response does not contain a valid JSON array of objects", content, 0)
+
+
 def llm_cache_dir(args: argparse.Namespace) -> Path | None:
     if args.no_llm_cache:
         return None
@@ -829,10 +854,7 @@ def llm_json_request(
             usage_callback(response_data["usage"])
         content = response_data["choices"][0]["message"]["content"].strip()
         trace_event(trace_path, {"event": response_event, "batch": batch_number, "content": content})
-        cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", content, flags=re.I)
-        requested_results = json.loads(cleaned)
-        if not isinstance(requested_results, list) or not all(isinstance(item, dict) for item in requested_results):
-            raise ValueError("response must be a JSON array of objects")
+        requested_results = parse_json_array_response(content)
     except urllib.error.HTTPError as exc:
         elapsed = time.perf_counter() - started
         response_body = exc.read().decode("utf-8", errors="replace")

@@ -128,6 +128,11 @@ ignores tag order, weights, underscore/hyphen spelling, and whitespace. This
 prevents cosmetically different duplicates from satisfying requested leaf counts.
 The linter reports duplicates across categories as warnings and rejects them
 within one category; it also reports empty phrases caused by stray commas.
+If a model returns more leaves than requested with enough aligned provenance,
+the generator deterministically retains the requested prefix and continues. The
+removed leaves are preserved in an `[UNRESOLVED]` report entry for manual review.
+LLM response parsing also recovers the last valid JSON object array when a model
+wraps multiple attempts in Markdown or explanatory commentary.
 
 The default `general` content profile requires a CSV containing a
 `content_class` column. `classify_danbooru_tags.py` creates that enriched CSV in
