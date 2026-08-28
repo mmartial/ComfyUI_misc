@@ -118,7 +118,11 @@ The planned and realized category graphs are both validated. When routers are
 present, every planned category must be reachable from at least one router, and
 every generated category must reference each dependency declared in its plan at
 least once across its leaves. Missing dependency usage enters the same bounded
-category-correction flow, preventing generated but unreachable category pools.
+category-correction flow. If corrective retries cannot make every planned edge
+useful, the generator retains the structurally valid category and continues.
+The final report marks the omitted dependencies `[UNRESOLVED]` with manual repair
+guidance. It also reports every category that is actually unreachable from the
+public `random*` routers, so an overconnected plan does not prevent completion.
 Generated leaves are also compared using a normalized tags-mode signature that
 ignores tag order, weights, underscore/hyphen spelling, and whitespace. This
 prevents cosmetically different duplicates from satisfying requested leaf counts.
@@ -229,7 +233,7 @@ OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
   --model gemma4:cloud \
   --max-planner-retries 3 \
   --max-category-retries 3 \
-  --max-generation-calls 50 \
+  --max-generation-calls 100 \
   --interactive \
   --verbose
 ```

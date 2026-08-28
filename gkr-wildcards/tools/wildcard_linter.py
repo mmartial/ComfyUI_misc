@@ -470,6 +470,36 @@ def graph_findings(leaves: list[Leaf], categories: dict[tuple[str, str], list[Le
     for node in graph:
         walk(node, [])
 
+    namespaces = sorted({namespace for namespace, _ in categories})
+    for namespace in namespaces:
+        roots = sorted(
+            key for key in categories
+            if key[0] == namespace and (
+                key[1] == "random" or key[1].startswith("random_")
+                or key[1].endswith("_random") or key[1].endswith("_router")
+            )
+        )
+        if not roots:
+            continue
+        reachable: set[tuple[str, str]] = set()
+        pending = list(roots)
+        while pending:
+            node = pending.pop()
+            if node in reachable or node not in categories:
+                continue
+            reachable.add(node)
+            pending.extend(graph.get(node, set()))
+        root_names = ", ".join(name for _, name in roots)
+        for key in sorted(node for node in categories if node[0] == namespace and node not in reachable):
+            anchor = categories[key][0]
+            findings.append(Finding(
+                "warning", "unreachable_category",
+                f"Category {namespace}/{key[1]} is not reachable from public router(s): {root_names}. "
+                f"Add __{namespace}/{key[1]}__ to a reachable composite/router, connect it through another used "
+                "category, or remove the unused pool after review.",
+                anchor.file, anchor.line, key[1], evidence=f"routers: {root_names}",
+            ))
+
     for leaf in leaves:
         camera_refs = [ref for ref in leaf.references if CAMERA_CATEGORY_RE.search(ref[1])]
         if not camera_refs:

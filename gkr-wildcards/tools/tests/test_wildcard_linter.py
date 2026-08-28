@@ -257,6 +257,20 @@ class WildcardLinterTests(unittest.TestCase):
         findings = initial + LINTER.graph_findings(leaves, categories)
         self.assertFalse([finding for finding in findings if finding.severity == "error"])
 
+    def test_unreachable_category_reports_router_and_manual_remedies(self):
+        leaves, categories, initial = self.inventory(
+            "gkr_test:\n"
+            "  unused_pool:\n    - mechanic\n"
+            "  scene:\n    - street\n"
+            '  random:\n    - "__gkr_test/scene__"\n'
+        )
+        findings = initial + LINTER.graph_findings(leaves, categories)
+        unreachable = [finding for finding in findings if finding.rule == "unreachable_category"]
+        self.assertEqual([finding.category for finding in unreachable], ["unused_pool"])
+        self.assertIn("random", unreachable[0].message)
+        self.assertIn("remove the unused pool", unreachable[0].message)
+        self.assertFalse(unreachable[0].leaf_id)
+
     def test_tags_mode_reports_empty_comma_phrase(self):
         leaves, _, _ = self.inventory(
             "# MODE: tags\ngkr_test:\n  action:\n    - diving from rooftop,\n"

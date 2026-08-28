@@ -327,6 +327,23 @@ class WildcardGeneratorTests(unittest.TestCase):
         )
         self.assertEqual(leaves, ["heads-up_display, goggles"])
 
+    def test_parenthesized_qualifier_is_part_of_canonical_tag(self):
+        response = {
+            "leaves": ["crowd, subway, western_comics_(style), comic"],
+            "provenance": [{
+                "canonical_tags": ["western_comics_(style)"], "literal_fallbacks": []
+            }],
+        }
+        leaves, _ = GENERATOR.validate_category_response(
+            "spotlight_us_comics", response, 1, "gkr_comics", [],
+            {"western_comics_(style)"},
+        )
+        self.assertEqual(leaves, ["crowd, subway, western_comics_(style), comic"])
+        self.assertEqual(
+            GENERATOR.UNDERSCORE_TAG_RE.findall("portal_(object), mercury_(element)"),
+            ["portal_(object)", "mercury_(element)"],
+        )
+
     def test_generated_category_must_use_every_declared_dependency(self):
         response = {
             "leaves": ["street, dynamic_pose"],
@@ -340,6 +357,14 @@ class WildcardGeneratorTests(unittest.TestCase):
                 "superhero_scene", response, 1, "gkr_hero",
                 ["superhero_combo", "hero_action"], {"street", "dynamic_pose"},
             )
+
+        leaves, provenance = GENERATOR.validate_category_response(
+            "superhero_scene", response, 1, "gkr_hero",
+            ["superhero_combo", "hero_action"], {"street", "dynamic_pose"},
+            require_dependencies=False,
+        )
+        self.assertEqual(leaves, ["street, dynamic_pose"])
+        self.assertEqual(len(provenance), 1)
 
     def test_generated_category_rejects_normalized_duplicate_leaves(self):
         response = {

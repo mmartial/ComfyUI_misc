@@ -33,7 +33,7 @@ CATEGORY_RE = re.compile(r"^  ([A-Za-z0-9_-]+)\s*:\s*(?:\[\s*\])?\s*(?:#.*)?$")
 ROOT_RE = re.compile(r"^([A-Za-z0-9_-]+)\s*:\s*$")
 REFERENCE_RE = re.compile(r"__([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)__")
 UNDERSCORE_TAG_RE = re.compile(
-    r"(?<![A-Za-z0-9_-])([a-z0-9][a-z0-9_-]*_[a-z0-9_-]+)(?![A-Za-z0-9_-])"
+    r"(?<![A-Za-z0-9_-])([a-z0-9][a-z0-9_-]*_(?:[a-z0-9_-]+(?:\([a-z0-9_-]+\))?|\([a-z0-9_-]+\)))(?![A-Za-z0-9_-])"
 )
 SAFE_NAME_RE = re.compile(r"^[A-Za-z0-9_-]+$")
 KINDS = {"component", "combo", "scene", "spotlight", "router"}
@@ -363,6 +363,7 @@ class Session:
         self.reported_tokens = 0
         self.events: list[dict[str, Any]] = []
         self.provenance: dict[str, list[dict[str, Any]]] = {}
+        self.generation_issues: list[dict[str, Any]] = []
         default_override_path = args.output.expanduser().resolve().with_suffix("").with_name(
             args.output.expanduser().resolve().with_suffix("").name + ".interactive-overrides.json"
         )
@@ -613,14 +614,19 @@ def category_batches(plans: list[CategoryPlan], size: int) -> list[list[Category
 class CategoryValidationError(RuntimeError):
     """A generated category response that can be corrected by another LLM call."""
 
-    def __init__(self, message: str, invalid_tags: set[str] | None = None):
+    def __init__(
+        self, message: str, invalid_tags: set[str] | None = None,
+        missing_dependencies: set[str] | None = None,
+    ):
         super().__init__(message)
         self.invalid_tags = invalid_tags or set()
+        self.missing_dependencies = missing_dependencies or set()
 
 
 def validate_category_response(
     category: str, result: dict[str, Any], expected_count: int,
     namespace: str, dependencies: list[str], allowed_canonical: set[str],
+    require_dependencies: bool = True,
 ) -> tuple[list[str], list[dict[str, Any]]]:
     raw = result.get("leaves", [])
     provenance = result.get("provenance", [])
@@ -686,7 +692,7 @@ def validate_category_response(
     if invalid_refs:
         errors.append("uses undeclared references: " + ", ".join(sorted(invalid_refs)))
     missing_dependencies = sorted(set(dependencies) - used_dependencies)
-    if missing_dependencies:
+    if require_dependencies and missing_dependencies:
         errors.append(
             "does not use declared dependencies: " + ", ".join(missing_dependencies)
         )
@@ -699,6 +705,7 @@ def validate_category_response(
         raise CategoryValidationError(
             f"category {category}: " + "; ".join(errors),
             invalid_provenance | invalid_output_tags,
+            set(missing_dependencies),
         )
     return leaves, provenance
 
@@ -840,6 +847,7 @@ def generate_categories(
                             leaves, provenance = validate_category_response(
                                 plan.name, result, plan.count, skeleton.namespace,
                                 plan.dependencies, allowed_canonical | set(replacements.values()),
+                                require_dependencies=False,
                             )
                             vocabulary.tags.update(replacements.values())
                             session.interactive_overrides.setdefault(plan.name, {}).update(replacements)
@@ -847,6 +855,29 @@ def generate_categories(
                             log(
                                 session.args,
                                 f"accepted {len(replacements)} interactive tag override(s) for {plan.name}",
+                            )
+                            if exc.missing_dependencies:
+                                session.generation_issues.append({
+                                    "category": plan.name,
+                                    "rule": "unused_declared_dependencies",
+                                    "missing_dependencies": sorted(exc.missing_dependencies),
+                                })
+                            break
+                        if exc.missing_dependencies and not exc.invalid_tags:
+                            leaves, provenance = validate_category_response(
+                                plan.name, result, plan.count, skeleton.namespace,
+                                plan.dependencies, allowed_canonical,
+                                require_dependencies=False,
+                            )
+                            session.generation_issues.append({
+                                "category": plan.name,
+                                "rule": "unused_declared_dependencies",
+                                "missing_dependencies": sorted(exc.missing_dependencies),
+                            })
+                            log(
+                                session.args,
+                                f"category {plan.name} still omits declared dependencies after retries; "
+                                "continuing with an unresolved review finding",
                             )
                             break
                         raise
@@ -1048,6 +1079,16 @@ def main() -> int:
                 fixed_output, rules, tags_rules, vocabulary,
                 args.canonical_tag_candidate_count, args.canonical_tag_style,
             )
+            for issue in session.generation_issues:
+                missing = ", ".join(issue["missing_dependencies"])
+                findings.append(linter.Finding(
+                    "warning", str(issue["rule"]),
+                    f"Generated category '{issue['category']}' did not reference these declared dependencies after "
+                    f"corrective retries: {missing}. This may leave category pools unreachable from public routes. "
+                    "Manual review: add the appropriate __namespace/category__ references to this or another reachable "
+                    "composite/router, or remove dependencies and pools that are not intended for output.",
+                    str(fixed_output), category=str(issue["category"]), evidence=missing,
+                ))
             if not args.skip_semantic_review:
                 session.check_token_budget()
                 review_leaves = [leaf for leaf in leaves if linter.has_literal_content(leaf)]
@@ -1090,6 +1131,7 @@ def main() -> int:
             "tag_provenance": session.provenance,
             "interactive_tag_overrides": session.interactive_overrides,
             "interactive_override_file": str(session.interactive_override_path),
+            "generation_issues": session.generation_issues,
             "retrieval": {
                 "mode": retrieval_mode,
                 "index": str(index_path),
@@ -1128,6 +1170,7 @@ def main() -> int:
             "generation_calls": session.events if session else [],
             "interactive_tag_overrides": session.interactive_overrides if session else {},
             "interactive_override_file": str(session.interactive_override_path) if session else None,
+            "generation_issues": session.generation_issues if session else [],
             "finished": time.time(),
         })
         try:
