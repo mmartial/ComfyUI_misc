@@ -33,7 +33,7 @@ CATEGORY_RE = re.compile(r"^  ([A-Za-z0-9_-]+)\s*:\s*(?:\[\s*\])?\s*(?:#.*)?$")
 ROOT_RE = re.compile(r"^([A-Za-z0-9_-]+)\s*:\s*$")
 REFERENCE_RE = re.compile(r"__([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)__")
 UNDERSCORE_TAG_RE = re.compile(
-    r"(?<![A-Za-z0-9_-])([a-z0-9][a-z0-9_-]*_(?:[a-z0-9_-]+(?:\([a-z0-9_-]+\))?|\([a-z0-9_-]+\)))(?![A-Za-z0-9_-])"
+    r"(?<![A-Za-z0-9_'-])([a-z0-9][a-z0-9_'-]*_(?:[a-z0-9_'-]+(?:\([a-z0-9_'-]+\))?|\([a-z0-9_'-]+\)))(?![A-Za-z0-9_'-])"
 )
 SAFE_NAME_RE = re.compile(r"^[A-Za-z0-9_-]+$")
 KINDS = {"component", "combo", "scene", "spotlight", "router"}
@@ -560,8 +560,22 @@ def generate_concepts(
             if key not in seen:
                 unique.append(concept)
                 seen.add(key)
-        if len(unique) != plan.count:
+        if len(unique) < plan.count:
             raise RuntimeError(f"category {plan.name} returned {len(unique)} unique concepts; expected {plan.count}")
+        if len(unique) > plan.count:
+            removed = unique[plan.count:]
+            unique = unique[:plan.count]
+            session.generation_issues.append({
+                "category": plan.name,
+                "rule": "trimmed_excess_generated_concepts",
+                "expected_count": plan.count,
+                "removed_concepts": removed,
+            })
+            log(
+                session.args,
+                f"category {plan.name} returned excess concepts; deterministically kept the first "
+                f"{plan.count} and recorded {len(removed)} removed concept(s) for review",
+            )
         concepts_by_category[plan.name] = unique
     return concepts_by_category
 
@@ -1116,7 +1130,19 @@ def main() -> int:
                 args.canonical_tag_candidate_count, args.canonical_tag_style,
             )
             for issue in session.generation_issues:
-                if issue["rule"] == "trimmed_excess_generated_leaves":
+                if issue["rule"] == "trimmed_excess_generated_concepts":
+                    removed = " | ".join(
+                        str(concept.get("summary", concept)) for concept in issue["removed_concepts"]
+                    )
+                    findings.append(linter.Finding(
+                        "warning", str(issue["rule"]),
+                        f"Concept generation for category '{issue['category']}' returned more than its requested "
+                        f"{issue['expected_count']} concepts. The generator retained the first "
+                        f"{issue['expected_count']} and omitted: {removed}. Manual review: no action is required unless "
+                        "the omitted concept should replace one of the generated leaves.",
+                        str(fixed_output), category=str(issue["category"]), evidence=removed,
+                    ))
+                elif issue["rule"] == "trimmed_excess_generated_leaves":
                     removed = " | ".join(issue["removed_leaves"])
                     findings.append(linter.Finding(
                         "warning", str(issue["rule"]),

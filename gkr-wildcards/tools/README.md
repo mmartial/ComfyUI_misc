@@ -131,6 +131,8 @@ within one category; it also reports empty phrases caused by stray commas.
 If a model returns more leaves than requested with enough aligned provenance,
 the generator deterministically retains the requested prefix and continues. The
 removed leaves are preserved in an `[UNRESOLVED]` report entry for manual review.
+Excess concepts are handled the same way before candidate retrieval: the
+requested prefix is retained and omitted concept summaries are reported.
 LLM response parsing also recovers the last valid JSON object array when a model
 wraps multiple attempts in Markdown or explanatory commentary.
 

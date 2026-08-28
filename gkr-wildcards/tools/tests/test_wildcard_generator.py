@@ -257,6 +257,28 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertEqual(generated["scene"], ["superhero_landing"])
         self.assertEqual(generated["random"], ["__gkr_hero/scene__"])
 
+    def test_excess_concepts_are_trimmed_and_recorded(self):
+        skeleton = self.skeleton("# MODE: tags\ngkr_test:\n  subject: []\n")
+        plan = GENERATOR.CategoryPlan("subject", "component", "subject", 2, [], True)
+
+        class FakeSession:
+            def __init__(self):
+                self.args = SimpleNamespace(content_profile="general", verbose=False)
+                self.generation_issues = []
+
+            def request(self, name, instruction, items):
+                return [{"id": "subject", "concepts": [
+                    {"summary": "first", "search_queries": ["first"]},
+                    {"summary": "second", "search_queries": ["second"]},
+                    {"summary": "excess", "search_queries": ["excess"]},
+                ]}]
+
+        session = FakeSession()
+        concepts = GENERATOR.generate_concepts(session, skeleton, [plan], "policy")
+        self.assertEqual([item["summary"] for item in concepts["subject"]], ["first", "second"])
+        self.assertEqual(session.generation_issues[0]["rule"], "trimmed_excess_generated_concepts")
+        self.assertEqual(session.generation_issues[0]["removed_concepts"][0]["summary"], "excess")
+
     def test_invalid_palette_tag_is_reported_and_corrected(self):
         index_module = sys.modules["danbooru_index"]
         temporary = tempfile.TemporaryDirectory()
@@ -342,6 +364,25 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertEqual(
             GENERATOR.UNDERSCORE_TAG_RE.findall("portal_(object), mercury_(element)"),
             ["portal_(object)", "mercury_(element)"],
+        )
+
+    def test_apostrophe_is_part_of_canonical_tag(self):
+        response = {
+            "leaves": ["close-up, (brushing_another's_hair:1.1), affectionate, caress"],
+            "provenance": [{
+                "canonical_tags": ["brushing_another's_hair"], "literal_fallbacks": []
+            }],
+        }
+        leaves, _ = GENERATOR.validate_category_response(
+            "romance_scene", response, 1, "gkr_comics", [],
+            {"brushing_another's_hair"},
+        )
+        self.assertEqual(len(leaves), 1)
+        self.assertEqual(
+            GENERATOR.UNDERSCORE_TAG_RE.findall(
+                "brushing_another's_hair, (brushing_another's_hair:1.1)"
+            ),
+            ["brushing_another's_hair", "brushing_another's_hair"],
         )
 
     def test_generated_category_must_use_every_declared_dependency(self):
