@@ -1076,7 +1076,16 @@ def llm_suggest_fixes(
                 received.add(uid)
         if received != expected:
             missing = ", ".join(sorted(expected - received))
-            raise RuntimeError(f"fix-suggestion response omitted or returned an empty rewrite for: {missing}")
+            verbose(
+                args,
+                f"fix-suggestion response omitted or returned an empty rewrite for {missing}; "
+                "keeping original leaves unresolved",
+            )
+            trace_event(trace_path, {
+                "event": "fix_suggestion_incomplete", "batch": batch_number,
+                "missing_ids": sorted(expected - received),
+                "action": "kept_original_unresolved",
+            })
     return suggestions, rationales
 
 

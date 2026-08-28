@@ -122,6 +122,36 @@ class WildcardLinterTests(unittest.TestCase):
         content = "`json\n[{\"id\": \"item\"}]\n`\nextra explanation"
         self.assertEqual(LINTER.parse_json_array_response(content), [{"id": "item"}])
 
+    def test_incomplete_fix_suggestion_keeps_missing_leaf_unresolved(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  subject:\n"
+            "    - first bad token\n"
+            "    - second bad token\n"
+        )
+        findings = [
+            LINTER.Finding(
+                "warning", "test_rule", "needs repair", leaf.file, leaf.line,
+                leaf.category, leaf.uid,
+            )
+            for leaf in leaves
+        ]
+        original_request = LINTER.llm_json_request
+        self.addCleanup(setattr, LINTER, "llm_json_request", original_request)
+        LINTER.llm_json_request = lambda **kwargs: [
+            {"id": leaves[0].uid, "suggested_rewrite": "first repaired token", "rationale": "fixed"},
+            {"id": leaves[1].uid, "suggested_rewrite": "", "rationale": "unable"},
+        ]
+        fix_args = SimpleNamespace(
+            model="test", base_url="http://localhost:11434/v1", api_key_env="PATH",
+            fix_rules="", fix_severity="both", canonical_tag_suggestions=False,
+            batch_size=20, canonical_tag_candidate_count=5, canonical_tag_style="underscore",
+            verbose=False,
+        )
+        suggestions, rationales = LINTER.llm_suggest_fixes(leaves, findings, fix_args)
+        self.assertEqual(suggestions, {leaves[0].uid: "first repaired token"})
+        self.assertEqual(rationales, {leaves[0].uid: "fixed"})
+        self.assertNotIn(leaves[1].uid, suggestions)
+
     def test_exact_canonical_item_is_supplied_to_visual_review(self):
         leaves, _, _ = self.inventory(
             "# MODE: tags\ngkr_test:\n  subject:\n"

@@ -135,6 +135,9 @@ Excess concepts are handled the same way before candidate retrieval: the
 requested prefix is retained and omitted concept summaries are reported.
 LLM response parsing also recovers the last valid JSON object array when a model
 wraps multiple attempts in Markdown or explanatory commentary.
+If a fix-suggestion batch omits an ID or returns an empty rewrite, valid rewrites
+from that batch are retained while affected original leaves remain unchanged and
+`[UNRESOLVED]`; later repair batches and final report generation continue.
 
 The default `general` content profile requires a CSV containing a
 `content_class` column. `classify_danbooru_tags.py` creates that enriched CSV in
