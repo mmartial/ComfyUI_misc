@@ -108,6 +108,10 @@ def parse_args() -> argparse.Namespace:
         "--interactive", action="store_true",
         help="After retries fail, prompt to accept or replace invalid tags without palette checks",
     )
+    parser.add_argument(
+        "--interactive-overrides", type=Path,
+        help="Persistent interactive decisions (defaults to <output-stem>.interactive-overrides.json)",
+    )
     parser.add_argument("--max-repair-passes", type=int, default=2)
     parser.add_argument("--max-category-depth", type=int, default=6)
     parser.add_argument("--max-added-categories", type=int, default=30)
@@ -359,8 +363,44 @@ class Session:
         self.reported_tokens = 0
         self.events: list[dict[str, Any]] = []
         self.provenance: dict[str, list[dict[str, Any]]] = {}
-        self.interactive_overrides: dict[str, dict[str, str]] = {}
+        default_override_path = args.output.expanduser().resolve().with_suffix("").with_name(
+            args.output.expanduser().resolve().with_suffix("").name + ".interactive-overrides.json"
+        )
+        self.interactive_override_path = (
+            args.interactive_overrides.expanduser().resolve()
+            if args.interactive_overrides else default_override_path
+        )
+        self.interactive_overrides = self.load_interactive_overrides()
         self.linter_args.llm_usage_callback = self.record_usage
+
+    def load_interactive_overrides(self) -> dict[str, dict[str, str]]:
+        if not self.interactive_override_path.is_file():
+            return {}
+        try:
+            raw = json.loads(self.interactive_override_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ValueError(f"invalid interactive override file {self.interactive_override_path}: {exc}") from exc
+        if not isinstance(raw, dict):
+            raise ValueError(f"interactive override file must contain an object: {self.interactive_override_path}")
+        overrides: dict[str, dict[str, str]] = {}
+        for category, mapping in raw.items():
+            if not isinstance(category, str) or not isinstance(mapping, dict):
+                raise ValueError(f"invalid interactive override mapping in {self.interactive_override_path}")
+            if not all(isinstance(old, str) and isinstance(new, str) for old, new in mapping.items()):
+                raise ValueError(f"interactive override tags must be strings in {self.interactive_override_path}")
+            overrides[category] = dict(mapping)
+        return overrides
+
+    def save_interactive_overrides(self) -> None:
+        self.interactive_override_path.parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.NamedTemporaryFile(
+            "w", encoding="utf-8", dir=self.interactive_override_path.parent,
+            prefix=self.interactive_override_path.name + ".", suffix=".tmp", delete=False,
+        ) as handle:
+            temporary_path = Path(handle.name)
+            json.dump(self.interactive_overrides, handle, indent=2, ensure_ascii=False)
+            handle.write("\n")
+        os.replace(temporary_path, self.interactive_override_path)
 
     def record_usage(self, usage: dict[str, Any]) -> None:
         try:
@@ -665,19 +705,53 @@ def validate_category_response(
 
 def apply_interactive_tag_overrides(
     category: str, result: dict[str, Any], invalid_tags: set[str],
-    input_fn: Any = input,
+    input_fn: Any = input, existing: dict[str, str] | None = None,
 ) -> tuple[dict[str, Any], dict[str, str]]:
     """Prompt for explicit tag overrides and apply them to leaves and provenance."""
-    replacements: dict[str, str] = {}
-    print(f"[wildcard-generator] interactive overrides for category {category}", file=sys.stderr)
-    for invalid_tag in sorted(invalid_tags):
+    replacements = {
+        tag: replacement for tag, replacement in (existing or {}).items() if tag in invalid_tags
+    }
+    missing_tags = sorted(invalid_tags - set(replacements))
+    if replacements:
+        log_message = ", ".join(f"{tag} -> {replacement}" for tag, replacement in sorted(replacements.items()))
+        print(
+            f"[wildcard-generator] reused interactive overrides for category {category}: {log_message}",
+            file=sys.stderr,
+        )
+    if missing_tags:
+        print(f"[wildcard-generator] interactive overrides for category {category}", file=sys.stderr)
+    leaves = result.get("leaves", [])
+    provenance = result.get("provenance", [])
+    for invalid_tag in missing_tags:
+        affected_indexes: set[int] = set()
+        if isinstance(leaves, list):
+            expression = re.compile(
+                rf"(?<![A-Za-z0-9_-]){re.escape(invalid_tag)}(?![A-Za-z0-9_-])"
+            )
+            affected_indexes.update(
+                index for index, leaf in enumerate(leaves)
+                if isinstance(leaf, str) and expression.search(leaf)
+            )
+        if isinstance(provenance, list):
+            affected_indexes.update(
+                index for index, entry in enumerate(provenance)
+                if isinstance(entry, dict)
+                and isinstance(entry.get("canonical_tags"), list)
+                and invalid_tag in {str(tag) for tag in entry["canonical_tags"]}
+            )
+        context_lines = [
+            f"  Leaf {index + 1}: {leaves[index]}"
+            for index in sorted(affected_indexes)
+            if isinstance(leaves, list) and index < len(leaves) and isinstance(leaves[index], str)
+        ]
+        context = "\n".join(context_lines) or "  Leaf context unavailable"
         replacement = input_fn(
-            f"Invalid tag '{invalid_tag}'. Enter a replacement, or press Enter to accept it unchanged: "
+            f"\nInvalid tag '{invalid_tag}' in category '{category}':\n{context}\n"
+            "Enter a replacement, or press Enter to accept it unchanged: "
         ).strip()
         replacements[invalid_tag] = replacement or invalid_tag
 
     corrected = dict(result)
-    leaves = result.get("leaves", [])
     def replace_leaf_tags(leaf: str) -> str:
         for old, new in replacements.items():
             leaf = re.sub(
@@ -688,7 +762,6 @@ def apply_interactive_tag_overrides(
     corrected["leaves"] = [
         replace_leaf_tags(leaf) if isinstance(leaf, str) else leaf for leaf in leaves
     ] if isinstance(leaves, list) else leaves
-    provenance = result.get("provenance", [])
     corrected_provenance: list[Any] = []
     if isinstance(provenance, list):
         for entry in provenance:
@@ -762,13 +835,15 @@ def generate_categories(
                         if session.args.interactive and exc.invalid_tags:
                             result, replacements = apply_interactive_tag_overrides(
                                 plan.name, result, exc.invalid_tags,
+                                existing=session.interactive_overrides.get(plan.name),
                             )
                             leaves, provenance = validate_category_response(
                                 plan.name, result, plan.count, skeleton.namespace,
                                 plan.dependencies, allowed_canonical | set(replacements.values()),
                             )
                             vocabulary.tags.update(replacements.values())
-                            session.interactive_overrides[plan.name] = replacements
+                            session.interactive_overrides.setdefault(plan.name, {}).update(replacements)
+                            session.save_interactive_overrides()
                             log(
                                 session.args,
                                 f"accepted {len(replacements)} interactive tag override(s) for {plan.name}",
@@ -1014,6 +1089,7 @@ def main() -> int:
             "reported_tokens": session.reported_tokens,
             "tag_provenance": session.provenance,
             "interactive_tag_overrides": session.interactive_overrides,
+            "interactive_override_file": str(session.interactive_override_path),
             "retrieval": {
                 "mode": retrieval_mode,
                 "index": str(index_path),
@@ -1050,6 +1126,8 @@ def main() -> int:
             "status": "incomplete", "error": f"{type(exc).__name__}: {exc}",
             "plan": [asdict(plan) for plan in plans],
             "generation_calls": session.events if session else [],
+            "interactive_tag_overrides": session.interactive_overrides if session else {},
+            "interactive_override_file": str(session.interactive_override_path) if session else None,
             "finished": time.time(),
         })
         try:

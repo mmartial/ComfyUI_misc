@@ -381,12 +381,66 @@ class WildcardGeneratorTests(unittest.TestCase):
             }],
         }
         answers = iter(["face_mask", ""])
+        prompts = []
+        def answer(prompt):
+            prompts.append(prompt)
+            return next(answers)
         corrected, replacements = GENERATOR.apply_interactive_tag_overrides(
-            "superhero_gear", response, {"mask", "heads-up_display"}, lambda _: next(answers)
+            "superhero_gear", response, {"mask", "heads-up_display"}, answer
         )
         self.assertEqual(replacements, {"heads-up_display": "face_mask", "mask": "mask"})
         self.assertEqual(corrected["leaves"], ["mask, face_mask"])
         self.assertEqual(corrected["provenance"][0]["canonical_tags"], ["mask", "face_mask"])
+        self.assertIn("Leaf 1: mask, heads-up_display", prompts[0])
+        self.assertIn("category 'superhero_gear'", prompts[0])
+
+    def test_interactive_override_shows_every_affected_leaf(self):
+        response = {
+            "leaves": ["mask, city", "mask, rooftop", "unrelated"],
+            "provenance": [
+                {"canonical_tags": ["mask"], "literal_fallbacks": []},
+                {"canonical_tags": ["mask"], "literal_fallbacks": []},
+                {"canonical_tags": [], "literal_fallbacks": ["unrelated"]},
+            ],
+        }
+        prompts = []
+        GENERATOR.apply_interactive_tag_overrides(
+            "villain", response, {"mask"}, lambda prompt: prompts.append(prompt) or "face_mask"
+        )
+        self.assertIn("Leaf 1: mask, city", prompts[0])
+        self.assertIn("Leaf 2: mask, rooftop", prompts[0])
+        self.assertNotIn("Leaf 3", prompts[0])
+
+    def test_existing_interactive_override_is_reused_without_prompt(self):
+        response = {
+            "leaves": ["incoming_mail, envelope"],
+            "provenance": [{"canonical_tags": ["incoming_mail"], "literal_fallbacks": []}],
+        }
+        corrected, replacements = GENERATOR.apply_interactive_tag_overrides(
+            "everyday_archetype", response, {"incoming_mail"},
+            lambda _: self.fail("saved override should not prompt"),
+            existing={"incoming_mail": "mail"},
+        )
+        self.assertEqual(replacements, {"incoming_mail": "mail"})
+        self.assertEqual(corrected["leaves"], ["mail, envelope"])
+
+    def test_session_persists_interactive_overrides_immediately(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        output = Path(temporary.name) / "gkr-test.yaml"
+        session_args = SimpleNamespace(
+            output=output, interactive_overrides=None, model="test-model",
+            base_url="http://localhost:11434/v1", api_key_env="PATH",
+        )
+        first = GENERATOR.Session(session_args, None)
+        first.interactive_overrides = {"everyday_archetype": {"incoming_mail": "mail"}}
+        first.save_interactive_overrides()
+        second = GENERATOR.Session(session_args, None)
+        self.assertEqual(second.interactive_overrides, first.interactive_overrides)
+        self.assertEqual(
+            second.interactive_override_path,
+            output.resolve().with_suffix("").with_name("gkr-test.interactive-overrides.json"),
+        )
 
 
 if __name__ == "__main__":

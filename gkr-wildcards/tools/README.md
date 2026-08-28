@@ -93,11 +93,18 @@ Required categories named `random`, `random_*`, `*_random`, or `*_router` are
 deterministically treated as routers even when the model labels them otherwise.
 
 With `--interactive`, exhausting those retries prompts once for every invalid
-tag. Press Enter to accept the displayed tag unchanged, or type a replacement.
+tag. The prompt shows the category and every complete leaf affected by that tag,
+including leaf numbers, before asking for a decision. Press Enter to accept the
+displayed tag unchanged, or type a replacement.
 Explicitly accepted and replacement tags bypass palette and subsequent canonical
 vocabulary membership checks; the chosen mapping is recorded under
 `interactive_tag_overrides` in the generation manifest. Structural checks such
 as leaf counts, provenance shape, and declared wildcard references still apply.
+Each decision is also written immediately to
+`<output-stem>.interactive-overrides.json`, so incomplete or interrupted runs
+reuse it without prompting again. Use `--interactive-overrides PATH` to choose a
+different persistent decision file. Delete or edit that file to reconsider a
+previous answer.
 
 ## Tag indexing, content profiles, and local embeddings
 
@@ -222,6 +229,7 @@ OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
   --model gemma4:cloud \
   --max-planner-retries 3 \
   --max-category-retries 3 \
+  --max-generation-calls 50 \
   --interactive \
   --verbose
 ```
