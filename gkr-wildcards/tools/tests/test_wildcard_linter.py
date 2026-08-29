@@ -691,6 +691,47 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertEqual(audits[0].status, "compliant")
         self.assertTrue(LINTER.prompt_audit_has_warning(audits))
 
+    def test_exact_canonical_item_overrides_llm_visual_test_false_positive(self):
+        vocabulary = LINTER.DanbooruVocabulary({"science_fiction"})
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 10,
+            "mechanic, space_station, science_fiction", (), "tags",
+        )
+        reviewed = {
+            "classification": "definite_failure",
+            "failed_test": "Visual test",
+            "reason": "The tag 'science_fiction' is an interpretive genre label.",
+        }
+        self.assertTrue(
+            LINTER.canonical_visual_test_false_positive(reviewed, leaf, vocabulary)
+        )
+
+        larger_phrase = LINTER.Leaf(
+            "id2", "test.yaml", "gkr", "scene", 0, 11,
+            "mechanic, science_fiction atmosphere", (), "tags",
+        )
+        self.assertFalse(
+            LINTER.canonical_visual_test_false_positive(reviewed, larger_phrase, vocabulary)
+        )
+        self.assertFalse(LINTER.canonical_visual_test_false_positive(
+            {**reviewed, "failed_test": "Compatibility test"}, leaf, vocabulary,
+        ))
+
+    def test_llm_replacement_candidates_render_as_alternatives_not_leaf_rewrite(self):
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 10,
+            "tower, monolithic, extreme low angle", (), "tags",
+        )
+        finding = LINTER.Finding(
+            "error", "Visual test", "Monolithic is interpretive.",
+            leaf.file, leaf.line, leaf.category, leaf.uid,
+            alternatives=("windowless stone shaft", "sheer concrete facade"), source="llm",
+        )
+        markdown = LINTER.render([finding], [leaf], "markdown", fix_attempted=True)
+        self.assertIn("Potential replacements — LLM generated", markdown)
+        self.assertIn("- `windowless stone shaft`", markdown)
+        self.assertNotIn("```diff", markdown)
+
     def test_prompt_audit_summary_counts_unique_pairs(self):
         audits = [
             LINTER.PromptAudit("one.png", "Tags", "noncompliant", ["bad"], "1family", ["subject_count_failure"], "family"),

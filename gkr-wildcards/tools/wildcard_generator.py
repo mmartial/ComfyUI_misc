@@ -1361,6 +1361,41 @@ def deterministic_findings(
     return leaves, findings
 
 
+def duplicate_generation_finding(
+    issue: dict[str, Any], leaves: list[linter.Leaf], fixed_output: Path,
+) -> linter.Finding:
+    """Render a cross-chunk duplicate issue using final-file line locations."""
+    category = str(issue["category"])
+    by_position = {
+        leaf.index + 1: leaf for leaf in leaves
+        if leaf.category == category and Path(leaf.file).resolve() == fixed_output.resolve()
+    }
+    evidence_blocks: list[str] = []
+    first_line = 0
+    for pair_number, pair in enumerate(issue["duplicates"], 1):
+        current = by_position.get(int(pair["current_position"]))
+        prior = by_position.get(int(pair["prior_position"]))
+        current_line = current.line if current else 0
+        prior_line = prior.line if prior else 0
+        first_line = first_line or current_line
+        current_location = f"{fixed_output}:{current_line}" if current_line else str(fixed_output)
+        prior_location = f"{fixed_output}:{prior_line}" if prior_line else str(fixed_output)
+        evidence_blocks.append(
+            f"Pair {pair_number}\n"
+            f"  duplicate: {current_location}\n"
+            f"    {current.text if current else pair['current_leaf']}\n"
+            f"  original:  {prior_location}\n"
+            f"    {prior.text if prior else pair['prior_leaf']}"
+        )
+    return linter.Finding(
+        "warning", str(issue["rule"]),
+        f"Generated category '{category}' retained {len(issue['duplicates'])} cross-chunk duplicate "
+        "pair(s) after exhausting corrective retries. Generation continued so validation and repair could "
+        "finish. Replace or remove one member of each pair listed below if automated repair did not resolve it.",
+        str(fixed_output), first_line, category, evidence="\n\n".join(evidence_blocks),
+    )
+
+
 def apply_leaf_rewrites(content: dict[str, list[str]], leaves: list[linter.Leaf], rewrites: dict[str, str]) -> int:
     applied = 0
     for leaf in leaves:
@@ -1368,6 +1403,44 @@ def apply_leaf_rewrites(content: dict[str, list[str]], leaves: list[linter.Leaf]
             content[leaf.category][leaf.index] = rewrites[leaf.uid]
             applied += 1
     return applied
+
+
+def deterministic_canonical_rewrites(
+    leaves: list[linter.Leaf], findings: list[linter.Finding],
+) -> dict[str, str]:
+    """Build safe one-to-one rewrites for exact canonical normalization findings."""
+    leaf_by_id = {leaf.uid: leaf for leaf in leaves}
+    rewrites: dict[str, str] = {}
+    for finding in findings:
+        if finding.rule != "canonical_tag_normalization" or not finding.leaf_id:
+            continue
+        try:
+            evidence = json.loads(finding.evidence)
+        except (TypeError, json.JSONDecodeError):
+            continue
+        candidates = evidence.get("candidates", [])
+        source = " ".join(str(evidence.get("input", "")).split()).casefold()
+        if evidence.get("status") != "exact_normalized_match" or len(candidates) != 1 or not source:
+            continue
+        leaf = leaf_by_id.get(finding.leaf_id)
+        if leaf is None:
+            continue
+        replacement = str(candidates[0])
+        parts = linter.split_top_level_commas(leaf.text)
+        changed = False
+        for index, raw_part in enumerate(parts):
+            stripped = raw_part.strip()
+            weighted = linter.WEIGHT_RE.fullmatch(stripped)
+            core = " ".join((weighted.group(1) if weighted else stripped).split()).casefold()
+            if core != source:
+                continue
+            parts[index] = (
+                f"({replacement}:{weighted.group(2)})" if weighted else replacement
+            )
+            changed = True
+        if changed:
+            rewrites[leaf.uid] = ", ".join(part.strip() for part in parts)
+    return rewrites
 
 
 def main() -> int:
@@ -1489,6 +1562,16 @@ def main() -> int:
         output.write_text(render_wildcard(skeleton, plans, content), encoding="utf-8")
         fixed_output.write_text(render_wildcard(skeleton, plans, content), encoding="utf-8")
 
+        initial_leaves, initial_findings = deterministic_findings(
+            fixed_output, rules, tags_rules, vocabulary,
+            args.canonical_tag_candidate_count, args.canonical_tag_style,
+        )
+        canonical_rewrites = deterministic_canonical_rewrites(initial_leaves, initial_findings)
+        if canonical_rewrites:
+            applied = apply_leaf_rewrites(content, initial_leaves, canonical_rewrites)
+            fixed_output.write_text(render_wildcard(skeleton, plans, content), encoding="utf-8")
+            log(args, f"applied {applied} deterministic exact canonical normalization(s)")
+
         for repair_pass in range(args.max_repair_passes + 1):
             leaves, findings = deterministic_findings(
                 fixed_output, rules, tags_rules, vocabulary,
@@ -1519,19 +1602,7 @@ def main() -> int:
                         str(fixed_output), category=str(issue["category"]), evidence=removed,
                     ))
                 elif issue["rule"] == "duplicate_leaves_across_chunks":
-                    duplicate_context = " | ".join(
-                        f"leaf {pair['current_position']}: {pair['current_leaf']} duplicates "
-                        f"leaf {pair['prior_position']}: {pair['prior_leaf']}"
-                        for pair in issue["duplicates"]
-                    )
-                    findings.append(linter.Finding(
-                        "warning", str(issue["rule"]),
-                        f"Generated category '{issue['category']}' retained cross-chunk duplicates after exhausting "
-                        f"corrective retries. Generation continued so the validation/repair pipeline could finish. "
-                        f"Duplicate context: {duplicate_context}. Manual review: replace or remove one member of each "
-                        "pair if the automated repair did not resolve it.",
-                        str(fixed_output), category=str(issue["category"]), evidence=duplicate_context,
-                    ))
+                    findings.append(duplicate_generation_finding(issue, leaves, fixed_output))
                 elif issue["rule"] == "repeated_component_lead_motifs":
                     motif_context = " | ".join(
                         f"{motif}: " + "; ".join(

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import importlib.util
 import io
+import json
 import sys
 import tempfile
 import unittest
@@ -275,6 +276,63 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertEqual(fixed, Path("gkr-hero.fixed.yaml"))
         self.assertEqual(report, Path("gkr-hero.fixed-report.md"))
         self.assertEqual(manifest, Path("gkr-hero.generation.json"))
+
+    def test_duplicate_generation_finding_uses_final_file_lines_and_readable_pairs(self):
+        fixed = Path("/tmp/gkr-test.fixed.yaml")
+        linter = sys.modules["wildcard_linter"]
+        leaves = [
+            linter.Leaf("a", str(fixed), "gkr_test", "covers", 0, 12,
+                        "cover, red", (), "tags"),
+            linter.Leaf("b", str(fixed), "gkr_test", "covers", 1, 13,
+                        "cover, blue", (), "tags"),
+            linter.Leaf("c", str(fixed), "gkr_test", "covers", 2, 14,
+                        "cover, red", (), "tags"),
+        ]
+        issue = {
+            "category": "covers", "rule": "duplicate_leaves_across_chunks",
+            "duplicates": [{
+                "prior_position": 1, "prior_leaf": "old original",
+                "current_position": 3, "current_leaf": "old duplicate",
+            }],
+        }
+        finding = GENERATOR.duplicate_generation_finding(issue, leaves, fixed)
+        self.assertEqual(finding.line, 14)
+        self.assertIn(f"duplicate: {fixed}:14", finding.evidence)
+        self.assertIn(f"original:  {fixed}:12", finding.evidence)
+        self.assertIn("    cover, red", finding.evidence)
+        report = linter.render([finding], leaves, "markdown", fix_attempted=True)
+        self.assertIn("```text\nPair 1", report)
+        self.assertNotIn("Evidence: `Pair 1", report)
+
+    def test_exact_canonical_normalization_is_rewritten_without_llm(self):
+        linter = sys.modules["wildcard_linter"]
+        leaves = [
+            linter.Leaf(
+                "plain", "test.yaml", "gkr", "scene", 0, 10,
+                "1man, grey suit, street", (), "tags",
+            ),
+            linter.Leaf(
+                "weighted", "test.yaml", "gkr", "scene", 1, 11,
+                "1woman, (blue coat:1.2), rain", (), "tags",
+            ),
+        ]
+        findings = [
+            linter.Finding(
+                "warning", "canonical_tag_normalization", "normalize", leaf.file,
+                leaf.line, leaf.category, leaf.uid,
+                json.dumps({
+                    "input": source, "status": "exact_normalized_match",
+                    "candidates": [candidate],
+                }),
+            )
+            for leaf, source, candidate in (
+                (leaves[0], "grey suit", "grey_suit"),
+                (leaves[1], "blue coat", "blue_coat"),
+            )
+        ]
+        rewrites = GENERATOR.deterministic_canonical_rewrites(leaves, findings)
+        self.assertEqual(rewrites["plain"], "1man, grey_suit, street")
+        self.assertEqual(rewrites["weighted"], "1woman, (blue_coat:1.2), rain")
 
     def test_post_repair_report_marks_remaining_warning_unresolved(self):
         linter = sys.modules["wildcard_linter"]

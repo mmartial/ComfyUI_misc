@@ -97,6 +97,7 @@ class Finding:
     leaf_id: str = ""
     evidence: str = ""
     suggestion: str = ""
+    alternatives: tuple[str, ...] = ()
     source: str = "deterministic"
 
 
@@ -1018,7 +1019,10 @@ def llm_review(
         } for leaf in batch]
         instruction = (
             "Audit every supplied wildcard leaf against the policy. Return JSON only as an array with one object per input ID. "
-            "Each object must contain id, classification (pass, definite_failure, uncertain), failed_test, and reason. "
+            "Each object must contain id, classification (pass, definite_failure, uncertain), failed_test, reason, and "
+            "replacement_candidates. For a failure tied to a specific term or phrase, replacement_candidates must contain "
+            "2-4 concise visible substitute tags or phrases that fit the existing leaf; return [] when deletion is the best "
+            "resolution or no safe context-preserving replacement exists. These are alternatives, not full-leaf rewrites. "
             "Apply the prompt-language section matching each item's mode. Do not omit IDs and do not add IDs. "
             "Modular leaves may be partial. In tags mode, each complete comma-separated item in verified_canonical_items is an exact "
             "local Danbooru-vocabulary match and passes the visual-representability test by itself; do not reject or rewrite that item "
@@ -1043,15 +1047,44 @@ def llm_review(
             if classification == "pass":
                 continue
             leaf = by_id[uid]
+            if canonical_visual_test_false_positive(item, leaf, danbooru_vocabulary):
+                verbose(
+                    args,
+                    f"ignored LLM visual-test finding for canonical vocabulary item in "
+                    f"{leaf.category} at {leaf.file}:{leaf.line}",
+                )
+                continue
+            raw_alternatives = item.get("replacement_candidates", [])
+            alternatives = tuple(dict.fromkeys(
+                " ".join(value.split()) for value in raw_alternatives
+                if isinstance(value, str) and value.strip()
+            ))[:4] if isinstance(raw_alternatives, list) else ()
             results.append(Finding(
                 "error" if classification == "definite_failure" else "warning",
                 str(item.get("failed_test") or "llm_semantic_review"), str(item.get("reason") or classification),
-                leaf.file, leaf.line, leaf.category, leaf.uid, source="llm",
+                leaf.file, leaf.line, leaf.category, leaf.uid,
+                alternatives=alternatives, source="llm",
             ))
         for uid in by_id.keys() - received:
             leaf = by_id[uid]
             results.append(Finding("error", "llm_incomplete", "LLM response omitted this leaf", leaf.file, leaf.line, leaf.category, leaf.uid, source="llm"))
     return results
+
+
+def canonical_visual_test_false_positive(
+    reviewed_item: dict[str, Any], leaf: Leaf,
+    vocabulary: DanbooruVocabulary | None,
+) -> bool:
+    """Suppress an LLM visual-test rejection of an exact local canonical item."""
+    failed_test = str(reviewed_item.get("failed_test", ""))
+    if "visual" not in failed_test.casefold() or vocabulary is None:
+        return False
+    verified = set(exact_canonical_tag_items(leaf, vocabulary))
+    if not verified:
+        return False
+    reason = str(reviewed_item.get("reason", ""))
+    quoted = re.findall(r"['`\"]([^'`\"]+)['`\"]", reason)
+    return any(normalize_canonical_tag(value) in verified for value in quoted)
 
 
 def llm_suggest_fixes(
@@ -1435,7 +1468,13 @@ def render(
             marker = "🔴" if finding.severity == "error" else "🟠"
             lines.extend(["---", "", f"### {marker} {finding.severity.upper()} · `{finding.rule}`{llm_badge}{unresolved_badge}", "", f"Location: `{location}`", "", finding.message])
             if finding.evidence:
-                lines.extend(["", f"Evidence: `{finding.evidence}`"])
+                if "\n" in finding.evidence:
+                    lines.extend(["", "Evidence:", "", "```text", finding.evidence, "```"])
+                else:
+                    lines.extend(["", f"Evidence: `{finding.evidence}`"])
+            if finding.alternatives:
+                lines.extend(["", "**Potential replacements — LLM generated:**", ""])
+                lines.extend(f"- `{alternative}`" for alternative in finding.alternatives)
             if finding.suggestion:
                 leaf = leaf_by_id.get(finding.leaf_id)
                 lines.extend(["", "**Potential fix — LLM generated:**", "", finding.suggestion])
@@ -1447,12 +1486,20 @@ def render(
         lines.append(f"Unresolved after fixed-output generation: {unresolved_count}; search for [UNRESOLVED]")
     for finding in findings:
         location = f"{finding.file}:{finding.line}" if finding.line else finding.file
-        evidence = f" [{finding.evidence}]" if finding.evidence else ""
+        evidence = (
+            f"\nEvidence:\n{finding.evidence}" if finding.evidence and "\n" in finding.evidence
+            else (f" [{finding.evidence}]" if finding.evidence else "")
+        )
         severity_color = "31;1" if finding.severity == "error" else "33;1"
         heading = ansi(finding.severity.upper(), severity_color, color)
         llm_badge = ansi(" [LLM]", "35;1", color) if finding.source == "llm" else ""
         unresolved_badge = ansi(" [UNRESOLVED]", "33;1", color) if fix_status(finding) == "unresolved" else ""
         lines.extend(["", ansi("─" * 88, "90", color), f"{heading}{llm_badge}{unresolved_badge}  {location}", f"category: {finding.category}  rule: {finding.rule}", f"{finding.message}{evidence}"])
+        if finding.alternatives:
+            lines.extend([
+                "", ansi("Potential replacements [LLM-generated]:", "36;1", color),
+                *[f"- {alternative}" for alternative in finding.alternatives],
+            ])
         if finding.suggestion:
             leaf = leaf_by_id.get(finding.leaf_id)
             lines.extend(["", ansi("Potential fix [LLM-generated]:", "32;1", color), finding.suggestion])
