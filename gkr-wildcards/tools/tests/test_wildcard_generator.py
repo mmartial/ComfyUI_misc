@@ -279,6 +279,32 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertEqual(session.generation_issues[0]["rule"], "trimmed_excess_generated_concepts")
         self.assertEqual(session.generation_issues[0]["removed_concepts"][0]["summary"], "excess")
 
+    def test_repeated_id_single_concept_objects_are_coalesced(self):
+        skeleton = self.skeleton("# MODE: tags\ngkr_test:\n  subject: []\n")
+        plan = GENERATOR.CategoryPlan("subject", "component", "subject", 2, [], True)
+
+        class FakeSession:
+            def __init__(self):
+                self.args = SimpleNamespace(
+                    content_profile="general", verbose=False, max_category_retries=0,
+                )
+                self.generation_issues = []
+
+            def request(self, name, instruction, items):
+                return [
+                    {"id": "subject", "concepts": {
+                        "summary": "first", "search_queries": ["first query"],
+                    }},
+                    {"id": "subject", "concepts": {
+                        "summary": "second", "search_queries": ["second query"],
+                    }},
+                ]
+
+        concepts = GENERATOR.generate_concepts(FakeSession(), skeleton, [plan], "policy")
+        self.assertEqual(
+            [concept["summary"] for concept in concepts["subject"]], ["first", "second"]
+        )
+
     def test_requested_count_allows_descriptive_text_before_prompts(self):
         directives = ["Create 200 complete, highly specific single-image prompts."]
         self.assertEqual(GENERATOR.requested_count(directives, "spotlight"), 200)

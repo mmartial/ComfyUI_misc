@@ -542,6 +542,19 @@ def generate_concepts(
     total_counts: dict[str, int] | None = None,
     prior_summaries: dict[str, list[str]] | None = None,
 ) -> dict[str, list[dict[str, Any]]]:
+    def collect_raw_concepts(results: list[dict[str, Any]], category: str) -> list[Any]:
+        """Coalesce both documented and common repeated-ID concept response shapes."""
+        collected: list[Any] = []
+        for entry in results:
+            if str(entry.get("id", "")) != category:
+                continue
+            raw_concepts = entry.get("concepts", [])
+            if isinstance(raw_concepts, list):
+                collected.extend(raw_concepts)
+            elif isinstance(raw_concepts, (dict, str)):
+                collected.append(raw_concepts)
+        return collected
+
     items = []
     for plan in batch:
         skeleton_category = next((item for item in skeleton.categories if item.name == plan.name), None)
@@ -557,11 +570,10 @@ def generate_concepts(
             "global_generator_instructions": skeleton.global_directives,
         })
     results = session.request("concept generation", concept_instruction(policy), items)
-    by_id = {str(item.get("id", "")): item for item in results}
     concepts_by_category: dict[str, list[dict[str, Any]]] = {}
     for plan in batch:
-        result = by_id.get(plan.name, {})
-        raw = result.get("concepts", [])
+        raw = collect_raw_concepts(results, plan.name)
+        result = {"id": plan.name, "concepts": raw}
         concepts: list[dict[str, Any]] = []
         for item in raw:
             if isinstance(item, str):
@@ -613,10 +625,8 @@ def generate_concepts(
                 concept_instruction(policy) + "\n\nCORRECTION: Return the full corrected object and obey validation_error.",
                 [correction_item],
             )
-            result = next(
-                (entry for entry in corrected if str(entry.get("id", "")) == plan.name), {}
-            )
-            raw = result.get("concepts", [])
+            raw = collect_raw_concepts(corrected, plan.name)
+            result = {"id": plan.name, "concepts": raw}
             concepts = []
             for entry in raw if isinstance(raw, list) else []:
                 if isinstance(entry, str):
