@@ -285,6 +285,7 @@ def planner_items(skeleton: Skeleton, args: argparse.Namespace) -> list[dict[str
             "max_added_categories": args.max_added_categories,
             "max_category_depth": args.max_category_depth,
             "defaults": DEFAULT_COUNTS,
+            "spotlight_only": all(infer_kind(category.name) == "spotlight" for category in skeleton.categories),
         },
     }]
 
@@ -338,6 +339,11 @@ def parse_plan(result: dict[str, Any], skeleton: Skeleton, args: argparse.Namesp
                 name, kind, " ".join(category.directives), requested_count(category.directives, kind), [], True
             ))
             seen.add(name)
+    if required_by_name and all(infer_kind(name) == "spotlight" for name in required_by_name):
+        # A spotlight is already a complete public image prompt. Supporting
+        # components, scenes, and routers change the requested output surface
+        # and are not needed when every declared category is a spotlight.
+        plans = [plan for plan in plans if plan.required]
     added = [plan for plan in plans if not plan.required]
     if len(added) > args.max_added_categories:
         allowed = {plan.name for plan in plans if plan.required} | {plan.name for plan in added[:args.max_added_categories]}
@@ -496,6 +502,8 @@ def planning_instruction(policy: str) -> str:
         "one object with id='plan' and a categories array. Every category object contains name, kind "
         "(component, combo, scene, spotlight, or router), purpose, count, and dependencies (category names). "
         "Preserve every required category exactly. Add only useful supporting categories and stay within the supplied limits. "
+        "When limits.spotlight_only is true, add no categories: spotlights are already complete public outputs and must not be "
+        "expanded into component, combo, scene, or random/router pools. "
         "A dependency means that the category must reference that category at least once across its leaves. Routers select complete routes. Combos and scenes "
         "must resolve to coherent single images. Keep the graph acyclic and no deeper than the supplied limit. This generator "
         "supports tags mode only. Do not generate leaves yet. Follow all GENERATOR instructions.\n\nPOLICY:\n" + policy
@@ -561,7 +569,9 @@ def generation_instruction(policy: str, vocabulary: linter.DanbooruVocabulary) -
         "tags mode: flat comma-separated short visual phrases, 1-3 meaningful weights, no prose, quality filler, negative prompt, or "
         "sequential/multi-panel content. Respect content_profile: general forbids mature, suggestive, explicit, fetish, or graphic "
         "content; sensitive permits non-explicit mature material but not explicit sexual content; unrestricted adds no content "
-        "restriction. Avoid duplicate or near-duplicate leaves. Follow the global and local GENERATOR instructions. "
+        "restriction. Avoid duplicate or near-duplicate leaves. For component pools, treat the first content-bearing item as the "
+        "lead motif and do not use any lead motif more than max_lead_motif_repeats; vary the actual base subject or setting rather "
+        "than producing several lightly modified variants of one base. Follow the global and local GENERATOR instructions. "
         + sample_note + "\n\nPOLICY:\n" + policy
     )
 
@@ -783,12 +793,29 @@ class CategoryValidationError(RuntimeError):
         self.missing_dependencies = missing_dependencies or set()
 
 
+def lead_leaf_motif(leaf: str) -> str:
+    """Return the first content-bearing tags-mode item for diversity checks."""
+    for raw_item in linter.split_top_level_commas(linter.literal_text(leaf)):
+        item = linter.WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip()
+        normalized = linter.normalize_canonical_tag(item)
+        if not normalized or re.fullmatch(
+            r"(?:\d+(?:girl|boy|woman|man|other|people|girls|boys|women|men)|"
+            r"multiple_(?:girls|boys|women|men|others)|group_of_(?:people|girls|boys|women|men))",
+            normalized,
+        ):
+            continue
+        return normalized
+    return ""
+
+
 def validate_category_response(
     category: str, result: dict[str, Any], expected_count: int,
     namespace: str, dependencies: list[str], allowed_canonical: set[str],
     require_dependencies: bool = True,
     forbidden_signatures: set[str] | None = None,
     forbidden_tags: set[str] | None = None,
+    max_lead_motif_repeats: int | None = None,
+    forbidden_lead_motifs: set[str] | None = None,
 ) -> tuple[list[str], list[dict[str, Any]]]:
     raw = result.get("leaves", [])
     provenance = result.get("provenance", [])
@@ -819,6 +846,36 @@ def validate_category_response(
             "duplicates leaves from earlier chunks at positions "
             + ", ".join(str(index) for index in repeated_from_prior)
         )
+    if max_lead_motif_repeats is not None:
+        motif_positions: dict[str, list[int]] = {}
+        for index, leaf in enumerate(leaves, 1):
+            motif = lead_leaf_motif(leaf)
+            if motif:
+                motif_positions.setdefault(motif, []).append(index)
+        overused_motifs = {
+            motif: positions for motif, positions in motif_positions.items()
+            if len(positions) > max_lead_motif_repeats
+        }
+        if overused_motifs:
+            errors.append(
+                f"repeats a lead motif more than {max_lead_motif_repeats} times: "
+                + "; ".join(
+                    f"{motif} at positions {', '.join(map(str, positions))}"
+                    for motif, positions in sorted(overused_motifs.items())
+                )
+            )
+        repeated_prior_motifs = {
+            motif: positions for motif, positions in motif_positions.items()
+            if motif in (forbidden_lead_motifs or set())
+        }
+        if repeated_prior_motifs:
+            errors.append(
+                "reuses lead motifs from earlier chunks: "
+                + "; ".join(
+                    f"{motif} at positions {', '.join(map(str, positions))}"
+                    for motif, positions in sorted(repeated_prior_motifs.items())
+                )
+            )
     if not isinstance(provenance, list) or not all(isinstance(item, dict) for item in provenance):
         errors.append("provenance must be an array containing one object per leaf")
         provenance = []
@@ -1039,6 +1096,11 @@ def generate_categories(
             items: list[dict[str, Any]] = []
             for plan in chunk_plans:
                 original = plan_by_name[plan.name]
+                motif_limit = 1 if original.kind == "component" else None
+                prior_lead_motifs = {
+                    motif for leaf in accumulated_leaves[plan.name]
+                    if (motif := lead_leaf_motif(leaf))
+                }
                 skeleton_category = next((item for item in skeleton.categories if item.name == plan.name), None)
                 dependency_examples = {name: generated.get(name, [])[:3] for name in plan.dependencies}
                 items.append({
@@ -1049,6 +1111,8 @@ def generate_categories(
                     "allowed_dependencies": plan.dependencies,
                     "dependency_examples": dependency_examples,
                     "avoid_duplicate_leaves": list(accumulated_leaves[plan.name]),
+                    "max_lead_motif_repeats": motif_limit,
+                    "avoid_lead_motifs": sorted(prior_lead_motifs),
                     "concepts": concepts_by_category[plan.name],
                     "generator_instructions": skeleton_category.directives if skeleton_category else [],
                     "global_generator_instructions": skeleton.global_directives,
@@ -1059,6 +1123,11 @@ def generate_categories(
             by_id = {str(item.get("id", "")): item for item in results}
             for plan in chunk_plans:
                 original = plan_by_name[plan.name]
+                motif_limit = 1 if original.kind == "component" else None
+                prior_lead_motifs = {
+                    motif for leaf in accumulated_leaves[plan.name]
+                    if (motif := lead_leaf_motif(leaf))
+                }
                 accumulated_summaries[plan.name].extend(
                     concept["summary"] for concept in concepts_by_category[plan.name]
                 )
@@ -1092,6 +1161,8 @@ def generate_categories(
                             require_dependencies=False,
                             forbidden_signatures=prior_signatures,
                             forbidden_tags=skeleton.excluded_tags,
+                            max_lead_motif_repeats=motif_limit,
+                            forbidden_lead_motifs=prior_lead_motifs,
                         )
                         break
                     except CategoryValidationError as exc:
@@ -1107,9 +1178,9 @@ def generate_categories(
                                 session.save_interactive_overrides()
                                 allowed_canonical |= set(replacements.values())
                                 interactive_applied = True
-                            # Cross-chunk duplication is recoverable after corrective retries:
-                            # retain the complete chunk so generation can finish, then expose
-                            # exact prior/current pairs to normal repair and manual review.
+                            # Leaf duplication and component lead-motif repetition are
+                            # recoverable only after the final corrective retry. Retain the
+                            # structurally valid chunk and expose complete context for repair.
                             try:
                                 leaves, provenance = validate_category_response(
                                     plan.name, result, plan.count, skeleton.namespace,
@@ -1117,6 +1188,7 @@ def generate_categories(
                                     require_dependencies=False,
                                     forbidden_signatures=None,
                                     forbidden_tags=skeleton.excluded_tags,
+                                    max_lead_motif_repeats=None,
                                 )
                             except CategoryValidationError:
                                 raise exc
@@ -1135,20 +1207,43 @@ def generate_categories(
                                         "current_position": offsets[plan.name] + local_index,
                                         "current_leaf": leaf,
                                     })
-                            if not duplicate_pairs and interactive_applied:
+                            combined_leaves = accumulated_leaves[plan.name] + leaves
+                            motif_groups: dict[str, list[dict[str, Any]]] = {}
+                            if motif_limit is not None:
+                                for position, leaf in enumerate(combined_leaves, 1):
+                                    motif = lead_leaf_motif(leaf)
+                                    if motif:
+                                        motif_groups.setdefault(motif, []).append({
+                                            "position": position, "leaf": leaf,
+                                        })
+                                motif_groups = {
+                                    motif: entries for motif, entries in motif_groups.items()
+                                    if len(entries) > 1
+                                    and any(entry["position"] > offsets[plan.name] for entry in entries)
+                                }
+                            if not duplicate_pairs and not motif_groups and interactive_applied:
                                 break
-                            if not duplicate_pairs:
+                            if not duplicate_pairs and not motif_groups:
                                 raise exc
-                            session.generation_issues.append({
-                                "category": plan.name,
-                                "rule": "duplicate_leaves_across_chunks",
-                                "chunk_index": chunk_index,
-                                "duplicates": duplicate_pairs,
-                            })
+                            if duplicate_pairs:
+                                session.generation_issues.append({
+                                    "category": plan.name,
+                                    "rule": "duplicate_leaves_across_chunks",
+                                    "chunk_index": chunk_index,
+                                    "duplicates": duplicate_pairs,
+                                })
+                            if motif_groups:
+                                session.generation_issues.append({
+                                    "category": plan.name,
+                                    "rule": "repeated_component_lead_motifs",
+                                    "chunk_index": chunk_index,
+                                    "motifs": motif_groups,
+                                })
                             log(
                                 session.args,
-                                f"category {plan.name} still duplicates {len(duplicate_pairs)} earlier leaf/leaves "
-                                "after retries; continuing with unresolved review findings",
+                                f"category {plan.name} still has {len(duplicate_pairs)} duplicate leaf/leaves and "
+                                f"{len(motif_groups)} repeated component lead motif(s) after final retry; "
+                                "continuing with unresolved review findings",
                             )
                             break
                         log(session.args, f"{exc}; corrective retry {retry + 1}/{session.args.max_category_retries}")
@@ -1160,7 +1255,8 @@ def generate_categories(
                             "category correction",
                             generation_instruction(policy, vocabulary) +
                             "\n\nCORRECTION: Fix every issue in validation_error and return the full corrected object. "
-                            "Keep exactly requested_count unique leaves and do not repeat avoid_duplicate_leaves.",
+                            "Keep exactly requested_count unique leaves, do not repeat avoid_duplicate_leaves, and ensure "
+                            "every component lead motif is unique within the response and absent from avoid_lead_motifs.",
                             [correction_item],
                         )
                         result = next(
@@ -1422,6 +1518,21 @@ def main() -> int:
                         f"Duplicate context: {duplicate_context}. Manual review: replace or remove one member of each "
                         "pair if the automated repair did not resolve it.",
                         str(fixed_output), category=str(issue["category"]), evidence=duplicate_context,
+                    ))
+                elif issue["rule"] == "repeated_component_lead_motifs":
+                    motif_context = " | ".join(
+                        f"{motif}: " + "; ".join(
+                            f"leaf {entry['position']}: {entry['leaf']}" for entry in entries
+                        )
+                        for motif, entries in sorted(issue["motifs"].items())
+                    )
+                    findings.append(linter.Finding(
+                        "warning", str(issue["rule"]),
+                        f"Generated component category '{issue['category']}' retained repeated lead motifs only after "
+                        f"exhausting its final corrective retry. Generation continued for manual review. Repetition "
+                        f"context: {motif_context}. Manual review: replace every repeated base motif so each component "
+                        "leaf contributes a distinct random choice.",
+                        str(fixed_output), category=str(issue["category"]), evidence=motif_context,
                     ))
                 else:
                     missing = ", ".join(issue["missing_dependencies"])

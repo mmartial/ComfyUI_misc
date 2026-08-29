@@ -128,6 +128,24 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertEqual(by_name["spotlight"].count, 50)
         self.assertEqual(by_name["random"].dependencies, ["spotlight"])
 
+    def test_spotlight_only_skeleton_rejects_all_planner_added_categories(self):
+        skeleton = self.skeleton(
+            "# MODE: tags\ngkr_comics:\n"
+            "  # GENERATOR: Create 200 spotlights.\n"
+            "  spotlight_european_comics: []\n"
+        )
+        result = {"categories": [
+            {"name": "spotlight_european_comics", "kind": "spotlight", "count": 200},
+            {"name": "eu_character_archetypes", "kind": "component", "count": 20},
+            {"name": "eu_scene", "kind": "scene", "count": 12,
+             "dependencies": ["eu_character_archetypes"]},
+            {"name": "random_european_comics", "kind": "router", "count": 0,
+             "dependencies": ["spotlight_european_comics", "eu_scene"]},
+        ]}
+        plan = GENERATOR.parse_plan(result, skeleton, args())
+        self.assertEqual([item.name for item in plan], ["spotlight_european_comics"])
+        self.assertEqual(plan[0].count, 200)
+
     def test_namespaced_random_is_forced_to_required_router(self):
         skeleton = self.skeleton(
             "# MODE: tags\ngkr_villains:\n  villain_scene: []\n  superhero_villains_random: []\n"
@@ -450,7 +468,7 @@ class WildcardGeneratorTests(unittest.TestCase):
         index = index_module.DanbooruIndex(index_path)
         self.addCleanup(index.close)
         skeleton = self.skeleton("# MODE: tags\ngkr_test:\n  spotlight: []\n")
-        plans = [GENERATOR.CategoryPlan("spotlight", "spotlight", "test", 2, [], True)]
+        plans = [GENERATOR.CategoryPlan("spotlight", "component", "test", 2, [], True)]
 
         class FakeSession:
             def __init__(self):
@@ -483,6 +501,11 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertEqual(issue["rule"], "duplicate_leaves_across_chunks")
         self.assertEqual(issue["duplicates"][0]["prior_position"], 1)
         self.assertEqual(issue["duplicates"][0]["current_position"], 2)
+        motif_issue = session.generation_issues[1]
+        self.assertEqual(motif_issue["rule"], "repeated_component_lead_motifs")
+        self.assertEqual(
+            [entry["position"] for entry in motif_issue["motifs"]["tag_one"]], [1, 2]
+        )
 
     def test_invalid_palette_tag_is_reported_and_corrected(self):
         index_module = sys.modules["danbooru_index"]
@@ -625,6 +648,48 @@ class WildcardGeneratorTests(unittest.TestCase):
         ):
             GENERATOR.validate_category_response(
                 "hero_action", response, 2, "gkr_hero", [], {"muscles", "dynamic_pose"}
+            )
+
+    def test_small_component_pool_limits_repeated_lead_motifs(self):
+        leaves = [
+            "pith_helmet, khaki safari suit",
+            "pith_helmet, suit, rugged explorer",
+            "pith_helmet, combat_helmet, explorer",
+            "fedora, trench_coat, detective",
+            "aviator_cap, flight_goggles, pilot",
+            "hooded_cloak, jewelry, mage",
+        ]
+        response = {
+            "leaves": leaves,
+            "provenance": [
+                {"canonical_tags": [], "literal_fallbacks": []} for _ in leaves
+            ],
+        }
+        with self.assertRaisesRegex(
+            GENERATOR.CategoryValidationError,
+            "repeats a lead motif more than 1 times: pith_helmet at positions 1, 2, 3",
+        ):
+            GENERATOR.validate_category_response(
+                "eu_character_archetypes", response, 6, "gkr_comics", [],
+                {"pith_helmet", "combat_helmet", "trench_coat", "aviator_cap",
+                 "flight_goggles", "hooded_cloak"},
+                max_lead_motif_repeats=1,
+            )
+
+    def test_component_lead_motif_cannot_repeat_from_prior_chunk(self):
+        response = {
+            "leaves": ["pith_helmet, combat_helmet, explorer"],
+            "provenance": [{"canonical_tags": ["pith_helmet", "combat_helmet"],
+                            "literal_fallbacks": []}],
+        }
+        with self.assertRaisesRegex(
+            GENERATOR.CategoryValidationError,
+            "reuses lead motifs from earlier chunks: pith_helmet at positions 1",
+        ):
+            GENERATOR.validate_category_response(
+                "eu_character_archetypes", response, 1, "gkr_comics", [],
+                {"pith_helmet", "combat_helmet"}, max_lead_motif_repeats=1,
+                forbidden_lead_motifs={"pith_helmet"},
             )
 
     def test_excess_leaves_are_trimmed_with_aligned_provenance(self):

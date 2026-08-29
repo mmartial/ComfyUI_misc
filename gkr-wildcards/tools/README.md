@@ -127,6 +127,19 @@ The planner receives the exact graph-validation error and its rejected plan.
 Required categories named `random`, `random_*`, `*_random`, or `*_router` are
 deterministically treated as routers even when the model labels them otherwise.
 
+When every required skeleton category is a spotlight, the accepted plan is
+restricted to those required spotlights. The planner cannot add component,
+combo, scene, or random/router pools because spotlights are already complete
+public outputs.
+
+Generated component pools also enforce strict lead-motif diversity across the
+entire category and across generation chunks: the same first content-bearing
+subject or setting may not appear twice. Subject-count markers such as `1man`
+are ignored when identifying the lead motif. Violations receive normal category
+corrective retries with the repeated motif and leaf positions. Repetition may be
+retained only after the final retry is exhausted; it is then recorded with every
+affected leaf as an unresolved manual-review finding instead of aborting the run.
+
 With `--interactive`, exhausting those retries prompts once for every invalid
 tag. The prompt shows the category and every complete leaf affected by that tag,
 including leaf numbers, before asking for a decision. Press Enter to accept the
