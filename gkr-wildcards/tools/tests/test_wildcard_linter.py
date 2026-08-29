@@ -701,6 +701,38 @@ class WildcardLinterTests(unittest.TestCase):
             self.assertEqual(first, second)
             self.assertEqual(opened.call_count, 1)
 
+    def test_concept_response_repeated_ids_are_coalesced_before_caching(self):
+        class Response:
+            status = 200
+            def __enter__(self): return self
+            def __exit__(self, *_): return False
+            def read(self):
+                content = json.dumps([
+                    {"id": "subject", "concepts": {"summary": "first", "search_queries": ["one"]}},
+                    {"id": "subject", "concepts": {"summary": "second", "search_queries": ["two"]}},
+                ])
+                return json.dumps({"choices": [{"message": {"content": content}}]}).encode()
+
+        with tempfile.TemporaryDirectory() as temporary:
+            args = SimpleNamespace(
+                no_llm_cache=False, llm_cache_dir=Path(temporary),
+                llm_cache_max_age_minutes=None, timeout=10, verbose=False,
+            )
+            kwargs = dict(
+                args=args, endpoint="http://example.test/v1/chat/completions", api_key="secret",
+                model="test", instruction="concepts", items=[{"id": "subject", "count": 2}],
+                call_name="concept generation", batch_number=1, batch_total=1, offset=0,
+                trace_path=None, response_event="response",
+            )
+            with patch.object(LINTER.urllib.request, "urlopen", return_value=Response()):
+                first = LINTER.llm_json_request(**kwargs)
+            with patch.object(LINTER.urllib.request, "urlopen", side_effect=AssertionError("network used")):
+                second = LINTER.llm_json_request(**kwargs)
+            self.assertEqual(first, second)
+            self.assertEqual(
+                [concept["summary"] for concept in first[0]["concepts"]], ["first", "second"]
+            )
+
     def test_llm_http_error_includes_response_body(self):
         args = SimpleNamespace(
             no_llm_cache=True, llm_cache_dir=None,

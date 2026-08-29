@@ -622,7 +622,10 @@ def generate_concepts(
             correction_item["correction_attempt"] = retry + 1
             corrected = session.request(
                 "concept correction",
-                concept_instruction(policy) + "\n\nCORRECTION: Return the full corrected object and obey validation_error.",
+                concept_instruction(policy) +
+                "\n\nCORRECTION: Generate a fresh full set instead of paraphrasing or replaying the rejected response. "
+                "Return exactly one object for this ID, with exactly requested_count entries inside its concepts array, "
+                "and obey validation_error.",
                 [correction_item],
             )
             raw = collect_raw_concepts(corrected, plan.name)

@@ -810,6 +810,11 @@ def llm_json_request(
             reviewed_item = cached["reviewed"]
             if cached.get("version") != 2 or not isinstance(reviewed_item, dict):
                 raise ValueError("not a version 2 per-item response")
+            if (
+                call_name in {"concept generation", "concept correction"}
+                and not isinstance(reviewed_item.get("concepts"), list)
+            ):
+                raise ValueError("legacy concept cache entry does not contain a concepts array")
             reviewed_item = dict(reviewed_item)
             reviewed_item["id"] = uid
             cached_by_id[uid] = reviewed_item
@@ -855,6 +860,21 @@ def llm_json_request(
         content = response_data["choices"][0]["message"]["content"].strip()
         trace_event(trace_path, {"event": response_event, "batch": batch_number, "content": content})
         requested_results = parse_json_array_response(content)
+        if call_name in {"concept generation", "concept correction"}:
+            # Some models emit one repeated-ID object per concept instead of
+            # one category object containing a concepts array. Coalesce that
+            # equivalent shape before item caching, which otherwise retains
+            # only the final repeated ID.
+            coalesced: dict[str, dict[str, Any]] = {}
+            for result in requested_results:
+                uid = str(result.get("id", ""))
+                target = coalesced.setdefault(uid, {"id": uid, "concepts": []})
+                concepts = result.get("concepts", [])
+                if isinstance(concepts, list):
+                    target["concepts"].extend(concepts)
+                elif isinstance(concepts, (dict, str)):
+                    target["concepts"].append(concepts)
+            requested_results = list(coalesced.values())
     except urllib.error.HTTPError as exc:
         elapsed = time.perf_counter() - started
         response_body = exc.read().decode("utf-8", errors="replace")
