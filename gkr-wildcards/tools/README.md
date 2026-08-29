@@ -66,6 +66,7 @@ Useful limits and controls:
 ```text
 --batch-categories 3
 --category-chunk-size 25
+--concept-continuation-buffer 3
 --max-generation-calls 20
 --max-planner-retries 1
 --max-category-retries 1
@@ -74,6 +75,7 @@ Useful limits and controls:
 --max-category-depth 6
 --max-added-categories 30
 --max-total-tokens 100000
+--color auto
 ```
 
 `--max-category-depth` measures the longest category-reference chain, including
@@ -97,6 +99,16 @@ checks dependency use across the complete category. Smaller categories still
 use a single chunk. Increase `--max-generation-calls` for very large files;
 concept and leaf generation normally require two calls per chunk-round, plus
 planner, correction, review, and repair calls.
+
+Partial concept corrections are cumulative. The generator retains usable
+concepts, requests only the missing continuation, and asks for a small reserve
+controlled by `--concept-continuation-buffer` (3 by default). Excess unique
+concepts are deterministically trimmed after the chunk is filled.
+
+Verbose prefixes use ANSI colors when stderr is a terminal. Use `--color always`
+to preserve colors through a compatible pipe or log viewer, or `--color never`
+to disable them. Within verbose messages, successful HTTP and cache/no-call
+details are green, while requested LLM work and corrective retries are yellow.
 
 Invalid plans also receive bounded corrective retries before leaf generation.
 The planner receives the exact graph-validation error and its rejected plan.

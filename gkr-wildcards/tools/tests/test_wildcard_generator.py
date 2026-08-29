@@ -7,11 +7,13 @@
 from __future__ import annotations
 
 import importlib.util
+import io
 import sys
 import tempfile
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
 
 
 TOOLS = Path(__file__).resolve().parents[1]
@@ -38,6 +40,17 @@ def args(**overrides):
 
 
 class WildcardGeneratorTests(unittest.TestCase):
+    def test_colored_verbose_log_highlights_corrective_retry(self):
+        stream = io.StringIO()
+        with patch.object(GENERATOR.sys, "stderr", stream):
+            GENERATOR.log(
+                SimpleNamespace(verbose=True, color="always"),
+                "category test; corrective retry 1/3",
+            )
+        output = stream.getvalue()
+        self.assertIn("\033[36;1m[wildcard-generator]\033[0m", output)
+        self.assertIn("\033[33;1mcorrective retry 1/3\033[0m", output)
+
     def skeleton(self, source: str):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
@@ -303,6 +316,37 @@ class WildcardGeneratorTests(unittest.TestCase):
         concepts = GENERATOR.generate_concepts(FakeSession(), skeleton, [plan], "policy")
         self.assertEqual(
             [concept["summary"] for concept in concepts["subject"]], ["first", "second"]
+        )
+
+    def test_partial_concept_corrections_fill_missing_continuation(self):
+        skeleton = self.skeleton("# MODE: tags\ngkr_test:\n  subject: []\n")
+        plan = GENERATOR.CategoryPlan("subject", "component", "subject", 3, [], True)
+
+        class FakeSession:
+            def __init__(self):
+                self.args = SimpleNamespace(
+                    content_profile="general", verbose=False, max_category_retries=2,
+                )
+                self.generation_issues = []
+                self.corrections = []
+
+            def request(self, name, instruction, items):
+                if name == "concept generation":
+                    return [{"id": "subject", "concepts": [{"summary": "first"}]}]
+                self.corrections.append(items[0])
+                summary = "second" if len(self.corrections) == 1 else "third"
+                return [{"id": "subject", "concepts": [{"summary": summary}]}]
+
+        session = FakeSession()
+        concepts = GENERATOR.generate_concepts(session, skeleton, [plan], "policy")
+        self.assertEqual(
+            [concept["summary"] for concept in concepts["subject"]],
+            ["first", "second", "third"],
+        )
+        self.assertEqual([item["continuation_needed"] for item in session.corrections], [2, 1])
+        self.assertEqual([item["requested_count"] for item in session.corrections], [4, 2])
+        self.assertEqual(
+            session.corrections[1]["avoid_concept_summaries"], ["first", "second"]
         )
 
     def test_requested_count_allows_descriptive_text_before_prompts(self):

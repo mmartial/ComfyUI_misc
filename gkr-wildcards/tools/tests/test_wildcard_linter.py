@@ -27,6 +27,17 @@ SPEC.loader.exec_module(LINTER)
 
 
 class WildcardLinterTests(unittest.TestCase):
+    def test_colored_verbose_log_highlights_cache_and_request_details(self):
+        stream = io.StringIO()
+        message = "completed, HTTP 200; 0 cached, 1 requested; no LLM call"
+        with patch.object(LINTER.sys, "stderr", stream):
+            LINTER.verbose(SimpleNamespace(verbose=True, color="always"), message)
+        output = stream.getvalue()
+        self.assertIn("\033[32;1mHTTP 200\033[0m", output)
+        self.assertIn("\033[32;1m0 cached\033[0m", output)
+        self.assertIn("\033[33;1m1 requested\033[0m", output)
+        self.assertIn("\033[32;1mno LLM call\033[0m", output)
+
     def setUp(self) -> None:
         self.rules = LINTER.load_rules(Path(__file__).resolve().parents[1] / "rules.yaml")
         self.tags_rules = LINTER.load_rules(Path(__file__).resolve().parents[1] / "tags-rules.yaml")

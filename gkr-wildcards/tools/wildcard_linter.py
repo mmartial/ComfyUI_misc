@@ -699,7 +699,26 @@ def category_has_sequence(key: tuple[str, str], categories: dict[tuple[str, str]
 
 def verbose(args: argparse.Namespace, message: str) -> None:
     if args.verbose:
-        print(f"[wildcard-linter] {message}", file=sys.stderr)
+        color_mode = getattr(args, "color", "auto")
+        use_color = color_mode == "always" or (color_mode == "auto" and sys.stderr.isatty())
+        prefix = "\033[35;1m[wildcard-linter]\033[0m" if use_color else "[wildcard-linter]"
+        if use_color:
+            message = re.sub(
+                r"\bno LLM call\b|\b\d+/\d+ item cache hits\b|\b\d+ cached\b",
+                lambda match: f"\033[32;1m{match.group(0)}\033[0m",
+                message,
+            )
+            message = re.sub(
+                r"\bHTTP 2\d\d\b",
+                lambda match: f"\033[32;1m{match.group(0)}\033[0m",
+                message,
+            )
+            message = re.sub(
+                r"\b\d+ requested\b",
+                lambda match: f"\033[33;1m{match.group(0)}\033[0m",
+                message,
+            )
+        print(f"{prefix} {message}", file=sys.stderr)
 
 
 def trace_event(path: Path | None, event: dict[str, Any]) -> None:

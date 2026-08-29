@@ -99,6 +99,10 @@ def parse_args() -> argparse.Namespace:
         "--category-chunk-size", type=int, default=25,
         help="Maximum concepts/leaves requested per category in one LLM response (default: 25)",
     )
+    parser.add_argument(
+        "--concept-continuation-buffer", type=int, default=3,
+        help="Extra concepts requested when filling a partial chunk (default: 3)",
+    )
     parser.add_argument("--max-generation-calls", type=int, default=20)
     parser.add_argument(
         "--max-planner-retries", type=int, default=1,
@@ -134,12 +138,31 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--skip-semantic-review", action="store_true")
     parser.add_argument("--skip-fix-verification", action="store_true")
     parser.add_argument("-v", "--verbose", action="store_true")
+    parser.add_argument(
+        "--color", choices=("auto", "always", "never"), default="auto",
+        help="ANSI color mode for verbose output (default: auto)",
+    )
     return parser.parse_args()
 
 
 def log(args: argparse.Namespace, message: str) -> None:
     if args.verbose:
-        print(f"[wildcard-generator] {message}", file=sys.stderr)
+        use_color = getattr(args, "color", "auto") == "always" or (
+            getattr(args, "color", "auto") == "auto" and sys.stderr.isatty()
+        )
+        prefix = "\033[36;1m[wildcard-generator]\033[0m" if use_color else "[wildcard-generator]"
+        if use_color:
+            message = re.sub(
+                r"\bcorrective retry \d+/\d+\b",
+                lambda match: f"\033[33;1m{match.group(0)}\033[0m",
+                message,
+            )
+            message = re.sub(
+                r"\bcontinuing with (?:an )?unresolved review findings?\b",
+                lambda match: f"\033[33;1m{match.group(0)}\033[0m",
+                message,
+            )
+        print(f"{prefix} {message}", file=sys.stderr)
 
 
 def parse_skeleton(path: Path) -> Skeleton:
@@ -555,6 +578,27 @@ def generate_concepts(
                 collected.append(raw_concepts)
         return collected
 
+    def normalize_concepts(raw: list[Any]) -> list[dict[str, Any]]:
+        normalized: list[dict[str, Any]] = []
+        for entry in raw:
+            if isinstance(entry, str):
+                summary = " ".join(entry.split())
+                queries = [summary]
+            elif isinstance(entry, dict):
+                summary = " ".join(str(entry.get("summary", "")).split())
+                queries = [
+                    " ".join(value.split()) for value in entry.get("search_queries", [])
+                    if isinstance(value, str) and value.strip()
+                ]
+            else:
+                continue
+            if summary:
+                normalized.append({
+                    "summary": summary,
+                    "search_queries": list(dict.fromkeys(queries or [summary]))[:4],
+                })
+        return normalized
+
     items = []
     for plan in batch:
         skeleton_category = next((item for item in skeleton.categories if item.name == plan.name), None)
@@ -574,21 +618,7 @@ def generate_concepts(
     for plan in batch:
         raw = collect_raw_concepts(results, plan.name)
         result = {"id": plan.name, "concepts": raw}
-        concepts: list[dict[str, Any]] = []
-        for item in raw:
-            if isinstance(item, str):
-                summary = " ".join(item.split())
-                queries = [summary]
-            elif isinstance(item, dict):
-                summary = " ".join(str(item.get("summary", "")).split())
-                queries = [
-                    " ".join(value.split()) for value in item.get("search_queries", [])
-                    if isinstance(value, str) and value.strip()
-                ]
-            else:
-                continue
-            if summary:
-                concepts.append({"summary": summary, "search_queries": list(dict.fromkeys(queries or [summary]))[:4]})
+        concepts = normalize_concepts(raw)
         unique: list[dict[str, Any]] = []
         seen: set[str] = {
             value.casefold() for value in (prior_summaries or {}).get(plan.name, [])
@@ -614,39 +644,41 @@ def generate_concepts(
                 f"{retry + 1}/{max_retries}",
             )
             correction_item = dict(next(item for item in items if item["id"] == plan.name))
+            missing_count = plan.count - len(unique)
+            configured_buffer = getattr(session.args, "concept_continuation_buffer", 3)
+            extra_count = min(configured_buffer, missing_count)
+            if configured_buffer and retry + 1 == max_retries:
+                extra_count = min(
+                    missing_count,
+                    max(configured_buffer, math.ceil(missing_count * 0.25)),
+                )
+            correction_item["requested_count"] = missing_count + extra_count
+            correction_item["continuation_needed"] = missing_count
+            correction_item["avoid_concept_summaries"] = (
+                list((prior_summaries or {}).get(plan.name, []))
+                + [concept["summary"] for concept in unique]
+            )
+            correction_item["accepted_concepts"] = unique
             correction_item["rejected_response"] = result
             correction_item["validation_error"] = (
-                f"Return exactly {plan.count} concepts that are distinct from avoid_concept_summaries; "
-                f"the previous response yielded only {len(unique)} usable concepts."
+                f"Return exactly {missing_count + extra_count} additional concepts that are distinct from "
+                f"avoid_concept_summaries. The generator has retained {len(unique)} of the required "
+                f"{plan.count} concepts, needs {missing_count} more, and requests {extra_count} reserve "
+                "candidate(s) so duplicates or unusable entries do not leave the chunk short."
             )
             correction_item["correction_attempt"] = retry + 1
             corrected = session.request(
                 "concept correction",
                 concept_instruction(policy) +
-                "\n\nCORRECTION: Generate a fresh full set instead of paraphrasing or replaying the rejected response. "
+                "\n\nCORRECTION: Generate only the missing continuation instead of paraphrasing or replaying "
+                "accepted_concepts or the rejected response. "
                 "Return exactly one object for this ID, with exactly requested_count entries inside its concepts array, "
                 "and obey validation_error.",
                 [correction_item],
             )
             raw = collect_raw_concepts(corrected, plan.name)
             result = {"id": plan.name, "concepts": raw}
-            concepts = []
-            for entry in raw if isinstance(raw, list) else []:
-                if isinstance(entry, str):
-                    summary = " ".join(entry.split())
-                    queries = [summary]
-                elif isinstance(entry, dict):
-                    summary = " ".join(str(entry.get("summary", "")).split())
-                    queries = [
-                        " ".join(value.split()) for value in entry.get("search_queries", [])
-                        if isinstance(value, str) and value.strip()
-                    ]
-                else:
-                    continue
-                if summary:
-                    concepts.append({"summary": summary, "search_queries": list(dict.fromkeys(queries or [summary]))[:4]})
-            unique = []
-            seen = {value.casefold() for value in (prior_summaries or {}).get(plan.name, [])}
+            concepts = normalize_concepts(raw)
             for concept in concepts:
                 key = concept["summary"].casefold()
                 if key not in seen:
@@ -1220,6 +1252,7 @@ def main() -> int:
             or args.max_generation_calls < 1 or args.max_category_retries < 0
             or args.max_planner_retries < 0
             or args.category_chunk_size < 1
+            or args.concept_continuation_buffer < 0
         ):
             raise ValueError(
                 "generation limits must be positive (added-category, planner-retry, and category-retry limits may be zero)"
