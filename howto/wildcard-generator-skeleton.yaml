@@ -11,6 +11,9 @@
 #
 # GLOBAL RULE: Read and apply ./prompt.md (MODE: tags)
 #
+# Optional exact canonical tags that retrieval and generation must exclude:
+# DO_NOT_USE_TAGS: [example_tag, qualified_tag_(style)]
+#
 # GENERATOR: THEME: Original superhero worlds and decisive superhero imagery.
 # GENERATOR: Cover heroic action, civilian rescue, investigation, secret bases, villains, and quiet public moments after danger.
 # GENERATOR: Avoid named characters, franchises, recognizable costumes, logos, and direct imitation.

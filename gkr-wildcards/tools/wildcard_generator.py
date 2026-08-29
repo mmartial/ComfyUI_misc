@@ -29,6 +29,7 @@ from danbooru_index import DanbooruIndex, EmbeddingClient, SearchResult, build_i
 
 
 GENERATOR_RE = re.compile(r"^\s*#\s*GENERATOR\s*:\s*(.*?)\s*$", re.I)
+DO_NOT_USE_TAGS_RE = re.compile(r"^\s*#\s*DO_NOT_USE_TAGS\s*:\s*(.*?)\s*$", re.I)
 CATEGORY_RE = re.compile(r"^  ([A-Za-z0-9_-]+)\s*:\s*(?:\[\s*\])?\s*(?:#.*)?$")
 ROOT_RE = re.compile(r"^([A-Za-z0-9_-]+)\s*:\s*$")
 REFERENCE_RE = re.compile(r"__([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)__")
@@ -54,6 +55,7 @@ class Skeleton:
     header: str
     global_directives: list[str]
     categories: list[SkeletonCategory]
+    excluded_tags: set[str] = field(default_factory=set)
 
 
 @dataclass
@@ -188,6 +190,23 @@ def parse_skeleton(path: Path) -> Skeleton:
         raise ValueError("could not locate namespace line")
     header = "\n".join(lines[:root_index]).rstrip()
     global_directives = [match.group(1) for line in lines[:root_index] if (match := GENERATOR_RE.match(line))]
+    excluded_tags: set[str] = set()
+    for line in lines[:root_index]:
+        match = DO_NOT_USE_TAGS_RE.match(line)
+        if not match:
+            continue
+        raw_value = match.group(1).strip()
+        try:
+            parsed_value = yaml.safe_load(raw_value)
+        except yaml.YAMLError as exc:
+            raise ValueError(f"invalid DO_NOT_USE_TAGS header entry: {exc}") from exc
+        values = parsed_value if isinstance(parsed_value, list) else raw_value.split(",")
+        for value in values:
+            tag = str(value).strip().lower()
+            if tag:
+                if not re.fullmatch(r"[a-z0-9][a-z0-9_+().:'-]*", tag):
+                    raise ValueError(f"invalid excluded tag in DO_NOT_USE_TAGS: {tag}")
+                excluded_tags.add(tag)
     categories: list[SkeletonCategory] = []
     pending: list[str] = []
     for line in lines[root_index + 1:]:
@@ -205,7 +224,7 @@ def parse_skeleton(path: Path) -> Skeleton:
         raise ValueError("skeleton must declare at least one empty category")
     if len({category.name for category in categories}) != len(categories):
         raise ValueError("skeleton contains duplicate categories")
-    return Skeleton(path.resolve(), namespace, source, header, global_directives, categories)
+    return Skeleton(path.resolve(), namespace, source, header, global_directives, categories, excluded_tags)
 
 
 def infer_kind(name: str) -> str:
@@ -228,7 +247,7 @@ def requested_count(directives: Iterable[str], kind: str) -> int:
     for directive in directives:
         match = re.search(
             r"\b(\d{1,4})\b[^.\n]{0,120}?\b"
-            r"(?:leaves|items|options|entries|prompts|concepts)\b",
+            r"(?:leaves?|items?|options?|entries|prompts?|concepts?|spotlights?)\b",
             directive, re.I,
         )
         if match:
@@ -240,7 +259,7 @@ def has_explicit_count(directives: Iterable[str]) -> bool:
     return any(
         re.search(
             r"\b\d{1,4}\b[^.\n]{0,120}?\b"
-            r"(?:leaves|items|options|entries|prompts|concepts)\b",
+            r"(?:leaves?|items?|options?|entries|prompts?|concepts?|spotlights?)\b",
             value, re.I,
         )
         for value in directives
@@ -252,6 +271,7 @@ def planner_items(skeleton: Skeleton, args: argparse.Namespace) -> list[dict[str
         "id": "plan",
         "namespace": skeleton.namespace,
         "global_generator_instructions": skeleton.global_directives,
+        "do_not_use_tags": sorted(skeleton.excluded_tags),
         "required_categories": [
             {
                 "name": category.name,
@@ -612,6 +632,7 @@ def generate_concepts(
             "content_profile": session.args.content_profile,
             "generator_instructions": skeleton_category.directives if skeleton_category else [],
             "global_generator_instructions": skeleton.global_directives,
+            "do_not_use_tags": sorted(skeleton.excluded_tags),
         })
     results = session.request("concept generation", concept_instruction(policy), items)
     concepts_by_category: dict[str, list[dict[str, Any]]] = {}
@@ -705,6 +726,7 @@ def generate_concepts(
 def retrieve_concepts(
     concepts_by_category: dict[str, list[dict[str, Any]]], index: DanbooruIndex,
     embedding_client: EmbeddingClient | None, query_prefix: str, limit: int,
+    excluded_tags: set[str] | None = None,
 ) -> None:
     queries: list[str] = []
     for concepts in concepts_by_category.values():
@@ -720,6 +742,8 @@ def retrieve_concepts(
             merged: dict[str, SearchResult] = {}
             for query in concept["search_queries"]:
                 for candidate in index.hybrid_search(query, vectors.get(query), limit):
+                    if candidate.tag in (excluded_tags or set()):
+                        continue
                     current = merged.get(candidate.tag)
                     if current is None or candidate.score > current.score:
                         merged[candidate.tag] = candidate
@@ -764,6 +788,7 @@ def validate_category_response(
     namespace: str, dependencies: list[str], allowed_canonical: set[str],
     require_dependencies: bool = True,
     forbidden_signatures: set[str] | None = None,
+    forbidden_tags: set[str] | None = None,
 ) -> tuple[list[str], list[dict[str, Any]]]:
     raw = result.get("leaves", [])
     provenance = result.get("provenance", [])
@@ -820,6 +845,7 @@ def validate_category_response(
     invalid_refs: set[str] = set()
     used_dependencies: set[str] = set()
     invalid_output_tags: set[str] = set()
+    forbidden_output_tags: set[str] = set()
     for leaf in leaves:
         refs = set(REFERENCE_RE.findall(leaf))
         invalid_refs.update(
@@ -835,6 +861,11 @@ def validate_category_response(
             for token in UNDERSCORE_TAG_RE.findall(literal)
             if token not in allowed_canonical
         )
+        for raw_item in linter.split_top_level_commas(literal):
+            unweighted = linter.WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip()
+            normalized = linter.normalize_canonical_tag(unweighted)
+            if normalized in (forbidden_tags or set()):
+                forbidden_output_tags.add(normalized)
     if invalid_refs:
         errors.append("uses undeclared references: " + ", ".join(sorted(invalid_refs)))
     missing_dependencies = sorted(set(dependencies) - used_dependencies)
@@ -847,10 +878,15 @@ def validate_category_response(
             "uses underscore tags outside the retrieved palette: "
             + ", ".join(sorted(invalid_output_tags))
         )
+    if forbidden_output_tags:
+        errors.append(
+            "uses tags excluded by the skeleton header: "
+            + ", ".join(sorted(forbidden_output_tags))
+        )
     if errors:
         raise CategoryValidationError(
             f"category {category}: " + "; ".join(errors),
-            invalid_provenance | invalid_output_tags,
+            invalid_provenance | invalid_output_tags | forbidden_output_tags,
             set(missing_dependencies),
         )
     return leaves, provenance
@@ -998,7 +1034,7 @@ def generate_categories(
             )
             retrieve_concepts(
                 concepts_by_category, index, embedding_client, embedding_query_prefix,
-                session.args.retrieval_candidates,
+                session.args.retrieval_candidates, skeleton.excluded_tags,
             )
             items: list[dict[str, Any]] = []
             for plan in chunk_plans:
@@ -1016,6 +1052,7 @@ def generate_categories(
                     "concepts": concepts_by_category[plan.name],
                     "generator_instructions": skeleton_category.directives if skeleton_category else [],
                     "global_generator_instructions": skeleton.global_directives,
+                    "do_not_use_tags": sorted(skeleton.excluded_tags),
                     "content_profile": session.args.content_profile,
                 })
             results = session.request("category generation", generation_instruction(policy, vocabulary), items)
@@ -1054,6 +1091,7 @@ def generate_categories(
                             plan.dependencies, allowed_canonical,
                             require_dependencies=False,
                             forbidden_signatures=prior_signatures,
+                            forbidden_tags=skeleton.excluded_tags,
                         )
                         break
                     except CategoryValidationError as exc:
@@ -1078,6 +1116,7 @@ def generate_categories(
                                     plan.dependencies, allowed_canonical,
                                     require_dependencies=False,
                                     forbidden_signatures=None,
+                                    forbidden_tags=skeleton.excluded_tags,
                                 )
                             except CategoryValidationError:
                                 raise exc
@@ -1259,6 +1298,11 @@ def main() -> int:
             )
         skeleton = parse_skeleton(args.skeleton.expanduser().resolve())
         policy = prompt_path.read_text(encoding="utf-8")
+        if skeleton.excluded_tags:
+            policy += (
+                "\n\nSKELETON TAG EXCLUSIONS (mandatory): Never emit these exact tags, including weighted "
+                "or space-rendered equivalents: " + ", ".join(sorted(skeleton.excluded_tags))
+            )
         rules = linter.load_rules(rules_path)
         tags_rules = linter.load_rules(tags_rules_path)
         csv_path = args.danbooru_tags.expanduser().resolve()
@@ -1276,7 +1320,7 @@ def main() -> int:
             info = build_index(csv_path, index_path, args.content_profile)
             log(args, f"rebuilt stale lexical tag index with {info['tag_count']} tags")
             tag_index = DanbooruIndex(index_path)
-        allowed_tags = tag_index.canonical_names()
+        allowed_tags = tag_index.canonical_names() - skeleton.excluded_tags
         vocabulary = linter.DanbooruVocabulary(
             allowed_tags,
             {name: count for name, count in full_vocabulary.post_counts.items() if name in allowed_tags},
@@ -1430,6 +1474,7 @@ def main() -> int:
             "reported_tokens": session.reported_tokens,
             "tag_provenance": session.provenance,
             "interactive_tag_overrides": session.interactive_overrides,
+            "excluded_tags": sorted(skeleton.excluded_tags),
             "interactive_override_file": str(session.interactive_override_path),
             "generation_issues": session.generation_issues,
             "retrieval": {

@@ -61,6 +61,18 @@ metadata, reported token usage, and unresolved findings. API credentials are
 never written. Use `--fixed-output` and `--report` to override the corresponding
 paths.
 
+Skeleton headers may prohibit exact tags with one or more comment entries:
+
+```yaml
+# DO_NOT_USE_TAGS: [comic, western_comics_(style)]
+```
+
+Excluded tags are removed from retrieved candidate palettes, included as hard
+constraints in generation and repair prompts, rejected by deterministic
+category validation (including weighted and space-rendered equivalents), and
+recorded in the generation manifest. The directive applies to the complete
+generated wildcard, not only required skeleton categories.
+
 Useful limits and controls:
 
 ```text
@@ -267,9 +279,12 @@ OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
   --max-planner-retries 3 \
   --category-chunk-size 25 \
   --max-category-retries 3 \
-  --max-generation-calls 100 \
+  --max-generation-calls 200 \
+  --concept-continuation-buffer 5 \
   --interactive \
-  --verbose
+  --interactive \
+  --verbose \
+  --color auto
 ```
 
 # Lint an existing wildcard

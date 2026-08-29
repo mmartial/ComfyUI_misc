@@ -51,6 +51,32 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertIn("\033[36;1m[wildcard-generator]\033[0m", output)
         self.assertIn("\033[33;1mcorrective retry 1/3\033[0m", output)
 
+    def test_skeleton_header_parses_do_not_use_tags(self):
+        skeleton = self.skeleton(
+            "# MODE: tags\n"
+            "# DO_NOT_USE_TAGS: [comic, western_comics_(style)]\n"
+            "gkr_test:\n  subject: []\n"
+        )
+        self.assertEqual(skeleton.excluded_tags, {"comic", "western_comics_(style)"})
+
+    def test_excluded_header_tags_are_rejected_in_plain_weighted_and_space_forms(self):
+        for leaf in (
+            "person, comic, street",
+            "person, (comic:1.2), street",
+            "person, western comics (style), street",
+        ):
+            response = {
+                "leaves": [leaf],
+                "provenance": [{"canonical_tags": [], "literal_fallbacks": []}],
+            }
+            with self.assertRaisesRegex(
+                GENERATOR.CategoryValidationError, "uses tags excluded by the skeleton header"
+            ):
+                GENERATOR.validate_category_response(
+                    "subject", response, 1, "gkr_test", [], set(),
+                    forbidden_tags={"comic", "western_comics_(style)"},
+                )
+
     def skeleton(self, source: str):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
@@ -351,6 +377,13 @@ class WildcardGeneratorTests(unittest.TestCase):
 
     def test_requested_count_allows_descriptive_text_before_prompts(self):
         directives = ["Create 200 complete, highly specific single-image prompts."]
+        self.assertEqual(GENERATOR.requested_count(directives, "spotlight"), 200)
+        self.assertTrue(GENERATOR.has_explicit_count(directives))
+
+    def test_requested_count_recognizes_spotlights_noun(self):
+        directives = [
+            "Create 200 complete single-image European comics spotlights across traditions."
+        ]
         self.assertEqual(GENERATOR.requested_count(directives, "spotlight"), 200)
         self.assertTrue(GENERATOR.has_explicit_count(directives))
 
