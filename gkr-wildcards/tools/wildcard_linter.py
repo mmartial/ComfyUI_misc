@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["PyYAML>=6.0.2"]
+# dependencies = ["PyYAML>=6.0.2", "numpy>=2.0"]
 # ///
 
 """Lint GKR wildcard YAML files and optionally request semantic LLM review."""
@@ -26,6 +26,8 @@ from pathlib import Path
 from typing import Any, Iterable
 
 import yaml
+
+from danbooru_index import DanbooruIndex, EmbeddingClient
 
 
 REFERENCE_RE = re.compile(r"__([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)__")
@@ -125,6 +127,67 @@ class DanbooruVocabulary:
         return len(self.tags)
 
 
+@dataclass
+class CanonicalTagRetriever:
+    """Retrieve repair candidates from a lexical or embedded SQLite index."""
+    index: DanbooruIndex
+    vocabulary: DanbooruVocabulary
+    embedding_client: EmbeddingClient | None = None
+    query_prefix: str = ""
+    vector_cache: dict[str, list[float]] = field(default_factory=dict)
+    strict_embeddings: bool = False
+
+    def prime(self, leaves: list[Leaf], batch_size: int = 64) -> int:
+        """Batch query embeddings for unknown canonical-looking items before linting."""
+        if self.embedding_client is None:
+            return 0
+        queries: list[str] = []
+        for leaf in leaves:
+            if leaf.mode != "tags":
+                continue
+            for item in split_top_level_commas(leaf.text):
+                raw = WEIGHT_RE.sub(lambda match: match.group(1), item).strip().lower()
+                normalized = normalize_canonical_tag(raw)
+                if (
+                    "_" in raw
+                    and re.fullmatch(r"[a-z0-9][a-z0-9_+().:'-]*", raw)
+                    and normalized not in self.vocabulary
+                    and normalized not in self.vocabulary.aliases
+                    and not canonical_inflection_matches(normalized, self.vocabulary)
+                    and raw not in self.vector_cache
+                ):
+                    queries.append(raw)
+        unique = list(dict.fromkeys(queries))
+        for offset in range(0, len(unique), batch_size):
+            batch = unique[offset:offset + batch_size]
+            try:
+                vectors = self.embedding_client.embed([self.query_prefix + value for value in batch])
+            except RuntimeError:
+                if self.strict_embeddings:
+                    raise
+                self.embedding_client = None
+                self.vector_cache.clear()
+                return -1
+            self.vector_cache.update(zip(batch, vectors))
+        return len(unique)
+
+    def candidates(self, value: str, limit: int) -> list[str]:
+        vector = None
+        if self.embedding_client is not None:
+            vector = self.vector_cache.get(value)
+            if vector is None:
+                try:
+                    vector = self.embedding_client.embed([self.query_prefix + value])[0]
+                    self.vector_cache[value] = vector
+                except RuntimeError:
+                    if self.strict_embeddings:
+                        raise
+                    self.embedding_client = None
+                    vector = None
+        results = self.index.hybrid_search(value, vector, max(limit * 2, 10))
+        return [result.tag for result in results if result.tag in self.vocabulary.tags][:limit]
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Lint wildcard YAML structure, tags, routes, and optional LLM-visible semantics.",
@@ -161,7 +224,7 @@ Repair behavior:
     parser.add_argument("--api-key-env", default="OPENAI_API_KEY", help="Environment variable containing the API key")
     parser.add_argument("--batch-size", type=int, default=20, help="Leaves per semantic-review or fix-suggestion LLM request (default: 20)")
     parser.add_argument("--verification-batch-size", type=int, default=15, help="Items per semantic fix-verification request")
-    parser.add_argument("--timeout", type=int, default=120, help="Timeout in seconds for each individual LLM HTTP request (default: 120)")
+    parser.add_argument("--timeout", type=int, default=120, help="Timeout in seconds for each individual chat or embedding HTTP request; it is not a whole-run limit (default: 120)")
     parser.add_argument("--prompt", type=Path, help="Review policy Markdown; defaults to ../prompt.md")
     parser.add_argument("--llm-log", type=Path, help="Write sanitized LLM requests and responses as JSON Lines")
     parser.add_argument("--llm-cache-dir", type=Path, help="Persistent response cache; identical requests become cache hits and make no LLM call (default: system temp/wildcard-linter-cache)")
@@ -171,7 +234,13 @@ Repair behavior:
     parser.add_argument("--annotated-details", type=Path, help="Write a copy of details.md with audit status inserted into each image section; requires --validate-post-prompts")
     parser.add_argument("--post-prompt-output", type=Path, help="Write post-prompt audit summary to a separate report; requires --validate-post-prompts")
     parser.add_argument("--include-post-prompt-report", action="store_true", help="Append post-prompt validation to the ordinary --output report; requires --validate-post-prompts")
-    parser.add_argument("--danbooru-tags", type=Path, help="CSV vocabulary used to recognize exact canonical tags and find normalized/candidate forms; no SQLite index is needed")
+    parser.add_argument("--danbooru-tags", type=Path, help="CSV vocabulary used to recognize exact canonical tags and find normalized/candidate forms")
+    parser.add_argument("--danbooru-index", type=Path, help="SQLite retrieval index with optional embeddings (default when present: <danbooru-tags stem>.index.sqlite)")
+    parser.add_argument("--retrieval", choices=("auto", "lexical", "hybrid"), default="auto", help="Canonical candidate retrieval: auto uses compatible SQLite embeddings when available and otherwise lexical; lexical disables embeddings; hybrid requires a compatible complete embedding index (default: auto)")
+    parser.add_argument("--embedding-model", help="Embedding query model; when omitted, use the model recorded in SQLite metadata")
+    parser.add_argument("--embedding-base-url", help="Embedding API base URL; when omitted, use the URL recorded in SQLite metadata")
+    parser.add_argument("--embedding-api-key-env", default="OLLAMA_API_KEY", help="Name of the environment variable containing the embedding API key (default: OLLAMA_API_KEY)")
+    parser.add_argument("--embedding-query-prefix", help="Text prepended to embedding queries; when omitted, use the prefix recorded in SQLite metadata")
     parser.add_argument("--canonical-tag-suggestions", action="store_true", help="Let the fix stage choose only from retrieved canonical candidates (or retain a literal/remove it); requires --danbooru-tags, --llm, and --suggest-fixes")
     parser.add_argument("--canonical-tag-candidate-count", type=int, default=5, help="Maximum canonical candidates supplied per unknown tag-like item (default: 5)")
     parser.add_argument("--canonical-tag-style", choices=("underscore", "spaces"), default="underscore", help="How canonical candidates are written in repair prompts/output: underscore uses exact database identifiers such as red_hair; spaces renders red hair for models expecting natural-language tags. Matching remains canonical internally (default: underscore)")
@@ -1102,6 +1171,7 @@ def llm_suggest_fixes(
     leaves: list[Leaf], findings: list[Finding], args: argparse.Namespace, trace_path: Path | None = None,
     danbooru_vocabulary: DanbooruVocabulary | None = None,
     tags_rules: dict[str, Any] | None = None,
+    canonical_retriever: CanonicalTagRetriever | None = None,
 ) -> tuple[dict[str, str], dict[str, str]]:
     model = args.model or os.getenv("OPENAI_MODEL")
     base_url = (args.base_url or os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1").rstrip("/")
@@ -1150,7 +1220,7 @@ def llm_suggest_fixes(
             if args.canonical_tag_suggestions and danbooru_vocabulary is not None:
                 item["canonical_tag_guidance"] = canonical_tag_guidance(
                     leaf, danbooru_vocabulary, args.canonical_tag_candidate_count, args.canonical_tag_style,
-                    (tags_rules or {}).get("canonical_composition"),
+                    (tags_rules or {}).get("canonical_composition"), canonical_retriever,
                 )
             items.append(item)
         instruction = (
@@ -1217,7 +1287,7 @@ def validate_suggestions(
     leaves: list[Leaf], suggestions: dict[str, str], findings: list[Finding],
     rules: dict[str, Any], tags_rules: dict[str, Any],
     danbooru_vocabulary: DanbooruVocabulary | None = None, canonical_candidate_count: int = 5,
-    canonical_tag_style: str = "underscore",
+    canonical_tag_style: str = "underscore", canonical_retriever: CanonicalTagRetriever | None = None,
 ) -> tuple[dict[str, str], dict[str, list[str]]]:
     """Reject structural changes and rewrites that leave or introduce targeted errors."""
     leaf_by_id = {leaf.uid: leaf for leaf in leaves}
@@ -1250,11 +1320,11 @@ def validate_suggestions(
         if danbooru_vocabulary is not None:
             post += canonical_tag_findings(
                 [candidate], danbooru_vocabulary, canonical_candidate_count, canonical_tag_style,
-                tags_rules.get("canonical_composition"),
+                tags_rules.get("canonical_composition"), canonical_retriever,
             )
             baseline_local += canonical_tag_findings(
                 [leaf], danbooru_vocabulary, canonical_candidate_count, canonical_tag_style,
-                tags_rules.get("canonical_composition"),
+                tags_rules.get("canonical_composition"), canonical_retriever,
             )
         locally_evaluable = {finding.rule for finding in baseline_local}
         unsupported = deterministic_errors.get(uid, set()) - locally_evaluable
@@ -1618,7 +1688,71 @@ def load_danbooru_tags(path: Path) -> DanbooruVocabulary:
     return DanbooruVocabulary(tags, counts, aliases)
 
 
-def canonical_candidates(value: str, vocabulary: DanbooruVocabulary, limit: int = 5) -> list[str]:
+def open_canonical_retriever(
+    args: argparse.Namespace, csv_path: Path, vocabulary: DanbooruVocabulary,
+) -> CanonicalTagRetriever | None:
+    """Open a compatible index and enable embeddings according to --retrieval."""
+    index_path = (args.danbooru_index or csv_path.with_suffix(".index.sqlite")).expanduser().resolve()
+    if not index_path.exists():
+        if args.retrieval == "hybrid":
+            raise ValueError(f"--retrieval hybrid requires an existing Danbooru index: {index_path}")
+        verbose(args, f"Danbooru index not found at {index_path}; using in-memory lexical candidates")
+        return None
+    index = DanbooruIndex(index_path)
+    if not index.compatible_with_csv(csv_path):
+        index.close()
+        if args.retrieval == "hybrid":
+            raise ValueError(f"Danbooru index is not compatible with {csv_path}; rebuild its embeddings")
+        verbose(args, f"Danbooru index does not match {csv_path}; using in-memory lexical candidates")
+        return None
+
+    query_prefix = str(
+        args.embedding_query_prefix
+        if args.embedding_query_prefix is not None
+        else index.metadata.get("embedding_query_prefix", "")
+    )
+    client: EmbeddingClient | None = None
+    mode = "SQLite lexical"
+    if args.retrieval == "hybrid" and not index.has_embeddings:
+        index.close()
+        raise ValueError("--retrieval hybrid requires a complete embedding index")
+    if args.retrieval != "lexical" and index.has_embeddings:
+        model = args.embedding_model or index.metadata.get("embedding_model")
+        base_url = args.embedding_base_url or index.metadata.get("embedding_base_url")
+        if not model or not base_url:
+            if args.retrieval == "hybrid":
+                index.close()
+                raise ValueError("embedding index lacks model or base-URL metadata")
+            verbose(args, "embedding metadata is incomplete; using SQLite lexical retrieval")
+        else:
+            candidate = EmbeddingClient(
+                str(base_url), str(model), os.getenv(args.embedding_api_key_env, ""), args.timeout,
+                int(index.metadata.get("embedding_dimensions", 0)) or None,
+            )
+            try:
+                probe = candidate.embed([query_prefix + "canonical tag candidate"])[0]
+                expected = int(index.metadata.get("embedding_dimensions", 0))
+                if len(probe) != expected:
+                    raise RuntimeError(
+                        f"query embedding has {len(probe)} dimensions; index requires {expected}"
+                    )
+                client = candidate
+                mode = "SQLite hybrid (lexical + embeddings)"
+            except RuntimeError as exc:
+                if args.retrieval == "hybrid":
+                    index.close()
+                    raise
+                verbose(args, f"embedding query probe failed; using SQLite lexical retrieval: {exc}")
+    verbose(args, f"canonical candidate retrieval: {mode}; index={index_path}")
+    return CanonicalTagRetriever(
+        index, vocabulary, client, query_prefix, strict_embeddings=args.retrieval == "hybrid",
+    )
+
+
+def canonical_candidates(
+    value: str, vocabulary: DanbooruVocabulary, limit: int = 5,
+    retriever: CanonicalTagRetriever | None = None,
+) -> list[str]:
     normalized = normalize_canonical_tag(value)
     alias_matches = vocabulary.aliases.get(normalized, set())
     if alias_matches:
@@ -1626,6 +1760,10 @@ def canonical_candidates(value: str, vocabulary: DanbooruVocabulary, limit: int 
     inflection_matches = canonical_inflection_matches(normalized, vocabulary)
     if inflection_matches:
         return inflection_matches[:limit]
+    if retriever is not None:
+        indexed = retriever.candidates(value, limit)
+        if indexed:
+            return indexed
     query_tokens = set(normalized.replace("+", "_").split("_"))
     scored: list[tuple[float, int, str]] = []
     for tag in vocabulary.tags:
@@ -1749,6 +1887,7 @@ def shared_head_canonical_composition(
 def canonical_tag_guidance(
     leaf: Leaf, vocabulary: DanbooruVocabulary, candidate_count: int,
     output_style: str = "underscore", composition_policy: dict[str, Any] | None = None,
+    retriever: CanonicalTagRetriever | None = None,
 ) -> list[dict[str, Any]]:
     if leaf.mode != "tags":
         return []
@@ -1781,7 +1920,7 @@ def canonical_tag_guidance(
                 "candidates": [render_canonical_tag(separator_normalized, output_style)],
             })
         elif "_" in unweighted and re.fullmatch(r"[a-z0-9][a-z0-9_+().:'-]*", unweighted):
-            canonical_ids = canonical_candidates(unweighted, vocabulary, candidate_count)
+            canonical_ids = canonical_candidates(unweighted, vocabulary, candidate_count, retriever)
             guidance.append({
                 "input": raw, "status": "unknown_canonical_looking_token",
                 "canonical_ids": canonical_ids,
@@ -1820,11 +1959,12 @@ def canonical_tag_guidance(
 def canonical_tag_findings(
     leaves: list[Leaf], vocabulary: DanbooruVocabulary, candidate_count: int = 5,
     output_style: str = "underscore", composition_policy: dict[str, Any] | None = None,
+    retriever: CanonicalTagRetriever | None = None,
 ) -> list[Finding]:
     findings: list[Finding] = []
     for leaf in leaves:
         for guidance in canonical_tag_guidance(
-            leaf, vocabulary, candidate_count, output_style, composition_policy,
+            leaf, vocabulary, candidate_count, output_style, composition_policy, retriever,
         ):
             status = guidance["status"]
             candidates = guidance["candidates"]
@@ -2072,6 +2212,7 @@ def main() -> int:
     prompt_path = args.prompt or script_dir.parent / "prompt.md"
     audits: list[PromptAudit] = []
     danbooru_vocabulary: DanbooruVocabulary | None = None
+    canonical_retriever: CanonicalTagRetriever | None = None
     try:
         if args.annotated_details and not args.validate_post_prompts:
             raise ValueError("--annotated-details requires --validate-post-prompts")
@@ -2088,6 +2229,8 @@ def main() -> int:
                 raise ValueError("--output and --post-prompt-output must name different files")
         if args.canonical_tag_suggestions and not args.danbooru_tags:
             raise ValueError("--canonical-tag-suggestions requires --danbooru-tags")
+        if args.danbooru_index and not args.danbooru_tags:
+            raise ValueError("--danbooru-index requires --danbooru-tags")
         if args.canonical_tag_suggestions and (not args.llm or not args.suggest_fixes):
             raise ValueError("--canonical-tag-suggestions requires --llm and --suggest-fixes")
         if args.canonical_tag_candidate_count < 1:
@@ -2119,6 +2262,10 @@ def main() -> int:
                 return 0
         if not args.paths:
             raise ValueError("provide at least one YAML path or --validate-post-prompts")
+        if danbooru_vocabulary is not None:
+            canonical_retriever = open_canonical_retriever(
+                args, args.danbooru_tags.expanduser().resolve(), danbooru_vocabulary,
+            )
         if args.batch_size < 1:
             raise ValueError("--batch-size must be at least 1")
         if args.verification_batch_size < 1:
@@ -2143,6 +2290,12 @@ def main() -> int:
         verbose(args, f"loaded general rules from {rules_path}")
         leaves, categories, findings = load_inventory(paths)
         verbose(args, f"inventoried {len(categories)} categories and {len(leaves)} leaves")
+        if canonical_retriever is not None and canonical_retriever.embedding_client is not None:
+            primed = canonical_retriever.prime(leaves)
+            if primed < 0:
+                verbose(args, "embedding batch failed; continuing with SQLite lexical retrieval")
+            else:
+                verbose(args, f"precomputed {primed} canonical-candidate query embedding(s) in batches")
         pattern_results = pattern_findings(leaves, rules)
         findings.extend(pattern_results)
         verbose(args, f"pattern checks produced {len(pattern_results)} finding(s)")
@@ -2158,7 +2311,7 @@ def main() -> int:
         if danbooru_vocabulary is not None:
             canonical_results = canonical_tag_findings(
                 leaves, danbooru_vocabulary, args.canonical_tag_candidate_count, args.canonical_tag_style,
-                tags_rules.get("canonical_composition"),
+                tags_rules.get("canonical_composition"), canonical_retriever,
             )
             findings.extend(canonical_results)
             verbose(args, f"canonical-tag checks produced {len(canonical_results)} finding(s)")
@@ -2212,10 +2365,12 @@ def main() -> int:
                 verbose(args, "requesting potential fixes for found leaf issues")
                 proposed_suggestions, fix_rationales = llm_suggest_fixes(
                     leaves, findings, args, trace_path, danbooru_vocabulary, tags_rules,
+                    canonical_retriever,
                 )
                 suggestions, rejected_suggestions = validate_suggestions(
                     leaves, proposed_suggestions, findings, rules, tags_rules,
                     danbooru_vocabulary, args.canonical_tag_candidate_count, args.canonical_tag_style,
+                    canonical_retriever,
                 )
                 verbose(args, f"deterministic validation accepted {len(suggestions)} of {len(proposed_suggestions)} potential fixes")
                 if not args.skip_fix_verification:
@@ -2258,6 +2413,9 @@ def main() -> int:
     except (OSError, ValueError, RuntimeError) as exc:
         print(f"wildcard_linter: {exc}", file=sys.stderr)
         return 2
+    finally:
+        if canonical_retriever is not None:
+            canonical_retriever.index.close()
     if args.fail_on == "never":
         return 0
     if any(f.severity == "error" for f in findings):

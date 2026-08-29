@@ -19,6 +19,12 @@ from unittest.mock import patch
 
 
 MODULE_PATH = Path(__file__).resolve().parents[1] / "wildcard_linter.py"
+INDEX_PATH = MODULE_PATH.with_name("danbooru_index.py")
+INDEX_SPEC = importlib.util.spec_from_file_location("danbooru_index", INDEX_PATH)
+assert INDEX_SPEC and INDEX_SPEC.loader
+INDEX_MODULE = importlib.util.module_from_spec(INDEX_SPEC)
+sys.modules[INDEX_SPEC.name] = INDEX_MODULE
+INDEX_SPEC.loader.exec_module(INDEX_MODULE)
 SPEC = importlib.util.spec_from_file_location("wildcard_linter", MODULE_PATH)
 assert SPEC and SPEC.loader
 LINTER = importlib.util.module_from_spec(SPEC)
@@ -27,6 +33,19 @@ SPEC.loader.exec_module(LINTER)
 
 
 class WildcardLinterTests(unittest.TestCase):
+    def test_canonical_candidates_prefer_configured_index_retriever(self):
+        vocabulary = LINTER.DanbooruVocabulary({"grey_suit", "business_suit"})
+
+        class FakeRetriever:
+            def candidates(self, value, limit):
+                self.request = (value, limit)
+                return ["business_suit"]
+
+        retriever = FakeRetriever()
+        candidates = LINTER.canonical_candidates("formal_outfit", vocabulary, 3, retriever)
+        self.assertEqual(candidates, ["business_suit"])
+        self.assertEqual(retriever.request, ("formal_outfit", 3))
+
     def test_colored_verbose_log_highlights_cache_and_request_details(self):
         stream = io.StringIO()
         message = "completed, HTTP 200; 0 cached, 1 requested; no LLM call"

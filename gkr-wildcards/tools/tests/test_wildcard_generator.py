@@ -29,8 +29,8 @@ def load_module(name: str, path: Path):
     return module
 
 
-load_module("wildcard_linter", TOOLS / "wildcard_linter.py")
 load_module("danbooru_index", TOOLS / "danbooru_index.py")
+load_module("wildcard_linter", TOOLS / "wildcard_linter.py")
 GENERATOR = load_module("wildcard_generator", TOOLS / "wildcard_generator.py")
 
 

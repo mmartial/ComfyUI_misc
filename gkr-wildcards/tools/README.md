@@ -446,6 +446,36 @@ To let the existing LLM fix stage choose from constrained candidates, add:
 
 `--canonical-tag-style underscore` renders canonical suggestions as database identifiers such as `red_hair`. Use `--canonical-tag-style spaces` for models whose documented tag syntax uses `red hair`; matching and verification still retain `red_hair` internally as the canonical identity.
 
+### SQLite and embedding-assisted canonical candidates
+
+The linter can reuse the same SQLite tag index as the generator. When
+`--danbooru-tags` is supplied, `--retrieval auto` (the default) looks beside the CSV
+for `<csv-stem>.index.sqlite`. If the index exists, matches the CSV checksum, and has
+complete embedding metadata, the linter queries the recorded embedding endpoint and
+combines semantic and lexical results. Unknown-tag queries are embedded in batches and
+cached in memory for the run. Exact canonical matches, aliases, and conservative
+singular/plural matches still take priority over approximate retrieval.
+
+Use `--retrieval lexical` to use the compatible SQLite index without contacting the
+embedding endpoint. Use `--retrieval hybrid` when embeddings are mandatory: the command
+fails if the index is missing, stale, incomplete, has incompatible vector dimensions,
+or the embedding endpoint cannot be queried. `auto` reports the problem in verbose mode
+and falls back to SQLite or in-memory lexical matching instead.
+
+Override discovery or metadata only when needed:
+
+```text
+--danbooru-index safebooru_general_tags.index.sqlite
+--retrieval auto
+--embedding-model embeddinggemma:latest
+--embedding-base-url http://localhost:11434/v1
+--embedding-api-key-env OLLAMA_API_KEY
+```
+
+Normally the model, URL, query prefix, and vector dimensions should be omitted so they
+come from index metadata. Supplying `--danbooru-index` requires `--danbooru-tags`; the
+CSV remains the authoritative vocabulary and is checksum-verified against the index.
+
 During post-prompt auditing, unknown underscore-style output tokens receive soft `unknown_canonical_tag` warnings. These warnings leave the per-image status compliant by themselves, but count under `--fail-on warning`.
 
 Create or refresh the local vocabulary with:
@@ -903,12 +933,43 @@ THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
   --fail-on never
 ```
 
+To use the linter to also use the embeddings stored in the SQLite DB:
+
+```bash
+THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
+  gkr-$THEME.yaml \
+  --verbose \
+  --llm \
+  --llm-scope content \
+  --suggest-fixes \
+  --fix-severity both \
+  --danbooru-tags safebooru_general_tags.classified.csv \
+  --danbooru-index safebooru_general_tags.index.sqlite \
+  --retrieval auto \
+  --canonical-tag-suggestions \
+  --canonical-tag-candidate-count 5 \
+  --canonical-tag-style underscore \
+  --api-key-env OLLAMA_API_KEY \
+  --base-url http://localhost:11434/v1 \
+  --model gemma4:cloud \
+  --batch-size 15 \
+  --verification-batch-size 15 \
+  --timeout 300 \
+  --llm-cache-dir wildcard-linter-cache \
+  --fixed-output gkr-$THEME.fixed.yaml \
+  --format markdown \
+  --output gkr-$THEME.fixed.report.md \
+  --color auto \
+  --fail-on never
+```
+
+
 After completion:
 
 1. Compare the bsase YAML against the `.fixed` YAML and make decisions
 2. Review the `.fixed-report.md` for `UNRESOLVED` entries
 
-### Analyze the details.md file
+## Analyze a details.md file
 
 ```bash
 ## 1. Generate the details.md file
