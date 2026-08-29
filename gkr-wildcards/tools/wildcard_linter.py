@@ -127,43 +127,54 @@ class DanbooruVocabulary:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Lint wildcard YAML structure, language, and composite routes."
+        description="Lint wildcard YAML structure, tags, routes, and optional LLM-visible semantics.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""Common scopes:
+  --llm-scope candidates  Review only leaves already flagged by deterministic checks.
+  --llm-scope content     Also review clean leaves containing literal prompt text; skip pure routers.
+  --llm-scope all         Review every leaf, including pure wildcard routers.
+
+Repair behavior:
+  The input YAML is never overwritten. --fixed-output receives accepted rewrites, while
+  findings not repaired remain marked [UNRESOLVED] in text/Markdown reports.
+  --fail-on controls only the process exit status; it does not stop report generation.
+""",
     )
-    parser.add_argument("paths", nargs="*", help="YAML file(s) or directories")
+    parser.add_argument("paths", nargs="*", help="One or more YAML files/directories. Required for wildcard linting; may be omitted only with --validate-post-prompts")
     parser.add_argument("--rules", type=Path, help="Rules YAML (defaults beside script)")
     parser.add_argument("--tags-rules", type=Path, help="Tags-mode rules YAML (defaults beside script)")
-    parser.add_argument("--format", choices=("text", "json", "markdown"), default="text")
-    parser.add_argument("--output", type=Path, help="Write report to this path")
-    parser.add_argument("--fail-on", choices=("error", "warning", "never"), default="error")
-    parser.add_argument("--color", choices=("auto", "always", "never"), default="auto", help="ANSI color mode for text reports")
+    parser.add_argument("--format", choices=("text", "json", "markdown"), default="text", help="Report encoding written to --output or stdout (default: text)")
+    parser.add_argument("--output", type=Path, help="Write the lint report here instead of stdout; this is distinct from --fixed-output YAML")
+    parser.add_argument("--fail-on", choices=("error", "warning", "never"), default="error", help="Exit nonzero for errors, for warnings or errors, or never; processing and report generation still finish (default: error)")
+    parser.add_argument("--color", choices=("auto", "always", "never"), default="auto", help="ANSI color mode for terminal text and verbose progress; Markdown/JSON files are not colorized (default: auto)")
     parser.add_argument("-v", "--verbose", action="store_true", help="Report inventory, rule, route, and LLM batch progress to stderr")
-    parser.add_argument("--llm", action="store_true", help="Run OpenAI-compatible semantic review")
-    parser.add_argument("--llm-scope", choices=("candidates", "content", "all"), default="candidates", help="LLM selection: flagged candidates, all literal-content leaves, or every leaf")
-    parser.add_argument("--suggest-fixes", action="store_true", help="Run a second LLM pass proposing rewrites for found leaf issues; requires --llm")
-    parser.add_argument("--fixed-output", type=Path, help="Write suggested rewrites to a new YAML file; requires --llm and --suggest-fixes")
+    parser.add_argument("--llm", action="store_true", help="Add OpenAI-compatible semantic/visual review after deterministic checks")
+    parser.add_argument("--llm-scope", choices=("candidates", "content", "all"), default="candidates", help="Select LLM coverage: flagged leaves only, all leaves with literal content, or every leaf including pure routers (default: candidates)")
+    parser.add_argument("--suggest-fixes", action="store_true", help="Ask the LLM for constrained rewrites of eligible findings; requires --llm and does not alter the input")
+    parser.add_argument("--fixed-output", type=Path, help="Optional. Write accepted rewrites to this separate YAML file. When omitted, no fixed YAML is produced; requires --llm, --suggest-fixes, and exactly one input YAML")
     parser.add_argument("--fix-severity", choices=("error", "warning", "both"), default="error", help="Fix errors only (default), warnings only, or both")
-    parser.add_argument("--fix-rules", help="Comma-separated rule allowlist for fixes; overrides --fix-severity")
-    parser.add_argument("--fix-manifest", type=Path, help="Write accepted and rejected fix details as JSON")
+    parser.add_argument("--fix-rules", help="Comma-separated rule-code allowlist; when supplied, only these rules are repair targets and --fix-severity is ignored")
+    parser.add_argument("--fix-manifest", type=Path, help="Write machine-readable proposed, accepted, rejected, and unresolved fix details as JSON")
     parser.add_argument("--skip-fix-verification", action="store_true", help="Skip the final LLM semantic-preservation check (not recommended)")
-    parser.add_argument("--model", help="Model name; defaults to OPENAI_MODEL")
-    parser.add_argument("--base-url", help="API base URL; defaults to OPENAI_BASE_URL")
+    parser.add_argument("--model", help="Chat model name. With --llm, omission falls back to OPENAI_MODEL and fails if neither is set")
+    parser.add_argument("--base-url", help="OpenAI-compatible API base URL. With --llm, omission falls back to OPENAI_BASE_URL")
     parser.add_argument("--api-key-env", default="OPENAI_API_KEY", help="Environment variable containing the API key")
-    parser.add_argument("--batch-size", type=int, default=20)
+    parser.add_argument("--batch-size", type=int, default=20, help="Leaves per semantic-review or fix-suggestion LLM request (default: 20)")
     parser.add_argument("--verification-batch-size", type=int, default=15, help="Items per semantic fix-verification request")
-    parser.add_argument("--timeout", type=int, default=120)
+    parser.add_argument("--timeout", type=int, default=120, help="Timeout in seconds for each individual LLM HTTP request (default: 120)")
     parser.add_argument("--prompt", type=Path, help="Review policy Markdown; defaults to ../prompt.md")
     parser.add_argument("--llm-log", type=Path, help="Write sanitized LLM requests and responses as JSON Lines")
-    parser.add_argument("--llm-cache-dir", type=Path, help="Persistent LLM response cache (default: system temp/wildcard-linter-cache)")
-    parser.add_argument("--no-llm-cache", action="store_true", help="Disable reading and writing the persistent LLM response cache")
-    parser.add_argument("--llm-cache-max-age-minutes", type=float, help="Delete and refresh cache entries older than this many minutes (disabled by default)")
+    parser.add_argument("--llm-cache-dir", type=Path, help="Persistent response cache; identical requests become cache hits and make no LLM call (default: system temp/wildcard-linter-cache)")
+    parser.add_argument("--no-llm-cache", action="store_true", help="Force fresh LLM calls and do not save their responses")
+    parser.add_argument("--llm-cache-max-age-minutes", type=float, help="Refresh cache entries older than this age; omit to retain cached responses indefinitely")
     parser.add_argument("--validate-post-prompts", type=Path, metavar="DETAILS_MD", help="Audit final post-LLM prompts recorded by theme_organizer.py")
     parser.add_argument("--annotated-details", type=Path, help="Write a copy of details.md with audit status inserted into each image section; requires --validate-post-prompts")
     parser.add_argument("--post-prompt-output", type=Path, help="Write post-prompt audit summary to a separate report; requires --validate-post-prompts")
     parser.add_argument("--include-post-prompt-report", action="store_true", help="Append post-prompt validation to the ordinary --output report; requires --validate-post-prompts")
-    parser.add_argument("--danbooru-tags", type=Path, help="Canonical Danbooru vocabulary for tags-mode YAML linting and post-prompt audits")
-    parser.add_argument("--canonical-tag-suggestions", action="store_true", help="Give constrained Danbooru candidate lists to the LLM fix stage; requires --danbooru-tags, --llm, and --suggest-fixes")
+    parser.add_argument("--danbooru-tags", type=Path, help="CSV vocabulary used to recognize exact canonical tags and find normalized/candidate forms; no SQLite index is needed")
+    parser.add_argument("--canonical-tag-suggestions", action="store_true", help="Let the fix stage choose only from retrieved canonical candidates (or retain a literal/remove it); requires --danbooru-tags, --llm, and --suggest-fixes")
     parser.add_argument("--canonical-tag-candidate-count", type=int, default=5, help="Maximum canonical candidates supplied per unknown tag-like item (default: 5)")
-    parser.add_argument("--canonical-tag-style", choices=("underscore", "spaces"), default="underscore", help="Rendered spelling for canonical tag suggestions (default: underscore)")
+    parser.add_argument("--canonical-tag-style", choices=("underscore", "spaces"), default="underscore", help="How canonical candidates are written in repair prompts/output: underscore uses exact database identifiers such as red_hair; spaces renders red hair for models expecting natural-language tags. Matching remains canonical internally (default: underscore)")
     return parser.parse_args()
 
 

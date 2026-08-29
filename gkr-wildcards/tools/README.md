@@ -294,21 +294,22 @@ OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
   --verbose
 
 # WITH both
-OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
-  ../howto/wildcard-generator-skeleton.yaml \
-  --output gkr-superhero.yaml \
+THEME="superhero"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
+  gkr-$THEME.skeleton.yaml \
+  --output gkr-$THEME.yaml \
   --danbooru-tags safebooru_general_tags.classified.csv \
   --danbooru-index safebooru_general_tags.index.sqlite \
   --content-profile general \
   --api-key-env OLLAMA_API_KEY \
   --base-url http://localhost:11434/v1 \
   --model gemma4:cloud \
+  --retrieval-candidates 30 \
+  --llm-log gkr-$THEME.json \
   --max-planner-retries 3 \
   --category-chunk-size 25 \
   --max-category-retries 3 \
   --max-generation-calls 200 \
   --concept-continuation-buffer 5 \
-  --interactive \
   --interactive \
   --verbose \
   --color auto
@@ -322,6 +323,37 @@ OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
 2. Optional semantic review through OpenAI or an OpenAI-compatible endpoint such as LiteLLM.
 
 The deterministic stage is always run. The LLM stage never edits files and is opt-in.
+
+## How command-line options are documented
+
+Use `uv run tools/wildcard_linter.py --help` or
+`uv run tools/wildcard_generator.py --help` for the authoritative option list. The
+usage synopsis follows standard `argparse` notation:
+
+- an option inside `[...]` is optional;
+- an option absent from brackets is required;
+- `{a,b}` means exactly one listed value may be selected;
+- `PATH`, `TIMEOUT`, and similar uppercase words are values supplied after an option.
+
+The help description also states what happens when an option is omitted. This matters
+because an optional path can have two different meanings:
+
+- Generator `--fixed-output` is a path override. A repaired file is always written;
+  omitting the option derives `<output-stem>.fixed.yaml` automatically.
+- Linter `--fixed-output` enables writing a fixed copy. Omitting it means no fixed YAML
+  is written, although linting and report output still run.
+
+Defaults do not necessarily mean that a feature is enabled. For example,
+`--canonical-tag-style underscore` supplies the default spelling only when canonical
+suggestions or repairs need to render a candidate. It does not enable LLM review or
+canonical suggestions by itself. Those require `--llm`, `--suggest-fixes`,
+`--danbooru-tags`, and `--canonical-tag-suggestions` as documented by their help.
+
+The built-in help is intended for exact requiredness, defaults, omission behavior, and
+option dependencies. This README provides workflows, rationale, and longer examples.
+Keeping both levels is preferable to putting all documentation in only one place: users
+can understand a single flag without leaving the terminal, while related multi-option
+workflows remain readable here.
 
 ## Requirements
 
@@ -866,7 +898,7 @@ THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
   --llm-cache-dir wildcard-linter-cache \
   --fixed-output gkr-$THEME.fixed.yaml \
   --format markdown \
-  --output gkr-$THEME.fixed-report.md \
+  --output gkr-$THEME.fixed.report.md \
   --color auto \
   --fail-on never
 ```

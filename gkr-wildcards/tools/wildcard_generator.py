@@ -70,42 +70,51 @@ class CategoryPlan:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Create a tags-mode wildcard with staged OpenAI-compatible LLM calls."
+        description="Create, validate, and repair a tags-mode wildcard with staged OpenAI-compatible LLM calls.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""Behavior notes:
+  The initial model output is written to --output. Validation and accepted repairs are
+  written separately to --fixed-output, followed by a Markdown report and JSON manifest.
+  Large requested category counts are generated in --category-chunk-size batches.
+  --max-generation-calls is a global safety limit across planning, generation, retries,
+  semantic review, and repair—not the number of categories.
+  Cached calls still appear in progress numbering but do not contact the LLM.
+""",
     )
-    parser.add_argument("skeleton", type=Path, help="Commented YAML skeleton containing one namespace")
-    parser.add_argument("--output", type=Path, required=True, help="Destination for the initial generated YAML")
-    parser.add_argument("--fixed-output", type=Path, help="Repaired YAML (defaults to <output-stem>.fixed.yaml)")
-    parser.add_argument("--danbooru-tags", type=Path, required=True, help="Local Danbooru-compatible tag CSV")
-    parser.add_argument("--danbooru-index", type=Path, help="Reusable SQLite tag index (defaults beside CSV)")
+    parser.add_argument("skeleton", type=Path, help="Commented YAML skeleton defining one namespace, required categories, counts, dependencies, and optional DO_NOT_USE_TAGS")
+    parser.add_argument("--output", type=Path, required=True, help="REQUIRED. Write the initial generated YAML here; this file is not changed by the later repair stage")
+    parser.add_argument("--fixed-output", type=Path, help="Optional path override. The repaired file is always produced; when omitted its path is derived as <output-stem>.fixed.yaml")
+    parser.add_argument("--danbooru-tags", type=Path, required=True, help="REQUIRED. Local Danbooru-compatible CSV used as the authoritative canonical-tag vocabulary")
+    parser.add_argument("--danbooru-index", type=Path, help="Reusable SQLite retrieval index; built beside the tag CSV when omitted or missing")
     parser.add_argument(
         "--content-profile", choices=("general", "sensitive", "unrestricted"), default="general",
         help="Candidate-vocabulary content profile (default: general)",
     )
     parser.add_argument(
         "--retrieval", choices=("auto", "lexical", "hybrid"), default="auto",
-        help="Use embeddings when available (auto), disable them, or require them",
+        help="Tag retrieval mode: auto uses index embeddings when present and otherwise lexical; lexical disables embeddings; hybrid requires embeddings",
     )
-    parser.add_argument("--embedding-model", help="Query embedding model; defaults to index metadata")
-    parser.add_argument("--embedding-base-url", help="Query embedding base URL; defaults to index metadata")
-    parser.add_argument("--embedding-api-key-env", default="OLLAMA_API_KEY")
-    parser.add_argument("--embedding-query-prefix", help="Query prefix; defaults to index metadata")
-    parser.add_argument("--retrieval-candidates", type=int, default=12)
+    parser.add_argument("--embedding-model", help="Embedding model for retrieval queries; normally omit to reuse the model recorded in the SQLite index")
+    parser.add_argument("--embedding-base-url", help="Embedding API base URL; normally omit to reuse index metadata")
+    parser.add_argument("--embedding-api-key-env", default="OLLAMA_API_KEY", help="Name of the environment variable containing the embedding API key (default: OLLAMA_API_KEY)")
+    parser.add_argument("--embedding-query-prefix", help="Text prepended to embedding queries; normally omit to reuse index metadata")
+    parser.add_argument("--retrieval-candidates", type=int, default=12, help="Maximum retrieved canonical tags placed in each concept/category palette; larger values improve choice but enlarge prompts (default: 12)")
     parser.add_argument("--prompt", type=Path, help="Policy Markdown (defaults to ../prompt.md)")
     parser.add_argument("--rules", type=Path, help="General linter rules (defaults beside script)")
     parser.add_argument("--tags-rules", type=Path, help="Tags-mode rules (defaults beside script)")
-    parser.add_argument("--model", help="Model name; defaults to OPENAI_MODEL")
-    parser.add_argument("--base-url", help="API base URL; defaults to OPENAI_BASE_URL")
-    parser.add_argument("--api-key-env", default="OPENAI_API_KEY")
-    parser.add_argument("--batch-categories", type=int, default=3)
+    parser.add_argument("--model", help="Chat model name. When omitted, read OPENAI_MODEL; generation fails if neither is set")
+    parser.add_argument("--base-url", help="OpenAI-compatible API base URL. When omitted, read OPENAI_BASE_URL")
+    parser.add_argument("--api-key-env", default="OPENAI_API_KEY", help="Name of the environment variable containing the chat API key (default: OPENAI_API_KEY)")
+    parser.add_argument("--batch-categories", type=int, default=3, help="Categories generated together per LLM request when their dependency order permits (default: 3)")
     parser.add_argument(
         "--category-chunk-size", type=int, default=25,
-        help="Maximum concepts/leaves requested per category in one LLM response (default: 25)",
+        help="Maximum concepts/leaves requested for one category per LLM response; lower this when the model truncates or miscounts large arrays (default: 25)",
     )
     parser.add_argument(
         "--concept-continuation-buffer", type=int, default=3,
-        help="Extra concepts requested when filling a partial chunk (default: 3)",
+        help="Extra concepts requested on continuation retries so duplicates can be discarded while still filling the chunk (default: 3)",
     )
-    parser.add_argument("--max-generation-calls", type=int, default=20)
+    parser.add_argument("--max-generation-calls", type=int, default=20, help="Global cap on staged LLM operations, including retries and repair; increase for many categories or large chunked counts (default: 20)")
     parser.add_argument(
         "--max-planner-retries", type=int, default=1,
         help="Corrective retries when the generated category plan fails graph validation (default: 1)",
@@ -116,30 +125,30 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--interactive", action="store_true",
-        help="After retries fail, prompt to accept or replace invalid tags without palette checks",
+        help="After automated category retries fail, show each affected full leaf and ask whether to replace or explicitly accept the questionable tag",
     )
     parser.add_argument(
         "--interactive-overrides", type=Path,
-        help="Persistent interactive decisions (defaults to <output-stem>.interactive-overrides.json)",
+        help="Persist accepted/replacement decisions and reuse them on reruns (default: <output-stem>.interactive-overrides.json)",
     )
-    parser.add_argument("--max-repair-passes", type=int, default=2)
-    parser.add_argument("--max-category-depth", type=int, default=6)
-    parser.add_argument("--max-added-categories", type=int, default=30)
-    parser.add_argument("--max-total-tokens", type=int, help="Stop new calls after reported total usage reaches this value")
-    parser.add_argument("--timeout", type=int, default=120)
-    parser.add_argument("--batch-size", type=int, default=20, help="Leaves per review/repair request")
-    parser.add_argument("--verification-batch-size", type=int, default=15)
-    parser.add_argument("--canonical-tag-candidate-count", type=int, default=5)
-    parser.add_argument("--canonical-tag-style", choices=("underscore", "spaces"), default="underscore")
-    parser.add_argument("--manifest", type=Path, help="Generation manifest (defaults beside output)")
-    parser.add_argument("--report", type=Path, help="Post-repair Markdown report (defaults to <output-stem>.fixed-report.md)")
+    parser.add_argument("--max-repair-passes", type=int, default=2, help="Maximum whole-file lint/fix cycles after generation; unresolved findings are reported after the final pass (default: 2)")
+    parser.add_argument("--max-category-depth", type=int, default=6, help="Reject plans whose category dependency graph exceeds this depth (default: 6)")
+    parser.add_argument("--max-added-categories", type=int, default=30, help="Maximum categories the planner may add beyond those required by the skeleton (default: 30)")
+    parser.add_argument("--max-total-tokens", type=int, help="Optional run-wide token safety limit. When omitted, token usage does not stop new calls; --max-generation-calls still applies")
+    parser.add_argument("--timeout", type=int, default=120, help="Timeout in seconds for each individual embedding or chat HTTP request; it is not a whole-run limit (default: 120)")
+    parser.add_argument("--batch-size", type=int, default=20, help="Leaves per post-generation semantic review or repair request (default: 20)")
+    parser.add_argument("--verification-batch-size", type=int, default=15, help="Accepted rewrites checked per semantic-preservation request (default: 15)")
+    parser.add_argument("--canonical-tag-candidate-count", type=int, default=5, help="Maximum canonical alternatives supplied when repairing an unknown tag-like phrase (default: 5)")
+    parser.add_argument("--canonical-tag-style", choices=("underscore", "spaces"), default="underscore", help="How canonical candidates are written in repair prompts/output: underscore uses exact database identifiers such as red_hair; spaces renders red hair for models expecting natural-language tags. Matching remains canonical internally (default: underscore)")
+    parser.add_argument("--manifest", type=Path, help="Optional path override for the always-produced generation/repair JSON manifest (default: beside --output)")
+    parser.add_argument("--report", type=Path, help="Optional path override for the always-produced post-repair Markdown report (default: <output-stem>.fixed-report.md)")
     parser.add_argument("--llm-log", type=Path, help="Sanitized JSONL request/response trace")
-    parser.add_argument("--llm-cache-dir", type=Path)
-    parser.add_argument("--no-llm-cache", action="store_true")
-    parser.add_argument("--llm-cache-max-age-minutes", type=float)
-    parser.add_argument("--skip-semantic-review", action="store_true")
-    parser.add_argument("--skip-fix-verification", action="store_true")
-    parser.add_argument("-v", "--verbose", action="store_true")
+    parser.add_argument("--llm-cache-dir", type=Path, help="Persistent response cache; matching prompts are reused without an LLM call (default: system temporary cache)")
+    parser.add_argument("--no-llm-cache", action="store_true", help="Disable both reading and writing cached LLM responses")
+    parser.add_argument("--llm-cache-max-age-minutes", type=float, help="Refresh cache entries older than this age; omit to keep them indefinitely")
+    parser.add_argument("--skip-semantic-review", action="store_true", help="Skip the final LLM visual/semantic audit; deterministic validation still runs")
+    parser.add_argument("--skip-fix-verification", action="store_true", help="Accept proposed rewrites without the final LLM semantic-preservation check (not recommended)")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Show planning, cache/LLM calls, chunks, retries, interactive overrides, review, and repair progress")
     parser.add_argument(
         "--color", choices=("auto", "always", "never"), default="auto",
         help="ANSI color mode for verbose output (default: auto)",
