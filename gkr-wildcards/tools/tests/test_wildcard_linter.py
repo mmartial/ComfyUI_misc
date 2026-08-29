@@ -323,6 +323,14 @@ class WildcardLinterTests(unittest.TestCase):
         findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
         self.assertIn("tags_empty_phrase", {finding.rule for finding in findings})
 
+    def test_reference_before_comma_is_not_an_empty_phrase(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  action:\n"
+            '    - "__gkr_test/subject__, muscle_car, theft, comic, money bags on pavement"\n'
+        )
+        findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
+        self.assertNotIn("tags_empty_phrase", {finding.rule for finding in findings})
+
     def test_duplicate_check_normalizes_tag_order_weights_and_underscores(self):
         leaves, _, _ = self.inventory(
             "# MODE: tags\ngkr_test:\n"

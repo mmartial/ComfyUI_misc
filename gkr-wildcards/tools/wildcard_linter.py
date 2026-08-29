@@ -352,7 +352,7 @@ def tags_mode_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Findin
         if leaf.mode != "tags" or not has_literal_content(leaf):
             continue
         literal = " ".join(literal_text(leaf.text).split())
-        if any(not phrase.strip() for phrase in split_top_level_commas(literal)):
+        if any(not phrase.strip() for phrase in split_top_level_commas(leaf.text)):
             findings.append(Finding(
                 "warning", "tags_empty_phrase",
                 "Tags-mode leaf contains an empty comma-separated phrase; remove the leading, trailing, or repeated comma.",
