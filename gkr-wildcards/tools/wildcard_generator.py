@@ -1013,22 +1013,60 @@ def generate_categories(
                         break
                     except CategoryValidationError as exc:
                         if retry >= session.args.max_category_retries:
+                            interactive_applied = False
                             if session.args.interactive and exc.invalid_tags:
                                 result, replacements = apply_interactive_tag_overrides(
                                     plan.name, result, exc.invalid_tags,
                                     existing=session.interactive_overrides.get(plan.name),
                                 )
-                                leaves, provenance = validate_category_response(
-                                    plan.name, result, plan.count, skeleton.namespace,
-                                    plan.dependencies, allowed_canonical | set(replacements.values()),
-                                    require_dependencies=False,
-                                    forbidden_signatures=prior_signatures,
-                                )
                                 vocabulary.tags.update(replacements.values())
                                 session.interactive_overrides.setdefault(plan.name, {}).update(replacements)
                                 session.save_interactive_overrides()
+                                allowed_canonical |= set(replacements.values())
+                                interactive_applied = True
+                            # Cross-chunk duplication is recoverable after corrective retries:
+                            # retain the complete chunk so generation can finish, then expose
+                            # exact prior/current pairs to normal repair and manual review.
+                            try:
+                                leaves, provenance = validate_category_response(
+                                    plan.name, result, plan.count, skeleton.namespace,
+                                    plan.dependencies, allowed_canonical,
+                                    require_dependencies=False,
+                                    forbidden_signatures=None,
+                                )
+                            except CategoryValidationError:
+                                raise exc
+                            prior_by_signature = {
+                                linter.duplicate_leaf_signature(leaf, "tags"): (index, leaf)
+                                for index, leaf in enumerate(accumulated_leaves[plan.name], 1)
+                            }
+                            duplicate_pairs: list[dict[str, Any]] = []
+                            for local_index, leaf in enumerate(leaves, 1):
+                                signature = linter.duplicate_leaf_signature(leaf, "tags")
+                                if signature in prior_by_signature:
+                                    prior_index, prior_leaf = prior_by_signature[signature]
+                                    duplicate_pairs.append({
+                                        "prior_position": prior_index,
+                                        "prior_leaf": prior_leaf,
+                                        "current_position": offsets[plan.name] + local_index,
+                                        "current_leaf": leaf,
+                                    })
+                            if not duplicate_pairs and interactive_applied:
                                 break
-                            raise
+                            if not duplicate_pairs:
+                                raise exc
+                            session.generation_issues.append({
+                                "category": plan.name,
+                                "rule": "duplicate_leaves_across_chunks",
+                                "chunk_index": chunk_index,
+                                "duplicates": duplicate_pairs,
+                            })
+                            log(
+                                session.args,
+                                f"category {plan.name} still duplicates {len(duplicate_pairs)} earlier leaf/leaves "
+                                "after retries; continuing with unresolved review findings",
+                            )
+                            break
                         log(session.args, f"{exc}; corrective retry {retry + 1}/{session.args.max_category_retries}")
                         correction_item = dict(item)
                         correction_item["rejected_response"] = result
@@ -1280,6 +1318,20 @@ def main() -> int:
                         f"output: {removed}. Manual review: restore or replace an omitted concept only if it is more "
                         "valuable than one of the retained leaves.",
                         str(fixed_output), category=str(issue["category"]), evidence=removed,
+                    ))
+                elif issue["rule"] == "duplicate_leaves_across_chunks":
+                    duplicate_context = " | ".join(
+                        f"leaf {pair['current_position']}: {pair['current_leaf']} duplicates "
+                        f"leaf {pair['prior_position']}: {pair['prior_leaf']}"
+                        for pair in issue["duplicates"]
+                    )
+                    findings.append(linter.Finding(
+                        "warning", str(issue["rule"]),
+                        f"Generated category '{issue['category']}' retained cross-chunk duplicates after exhausting "
+                        f"corrective retries. Generation continued so the validation/repair pipeline could finish. "
+                        f"Duplicate context: {duplicate_context}. Manual review: replace or remove one member of each "
+                        "pair if the automated repair did not resolve it.",
+                        str(fixed_output), category=str(issue["category"]), evidence=duplicate_context,
                     ))
                 else:
                     missing = ", ".join(issue["missing_dependencies"])
