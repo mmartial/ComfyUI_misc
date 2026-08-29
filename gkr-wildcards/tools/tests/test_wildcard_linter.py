@@ -193,6 +193,23 @@ class WildcardLinterTests(unittest.TestCase):
         findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
         self.assertIn("tags_sequential_format", {finding.rule for finding in findings})
 
+    def test_tags_mode_validates_structured_limited_palettes(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  spotlight_covers:\n"
+            "    - cover, (red, copper, blue) limited_palette\n"
+            "    - red_dress, blue_eyes, street\n"
+            "    - cover, mahogany and gold palette\n"
+            "    - cover, (deep red, gold) limited_palette\n"
+            "    - cover, (red, red) limited_palette\n"
+        )
+        findings = LINTER.tags_mode_findings(leaves, self.tags_rules)
+        palette_findings = [finding for finding in findings if finding.rule == "tags_limited_palette"]
+        self.assertEqual(len(palette_findings), 3)
+        self.assertEqual(
+            {finding.line for finding in palette_findings},
+            {6, 7, 8},
+        )
+
     def test_tags_mode_rejects_two_page_and_adjacent_poses(self):
         leaves, _, _ = self.inventory(
             "# MODE: tags\ngkr_test:\n  layout:\n"

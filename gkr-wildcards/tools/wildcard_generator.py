@@ -571,7 +571,11 @@ def generation_instruction(policy: str, vocabulary: linter.DanbooruVocabulary) -
         "content; sensitive permits non-explicit mature material but not explicit sexual content; unrestricted adds no content "
         "restriction. Avoid duplicate or near-duplicate leaves. For component pools, treat the first content-bearing item as the "
         "lead motif and do not use any lead motif more than max_lead_motif_repeats; vary the actual base subject or setting rather "
-        "than producing several lightly modified variants of one base. Follow the global and local GENERATOR instructions. "
+        "than producing several lightly modified variants of one base. When—and only when—a concept intentionally restricts the "
+        "image to a finite set of colors, express that restriction in the exact tags-mode form "
+        "`(color1, color2, ... colorN) limited_palette`, using only ordinary color names—not materials, finishes, moods, "
+        "intensity adjectives, or objects used metaphorically as colors. Do not add limited_palette to an image that merely "
+        "mentions colors without restricting the full image palette. Follow the global and local GENERATOR instructions. "
         + sample_note + "\n\nPOLICY:\n" + policy
     )
 
@@ -890,7 +894,8 @@ def validate_category_response(
             errors.append("provenance fields canonical_tags and literal_fallbacks must be arrays")
             continue
         invalid_provenance.update(
-            str(tag) for tag in canonical_tags if str(tag) not in allowed_canonical
+            str(tag) for tag in canonical_tags
+            if str(tag) not in allowed_canonical and str(tag) != "limited_palette"
         )
     if invalid_provenance:
         errors.append(
@@ -903,6 +908,7 @@ def validate_category_response(
     used_dependencies: set[str] = set()
     invalid_output_tags: set[str] = set()
     forbidden_output_tags: set[str] = set()
+    invalid_palettes: list[str] = []
     for leaf in leaves:
         refs = set(REFERENCE_RE.findall(leaf))
         invalid_refs.update(
@@ -916,13 +922,14 @@ def validate_category_response(
         invalid_output_tags.update(
             token
             for token in UNDERSCORE_TAG_RE.findall(literal)
-            if token not in allowed_canonical
+            if token not in allowed_canonical and token != "limited_palette"
         )
         for raw_item in linter.split_top_level_commas(literal):
             unweighted = linter.WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip()
             normalized = linter.normalize_canonical_tag(unweighted)
             if normalized in (forbidden_tags or set()):
                 forbidden_output_tags.add(normalized)
+        invalid_palettes.extend(linter.invalid_limited_palettes(literal))
     if invalid_refs:
         errors.append("uses undeclared references: " + ", ".join(sorted(invalid_refs)))
     missing_dependencies = sorted(set(dependencies) - used_dependencies)
@@ -939,6 +946,12 @@ def validate_category_response(
         errors.append(
             "uses tags excluded by the skeleton header: "
             + ", ".join(sorted(forbidden_output_tags))
+        )
+    if invalid_palettes:
+        errors.append(
+            "uses invalid limited-palette syntax or non-color names: "
+            + " | ".join(dict.fromkeys(invalid_palettes))
+            + "; expected (color1, color2, ... colorN) limited_palette"
         )
     if errors:
         raise CategoryValidationError(

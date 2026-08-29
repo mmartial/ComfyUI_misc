@@ -77,6 +77,33 @@ class WildcardGeneratorTests(unittest.TestCase):
                     forbidden_tags={"comic", "western_comics_(style)"},
                 )
 
+    def test_limited_palette_requires_exact_syntax_and_real_color_names(self):
+        valid = {
+            "leaves": ["cover, (red, copper, blue) limited_palette"],
+            "provenance": [{"canonical_tags": ["limited_palette"], "literal_fallbacks": []}],
+        }
+        leaves, _ = GENERATOR.validate_category_response(
+            "spotlight_covers", valid, 1, "gkr_test", [], set()
+        )
+        self.assertEqual(leaves, valid["leaves"])
+
+        for palette in (
+            "mahogany and gold palette",
+            "(mahogany, gold) limited_palette",
+            "(deep red, gold) limited_palette",
+            "(red, gold) limited palette",
+        ):
+            invalid = {
+                "leaves": [f"cover, {palette}"],
+                "provenance": [{"canonical_tags": [], "literal_fallbacks": []}],
+            }
+            with self.assertRaisesRegex(
+                GENERATOR.CategoryValidationError, "invalid limited-palette syntax or non-color names"
+            ):
+                GENERATOR.validate_category_response(
+                    "spotlight_covers", invalid, 1, "gkr_test", [], set()
+                )
+
     def skeleton(self, source: str):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)

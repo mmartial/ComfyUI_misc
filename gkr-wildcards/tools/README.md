@@ -117,6 +117,20 @@ concepts, requests only the missing continuation, and asks for a small reserve
 controlled by `--concept-continuation-buffer` (3 by default). Excess unique
 concepts are deterministically trimmed after the chunk is filled.
 
+Whenever an image is intentionally restricted to a finite color set, that
+restriction uses one structured tags-mode item in any category:
+
+```text
+(red, blue, gold) limited_palette
+```
+
+The generator rejects `limited palette`, prose such as `red and blue palette`,
+duplicate colors, and non-color/material descriptions such as `mahogany`,
+`rusted brown`, or `electric cyan`. Ordinary color names may still be used as
+unmodified palette values. `limited_palette` must not be added merely because a
+leaf mentions one or more colors; it is reserved for an intentional whole-image
+palette restriction.
+
 Verbose prefixes use ANSI colors when stderr is a terminal. Use `--color always`
 to preserve colors through a compatible pipe or log viewer, or `--color never`
 to disable them. Within verbose messages, successful HTTP and cache/no-call

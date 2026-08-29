@@ -39,6 +39,12 @@ SEQUENCE_RE = re.compile(
 CAMERA_CATEGORY_RE = re.compile(r"(?:^|_)(camera|composition|framing)$", re.I)
 MODE_RE = re.compile(r"\bMODE\s*:\s*(narrative|tags)\b", re.I)
 WEIGHT_RE = re.compile(r"\(([^()]+):(-?(?:\d+(?:\.\d+)?|\.\d+))\)")
+PALETTE_COLOR_NAMES = {
+    "amber", "beige", "black", "blue", "brown", "copper", "coral", "crimson", "cyan",
+    "emerald", "gold", "green", "grey", "indigo", "ivory", "lavender", "lime",
+    "magenta", "maroon", "navy", "ochre", "orange", "pink", "purple", "red",
+    "scarlet", "silver", "tan", "teal", "turquoise", "violet", "white", "yellow",
+}
 TAG_SEQUENCE_RE = re.compile(
     r"\b(?:multi[- ]?panel|split comic panels?|sequential panels?|\w+-panel (?:page|sequence)|"
     r"comic page|manga page|(?:two|three|four|five|six|seven|eight|nine|\d+)[- ]page|"
@@ -267,6 +273,23 @@ def split_top_level_commas(text: str) -> list[str]:
     return parts
 
 
+def invalid_limited_palettes(text: str) -> list[str]:
+    """Return malformed palettes or palettes containing non-color values."""
+    invalid: list[str] = []
+    for raw_item in split_top_level_commas(literal_text(text)):
+        item = WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip()
+        if not re.search(r"(?:\blimited[ _]palette\b|\bpalette\b)", item, re.I):
+            continue
+        match = re.fullmatch(r"\(([^()]+)\)\s+limited_palette", item, re.I)
+        colors = [color.strip().lower() for color in match.group(1).split(",")] if match else []
+        if (
+            not match or len(colors) < 2 or len(colors) != len(set(colors))
+            or any(color not in PALETTE_COLOR_NAMES for color in colors)
+        ):
+            invalid.append(item)
+    return list(dict.fromkeys(invalid))
+
+
 def duplicate_leaf_signature(text: str, mode: str) -> str:
     """Normalize non-semantic tags-mode spelling, weighting, order, and spacing."""
     compact = " ".join(text.lower().split())
@@ -352,6 +375,14 @@ def tags_mode_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Findin
         if leaf.mode != "tags" or not has_literal_content(leaf):
             continue
         literal = " ".join(literal_text(leaf.text).split())
+        invalid_palettes = invalid_limited_palettes(literal)
+        if invalid_palettes:
+            findings.append(Finding(
+                "error", "tags_limited_palette",
+                "Color palettes must use `(color1, color2, ... colorN) limited_palette` with at least two "
+                "distinct ordinary color names; do not use prose, material names, or intensity modifiers.",
+                leaf.file, leaf.line, leaf.category, leaf.uid, " | ".join(invalid_palettes),
+            ))
         if any(not phrase.strip() for phrase in split_top_level_commas(leaf.text)):
             findings.append(Finding(
                 "warning", "tags_empty_phrase",
