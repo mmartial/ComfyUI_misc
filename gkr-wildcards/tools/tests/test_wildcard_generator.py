@@ -547,6 +547,32 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertIn("Leaf 2: mask, rooftop", prompts[0])
         self.assertNotIn("Leaf 3", prompts[0])
 
+    def test_interactive_bare_tag_does_not_match_parenthesized_qualifier(self):
+        response = {
+            "leaves": [
+                "mole_(animal), bone, red clay",
+                "toad_(animal), yellow_skin, ashes",
+                "animal, translucent, glowing_petals",
+            ],
+            "provenance": [
+                {"canonical_tags": ["mole_(animal)", "bone"], "literal_fallbacks": []},
+                {"canonical_tags": ["toad_(animal)", "yellow_skin"], "literal_fallbacks": []},
+                {"canonical_tags": ["animal", "translucent"], "literal_fallbacks": []},
+            ],
+        }
+        prompts = []
+        corrected, replacements = GENERATOR.apply_interactive_tag_overrides(
+            "creature_spotlight", response, {"animal"},
+            lambda prompt: prompts.append(prompt) or "lynx",
+        )
+        self.assertEqual(replacements, {"animal": "lynx"})
+        self.assertNotIn("Leaf 1", prompts[0])
+        self.assertNotIn("Leaf 2", prompts[0])
+        self.assertIn("Leaf 3: animal, translucent, glowing_petals", prompts[0])
+        self.assertEqual(corrected["leaves"][0], "mole_(animal), bone, red clay")
+        self.assertEqual(corrected["leaves"][1], "toad_(animal), yellow_skin, ashes")
+        self.assertEqual(corrected["leaves"][2], "lynx, translucent, glowing_petals")
+
     def test_existing_interactive_override_is_reused_without_prompt(self):
         response = {
             "leaves": ["incoming_mail, envelope"],

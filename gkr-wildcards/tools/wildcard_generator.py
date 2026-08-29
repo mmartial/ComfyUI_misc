@@ -848,12 +848,18 @@ def apply_interactive_tag_overrides(
         print(f"[wildcard-generator] interactive overrides for category {category}", file=sys.stderr)
     leaves = result.get("leaves", [])
     provenance = result.get("provenance", [])
+
+    def tag_expression(tag: str) -> re.Pattern[str]:
+        # A bare invalid tag such as ``animal`` must not match the qualifier in
+        # a different canonical tag such as ``mole_(animal)``.
+        return re.compile(
+            rf"(?<!_\()(?<![A-Za-z0-9_-]){re.escape(tag)}(?![A-Za-z0-9_-])"
+        )
+
     for invalid_tag in missing_tags:
         affected_indexes: set[int] = set()
         if isinstance(leaves, list):
-            expression = re.compile(
-                rf"(?<![A-Za-z0-9_-]){re.escape(invalid_tag)}(?![A-Za-z0-9_-])"
-            )
+            expression = tag_expression(invalid_tag)
             affected_indexes.update(
                 index for index, leaf in enumerate(leaves)
                 if isinstance(leaf, str) and expression.search(leaf)
@@ -880,9 +886,7 @@ def apply_interactive_tag_overrides(
     corrected = dict(result)
     def replace_leaf_tags(leaf: str) -> str:
         for old, new in replacements.items():
-            leaf = re.sub(
-                rf"(?<![A-Za-z0-9_-]){re.escape(old)}(?![A-Za-z0-9_-])", new, leaf,
-            )
+            leaf = tag_expression(old).sub(new, leaf)
         return leaf
 
     corrected["leaves"] = [
