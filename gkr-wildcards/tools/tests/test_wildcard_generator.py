@@ -279,6 +279,62 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertEqual(session.generation_issues[0]["rule"], "trimmed_excess_generated_concepts")
         self.assertEqual(session.generation_issues[0]["removed_concepts"][0]["summary"], "excess")
 
+    def test_requested_count_allows_descriptive_text_before_prompts(self):
+        directives = ["Create 200 complete, highly specific single-image prompts."]
+        self.assertEqual(GENERATOR.requested_count(directives, "spotlight"), 200)
+        self.assertTrue(GENERATOR.has_explicit_count(directives))
+
+    def test_large_category_is_generated_and_aggregated_in_chunks(self):
+        index_module = sys.modules["danbooru_index"]
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        csv_path = root / "tags.csv"
+        index_path = root / "tags.sqlite"
+        csv_path.write_text("name,post_count\ntag_one,1000\ntag_two,900\n", encoding="utf-8")
+        index_module.build_index(csv_path, index_path)
+        index = index_module.DanbooruIndex(index_path)
+        self.addCleanup(index.close)
+        skeleton = self.skeleton("# MODE: tags\ngkr_test:\n  spotlight: []\n")
+        plans = [GENERATOR.CategoryPlan("spotlight", "spotlight", "test", 2, [], True)]
+
+        class FakeSession:
+            def __init__(self):
+                self.args = SimpleNamespace(
+                    batch_categories=3, category_chunk_size=1, retrieval_candidates=5,
+                    content_profile="general", verbose=False, max_category_retries=1,
+                    interactive=False,
+                )
+                self.calls = []
+                self.provenance = {}
+                self.generation_issues = []
+
+            def request(self, name, instruction, items):
+                self.calls.append((name, items))
+                chunk = items[0]["chunk_index"]
+                tag = "tag_one" if chunk == 0 else "tag_two"
+                if name == "concept generation":
+                    return [{"id": "spotlight", "concepts": [{
+                        "summary": f"concept {chunk}", "search_queries": [tag]
+                    }]}]
+                return [{
+                    "id": "spotlight", "leaves": [tag],
+                    "provenance": [{"canonical_tags": [tag], "literal_fallbacks": []}],
+                }]
+
+        session = FakeSession()
+        vocabulary = sys.modules["wildcard_linter"].DanbooruVocabulary({"tag_one", "tag_two"})
+        generated = GENERATOR.generate_categories(
+            session, skeleton, plans, "policy", vocabulary, index, None, ""
+        )
+        self.assertEqual(generated["spotlight"], ["tag_one", "tag_two"])
+        self.assertEqual([name for name, _ in session.calls], [
+            "concept generation", "category generation",
+            "concept generation", "category generation",
+        ])
+        self.assertEqual(session.calls[2][1][0]["avoid_concept_summaries"], ["concept 0"])
+        self.assertEqual(session.calls[3][1][0]["avoid_duplicate_leaves"], ["tag_one"])
+
     def test_invalid_palette_tag_is_reported_and_corrected(self):
         index_module = sys.modules["danbooru_index"]
         temporary = tempfile.TemporaryDirectory()

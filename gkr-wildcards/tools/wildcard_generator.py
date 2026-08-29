@@ -95,6 +95,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--base-url", help="API base URL; defaults to OPENAI_BASE_URL")
     parser.add_argument("--api-key-env", default="OPENAI_API_KEY")
     parser.add_argument("--batch-categories", type=int, default=3)
+    parser.add_argument(
+        "--category-chunk-size", type=int, default=25,
+        help="Maximum concepts/leaves requested per category in one LLM response (default: 25)",
+    )
     parser.add_argument("--max-generation-calls", type=int, default=20)
     parser.add_argument(
         "--max-planner-retries", type=int, default=1,
@@ -199,14 +203,25 @@ def infer_kind(name: str) -> str:
 
 def requested_count(directives: Iterable[str], kind: str) -> int:
     for directive in directives:
-        match = re.search(r"\b(\d{1,4})\s+(?:leaves|items|options|entries|prompts)\b", directive, re.I)
+        match = re.search(
+            r"\b(\d{1,4})\b[^.\n]{0,120}?\b"
+            r"(?:leaves|items|options|entries|prompts|concepts)\b",
+            directive, re.I,
+        )
         if match:
             return int(match.group(1))
     return DEFAULT_COUNTS[kind]
 
 
 def has_explicit_count(directives: Iterable[str]) -> bool:
-    return any(re.search(r"\b\d{1,4}\s+(?:leaves|items|options|entries|prompts)\b", value, re.I) for value in directives)
+    return any(
+        re.search(
+            r"\b\d{1,4}\b[^.\n]{0,120}?\b"
+            r"(?:leaves|items|options|entries|prompts|concepts)\b",
+            value, re.I,
+        )
+        for value in directives
+    )
 
 
 def planner_items(skeleton: Skeleton, args: argparse.Namespace) -> list[dict[str, Any]]:
@@ -522,6 +537,10 @@ def concept_instruction(policy: str) -> str:
 
 def generate_concepts(
     session: Session, skeleton: Skeleton, batch: list[CategoryPlan], policy: str,
+    *, chunk_indexes: dict[str, int] | None = None,
+    chunk_offsets: dict[str, int] | None = None,
+    total_counts: dict[str, int] | None = None,
+    prior_summaries: dict[str, list[str]] | None = None,
 ) -> dict[str, list[dict[str, Any]]]:
     items = []
     for plan in batch:
@@ -529,6 +548,10 @@ def generate_concepts(
         items.append({
             "id": plan.name, "kind": plan.kind, "purpose": plan.purpose,
             "requested_count": plan.count, "dependencies": plan.dependencies,
+            "chunk_index": (chunk_indexes or {}).get(plan.name, 0),
+            "chunk_offset": (chunk_offsets or {}).get(plan.name, 0),
+            "total_requested_count": (total_counts or {}).get(plan.name, plan.count),
+            "avoid_concept_summaries": list((prior_summaries or {}).get(plan.name, [])),
             "content_profile": session.args.content_profile,
             "generator_instructions": skeleton_category.directives if skeleton_category else [],
             "global_generator_instructions": skeleton.global_directives,
@@ -537,7 +560,8 @@ def generate_concepts(
     by_id = {str(item.get("id", "")): item for item in results}
     concepts_by_category: dict[str, list[dict[str, Any]]] = {}
     for plan in batch:
-        raw = by_id.get(plan.name, {}).get("concepts", [])
+        result = by_id.get(plan.name, {})
+        raw = result.get("concepts", [])
         concepts: list[dict[str, Any]] = []
         for item in raw:
             if isinstance(item, str):
@@ -554,14 +578,67 @@ def generate_concepts(
             if summary:
                 concepts.append({"summary": summary, "search_queries": list(dict.fromkeys(queries or [summary]))[:4]})
         unique: list[dict[str, Any]] = []
-        seen: set[str] = set()
+        seen: set[str] = {
+            value.casefold() for value in (prior_summaries or {}).get(plan.name, [])
+        }
         for concept in concepts:
             key = concept["summary"].lower()
             if key not in seen:
                 unique.append(concept)
                 seen.add(key)
-        if len(unique) < plan.count:
-            raise RuntimeError(f"category {plan.name} returned {len(unique)} unique concepts; expected {plan.count}")
+        max_retries = getattr(session.args, "max_category_retries", 1)
+        for retry in range(max_retries + 1):
+            if len(unique) >= plan.count:
+                break
+            if retry >= max_retries:
+                raise RuntimeError(
+                    f"category {plan.name} returned {len(unique)} new unique concepts; expected {plan.count} "
+                    f"for chunk {(chunk_indexes or {}).get(plan.name, 0) + 1}"
+                )
+            log(
+                session.args,
+                f"category {plan.name} returned {len(unique)}/{plan.count} concepts for chunk "
+                f"{(chunk_indexes or {}).get(plan.name, 0) + 1}; corrective retry "
+                f"{retry + 1}/{max_retries}",
+            )
+            correction_item = dict(next(item for item in items if item["id"] == plan.name))
+            correction_item["rejected_response"] = result
+            correction_item["validation_error"] = (
+                f"Return exactly {plan.count} concepts that are distinct from avoid_concept_summaries; "
+                f"the previous response yielded only {len(unique)} usable concepts."
+            )
+            correction_item["correction_attempt"] = retry + 1
+            corrected = session.request(
+                "concept correction",
+                concept_instruction(policy) + "\n\nCORRECTION: Return the full corrected object and obey validation_error.",
+                [correction_item],
+            )
+            result = next(
+                (entry for entry in corrected if str(entry.get("id", "")) == plan.name), {}
+            )
+            raw = result.get("concepts", [])
+            concepts = []
+            for entry in raw if isinstance(raw, list) else []:
+                if isinstance(entry, str):
+                    summary = " ".join(entry.split())
+                    queries = [summary]
+                elif isinstance(entry, dict):
+                    summary = " ".join(str(entry.get("summary", "")).split())
+                    queries = [
+                        " ".join(value.split()) for value in entry.get("search_queries", [])
+                        if isinstance(value, str) and value.strip()
+                    ]
+                else:
+                    continue
+                if summary:
+                    concepts.append({"summary": summary, "search_queries": list(dict.fromkeys(queries or [summary]))[:4]})
+            unique = []
+            seen = {value.casefold() for value in (prior_summaries or {}).get(plan.name, [])}
+            for concept in concepts:
+                key = concept["summary"].casefold()
+                if key not in seen:
+                    unique.append(concept)
+                    seen.add(key)
         if len(unique) > plan.count:
             removed = unique[plan.count:]
             unique = unique[:plan.count]
@@ -641,6 +718,7 @@ def validate_category_response(
     category: str, result: dict[str, Any], expected_count: int,
     namespace: str, dependencies: list[str], allowed_canonical: set[str],
     require_dependencies: bool = True,
+    forbidden_signatures: set[str] | None = None,
 ) -> tuple[list[str], list[dict[str, Any]]]:
     raw = result.get("leaves", [])
     provenance = result.get("provenance", [])
@@ -661,6 +739,15 @@ def validate_category_response(
         errors.append(
             "contains normalized duplicate leaves at positions "
             + ", ".join(normalized_duplicates)
+        )
+    repeated_from_prior = sorted(
+        index for signature, index in signatures.items()
+        if signature in (forbidden_signatures or set())
+    )
+    if repeated_from_prior:
+        errors.append(
+            "duplicates leaves from earlier chunks at positions "
+            + ", ".join(str(index) for index in repeated_from_prior)
         )
     if not isinstance(provenance, list) or not all(isinstance(item, dict) for item in provenance):
         errors.append("provenance must be an array containing one object per leaf")
@@ -825,6 +912,9 @@ def generate_categories(
 ) -> dict[str, list[str]]:
     generated: dict[str, list[str]] = {}
     plan_by_name = {plan.name: plan for plan in plans}
+    chunk_size = getattr(session.args, "category_chunk_size", 25)
+    if chunk_size < 1:
+        raise ValueError("--category-chunk-size must be at least 1")
     for batch in category_batches(plans, session.args.batch_categories):
         routers = [plan for plan in batch if plan.kind == "router"]
         content_batch = [plan for plan in batch if plan.kind != "router"]
@@ -833,120 +923,153 @@ def generate_categories(
             log(session.args, f"generated {plan.name}: {len(generated[plan.name])} router leaves")
         if not content_batch:
             continue
-        concepts_by_category = generate_concepts(session, skeleton, content_batch, policy)
-        retrieve_concepts(
-            concepts_by_category, index, embedding_client, embedding_query_prefix,
-            session.args.retrieval_candidates,
-        )
-        items: list[dict[str, Any]] = []
-        for plan in content_batch:
-            skeleton_category = next((item for item in skeleton.categories if item.name == plan.name), None)
-            dependency_examples = {name: generated.get(name, [])[:3] for name in plan.dependencies}
-            items.append({
-                "id": plan.name, "namespace": skeleton.namespace, "kind": plan.kind,
-                "purpose": plan.purpose, "requested_count": plan.count,
-                "allowed_dependencies": plan.dependencies,
-                "dependency_examples": dependency_examples,
-                "concepts": concepts_by_category[plan.name],
-                "generator_instructions": skeleton_category.directives if skeleton_category else [],
-                "global_generator_instructions": skeleton.global_directives,
-                "content_profile": session.args.content_profile,
-            })
-        results = session.request("category generation", generation_instruction(policy, vocabulary), items)
-        by_id = {str(item.get("id", "")): item for item in results}
-        for plan in content_batch:
-            allowed_canonical = {
-                str(candidate["tag"])
-                for concept in concepts_by_category[plan.name]
-                for candidate in concept.get("candidates", [])
-            }
-            result = by_id.get(plan.name, {})
-            item = next(item for item in items if item["id"] == plan.name)
-            excess_issue: dict[str, Any] | None = None
-            for retry in range(session.args.max_category_retries + 1):
-                result, removed_leaves = trim_excess_category_response(result, plan.count)
-                if removed_leaves:
-                    if excess_issue is None:
+        accumulated_leaves = {plan.name: [] for plan in content_batch}
+        accumulated_provenance = {plan.name: [] for plan in content_batch}
+        accumulated_summaries = {plan.name: [] for plan in content_batch}
+        chunk_index = 0
+        while any(len(accumulated_leaves[plan.name]) < plan.count for plan in content_batch):
+            active_originals = [
+                plan for plan in content_batch if len(accumulated_leaves[plan.name]) < plan.count
+            ]
+            chunk_plans = [
+                CategoryPlan(
+                    plan.name, plan.kind, plan.purpose,
+                    min(chunk_size, plan.count - len(accumulated_leaves[plan.name])),
+                    plan.dependencies,
+                )
+                for plan in active_originals
+            ]
+            offsets = {plan.name: len(accumulated_leaves[plan.name]) for plan in active_originals}
+            total_counts = {plan.name: plan.count for plan in active_originals}
+            indexes = {plan.name: chunk_index for plan in active_originals}
+            concepts_by_category = generate_concepts(
+                session, skeleton, chunk_plans, policy,
+                chunk_indexes=indexes, chunk_offsets=offsets, total_counts=total_counts,
+                prior_summaries=accumulated_summaries,
+            )
+            retrieve_concepts(
+                concepts_by_category, index, embedding_client, embedding_query_prefix,
+                session.args.retrieval_candidates,
+            )
+            items: list[dict[str, Any]] = []
+            for plan in chunk_plans:
+                original = plan_by_name[plan.name]
+                skeleton_category = next((item for item in skeleton.categories if item.name == plan.name), None)
+                dependency_examples = {name: generated.get(name, [])[:3] for name in plan.dependencies}
+                items.append({
+                    "id": plan.name, "namespace": skeleton.namespace, "kind": plan.kind,
+                    "purpose": plan.purpose, "requested_count": plan.count,
+                    "total_requested_count": original.count,
+                    "chunk_index": chunk_index, "chunk_offset": offsets[plan.name],
+                    "allowed_dependencies": plan.dependencies,
+                    "dependency_examples": dependency_examples,
+                    "avoid_duplicate_leaves": list(accumulated_leaves[plan.name]),
+                    "concepts": concepts_by_category[plan.name],
+                    "generator_instructions": skeleton_category.directives if skeleton_category else [],
+                    "global_generator_instructions": skeleton.global_directives,
+                    "content_profile": session.args.content_profile,
+                })
+            results = session.request("category generation", generation_instruction(policy, vocabulary), items)
+            by_id = {str(item.get("id", "")): item for item in results}
+            for plan in chunk_plans:
+                original = plan_by_name[plan.name]
+                accumulated_summaries[plan.name].extend(
+                    concept["summary"] for concept in concepts_by_category[plan.name]
+                )
+                prior_signatures = {
+                    linter.duplicate_leaf_signature(leaf, "tags")
+                    for leaf in accumulated_leaves[plan.name]
+                }
+                allowed_canonical = {
+                    str(candidate["tag"])
+                    for concept in concepts_by_category[plan.name]
+                    for candidate in concept.get("candidates", [])
+                }
+                result = by_id.get(plan.name, {})
+                item = next(item for item in items if item["id"] == plan.name)
+                excess_issue: dict[str, Any] | None = None
+                for retry in range(session.args.max_category_retries + 1):
+                    result, removed_leaves = trim_excess_category_response(result, plan.count)
+                    if removed_leaves:
                         excess_issue = {
                             "category": plan.name,
                             "rule": "trimmed_excess_generated_leaves",
+                            "chunk_index": chunk_index,
                             "expected_count": plan.count,
                             "removed_leaves": removed_leaves,
                         }
                         session.generation_issues.append(excess_issue)
-                    else:
-                        excess_issue["removed_leaves"] = removed_leaves
-                    log(
-                        session.args,
-                        f"category {plan.name} returned excess leaves; deterministically kept the first "
-                        f"{plan.count} and recorded {len(removed_leaves)} removed leaf/leaves for review",
-                    )
-                try:
-                    leaves, provenance = validate_category_response(
-                        plan.name, result, plan.count, skeleton.namespace,
-                        plan.dependencies, allowed_canonical,
-                    )
-                    break
-                except CategoryValidationError as exc:
-                    if retry >= session.args.max_category_retries:
-                        if session.args.interactive and exc.invalid_tags:
-                            result, replacements = apply_interactive_tag_overrides(
-                                plan.name, result, exc.invalid_tags,
-                                existing=session.interactive_overrides.get(plan.name),
-                            )
-                            leaves, provenance = validate_category_response(
-                                plan.name, result, plan.count, skeleton.namespace,
-                                plan.dependencies, allowed_canonical | set(replacements.values()),
-                                require_dependencies=False,
-                            )
-                            vocabulary.tags.update(replacements.values())
-                            session.interactive_overrides.setdefault(plan.name, {}).update(replacements)
-                            session.save_interactive_overrides()
-                            log(
-                                session.args,
-                                f"accepted {len(replacements)} interactive tag override(s) for {plan.name}",
-                            )
-                            if exc.missing_dependencies:
-                                session.generation_issues.append({
-                                    "category": plan.name,
-                                    "rule": "unused_declared_dependencies",
-                                    "missing_dependencies": sorted(exc.missing_dependencies),
-                                })
-                            break
-                        if exc.missing_dependencies and not exc.invalid_tags:
-                            leaves, provenance = validate_category_response(
-                                plan.name, result, plan.count, skeleton.namespace,
-                                plan.dependencies, allowed_canonical,
-                                require_dependencies=False,
-                            )
-                            session.generation_issues.append({
-                                "category": plan.name,
-                                "rule": "unused_declared_dependencies",
-                                "missing_dependencies": sorted(exc.missing_dependencies),
-                            })
-                            log(
-                                session.args,
-                                f"category {plan.name} still omits declared dependencies after retries; "
-                                "continuing with an unresolved review finding",
-                            )
-                            break
-                        raise
-                    log(session.args, f"{exc}; corrective retry {retry + 1}/{session.args.max_category_retries}")
-                    correction_item = dict(item)
-                    correction_item["rejected_response"] = result
-                    correction_item["validation_error"] = str(exc)
-                    correction_item["correction_attempt"] = retry + 1
-                    correction_instruction = generation_instruction(policy, vocabulary) + (
-                        "\n\nCORRECTION: The previous response for this single category was rejected by deterministic "
-                        "validation. Fix every issue reported in validation_error. Use only canonical tags present in the "
-                        "supplied concept candidate palettes, use every allowed dependency at least once across the leaves, "
-                        "keep exactly requested_count unique leaves, and return the full "
-                        "corrected object with matching provenance."
-                    )
-                    corrected = session.request("category correction", correction_instruction, [correction_item])
-                    result = next(
-                        (entry for entry in corrected if str(entry.get("id", "")) == plan.name), {}
-                    )
+                    try:
+                        leaves, provenance = validate_category_response(
+                            plan.name, result, plan.count, skeleton.namespace,
+                            plan.dependencies, allowed_canonical,
+                            require_dependencies=False,
+                            forbidden_signatures=prior_signatures,
+                        )
+                        break
+                    except CategoryValidationError as exc:
+                        if retry >= session.args.max_category_retries:
+                            if session.args.interactive and exc.invalid_tags:
+                                result, replacements = apply_interactive_tag_overrides(
+                                    plan.name, result, exc.invalid_tags,
+                                    existing=session.interactive_overrides.get(plan.name),
+                                )
+                                leaves, provenance = validate_category_response(
+                                    plan.name, result, plan.count, skeleton.namespace,
+                                    plan.dependencies, allowed_canonical | set(replacements.values()),
+                                    require_dependencies=False,
+                                    forbidden_signatures=prior_signatures,
+                                )
+                                vocabulary.tags.update(replacements.values())
+                                session.interactive_overrides.setdefault(plan.name, {}).update(replacements)
+                                session.save_interactive_overrides()
+                                break
+                            raise
+                        log(session.args, f"{exc}; corrective retry {retry + 1}/{session.args.max_category_retries}")
+                        correction_item = dict(item)
+                        correction_item["rejected_response"] = result
+                        correction_item["validation_error"] = str(exc)
+                        correction_item["correction_attempt"] = retry + 1
+                        corrected = session.request(
+                            "category correction",
+                            generation_instruction(policy, vocabulary) +
+                            "\n\nCORRECTION: Fix every issue in validation_error and return the full corrected object. "
+                            "Keep exactly requested_count unique leaves and do not repeat avoid_duplicate_leaves.",
+                            [correction_item],
+                        )
+                        result = next(
+                            (entry for entry in corrected if str(entry.get("id", "")) == plan.name), {}
+                        )
+                accumulated_leaves[plan.name].extend(leaves)
+                accumulated_provenance[plan.name].extend(provenance)
+                log(
+                    session.args,
+                    f"generated {plan.name} chunk {chunk_index + 1}: {len(leaves)} leaves "
+                    f"({len(accumulated_leaves[plan.name])}/{original.count})",
+                )
+            chunk_index += 1
+
+        for plan in content_batch:
+            leaves = accumulated_leaves[plan.name]
+            provenance = accumulated_provenance[plan.name]
+            if len(leaves) != plan.count:
+                raise RuntimeError(f"category {plan.name} aggregated {len(leaves)} leaves; expected {plan.count}")
+            used_dependencies = {
+                category for leaf in leaves for namespace, category in REFERENCE_RE.findall(leaf)
+                if namespace == skeleton.namespace
+            }
+            missing_dependencies = sorted(set(plan.dependencies) - used_dependencies)
+            if missing_dependencies:
+                session.generation_issues.append({
+                    "category": plan.name,
+                    "rule": "unused_declared_dependencies",
+                    "missing_dependencies": missing_dependencies,
+                })
+                log(
+                    session.args,
+                    f"category {plan.name} omits declared dependencies after aggregation; "
+                    "continuing with an unresolved review finding",
+                )
             generated[plan.name] = leaves
             session.provenance[plan.name] = provenance
             log(session.args, f"generated {plan.name}: {len(leaves)} leaves")
@@ -1041,6 +1164,7 @@ def main() -> int:
             args.max_category_depth < 1 or args.max_added_categories < 0
             or args.max_generation_calls < 1 or args.max_category_retries < 0
             or args.max_planner_retries < 0
+            or args.category_chunk_size < 1
         ):
             raise ValueError(
                 "generation limits must be positive (added-category, planner-retry, and category-retry limits may be zero)"

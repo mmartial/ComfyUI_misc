@@ -65,6 +65,7 @@ Useful limits and controls:
 
 ```text
 --batch-categories 3
+--category-chunk-size 25
 --max-generation-calls 20
 --max-planner-retries 1
 --max-category-retries 1
@@ -86,6 +87,16 @@ When a generated category fails deterministic validation, the generator reports
 the exact invalid tags or references and retries only that category. The default
 is one corrective retry; use `--max-category-retries 0` to disable it. Corrective
 requests count toward `--max-generation-calls`.
+
+Large categories are generated autonomously in chunks controlled by
+`--category-chunk-size` (25 by default). Each chunk has a distinct cache key,
+receives the earlier concept summaries and leaves as exclusions, and is checked
+for duplicates against all preceding chunks. The generator aggregates the
+chunks under the original category, verifies the final requested count, and
+checks dependency use across the complete category. Smaller categories still
+use a single chunk. Increase `--max-generation-calls` for very large files;
+concept and leaf generation normally require two calls per chunk-round, plus
+planner, correction, review, and repair calls.
 
 Invalid plans also receive bounded corrective retries before leaf generation.
 The planner receives the exact graph-validation error and its rejected plan.
@@ -242,6 +253,7 @@ OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
   --base-url http://localhost:11434/v1 \
   --model gemma4:cloud \
   --max-planner-retries 3 \
+  --category-chunk-size 25 \
   --max-category-retries 3 \
   --max-generation-calls 100 \
   --interactive \
