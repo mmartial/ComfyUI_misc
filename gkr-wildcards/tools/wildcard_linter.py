@@ -217,6 +217,10 @@ class CanonicalTagRetriever:
         return len(unique)
 
     def candidates(self, value: str, limit: int) -> list[str]:
+        return [result.tag for result in self.candidate_results(value, limit)]
+
+    def candidate_results(self, value: str, limit: int) -> list[Any]:
+        """Return ranked vocabulary-backed results, retaining scores for repair decisions."""
         vector = None
         if self.embedding_client is not None:
             vector = self.vector_cache.get(value)
@@ -230,7 +234,7 @@ class CanonicalTagRetriever:
                     self.embedding_client = None
                     vector = None
         results = self.index.hybrid_search(value, vector, max(limit * 2, 10))
-        return [result.tag for result in results if result.tag in self.vocabulary.tags][:limit]
+        return [result for result in results if result.tag in self.vocabulary.tags][:limit]
 
 
 def parse_args() -> argparse.Namespace:
@@ -287,6 +291,7 @@ Repair behavior:
         help="Allow canonical_literal_concept warnings to join the normal --fix-severity selection; requires --canonical-literal-review",
     )
     parser.add_argument("--fix-manifest", type=Path, help="Write machine-readable proposed, accepted, rejected, and unresolved fix details as JSON")
+    parser.add_argument("--max-fix-retries", type=int, default=2, metavar="COUNT", help="Fresh corrective LLM attempts after a proposed rewrite fails deterministic validation (default: 2; use 0 for one-shot behavior)")
     parser.add_argument("--skip-fix-verification", action="store_true", help="Skip the final LLM semantic-preservation check (not recommended)")
     parser.add_argument("--model", help="Chat model name. With --llm, omission falls back to OPENAI_MODEL and fails if neither is set")
     parser.add_argument("--base-url", help="OpenAI-compatible API base URL. With --llm, omission falls back to OPENAI_BASE_URL")
@@ -1504,6 +1509,7 @@ def llm_suggest_fixes(
                 "category": leaf.category,
                 "text": leaf.text,
                 "issues": [{"rule": finding.rule, "message": finding.message, "evidence": finding.evidence} for finding in issues[leaf.uid]],
+                "repair_policy_version": 2,
             }
             if args.canonical_tag_suggestions and danbooru_vocabulary is not None:
                 item["canonical_tag_guidance"] = canonical_tag_guidance(
@@ -1529,7 +1535,7 @@ def llm_suggest_fixes(
             "candidates as review options rather than automatic replacements: combine canonical components when that preserves the full "
             "visible meaning, and retain the literal phrase when none does. "
             "Return JSON only as an array with exactly one object per input ID containing id, suggested_rewrite, and rationale. "
-            "Do not modify files and do not omit IDs."
+            "Do not modify files and do not omit IDs. Repair policy version 2."
         )
         trace_event(trace_path, {"event": "fix_request", "batch": batch_number, "items": items})
         reviewed = llm_json_request(
@@ -1560,6 +1566,81 @@ def llm_suggest_fixes(
                 "missing_ids": sorted(expected - received),
                 "action": "kept_original_unresolved",
             })
+    return suggestions, rationales
+
+
+def llm_correct_rejected_fixes(
+    leaves: list[Leaf], findings: list[Finding], previous: dict[str, str],
+    rejections: dict[str, list[str]], args: argparse.Namespace, retry: int,
+    trace_path: Path | None = None, danbooru_vocabulary: DanbooruVocabulary | None = None,
+    tags_rules: dict[str, Any] | None = None,
+    canonical_retriever: CanonicalTagRetriever | None = None,
+) -> tuple[dict[str, str], dict[str, str]]:
+    """Request fresh alternatives using exact deterministic rejection feedback."""
+    if not rejections:
+        return {}, {}
+    model = args.model or os.getenv("OPENAI_MODEL")
+    base_url = (args.base_url or os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1").rstrip("/")
+    api_key = os.getenv(args.api_key_env)
+    if not model or not api_key:
+        raise ValueError("model and API key are required for corrective fix suggestions")
+    endpoint = base_url if base_url.endswith("/chat/completions") else f"{base_url}/chat/completions"
+    leaf_by_id = {leaf.uid: leaf for leaf in leaves}
+    findings_by_id: dict[str, list[Finding]] = {}
+    for finding in findings:
+        if finding.leaf_id in rejections:
+            findings_by_id.setdefault(finding.leaf_id, []).append(finding)
+    targets = [leaf_by_id[uid] for uid in rejections if uid in leaf_by_id]
+    suggestions: dict[str, str] = {}
+    rationales: dict[str, str] = {}
+    for offset in range(0, len(targets), args.batch_size):
+        batch = targets[offset:offset + args.batch_size]
+        batch_number = offset // args.batch_size + 1
+        batch_total = (len(targets) + args.batch_size - 1) // args.batch_size
+        verbose(args, f"fix correction retry {retry}/{args.max_fix_retries}, batch {batch_number}/{batch_total}: {len(batch)} leaves")
+        items = []
+        for leaf in batch:
+            item: dict[str, Any] = {
+                "id": leaf.uid, "mode": leaf.mode, "category": leaf.category,
+                "original": leaf.text, "rejected_rewrite": previous.get(leaf.uid, ""),
+                "rejection_reasons": rejections[leaf.uid],
+                "issues": [
+                    {"rule": finding.rule, "message": finding.message, "evidence": finding.evidence}
+                    for finding in findings_by_id.get(leaf.uid, [])
+                ],
+                "repair_policy_version": 2,
+            }
+            if args.canonical_tag_suggestions and danbooru_vocabulary is not None:
+                item["canonical_tag_guidance"] = canonical_tag_guidance(
+                    leaf, danbooru_vocabulary, args.canonical_tag_candidate_count,
+                    args.canonical_tag_style, (tags_rules or {}).get("canonical_composition"),
+                    canonical_retriever,
+                )
+            items.append(item)
+        instruction = (
+            "The previous wildcard rewrite was rejected. Produce one different complete-leaf repair per input. "
+            "Obey every rejection reason exactly while fixing the listed issues and preserving every valid visible fact, "
+            "wildcard reference, weight, relationship, alternative, subject count, and tags/narrative mode. Never split a "
+            "multiword visible concept into independent singleton tags unless the evidence supplies a meaning-preserving "
+            "compound canonical candidate. Candidate tags are options, not mandatory substitutions. If no candidate preserves "
+            "the concept, retain a compact literal phrase. Return JSON only as an array with exactly one object per ID containing "
+            "id, suggested_rewrite, and rationale. Repair policy version 2."
+        )
+        trace_event(trace_path, {"event": "fix_correction_request", "retry": retry, "batch": batch_number, "items": items})
+        reviewed = llm_json_request(
+            args=args, endpoint=endpoint, api_key=api_key, model=model,
+            instruction=instruction, items=items,
+            call_name=f"fix correction retry {retry}", batch_number=batch_number,
+            batch_total=batch_total, offset=offset, trace_path=trace_path,
+            response_event="fix_correction_response",
+        )
+        expected = {leaf.uid for leaf in batch}
+        for item in reviewed:
+            uid = str(item.get("id", ""))
+            rewrite = " ".join(str(item.get("suggested_rewrite", "")).split())
+            if uid in expected and rewrite and rewrite != leaf_by_id[uid].text:
+                suggestions[uid] = rewrite
+                rationales[uid] = " ".join(str(item.get("rationale", "")).split())
     return suggestions, rationales
 
 
@@ -1934,12 +2015,17 @@ def markdown_highlight_source_terms(message: str, leaf: Leaf | None) -> str:
 def render(
     findings: list[Finding], leaves: list[Leaf], fmt: str, color: bool = False,
     fix_attempted: bool = False, fixed_leaf_ids: set[str] | None = None,
+    proposed_suggestions: dict[str, str] | None = None,
+    rejected_suggestions: dict[str, list[str]] | None = None,
 ) -> str:
     counts = {severity: sum(f.severity == severity for f in findings) for severity in ("error", "warning")}
     files = len({leaf.file for leaf in leaves})
     categories = len({(leaf.namespace, leaf.category) for leaf in leaves})
     leaf_by_id = {leaf.uid: leaf for leaf in leaves}
     fixed_leaf_ids = fixed_leaf_ids or set()
+    proposed_suggestions = proposed_suggestions or {}
+    rejected_suggestions = rejected_suggestions or {}
+    affected_leaf_ids = {finding.leaf_id for finding in findings if finding.leaf_id}
     unresolved_count = sum(
         fix_attempted and (not finding.leaf_id or finding.leaf_id not in fixed_leaf_ids)
         for finding in findings
@@ -1963,8 +2049,14 @@ def render(
     if fmt == "markdown":
         lines = ["# Wildcard lint report", "", f"Files: {files} · Categories: {categories} · Leaves: {len(leaves)} · Errors: {counts['error']} · Warnings: {counts['warning']}"]
         if fix_attempted:
-            lines.extend(["", f"Unresolved after fixed-output generation: {unresolved_count}. Search this report for `[UNRESOLVED]`."])
+            lines.extend([
+                "", f"Unresolved after fixed-output generation: {unresolved_count} findings across "
+                f"{len(affected_leaf_ids - fixed_leaf_ids)} leaves. Search this report for `[UNRESOLVED]`.",
+                "", f"Repair summary: {len(proposed_suggestions)} leaves received proposals · "
+                f"{len(fixed_leaf_ids)} accepted · {len(rejected_suggestions)} rejected.",
+            ])
         lines.append("")
+        rendered_rejections: set[str] = set()
         for finding in findings:
             location = f"{finding.file}:{finding.line}" if finding.line else finding.file
             leaf = leaf_by_id.get(finding.leaf_id)
@@ -2010,6 +2102,13 @@ def render(
                 lines.extend(["", fix_label, "", finding.suggestion])
                 if leaf:
                     lines.extend(["", "```diff", f"- {leaf.text}", f"+ {finding.suggestion}", "```"])
+            elif finding.leaf_id in rejected_suggestions and finding.leaf_id not in rendered_rejections:
+                rendered_rejections.add(finding.leaf_id)
+                lines.extend(["", "**Rejected automatic repair:**", ""])
+                proposed = proposed_suggestions.get(finding.leaf_id, "")
+                if proposed:
+                    lines.extend(["```diff", f"- {leaf.text if leaf else ''}", f"+ {proposed}", "```", ""])
+                lines.extend(f"- {reason}" for reason in rejected_suggestions[finding.leaf_id])
         return "\n".join(lines) + "\n"
     lines = [f"Scanned {files} file(s), {categories} categories, {len(leaves)} leaves: {counts['error']} error(s), {counts['warning']} warning(s)"]
     if fix_attempted:
@@ -2515,6 +2614,133 @@ def canonical_tag_findings(
     return findings
 
 
+DETERMINISTIC_CANONICAL_STATUSES = {
+    "exact_normalized_match", "unique_alias", "separator_normalized_match",
+    "shared_head_composition", "contained_canonical_spans",
+}
+DETERMINISTIC_CANONICAL_RULES = {
+    "canonical_tag_normalization", "canonical_tag_alias",
+    "canonical_tag_separator_normalization", "canonical_tag_composition",
+    "canonical_tag_contained_span",
+}
+
+
+def deterministic_canonical_repairs(
+    leaves: list[Leaf], findings: list[Finding],
+) -> tuple[dict[str, str], set[tuple[str, str, str]]]:
+    """Combine only unambiguous whole-item canonical rewrites for each leaf."""
+    leaf_by_id = {leaf.uid: leaf for leaf in leaves}
+    rewrites: dict[str, str] = {}
+    resolved: set[tuple[str, str, str]] = set()
+    for finding in findings:
+        if (
+            finding.rule not in DETERMINISTIC_CANONICAL_RULES
+            or finding.leaf_id not in leaf_by_id or not finding.evidence
+        ):
+            continue
+        try:
+            guidance = json.loads(finding.evidence)
+        except (TypeError, json.JSONDecodeError):
+            continue
+        status = guidance.get("status")
+        candidates = [str(candidate) for candidate in guidance.get("candidates", []) if str(candidate)]
+        unmatched = guidance.get("unmatched_words", [])
+        if status not in DETERMINISTIC_CANONICAL_STATUSES or not candidates:
+            continue
+        if status in {"shared_head_composition", "contained_canonical_spans"} and unmatched:
+            continue
+        source_item = str(guidance.get("input", "")).strip()
+        if not source_item:
+            continue
+        weight = WEIGHT_RE.fullmatch(source_item)
+        if weight and len(candidates) != 1:
+            continue
+        replacement = f"({candidates[0]}:{weight.group(2)})" if weight else ", ".join(candidates)
+        current = rewrites.get(finding.leaf_id, leaf_by_id[finding.leaf_id].text)
+        parts = split_top_level_commas(current)
+        matching = [index for index, part in enumerate(parts) if part.strip() == source_item]
+        if len(matching) != 1:
+            continue
+        index = matching[0]
+        leading = parts[index][:len(parts[index]) - len(parts[index].lstrip())]
+        parts[index] = leading + replacement
+        rewritten = ",".join(parts)
+        if sorted(reference_tokens(current)) != sorted(reference_tokens(rewritten)):
+            continue
+        rewrites[finding.leaf_id] = rewritten
+        resolved.add((finding.leaf_id, finding.rule, source_item))
+    return rewrites, resolved
+
+
+def leaves_with_rewrites(leaves: list[Leaf], rewrites: dict[str, str]) -> list[Leaf]:
+    """Return an inventory view containing staged leaf text without touching disk."""
+    return [
+        Leaf(
+            leaf.uid, leaf.file, leaf.namespace, leaf.category, leaf.index, leaf.line,
+            rewrites.get(leaf.uid, leaf.text),
+            tuple(REFERENCE_RE.findall(rewrites.get(leaf.uid, leaf.text))), leaf.mode,
+        )
+        for leaf in leaves
+    ]
+
+
+def canonical_finding_key(finding: Finding) -> tuple[str, str, str] | None:
+    if not finding.evidence:
+        return None
+    try:
+        evidence = json.loads(finding.evidence)
+    except (TypeError, json.JSONDecodeError):
+        return None
+    source_item = str(evidence.get("input", "")).strip()
+    return (finding.leaf_id, finding.rule, source_item) if source_item else None
+
+
+def validate_deterministic_canonical_repairs(
+    leaves: list[Leaf], rewrites: dict[str, str], resolved: set[tuple[str, str, str]],
+    rules: dict[str, Any], tags_rules: dict[str, Any], vocabulary: DanbooruVocabulary,
+    candidate_count: int = 5, output_style: str = "underscore",
+    retriever: CanonicalTagRetriever | None = None,
+) -> tuple[dict[str, str], set[tuple[str, str, str]], dict[str, list[str]]]:
+    """Re-lint staged deterministic leaves and retain only locally clean rewrites."""
+    leaf_by_id = {leaf.uid: leaf for leaf in leaves}
+    accepted: dict[str, str] = {}
+    rejected: dict[str, list[str]] = {}
+    accepted_resolved: set[tuple[str, str, str]] = set()
+    for uid, rewrite in rewrites.items():
+        original = leaf_by_id[uid]
+        candidate = leaves_with_rewrites([original], {uid: rewrite})[0]
+        baseline = (
+            pattern_findings([original], rules) + tags_mode_findings([original], tags_rules)
+            + canonical_tag_findings(
+                [original], vocabulary, candidate_count, output_style,
+                tags_rules.get("canonical_composition"), retriever,
+            )
+        )
+        post = (
+            pattern_findings([candidate], rules) + tags_mode_findings([candidate], tags_rules)
+            + canonical_tag_findings(
+                [candidate], vocabulary, candidate_count, output_style,
+                tags_rules.get("canonical_composition"), retriever,
+            )
+        )
+        baseline_rules = {finding.rule for finding in baseline}
+        introduced = sorted({finding.rule for finding in post if finding.rule not in baseline_rules})
+        targeted = {key for key in resolved if key[0] == uid}
+        remaining_keys = {key for finding in post if (key := canonical_finding_key(finding))}
+        remaining = targeted & remaining_keys
+        reasons = []
+        if introduced:
+            reasons.append("new deterministic finding: " + ", ".join(introduced))
+        if remaining:
+            reasons.append("targeted canonical repair remains unresolved")
+        if reasons:
+            rejected[uid] = reasons
+        else:
+            accepted[uid] = rewrite
+            accepted_resolved.update(targeted)
+    return accepted, accepted_resolved, rejected
+
+
 LITERAL_CONCEPT_STOPWORDS = {
     "about", "above", "across", "after", "against", "along", "among", "around",
     "behind", "below", "beneath", "beside", "between", "during", "from", "inside",
@@ -2564,9 +2790,29 @@ def canonical_literal_concept_findings(
                 if len(word) >= 5 and word not in LITERAL_CONCEPT_STOPWORDS
                 and normalize_canonical_tag(word) not in vocabulary
             ]
-            candidates = list(dict.fromkeys(
-                retriever.candidates(raw, max(candidate_count, 1))
-            ))[:candidate_count]
+            # A phrase composed entirely of known tags is a valid literal composition under
+            # the prefer policy. Reporting it merely invites destructive word atomization.
+            if not unknown:
+                continue
+            if hasattr(retriever, "candidate_results"):
+                ranked = retriever.candidate_results(raw, max(candidate_count, 1))
+                candidate_records = [
+                    {"tag": item.tag, "score": round(float(item.score), 4), "post_count": item.post_count}
+                    for item in ranked
+                ]
+                raw_candidates = [item.tag for item in ranked]
+            else:
+                raw_candidates = retriever.candidates(raw, max(candidate_count, 1))
+                candidate_records = [{"tag": tag} for tag in raw_candidates]
+            candidates = list(dict.fromkeys(raw_candidates))[:candidate_count]
+            head = next((word for word in reversed(words) if word not in LITERAL_CONCEPT_STOPWORDS), "")
+            relevant = [
+                candidate for candidate in candidates
+                if head in normalize_canonical_tag(candidate).split("_")
+                or canonical_compound_component(head, normalize_canonical_tag(candidate))
+            ]
+            if not relevant:
+                continue
             if not candidates:
                 continue
             rendered_known = [render_canonical_tag(tag, output_style) for tag in known]
@@ -2577,6 +2823,8 @@ def canonical_literal_concept_findings(
                 "known_canonical_components": rendered_known,
                 "unknown_words": unknown,
                 "candidates": rendered_candidates,
+                "ranked_candidates": candidate_records,
+                "meaning_preserving_candidates": [render_canonical_tag(tag, output_style) for tag in relevant],
                 "instruction": (
                     "Use candidates only when they preserve the complete visible concept; combine multiple "
                     "canonical components when appropriate, otherwise retain the literal phrase."
@@ -2890,6 +3138,8 @@ def main() -> int:
             raise ValueError("--batch-size must be at least 1")
         if args.verification_batch_size < 1:
             raise ValueError("--verification-batch-size must be at least 1")
+        if args.max_fix_retries < 0:
+            raise ValueError("--max-fix-retries must be at least 0")
         if args.timeout < 1:
             raise ValueError("--timeout must be at least 1 second")
         if args.llm_cache_max_age_minutes is not None and args.llm_cache_max_age_minutes <= 0:
@@ -3029,13 +3279,45 @@ def main() -> int:
             findings.extend(llm_results)
             verbose(args, f"LLM review produced {len(llm_results)} finding(s)")
             if args.suggest_fixes:
+                deterministic_suggestions, deterministically_resolved = deterministic_canonical_repairs(
+                    leaves, findings,
+                )
+                if deterministic_suggestions and danbooru_vocabulary is not None:
+                    deterministic_suggestions, deterministically_resolved, deterministic_rejections = (
+                        validate_deterministic_canonical_repairs(
+                            leaves, deterministic_suggestions, deterministically_resolved,
+                            rules, tags_rules, danbooru_vocabulary,
+                            args.canonical_tag_candidate_count, args.canonical_tag_style,
+                            canonical_retriever,
+                        )
+                    )
+                    for uid, reasons in deterministic_rejections.items():
+                        verbose(args, f"rejected deterministic canonical repair for {uid}: {'; '.join(reasons)}")
+                working_leaves = leaves_with_rewrites(leaves, deterministic_suggestions)
+                repair_findings = [
+                    finding for finding in findings
+                    if canonical_finding_key(finding) not in deterministically_resolved
+                ]
+                suggestions = dict(deterministic_suggestions)
+                proposed_suggestions = dict(deterministic_suggestions)
+                fix_rationales.update({
+                    uid: "unambiguous canonical repair applied deterministically"
+                    for uid in deterministic_suggestions
+                })
+                verbose(
+                    args,
+                    f"staged {len(deterministic_suggestions)} leaf repair(s) resolving "
+                    f"{len(deterministically_resolved)} unambiguous canonical finding(s)",
+                )
                 verbose(args, "requesting potential fixes for found leaf issues")
-                proposed_suggestions, fix_rationales = llm_suggest_fixes(
-                    leaves, findings, args, trace_path, danbooru_vocabulary, tags_rules,
+                llm_proposed, llm_rationales = llm_suggest_fixes(
+                    working_leaves, repair_findings, args, trace_path, danbooru_vocabulary, tags_rules,
                     canonical_retriever,
                 )
-                suggestions, rejected_suggestions = validate_suggestions(
-                    leaves, proposed_suggestions, findings, rules, tags_rules,
+                proposed_suggestions.update(llm_proposed)
+                fix_rationales.update(llm_rationales)
+                llm_accepted, rejected_suggestions = validate_suggestions(
+                    working_leaves, llm_proposed, repair_findings, rules, tags_rules,
                     danbooru_vocabulary, args.canonical_tag_candidate_count, args.canonical_tag_style,
                     canonical_retriever,
                     (
@@ -3044,12 +3326,48 @@ def main() -> int:
                     ),
                     args.semantic_duplicate_threshold if args.semantic_duplicates else None,
                 )
-                verbose(args, f"deterministic validation accepted {len(suggestions)} of {len(proposed_suggestions)} potential fixes")
+                verbose(args, f"deterministic validation accepted {len(llm_accepted)} of {len(llm_proposed)} LLM fixes")
+                for retry in range(1, args.max_fix_retries + 1):
+                    retry_targets = {
+                        uid: reasons for uid, reasons in rejected_suggestions.items()
+                        if uid not in llm_accepted
+                    }
+                    if not retry_targets:
+                        break
+                    corrected, corrected_rationales = llm_correct_rejected_fixes(
+                        working_leaves, repair_findings, proposed_suggestions, retry_targets, args, retry,
+                        trace_path, danbooru_vocabulary, tags_rules, canonical_retriever,
+                    )
+                    if not corrected:
+                        verbose(args, f"fix correction retry {retry}/{args.max_fix_retries} returned no usable alternatives")
+                        continue
+                    proposed_suggestions.update(corrected)
+                    fix_rationales.update(corrected_rationales)
+                    retry_accepted, retry_rejected = validate_suggestions(
+                        working_leaves, corrected, repair_findings, rules, tags_rules,
+                        danbooru_vocabulary, args.canonical_tag_candidate_count,
+                        args.canonical_tag_style, canonical_retriever,
+                        (
+                            canonical_retriever.embedding_client
+                            if args.semantic_duplicates and canonical_retriever is not None else None
+                        ),
+                        args.semantic_duplicate_threshold if args.semantic_duplicates else None,
+                    )
+                    llm_accepted.update(retry_accepted)
+                    for uid in retry_accepted:
+                        rejected_suggestions.pop(uid, None)
+                    rejected_suggestions.update(retry_rejected)
+                    verbose(
+                        args,
+                        f"fix correction retry {retry}/{args.max_fix_retries} accepted "
+                        f"{len(retry_accepted)} of {len(corrected)} alternatives",
+                    )
                 if not args.skip_fix_verification:
-                    suggestions, semantic_rejections = llm_verify_fixes(
-                        leaves, suggestions, findings, args, trace_path
+                    llm_accepted, semantic_rejections = llm_verify_fixes(
+                        working_leaves, llm_accepted, repair_findings, args, trace_path
                     )
                     rejected_suggestions.update(semantic_rejections)
+                suggestions.update(llm_accepted)
                 for finding in findings:
                     if finding.leaf_id in suggestions:
                         finding.suggestion = suggestions[finding.leaf_id]
@@ -3069,6 +3387,8 @@ def main() -> int:
             findings, leaves, args.format, use_color,
             fix_attempted=bool(args.fixed_output and args.llm and args.suggest_fixes),
             fixed_leaf_ids=set(suggestions),
+            proposed_suggestions=proposed_suggestions,
+            rejected_suggestions=rejected_suggestions,
         )
         if audits and args.include_post_prompt_report:
             report = combine_reports(report, audits, args.format)

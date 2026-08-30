@@ -74,7 +74,7 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertFalse(LINTER.canonical_compound_component("stained", "stain"))
         self.assertTrue(LINTER.canonical_compound_component("biodome", "dome"))
 
-    def test_literal_review_searches_complete_phrase_without_known_components(self):
+    def test_literal_review_suppresses_candidates_without_compatible_noun_head(self):
         vocabulary = LINTER.DanbooruVocabulary({"sitting", "railroad_tracks", "seat"})
         leaf = LINTER.Leaf(
             "vehicle", "test.yaml", "gkr", "vehicle_spotlight", 0, 10,
@@ -97,10 +97,21 @@ class WildcardLinterTests(unittest.TestCase):
             [leaf], vocabulary, retriever, candidate_count=5,
         )
         self.assertEqual(retriever.requests, ["strapped in", "magnetic rails"])
-        self.assertEqual(len(findings), 2)
+        self.assertEqual(findings, [])
+
+    def test_literal_review_suppresses_composition_of_known_tags(self):
+        vocabulary = LINTER.DanbooruVocabulary({"spandex", "suit", "business_suit"})
+        leaf = LINTER.Leaf(
+            "known", "test.yaml", "gkr", "archetype", 0, 10,
+            "1other, spandex suit", (), "tags",
+        )
+
+        class FakeRetriever:
+            def candidates(self, value, limit):
+                raise AssertionError("known compositions should not require retrieval")
+
         self.assertEqual(
-            [json.loads(finding.evidence)["candidates"] for finding in findings],
-            [["sitting", "seat"], ["railroad_tracks"]],
+            LINTER.canonical_literal_concept_findings([leaf], vocabulary, FakeRetriever()), []
         )
 
     def test_compact_canonical_relationship_compositions_are_recognized(self):
@@ -408,6 +419,38 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertEqual(suggestions, {leaves[0].uid: "first repaired token"})
         self.assertEqual(rationales, {leaves[0].uid: "fixed"})
         self.assertNotIn(leaves[1].uid, suggestions)
+
+    def test_corrective_fix_request_includes_validator_feedback(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  subject:\n    - bone armor\n"
+        )
+        leaf = leaves[0]
+        finding = LINTER.Finding(
+            "warning", "canonical_literal_concept", "review", leaf.file, leaf.line,
+            leaf.category, leaf.uid,
+        )
+        captured = {}
+        original_request = LINTER.llm_json_request
+        self.addCleanup(setattr, LINTER, "llm_json_request", original_request)
+
+        def fake_request(**kwargs):
+            captured.update(kwargs)
+            return [{"id": leaf.uid, "suggested_rewrite": "plate_armor", "rationale": "compound"}]
+
+        LINTER.llm_json_request = fake_request
+        fix_args = SimpleNamespace(
+            model="test", base_url="http://localhost:11434/v1", api_key_env="PATH",
+            canonical_tag_suggestions=False, canonical_tag_candidate_count=5,
+            canonical_tag_style="underscore", batch_size=20, max_fix_retries=2,
+            verbose=False,
+        )
+        suggestions, _ = LINTER.llm_correct_rejected_fixes(
+            leaves, [finding], {leaf.uid: "bone, armor"},
+            {leaf.uid: ["compound relationship lost"]}, fix_args, 1,
+        )
+        self.assertEqual(suggestions[leaf.uid], "plate_armor")
+        self.assertEqual(captured["items"][0]["repair_policy_version"], 2)
+        self.assertIn("compound relationship lost", captured["items"][0]["rejection_reasons"])
 
     def test_exact_canonical_item_is_supplied_to_visual_review(self):
         leaves, _, _ = self.inventory(
@@ -918,6 +961,50 @@ class WildcardLinterTests(unittest.TestCase):
         findings = LINTER.canonical_tag_findings([leaf], vocabulary, 5, "underscore", policy)
         self.assertEqual(findings[0].rule, "canonical_tag_composition")
         self.assertIn("glowing_eye, red_eyes", findings[0].message)
+
+    def test_deterministic_canonical_repairs_combine_safe_items_per_leaf(self):
+        vocabulary = LINTER.DanbooruVocabulary(
+            {"grey_suit", "high_contrast", "glowing_flower", "blue_flower"},
+            aliases={"gray_suit": {"grey_suit"}},
+        )
+        policy = {"enabled": True, "minimum_matches": 2, "allow_inflection_match": True}
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1,
+            "gray_suit, high-contrast, glowing blue flower", (), "tags",
+        )
+        findings = LINTER.canonical_tag_findings([leaf], vocabulary, 5, "underscore", policy)
+        rewrites, resolved = LINTER.deterministic_canonical_repairs([leaf], findings)
+        self.assertEqual(
+            rewrites["id"], "grey_suit, high_contrast, glowing_flower, blue_flower"
+        )
+        self.assertEqual(len(resolved), 3)
+
+    def test_deterministic_canonical_repairs_preserve_single_candidate_weight(self):
+        vocabulary = LINTER.DanbooruVocabulary({"grey_suit"})
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1, "(grey suit:1.2), standing", (), "tags",
+        )
+        findings = LINTER.canonical_tag_findings([leaf], vocabulary)
+        rewrites, _ = LINTER.deterministic_canonical_repairs([leaf], findings)
+        self.assertEqual(rewrites["id"], "(grey_suit:1.2), standing")
+
+        accepted, accepted_resolved, rejected = LINTER.validate_deterministic_canonical_repairs(
+            [leaf], rewrites, LINTER.deterministic_canonical_repairs([leaf], findings)[1],
+            self.rules, self.tags_rules, vocabulary,
+        )
+        self.assertEqual(accepted, rewrites)
+        self.assertTrue(accepted_resolved)
+        self.assertEqual(rejected, {})
+
+    def test_deterministic_canonical_repairs_leave_partial_contained_span_for_review(self):
+        vocabulary = LINTER.DanbooruVocabulary({"through_window"})
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1, "looking through_window", (), "tags",
+        )
+        findings = LINTER.canonical_tag_findings([leaf], vocabulary)
+        rewrites, resolved = LINTER.deterministic_canonical_repairs([leaf], findings)
+        self.assertEqual(rewrites, {})
+        self.assertEqual(resolved, set())
 
     def test_canonical_rewrite_must_resolve_targeted_issue(self):
         vocabulary = LINTER.DanbooruVocabulary({"holding_book"}, {"holding_book": 500}, {})
@@ -1440,6 +1527,25 @@ class WildcardLinterTests(unittest.TestCase):
             "1other, oversized_clothes, hoodie", [finding]
         )
         self.assertEqual(issues, [])
+
+    def test_markdown_report_explains_rejected_leaf_repair_once(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  archetype:\n    - bone armor, tribal paint\n"
+        )
+        leaf = leaves[0]
+        findings = [
+            LINTER.Finding("warning", "canonical_literal_concept", phrase, leaf.file, leaf.line,
+                           leaf.category, leaf.uid)
+            for phrase in ("bone armor", "tribal paint")
+        ]
+        markdown = LINTER.render(
+            findings, leaves, "markdown", fix_attempted=True,
+            proposed_suggestions={leaf.uid: "bone, armor, tribal, paint"},
+            rejected_suggestions={leaf.uid: ["compound relationship lost"]},
+        )
+        self.assertIn("2 findings across 1 leaves", markdown)
+        self.assertEqual(markdown.count("**Rejected automatic repair:**"), 1)
+        self.assertIn("compound relationship lost", markdown)
 
     def test_validation_rejects_new_dangling_relation(self):
         leaves, _, findings = self.inventory(

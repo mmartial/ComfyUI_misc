@@ -541,13 +541,15 @@ To let the existing LLM fix stage choose from constrained candidates, add:
 
 `--canonical-tag-suggestions` requires `--llm --suggest-fixes`. It makes canonical-tag findings eligible for that fix pass even when `--fix-severity error` is otherwise in effect; an explicit `--fix-rules` allowlist still takes precedence. For each questionable Tags-mode item, the LLM receives only the retrieved candidates and may select one when semantically equivalent, retain a short literal phrase, or omit an unsupported/nonvisual concept. It is explicitly prohibited from inventing another underscore tag. Deterministic fix validation then rejects a rewrite that retains the targeted canonical issue or introduces a new canonical-tag finding. The normal semantic verification pass still checks preservation of visible facts.
 
-Add `--canonical-literal-review` to review every short plain-space multiword phrase
-that would otherwise bypass underscore-tag validation. It searches the complete phrase
-against the SQLite index, records already canonical component words for context, and
-emits `canonical_literal_concept` when candidates are available. This includes phrases
-with no already-canonical component, such as `strapped in`, `magnetic rails`, or
-`riveted steel`, as well as compounds such as `glass biodome`. Embeddings for these
-phrases are queried in batches before review when hybrid retrieval is available.
+Add `--canonical-literal-review` to review short plain-space multiword phrases that
+would otherwise bypass underscore-tag validation. It searches the complete phrase
+against the SQLite index and records already canonical component words for context.
+A phrase made entirely from known vocabulary words is accepted as a literal composition.
+For other phrases, `canonical_literal_concept` is emitted only when a retrieved candidate
+is compatible with the phrase's noun head (for example, `glass biodome` can retrieve a
+`dome` candidate). This suppresses merely nearby alternatives for specialized phrases
+such as vehicle details. Embeddings are queried in batches before review when hybrid
+retrieval is available.
 Candidate proximity alone never authorizes replacement: the
 LLM may combine several canonical components or retain the literal when none preserves
 the complete visible concept, and the rewritten leaf is checked again before acceptance.
@@ -814,15 +816,20 @@ Requirements and safeguards:
 - Exactly one input YAML file is allowed.
 - The output path must differ from the original path.
 - Only leaf lines with generated suggestions are changed.
+- Before requesting LLM fixes, unambiguous canonical normalization, unique aliases, separator normalization, and fully matched contained-span/shared-head compositions are combined into a staged leaf repair. Ambiguous or partially matched phrases remain for contextual review.
+- The LLM fix stage receives the staged leaf and only the findings not resolved by that deterministic pass; a rejected LLM enhancement does not discard an already safe deterministic repair.
 - Wildcard references and their weights must remain exactly unchanged.
 - Every rewrite is deterministically re-linted; rewrites that retain a targeted error or introduce a new finding are rejected.
+- A rejected deterministic rewrite receives fresh corrective LLM attempts containing the exact rejection reasons. `--max-fix-retries COUNT` controls these attempts (default: 2; use 0 for one-shot behavior).
+- Repair requests include a policy version, so cached suggestions produced for older validation behavior are not silently reused.
+- Multiword concepts may use a meaning-preserving compound candidate, but repairs that merely split a relationship such as `bone armor` into `bone, armor` are rejected.
 - A separate semantic-preservation pass rejects fact loss, invention, altered alternatives or relationships, and format evasion.
 - Deterministic validation rejects removed `or`/`either` alternatives and newly introduced dangling relational fragments.
 - Comments, category ordering, router leaves, and unaffected formatting remain intact.
 - The copy is written atomically and parsed as YAML before it replaces the selected output path.
 - The original file is never modified.
 
-Use `--fix-manifest path.json` to record every proposed rewrite, its rationale and triggering issues, and whether validation accepted or rejected it.
+Use `--fix-manifest path.json` to record every proposed rewrite, its rationale and triggering issues, and whether validation accepted or rejected it. Markdown reports also summarize findings separately from affected leaves and show each rejected rewrite with its validation reasons once per leaf.
 
 Potential fixes remain LLM-generated and should be reviewed by diffing the files:
 
@@ -1119,6 +1126,8 @@ mkdir _tmp; THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter
   --llm-scope content \
   --suggest-fixes \
   --fix-severity both \
+  --max-fix-retries 2 \
+  --fix-manifest _tmp/gkr-comics-new.fix-manifest.json \
   --danbooru-tags safebooru_general_tags.classified.csv \
   --danbooru-index safebooru_general_tags.index.sqlite \
   --retrieval auto \
