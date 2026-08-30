@@ -211,7 +211,11 @@ Repair behavior:
     parser.add_argument("paths", nargs="*", help="One or more YAML files/directories. Required for wildcard linting; may be omitted only with --validate-post-prompts")
     parser.add_argument(
         "--only", action="append", metavar="CATEGORY",
-        help="Audit only this category plus categories it references directly (one hop). Repeat the option or use commas; namespace/category disambiguates names",
+        help="Audit only this category and referenced categories up to --only-depth (default: 1). Repeat the option or use commas; namespace/category disambiguates names",
+    )
+    parser.add_argument(
+        "--only-depth", type=int, default=1, metavar="LEVELS",
+        help="Reference levels followed from each --only category: 0 checks only the named category, 1 includes direct children, and larger values recurse further (default: 1; requires --only)",
     )
     parser.add_argument(
         "--semantic-duplicates", action="store_true",
@@ -344,9 +348,11 @@ def load_inventory(paths: list[Path]) -> tuple[list[Leaf], dict[tuple[str, str],
 
 def filter_inventory(
     leaves: list[Leaf], categories: dict[tuple[str, str], list[Leaf]],
-    findings: list[Finding], raw_only: list[str],
+    findings: list[Finding], raw_only: list[str], depth: int = 1,
 ) -> tuple[list[Leaf], dict[tuple[str, str], list[Leaf]], list[Finding], set[tuple[str, str]]]:
-    """Select requested categories and exactly one hop of referenced categories."""
+    """Select requested categories and a bounded number of reference hops."""
+    if depth < 0:
+        raise ValueError("--only-depth must be zero or greater")
     selectors = [value.strip() for raw in raw_only for value in raw.split(",") if value.strip()]
     if not selectors:
         raise ValueError("--only requires at least one non-empty category name")
@@ -368,9 +374,19 @@ def filter_inventory(
             + (f"; available categories: {available}" if available else "")
         )
     included = set(roots)
-    for key in roots:
-        for leaf in categories.get(key, []):
-            included.update(reference for reference in leaf.references if reference in categories)
+    frontier = set(roots)
+    for _ in range(depth):
+        next_frontier: set[tuple[str, str]] = set()
+        for key in frontier:
+            for leaf in categories.get(key, []):
+                next_frontier.update(
+                    reference for reference in leaf.references
+                    if reference in categories and reference not in included
+                )
+        included.update(next_frontier)
+        frontier = next_frontier
+        if not frontier:
+            break
     selected_categories = {key: categories[key] for key in included}
     selected_leaves = [leaf for leaf in leaves if (leaf.namespace, leaf.category) in included]
     included_locations = {(leaf.file, leaf.category) for leaf in selected_leaves}
@@ -471,10 +487,21 @@ def duplicate_leaf_findings(leaves: list[Leaf]) -> list[Finding]:
             "error" if same_category else "warning",
             "duplicate_leaf" if same_category else "cross_category_duplicate_leaf",
             (
-                f"Leaf duplicates {prior.category} line {prior.line} after normalizing tag order, "
+                f"Leaf in {leaf.category} duplicates an earlier leaf in {prior.category} after "
+                "normalizing tag order, "
                 "weights, underscores, hyphens, and spacing."
             ),
-            leaf.file, leaf.line, leaf.category, leaf.uid, leaf.text,
+            leaf.file, leaf.line, leaf.category, leaf.uid,
+            json.dumps({
+                "current": {
+                    "file": leaf.file, "line": leaf.line,
+                    "category": leaf.category, "leaf": leaf.text,
+                },
+                "earlier_match": {
+                    "file": prior.file, "line": prior.line,
+                    "category": prior.category, "leaf": prior.text,
+                },
+            }, ensure_ascii=False),
         ))
     return findings
 
@@ -1773,6 +1800,22 @@ def canonical_evidence_highlights(finding: Finding) -> tuple[list[str], list[str
     )
 
 
+def duplicate_evidence_comparison(finding: Finding) -> tuple[dict[str, object], dict[str, object]] | None:
+    """Return both sides of an exact duplicate finding's structured evidence."""
+    if finding.rule not in {"duplicate_leaf", "cross_category_duplicate_leaf"} or not finding.evidence:
+        return None
+    try:
+        evidence = json.loads(finding.evidence)
+    except (json.JSONDecodeError, TypeError):
+        return None
+    if not isinstance(evidence, dict):
+        return None
+    current, earlier = evidence.get("current"), evidence.get("earlier_match")
+    if not isinstance(current, dict) or not isinstance(earlier, dict):
+        return None
+    return current, earlier
+
+
 def render(
     findings: list[Finding], leaves: list[Leaf], fmt: str, color: bool = False,
     fix_attempted: bool = False, fixed_leaf_ids: set[str] | None = None,
@@ -1826,7 +1869,16 @@ def render(
                 if unmatched_words:
                     highlighted = ", ".join(f"**`{word}`**" for word in unmatched_words)
                     lines.append(f"- ⚠️ Unmatched source words: {highlighted}")
-            if finding.evidence:
+            duplicate_comparison = duplicate_evidence_comparison(finding)
+            if duplicate_comparison:
+                lines.extend(["", "**Duplicate comparison:**", ""])
+                for label, item in zip(("Current leaf", "Earlier matching leaf"), duplicate_comparison):
+                    item_location = f"{item.get('file', '')}:{item.get('line', 0)}"
+                    lines.extend([
+                        f"- **{label}:** category **`{item.get('category', '')}`** at `{item_location}`",
+                        f"  - `{item.get('leaf', '')}`",
+                    ])
+            if finding.evidence and not duplicate_comparison:
                 if "\n" in finding.evidence:
                     lines.extend(["", "Evidence:", "", "```text", finding.evidence, "```"])
                 else:
@@ -1873,7 +1925,16 @@ def render(
                 f"{ansi('Unmatched source words:', '33;1', color)} "
                 + ", ".join(ansi(word, "33;1", color) for word in unmatched_words)
             )
-        if evidence:
+        duplicate_comparison = duplicate_evidence_comparison(finding)
+        if duplicate_comparison:
+            lines.append(ansi("Duplicate comparison:", "36;1", color))
+            for label, item in zip(("Current leaf", "Earlier matching leaf"), duplicate_comparison):
+                item_location = f"{item.get('file', '')}:{item.get('line', 0)}"
+                lines.append(
+                    f"- {label}: {item.get('category', '')} at {item_location}\n"
+                    f"  {item.get('leaf', '')}"
+                )
+        if evidence and not duplicate_comparison:
             lines.append(evidence.lstrip("\n"))
         if finding.alternatives:
             lines.extend([
@@ -2698,9 +2759,13 @@ def main() -> int:
         verbose(args, f"loaded general rules from {rules_path}")
         leaves, categories, findings = load_inventory(paths)
         all_categories = categories
+        if args.only_depth < 0:
+            raise ValueError("--only-depth must be zero or greater")
+        if not args.only and args.only_depth != 1:
+            raise ValueError("--only-depth requires --only")
         if args.only:
             leaves, categories, findings, only_roots = filter_inventory(
-                leaves, categories, findings, args.only,
+                leaves, categories, findings, args.only, args.only_depth,
             )
             root_names = ", ".join(
                 f"{namespace}/{category}" for namespace, category in sorted(only_roots)
@@ -2708,7 +2773,7 @@ def main() -> int:
             included_names = ", ".join(
                 f"{namespace}/{category}" for namespace, category in sorted(categories)
             )
-            verbose(args, f"--only roots: {root_names}; auditing one-hop scope: {included_names}")
+            verbose(args, f"--only roots: {root_names}; auditing depth-{args.only_depth} scope: {included_names}")
         verbose(args, f"inventoried {len(categories)} categories and {len(leaves)} leaves")
         if canonical_retriever is not None and canonical_retriever.embedding_client is not None:
             primed = canonical_retriever.prime(leaves)

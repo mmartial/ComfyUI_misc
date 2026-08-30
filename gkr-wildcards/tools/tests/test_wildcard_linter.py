@@ -212,6 +212,30 @@ class WildcardLinterTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "--only category not found: missing"):
             LINTER.filter_inventory(leaves, categories, findings, ["missing"])
 
+    def test_only_depth_controls_recursive_reference_traversal(self):
+        leaves, categories, findings = self.inventory(
+            "gkr_test:\n"
+            "  root:\n    - __gkr_test/child__\n"
+            "  child:\n    - __gkr_test/grandchild__\n"
+            "  grandchild:\n    - __gkr_test/great_grandchild__\n"
+            "  great_grandchild:\n    - subject\n"
+            "  unrelated:\n    - landscape\n"
+        )
+        expected = {
+            0: {"root"},
+            1: {"root", "child"},
+            2: {"root", "child", "grandchild"},
+            3: {"root", "child", "grandchild", "great_grandchild"},
+            20: {"root", "child", "grandchild", "great_grandchild"},
+        }
+        for depth, names in expected.items():
+            _, selected, _, _ = LINTER.filter_inventory(
+                leaves, categories, findings, ["root"], depth,
+            )
+            self.assertEqual({category for _, category in selected}, names)
+        with self.assertRaisesRegex(ValueError, "zero or greater"):
+            LINTER.filter_inventory(leaves, categories, findings, ["root"], -1)
+
     def test_semantic_duplicate_checker_reports_closest_prior_leaf_with_context(self):
         leaves = [
             LINTER.Leaf("a", "test.yaml", "gkr", "covers", 0, 10,
@@ -531,6 +555,12 @@ class WildcardLinterTests(unittest.TestCase):
         )
         findings = LINTER.duplicate_leaf_findings(leaves)
         self.assertEqual([finding.rule for finding in findings], ["cross_category_duplicate_leaf"])
+        markdown = LINTER.render(findings, leaves, "markdown")
+        self.assertIn("**Duplicate comparison:**", markdown)
+        self.assertIn("**Current leaf:** category **`second`**", markdown)
+        self.assertIn("**Earlier matching leaf:** category **`first`**", markdown)
+        self.assertIn("gkr-test.yaml:4`", markdown)
+        self.assertIn("`dynamic pose, muscles`", markdown)
 
     def test_route_motif_probability_accounts_for_nested_routes(self):
         leaves, categories, _ = self.inventory(
