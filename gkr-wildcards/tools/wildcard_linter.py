@@ -1745,6 +1745,34 @@ def write_fixed_file(source: Path, destination: Path, leaves: list[Leaf], sugges
     return applied
 
 
+def canonical_evidence_highlights(finding: Finding) -> tuple[list[str], list[str]]:
+    """Extract the important human-review fields from canonical JSON evidence."""
+    if not finding.rule.startswith("canonical_tag_") or not finding.evidence:
+        return [], []
+    try:
+        evidence = json.loads(finding.evidence)
+    except (json.JSONDecodeError, TypeError):
+        return [], []
+    if not isinstance(evidence, dict):
+        return [], []
+
+    canonical = evidence.get("canonical_ids", [])
+    if not isinstance(canonical, list):
+        canonical = []
+    if not canonical and isinstance(evidence.get("spans"), list):
+        canonical = [
+            span.get("canonical") for span in evidence["spans"]
+            if isinstance(span, dict) and span.get("canonical")
+        ]
+    unmatched = evidence.get("unmatched_words", [])
+    if not isinstance(unmatched, list):
+        unmatched = []
+    return (
+        list(dict.fromkeys(str(tag) for tag in canonical if tag)),
+        list(dict.fromkeys(str(word) for word in unmatched if word)),
+    )
+
+
 def render(
     findings: list[Finding], leaves: list[Leaf], fmt: str, color: bool = False,
     fix_attempted: bool = False, fixed_leaf_ids: set[str] | None = None,
@@ -1789,6 +1817,15 @@ def render(
             if leaf:
                 lines.extend(["", "**Source leaf:**", "", "```text", leaf.text, "```"])
             lines.extend(["", finding.message])
+            canonical_tags, unmatched_words = canonical_evidence_highlights(finding)
+            if canonical_tags or unmatched_words:
+                lines.extend(["", "**Canonical analysis:**", ""])
+                if canonical_tags:
+                    highlighted = ", ".join(f"**`{tag}`**" for tag in canonical_tags)
+                    lines.append(f"- ✅ Canonical tags extracted from source: {highlighted}")
+                if unmatched_words:
+                    highlighted = ", ".join(f"**`{word}`**" for word in unmatched_words)
+                    lines.append(f"- ⚠️ Unmatched source words: {highlighted}")
             if finding.evidence:
                 if "\n" in finding.evidence:
                     lines.extend(["", "Evidence:", "", "```text", finding.evidence, "```"])
@@ -1798,7 +1835,12 @@ def render(
                 lines.extend(["", "**Potential replacements — LLM generated:**", ""])
                 lines.extend(f"- `{alternative}`" for alternative in finding.alternatives)
             if finding.suggestion:
-                lines.extend(["", "**Potential fix — LLM generated:**", "", finding.suggestion])
+                fix_label = (
+                    "**Applied fix — LLM generated and written to fixed output:**"
+                    if fix_status(finding) == "fixed"
+                    else "**Potential fix — LLM generated:**"
+                )
+                lines.extend(["", fix_label, "", finding.suggestion])
                 if leaf:
                     lines.extend(["", "```diff", f"- {leaf.text}", f"+ {finding.suggestion}", "```"])
         return "\n".join(lines) + "\n"
@@ -1819,14 +1861,32 @@ def render(
         lines.extend(["", ansi("─" * 88, "90", color), f"{heading}{llm_badge}{unresolved_badge}  {location}", f"category: {finding.category}  rule: {finding.rule}"])
         if leaf:
             lines.extend(["", ansi("Source leaf:", "36;1", color), leaf.text])
-        lines.extend(["", f"{finding.message}{evidence}"])
+        lines.extend(["", finding.message])
+        canonical_tags, unmatched_words = canonical_evidence_highlights(finding)
+        if canonical_tags:
+            lines.append(
+                f"{ansi('Canonical tags extracted from source:', '32;1', color)} "
+                + ", ".join(ansi(tag, "32;1", color) for tag in canonical_tags)
+            )
+        if unmatched_words:
+            lines.append(
+                f"{ansi('Unmatched source words:', '33;1', color)} "
+                + ", ".join(ansi(word, "33;1", color) for word in unmatched_words)
+            )
+        if evidence:
+            lines.append(evidence.lstrip("\n"))
         if finding.alternatives:
             lines.extend([
                 "", ansi("Potential replacements [LLM-generated]:", "36;1", color),
                 *[f"- {alternative}" for alternative in finding.alternatives],
             ])
         if finding.suggestion:
-            lines.extend(["", ansi("Potential fix [LLM-generated]:", "32;1", color), finding.suggestion])
+            fix_label = (
+                "Applied fix [LLM-generated; written to fixed output]:"
+                if fix_status(finding) == "fixed"
+                else "Potential fix [LLM-generated]:"
+            )
+            lines.extend(["", ansi(fix_label, "32;1", color), finding.suggestion])
             if leaf:
                 lines.extend(["", ansi(f"- {leaf.text}", "31", color), ansi(f"+ {finding.suggestion}", "32", color)])
     return "\n".join(lines) + "\n"

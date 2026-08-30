@@ -969,6 +969,47 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertIn("- `windowless stone shaft`", markdown)
         self.assertNotIn("```diff", markdown)
 
+    def test_canonical_evidence_is_highlighted_for_human_review(self):
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 10,
+            "looking through_window", (), "tags",
+        )
+        finding = LINTER.Finding(
+            "warning", "canonical_tag_contained_span",
+            "item contains canonical Danbooru span(s): through_window; unmatched words: looking",
+            leaf.file, leaf.line, leaf.category, leaf.uid,
+            evidence=json.dumps({
+                "input": "looking through_window",
+                "canonical_ids": ["through_window"],
+                "unmatched_words": ["looking"],
+            }),
+        )
+        markdown = LINTER.render([finding], [leaf], "markdown")
+        self.assertIn("**Canonical analysis:**", markdown)
+        self.assertIn("Canonical tags extracted from source: **`through_window`**", markdown)
+        self.assertIn("Unmatched source words: **`looking`**", markdown)
+        text_report = LINTER.render([finding], [leaf], "text")
+        self.assertIn("Canonical tags extracted from source: through_window", text_report)
+        self.assertIn("Unmatched source words: looking", text_report)
+
+    def test_accepted_rewrite_is_labeled_as_applied_in_fixed_report(self):
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 10,
+            "glowing blue_flower", (), "tags",
+        )
+        finding = LINTER.Finding(
+            "warning", "canonical_tag_composition", "decompose tags",
+            leaf.file, leaf.line, leaf.category, leaf.uid,
+            suggestion="glowing_flower, blue_flower",
+        )
+        applied = LINTER.render(
+            [finding], [leaf], "markdown", fix_attempted=True, fixed_leaf_ids={leaf.uid},
+        )
+        self.assertIn("Applied fix — LLM generated and written to fixed output", applied)
+        self.assertNotIn("Potential fix — LLM generated", applied)
+        potential = LINTER.render([finding], [leaf], "markdown", fix_attempted=False)
+        self.assertIn("Potential fix — LLM generated", potential)
+
     def test_prompt_audit_summary_counts_unique_pairs(self):
         audits = [
             LINTER.PromptAudit("one.png", "Tags", "noncompliant", ["bad"], "1family", ["subject_count_failure"], "family"),

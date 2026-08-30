@@ -686,6 +686,11 @@ uv run tools/wildcard_linter.py gkr-anime.yaml --llm --llm-cache-max-age-minutes
 
 Text and Markdown reports render every finding as a separate section. When a potential fix exists, the report shows the original leaf and proposed replacement as a diff.
 
+When `--fixed-output` actually receives an accepted rewrite, the report labels it
+`Applied fix — LLM generated and written to fixed output`. `Potential fix` is reserved
+for a suggestion that was not written. Finding locations always identify the original
+input YAML; the linter never overwrites that source file.
+
 Every leaf-level finding also shows the complete `Source leaf` immediately after the
 location and message. This provides the prompt context even when no fix was suggested or
 the finding remains unresolved. File- or category-level structural findings that do not
