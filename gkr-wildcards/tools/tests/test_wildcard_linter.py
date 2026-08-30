@@ -1412,6 +1412,35 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertNotIn(leaves[0].uid, accepted)
         self.assertIn("alternative-choice markers changed", rejected[leaves[0].uid])
 
+    def test_canonical_literal_repair_rejects_compound_atomization(self):
+        finding = LINTER.Finding(
+            "warning", "canonical_literal_concept", "review compound", "test.yaml", 1,
+            "archetype", "leaf-1",
+            evidence=json.dumps({
+                "input": "bone armor",
+                "candidates": ["bone", "armor", "bone_weapon"],
+            }),
+        )
+        issues = LINTER.canonical_literal_atomization_issues(
+            "1other, fur_cloak, bone, armor, tribal_paint", [finding]
+        )
+        self.assertEqual(len(issues), 1)
+        self.assertIn("atomizes 'bone armor'", issues[0])
+
+    def test_canonical_literal_repair_accepts_compound_candidate(self):
+        finding = LINTER.Finding(
+            "warning", "canonical_literal_concept", "review compound", "test.yaml", 1,
+            "archetype", "leaf-1",
+            evidence=json.dumps({
+                "input": "oversized hoodie",
+                "candidates": ["oversized_clothes", "hoodie"],
+            }),
+        )
+        issues = LINTER.canonical_literal_atomization_issues(
+            "1other, oversized_clothes, hoodie", [finding]
+        )
+        self.assertEqual(issues, [])
+
     def test_validation_rejects_new_dangling_relation(self):
         leaves, _, findings = self.inventory(
             "# MODE: tags\ngkr_test:\n  subject:\n"

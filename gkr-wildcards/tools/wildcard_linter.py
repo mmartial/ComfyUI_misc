@@ -1573,6 +1573,40 @@ def reference_tokens(text: str) -> tuple[str, ...]:
     return tuple(tokens)
 
 
+def canonical_literal_atomization_issues(
+    rewrite: str, targeted_findings: list[Finding],
+) -> list[str]:
+    """Reject fixes that replace a compound concept with unrelated singleton tags."""
+    rewritten_items = {
+        normalize_canonical_tag(WEIGHT_RE.sub(lambda match: match.group(1), item).strip())
+        for item in split_top_level_commas(literal_text(rewrite))
+        if item.strip()
+    }
+    issues: list[str] = []
+    for finding in targeted_findings:
+        if finding.rule != "canonical_literal_concept" or not finding.evidence:
+            continue
+        try:
+            evidence = json.loads(finding.evidence)
+        except (TypeError, json.JSONDecodeError):
+            continue
+        phrase = str(evidence.get("input", "")).strip().lower()
+        words = [normalize_canonical_tag(word) for word in re.findall(r"[a-z0-9][a-z0-9+'-]*", phrase)]
+        if len(words) < 2 or not set(words).issubset(rewritten_items):
+            continue
+        compound_candidates = {
+            normalize_canonical_tag(str(candidate))
+            for candidate in evidence.get("candidates", [])
+            if len(re.findall(r"[a-z0-9]+", str(candidate).replace("_", " "))) >= 2
+        }
+        if compound_candidates & rewritten_items:
+            continue
+        issues.append(
+            f"canonical literal repair atomizes '{phrase}' into independent tags and loses the compound relationship"
+        )
+    return issues
+
+
 def validate_suggestions(
     leaves: list[Leaf], suggestions: dict[str, str], findings: list[Finding],
     rules: dict[str, Any], tags_rules: dict[str, Any],
@@ -1599,10 +1633,12 @@ def validate_suggestions(
     for uid, rewrite in suggestions.items():
         leaf = leaf_by_id[uid]
         reasons: list[str] = []
+        leaf_findings = [finding for finding in findings if finding.leaf_id == uid]
         if sorted(reference_tokens(leaf.text)) != sorted(reference_tokens(rewrite)):
             reasons.append("wildcard references or their weights changed")
         if len(ALTERNATIVE_RE.findall(leaf.text)) != len(ALTERNATIVE_RE.findall(rewrite)):
             reasons.append("alternative-choice markers changed")
+        reasons.extend(canonical_literal_atomization_issues(rewrite, leaf_findings))
         candidate = Leaf(
             leaf.uid, leaf.file, leaf.namespace, leaf.category, leaf.index, leaf.line,
             rewrite, tuple(REFERENCE_RE.findall(rewrite)), leaf.mode,
