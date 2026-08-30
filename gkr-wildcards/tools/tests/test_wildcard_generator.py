@@ -41,6 +41,16 @@ def args(**overrides):
 
 
 class WildcardGeneratorTests(unittest.TestCase):
+    def test_generation_prompts_require_functional_query_expansion_and_compound_decomposition(self):
+        concept = GENERATOR.concept_instruction("policy")
+        generation = GENERATOR.generation_instruction(
+            "policy", sys.modules["wildcard_linter"].DanbooruVocabulary({"greenhouse", "glass", "dome"}),
+        )
+        self.assertIn("common visible functional terms", concept)
+        self.assertIn("biodome", concept)
+        self.assertIn("combination of candidates", generation)
+        self.assertIn("greenhouse, glass, dome", generation)
+
     def test_colored_verbose_log_highlights_corrective_retry(self):
         stream = io.StringIO()
         with patch.object(GENERATOR.sys, "stderr", stream):

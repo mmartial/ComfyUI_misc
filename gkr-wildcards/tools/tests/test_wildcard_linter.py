@@ -46,6 +46,33 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertEqual(candidates, ["business_suit"])
         self.assertEqual(retriever.request, ("formal_outfit", 3))
 
+    def test_plain_literal_compound_receives_canonical_candidate_review(self):
+        vocabulary = LINTER.DanbooruVocabulary({"glass", "dome", "greenhouse", "obidome"})
+        leaf = LINTER.Leaf(
+            "bio", "test.yaml", "gkr", "scene", 0, 10,
+            "1person, jumpsuit, glass biodome, science_fiction", (), "tags",
+        )
+
+        class FakeRetriever:
+            def candidates(self, value, limit):
+                self.request = (value, limit)
+                return ["obidome", "dome", "greenhouse"]
+
+        retriever = FakeRetriever()
+        findings = LINTER.canonical_literal_concept_findings(
+            [leaf], vocabulary, retriever, candidate_count=5,
+        )
+        self.assertEqual(len(findings), 1)
+        self.assertEqual(findings[0].rule, "canonical_literal_concept")
+        evidence = json.loads(findings[0].evidence)
+        self.assertEqual(evidence["input"], "glass biodome")
+        self.assertEqual(evidence["known_canonical_components"], ["glass"])
+        self.assertEqual(evidence["unknown_words"], ["biodome"])
+        self.assertIn("dome", evidence["candidates"])
+        self.assertFalse(LINTER.canonical_compound_component("golden", "gold"))
+        self.assertFalse(LINTER.canonical_compound_component("stained", "stain"))
+        self.assertTrue(LINTER.canonical_compound_component("biodome", "dome"))
+
     def test_colored_verbose_log_highlights_cache_and_request_details(self):
         stream = io.StringIO()
         message = "completed, HTTP 200; 0 cached, 1 requested; no LLM call"

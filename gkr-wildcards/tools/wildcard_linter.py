@@ -221,6 +221,10 @@ Repair behavior:
         "--semantic-duplicate-threshold", type=float, default=0.94, metavar="SIMILARITY",
         help="Minimum cosine similarity for --semantic-duplicates warnings; raise to reduce false positives (default: 0.94)",
     )
+    parser.add_argument(
+        "--canonical-literal-review", action="store_true",
+        help="Opt in to embedding-assisted review of plain compound concepts such as 'glass biodome'; warnings are report-only unless --fix-literal-concepts or an explicit --fix-rules allowlist authorizes them",
+    )
     parser.add_argument("--rules", type=Path, help="Rules YAML (defaults beside script)")
     parser.add_argument("--tags-rules", type=Path, help="Tags-mode rules YAML (defaults beside script)")
     parser.add_argument("--format", choices=("text", "json", "markdown"), default="text", help="Report encoding written to --output or stdout (default: text)")
@@ -234,6 +238,10 @@ Repair behavior:
     parser.add_argument("--fixed-output", type=Path, help="Optional. Write accepted rewrites to this separate YAML file. When omitted, no fixed YAML is produced; requires --llm, --suggest-fixes, and exactly one input YAML")
     parser.add_argument("--fix-severity", choices=("error", "warning", "both"), default="error", help="Fix errors only (default), warnings only, or both")
     parser.add_argument("--fix-rules", help="Comma-separated rule-code allowlist; when supplied, only these rules are repair targets and --fix-severity is ignored")
+    parser.add_argument(
+        "--fix-literal-concepts", action="store_true",
+        help="Allow canonical_literal_concept warnings to join the normal --fix-severity selection; requires --canonical-literal-review",
+    )
     parser.add_argument("--fix-manifest", type=Path, help="Write machine-readable proposed, accepted, rejected, and unresolved fix details as JSON")
     parser.add_argument("--skip-fix-verification", action="store_true", help="Skip the final LLM semantic-preservation check (not recommended)")
     parser.add_argument("--model", help="Chat model name. With --llm, omission falls back to OPENAI_MODEL and fails if neither is set")
@@ -1376,9 +1384,15 @@ def llm_suggest_fixes(
         finding for finding in findings
         if finding.rule not in STRUCTURAL_FIX_RULES
         and (
+            finding.rule != "canonical_literal_concept"
+            or finding.rule in selected_rules
+            or getattr(args, "fix_literal_concepts", False)
+        )
+        and (
             finding.rule in selected_rules if selected_rules
             else finding.severity in eligible_severities
             or (args.canonical_tag_suggestions and finding.rule in canonical_rules)
+            or (getattr(args, "fix_literal_concepts", False) and finding.rule == "canonical_literal_concept")
         )
     ]
     issues: dict[str, list[Finding]] = {}
@@ -1422,7 +1436,9 @@ def llm_suggest_fixes(
             "separate tag items; preserve an unmatched modifier only if it has its own supplied canonical support. Do not create a hybrid item "
             "such as 'vibrant red_hair', and do not substitute a merely related tag such as colorful. Never invent a new underscore-style tag. "
             "For shared_head_composition, preserve every supplied component unless the original itself makes that component unsupported; do "
-            "not collapse multiple visible attributes into only one component. "
+            "not collapse multiple visible attributes into only one component. For a canonical_literal_concept issue, treat the evidence "
+            "candidates as review options rather than automatic replacements: combine canonical components when that preserves the full "
+            "visible meaning, and retain the literal phrase when none does. "
             "Return JSON only as an array with exactly one object per input ID containing id, suggested_rewrite, and rationale. "
             "Do not modify files and do not omit IDs."
         )
@@ -1513,6 +1529,15 @@ def validate_suggestions(
                 [leaf], danbooru_vocabulary, canonical_candidate_count, canonical_tag_style,
                 tags_rules.get("canonical_composition"), canonical_retriever,
             )
+            if canonical_retriever is not None:
+                post += canonical_literal_concept_findings(
+                    [candidate], danbooru_vocabulary, canonical_retriever,
+                    canonical_candidate_count, canonical_tag_style,
+                )
+                baseline_local += canonical_literal_concept_findings(
+                    [leaf], danbooru_vocabulary, canonical_retriever,
+                    canonical_candidate_count, canonical_tag_style,
+                )
         locally_evaluable = {finding.rule for finding in baseline_local}
         unsupported = deterministic_errors.get(uid, set()) - locally_evaluable
         if unsupported:
@@ -1540,7 +1565,7 @@ def validate_suggestions(
             and finding.rule in {
                 "unknown_canonical_tag", "canonical_tag_normalization", "canonical_tag_alias",
                 "canonical_tag_contained_span", "canonical_tag_separator_normalization",
-                "canonical_tag_composition",
+                "canonical_tag_composition", "canonical_literal_concept",
             }
         }
         remaining_canonical = targeted_canonical & {finding.rule for finding in post}
@@ -2216,6 +2241,89 @@ def canonical_tag_findings(
     return findings
 
 
+LITERAL_CONCEPT_STOPWORDS = {
+    "about", "above", "across", "after", "against", "along", "among", "around",
+    "behind", "below", "beneath", "beside", "between", "during", "from", "inside",
+    "into", "near", "onto", "outside", "over", "through", "toward", "under", "upon",
+    "while", "with", "without",
+}
+LITERAL_CONCEPT_INFLECTION_AFFIXES = {"ed", "en", "er", "es", "ing", "ly", "s", "y"}
+
+
+def canonical_compound_component(word: str, candidate: str) -> bool:
+    """Accept a substantial embedded canonical component, excluding simple inflection."""
+    comparable = candidate.replace("_", " ")
+    if " " in comparable or len(comparable) < 4 or comparable == word:
+        return False
+    if word.startswith(comparable):
+        affix = word[len(comparable):]
+    elif word.endswith(comparable):
+        affix = word[:-len(comparable)]
+    else:
+        return False
+    return len(affix) >= 2 and affix not in LITERAL_CONCEPT_INFLECTION_AFFIXES
+
+
+def canonical_literal_concept_findings(
+    leaves: list[Leaf], vocabulary: DanbooruVocabulary,
+    retriever: CanonicalTagRetriever, candidate_count: int = 5,
+    output_style: str = "underscore",
+) -> list[Finding]:
+    """Flag plain compound concepts that may decompose into canonical vocabulary."""
+    findings: list[Finding] = []
+    for leaf in leaves:
+        if leaf.mode != "tags":
+            continue
+        for raw_item in split_top_level_commas(literal_text(leaf.text)):
+            raw = WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip().lower()
+            if not raw or "_" in raw or normalize_canonical_tag(raw) in vocabulary:
+                continue
+            words = re.findall(r"[a-z0-9][a-z0-9+'-]*", raw)
+            if not 2 <= len(words) <= 5:
+                continue
+            known = [word for word in words if normalize_canonical_tag(word) in vocabulary]
+            unknown = [
+                word for word in words
+                if len(word) >= 5 and word not in LITERAL_CONCEPT_STOPWORDS
+                and normalize_canonical_tag(word) not in vocabulary
+            ]
+            if not unknown or not known:
+                continue
+            candidates: list[str] = []
+            for word in unknown:
+                for candidate in retriever.candidates(word, max(candidate_count * 3, 10)):
+                    if canonical_compound_component(word, candidate):
+                        candidates.append(candidate)
+            candidates = list(dict.fromkeys(candidates))[:candidate_count]
+            if not candidates:
+                continue
+            rendered_known = [render_canonical_tag(tag, output_style) for tag in known]
+            rendered_candidates = [render_canonical_tag(tag, output_style) for tag in candidates]
+            guidance = {
+                "input": raw,
+                "status": "literal_compound_candidate_review",
+                "known_canonical_components": rendered_known,
+                "unknown_words": unknown,
+                "candidates": rendered_candidates,
+                "instruction": (
+                    "Use candidates only when they preserve the complete visible concept; combine multiple "
+                    "canonical components when appropriate, otherwise retain the literal phrase."
+                ),
+            }
+            component_note = (
+                f"; known canonical component(s): {', '.join(rendered_known)}"
+                if rendered_known else ""
+            )
+            findings.append(Finding(
+                "warning", "canonical_literal_concept",
+                f"Plain literal compound may have a canonical decomposition{component_note}; "
+                f"review candidates: {', '.join(rendered_candidates)}.",
+                leaf.file, leaf.line, leaf.category, leaf.uid,
+                evidence=json.dumps(guidance, ensure_ascii=False),
+            ))
+    return findings
+
+
 def representability_issues(prompt: str) -> list[tuple[str, str]]:
     issues: list[tuple[str, str]] = []
     if TRANSPORT_ERROR_RE.search(prompt):
@@ -2449,6 +2557,12 @@ def main() -> int:
             raise ValueError("--canonical-tag-suggestions requires --danbooru-tags")
         if args.semantic_duplicates and not args.danbooru_tags:
             raise ValueError("--semantic-duplicates requires --danbooru-tags and its embedded SQLite index")
+        if args.canonical_literal_review and not args.danbooru_tags:
+            raise ValueError("--canonical-literal-review requires --danbooru-tags and its embedded SQLite index")
+        if args.fix_literal_concepts and not args.canonical_literal_review:
+            raise ValueError("--fix-literal-concepts requires --canonical-literal-review")
+        if args.fix_literal_concepts and (not args.llm or not args.suggest_fixes):
+            raise ValueError("--fix-literal-concepts requires --llm and --suggest-fixes")
         if args.danbooru_index and not args.danbooru_tags:
             raise ValueError("--danbooru-index requires --danbooru-tags")
         if args.canonical_tag_suggestions and (not args.llm or not args.suggest_fixes):
@@ -2493,6 +2607,12 @@ def main() -> int:
         ):
             raise ValueError(
                 "--semantic-duplicates requires a compatible complete embedding index and reachable embedding endpoint"
+            )
+        if args.canonical_literal_review and (
+            canonical_retriever is None or canonical_retriever.embedding_client is None
+        ):
+            raise ValueError(
+                "--canonical-literal-review requires a compatible complete embedding index and reachable embedding endpoint"
             )
         if args.batch_size < 1:
             raise ValueError("--batch-size must be at least 1")
@@ -2568,6 +2688,13 @@ def main() -> int:
             )
             findings.extend(canonical_results)
             verbose(args, f"canonical-tag checks produced {len(canonical_results)} finding(s)")
+            if args.canonical_literal_review and canonical_retriever is not None:
+                literal_results = canonical_literal_concept_findings(
+                    leaves, danbooru_vocabulary, canonical_retriever,
+                    args.canonical_tag_candidate_count, args.canonical_tag_style,
+                )
+                findings.extend(literal_results)
+                verbose(args, f"canonical literal-concept checks produced {len(literal_results)} finding(s)")
         graph_results = graph_findings(
             leaves, categories, all_categories if args.only else None, partial=bool(args.only),
         )

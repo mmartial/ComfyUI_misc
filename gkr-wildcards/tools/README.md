@@ -510,6 +510,24 @@ To let the existing LLM fix stage choose from constrained candidates, add:
 
 `--canonical-tag-suggestions` requires `--llm --suggest-fixes`. It makes canonical-tag findings eligible for that fix pass even when `--fix-severity error` is otherwise in effect; an explicit `--fix-rules` allowlist still takes precedence. For each questionable Tags-mode item, the LLM receives only the retrieved candidates and may select one when semantically equivalent, retain a short literal phrase, or omit an unsupported/nonvisual concept. It is explicitly prohibited from inventing another underscore tag. Deterministic fix validation then rejects a rewrite that retains the targeted canonical issue or introduces a new canonical-tag finding. The normal semantic verification pass still checks preservation of visible facts.
 
+Add `--canonical-literal-review` to review short plain-space compound
+concepts that would otherwise bypass underscore-tag validation. It separates already
+canonical single-word components from unknown words, retrieves conservative candidates
+for the unknown components, and emits `canonical_literal_concept`. For example,
+`glass biodome` identifies `glass` as canonical and offers candidates related to
+`biodome` for LLM review. Candidate proximity alone never authorizes replacement: the
+LLM may combine several canonical components or retain the literal when none preserves
+the complete visible concept, and the rewritten leaf is checked again before acceptance.
+
+This review is deliberately opt-in because compound-word similarity is heuristic and a
+nearest embedding candidate is not proof of equivalence. Its findings are report-only by
+default, even with `--fix-severity both`. To add them to the ordinary severity selection,
+use `--fix-literal-concepts`; proposed rewrites still pass canonical, structural, and
+semantic-preservation verification before entering the fixed copy. An explicit
+`--fix-rules canonical_literal_concept` remains available when that is the only rule to
+repair, because `--fix-rules` is an allowlist that replaces `--fix-severity`. This
+separation lets a project evaluate candidate quality before allowing changes.
+
 `--canonical-tag-style underscore` renders canonical suggestions as database identifiers such as `red_hair`. Use `--canonical-tag-style spaces` for models whose documented tag syntax uses `red hair`; matching and verification still retain `red_hair` internally as the canonical identity.
 
 ### SQLite and embedding-assisted canonical candidates
@@ -1042,7 +1060,7 @@ After completion:
 
 ### Fix "only" a section in a generated file
 
-Use `--only` and `--semantic-duplicates`:
+Use `--only`, `--semantic-duplicates` and `--canonical-literal-review`:
 
 ```bash
 THEME="comics"; SECTION="spotlight_covers"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
@@ -1050,6 +1068,7 @@ THEME="comics"; SECTION="spotlight_covers"; OLLAMA_API_KEY="ollama" uv run tools
   --only $SECTION \
   --semantic-duplicates \
   --semantic-duplicate-threshold 0.94 \
+  --canonical-literal-review \
   --verbose \
   --llm \
   --llm-scope content \
@@ -1074,6 +1093,8 @@ THEME="comics"; SECTION="spotlight_covers"; OLLAMA_API_KEY="ollama" uv run tools
   --color auto \
   --fail-on never
 ```
+
+After review, you can add `--fix-literal-concepts`
 
 ## Analyze a details.md file
 
