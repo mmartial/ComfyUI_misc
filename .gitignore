@@ -10,3 +10,4 @@ details.audited.md
 safebooru_general_tags.*
 *-audit.md
 gkr-wildcards/*.json*
+_tmp/

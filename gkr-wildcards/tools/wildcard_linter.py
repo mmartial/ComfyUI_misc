@@ -176,6 +176,37 @@ class CanonicalTagRetriever:
             self.vector_cache.update(zip(batch, vectors))
         return len(unique)
 
+    def prime_literal_phrases(self, leaves: list[Leaf], batch_size: int = 64) -> int:
+        """Batch embeddings for multiword literals before canonical-literal review."""
+        if self.embedding_client is None:
+            return 0
+        queries: list[str] = []
+        for leaf in leaves:
+            if leaf.mode != "tags":
+                continue
+            for item in split_top_level_commas(literal_text(leaf.text)):
+                raw = WEIGHT_RE.sub(lambda match: match.group(1), item).strip().lower()
+                words = re.findall(r"[a-z0-9][a-z0-9+'-]*", raw)
+                if (
+                    2 <= len(words) <= 5 and "_" not in raw
+                    and normalize_canonical_tag(raw) not in self.vocabulary
+                    and raw not in self.vector_cache
+                ):
+                    queries.append(raw)
+        unique = list(dict.fromkeys(queries))
+        for offset in range(0, len(unique), batch_size):
+            batch = unique[offset:offset + batch_size]
+            try:
+                vectors = self.embedding_client.embed([self.query_prefix + value for value in batch])
+            except RuntimeError:
+                if self.strict_embeddings:
+                    raise
+                self.embedding_client = None
+                self.vector_cache.clear()
+                return -1
+            self.vector_cache.update(zip(batch, vectors))
+        return len(unique)
+
     def candidates(self, value: str, limit: int) -> list[str]:
         vector = None
         if self.embedding_client is not None:
@@ -227,7 +258,7 @@ Repair behavior:
     )
     parser.add_argument(
         "--canonical-literal-review", action="store_true",
-        help="Opt in to embedding-assisted review of plain compound concepts such as 'glass biodome'; warnings are report-only unless --fix-literal-concepts or an explicit --fix-rules allowlist authorizes them",
+        help="Opt in to embedding-assisted review of every short multiword literal phrase such as 'glass biodome' or 'riveted steel'; warnings are report-only unless --fix-literal-concepts or an explicit --fix-rules allowlist authorizes them",
     )
     parser.add_argument("--rules", type=Path, help="Rules YAML (defaults beside script)")
     parser.add_argument("--tags-rules", type=Path, help="Tags-mode rules YAML (defaults beside script)")
@@ -2442,21 +2473,16 @@ def canonical_literal_concept_findings(
                 if len(word) >= 5 and word not in LITERAL_CONCEPT_STOPWORDS
                 and normalize_canonical_tag(word) not in vocabulary
             ]
-            if not unknown or not known:
-                continue
-            candidates: list[str] = []
-            for word in unknown:
-                for candidate in retriever.candidates(word, max(candidate_count * 3, 10)):
-                    if canonical_compound_component(word, candidate):
-                        candidates.append(candidate)
-            candidates = list(dict.fromkeys(candidates))[:candidate_count]
+            candidates = list(dict.fromkeys(
+                retriever.candidates(raw, max(candidate_count, 1))
+            ))[:candidate_count]
             if not candidates:
                 continue
             rendered_known = [render_canonical_tag(tag, output_style) for tag in known]
             rendered_candidates = [render_canonical_tag(tag, output_style) for tag in candidates]
             guidance = {
                 "input": raw,
-                "status": "literal_compound_candidate_review",
+                "status": "literal_phrase_candidate_review",
                 "known_canonical_components": rendered_known,
                 "unknown_words": unknown,
                 "candidates": rendered_candidates,
@@ -2471,7 +2497,7 @@ def canonical_literal_concept_findings(
             )
             findings.append(Finding(
                 "warning", "canonical_literal_concept",
-                f"Plain literal compound may have a canonical decomposition{component_note}; "
+                f"Plain literal phrase has similarity-retrieved canonical alternatives{component_note}; "
                 f"review candidates: {', '.join(rendered_candidates)}.",
                 leaf.file, leaf.line, leaf.category, leaf.uid,
                 evidence=json.dumps(guidance, ensure_ascii=False),
@@ -2815,6 +2841,15 @@ def main() -> int:
                 verbose(args, "embedding batch failed; continuing with SQLite lexical retrieval")
             else:
                 verbose(args, f"precomputed {primed} canonical-candidate query embedding(s) in batches")
+            if args.canonical_literal_review and canonical_retriever.embedding_client is not None:
+                literal_primed = canonical_retriever.prime_literal_phrases(leaves)
+                if literal_primed < 0:
+                    verbose(args, "literal-phrase embedding batch failed; continuing with SQLite lexical retrieval")
+                else:
+                    verbose(
+                        args,
+                        f"precomputed {literal_primed} canonical-literal phrase embedding(s) in batches",
+                    )
         pattern_results = pattern_findings(leaves, rules)
         findings.extend(pattern_results)
         verbose(args, f"pattern checks produced {len(pattern_results)} finding(s)")

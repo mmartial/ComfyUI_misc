@@ -66,12 +66,42 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertEqual(findings[0].rule, "canonical_literal_concept")
         evidence = json.loads(findings[0].evidence)
         self.assertEqual(evidence["input"], "glass biodome")
+        self.assertEqual(evidence["status"], "literal_phrase_candidate_review")
         self.assertEqual(evidence["known_canonical_components"], ["glass"])
         self.assertEqual(evidence["unknown_words"], ["biodome"])
         self.assertIn("dome", evidence["candidates"])
         self.assertFalse(LINTER.canonical_compound_component("golden", "gold"))
         self.assertFalse(LINTER.canonical_compound_component("stained", "stain"))
         self.assertTrue(LINTER.canonical_compound_component("biodome", "dome"))
+
+    def test_literal_review_searches_complete_phrase_without_known_components(self):
+        vocabulary = LINTER.DanbooruVocabulary({"sitting", "railroad_tracks", "seat"})
+        leaf = LINTER.Leaf(
+            "vehicle", "test.yaml", "gkr", "vehicle_spotlight", 0, 10,
+            "hover_vehicle, strapped in, magnetic rails", (), "tags",
+        )
+
+        class FakeRetriever:
+            def __init__(self):
+                self.requests = []
+
+            def candidates(self, value, limit):
+                self.requests.append(value)
+                return {
+                    "strapped in": ["sitting", "seat"],
+                    "magnetic rails": ["railroad_tracks"],
+                }.get(value, [])
+
+        retriever = FakeRetriever()
+        findings = LINTER.canonical_literal_concept_findings(
+            [leaf], vocabulary, retriever, candidate_count=5,
+        )
+        self.assertEqual(retriever.requests, ["strapped in", "magnetic rails"])
+        self.assertEqual(len(findings), 2)
+        self.assertEqual(
+            [json.loads(finding.evidence)["candidates"] for finding in findings],
+            [["sitting", "seat"], ["railroad_tracks"]],
+        )
 
     def test_colored_verbose_log_highlights_cache_and_request_details(self):
         stream = io.StringIO()

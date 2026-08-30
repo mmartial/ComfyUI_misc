@@ -541,12 +541,14 @@ To let the existing LLM fix stage choose from constrained candidates, add:
 
 `--canonical-tag-suggestions` requires `--llm --suggest-fixes`. It makes canonical-tag findings eligible for that fix pass even when `--fix-severity error` is otherwise in effect; an explicit `--fix-rules` allowlist still takes precedence. For each questionable Tags-mode item, the LLM receives only the retrieved candidates and may select one when semantically equivalent, retain a short literal phrase, or omit an unsupported/nonvisual concept. It is explicitly prohibited from inventing another underscore tag. Deterministic fix validation then rejects a rewrite that retains the targeted canonical issue or introduces a new canonical-tag finding. The normal semantic verification pass still checks preservation of visible facts.
 
-Add `--canonical-literal-review` to review short plain-space compound
-concepts that would otherwise bypass underscore-tag validation. It separates already
-canonical single-word components from unknown words, retrieves conservative candidates
-for the unknown components, and emits `canonical_literal_concept`. For example,
-`glass biodome` identifies `glass` as canonical and offers candidates related to
-`biodome` for LLM review. Candidate proximity alone never authorizes replacement: the
+Add `--canonical-literal-review` to review every short plain-space multiword phrase
+that would otherwise bypass underscore-tag validation. It searches the complete phrase
+against the SQLite index, records already canonical component words for context, and
+emits `canonical_literal_concept` when candidates are available. This includes phrases
+with no already-canonical component, such as `strapped in`, `magnetic rails`, or
+`riveted steel`, as well as compounds such as `glass biodome`. Embeddings for these
+phrases are queried in batches before review when hybrid retrieval is available.
+Candidate proximity alone never authorizes replacement: the
 LLM may combine several canonical components or retain the literal when none preserves
 the complete visible concept, and the rewritten leaf is checked again before acceptance.
 
@@ -1033,7 +1035,7 @@ python3 tools/download_danbooru_tags.py \
 rm -rf wildcard-linter-cache
 mkdir wildcard-linter-cache
 
-THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
+mkdir _tmp; THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
   gkr-$THEME.yaml \
   --verbose \
   --llm \
@@ -1051,9 +1053,10 @@ THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
   --verification-batch-size 15 \
   --timeout 300 \
   --llm-cache-dir wildcard-linter-cache \
-  --fixed-output gkr-$THEME.fixed.yaml \
+  --llm-log "_tmp/gkr-$THEME.llm.jsonl" \
+  --fixed-output _tmp/gkr-$THEME.fixed.yaml \
   --format markdown \
-  --output gkr-$THEME.fixed.report.md \
+  --output _tmp/gkr-$THEME.fixed.report.md \
   --color auto \
   --fail-on never
 ```
@@ -1061,7 +1064,7 @@ THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
 To use the linter to also use the embeddings stored in the SQLite DB:
 
 ```bash
-THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
+mkdir _tmp; THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
   gkr-$THEME.yaml \
   --verbose \
   --llm \
@@ -1081,9 +1084,10 @@ THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
   --verification-batch-size 15 \
   --timeout 300 \
   --llm-cache-dir wildcard-linter-cache \
-  --fixed-output gkr-$THEME.fixed.yaml \
+  --llm-log "_tmp/gkr-$THEME.llm.jsonl" \
+  --fixed-output _tmp/gkr-$THEME.fixed.yaml \
   --format markdown \
-  --output gkr-$THEME.fixed.report.md \
+  --output _tmp/gkr-$THEME.fixed.report.md \
   --color auto \
   --fail-on never
 ```
@@ -1096,7 +1100,7 @@ After completion:
 Or to get a futher "fixed" `fixed.yaml` file:
 
 ```bash
-THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
+mkdir _tmp; THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
   gkr-$THEME.yaml \
   --semantic-duplicates \
   --semantic-duplicate-threshold 0.94 \
@@ -1120,9 +1124,10 @@ THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
   --verification-batch-size 15 \
   --timeout 300 \
   --llm-cache-dir wildcard-linter-cache \
-  --fixed-output gkr-$THEME.fixed.yaml \
+  --llm-log "_tmp/gkr-$THEME.llm.jsonl" \
+  --fixed-output _tmp/gkr-$THEME.fixed.yaml \
   --format markdown \
-  --output gkr-$THEME.fixed.report.md \
+  --output _tmp/gkr-$THEME.fixed.report.md \
   --color auto \
   --fail-on never
 ```
@@ -1132,7 +1137,7 @@ THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
 Use `--only` (and select your `--only-depth`), `--semantic-duplicates` and `--canonical-literal-review`:
 
 ```bash
-THEME="comics"; SECTION="spotlight"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
+mkdir _tmp; THEME="comics"; SECTION="spotlight"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
   gkr-$THEME.yaml \
   --only $SECTION \
   --only-depth 5 \
@@ -1158,9 +1163,10 @@ THEME="comics"; SECTION="spotlight"; OLLAMA_API_KEY="ollama" uv run tools/wildca
   --verification-batch-size 15 \
   --timeout 300 \
   --llm-cache-dir wildcard-linter-cache \
-  --fixed-output gkr-$THEME.$SECTION.fixed.yaml \
+  --llm-log "_tmp/gkr-$THEME.$SECTION.llm.jsonl" \
+  --fixed-output _tmp/gkr-$THEME.$SECTION.fixed.yaml \
   --format markdown \
-  --output gkr-$THEME.$SECTION.fixed.report.md \
+  --output _tmp/gkr-$THEME.$SECTION.fixed.report.md \
   --color auto \
   --fail-on never
 ```
