@@ -75,6 +75,15 @@ TAG_DANGLING_RELATION_RE = re.compile(
     re.I,
 )
 ALTERNATIVE_RE = re.compile(r"\b(?:or|either)\b", re.I)
+RELATIONAL_ACTION_TAGS = {
+    "holding", "gripping", "protecting", "fighting", "facing", "chasing", "blocking",
+    "catching", "carrying", "surrounding", "reaching", "standing", "kneeling",
+    "crouching", "climbing", "crawling", "hovering", "floating",
+}
+BODY_RELATION_SUBJECTS = {"hand", "hands", "foot", "feet", "head", "back", "arms", "legs"}
+BODY_RELATION_PREPOSITIONS = {
+    "on", "in", "inside", "against", "around", "under", "over", "near", "beside", "behind",
+}
 STRUCTURAL_FIX_RULES = {
     "camera_format_conflict", "unrestricted_camera_composite", "missing_reference", "reference_cycle",
 }
@@ -1280,6 +1289,9 @@ def llm_review(
             "id": leaf.uid, "file": Path(leaf.file).name, "namespace": leaf.namespace,
             "mode": leaf.mode, "category": leaf.category, "line": leaf.line, "text": leaf.text,
             "verified_canonical_items": exact_canonical_tag_items(leaf, danbooru_vocabulary),
+            "verified_relationship_compositions": exact_canonical_relationship_items(
+                leaf, danbooru_vocabulary,
+            ),
         } for leaf in batch]
         instruction = (
             "Audit every supplied wildcard leaf against the policy. Return JSON only as an array with one object per input ID. "
@@ -1292,7 +1304,9 @@ def llm_review(
             "local Danbooru-vocabulary match and passes the visual-representability test by itself; do not reject or rewrite that item "
             "merely because the same word could be abstract in prose. For the Comprehension test, treat each verified canonical item as a "
             "recognized atomic image concept; do not reject it solely for being unfamiliar, abstract-sounding, or dependent on learned tag "
-            "semantics. A leaf may still fail comprehension when the composition leaves a subject, object, action target, or relationship "
+            "semantics. Each verified_relationship_compositions entry is an intentionally compact hybrid relationship whose listed "
+            "components were checked against the same vocabulary; do not reject it merely for joining those components with a short "
+            "action or spatial frame. A leaf may still fail comprehension when the composition leaves a subject, object, action target, or relationship "
             "genuinely unspecified or ambiguous. For the Single-moment test, accept a verified atomic action/effect such as jumping, breaking, "
             "digital_dissolve, or transformation as a learned freeze-frame concept; do not reject it merely because the named action implies "
             "time in ordinary prose. Explicit sequences, progressions, before/after tags, multi-state layouts, and contextually incompatible use "
@@ -2081,6 +2095,44 @@ def exact_canonical_tag_items(
     return sorted(matches)
 
 
+def canonical_relationship_components(
+    value: str, vocabulary: DanbooruVocabulary | set[str],
+) -> list[str]:
+    """Recognize a narrow hybrid relationship made from canonical tag components."""
+    tags = vocabulary.tags if isinstance(vocabulary, DanbooruVocabulary) else vocabulary
+    unweighted = WEIGHT_RE.sub(lambda match: match.group(1), value.strip().lower())
+    tokens = re.findall(r"[a-z0-9][a-z0-9_+().'’-]*", unweighted)
+    if len(tokens) == 2:
+        action, target = map(normalize_canonical_tag, tokens)
+        if action in RELATIONAL_ACTION_TAGS and action in tags and target in tags:
+            return [action, target]
+    if len(tokens) == 3:
+        subject, preposition, target = tokens
+        normalized_target = normalize_canonical_tag(target)
+        if (
+            subject in BODY_RELATION_SUBJECTS
+            and preposition in BODY_RELATION_PREPOSITIONS
+            and normalized_target in tags
+        ):
+            return [normalized_target]
+    return []
+
+
+def exact_canonical_relationship_items(
+    leaf: Leaf, vocabulary: DanbooruVocabulary | None,
+) -> list[dict[str, Any]]:
+    """Return recognized compact relationship items and their canonical components."""
+    if leaf.mode != "tags" or vocabulary is None:
+        return []
+    relationships: list[dict[str, Any]] = []
+    for raw_item in split_top_level_commas(literal_text(leaf.text)):
+        item = raw_item.strip()
+        components = canonical_relationship_components(item, vocabulary)
+        if components:
+            relationships.append({"text": item, "canonical_components": components})
+    return relationships
+
+
 def load_danbooru_tags(path: Path) -> DanbooruVocabulary:
     text = path.read_text(encoding="utf-8-sig")
     meaningful = [line for line in text.splitlines() if line.strip() and not line.lstrip().startswith("#")]
@@ -2462,7 +2514,10 @@ def canonical_literal_concept_findings(
             continue
         for raw_item in split_top_level_commas(literal_text(leaf.text)):
             raw = WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip().lower()
-            if not raw or "_" in raw or normalize_canonical_tag(raw) in vocabulary:
+            if (
+                not raw or "_" in raw or normalize_canonical_tag(raw) in vocabulary
+                or canonical_relationship_components(raw_item, vocabulary)
+            ):
                 continue
             words = re.findall(r"[a-z0-9][a-z0-9+'-]*", raw)
             if not 2 <= len(words) <= 5:

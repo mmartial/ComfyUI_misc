@@ -617,7 +617,9 @@ def generation_instruction(
         "tags mode: flat comma-separated short visual phrases, 1-3 meaningful weights, no prose, quality filler, negative prompt, or "
         "sequential/multi-panel content. Respect content_profile: general forbids mature, suggestive, explicit, fetish, or graphic "
         "content; sensitive permits non-explicit mature material but not explicit sexual content; unrestricted adds no content "
-        "restriction. " + canonical_note +
+        "restriction. Compact relationship compositions made from verified canonical components are not literal fallbacks; accepted "
+        "forms include `holding black_rose`, `standing against_mirror`, and `hands on (steering_wheel:1.2)`. Keep these relations short "
+        "and do not use this exception for decorative prose or an unknown underscore token. " + canonical_note +
         "Avoid duplicate or near-duplicate leaves. For component pools, treat the first content-bearing item as the "
         "lead motif and do not use any lead motif more than max_lead_motif_repeats; vary the actual base subject or setting rather "
         "than producing several lightly modified variants of one base. When—and only when—a concept intentionally restricts the "
@@ -873,6 +875,8 @@ def literal_fallback_phrases(leaf: str, canonical_tags: set[str]) -> list[str]:
             continue
         normalized = linter.normalize_canonical_tag(item)
         if normalized in canonical_tags or normalized == "limited_palette":
+            continue
+        if linter.canonical_relationship_components(item, canonical_tags):
             continue
         phrases.append(item)
     return phrases

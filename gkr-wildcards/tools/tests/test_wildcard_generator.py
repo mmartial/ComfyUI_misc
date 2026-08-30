@@ -146,6 +146,16 @@ class WildcardGeneratorTests(unittest.TestCase):
                 "vehicle", missing, 1, "gkr_test", [], allowed, canonical_policy="strict",
             )
 
+    def test_prefer_does_not_treat_recognized_relationship_compositions_as_fallbacks(self):
+        canonical = {
+            "standing", "against_mirror", "holding", "black_rose", "steering_wheel",
+        }
+        leaf = (
+            "standing against_mirror, holding black_rose, "
+            "hands on (steering_wheel:1.2)"
+        )
+        self.assertEqual(GENERATOR.literal_fallback_phrases(leaf, canonical), [])
+
     def test_excluded_header_tags_are_rejected_in_plain_weighted_and_space_forms(self):
         for leaf in (
             "person, comic, street",

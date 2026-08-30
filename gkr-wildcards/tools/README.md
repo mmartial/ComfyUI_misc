@@ -82,8 +82,8 @@ Choose how strongly generation must prefer the canonical vocabulary in the skele
 The setting is durable and travels with the skeleton. `--canonical-policy strict|prefer|flexible`
 overrides it for one run. When neither is supplied, `flexible` preserves legacy behavior:
 
-- `strict` permits only retrieved canonical tags and wildcard references; literal fallbacks fail
-  category validation.
+- `strict` permits retrieved canonical tags, wildcard references, and narrowly recognized compact
+  relationships composed from canonical parts; other literal fallbacks fail category validation.
 - `prefer` uses the ordinary concept-level candidate palette, then extracts every literal from the
   draft, searches the SQLite index for that complete phrase, and sends those candidates plus the
   complete draft to a canonical-revision LLM pass. A retained literal must have aligned provenance
@@ -560,6 +560,14 @@ semantic-preservation verification before entering the fixed copy. An explicit
 `--fix-rules canonical_literal_concept` remains available when that is the only rule to
 repair, because `--fix-rules` is an allowlist that replaces `--fix-severity`. This
 separation lets a project evaluate candidate quality before allowing changes.
+
+Compact relationship phrases are treated separately from ordinary descriptive literals. The
+linter recognizes a canonical relationship action plus canonical target, such as
+`holding black_rose` or `standing against_mirror`, and a small body-part/spatial frame around a
+canonical weighted object, such as `hands on (steering_wheel:1.2)`. These are sent to semantic
+review as verified relationship compositions and are not canonical-literal repair targets. The
+recognition is intentionally narrow: unknown underscore tokens and arbitrary prose remain subject
+to normal validation and similarity review.
 
 `--canonical-tag-style underscore` renders canonical suggestions as database identifiers such as `red_hair`. Use `--canonical-tag-style spaces` for models whose documented tag syntax uses `red hair`; matching and verification still retain `red_hair` internally as the canonical identity.
 

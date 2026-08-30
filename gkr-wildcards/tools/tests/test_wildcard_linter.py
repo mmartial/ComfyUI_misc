@@ -103,6 +103,34 @@ class WildcardLinterTests(unittest.TestCase):
             [["sitting", "seat"], ["railroad_tracks"]],
         )
 
+    def test_compact_canonical_relationship_compositions_are_recognized(self):
+        vocabulary = LINTER.DanbooruVocabulary({
+            "standing", "against_mirror", "holding", "black_rose", "steering_wheel",
+        })
+        expected = {
+            "standing against_mirror": ["standing", "against_mirror"],
+            "holding black_rose": ["holding", "black_rose"],
+            "hands on (steering_wheel:1.2)": ["steering_wheel"],
+        }
+        for phrase, components in expected.items():
+            self.assertEqual(
+                LINTER.canonical_relationship_components(phrase, vocabulary), components,
+            )
+        self.assertEqual(
+            LINTER.canonical_relationship_components("holding invented_object", vocabulary), [],
+        )
+        leaf = LINTER.Leaf(
+            "relations", "test.yaml", "gkr", "scene", 0, 10,
+            ", ".join(expected), (), "tags",
+        )
+        self.assertEqual(
+            LINTER.exact_canonical_relationship_items(leaf, vocabulary),
+            [
+                {"text": phrase, "canonical_components": components}
+                for phrase, components in expected.items()
+            ],
+        )
+
     def test_colored_verbose_log_highlights_cache_and_request_details(self):
         stream = io.StringIO()
         message = "completed, HTTP 200; 0 cached, 1 requested; no LLM call"
