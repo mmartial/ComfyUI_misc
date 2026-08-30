@@ -208,6 +208,10 @@ Repair behavior:
 """,
     )
     parser.add_argument("paths", nargs="*", help="One or more YAML files/directories. Required for wildcard linting; may be omitted only with --validate-post-prompts")
+    parser.add_argument(
+        "--only", action="append", metavar="CATEGORY",
+        help="Audit only this category plus categories it references directly (one hop). Repeat the option or use commas; namespace/category disambiguates names",
+    )
     parser.add_argument("--rules", type=Path, help="Rules YAML (defaults beside script)")
     parser.add_argument("--tags-rules", type=Path, help="Tags-mode rules YAML (defaults beside script)")
     parser.add_argument("--format", choices=("text", "json", "markdown"), default="text", help="Report encoding written to --output or stdout (default: text)")
@@ -319,6 +323,45 @@ def load_inventory(paths: list[Path]) -> tuple[list[Leaf], dict[tuple[str, str],
                 leaves.append(leaf)
                 categories.setdefault((namespace, str(category)), []).append(leaf)
     return leaves, categories, findings
+
+
+def filter_inventory(
+    leaves: list[Leaf], categories: dict[tuple[str, str], list[Leaf]],
+    findings: list[Finding], raw_only: list[str],
+) -> tuple[list[Leaf], dict[tuple[str, str], list[Leaf]], list[Finding], set[tuple[str, str]]]:
+    """Select requested categories and exactly one hop of referenced categories."""
+    selectors = [value.strip() for raw in raw_only for value in raw.split(",") if value.strip()]
+    if not selectors:
+        raise ValueError("--only requires at least one non-empty category name")
+    roots: set[tuple[str, str]] = set()
+    missing: list[str] = []
+    for selector in selectors:
+        if "/" in selector:
+            namespace, category = selector.split("/", 1)
+            matches = {(namespace, category)} & categories.keys()
+        else:
+            matches = {key for key in categories if key[1] == selector}
+        if not matches:
+            missing.append(selector)
+        roots.update(matches)
+    if missing:
+        available = ", ".join(sorted({category for _, category in categories}))
+        raise ValueError(
+            "--only category not found: " + ", ".join(missing)
+            + (f"; available categories: {available}" if available else "")
+        )
+    included = set(roots)
+    for key in roots:
+        for leaf in categories.get(key, []):
+            included.update(reference for reference in leaf.references if reference in categories)
+    selected_categories = {key: categories[key] for key in included}
+    selected_leaves = [leaf for leaf in leaves if (leaf.namespace, leaf.category) in included]
+    included_locations = {(leaf.file, leaf.category) for leaf in selected_leaves}
+    selected_findings = [
+        finding for finding in findings
+        if not finding.category or (finding.file, finding.category) in included_locations
+    ]
+    return selected_leaves, selected_categories, selected_findings, roots
 
 
 def load_rules(path: Path) -> dict[str, Any]:
@@ -550,14 +593,18 @@ def authored_category(category: str, rules: dict[str, Any]) -> bool:
     return any(re.search(pattern, category) for pattern in rules.get("authored_category_regex", []))
 
 
-def graph_findings(leaves: list[Leaf], categories: dict[tuple[str, str], list[Leaf]]) -> list[Finding]:
+def graph_findings(
+    leaves: list[Leaf], categories: dict[tuple[str, str], list[Leaf]],
+    known_categories: dict[tuple[str, str], list[Leaf]] | None = None, partial: bool = False,
+) -> list[Finding]:
     findings: list[Finding] = []
+    known_categories = known_categories or categories
     graph: dict[tuple[str, str], set[tuple[str, str]]] = {key: set() for key in categories}
     for leaf in leaves:
         source = (leaf.namespace, leaf.category)
         for ref in leaf.references:
             graph.setdefault(source, set()).add(ref)
-            if ref not in categories:
+            if ref not in known_categories:
                 findings.append(Finding("error", "missing_reference", f"reference {ref[0]}/{ref[1]} does not exist", leaf.file, leaf.line, leaf.category, leaf.uid, f"__{ref[0]}/{ref[1]}__"))
 
     visiting: set[tuple[str, str]] = set()
@@ -587,7 +634,7 @@ def graph_findings(leaves: list[Leaf], categories: dict[tuple[str, str], list[Le
         walk(node, [])
 
     namespaces = sorted({namespace for namespace, _ in categories})
-    for namespace in namespaces:
+    for namespace in (() if partial else namespaces):
         roots = sorted(
             key for key in categories
             if key[0] == namespace and (
@@ -621,7 +668,7 @@ def graph_findings(leaves: list[Leaf], categories: dict[tuple[str, str], list[Le
         if not camera_refs:
             continue
         other_refs = [ref for ref in leaf.references if ref not in camera_refs]
-        if SEQUENCE_RE.search(literal_text(leaf.text)) or any(category_has_sequence(ref, categories, set()) for ref in other_refs):
+        if SEQUENCE_RE.search(literal_text(leaf.text)) or any(category_has_sequence(ref, known_categories, set()) for ref in other_refs):
             findings.append(Finding("error", "camera_format_conflict", "unrestricted camera pool can conflict with sequential or multi-panel content", leaf.file, leaf.line, leaf.category, leaf.uid, ", ".join(f"{a}/{b}" for a, b in camera_refs)))
         elif len(other_refs) or len(literal_text(leaf.text).split()) > 10:
             findings.append(Finding("warning", "unrestricted_camera_composite", "completed content references an unrestricted camera pool; verify every expansion preserves subject count and visibility", leaf.file, leaf.line, leaf.category, leaf.uid, ", ".join(f"{a}/{b}" for a, b in camera_refs)))
@@ -2366,6 +2413,18 @@ def main() -> int:
         rules = load_rules(rules_path)
         verbose(args, f"loaded general rules from {rules_path}")
         leaves, categories, findings = load_inventory(paths)
+        all_categories = categories
+        if args.only:
+            leaves, categories, findings, only_roots = filter_inventory(
+                leaves, categories, findings, args.only,
+            )
+            root_names = ", ".join(
+                f"{namespace}/{category}" for namespace, category in sorted(only_roots)
+            )
+            included_names = ", ".join(
+                f"{namespace}/{category}" for namespace, category in sorted(categories)
+            )
+            verbose(args, f"--only roots: {root_names}; auditing one-hop scope: {included_names}")
         verbose(args, f"inventoried {len(categories)} categories and {len(leaves)} leaves")
         if canonical_retriever is not None and canonical_retriever.embedding_client is not None:
             primed = canonical_retriever.prime(leaves)
@@ -2392,13 +2451,15 @@ def main() -> int:
             )
             findings.extend(canonical_results)
             verbose(args, f"canonical-tag checks produced {len(canonical_results)} finding(s)")
-        graph_results = graph_findings(leaves, categories)
+        graph_results = graph_findings(
+            leaves, categories, all_categories if args.only else None, partial=bool(args.only),
+        )
         findings.extend(graph_results)
         verbose(args, f"reference and route checks produced {len(graph_results)} finding(s)")
-        motif_results = route_motif_findings(categories, rules)
+        motif_results = [] if args.only else route_motif_findings(categories, rules)
         findings.extend(motif_results)
         verbose(args, f"route motif checks produced {len(motif_results)} finding(s)")
-        policy_results = namespace_policy_findings(leaves, categories, rules)
+        policy_results = [] if args.only else namespace_policy_findings(leaves, categories, rules)
         findings.extend(policy_results)
         verbose(args, f"namespace policy checks produced {len(policy_results)} finding(s)")
         suggestions: dict[str, str] = {}

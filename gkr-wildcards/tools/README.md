@@ -370,6 +370,26 @@ From `gkr-wildcards`:
 uv run tools/wildcard_linter.py gkr-anime.yaml
 ```
 
+Audit one subsection and the category pools it references directly:
+
+```bash
+uv run tools/wildcard_linter.py gkr-comics.yaml --only spotlight_us_comics
+uv run tools/wildcard_linter.py gkr-comics.yaml \
+  --only spotlight_us_comics --only spotlight_covers
+```
+
+`--only` accepts repeated options or comma-separated names. A plain category name matches
+that name in any input namespace; use `namespace/category` to disambiguate. The scope is
+exactly one reference hop: selected categories are audited, as are all leaves in the
+categories referenced directly by their leaves, but references made by those included
+subcategories are not recursively added. Missing-reference and cycle checks still use
+the complete file inventory so the partial audit does not invent errors merely because
+an out-of-scope category was intentionally omitted. Whole-namespace reachability, route-
+motif probability, and namespace-policy checks are skipped because their results would
+be misleading on a subsection. `--fixed-output`, LLM review, canonical lookup, and report
+generation operate only on the selected scope while the fixed copy retains the rest of
+the original YAML unchanged.
+
 Audit every wildcard YAML file in the folder:
 
 ```bash

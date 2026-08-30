@@ -137,6 +137,54 @@ class WildcardLinterTests(unittest.TestCase):
         )
         self.assertEqual(leaves[0].mode, "tags")
 
+    def test_only_selects_requested_categories_and_exactly_one_reference_hop(self):
+        leaves, categories, findings = self.inventory(
+            "# MODE: tags\n"
+            "gkr_test:\n"
+            "  spotlight_covers:\n"
+            "    - __gkr_test/cover_subject__, comic_cover\n"
+            "  cover_subject:\n"
+            "    - __gkr_test/deep_subject__, 1woman\n"
+            "  deep_subject:\n"
+            "    - knight\n"
+            "  unrelated:\n"
+            "    - landscape\n"
+        )
+        selected_leaves, selected_categories, selected_findings, roots = LINTER.filter_inventory(
+            leaves, categories, findings, ["spotlight_covers"],
+        )
+        self.assertEqual(roots, {("gkr_test", "spotlight_covers")})
+        self.assertEqual(
+            set(selected_categories),
+            {("gkr_test", "spotlight_covers"), ("gkr_test", "cover_subject")},
+        )
+        self.assertEqual(
+            {leaf.category for leaf in selected_leaves},
+            {"spotlight_covers", "cover_subject"},
+        )
+        self.assertFalse(selected_findings)
+        graph = LINTER.graph_findings(
+            selected_leaves, selected_categories, categories, partial=True,
+        )
+        self.assertNotIn("missing_reference", {finding.rule for finding in graph})
+
+    def test_only_accepts_repeated_comma_and_qualified_names_and_rejects_unknown(self):
+        leaves, categories, findings = self.inventory(
+            "gkr_test:\n"
+            "  spotlight_us_comics:\n"
+            "    - city\n"
+            "  spotlight_covers:\n"
+            "    - comic cover\n"
+        )
+        _, selected, _, roots = LINTER.filter_inventory(
+            leaves, categories, findings,
+            ["gkr_test/spotlight_us_comics,spotlight_covers"],
+        )
+        self.assertEqual(set(selected), roots)
+        self.assertEqual(len(roots), 2)
+        with self.assertRaisesRegex(ValueError, "--only category not found: missing"):
+            LINTER.filter_inventory(leaves, categories, findings, ["missing"])
+
     def test_json_response_parser_uses_last_valid_array_amid_commentary(self):
         content = (
             "```json\n[{\"id\": \"first\"}]\n```\n"
