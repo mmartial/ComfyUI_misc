@@ -724,6 +724,10 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertTrue(
             LINTER.canonical_visual_test_false_positive(reviewed, leaf, vocabulary)
         )
+        self.assertEqual(
+            LINTER.canonical_visual_test_matches(reviewed, leaf, vocabulary),
+            ["science_fiction"],
+        )
 
         larger_phrase = LINTER.Leaf(
             "id2", "test.yaml", "gkr", "scene", 0, 11,

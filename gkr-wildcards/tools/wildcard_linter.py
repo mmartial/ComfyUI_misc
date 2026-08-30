@@ -1127,10 +1127,12 @@ def llm_review(
             if classification == "pass":
                 continue
             leaf = by_id[uid]
-            if canonical_visual_test_false_positive(item, leaf, danbooru_vocabulary):
+            canonical_matches = canonical_visual_test_matches(item, leaf, danbooru_vocabulary)
+            if canonical_matches:
                 verbose(
                     args,
-                    f"ignored LLM visual-test finding for canonical vocabulary item in "
+                    f"ignored LLM visual-test finding for canonical vocabulary item(s) "
+                    f"[{', '.join(canonical_matches)}] in "
                     f"{leaf.category} at {leaf.file}:{leaf.line}",
                 )
                 continue
@@ -1156,15 +1158,23 @@ def canonical_visual_test_false_positive(
     vocabulary: DanbooruVocabulary | None,
 ) -> bool:
     """Suppress an LLM visual-test rejection of an exact local canonical item."""
+    return bool(canonical_visual_test_matches(reviewed_item, leaf, vocabulary))
+
+
+def canonical_visual_test_matches(
+    reviewed_item: dict[str, Any], leaf: Leaf,
+    vocabulary: DanbooruVocabulary | None,
+) -> list[str]:
+    """Return exact canonical items incorrectly rejected by an LLM visual test."""
     failed_test = str(reviewed_item.get("failed_test", ""))
     if "visual" not in failed_test.casefold() or vocabulary is None:
-        return False
+        return []
     verified = set(exact_canonical_tag_items(leaf, vocabulary))
     if not verified:
-        return False
+        return []
     reason = str(reviewed_item.get("reason", ""))
     quoted = re.findall(r"['`\"]([^'`\"]+)['`\"]", reason)
-    return any(normalize_canonical_tag(value) in verified for value in quoted)
+    return sorted({normalize_canonical_tag(value) for value in quoted} & verified)
 
 
 def llm_suggest_fixes(
