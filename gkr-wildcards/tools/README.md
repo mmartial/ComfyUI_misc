@@ -390,6 +390,37 @@ be misleading on a subsection. `--fixed-output`, LLM review, canonical lookup, a
 generation operate only on the selected scope while the fixed copy retains the rest of
 the original YAML unchanged.
 
+For large pools, add `--semantic-duplicates` to compare leaf meaning rather than only
+normalized spelling:
+
+```bash
+uv run tools/wildcard_linter.py gkr-comics.yaml \
+  --only spotlight_covers \
+  --danbooru-tags safebooru_general_tags.classified.csv \
+  --danbooru-index safebooru_general_tags.index.sqlite \
+  --retrieval auto \
+  --semantic-duplicates \
+  --semantic-duplicate-threshold 0.94 \
+  --format markdown --output spotlight-covers-duplicates.md \
+  --fail-on never --verbose
+```
+
+This pass embeds the scoped leaf text in batches and compares cosine similarity only
+within the same category. Each leaf produces at most one warning for its closest earlier
+neighbor, avoiding an unreadable all-pairs report. Exact normalized duplicates remain
+covered by `duplicate_leaf`; the semantic pass skips those redundant pairs. Findings use
+rule `semantic_duplicate_leaf` and include both source locations, both complete leaves,
+the measured cosine similarity, and the configured threshold. The default threshold is
+`0.94`; increase it for fewer, stronger matches or lower it cautiously for broader
+review. Because similarity is model-dependent and does not prove identity, these are
+warnings for human review rather than automatic removals or fixes.
+
+When `--llm --suggest-fixes` makes semantic-duplicate warnings eligible for repair (for
+example through `--fix-severity both` or `--fix-rules semantic_duplicate_leaf`), proposed
+rewrites are embedded again before acceptance. A rewrite that remains at or above the
+configured similarity threshold is rejected and remains `[UNRESOLVED]`; it is not marked
+fixed merely because the LLM changed its wording.
+
 Audit every wildcard YAML file in the folder:
 
 ```bash
@@ -930,7 +961,7 @@ uv run tools/wildcard_linter.py gkr-anime.yaml \
   --timeout 300
 ```
 
-## Practical example:
+## Practical example
 
 ### Obtain the safebooru_general_tags.csv file
 
@@ -1008,6 +1039,41 @@ After completion:
 
 1. Compare the bsase YAML against the `.fixed` YAML and make decisions
 2. Review the `.fixed-report.md` for `UNRESOLVED` entries
+
+### Fix "only" a section in a generated file
+
+Use `--only` and `--semantic-duplicates`:
+
+```bash
+THEME="comics"; SECTION="spotlight_covers"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
+  gkr-$THEME.yaml \
+  --only $SECTION \
+  --semantic-duplicates \
+  --semantic-duplicate-threshold 0.94 \
+  --verbose \
+  --llm \
+  --llm-scope content \
+  --suggest-fixes \
+  --fix-severity both \
+  --danbooru-tags safebooru_general_tags.classified.csv \
+  --danbooru-index safebooru_general_tags.index.sqlite \
+  --retrieval auto \
+  --canonical-tag-suggestions \
+  --canonical-tag-candidate-count 5 \
+  --canonical-tag-style underscore \
+  --api-key-env OLLAMA_API_KEY \
+  --base-url http://localhost:11434/v1 \
+  --model gemma4:cloud \
+  --batch-size 15 \
+  --verification-batch-size 15 \
+  --timeout 300 \
+  --llm-cache-dir wildcard-linter-cache \
+  --fixed-output gkr-$THEME.$SECTION.fixed.yaml \
+  --format markdown \
+  --output gkr-$THEME.$SECTION.fixed.report.md \
+  --color auto \
+  --fail-on never
+```
 
 ## Analyze a details.md file
 

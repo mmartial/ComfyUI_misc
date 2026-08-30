@@ -26,6 +26,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 import yaml
+import numpy as np
 
 from danbooru_index import DanbooruIndex, EmbeddingClient
 
@@ -211,6 +212,14 @@ Repair behavior:
     parser.add_argument(
         "--only", action="append", metavar="CATEGORY",
         help="Audit only this category plus categories it references directly (one hop). Repeat the option or use commas; namespace/category disambiguates names",
+    )
+    parser.add_argument(
+        "--semantic-duplicates", action="store_true",
+        help="Embed leaf text and report near-duplicates within each audited category; requires --danbooru-tags and an available embedded SQLite index",
+    )
+    parser.add_argument(
+        "--semantic-duplicate-threshold", type=float, default=0.94, metavar="SIMILARITY",
+        help="Minimum cosine similarity for --semantic-duplicates warnings; raise to reduce false positives (default: 0.94)",
     )
     parser.add_argument("--rules", type=Path, help="Rules YAML (defaults beside script)")
     parser.add_argument("--tags-rules", type=Path, help="Tags-mode rules YAML (defaults beside script)")
@@ -459,6 +468,64 @@ def duplicate_leaf_findings(leaves: list[Leaf]) -> list[Finding]:
             ),
             leaf.file, leaf.line, leaf.category, leaf.uid, leaf.text,
         ))
+    return findings
+
+
+def semantic_leaf_text(text: str) -> str:
+    """Render wildcard syntax as embedding-friendly text without losing referenced concepts."""
+    text = REFERENCE_RE.sub(lambda match: match.group(2).replace("_", " "), text)
+    text = WEIGHT_RE.sub(lambda match: match.group(1), text)
+    return " ".join(text.replace("_", " ").split())
+
+
+def semantic_duplicate_findings(
+    leaves: list[Leaf], embedding_client: EmbeddingClient,
+    threshold: float = 0.94, batch_size: int = 64,
+) -> list[Finding]:
+    """Report each leaf's closest earlier semantic neighbor within its category."""
+    eligible = [leaf for leaf in leaves if semantic_leaf_text(leaf.text)]
+    if len(eligible) < 2:
+        return []
+    texts = [semantic_leaf_text(leaf.text) for leaf in eligible]
+    vectors: list[list[float]] = []
+    for offset in range(0, len(texts), batch_size):
+        vectors.extend(embedding_client.embed(texts[offset:offset + batch_size]))
+    matrix = np.asarray(vectors, dtype=np.float32)
+    if matrix.ndim != 2 or matrix.shape[0] != len(eligible):
+        raise RuntimeError("semantic duplicate embeddings have an invalid shape")
+    norms = np.linalg.norm(matrix, axis=1, keepdims=True)
+    norms[norms == 0] = 1.0
+    matrix = matrix / norms
+    findings: list[Finding] = []
+    by_category: dict[tuple[str, str], list[int]] = {}
+    for index, leaf in enumerate(eligible):
+        by_category.setdefault((leaf.namespace, leaf.category), []).append(index)
+    for indexes in by_category.values():
+        for position, current_index in enumerate(indexes):
+            if position == 0:
+                continue
+            prior_indexes = indexes[:position]
+            scores = matrix[prior_indexes] @ matrix[current_index]
+            best_offset = int(np.argmax(scores))
+            score = float(scores[best_offset])
+            prior_index = prior_indexes[best_offset]
+            current = eligible[current_index]
+            prior = eligible[prior_index]
+            if score < threshold:
+                continue
+            if duplicate_leaf_signature(current.text, current.mode) == duplicate_leaf_signature(prior.text, prior.mode):
+                continue
+            evidence = (
+                f"cosine similarity: {score:.4f}\n"
+                f"candidate: {current.file}:{current.line}\n  {current.text}\n"
+                f"closest earlier leaf: {prior.file}:{prior.line}\n  {prior.text}"
+            )
+            findings.append(Finding(
+                "warning", "semantic_duplicate_leaf",
+                f"Leaf is semantically similar to an earlier leaf in the same category "
+                f"(cosine similarity {score:.4f}, threshold {threshold:.4f}).",
+                current.file, current.line, current.category, current.uid, evidence,
+            ))
     return findings
 
 
@@ -1406,6 +1473,8 @@ def validate_suggestions(
     rules: dict[str, Any], tags_rules: dict[str, Any],
     danbooru_vocabulary: DanbooruVocabulary | None = None, canonical_candidate_count: int = 5,
     canonical_tag_style: str = "underscore", canonical_retriever: CanonicalTagRetriever | None = None,
+    semantic_duplicate_client: EmbeddingClient | None = None,
+    semantic_duplicate_threshold: float | None = None,
 ) -> tuple[dict[str, str], dict[str, list[str]]]:
     """Reject structural changes and rewrites that leave or introduce targeted errors."""
     leaf_by_id = {leaf.uid: leaf for leaf in leaves}
@@ -1481,6 +1550,31 @@ def validate_suggestions(
             rejected[uid] = reasons
         else:
             accepted[uid] = rewrite
+    targeted_semantic = {
+        finding.leaf_id for finding in findings
+        if finding.rule == "semantic_duplicate_leaf" and finding.leaf_id in accepted
+    }
+    if targeted_semantic and semantic_duplicate_client is not None and semantic_duplicate_threshold is not None:
+        rewritten_leaves = [
+            Leaf(
+                leaf.uid, leaf.file, leaf.namespace, leaf.category, leaf.index, leaf.line,
+                accepted.get(leaf.uid, leaf.text),
+                tuple(REFERENCE_RE.findall(accepted.get(leaf.uid, leaf.text))), leaf.mode,
+            )
+            for leaf in leaves
+        ]
+        remaining = semantic_duplicate_findings(
+            rewritten_leaves, semantic_duplicate_client, semantic_duplicate_threshold,
+        )
+        remaining_by_id = {
+            finding.leaf_id: finding for finding in remaining
+            if finding.leaf_id in targeted_semantic
+        }
+        for uid, finding in remaining_by_id.items():
+            accepted.pop(uid, None)
+            rejected.setdefault(uid, []).append(
+                "semantic duplicate remains after rewrite: " + finding.message
+            )
     return accepted, rejected
 
 
@@ -2353,12 +2447,16 @@ def main() -> int:
                 raise ValueError("--output and --post-prompt-output must name different files")
         if args.canonical_tag_suggestions and not args.danbooru_tags:
             raise ValueError("--canonical-tag-suggestions requires --danbooru-tags")
+        if args.semantic_duplicates and not args.danbooru_tags:
+            raise ValueError("--semantic-duplicates requires --danbooru-tags and its embedded SQLite index")
         if args.danbooru_index and not args.danbooru_tags:
             raise ValueError("--danbooru-index requires --danbooru-tags")
         if args.canonical_tag_suggestions and (not args.llm or not args.suggest_fixes):
             raise ValueError("--canonical-tag-suggestions requires --llm and --suggest-fixes")
         if args.canonical_tag_candidate_count < 1:
             raise ValueError("--canonical-tag-candidate-count must be at least 1")
+        if not 0.0 < args.semantic_duplicate_threshold <= 1.0:
+            raise ValueError("--semantic-duplicate-threshold must be greater than 0 and at most 1")
         if args.danbooru_tags:
             danbooru_vocabulary = load_danbooru_tags(args.danbooru_tags.expanduser().resolve())
             verbose(args, f"loaded {len(danbooru_vocabulary)} local Danbooru tags from {args.danbooru_tags}")
@@ -2389,6 +2487,12 @@ def main() -> int:
         if danbooru_vocabulary is not None:
             canonical_retriever = open_canonical_retriever(
                 args, args.danbooru_tags.expanduser().resolve(), danbooru_vocabulary,
+            )
+        if args.semantic_duplicates and (
+            canonical_retriever is None or canonical_retriever.embedding_client is None
+        ):
+            raise ValueError(
+                "--semantic-duplicates requires a compatible complete embedding index and reachable embedding endpoint"
             )
         if args.batch_size < 1:
             raise ValueError("--batch-size must be at least 1")
@@ -2444,6 +2548,19 @@ def main() -> int:
         duplicate_results = duplicate_leaf_findings(leaves)
         findings.extend(duplicate_results)
         verbose(args, f"duplicate checks produced {len(duplicate_results)} finding(s)")
+        if args.semantic_duplicates:
+            assert canonical_retriever is not None and canonical_retriever.embedding_client is not None
+            verbose(
+                args,
+                f"embedding {len(leaves)} scoped leaves for semantic duplicate comparison "
+                f"at threshold {args.semantic_duplicate_threshold:.4f}",
+            )
+            semantic_duplicate_results = semantic_duplicate_findings(
+                leaves, canonical_retriever.embedding_client,
+                args.semantic_duplicate_threshold,
+            )
+            findings.extend(semantic_duplicate_results)
+            verbose(args, f"semantic duplicate checks produced {len(semantic_duplicate_results)} finding(s)")
         if danbooru_vocabulary is not None:
             canonical_results = canonical_tag_findings(
                 leaves, danbooru_vocabulary, args.canonical_tag_candidate_count, args.canonical_tag_style,
@@ -2509,6 +2626,11 @@ def main() -> int:
                     leaves, proposed_suggestions, findings, rules, tags_rules,
                     danbooru_vocabulary, args.canonical_tag_candidate_count, args.canonical_tag_style,
                     canonical_retriever,
+                    (
+                        canonical_retriever.embedding_client
+                        if args.semantic_duplicates and canonical_retriever is not None else None
+                    ),
+                    args.semantic_duplicate_threshold if args.semantic_duplicates else None,
                 )
                 verbose(args, f"deterministic validation accepted {len(suggestions)} of {len(proposed_suggestions)} potential fixes")
                 if not args.skip_fix_verification:

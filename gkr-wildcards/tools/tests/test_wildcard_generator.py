@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["PyYAML>=6.0.2"]
+# dependencies = ["PyYAML>=6.0.2", "numpy>=2.0"]
 # ///
 
 from __future__ import annotations

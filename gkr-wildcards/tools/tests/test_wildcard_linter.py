@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["PyYAML>=6.0.2"]
+# dependencies = ["PyYAML>=6.0.2", "numpy>=2.0"]
 # ///
 
 from __future__ import annotations
@@ -184,6 +184,76 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertEqual(len(roots), 2)
         with self.assertRaisesRegex(ValueError, "--only category not found: missing"):
             LINTER.filter_inventory(leaves, categories, findings, ["missing"])
+
+    def test_semantic_duplicate_checker_reports_closest_prior_leaf_with_context(self):
+        leaves = [
+            LINTER.Leaf("a", "test.yaml", "gkr", "covers", 0, 10,
+                        "comic_cover, red car, desert", (), "tags"),
+            LINTER.Leaf("b", "test.yaml", "gkr", "covers", 1, 11,
+                        "comic_cover, crimson automobile, sandy desert", (), "tags"),
+            LINTER.Leaf("c", "test.yaml", "gkr", "covers", 2, 12,
+                        "comic_cover, blue ocean, sailboat", (), "tags"),
+            LINTER.Leaf("d", "test.yaml", "gkr", "other", 0, 20,
+                        "comic_cover, crimson automobile, sandy desert", (), "tags"),
+        ]
+
+        class FakeEmbeddingClient:
+            def embed(self, inputs):
+                vectors = {
+                    "comic cover, red car, desert": [1.0, 0.0],
+                    "comic cover, crimson automobile, sandy desert": [0.999, 0.01],
+                    "comic cover, blue ocean, sailboat": [0.0, 1.0],
+                }
+                return [vectors[value] for value in inputs]
+
+        findings = LINTER.semantic_duplicate_findings(
+            leaves, FakeEmbeddingClient(), threshold=0.95,
+        )
+        self.assertEqual(len(findings), 1)
+        finding = findings[0]
+        self.assertEqual(finding.rule, "semantic_duplicate_leaf")
+        self.assertEqual(finding.line, 11)
+        self.assertIn("closest earlier leaf: test.yaml:10", finding.evidence)
+        self.assertIn("comic_cover, red car, desert", finding.evidence)
+        self.assertIn("cosine similarity:", finding.evidence)
+
+    def test_semantic_duplicate_fix_must_fall_below_threshold(self):
+        leaves = [
+            LINTER.Leaf("prior", "test.yaml", "gkr", "covers", 0, 10,
+                        "red car in desert", (), "narrative"),
+            LINTER.Leaf("target", "test.yaml", "gkr", "covers", 1, 11,
+                        "crimson automobile on sand", (), "narrative"),
+        ]
+        finding = LINTER.Finding(
+            "warning", "semantic_duplicate_leaf", "near duplicate",
+            "test.yaml", 11, "covers", "target",
+        )
+
+        class FakeEmbeddingClient:
+            def embed(self, inputs):
+                vectors = {
+                    "red car in desert": [1.0, 0.0],
+                    "scarlet vehicle among dunes": [0.999, 0.01],
+                    "blue sailboat on rough ocean": [0.0, 1.0],
+                }
+                return [vectors[value] for value in inputs]
+
+        accepted, rejected = LINTER.validate_suggestions(
+            leaves, {"target": "scarlet vehicle among dunes"}, [finding],
+            self.rules, self.tags_rules,
+            semantic_duplicate_client=FakeEmbeddingClient(),
+            semantic_duplicate_threshold=0.95,
+        )
+        self.assertNotIn("target", accepted)
+        self.assertIn("semantic duplicate remains after rewrite", rejected["target"][0])
+        accepted, rejected = LINTER.validate_suggestions(
+            leaves, {"target": "blue sailboat on rough ocean"}, [finding],
+            self.rules, self.tags_rules,
+            semantic_duplicate_client=FakeEmbeddingClient(),
+            semantic_duplicate_threshold=0.95,
+        )
+        self.assertEqual(accepted, {"target": "blue sailboat on rough ocean"})
+        self.assertFalse(rejected)
 
     def test_json_response_parser_uses_last_valid_array_amid_commentary(self):
         content = (
