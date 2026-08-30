@@ -425,6 +425,21 @@ Contained-span matching searches longest, non-overlapping spans of at least two 
 
 During LLM visual review, an exact complete comma-separated Tags-mode item from this vocabulary is supplied as a verified visual tag. Thus `dreaming` passes the representability test when it is its own item and exists in the CSV. A larger phrase such as `detective dreaming of victory` receives no such exemption merely because it contains that word. Structural and composition checks still apply to verified items.
 
+The same vocabulary is used narrowly during the Comprehension test. An exact canonical
+item is treated as a recognized atomic image concept and is not rejected solely because
+its name appears abstract, unfamiliar, or dependent on learned tag semantics. This does
+not make the entire leaf automatically comprehensible: a canonical relational tag such
+as `holding` can still be reported when no held object is identified, and canonical
+items do not excuse a missing subject, ambiguous action target, or unclear relationship.
+
+It is also consulted for the Single-moment test. Exact atomic action and effect tags such
+as `jumping`, `breaking`, `digital_dissolve`, and `transformation` are treated as learned
+freeze-frame concepts rather than rejected merely because their ordinary-language names
+imply time. Explicitly multi-state concepts such as `before_and_after`, progressions,
+sequences, and stage layouts remain invalid in an ordinary single-image route. Contextual
+misuse also remains reviewable—for example, a person-oriented `jumping` tag does not
+automatically validate a space fleet described as making a hyperspace jump.
+
 Hyphen normalization is also exact-first. A literal canonical tag that contains a hyphen remains unchanged. Otherwise ASCII hyphens and common Unicode dash forms are treated as word separators for lookup, allowing `high-contrast`, `high‑contrast`, and `high—contrast` to discover `high_contrast` without globally rewriting legitimate hyphenated canonical tags.
 
 The Tags-mode `canonical_composition` policy also recognizes overlapping modifier tags that share the final noun. When at least two vocabulary-backed components exist, `glowing red eye` yields `glowing_eye` (exact) and `red_eyes` (conservative inflection from `red eye`) under `canonical_tag_composition`. The components are passed to the constrained LLM and must remain represented in an accepted rewrite. The analysis is disabled outside Tags mode, does not fire for only one component, and never treats candidate existence alone as permission to change semantics.
@@ -601,6 +616,11 @@ uv run tools/wildcard_linter.py gkr-anime.yaml --llm --llm-cache-max-age-minutes
 ## Report layout, differences, and color
 
 Text and Markdown reports render every finding as a separate section. When a potential fix exists, the report shows the original leaf and proposed replacement as a diff.
+
+Every leaf-level finding also shows the complete `Source leaf` immediately after the
+location and message. This provides the prompt context even when no fix was suggested or
+the finding remains unresolved. File- or category-level structural findings that do not
+belong to one specific leaf omit this block.
 
 When `--fixed-output` is generated, findings whose leaves were not included in the accepted replacements are marked `[UNRESOLVED]` in text and Markdown reports. The report summary includes the unresolved count, making `rg '\[UNRESOLVED\]' gkr-comics.fixed-report.md` a quick review filter. JSON reports expose the same state as `fix_status` (`fixed`, `unresolved`, or `not_attempted`) and include `summary.unresolved`. The marker is report metadata only; it is never inserted into wildcard YAML content.
 

@@ -47,6 +47,10 @@ PALETTE_COLOR_NAMES = {
     "magenta", "maroon", "navy", "ochre", "orange", "pink", "purple", "red",
     "scarlet", "silver", "tan", "teal", "turquoise", "violet", "white", "yellow",
 }
+EXPLICIT_MULTI_MOMENT_CANONICAL_TAGS = {
+    "age_comparison", "age_progression", "before_and_after", "different_times",
+    "multiple_views", "progression", "sequence", "stages_of_life", "timeline",
+}
 TAG_SEQUENCE_RE = re.compile(
     r"\b(?:multi[- ]?panel|split comic panels?|sequential panels?|\w+-panel (?:page|sequence)|"
     r"comic page|manga page|(?:two|three|four|five|six|seven|eight|nine|\d+)[- ]page|"
@@ -1106,8 +1110,14 @@ def llm_review(
             "Apply the prompt-language section matching each item's mode. Do not omit IDs and do not add IDs. "
             "Modular leaves may be partial. In tags mode, each complete comma-separated item in verified_canonical_items is an exact "
             "local Danbooru-vocabulary match and passes the visual-representability test by itself; do not reject or rewrite that item "
-            "merely because the same word could be abstract in prose. This exception does not validate a larger phrase containing the "
-            "word, nor does it override structural, compatibility, or composition checks.\n\nPOLICY:\n" + policy
+            "merely because the same word could be abstract in prose. For the Comprehension test, treat each verified canonical item as a "
+            "recognized atomic image concept; do not reject it solely for being unfamiliar, abstract-sounding, or dependent on learned tag "
+            "semantics. A leaf may still fail comprehension when the composition leaves a subject, object, action target, or relationship "
+            "genuinely unspecified or ambiguous. For the Single-moment test, accept a verified atomic action/effect such as jumping, breaking, "
+            "digital_dissolve, or transformation as a learned freeze-frame concept; do not reject it merely because the named action implies "
+            "time in ordinary prose. Explicit sequences, progressions, before/after tags, multi-state layouts, and contextually incompatible use "
+            "may still fail. This exception does not validate a larger phrase containing the word, nor does it override "
+            "structural, compatibility, or composition checks.\n\nPOLICY:\n" + policy
         )
         trace_event(trace_path, {"event": "request", "batch": batch_number, "items": payload_items})
         reviewed = llm_json_request(
@@ -1127,11 +1137,13 @@ def llm_review(
             if classification == "pass":
                 continue
             leaf = by_id[uid]
-            canonical_matches = canonical_visual_test_matches(item, leaf, danbooru_vocabulary)
+            canonical_test, canonical_matches = canonical_llm_false_positive_matches(
+                item, leaf, danbooru_vocabulary,
+            )
             if canonical_matches:
                 verbose(
                     args,
-                    f"ignored LLM visual-test finding for canonical vocabulary item(s) "
+                    f"ignored LLM {canonical_test} finding for canonical vocabulary item(s) "
                     f"[{', '.join(canonical_matches)}] in "
                     f"{leaf.category} at {leaf.file}:{leaf.line}",
                 )
@@ -1175,6 +1187,55 @@ def canonical_visual_test_matches(
     reason = str(reviewed_item.get("reason", ""))
     quoted = re.findall(r"['`\"]([^'`\"]+)['`\"]", reason)
     return sorted({normalize_canonical_tag(value) for value in quoted} & verified)
+
+
+def canonical_llm_false_positive_matches(
+    reviewed_item: dict[str, Any], leaf: Leaf,
+    vocabulary: DanbooruVocabulary | None,
+) -> tuple[str, list[str]]:
+    """Protect exact canonical items without excusing genuinely unclear relationships."""
+    visual = canonical_visual_test_matches(reviewed_item, leaf, vocabulary)
+    if visual:
+        return "visual-test", visual
+    failed_test = str(reviewed_item.get("failed_test", ""))
+    if vocabulary is None:
+        return "", []
+    verified = set(exact_canonical_tag_items(leaf, vocabulary))
+    reason = str(reviewed_item.get("reason", ""))
+    quoted = re.findall(r"['`\"]([^'`\"]+)['`\"]", reason)
+    matches = sorted({normalize_canonical_tag(value) for value in quoted} & verified)
+    if not matches:
+        return "", []
+    if "single-moment" in failed_test.casefold() or "single moment" in failed_test.casefold():
+        atomic = [tag for tag in matches if tag not in EXPLICIT_MULTI_MOMENT_CANONICAL_TAGS]
+        transition_objection = re.search(
+            r"\b(?:transition|process|change|across time|over time|stable (?:visible )?state|earlier|later)\b",
+            reason, re.I,
+        )
+        contextual_objection = re.search(
+            r"\b(?:in (?:this|the) context|before[- /]?and[- /]?after|multiple (?:moments|states)|"
+            r"sequence|progression|panels?|stages?)\b",
+            reason, re.I,
+        )
+        if atomic and transition_objection and not contextual_objection:
+            return "single-moment-test", atomic
+        return "", []
+    if "comprehension" not in failed_test.casefold():
+        return "", []
+    relational_failure = re.search(
+        r"\b(?:incomplete|does not specify|doesn't specify|unclear (?:what|who|which)|"
+        r"relationship between|disconnected|lacks? (?:a |an |the )?(?:subject|object|target|action)|"
+        r"missing (?:a |an |the )?(?:subject|object|target|action)|focal subject)\b",
+        reason, re.I,
+    )
+    if relational_failure:
+        return "", []
+    intrinsic_rejection = re.search(
+        r"\b(?:abstract|interpretive|unfamiliar|unrecognized|not (?:visually )?representable|"
+        r"cannot be seen|requires visible evidence|dependent on (?:context|explanation))\b",
+        reason, re.I,
+    )
+    return ("comprehension-test", matches) if intrinsic_rejection else ("", [])
 
 
 def llm_suggest_fixes(
@@ -1554,10 +1615,14 @@ def render(
         lines.append("")
         for finding in findings:
             location = f"{finding.file}:{finding.line}" if finding.line else finding.file
+            leaf = leaf_by_id.get(finding.leaf_id)
             llm_badge = " · **LLM**" if finding.source == "llm" else ""
             unresolved_badge = " · **[UNRESOLVED]**" if fix_status(finding) == "unresolved" else ""
             marker = "🔴" if finding.severity == "error" else "🟠"
-            lines.extend(["---", "", f"### {marker} {finding.severity.upper()} · `{finding.rule}`{llm_badge}{unresolved_badge}", "", f"Location: `{location}`", "", finding.message])
+            lines.extend(["---", "", f"### {marker} {finding.severity.upper()} · `{finding.rule}`{llm_badge}{unresolved_badge}", "", f"Location: `{location}`"])
+            if leaf:
+                lines.extend(["", "**Source leaf:**", "", "```text", leaf.text, "```"])
+            lines.extend(["", finding.message])
             if finding.evidence:
                 if "\n" in finding.evidence:
                     lines.extend(["", "Evidence:", "", "```text", finding.evidence, "```"])
@@ -1567,7 +1632,6 @@ def render(
                 lines.extend(["", "**Potential replacements — LLM generated:**", ""])
                 lines.extend(f"- `{alternative}`" for alternative in finding.alternatives)
             if finding.suggestion:
-                leaf = leaf_by_id.get(finding.leaf_id)
                 lines.extend(["", "**Potential fix — LLM generated:**", "", finding.suggestion])
                 if leaf:
                     lines.extend(["", "```diff", f"- {leaf.text}", f"+ {finding.suggestion}", "```"])
@@ -1577,6 +1641,7 @@ def render(
         lines.append(f"Unresolved after fixed-output generation: {unresolved_count}; search for [UNRESOLVED]")
     for finding in findings:
         location = f"{finding.file}:{finding.line}" if finding.line else finding.file
+        leaf = leaf_by_id.get(finding.leaf_id)
         evidence = (
             f"\nEvidence:\n{finding.evidence}" if finding.evidence and "\n" in finding.evidence
             else (f" [{finding.evidence}]" if finding.evidence else "")
@@ -1585,14 +1650,16 @@ def render(
         heading = ansi(finding.severity.upper(), severity_color, color)
         llm_badge = ansi(" [LLM]", "35;1", color) if finding.source == "llm" else ""
         unresolved_badge = ansi(" [UNRESOLVED]", "33;1", color) if fix_status(finding) == "unresolved" else ""
-        lines.extend(["", ansi("─" * 88, "90", color), f"{heading}{llm_badge}{unresolved_badge}  {location}", f"category: {finding.category}  rule: {finding.rule}", f"{finding.message}{evidence}"])
+        lines.extend(["", ansi("─" * 88, "90", color), f"{heading}{llm_badge}{unresolved_badge}  {location}", f"category: {finding.category}  rule: {finding.rule}"])
+        if leaf:
+            lines.extend(["", ansi("Source leaf:", "36;1", color), leaf.text])
+        lines.extend(["", f"{finding.message}{evidence}"])
         if finding.alternatives:
             lines.extend([
                 "", ansi("Potential replacements [LLM-generated]:", "36;1", color),
                 *[f"- {alternative}" for alternative in finding.alternatives],
             ])
         if finding.suggestion:
-            leaf = leaf_by_id.get(finding.leaf_id)
             lines.extend(["", ansi("Potential fix [LLM-generated]:", "32;1", color), finding.suggestion])
             if leaf:
                 lines.extend(["", ansi(f"- {leaf.text}", "31", color), ansi(f"+ {finding.suggestion}", "32", color)])

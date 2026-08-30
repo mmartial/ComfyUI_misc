@@ -740,6 +740,72 @@ class WildcardLinterTests(unittest.TestCase):
             {**reviewed, "failed_test": "Compatibility test"}, leaf, vocabulary,
         ))
 
+    def test_comprehension_check_protects_canonical_term_but_not_missing_relationship(self):
+        vocabulary = LINTER.DanbooruVocabulary({"teamwork", "holding"})
+        teamwork = LINTER.Leaf(
+            "team", "test.yaml", "gkr", "scene", 0, 10,
+            "2others, jumping, teamwork, dual_wielding", (), "tags",
+        )
+        intrinsic = {
+            "failed_test": "Comprehension test",
+            "reason": "The tag 'teamwork' is an abstract relationship that requires visible evidence.",
+        }
+        self.assertEqual(
+            LINTER.canonical_llm_false_positive_matches(intrinsic, teamwork, vocabulary),
+            ("comprehension-test", ["teamwork"]),
+        )
+        holding = LINTER.Leaf(
+            "hold", "test.yaml", "gkr", "scene", 0, 11,
+            "1man, holding, concrete debris", (), "tags",
+        )
+        relational = {
+            "failed_test": "Comprehension test",
+            "reason": "The tag 'holding' is incomplete and does not specify what is being held.",
+        }
+        self.assertEqual(
+            LINTER.canonical_llm_false_positive_matches(relational, holding, vocabulary),
+            ("", []),
+        )
+
+    def test_single_moment_check_protects_atomic_canonical_transition_tag(self):
+        vocabulary = LINTER.DanbooruVocabulary({"transformation", "before_and_after", "jumping"})
+        leaf = LINTER.Leaf(
+            "transform", "test.yaml", "gkr", "scene", 0, 10,
+            "shadow, transformation, monster, urban", (), "tags",
+        )
+        reviewed = {
+            "failed_test": "Single-moment test",
+            "reason": "The tag 'transformation' describes a transition across time, not a stable visible state.",
+        }
+        self.assertEqual(
+            LINTER.canonical_llm_false_positive_matches(reviewed, leaf, vocabulary),
+            ("single-moment-test", ["transformation"]),
+        )
+        multi = LINTER.Leaf(
+            "multi", "test.yaml", "gkr", "scene", 0, 11,
+            "1woman, before_and_after, transformation", (), "tags",
+        )
+        multi_review = {
+            "failed_test": "Single-moment test",
+            "reason": "The tag 'before_and_after' requires multiple states across time.",
+        }
+        self.assertEqual(
+            LINTER.canonical_llm_false_positive_matches(multi_review, multi, vocabulary),
+            ("", []),
+        )
+        contextual = LINTER.Leaf(
+            "fleet", "test.yaml", "gkr", "scene", 0, 12,
+            "fleet, battleship, space, jumping", (), "tags",
+        )
+        contextual_review = {
+            "failed_test": "Single-moment test",
+            "reason": "The tag 'jumping' in the context of a space fleet implies a transition across time.",
+        }
+        self.assertEqual(
+            LINTER.canonical_llm_false_positive_matches(contextual_review, contextual, vocabulary),
+            ("", []),
+        )
+
     def test_llm_replacement_candidates_render_as_alternatives_not_leaf_rewrite(self):
         leaf = LINTER.Leaf(
             "id", "test.yaml", "gkr", "scene", 0, 10,
@@ -752,6 +818,9 @@ class WildcardLinterTests(unittest.TestCase):
         )
         markdown = LINTER.render([finding], [leaf], "markdown", fix_attempted=True)
         self.assertIn("Potential replacements — LLM generated", markdown)
+        self.assertIn("**Source leaf:**\n\n```text\ntower, monolithic, extreme low angle\n```", markdown)
+        text_report = LINTER.render([finding], [leaf], "text", fix_attempted=True)
+        self.assertIn("Source leaf:\ntower, monolithic, extreme low angle", text_report)
         self.assertIn("- `windowless stone shaft`", markdown)
         self.assertNotIn("```diff", markdown)
 
