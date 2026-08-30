@@ -73,12 +73,37 @@ category validation (including weighted and space-rendered equivalents), and
 recorded in the generation manifest. The directive applies to the complete
 generated wildcard, not only required skeleton categories.
 
+Choose how strongly generation must prefer the canonical vocabulary in the skeleton header:
+
+```yaml
+# CANONICAL_POLICY: prefer
+```
+
+The setting is durable and travels with the skeleton. `--canonical-policy strict|prefer|flexible`
+overrides it for one run. When neither is supplied, `flexible` preserves legacy behavior:
+
+- `strict` permits only retrieved canonical tags and wildcard references; literal fallbacks fail
+  category validation.
+- `prefer` uses the ordinary concept-level candidate palette, then extracts every literal from the
+  draft, searches the SQLite index for that complete phrase, and sends those candidates plus the
+  complete draft to a canonical-revision LLM pass. A retained literal must have aligned provenance
+  recording its exact text, candidates considered, and a specific reason canonical candidates lose
+  necessary visible information.
+- `flexible` uses the initial candidate palette but permits compact literal visual phrases without
+  the fallback-specific retrieval/revision pass.
+
+`prefer` normally adds one cached generation call for each category chunk containing proposed
+literals. Those calls count toward `--max-generation-calls`; large runs may need a higher limit.
+Hybrid similarity is used when the index contains compatible embeddings and `--retrieval auto` or
+`--retrieval hybrid` selects them. Otherwise the same pass uses lexical SQLite retrieval.
+
 Useful limits and controls:
 
 ```text
 --batch-categories 3
 --category-chunk-size 25
 --concept-continuation-buffer 3
+--canonical-policy prefer
 --max-generation-calls 20
 --max-planner-retries 1
 --max-category-retries 1
@@ -304,6 +329,7 @@ THEME="superhero"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
   --base-url http://localhost:11434/v1 \
   --model gemma4:cloud \
   --retrieval-candidates 30 \
+  --canonical-policy prefer \
   --llm-log gkr-$THEME.json \
   --max-planner-retries 3 \
   --category-chunk-size 25 \
@@ -1062,11 +1088,44 @@ THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
   --fail-on never
 ```
 
-
 After completion:
 
 1. Compare the bsase YAML against the `.fixed` YAML and make decisions
 2. Review the `.fixed-report.md` for `UNRESOLVED` entries
+
+Or to get a futher "fixed" `fixed.yaml` file:
+
+```bash
+THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
+  gkr-$THEME.yaml \
+  --semantic-duplicates \
+  --semantic-duplicate-threshold 0.94 \
+  --canonical-literal-review \
+  --fix-literal-concepts \
+  --verbose \
+  --llm \
+  --llm-scope content \
+  --suggest-fixes \
+  --fix-severity both \
+  --danbooru-tags safebooru_general_tags.classified.csv \
+  --danbooru-index safebooru_general_tags.index.sqlite \
+  --retrieval auto \
+  --canonical-tag-suggestions \
+  --canonical-tag-candidate-count 5 \
+  --canonical-tag-style underscore \
+  --api-key-env OLLAMA_API_KEY \
+  --base-url http://localhost:11434/v1 \
+  --model gemma4:cloud \
+  --batch-size 15 \
+  --verification-batch-size 15 \
+  --timeout 300 \
+  --llm-cache-dir wildcard-linter-cache \
+  --fixed-output gkr-$THEME.fixed.yaml \
+  --format markdown \
+  --output gkr-$THEME.fixed.report.md \
+  --color auto \
+  --fail-on never
+```
 
 ### Fix "only" a section in a generated file
 
@@ -1080,6 +1139,7 @@ THEME="comics"; SECTION="spotlight"; OLLAMA_API_KEY="ollama" uv run tools/wildca
   --semantic-duplicates \
   --semantic-duplicate-threshold 0.94 \
   --canonical-literal-review \
+  --fix-literal-concepts \
   --verbose \
   --llm \
   --llm-scope content \

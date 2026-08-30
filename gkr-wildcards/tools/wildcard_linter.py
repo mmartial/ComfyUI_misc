@@ -1352,7 +1352,18 @@ def canonical_llm_false_positive_matches(
     verified = set(exact_canonical_tag_items(leaf, vocabulary))
     reason = str(reviewed_item.get("reason", ""))
     quoted = re.findall(r"['`\"]([^'`\"]+)['`\"]", reason)
-    matches = sorted({normalize_canonical_tag(value) for value in quoted} & verified)
+    quoted_canonical = {normalize_canonical_tag(value) for value in quoted} & vocabulary.tags
+    compound_context: set[str] = set()
+    if leaf.mode == "tags":
+        for raw_item in split_top_level_commas(literal_text(leaf.text)):
+            item = WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip()
+            words = re.findall(r"[A-Za-z0-9+][A-Za-z0-9_+().'’-]*", item.lower())
+            normalized_words = {normalize_canonical_tag(word) for word in words}
+            present = quoted_canonical & normalized_words
+            verified.update(present)
+            if len(words) > 1:
+                compound_context.update(present)
+    matches = sorted(quoted_canonical & verified)
     if not matches:
         return "", []
     if "single-moment" in failed_test.casefold() or "single moment" in failed_test.casefold():
@@ -1361,23 +1372,29 @@ def canonical_llm_false_positive_matches(
             r"\b(?:transition|process|change|across time|over time|stable (?:visible )?state|earlier|later)\b",
             reason, re.I,
         )
+        intrinsic_objection = re.search(
+            r"\b(?:abstract|interpretive|unfamiliar|unrecognized|not (?:a )?(?:visible|visual)|"
+            r"not (?:visually )?representable|cannot be seen|requires visible evidence)\b",
+            reason, re.I,
+        )
         contextual_objection = re.search(
             r"\b(?:in (?:this|the) context|before[- /]?and[- /]?after|multiple (?:moments|states)|"
             r"sequence|progression|panels?|stages?)\b",
             reason, re.I,
         )
-        if atomic and transition_objection and not contextual_objection:
+        if atomic and (transition_objection or intrinsic_objection) and not contextual_objection:
             return "single-moment-test", atomic
         return "", []
     if "comprehension" not in failed_test.casefold():
         return "", []
     relational_failure = re.search(
-        r"\b(?:incomplete|does not specify|doesn't specify|unclear (?:what|who|which)|"
+        r"\b(?:incomplete|(?:does not|doesn't) specify (?:what|who|which|the (?:subject|object|target|action))|"
+        r"unclear (?:what|who|which)|"
         r"relationship between|disconnected|lacks? (?:a |an |the )?(?:subject|object|target|action)|"
         r"missing (?:a |an |the )?(?:subject|object|target|action)|focal subject)\b",
         reason, re.I,
     )
-    if relational_failure:
+    if relational_failure and not set(matches) <= compound_context:
         return "", []
     intrinsic_rejection = re.search(
         r"\b(?:abstract|interpretive|unfamiliar|unrecognized|not (?:visually )?representable|"
@@ -1816,6 +1833,23 @@ def duplicate_evidence_comparison(finding: Finding) -> tuple[dict[str, object], 
     return current, earlier
 
 
+def markdown_highlight_source_terms(message: str, leaf: Leaf | None) -> str:
+    """Emphasize quoted finding terms that occur in the source leaf."""
+    if leaf is None:
+        return message
+    normalized_leaf = re.sub(r"[_-]+", " ", leaf.text).lower()
+
+    def replace(match: re.Match[str]) -> str:
+        term = match.group(1)
+        normalized_term = re.sub(r"[_-]+", " ", term).lower()
+        if normalized_term not in normalized_leaf:
+            return match.group(0)
+        return f"**`{term.replace('`', '')}`**"
+
+    message = re.sub(r"(?<!\w)'([^'\n]{1,160})'(?!\w)", replace, message)
+    return re.sub(r"(?<!\w)‘([^’\n]{1,160})’(?!\w)", replace, message)
+
+
 def render(
     findings: list[Finding], leaves: list[Leaf], fmt: str, color: bool = False,
     fix_attempted: bool = False, fixed_leaf_ids: set[str] | None = None,
@@ -1859,7 +1893,7 @@ def render(
             lines.extend(["---", "", f"### {marker} {finding.severity.upper()} · `{finding.rule}`{llm_badge}{unresolved_badge}", "", f"Location: `{location}`"])
             if leaf:
                 lines.extend(["", "**Source leaf:**", "", "```text", leaf.text, "```"])
-            lines.extend(["", finding.message])
+            lines.extend(["", markdown_highlight_source_terms(finding.message, leaf)])
             canonical_tags, unmatched_words = canonical_evidence_highlights(finding)
             if canonical_tags or unmatched_words:
                 lines.extend(["", "**Canonical analysis:**", ""])

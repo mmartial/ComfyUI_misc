@@ -30,6 +30,7 @@ from danbooru_index import DanbooruIndex, EmbeddingClient, SearchResult, build_i
 
 GENERATOR_RE = re.compile(r"^\s*#\s*GENERATOR\s*:\s*(.*?)\s*$", re.I)
 DO_NOT_USE_TAGS_RE = re.compile(r"^\s*#\s*DO_NOT_USE_TAGS\s*:\s*(.*?)\s*$", re.I)
+CANONICAL_POLICY_RE = re.compile(r"^\s*#\s*CANONICAL_POLICY\s*:\s*(.*?)\s*$", re.I)
 CATEGORY_RE = re.compile(r"^  ([A-Za-z0-9_-]+)\s*:\s*(?:\[\s*\])?\s*(?:#.*)?$")
 ROOT_RE = re.compile(r"^([A-Za-z0-9_-]+)\s*:\s*$")
 REFERENCE_RE = re.compile(r"__([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)__")
@@ -39,6 +40,7 @@ UNDERSCORE_TAG_RE = re.compile(
 SAFE_NAME_RE = re.compile(r"^[A-Za-z0-9_-]+$")
 KINDS = {"component", "combo", "scene", "spotlight", "router"}
 DEFAULT_COUNTS = {"component": 20, "combo": 12, "scene": 12, "spotlight": 50, "router": 0}
+CANONICAL_POLICIES = {"strict", "prefer", "flexible"}
 
 
 @dataclass
@@ -56,6 +58,7 @@ class Skeleton:
     global_directives: list[str]
     categories: list[SkeletonCategory]
     excluded_tags: set[str] = field(default_factory=set)
+    canonical_policy: str = "flexible"
 
 
 @dataclass
@@ -99,6 +102,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--embedding-api-key-env", default="OLLAMA_API_KEY", help="Name of the environment variable containing the embedding API key (default: OLLAMA_API_KEY)")
     parser.add_argument("--embedding-query-prefix", help="Text prepended to embedding queries; normally omit to reuse index metadata")
     parser.add_argument("--retrieval-candidates", type=int, default=12, help="Maximum retrieved canonical tags placed in each concept/category palette; larger values improve choice but enlarge prompts (default: 12)")
+    parser.add_argument(
+        "--canonical-policy", choices=sorted(CANONICAL_POLICIES),
+        help="Override CANONICAL_POLICY from the skeleton: strict forbids literal fallbacks; prefer performs fallback-specific retrieval and requires justification; flexible preserves the legacy initial-palette behavior (default: skeleton setting, otherwise flexible)",
+    )
     parser.add_argument("--prompt", type=Path, help="Policy Markdown (defaults to ../prompt.md)")
     parser.add_argument("--rules", type=Path, help="General linter rules (defaults beside script)")
     parser.add_argument("--tags-rules", type=Path, help="Tags-mode rules (defaults beside script)")
@@ -199,6 +206,19 @@ def parse_skeleton(path: Path) -> Skeleton:
         raise ValueError("could not locate namespace line")
     header = "\n".join(lines[:root_index]).rstrip()
     global_directives = [match.group(1) for line in lines[:root_index] if (match := GENERATOR_RE.match(line))]
+    canonical_policy = "flexible"
+    policy_entries = [
+        match.group(1).strip().lower() for line in lines[:root_index]
+        if (match := CANONICAL_POLICY_RE.match(line))
+    ]
+    if len(policy_entries) > 1:
+        raise ValueError("skeleton header may declare CANONICAL_POLICY only once")
+    if policy_entries:
+        canonical_policy = policy_entries[0]
+        if canonical_policy not in CANONICAL_POLICIES:
+            raise ValueError(
+                "CANONICAL_POLICY must be one of: " + ", ".join(sorted(CANONICAL_POLICIES))
+            )
     excluded_tags: set[str] = set()
     for line in lines[:root_index]:
         match = DO_NOT_USE_TAGS_RE.match(line)
@@ -233,7 +253,10 @@ def parse_skeleton(path: Path) -> Skeleton:
         raise ValueError("skeleton must declare at least one empty category")
     if len({category.name for category in categories}) != len(categories):
         raise ValueError("skeleton contains duplicate categories")
-    return Skeleton(path.resolve(), namespace, source, header, global_directives, categories, excluded_tags)
+    return Skeleton(
+        path.resolve(), namespace, source, header, global_directives, categories,
+        excluded_tags, canonical_policy,
+    )
 
 
 def infer_kind(name: str) -> str:
@@ -558,12 +581,26 @@ def generate_valid_plan(
     raise AssertionError("planner retry loop exhausted unexpectedly")
 
 
-def generation_instruction(policy: str, vocabulary: linter.DanbooruVocabulary) -> str:
+def generation_instruction(
+    policy: str, vocabulary: linter.DanbooruVocabulary,
+    canonical_policy: str = "flexible",
+) -> str:
     sample_note = (
         f"A local canonical vocabulary with {len(vocabulary)} tags is available to deterministic validation. "
         "Use established Danbooru underscore tags when confidently known and visually equivalent, but never invent an underscore "
         "tag. Use a compact literal phrase with spaces whenever no canonical tag exists or canonicalization would lose content."
     )
+    canonical_note = {
+        "strict": (
+            "CANONICAL POLICY strict: every literal comma item must be a supplied canonical candidate or wildcard "
+            "reference; do not emit literal fallbacks. "
+        ),
+        "prefer": (
+            "CANONICAL POLICY prefer: use supplied canonical candidates first. A later retrieval pass will inspect "
+            "every proposed literal fallback, so record each fallback provisionally and do not invent underscore tags. "
+        ),
+        "flexible": "CANONICAL POLICY flexible: compact necessary literal fallbacks are permitted. ",
+    }[canonical_policy]
     return (
         "Realize supplied visual concepts as wildcard leaves. Return JSON only as an array with exactly one object per input ID, "
         "containing id, leaves (an array of strings), and provenance (one entry per leaf listing canonical_tags and literal_fallbacks). "
@@ -580,7 +617,8 @@ def generation_instruction(policy: str, vocabulary: linter.DanbooruVocabulary) -
         "tags mode: flat comma-separated short visual phrases, 1-3 meaningful weights, no prose, quality filler, negative prompt, or "
         "sequential/multi-panel content. Respect content_profile: general forbids mature, suggestive, explicit, fetish, or graphic "
         "content; sensitive permits non-explicit mature material but not explicit sexual content; unrestricted adds no content "
-        "restriction. Avoid duplicate or near-duplicate leaves. For component pools, treat the first content-bearing item as the "
+        "restriction. " + canonical_note +
+        "Avoid duplicate or near-duplicate leaves. For component pools, treat the first content-bearing item as the "
         "lead motif and do not use any lead motif more than max_lead_motif_repeats; vary the actual base subject or setting rather "
         "than producing several lightly modified variants of one base. When—and only when—a concept intentionally restricts the "
         "image to a finite set of colors, express that restriction in the exact tags-mode form "
@@ -826,6 +864,102 @@ def lead_leaf_motif(leaf: str) -> str:
     return ""
 
 
+def literal_fallback_phrases(leaf: str, canonical_tags: set[str]) -> list[str]:
+    """Return noncanonical comma items that require literal-fallback treatment."""
+    phrases: list[str] = []
+    for raw_item in linter.split_top_level_commas(linter.literal_text(leaf)):
+        item = linter.WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip()
+        if not item or re.fullmatch(r"\([^)]+\)\s+limited_palette", item, re.I):
+            continue
+        normalized = linter.normalize_canonical_tag(item)
+        if normalized in canonical_tags or normalized == "limited_palette":
+            continue
+        phrases.append(item)
+    return phrases
+
+
+def retrieve_literal_fallback_guidance(
+    result: dict[str, Any], vocabulary: linter.DanbooruVocabulary,
+    index: DanbooruIndex, embedding_client: EmbeddingClient | None,
+    query_prefix: str, limit: int, excluded_tags: set[str] | None = None,
+) -> list[dict[str, Any]]:
+    """Retrieve canonical alternatives for every literal phrase in a draft response."""
+    leaves = result.get("leaves", [])
+    if not isinstance(leaves, list):
+        return []
+    entries: list[dict[str, Any]] = []
+    for leaf_index, leaf in enumerate(leaves):
+        if not isinstance(leaf, str):
+            continue
+        for phrase in literal_fallback_phrases(leaf, vocabulary.tags):
+            entries.append({"leaf_index": leaf_index, "phrase": phrase})
+    queries = list(dict.fromkeys(entry["phrase"] for entry in entries))
+    vectors: dict[str, list[float]] = {}
+    if embedding_client is not None and queries:
+        embedded = embedding_client.embed([query_prefix + query for query in queries])
+        vectors = dict(zip(queries, embedded))
+    candidates_by_query: dict[str, list[dict[str, Any]]] = {}
+    for query in queries:
+        candidates = [
+            candidate for candidate in index.hybrid_search(query, vectors.get(query), max(limit * 2, 10))
+            if candidate.tag in vocabulary.tags and candidate.tag not in (excluded_tags or set())
+        ][:limit]
+        candidates_by_query[query] = [
+            {
+                "tag": candidate.tag, "match": candidate.match,
+                "score": round(candidate.score, 4), "post_count": candidate.post_count,
+            }
+            for candidate in candidates
+        ]
+    for entry in entries:
+        entry["candidates"] = candidates_by_query[entry["phrase"]]
+    return entries
+
+
+def canonicalize_preferred_fallbacks(
+    session: Session, category_item: dict[str, Any], result: dict[str, Any],
+    vocabulary: linter.DanbooruVocabulary, index: DanbooruIndex,
+    embedding_client: EmbeddingClient | None, query_prefix: str,
+    excluded_tags: set[str], policy: str,
+) -> tuple[dict[str, Any], set[str]]:
+    """Run fallback-specific retrieval and one constrained revision for prefer mode."""
+    guidance = retrieve_literal_fallback_guidance(
+        result, vocabulary, index, embedding_client, query_prefix,
+        session.args.retrieval_candidates, excluded_tags,
+    )
+    retrieved = {
+        str(candidate["tag"])
+        for entry in guidance for candidate in entry.get("candidates", [])
+    }
+    if not guidance:
+        return result, retrieved
+    revision_item = dict(category_item)
+    category_item["literal_fallback_guidance"] = guidance
+    revision_item.update({
+        "draft_response": result,
+        "canonical_policy": "prefer",
+        "literal_fallback_guidance": guidance,
+    })
+    instruction = (
+        "Revise one generated category using fallback-specific canonical retrieval. Return JSON only as an array "
+        "with one object matching the supplied id and containing exactly requested_count leaves plus one aligned "
+        "provenance object per leaf. For each literal_fallback_guidance entry, first replace the phrase with one or "
+        "more supplied canonical candidate tags when they preserve its visible meaning. Do not use a merely related "
+        "candidate. A literal phrase may remain only when no supplied candidate or candidate combination preserves "
+        "important visible information. For every retained literal, provenance.literal_fallbacks must contain an "
+        "object with text (the exact retained comma item), reason (a specific explanation of the information lost by "
+        "the candidates), and candidates_considered (candidate tags actually reviewed). canonical_tags must list all "
+        "canonical tags used. Never invent underscore tags, alter wildcard references, add concepts, remove required "
+        "visible content, change leaf count, or introduce duplicates.\n\nPOLICY:\n" + policy
+    )
+    revised = session.request("canonical fallback revision", instruction, [revision_item])
+    replacement = next(
+        (entry for entry in revised if str(entry.get("id", "")) == str(category_item.get("id", ""))),
+        {},
+    )
+    return (replacement or result), retrieved
+
+
 def validate_category_response(
     category: str, result: dict[str, Any], expected_count: int,
     namespace: str, dependencies: list[str], allowed_canonical: set[str],
@@ -834,7 +968,10 @@ def validate_category_response(
     forbidden_tags: set[str] | None = None,
     max_lead_motif_repeats: int | None = None,
     forbidden_lead_motifs: set[str] | None = None,
+    canonical_policy: str = "flexible",
 ) -> tuple[list[str], list[dict[str, Any]]]:
+    if canonical_policy not in CANONICAL_POLICIES:
+        raise ValueError("canonical_policy must be strict, prefer, or flexible")
     raw = result.get("leaves", [])
     provenance = result.get("provenance", [])
     leaves = [" ".join(value.split()) for value in raw if isinstance(value, str) and value.strip()]
@@ -916,6 +1053,51 @@ def validate_category_response(
             "provenance cites tags outside the retrieved palette: "
             + ", ".join(sorted(invalid_provenance))
         )
+
+    if canonical_policy in {"strict", "prefer"} and len(provenance) == len(leaves):
+        provenance_errors: list[str] = []
+        for leaf_index, (leaf, entry) in enumerate(zip(leaves, provenance), 1):
+            literals = literal_fallback_phrases(leaf, allowed_canonical)
+            fallbacks = entry.get("literal_fallbacks", []) if isinstance(entry, dict) else []
+            if canonical_policy == "strict":
+                if literals:
+                    provenance_errors.append(
+                        f"leaf {leaf_index} contains literal fallback(s): {', '.join(literals)}"
+                    )
+                if fallbacks:
+                    provenance_errors.append(f"leaf {leaf_index} declares literal fallbacks in strict mode")
+                continue
+            declared: dict[str, dict[str, Any]] = {}
+            if isinstance(fallbacks, list):
+                for fallback in fallbacks:
+                    if isinstance(fallback, dict) and isinstance(fallback.get("text"), str):
+                        declared[" ".join(fallback["text"].split())] = fallback
+            missing = [literal for literal in literals if literal not in declared]
+            extra = [text for text in declared if text not in literals]
+            if missing:
+                provenance_errors.append(
+                    f"leaf {leaf_index} lacks justified provenance for: {', '.join(missing)}"
+                )
+            if extra:
+                provenance_errors.append(
+                    f"leaf {leaf_index} declares absent literal fallback(s): {', '.join(extra)}"
+                )
+            for literal in literals:
+                fallback = declared.get(literal)
+                if not fallback:
+                    continue
+                reason = " ".join(str(fallback.get("reason", "")).split())
+                considered = fallback.get("candidates_considered", [])
+                if len(reason) < 12:
+                    provenance_errors.append(
+                        f"leaf {leaf_index} fallback '{literal}' lacks a specific reason"
+                    )
+                if not isinstance(considered, list):
+                    provenance_errors.append(
+                        f"leaf {leaf_index} fallback '{literal}' candidates_considered must be an array"
+                    )
+        if provenance_errors:
+            errors.append("canonical policy provenance: " + "; ".join(provenance_errors))
 
     allowed_refs = {(namespace, dependency) for dependency in dependencies}
     invalid_refs: set[str] = set()
@@ -1080,6 +1262,8 @@ def generate_categories(
     embedding_client: EmbeddingClient | None, embedding_query_prefix: str,
 ) -> dict[str, list[str]]:
     generated: dict[str, list[str]] = {}
+    canonical_policy = getattr(session.args, "canonical_policy", None) or skeleton.canonical_policy
+    log(session.args, f"canonical policy: {canonical_policy}")
     plan_by_name = {plan.name: plan for plan in plans}
     chunk_size = getattr(session.args, "category_chunk_size", 25)
     if chunk_size < 1:
@@ -1145,8 +1329,11 @@ def generate_categories(
                     "global_generator_instructions": skeleton.global_directives,
                     "do_not_use_tags": sorted(skeleton.excluded_tags),
                     "content_profile": session.args.content_profile,
+                    "canonical_policy": canonical_policy,
                 })
-            results = session.request("category generation", generation_instruction(policy, vocabulary), items)
+            results = session.request(
+                "category generation", generation_instruction(policy, vocabulary, canonical_policy), items,
+            )
             by_id = {str(item.get("id", "")): item for item in results}
             for plan in chunk_plans:
                 original = plan_by_name[plan.name]
@@ -1169,6 +1356,12 @@ def generate_categories(
                 }
                 result = by_id.get(plan.name, {})
                 item = next(item for item in items if item["id"] == plan.name)
+                if canonical_policy == "prefer":
+                    result, fallback_candidates = canonicalize_preferred_fallbacks(
+                        session, item, result, vocabulary, index, embedding_client,
+                        embedding_query_prefix, skeleton.excluded_tags, policy,
+                    )
+                    allowed_canonical.update(fallback_candidates)
                 excess_issue: dict[str, Any] | None = None
                 for retry in range(session.args.max_category_retries + 1):
                     result, removed_leaves = trim_excess_category_response(result, plan.count)
@@ -1190,6 +1383,7 @@ def generate_categories(
                             forbidden_tags=skeleton.excluded_tags,
                             max_lead_motif_repeats=motif_limit,
                             forbidden_lead_motifs=prior_lead_motifs,
+                            canonical_policy=canonical_policy,
                         )
                         break
                     except CategoryValidationError as exc:
@@ -1216,6 +1410,7 @@ def generate_categories(
                                     forbidden_signatures=None,
                                     forbidden_tags=skeleton.excluded_tags,
                                     max_lead_motif_repeats=None,
+                                    canonical_policy=canonical_policy,
                                 )
                             except CategoryValidationError:
                                 raise exc
@@ -1280,7 +1475,7 @@ def generate_categories(
                         correction_item["correction_attempt"] = retry + 1
                         corrected = session.request(
                             "category correction",
-                            generation_instruction(policy, vocabulary) +
+                            generation_instruction(policy, vocabulary, canonical_policy) +
                             "\n\nCORRECTION: Fix every issue in validation_error and return the full corrected object. "
                             "Keep exactly requested_count unique leaves, do not repeat avoid_duplicate_leaves, and ensure "
                             "every component lead motif is unique within the response and absent from avoid_lead_motifs.",
@@ -1684,6 +1879,7 @@ def main() -> int:
             "tag_provenance": session.provenance,
             "interactive_tag_overrides": session.interactive_overrides,
             "excluded_tags": sorted(skeleton.excluded_tags),
+            "canonical_policy": args.canonical_policy or skeleton.canonical_policy,
             "interactive_override_file": str(session.interactive_override_path),
             "generation_issues": session.generation_issues,
             "retrieval": {
@@ -1723,6 +1919,9 @@ def main() -> int:
             "plan": [asdict(plan) for plan in plans],
             "generation_calls": session.events if session else [],
             "interactive_tag_overrides": session.interactive_overrides if session else {},
+            "canonical_policy": (
+                args.canonical_policy or skeleton.canonical_policy if skeleton else args.canonical_policy
+            ),
             "interactive_override_file": str(session.interactive_override_path) if session else None,
             "generation_issues": session.generation_issues if session else [],
             "finished": time.time(),

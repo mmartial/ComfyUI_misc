@@ -916,7 +916,7 @@ class WildcardLinterTests(unittest.TestCase):
         ))
 
     def test_comprehension_check_protects_canonical_term_but_not_missing_relationship(self):
-        vocabulary = LINTER.DanbooruVocabulary({"teamwork", "holding"})
+        vocabulary = LINTER.DanbooruVocabulary({"teamwork", "holding", "energy", "protecting", "crowd"})
         teamwork = LINTER.Leaf(
             "team", "test.yaml", "gkr", "scene", 0, 10,
             "2others, jumping, teamwork, dual_wielding", (), "tags",
@@ -941,9 +941,39 @@ class WildcardLinterTests(unittest.TestCase):
             LINTER.canonical_llm_false_positive_matches(relational, holding, vocabulary),
             ("", []),
         )
+        energy = LINTER.Leaf(
+            "energy", "test.yaml", "gkr", "scene", 0, 12,
+            "energy, (bridge:1.1), construction, superhero_costume", (), "tags",
+        )
+        abstract_options = {
+            "failed_test": "Comprehension",
+            "reason": (
+                "The term 'energy' is too abstract. It doesn't specify if the character is "
+                "emitting energy, absorbing it, or if the bridge is made of energy."
+            ),
+        }
+        self.assertEqual(
+            LINTER.canonical_llm_false_positive_matches(abstract_options, energy, vocabulary),
+            ("comprehension-test", ["energy"]),
+        )
+        protecting = LINTER.Leaf(
+            "protecting", "test.yaml", "gkr", "scene", 0, 13,
+            "protecting crowd", (), "tags",
+        )
+        supplied_target = {
+            "failed_test": "Comprehension",
+            "reason": (
+                "The term 'protecting' is an abstract motive/role. It does not specify the "
+                "visible action or spatial relationship between the hero and the crowd."
+            ),
+        }
+        self.assertEqual(
+            LINTER.canonical_llm_false_positive_matches(supplied_target, protecting, vocabulary),
+            ("comprehension-test", ["protecting"]),
+        )
 
     def test_single_moment_check_protects_atomic_canonical_transition_tag(self):
-        vocabulary = LINTER.DanbooruVocabulary({"transformation", "before_and_after", "jumping"})
+        vocabulary = LINTER.DanbooruVocabulary({"transformation", "before_and_after", "jumping", "time_stop"})
         leaf = LINTER.Leaf(
             "transform", "test.yaml", "gkr", "scene", 0, 10,
             "shadow, transformation, monster, urban", (), "tags",
@@ -979,6 +1009,21 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertEqual(
             LINTER.canonical_llm_false_positive_matches(contextual_review, contextual, vocabulary),
             ("", []),
+        )
+        stopped_time = LINTER.Leaf(
+            "time", "test.yaml", "gkr", "scene", 0, 13,
+            "time_stop, (water_drop:1.2), frozen, rain, raindrops, time_stop", (), "tags",
+        )
+        visibility_review = {
+            "failed_test": "Single-moment test",
+            "reason": (
+                "The tag 'time_stop' is an abstract concept/state of time rather than a visible "
+                "mark. While frozen rain is visible, 'time_stop' itself is not a visual element."
+            ),
+        }
+        self.assertEqual(
+            LINTER.canonical_llm_false_positive_matches(visibility_review, stopped_time, vocabulary),
+            ("single-moment-test", ["time_stop"]),
         )
 
     def test_llm_replacement_candidates_render_as_alternatives_not_leaf_rewrite(self):
@@ -1021,6 +1066,26 @@ class WildcardLinterTests(unittest.TestCase):
         text_report = LINTER.render([finding], [leaf], "text")
         self.assertIn("Canonical tags extracted from source: through_window", text_report)
         self.assertIn("Unmatched source words: looking", text_report)
+
+    def test_markdown_highlights_quoted_terms_found_in_source_leaf(self):
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 10,
+            "astronaut, gravity boots, moon", (), "tags",
+        )
+        finding = LINTER.Finding(
+            "warning", "Visual test",
+            "The term 'gravity boots' is not a verified canonical tag and is conceptual.",
+            leaf.file, leaf.line, leaf.category, leaf.uid, source="llm",
+        )
+        markdown = LINTER.render([finding], [leaf], "markdown")
+        self.assertIn("The term **`gravity boots`** is not a verified canonical tag", markdown)
+
+        unrelated = LINTER.Finding(
+            "warning", "Visual test", "The 'Visual test' policy rejected the term.",
+            leaf.file, leaf.line, leaf.category, leaf.uid, source="llm",
+        )
+        unrelated_markdown = LINTER.render([unrelated], [leaf], "markdown")
+        self.assertIn("The 'Visual test' policy", unrelated_markdown)
 
     def test_accepted_rewrite_is_labeled_as_applied_in_fixed_report(self):
         leaf = LINTER.Leaf(

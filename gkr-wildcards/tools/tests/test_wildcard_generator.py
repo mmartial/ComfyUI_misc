@@ -70,6 +70,82 @@ class WildcardGeneratorTests(unittest.TestCase):
         )
         self.assertEqual(skeleton.excluded_tags, {"comic", "western_comics_(style)"})
 
+    def test_skeleton_header_parses_canonical_policy(self):
+        skeleton = self.skeleton(
+            "# MODE: tags\n# CANONICAL_POLICY: prefer\ngkr_test:\n  subject: []\n"
+        )
+        self.assertEqual(skeleton.canonical_policy, "prefer")
+        defaulted = self.skeleton("# MODE: tags\ngkr_test:\n  subject: []\n")
+        self.assertEqual(defaulted.canonical_policy, "flexible")
+        with self.assertRaisesRegex(ValueError, "CANONICAL_POLICY must be one of"):
+            self.skeleton(
+                "# MODE: tags\n# CANONICAL_POLICY: sometimes\ngkr_test:\n  subject: []\n"
+            )
+
+    def test_prefer_retrieves_candidates_for_each_literal_fallback(self):
+        index_module = sys.modules["danbooru_index"]
+
+        class FakeIndex:
+            def hybrid_search(self, query, vector, limit):
+                mapping = {
+                    "velvet seat": [
+                        index_module.SearchResult("seat", 100, 0.91, "hybrid"),
+                        index_module.SearchResult("velvet", 50, 0.84, "hybrid"),
+                    ],
+                }
+                return mapping.get(query, [])
+
+        response = {
+            "leaves": ["motor_vehicle, velvet seat, city_lights"],
+            "provenance": [{"canonical_tags": ["motor_vehicle", "city_lights"], "literal_fallbacks": []}],
+        }
+        vocabulary = sys.modules["wildcard_linter"].DanbooruVocabulary(
+            {"motor_vehicle", "seat", "velvet", "city_lights"}
+        )
+        guidance = GENERATOR.retrieve_literal_fallback_guidance(
+            response, vocabulary, FakeIndex(), None, "", 5,
+        )
+        self.assertEqual([entry["phrase"] for entry in guidance], ["velvet seat"])
+        self.assertEqual(
+            [candidate["tag"] for candidate in guidance[0]["candidates"]],
+            ["seat", "velvet"],
+        )
+
+    def test_prefer_requires_justified_literal_provenance_and_strict_forbids_literals(self):
+        allowed = {"motor_vehicle", "city_lights"}
+        leaf = "motor_vehicle, velvet seat, city_lights"
+        missing = {
+            "leaves": [leaf],
+            "provenance": [{"canonical_tags": list(allowed), "literal_fallbacks": []}],
+        }
+        with self.assertRaisesRegex(
+            GENERATOR.CategoryValidationError, "lacks justified provenance for: velvet seat"
+        ):
+            GENERATOR.validate_category_response(
+                "vehicle", missing, 1, "gkr_test", [], allowed, canonical_policy="prefer",
+            )
+        justified = {
+            "leaves": [leaf],
+            "provenance": [{
+                "canonical_tags": list(allowed),
+                "literal_fallbacks": [{
+                    "text": "velvet seat",
+                    "reason": "The candidates lose the upholstered material relationship.",
+                    "candidates_considered": ["seat", "velvet"],
+                }],
+            }],
+        }
+        leaves, _ = GENERATOR.validate_category_response(
+            "vehicle", justified, 1, "gkr_test", [], allowed, canonical_policy="prefer",
+        )
+        self.assertEqual(leaves, [leaf])
+        with self.assertRaisesRegex(
+            GENERATOR.CategoryValidationError, "contains literal fallback.*velvet seat"
+        ):
+            GENERATOR.validate_category_response(
+                "vehicle", missing, 1, "gkr_test", [], allowed, canonical_policy="strict",
+            )
+
     def test_excluded_header_tags_are_rejected_in_plain_weighted_and_space_forms(self):
         for leaf in (
             "person, comic, street",
@@ -408,6 +484,64 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertEqual(session.assert_candidate, "superhero_landing")
         self.assertEqual(generated["scene"], ["superhero_landing"])
         self.assertEqual(generated["random"], ["__gkr_hero/scene__"])
+
+    def test_prefer_mode_revises_draft_literals_with_retrieved_candidates(self):
+        index_module = sys.modules["danbooru_index"]
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        csv_path = root / "tags.csv"
+        index_path = root / "tags.sqlite"
+        csv_path.write_text("name,post_count\nseat,1000\nvelvet,500\n", encoding="utf-8")
+        index_module.build_index(csv_path, index_path)
+        index = index_module.DanbooruIndex(index_path)
+        self.addCleanup(index.close)
+        skeleton = self.skeleton(
+            "# MODE: tags\n# CANONICAL_POLICY: prefer\ngkr_test:\n  subject: []\n"
+        )
+        plan = GENERATOR.CategoryPlan("subject", "component", "seat subject", 1, [], True)
+
+        class FakeSession:
+            def __init__(self):
+                self.args = SimpleNamespace(
+                    batch_categories=3, category_chunk_size=25, retrieval_candidates=5,
+                    content_profile="general", verbose=False, canonical_policy=None,
+                    max_category_retries=1, interactive=False,
+                )
+                self.calls = []
+                self.provenance = {}
+                self.generation_issues = []
+
+            def request(self, name, instruction, items):
+                self.calls.append(name)
+                if name == "concept generation":
+                    return [{"id": "subject", "concepts": [{
+                        "summary": "ornate chair", "search_queries": ["seat velvet"],
+                    }]}]
+                if name == "category generation":
+                    return [{
+                        "id": "subject", "leaves": ["velvet seat"],
+                        "provenance": [{"canonical_tags": [], "literal_fallbacks": []}],
+                    }]
+                self.assert_guidance = items[0]["literal_fallback_guidance"]
+                return [{
+                    "id": "subject", "leaves": ["seat, velvet"],
+                    "provenance": [{
+                        "canonical_tags": ["seat", "velvet"], "literal_fallbacks": [],
+                    }],
+                }]
+
+        session = FakeSession()
+        vocabulary = sys.modules["wildcard_linter"].DanbooruVocabulary({"seat", "velvet"})
+        generated = GENERATOR.generate_categories(
+            session, skeleton, [plan], "policy", vocabulary, index, None, "",
+        )
+        self.assertEqual(
+            session.calls,
+            ["concept generation", "category generation", "canonical fallback revision"],
+        )
+        self.assertEqual(session.assert_guidance[0]["phrase"], "velvet seat")
+        self.assertEqual(generated["subject"], ["seat, velvet"])
 
     def test_excess_concepts_are_trimmed_and_recorded(self):
         skeleton = self.skeleton("# MODE: tags\ngkr_test:\n  subject: []\n")
