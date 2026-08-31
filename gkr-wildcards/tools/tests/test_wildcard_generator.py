@@ -82,7 +82,7 @@ class WildcardGeneratorTests(unittest.TestCase):
                 "# MODE: tags\n# CANONICAL_POLICY: sometimes\ngkr_test:\n  subject: []\n"
             )
 
-    def test_prefer_retrieves_candidates_for_each_literal_fallback(self):
+    def test_prefer_preserves_known_modifier_object_composition(self):
         index_module = sys.modules["danbooru_index"]
 
         class FakeIndex:
@@ -105,11 +105,7 @@ class WildcardGeneratorTests(unittest.TestCase):
         guidance = GENERATOR.retrieve_literal_fallback_guidance(
             response, vocabulary, FakeIndex(), None, "", 5,
         )
-        self.assertEqual([entry["phrase"] for entry in guidance], ["velvet seat"])
-        self.assertEqual(
-            [candidate["tag"] for candidate in guidance[0]["candidates"]],
-            ["seat", "velvet"],
-        )
+        self.assertEqual(guidance, [])
 
     def test_prefer_requires_justified_literal_provenance_and_strict_forbids_literals(self):
         allowed = {"motor_vehicle", "city_lights"}
@@ -546,12 +542,8 @@ class WildcardGeneratorTests(unittest.TestCase):
         generated = GENERATOR.generate_categories(
             session, skeleton, [plan], "policy", vocabulary, index, None, "",
         )
-        self.assertEqual(
-            session.calls,
-            ["concept generation", "category generation", "canonical fallback revision"],
-        )
-        self.assertEqual(session.assert_guidance[0]["phrase"], "velvet seat")
-        self.assertEqual(generated["subject"], ["seat, velvet"])
+        self.assertEqual(session.calls, ["concept generation", "category generation"])
+        self.assertEqual(generated["subject"], ["velvet seat"])
 
     def test_excess_concepts_are_trimmed_and_recorded(self):
         skeleton = self.skeleton("# MODE: tags\ngkr_test:\n  subject: []\n")

@@ -78,7 +78,12 @@ ALTERNATIVE_RE = re.compile(r"\b(?:or|either)\b", re.I)
 RELATIONAL_ACTION_TAGS = {
     "holding", "gripping", "protecting", "fighting", "facing", "chasing", "blocking",
     "catching", "carrying", "surrounding", "reaching", "standing", "kneeling",
-    "crouching", "climbing", "crawling", "hovering", "floating",
+    "crouching", "climbing", "crawling", "hovering", "floating", "looking", "staring",
+    "leaning", "slipping", "scanning", "balancing", "watering", "brushing",
+}
+RELATIONAL_PREPOSITIONS = {
+    "at", "on", "in", "inside", "against", "around", "under", "over", "near",
+    "beside", "behind", "through", "toward", "with", "from", "into",
 }
 BODY_RELATION_SUBJECTS = {"hand", "hands", "foot", "feet", "head", "back", "arms", "legs"}
 BODY_RELATION_PREPOSITIONS = {
@@ -86,6 +91,8 @@ BODY_RELATION_PREPOSITIONS = {
 }
 STRUCTURAL_FIX_RULES = {
     "camera_format_conflict", "unrestricted_camera_composite", "missing_reference", "reference_cycle",
+    "duplicate_leaf", "cross_category_duplicate_leaf", "semantic_duplicate_leaf",
+    "duplicate_leaves_across_chunks",
 }
 
 
@@ -292,7 +299,7 @@ Repair behavior:
     )
     parser.add_argument("--fix-manifest", type=Path, help="Write machine-readable proposed, accepted, rejected, and unresolved fix details as JSON")
     parser.add_argument("--max-fix-retries", type=int, default=2, metavar="COUNT", help="Fresh corrective LLM attempts after a proposed rewrite fails deterministic validation (default: 2; use 0 for one-shot behavior)")
-    parser.add_argument("--skip-fix-verification", action="store_true", help="Skip the final LLM semantic-preservation check (not recommended)")
+    parser.add_argument("--skip-fix-verification", action="store_true", help="Skip both independent LLM semantic-preservation passes (not recommended)")
     parser.add_argument("--model", help="Chat model name. With --llm, omission falls back to OPENAI_MODEL and fails if neither is set")
     parser.add_argument("--base-url", help="OpenAI-compatible API base URL. With --llm, omission falls back to OPENAI_BASE_URL")
     parser.add_argument("--api-key-env", default="OPENAI_API_KEY", help="Environment variable containing the API key")
@@ -494,6 +501,19 @@ def invalid_limited_palettes(text: str) -> list[str]:
         ):
             invalid.append(item)
     return list(dict.fromkeys(invalid))
+
+
+def valid_limited_palette_item(text: str) -> bool:
+    """Return whether one complete item uses the required limited-palette grammar."""
+    item = WEIGHT_RE.sub(lambda match: match.group(1), text).strip()
+    match = re.fullmatch(r"\(([^()]+)\)\s+limited_palette", item, re.I)
+    if not match:
+        return False
+    colors = [color.strip().lower() for color in match.group(1).split(",")]
+    return (
+        len(colors) >= 2 and len(colors) == len(set(colors))
+        and all(color in PALETTE_COLOR_NAMES for color in colors)
+    )
 
 
 def duplicate_leaf_signature(text: str, mode: str) -> str:
@@ -714,6 +734,8 @@ def tags_mode_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Findin
                 ))
         for phrase in (part.strip(" .;:-") for part in split_top_level_commas(literal)):
             if not phrase:
+                continue
+            if valid_limited_palette_item(phrase):
                 continue
             unweighted = WEIGHT_RE.sub(lambda m: m.group(1), phrase)
             dangling = TAG_DANGLING_RELATION_RE.search(unweighted)
@@ -1673,7 +1695,20 @@ def canonical_literal_atomization_issues(
             continue
         phrase = str(evidence.get("input", "")).strip().lower()
         words = [normalize_canonical_tag(word) for word in re.findall(r"[a-z0-9][a-z0-9+'-]*", phrase)]
-        if len(words) < 2 or not set(words).issubset(rewritten_items):
+        if len(words) < 2:
+            continue
+        source = normalize_canonical_tag(phrase)
+        if source in rewritten_items:
+            continue
+        word_set = set(words)
+        contributing_items = [
+            item for item in rewritten_items
+            if set(item.split("_")) & word_set
+        ]
+        covered_words = {
+            word for item in contributing_items for word in item.split("_") if word in word_set
+        }
+        if not word_set.issubset(covered_words) or len(contributing_items) < 2:
             continue
         compound_candidates = {
             normalize_canonical_tag(str(candidate))
@@ -1685,6 +1720,55 @@ def canonical_literal_atomization_issues(
         issues.append(
             f"canonical literal repair atomizes '{phrase}' into independent tags and loses the compound relationship"
         )
+    return issues
+
+
+def canonical_literal_fact_loss_issues(
+    rewrite: str, targeted_findings: list[Finding],
+) -> list[str]:
+    """Reject canonical-literal repairs that silently discard visible source words."""
+    rewrite_words = {
+        normalize_canonical_tag(word)
+        for word in re.findall(
+            r"[a-z0-9][a-z0-9+'-]*",
+            WEIGHT_RE.sub(lambda match: match.group(1), literal_text(rewrite).lower()),
+        )
+    }
+
+    def preserved(source: str) -> bool:
+        if source in rewrite_words:
+            return True
+        for word in rewrite_words:
+            if source in canonical_inflection_variants(word) or word in canonical_inflection_variants(source):
+                return True
+            if source.startswith(word) or word.startswith(source):
+                suffix = source[len(word):] if source.startswith(word) else word[len(source):]
+                if suffix in LITERAL_CONCEPT_INFLECTION_AFFIXES:
+                    return True
+            if source.endswith("ed") and source[:-1] == word:
+                return True
+        return False
+
+    issues: list[str] = []
+    for finding in targeted_findings:
+        if finding.rule != "canonical_literal_concept" or not finding.evidence:
+            continue
+        try:
+            evidence = json.loads(finding.evidence)
+        except (TypeError, json.JSONDecodeError):
+            continue
+        phrase = str(evidence.get("input", "")).strip().lower()
+        source_words = [
+            normalize_canonical_tag(word)
+            for word in re.findall(r"[a-z0-9][a-z0-9+'-]*", phrase)
+            if word not in LITERAL_CONCEPT_STOPWORDS
+        ]
+        missing = [word for word in source_words if not preserved(word)]
+        if missing:
+            issues.append(
+                f"canonical literal repair drops visible source word(s) from '{phrase}': "
+                + ", ".join(missing)
+            )
     return issues
 
 
@@ -1720,6 +1804,22 @@ def validate_suggestions(
         if len(ALTERNATIVE_RE.findall(leaf.text)) != len(ALTERNATIVE_RE.findall(rewrite)):
             reasons.append("alternative-choice markers changed")
         reasons.extend(canonical_literal_atomization_issues(rewrite, leaf_findings))
+        reasons.extend(canonical_literal_fact_loss_issues(rewrite, leaf_findings))
+        if danbooru_vocabulary is not None and leaf.mode == "tags":
+            original_relationships = exact_canonical_relationship_items(leaf, danbooru_vocabulary)
+            rewritten_items = {
+                WEIGHT_RE.sub(lambda match: match.group(1), item).strip().lower()
+                for item in split_top_level_commas(literal_text(rewrite))
+            }
+            changed_relationships = [
+                item["text"] for item in original_relationships
+                if WEIGHT_RE.sub(lambda match: match.group(1), item["text"]).strip().lower()
+                not in rewritten_items
+            ]
+            if changed_relationships:
+                reasons.append(
+                    "verified compact relationship changed or split: " + ", ".join(changed_relationships)
+                )
         candidate = Leaf(
             leaf.uid, leaf.file, leaf.namespace, leaf.category, leaf.index, leaf.line,
             rewrite, tuple(REFERENCE_RE.findall(rewrite)), leaf.mode,
@@ -1771,7 +1871,7 @@ def validate_suggestions(
             and finding.rule in {
                 "unknown_canonical_tag", "canonical_tag_normalization", "canonical_tag_alias",
                 "canonical_tag_contained_span", "canonical_tag_separator_normalization",
-                "canonical_tag_composition", "canonical_literal_concept",
+                "canonical_tag_composition",
             }
         }
         remaining_canonical = targeted_canonical & {finding.rule for finding in post}
@@ -1811,7 +1911,7 @@ def validate_suggestions(
 
 def llm_verify_fixes(
     leaves: list[Leaf], suggestions: dict[str, str], findings: list[Finding],
-    args: argparse.Namespace, trace_path: Path | None = None,
+    args: argparse.Namespace, trace_path: Path | None = None, pass_number: int = 1,
 ) -> tuple[dict[str, str], dict[str, list[str]]]:
     """Use a separate LLM pass to reject rewrites that change valid semantics."""
     if not suggestions:
@@ -1835,11 +1935,13 @@ def llm_verify_fixes(
         batch = targets[offset:offset + verification_batch_size]
         batch_number = offset // verification_batch_size + 1
         batch_total = (len(targets) + verification_batch_size - 1) // verification_batch_size
-        verbose(args, f"fix-verification batch {batch_number}/{batch_total}: {len(batch)} leaves")
+        verbose(args, f"fix-verification pass {pass_number}, batch {batch_number}/{batch_total}: {len(batch)} leaves")
         items = [{
             "id": leaf.uid, "mode": leaf.mode, "category": leaf.category,
             "original": leaf.text, "rewrite": suggestions[leaf.uid],
             "issues": [{"rule": finding.rule, "message": finding.message} for finding in issues.get(leaf.uid, [])],
+            "verification_policy_version": 3,
+            "verification_pass": pass_number,
         } for leaf in batch]
         instruction = (
             "Act as a strict preservation verifier for wildcard rewrites. Compare every original and rewrite. A rewrite passes only when it "
@@ -1849,13 +1951,15 @@ def llm_verify_fixes(
             "strictly necessary to replace an explicitly listed invisible/abstract failure with minimal visible evidence are allowed. Formatting "
             "and compact wording changes alone are allowed. Return JSON only as an array with exactly one object per input ID containing id, "
             "classification (pass or reject), reason, and violations (an array chosen from fact_removed, fact_added, alternative_changed, "
-            "relationship_changed, subject_or_action_changed, format_evasion, other). Do not omit IDs."
+            "relationship_changed, subject_or_action_changed, format_evasion, other). Do not omit IDs. "
+            f"This is independent verification pass {pass_number}; reassess the rewrite from the supplied facts rather than trusting a prior "
+            "review. Verification policy version 3."
         )
         trace_event(trace_path, {"event": "verify_request", "batch": batch_number, "items": items})
         reviewed = llm_json_request(
             args=args, endpoint=endpoint, api_key=api_key, model=model,
             instruction=instruction, items=items,
-            call_name="fix-verification batch", batch_number=batch_number, batch_total=batch_total,
+            call_name=f"fix-verification pass {pass_number}", batch_number=batch_number, batch_total=batch_total,
             offset=offset, trace_path=trace_path, response_event="verify_response",
         )
         expected = {leaf.uid for leaf in batch}
@@ -2239,11 +2343,21 @@ def canonical_relationship_components(
     tokens = re.findall(r"[a-z0-9][a-z0-9_+().'’-]*", unweighted)
     if len(tokens) == 2:
         action, target = map(normalize_canonical_tag, tokens)
-        if action in RELATIONAL_ACTION_TAGS and action in tags and target in tags:
+        if action in RELATIONAL_ACTION_TAGS and target in tags:
+            return [*([action] if action in tags else []), target]
+        # Prefer-mode prompts may compactly attach a canonical modifier to a canonical
+        # object (for example, black wax_seal) without inventing a compound tag.
+        if action in tags and target in tags:
             return [action, target]
     if len(tokens) == 3:
-        subject, preposition, target = tokens
+        subject, preposition, target = map(normalize_canonical_tag, tokens)
         normalized_target = normalize_canonical_tag(target)
+        if (
+            subject in RELATIONAL_ACTION_TAGS
+            and preposition in RELATIONAL_PREPOSITIONS
+            and normalized_target in tags
+        ):
+            return [*([subject] if subject in tags else []), normalized_target]
         if (
             subject in BODY_RELATION_SUBJECTS
             and preposition in BODY_RELATION_PREPOSITIONS
@@ -2510,9 +2624,11 @@ def canonical_tag_guidance(
     guidance: list[dict[str, Any]] = []
     for item in split_top_level_commas(leaf.text):
         raw = item.strip()
-        if not raw or REFERENCE_RE.search(raw):
+        if not raw or REFERENCE_RE.search(raw) or valid_limited_palette_item(raw):
             continue
         unweighted = WEIGHT_RE.sub(lambda match: match.group(1), raw).strip().lower()
+        if canonical_relationship_components(raw, vocabulary):
+            continue
         normalized = normalize_canonical_tag(unweighted)
         if normalized in vocabulary:
             rendered = render_canonical_tag(normalized, output_style)
@@ -3363,10 +3479,14 @@ def main() -> int:
                         f"{len(retry_accepted)} of {len(corrected)} alternatives",
                     )
                 if not args.skip_fix_verification:
-                    llm_accepted, semantic_rejections = llm_verify_fixes(
-                        working_leaves, llm_accepted, repair_findings, args, trace_path
-                    )
-                    rejected_suggestions.update(semantic_rejections)
+                    for verification_pass in (1, 2):
+                        llm_accepted, semantic_rejections = llm_verify_fixes(
+                            working_leaves, llm_accepted, repair_findings, args, trace_path,
+                            verification_pass,
+                        )
+                        rejected_suggestions.update(semantic_rejections)
+                        if not llm_accepted:
+                            break
                 suggestions.update(llm_accepted)
                 for finding in findings:
                     if finding.leaf_id in suggestions:

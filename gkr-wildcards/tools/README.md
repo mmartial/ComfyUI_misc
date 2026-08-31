@@ -553,6 +553,9 @@ retrieval is available.
 Candidate proximity alone never authorizes replacement: the
 LLM may combine several canonical components or retain the literal when none preserves
 the complete visible concept, and the rewritten leaf is checked again before acceptance.
+Retaining such an ambiguous literal does not invalidate an otherwise safe repair to the
+same leaf; the literal finding remains unresolved for manual review. Atomizing its words
+or damaging their relationship is still rejected.
 
 This review is deliberately opt-in because compound-word similarity is heuristic and a
 nearest embedding candidate is not proof of equivalence. Its findings are report-only by
@@ -570,6 +573,12 @@ canonical weighted object, such as `hands on (steering_wheel:1.2)`. These are se
 review as verified relationship compositions and are not canonical-literal repair targets. The
 recognition is intentionally narrow: unknown underscore tokens and arbitrary prose remain subject
 to normal validation and similarity review.
+
+The same recognition covers compact visual action/preposition/object forms such as
+`looking at playing_card` and `leaning against machinery`, direct actions such as
+`scanning holographic_interface`, and canonical modifier/object forms such as
+`black wax_seal`. A valid `(red, blue, ...) limited_palette` expression is a specialized
+tags-mode construct and is exempt from generic long-phrase and contained-span repairs.
 
 `--canonical-tag-style underscore` renders canonical suggestions as database identifiers such as `red_hair`. Use `--canonical-tag-style spaces` for models whose documented tag syntax uses `red hair`; matching and verification still retain `red_hair` internally as the canonical identity.
 
@@ -824,7 +833,10 @@ Requirements and safeguards:
 - Repair requests include a policy version, so cached suggestions produced for older validation behavior are not silently reused.
 - Multiword concepts may use a meaning-preserving compound candidate, but repairs that merely split a relationship such as `bone armor` into `bone, armor` are rejected.
 - A separate semantic-preservation pass rejects fact loss, invention, altered alternatives or relationships, and format evasion.
+- LLM rewrites must pass two independently keyed semantic-preservation passes. `--skip-fix-verification` disables both and is not recommended.
 - Deterministic validation rejects removed `or`/`either` alternatives and newly introduced dangling relational fragments.
+- Canonical-literal rewrites must retain every meaningful visible source word (allowing conservative inflection), so material, modifier, action, and quantity details cannot disappear merely to reach a nearby vocabulary tag.
+- Exact, cross-category, and semantic duplicate findings are report-only during repair. The linter will not invent camera, mood, action, or quality tags simply to make duplicate text differ.
 - Comments, category ordering, router leaves, and unaffected formatting remain intact.
 - The copy is written atomically and parsed as YAML before it replaces the selected output path.
 - The original file is never modified.
