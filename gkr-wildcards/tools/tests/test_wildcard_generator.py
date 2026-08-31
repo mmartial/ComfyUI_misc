@@ -107,6 +107,34 @@ class WildcardGeneratorTests(unittest.TestCase):
         )
         self.assertEqual(guidance, [])
 
+    def test_prefer_retrieves_whole_phrase_and_component_tag_palette(self):
+        index_module = sys.modules["danbooru_index"]
+
+        class FakeIndex:
+            def hybrid_search(self, query, vector, limit):
+                mapping = {
+                    "crumbling": [index_module.SearchResult("ruins", 100, 0.9, "hybrid")],
+                    "stone": [index_module.SearchResult("stone_wall", 100, 0.9, "hybrid")],
+                    "cloister": [index_module.SearchResult("arch", 100, 0.8, "semantic")],
+                }
+                return mapping.get(query, [])
+
+        response = {
+            "leaves": ["crumbling stone cloister"],
+            "provenance": [{"canonical_tags": [], "literal_fallbacks": []}],
+        }
+        vocabulary = sys.modules["wildcard_linter"].DanbooruVocabulary(
+            {"ruins", "stone_wall", "arch"}
+        )
+        guidance = GENERATOR.retrieve_literal_fallback_guidance(
+            response, vocabulary, FakeIndex(), None, "", 5,
+        )
+        self.assertEqual(guidance[0]["candidate_tag_set_palette"], ["ruins", "stone_wall", "arch"])
+        self.assertEqual(
+            [item["text"] for item in guidance[0]["component_guidance"]],
+            ["crumbling", "stone", "cloister"],
+        )
+
     def test_prefer_requires_justified_literal_provenance_and_strict_forbids_literals(self):
         allowed = {"motor_vehicle", "city_lights"}
         leaf = "motor_vehicle, velvet seat, city_lights"

@@ -550,12 +550,43 @@ is compatible with the phrase's noun head (for example, `glass biodome` can retr
 `dome` candidate). This suppresses merely nearby alternatives for specialized phrases
 such as vehicle details. Embeddings are queried in batches before review when hybrid
 retrieval is available.
+
+Literal review searches both the whole phrase and each visible word component. The
+result includes `component_guidance` and a larger `candidate_tag_set_palette`, allowing
+the report to show possible vocabulary coverage. Component-only results are advisory:
+the repair stage does not rewrite them unless whole-phrase retrieval also supplies a
+meaning-preserving compound candidate. This prevents nearby component tags from turning
+one attached concept into unrelated singleton tags. A candidate that was already present
+elsewhere in the source leaf cannot be reused as evidence that a different literal phrase
+was preserved; the repair must introduce the replacement for that phrase.
+Unmatched components remain literal. For example, `crumbling stone cloister` may retrieve
+`ruins`, `rubble`, `stone_wall`, `arch`, and `column`, but `arch` or `column` may be used
+only when the source/context actually establishes those details; vector proximity alone
+does not authorize them. The generator's `prefer` policy uses the same component-aware
+retrieval before accepting a literal fallback.
 Candidate proximity alone never authorizes replacement: the
 LLM may combine several canonical components or retain the literal when none preserves
 the complete visible concept, and the rewritten leaf is checked again before acceptance.
 Retaining such an ambiguous literal does not invalidate an otherwise safe repair to the
 same leaf; the literal finding remains unresolved for manual review. Atomizing its words
-or damaging their relationship is still rejected.
+or damaging their relationship is still rejected. Validation also preserves plural
+objects and explicit subject counts, so rewrites such as `robes` to `robe` or `5others`
+to `5students` cannot enter the fixed copy. Fix-manifest statuses are exclusive; when a
+safe deterministic repair survives but a later LLM enhancement fails, the accepted
+rewrite and rejected enhancement are recorded in separate fields.
+
+When fix generation is enabled, exact deterministic canonical and redundancy repairs
+are applied to an in-memory working copy before LLM review. All subsequent content
+review, candidate generation, correction retries, and verification therefore operate on
+the already-cleaned leaf. The original YAML remains unchanged; the combined result is
+written only to `--fixed-output`.
+
+The deterministic validator applies preservation checks to every LLM repair rule, not
+only canonical-literal findings. It rejects newly invented concepts, comma-splitting of
+attached descriptive phrases, loss of canonical source tags, and substitution of an
+unknown underscore token with a merely similar retrieved neighbor. Embedding candidates
+remain suggestions: they do not prove that tags such as `steam_pipe` and `exhaust_pipe`
+are interchangeable.
 
 This review is deliberately opt-in because compound-word similarity is heuristic and a
 nearest embedding candidate is not proof of equivalence. Its findings are report-only by
@@ -837,11 +868,29 @@ Requirements and safeguards:
 - Deterministic validation rejects removed `or`/`either` alternatives and newly introduced dangling relational fragments.
 - Canonical-literal rewrites must retain every meaningful visible source word (allowing conservative inflection), so material, modifier, action, and quantity details cannot disappear merely to reach a nearby vocabulary tag.
 - Exact, cross-category, and semantic duplicate findings are report-only during repair. The linter will not invent camera, mood, action, or quality tags simply to make duplicate text differ.
+- A separate canonical redundancy pass safely removes repeated complete canonical items, retaining the more highly weighted copy. It also prefers explicit quantity tags where implication is unambiguous, such as `sword, multiple_swords` becoming `multiple_swords`. It does not collapse relationship/state tags such as `holding_sword` or `broken_sword` into or over a plain object tag.
 - Comments, category ordering, router leaves, and unaffected formatting remain intact.
 - The copy is written atomically and parsed as YAML before it replaces the selected output path.
 - The original file is never modified.
 
 Use `--fix-manifest path.json` to record every proposed rewrite, its rationale and triggering issues, and whether validation accepted or rejected it. Markdown reports also summarize findings separately from affected leaves and show each rejected rewrite with its validation reasons once per leaf.
+
+For a smaller second-stage manual review, add `--unresolved-output path.yaml` and
+optionally `--unresolved-report path.md`. The unresolved YAML starts from the accepted
+`--fixed-output` content and then substitutes the safest rejected attempt for each
+unresolved leaf. It is marked `REVIEW_CANDIDATES` in its header and must not be treated
+as validated production content. The unresolved Markdown groups findings once per leaf,
+shows a direct fixed-baseline-to-candidate diff, explains why the candidate was rejected,
+and collapses the other attempted rewrites. Every initial suggestion, correction retry,
+and semantic-verification rejection participates in ranking. If either unresolved path
+is omitted, it defaults to the supplied path's stem with the other extension. Both
+options require `--fixed-output`.
+
+```bash
+--fixed-output _tmp/gkr-comics.fixed.yaml \
+--unresolved-output _tmp/gkr-comics.unresolved.yaml \
+--unresolved-report _tmp/gkr-comics.unresolved.md
+```
 
 Potential fixes remain LLM-generated and should be reviewed by diffing the files:
 
@@ -1157,6 +1206,8 @@ mkdir _tmp; THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter
   --fixed-output _tmp/gkr-$THEME.fixed.yaml \
   --format markdown \
   --output _tmp/gkr-$THEME.fixed.report.md \
+  --unresolved-output _tmp/gkr-$THEME.unresolved.yaml \
+  --unresolved-report _tmp/gkr-$THEME.unresolved.md
   --color auto \
   --fail-on never
 ```

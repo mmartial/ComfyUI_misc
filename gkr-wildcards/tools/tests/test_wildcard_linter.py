@@ -96,7 +96,10 @@ class WildcardLinterTests(unittest.TestCase):
         findings = LINTER.canonical_literal_concept_findings(
             [leaf], vocabulary, retriever, candidate_count=5,
         )
-        self.assertEqual(retriever.requests, ["strapped in", "magnetic rails"])
+        self.assertEqual(
+            retriever.requests,
+            ["strapped in", "strapped", "magnetic rails", "magnetic", "rails"],
+        )
         self.assertEqual(findings, [])
 
     def test_literal_review_suppresses_composition_of_known_tags(self):
@@ -113,6 +116,33 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertEqual(
             LINTER.canonical_literal_concept_findings([leaf], vocabulary, FakeRetriever()), []
         )
+
+    def test_literal_review_builds_component_tag_set_palette(self):
+        vocabulary = LINTER.DanbooruVocabulary({"ruins", "rubble", "stone_wall", "arch", "column"})
+        leaf = LINTER.Leaf(
+            "place", "test.yaml", "gkr", "vehicle_spotlight", 0, 10,
+            "crumbling stone cloister", (), "tags",
+        )
+
+        class FakeRetriever:
+            def candidates(self, value, limit):
+                return {
+                    "crumbling stone cloister": [],
+                    "crumbling": ["ruins", "rubble"],
+                    "stone": ["stone_wall"],
+                    "cloister": ["arch", "column"],
+                }.get(value, [])
+
+        findings = LINTER.canonical_literal_concept_findings([leaf], vocabulary, FakeRetriever())
+        self.assertEqual(len(findings), 1)
+        evidence = json.loads(findings[0].evidence)
+        self.assertEqual(
+            evidence["candidate_tag_set_palette"],
+            ["ruins", "rubble", "stone_wall", "arch", "column"],
+        )
+        self.assertEqual([item["text"] for item in evidence["component_guidance"]], [
+            "crumbling", "stone", "cloister",
+        ])
 
     def test_compact_canonical_relationship_compositions_are_recognized(self):
         vocabulary = LINTER.DanbooruVocabulary({
@@ -1036,6 +1066,37 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertEqual(findings[0].rule, "canonical_tag_composition")
         self.assertIn("glowing_eye, red_eyes", findings[0].message)
 
+    def test_multiple_quantity_tag_deterministically_subsumes_singular_tag(self):
+        vocabulary = LINTER.DanbooruVocabulary({"sword", "multiple_swords"})
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1,
+            "person, sword, multiple_swords", (), "tags",
+        )
+        findings = LINTER.canonical_tag_redundancy_findings([leaf], vocabulary)
+        self.assertEqual(len(findings), 1)
+        self.assertEqual(findings[0].rule, "canonical_tag_redundancy")
+        rewrites, resolved = LINTER.deterministic_canonical_repairs([leaf], findings)
+        self.assertEqual(rewrites[leaf.uid], "person, multiple_swords")
+        self.assertEqual(len(resolved), 1)
+
+    def test_relationship_tag_does_not_subsume_object_tag(self):
+        vocabulary = LINTER.DanbooruVocabulary({"sword", "holding_sword"})
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1,
+            "person, sword, holding_sword", (), "tags",
+        )
+        self.assertEqual(LINTER.canonical_tag_redundancy_findings([leaf], vocabulary), [])
+
+    def test_exact_redundancy_keeps_more_highly_weighted_canonical_item(self):
+        vocabulary = LINTER.DanbooruVocabulary({"sword"})
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1,
+            "person, sword, (sword:1.2)", (), "tags",
+        )
+        findings = LINTER.canonical_tag_redundancy_findings([leaf], vocabulary)
+        rewrites, _ = LINTER.deterministic_canonical_repairs([leaf], findings)
+        self.assertEqual(rewrites[leaf.uid], "person, (sword:1.2)")
+
     def test_deterministic_canonical_repairs_combine_safe_items_per_leaf(self):
         vocabulary = LINTER.DanbooruVocabulary(
             {"grey_suit", "high_contrast", "glowing_flower", "blue_flower"},
@@ -1629,12 +1690,239 @@ class WildcardLinterTests(unittest.TestCase):
             evidence=json.dumps({
                 "input": "oversized hoodie",
                 "candidates": ["oversized_clothes", "hoodie"],
+                "meaning_preserving_candidates": ["oversized_clothes"],
             }),
         )
         issues = LINTER.canonical_literal_atomization_issues(
             "1other, oversized_clothes, hoodie", [finding]
         )
         self.assertEqual(issues, [])
+
+    def test_canonical_literal_repair_does_not_reuse_unrelated_existing_candidate(self):
+        finding = LINTER.Finding(
+            "warning", "canonical_literal_concept", "review compound", "test.yaml", 1,
+            "archetype", "leaf-1",
+            evidence=json.dumps({
+                "input": "dark velvet suit",
+                "meaning_preserving_candidates": ["business_suit", "black_suit", "pant_suit"],
+            }),
+        )
+        issues = LINTER.canonical_literal_atomization_issues(
+            "1other, black_suit, dark, velvet, suit",
+            [finding],
+            "1other, black_suit, dark velvet suit",
+        )
+        self.assertEqual(len(issues), 1)
+        self.assertIn("dark velvet suit", issues[0])
+
+    def test_canonical_literal_repair_rejects_partial_head_candidate(self):
+        finding = LINTER.Finding(
+            "warning", "canonical_literal_concept", "review compound", "test.yaml", 1,
+            "archetype", "leaf-1",
+            evidence=json.dumps({
+                "input": "starry nebula skin",
+                "meaning_preserving_candidates": ["starry_skin"],
+            }),
+        )
+        issues = LINTER.canonical_literal_atomization_issues(
+            "1other, starry_skin, nebula", [finding], "1other, starry nebula skin"
+        )
+        self.assertEqual(len(issues), 1)
+
+    def test_canonical_literal_repair_rejects_relation_recast_as_location(self):
+        finding = LINTER.Finding(
+            "warning", "canonical_literal_concept", "review compound", "test.yaml", 1,
+            "effect", "leaf-1",
+            evidence=json.dumps({
+                "input": "vines from ground",
+                "meaning_preserving_candidates": ["on_ground"],
+            }),
+        )
+        issues = LINTER.canonical_literal_atomization_issues(
+            "vines, on_ground", [finding], "vines from ground"
+        )
+        self.assertEqual(len(issues), 1)
+
+    def test_canonical_literal_repair_rejects_plural_compound_atomization(self):
+        finding = LINTER.Finding(
+            "warning", "canonical_literal_concept", "review compound", "test.yaml", 1,
+            "archetype", "leaf-1",
+            evidence=json.dumps({"input": "ancient bronze bracers", "candidates": []}),
+        )
+        issues = LINTER.canonical_literal_atomization_issues(
+            "1other, ancient, bronze, bracer", [finding]
+        )
+        self.assertEqual(len(issues), 1)
+
+    def test_canonical_literal_repair_rejects_plural_loss(self):
+        finding = LINTER.Finding(
+            "warning", "canonical_literal_concept", "review compound", "test.yaml", 1,
+            "archetype", "leaf-1",
+            evidence=json.dumps({"input": "white flowing robes", "candidates": []}),
+        )
+        issues = LINTER.canonical_literal_fact_loss_issues("1other, white, flowing, robe", [finding])
+        self.assertTrue(any("robes" in issue for issue in issues))
+
+    def test_validation_rejects_changed_explicit_subject_count(self):
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1,
+            "5others, student, classroom", (), "tags",
+        )
+        accepted, rejected = LINTER.validate_suggestions(
+            [leaf], {leaf.uid: "5students, classroom"}, [], self.rules, self.tags_rules,
+        )
+        self.assertEqual(accepted, {})
+        self.assertIn("explicit subject-count facts changed", rejected[leaf.uid])
+
+    def test_validation_rejects_unsupported_added_concept(self):
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1,
+            "(debris:1.2), floating, utility_belt", (), "tags",
+        )
+        accepted, rejected = LINTER.validate_suggestions(
+            [leaf], {leaf.uid: "superhero, (debris:1.2), floating, utility_belt"}, [],
+            self.rules, self.tags_rules,
+        )
+        self.assertEqual(accepted, {})
+        self.assertTrue(any("unsupported source concept 'superhero'" in reason for reason in rejected[leaf.uid]))
+
+    def test_validation_rejects_general_descriptive_phrase_split(self):
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "effect", 0, 1,
+            "golden energy aura, light_rays", (), "tags",
+        )
+        accepted, rejected = LINTER.validate_suggestions(
+            [leaf], {leaf.uid: "gold, energy, aura, light_rays"}, [],
+            self.rules, self.tags_rules,
+        )
+        self.assertEqual(accepted, {})
+        self.assertTrue(any("splits cohesive source phrase" in reason for reason in rejected[leaf.uid]))
+
+        for original, rewrite in (
+            ("dusty street, cowboy", "dust, street, cowboy"),
+            ("rainy street, cyberpunk", "rain, street, cyberpunk"),
+            ("ink splash, dancer", "ink, splashing, dancer"),
+            ("steaming tea, table", "steam, tea, table"),
+            ("plumed helmet, warrior", "plume, helmet, warrior"),
+        ):
+            self.assertTrue(
+                LINTER.general_phrase_cohesion_issues(original, rewrite),
+                f"expected cohesion rejection for {original!r} -> {rewrite!r}",
+            )
+
+    def test_validation_rejects_unknown_underscore_neighbor_substitution(self):
+        vocabulary = LINTER.DanbooruVocabulary({"exhaust_pipe", "steam"})
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1,
+            "person, factory, steam_pipe", (), "tags",
+        )
+        finding = LINTER.Finding(
+            "warning", "unknown_canonical_tag", "unknown", "test.yaml", 1,
+            "scene", leaf.uid,
+            evidence=json.dumps({
+                "input": "steam_pipe", "status": "unknown", "candidates": ["exhaust_pipe"],
+            }),
+        )
+        accepted, rejected = LINTER.validate_suggestions(
+            [leaf], {leaf.uid: "person, factory, exhaust_pipe"}, [finding],
+            self.rules, self.tags_rules, vocabulary,
+        )
+        self.assertEqual(accepted, {})
+        self.assertTrue(any("protected source tag 'steam_pipe'" in reason for reason in rejected[leaf.uid]))
+
+    def test_validation_rejects_loss_of_unknown_underscore_modifier(self):
+        vocabulary = LINTER.DanbooruVocabulary({"sword"})
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1,
+            "weapon_on_floor, pointed_sword", (), "tags",
+        )
+        accepted, rejected = LINTER.validate_suggestions(
+            [leaf], {leaf.uid: "weapon_on_floor, sword"}, [],
+            self.rules, self.tags_rules, vocabulary,
+        )
+        self.assertEqual(accepted, {})
+        self.assertTrue(any("protected source tag 'pointed_sword'" in reason for reason in rejected[leaf.uid]))
+
+    def test_fix_manifest_separates_accepted_repair_from_rejected_enhancement(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        path = Path(temporary.name) / "manifest.json"
+        leaf = LINTER.Leaf("id", "test.yaml", "gkr", "scene", 0, 7, "sword, sword", (), "tags")
+        LINTER.write_fix_manifest(
+            path, [leaf], {leaf.uid: "invented rewrite"}, {leaf.uid: "sword"},
+            {leaf.uid: ["semantic verification failed"]}, {leaf.uid: "rationale"}, [],
+        )
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        self.assertEqual(payload["summary"], {
+            "proposed": 1, "accepted": 1, "rejected": 0,
+            "accepted_with_rejected_enhancement": 1,
+        })
+        record = payload["fixes"][0]
+        self.assertEqual(record["suggested_rewrite"], "sword")
+        self.assertEqual(record["rejection_reasons"], [])
+        self.assertEqual(record["rejected_enhancement"], "invented rewrite")
+
+    def test_unresolved_candidates_rank_safer_rejected_attempt(self):
+        leaf = LINTER.Leaf("id", "test.yaml", "gkr", "scene", 0, 7, "dark velvet suit", (), "tags")
+        history = {
+            leaf.uid: [
+                {
+                    "rewrite": "superhero, dark, velvet, suit", "stage": "initial suggestion",
+                    "rationale": "", "rejection_reasons": [
+                        "repair adds unsupported source concept 'superhero'",
+                        "repair splits cohesive source phrase 'dark velvet suit' into separate items",
+                    ],
+                },
+                {
+                    "rewrite": "black_suit, dark velvet suit", "stage": "correction retry 1",
+                    "rationale": "", "rejection_reasons": ["semantic verification: candidate is redundant"],
+                },
+            ],
+        }
+        selected = LINTER.rank_unresolved_candidates(
+            [leaf], {}, history, {leaf.uid},
+        )
+        self.assertEqual(selected[leaf.uid]["rewrite"], "black_suit, dark velvet suit")
+        self.assertEqual(len(selected[leaf.uid]["alternatives"]), 1)
+
+    def test_unresolved_yaml_layers_candidate_over_fixed_baseline(self):
+        leaves, _, _ = self.inventory(
+            "gkr_test:\n  scene:\n    - first source leaf\n    - second source leaf\n"
+        )
+        source = Path(leaves[0].file)
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        destination = Path(temporary.name) / "review.yaml"
+        applied = LINTER.write_fixed_file(
+            source, destination, leaves,
+            {leaves[0].uid: "accepted fixed leaf", leaves[1].uid: "best rejected candidate"},
+            "# REVIEW_CANDIDATES: true\n",
+        )
+        content = destination.read_text(encoding="utf-8")
+        self.assertEqual(applied, 2)
+        self.assertTrue(content.startswith("# REVIEW_CANDIDATES: true\n"))
+        self.assertIn("accepted fixed leaf", content)
+        self.assertIn("best rejected candidate", content)
+
+    def test_unresolved_report_groups_findings_by_leaf(self):
+        leaf = LINTER.Leaf("id", "test.yaml", "gkr", "scene", 0, 7, "source", (), "tags")
+        findings = [
+            LINTER.Finding("warning", "rule_one", "first issue", leaf.file, leaf.line, leaf.category, leaf.uid),
+            LINTER.Finding("error", "rule_two", "second issue", leaf.file, leaf.line, leaf.category, leaf.uid),
+        ]
+        candidate = {
+            leaf.uid: {
+                "baseline": "fixed baseline", "rewrite": "rejected candidate",
+                "stage": "correction retry 1", "rejection_reasons": ["lost detail"],
+                "alternatives": [],
+            },
+        }
+        report = LINTER.render_unresolved_report([leaf], findings, candidate, {leaf.uid})
+        self.assertEqual(report.count("## `scene` · line 7"), 1)
+        self.assertIn("fixed baseline", report)
+        self.assertIn("rejected candidate", report)
+        self.assertIn("`rule_one`: first issue", report)
+        self.assertIn("`rule_two`: second issue", report)
 
     def test_valid_partial_repair_may_retain_ambiguous_literal_phrase(self):
         vocabulary = LINTER.DanbooruVocabulary({"armor", "plate_armor", "grey_suit"})

@@ -896,8 +896,14 @@ def retrieve_literal_fallback_guidance(
         if not isinstance(leaf, str):
             continue
         for phrase in literal_fallback_phrases(leaf, vocabulary.tags):
-            entries.append({"leaf_index": leaf_index, "phrase": phrase})
-    queries = list(dict.fromkeys(entry["phrase"] for entry in entries))
+            components = [
+                word for word in re.findall(r"[a-z0-9][a-z0-9+'-]*", phrase.lower())
+                if word not in linter.LITERAL_CONCEPT_STOPWORDS
+            ]
+            entries.append({"leaf_index": leaf_index, "phrase": phrase, "components": components})
+    queries = list(dict.fromkeys(
+        query for entry in entries for query in [entry["phrase"], *entry["components"]]
+    ))
     vectors: dict[str, list[float]] = {}
     if embedding_client is not None and queries:
         embedded = embedding_client.embed([query_prefix + query for query in queries])
@@ -917,6 +923,19 @@ def retrieve_literal_fallback_guidance(
         ]
     for entry in entries:
         entry["candidates"] = candidates_by_query[entry["phrase"]]
+        entry["component_guidance"] = [
+            {
+                "text": component,
+                "exact_tags": [component] if component in vocabulary.tags else [],
+                "candidates": [] if component in vocabulary.tags else candidates_by_query.get(component, []),
+            }
+            for component in entry.pop("components")
+        ]
+        entry["candidate_tag_set_palette"] = list(dict.fromkeys(
+            candidate["tag"]
+            for group in [entry["candidates"], *[item["candidates"] for item in entry["component_guidance"]]]
+            for candidate in group
+        ))
     return entries
 
 
@@ -932,8 +951,8 @@ def canonicalize_preferred_fallbacks(
         session.args.retrieval_candidates, excluded_tags,
     )
     retrieved = {
-        str(candidate["tag"])
-        for entry in guidance for candidate in entry.get("candidates", [])
+        str(tag)
+        for entry in guidance for tag in entry.get("candidate_tag_set_palette", [])
     }
     if not guidance:
         return result, retrieved
@@ -947,10 +966,10 @@ def canonicalize_preferred_fallbacks(
     instruction = (
         "Revise one generated category using fallback-specific canonical retrieval. Return JSON only as an array "
         "with one object matching the supplied id and containing exactly requested_count leaves plus one aligned "
-        "provenance object per leaf. For each literal_fallback_guidance entry, first replace the phrase with one or "
-        "more supplied canonical candidate tags when they preserve its visible meaning. Do not use a merely related "
-        "candidate. A literal phrase may remain only when no supplied candidate or candidate combination preserves "
-        "important visible information. For every retained literal, provenance.literal_fallbacks must contain an "
+        "provenance object per leaf. For each literal_fallback_guidance entry, build the smallest tag set that covers "
+        "every visible component using exact_tags and supplied candidates. Do not use a merely related candidate or "
+        "add an architectural/object detail only because it is commonly associated with the source phrase. Preserve "
+        "any unmatched component as concise literal text. For every retained literal, provenance.literal_fallbacks must contain an "
         "object with text (the exact retained comma item), reason (a specific explanation of the information lost by "
         "the candidates), and candidates_considered (candidate tags actually reviewed). canonical_tags must list all "
         "canonical tags used. Never invent underscore tags, alter wildcard references, add concepts, remove required "
