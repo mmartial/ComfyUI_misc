@@ -277,8 +277,11 @@ def infer_kind(name: str) -> str:
 
 def requested_count(directives: Iterable[str], kind: str) -> int:
     for directive in directives:
+        # The middle span excludes digit characters so the capture is the number nearest
+        # the unit keyword, not the first number in the directive. Without this, a ranged
+        # phrasing such as "Create between 20 and 30 leaves" would silently resolve to 20.
         match = re.search(
-            r"\b(\d{1,4})\b[^.\n]{0,120}?\b"
+            r"\b(\d{1,4})\b(?:(?!\d)[^.\n]){0,120}?\b"
             r"(?:leaves?|items?|options?|entries|prompts?|concepts?|spotlights?)\b",
             directive, re.I,
         )
@@ -504,6 +507,10 @@ class Session:
             self.reported_tokens += int(usage.get("total_tokens", 0))
         except (TypeError, ValueError):
             return
+        # This callback fires after every individual HTTP call, including each internal
+        # batch of the linter's multi-batch review/fix-suggestion/fix-verification stages,
+        # so the budget is enforced at true call granularity rather than only once per stage.
+        self.check_token_budget()
 
     def check_token_budget(self) -> None:
         if self.args.max_total_tokens is not None and self.reported_tokens >= self.args.max_total_tokens:
@@ -581,6 +588,21 @@ def generate_valid_plan(
     raise AssertionError("planner retry loop exhausted unexpectedly")
 
 
+GENERATION_EXAMPLE = (
+    "EXAMPLE of a correct response shape, with one canonical leaf and one justified literal fallback:\n"
+    '[{"id": "hero_props", "leaves": '
+    '["utility_belt, (grapple_hook:1.1), scuffed leather straps"], '
+    '"provenance": [{"canonical_tags": ["utility_belt", "grapple_hook"], "literal_fallbacks": '
+    '[{"text": "scuffed leather straps", '
+    '"reason": "no canonical tag preserves the worn/aged strap detail", '
+    '"candidates_considered": ["leather", "strap"]}]}]}]\n'
+    "WRONG — do not comma-split an attached compound into loose, unrelated tags merely to reach canonical "
+    'vocabulary: "bone armor" must not become "bone, armor", and "sleek metallic bodysuit" must not become '
+    '"sleek, metallic, bodysuit". Either use one canonical compound tag if one exists, or keep the compact '
+    "literal phrase together as a single comma item with a literal_fallbacks entry."
+)
+
+
 def generation_instruction(
     policy: str, vocabulary: linter.DanbooruVocabulary,
     canonical_policy: str = "flexible",
@@ -627,12 +649,14 @@ def generation_instruction(
         "scale reference; reject anatomically impossible use, invisible details for the selected viewpoint, and arbitrary unrelated props. " + canonical_note +
         "Avoid duplicate or near-duplicate leaves. For component pools, treat the first content-bearing item as the "
         "lead motif and do not use any lead motif more than max_lead_motif_repeats; vary the actual base subject or setting rather "
-        "than producing several lightly modified variants of one base. When—and only when—a concept intentionally restricts the "
+        "than producing several lightly modified variants of one base. Skip any leading subject-count marker such as 1girl, "
+        "multiple_boys, or group_of_people when identifying the lead motif; it is the first content-bearing subject or setting "
+        "after any such marker. When—and only when—a concept intentionally restricts the "
         "image to a finite set of colors, express that restriction in the exact tags-mode form "
         "`(color1, color2, ... colorN) limited_palette`, using only ordinary color names—not materials, finishes, moods, "
         "intensity adjectives, or objects used metaphorically as colors. Do not add limited_palette to an image that merely "
         "mentions colors without restricting the full image palette. Follow the global and local GENERATOR instructions. "
-        + sample_note + "\n\nPOLICY:\n" + policy
+        + sample_note + "\n\n" + GENERATION_EXAMPLE + "\n\nPOLICY:\n" + policy
     )
 
 
@@ -830,18 +854,20 @@ def retrieve_concepts(
 def category_batches(plans: list[CategoryPlan], size: int) -> list[list[CategoryPlan]]:
     if size < 1:
         raise ValueError("--batch-categories must be at least 1")
-    # Dependencies first makes generated context useful to later composite calls.
+    # Dependencies first makes generated context useful to later composite calls. Batches
+    # never cross a wave boundary: a category and its own dependency must not share a call,
+    # or the dependency's leaves would not exist yet to serve as examples.
     remaining = {plan.name: plan for plan in plans}
-    ordered: list[CategoryPlan] = []
+    batches: list[list[CategoryPlan]] = []
     while remaining:
         ready = [plan for plan in remaining.values() if all(dep not in remaining for dep in plan.dependencies)]
         if not ready:
             raise ValueError("category plan is cyclic")
         ready.sort(key=lambda plan: (plan.kind in {"combo", "scene", "spotlight", "router"}, plan.name))
         for plan in ready:
-            ordered.append(plan)
             del remaining[plan.name]
-    return [ordered[index:index + size] for index in range(0, len(ordered), size)]
+        batches.extend(ready[index:index + size] for index in range(0, len(ready), size))
+    return batches
 
 
 class CategoryValidationError(RuntimeError):

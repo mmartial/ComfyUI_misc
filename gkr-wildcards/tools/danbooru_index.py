@@ -387,6 +387,12 @@ class DanbooruIndex:
         if query_vector is not None:
             semantic = self.semantic_search(query_vector, max(limit * 2, 20))
             for rank, item in enumerate(semantic):
+                # Mirror the lexical trigram path's minimum-similarity gate (line ~333):
+                # without a floor, every semantic hit scores >=0.52 regardless of true
+                # cosine similarity, so an unrelated nearest neighbor for a niche/coined
+                # concept can still outrank or crowd out a genuinely relevant lexical match.
+                if item.score < 0.35:
+                    continue
                 semantic_score = 0.52 + 0.38 * max(0.0, item.score) + 0.03 / (rank + 1)
                 current = combined.get(item.tag)
                 candidate = SearchResult(item.tag, item.post_count, semantic_score, "hybrid" if current else "semantic")

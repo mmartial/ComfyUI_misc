@@ -187,6 +187,14 @@ Explicitly accepted and replacement tags bypass palette and subsequent canonical
 vocabulary membership checks; the chosen mapping is recorded under
 `interactive_tag_overrides` in the generation manifest. Structural checks such
 as leaf counts, provenance shape, and declared wildcard references still apply.
+This bypass is global and durable for the remainder of the run: the accepted
+tag is added to the shared in-memory vocabulary, so it is also treated as
+legitimate in every other category generated afterward and in the final
+deterministic lint pass over the completed file, not only in the leaf where it
+was approved. A typo or ad hoc string accepted once will silently suppress an
+`unknown_canonical_tag`-style finding anywhere else it happens to recur in the
+same run. Review `interactive_tag_overrides` in the generation manifest before
+trusting the file as fully vocabulary-clean.
 Each decision is also written immediately to
 `<output-stem>.interactive-overrides.json`, so incomplete or interrupted runs
 reuse it without prompting again. Use `--interactive-overrides PATH` to choose a
@@ -805,7 +813,7 @@ location and message. This provides the prompt context even when no fix was sugg
 the finding remains unresolved. File- or category-level structural findings that do not
 belong to one specific leaf omit this block.
 
-When `--fixed-output` is generated, findings whose leaves were not included in the accepted replacements are marked `[UNRESOLVED]` in text and Markdown reports. The report summary includes the unresolved count, making `rg '\[UNRESOLVED\]' gkr-comics.fixed-report.md` a quick review filter. JSON reports expose the same state as `fix_status` (`fixed`, `unresolved`, or `not_attempted`) and include `summary.unresolved`. The marker is report metadata only; it is never inserted into wildcard YAML content.
+When `--fixed-output` is generated, findings whose leaves were not included in the accepted replacements are marked `[UNRESOLVED]` in text and Markdown reports. The report summary includes the unresolved count, making `rg '\[UNRESOLVED\]' gkr-comics.fixed-report.md` a quick review filter. JSON reports expose the same state as `fix_status` (`fixed`, `unresolved`, `not_attempted`, or `not_leaf_attachable`) and include `summary.unresolved`. `not_leaf_attachable` covers route/graph/category-level findings that were never eligible for the per-leaf fix pipeline (for example `route_prompt_budget`) — these never count toward `summary.unresolved` and never receive the `[UNRESOLVED]` badge, so an unrelated accepted fix elsewhere in the file cannot make a whole-route structural finding look like a failed fix attempt. The marker is report metadata only; it is never inserted into wildcard YAML content.
 
 Terminal color defaults to `auto`: ANSI colors are enabled only when text is written directly to an interactive terminal. Redirected output and `--output` files remain free of escape codes. Override detection with:
 
@@ -893,7 +901,7 @@ Requirements and safeguards:
 - LLM rewrites must pass two independently keyed semantic-preservation passes. `--skip-fix-verification` disables both and is not recommended.
 - Deterministic validation rejects removed `or`/`either` alternatives and newly introduced dangling relational fragments.
 - Canonical-literal rewrites must retain every meaningful visible source word (allowing conservative inflection), so material, modifier, action, and quantity details cannot disappear merely to reach a nearby vocabulary tag.
-- Exact, cross-category, and semantic duplicate findings are report-only during repair. The linter will not invent camera, mood, action, or quality tags simply to make duplicate text differ.
+- Exact, cross-category, and semantic duplicate findings are report-only during repair. The linter will not invent camera, mood, action, or quality tags simply to make duplicate text differ. A pair that is identical except for `(term:weight)` values is reported separately as `duplicate_leaf_weight_variant` (warning) rather than `duplicate_leaf`, since differing emphasis can be a deliberate authored variant; it is also report-only. `route_contract_violation` and `route_prompt_budget` are whole-route/graph facts, not per-leaf ones — they carry no `leaf_id`, are also report-only during repair, and can never be marked resolved by an unrelated leaf-level fix.
 - A separate canonical redundancy pass safely removes repeated complete canonical items, retaining the more highly weighted copy. It also prefers explicit quantity tags where implication is unambiguous, such as `sword, multiple_swords` becoming `multiple_swords`. It does not collapse relationship/state tags such as `holding_sword` or `broken_sword` into or over a plain object tag.
 - Comments, category ordering, router leaves, and unaffected formatting remain intact.
 - The copy is written atomically and parsed as YAML before it replaces the selected output path.

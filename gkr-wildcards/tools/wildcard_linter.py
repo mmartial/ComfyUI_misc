@@ -92,7 +92,8 @@ BODY_RELATION_PREPOSITIONS = {
 STRUCTURAL_FIX_RULES = {
     "camera_format_conflict", "unrestricted_camera_composite", "missing_reference", "reference_cycle",
     "duplicate_leaf", "cross_category_duplicate_leaf", "semantic_duplicate_leaf",
-    "duplicate_leaves_across_chunks",
+    "duplicate_leaves_across_chunks", "route_contract_violation", "route_prompt_budget",
+    "duplicate_leaf_weight_variant",
 }
 
 
@@ -542,6 +543,18 @@ def duplicate_leaf_signature(text: str, mode: str) -> str:
     return "refs:" + "|".join(references) + ";tags:" + "|".join(sorted(phrases))
 
 
+def duplicate_leaf_weight_only_variant(current_text: str, prior_text: str) -> bool:
+    """Return whether two leaves are identical except for their (term:weight) values.
+
+    Weight expresses visual priority (see prompt.md), so two otherwise-identical leaves
+    authored at different emphasis are a deliberate variant, not the same content twice.
+    """
+    if current_text.strip().lower() == prior_text.strip().lower():
+        return False
+    unweighted = lambda text: WEIGHT_RE.sub(lambda match: match.group(1), text).strip().lower()
+    return unweighted(current_text) == unweighted(prior_text)
+
+
 def duplicate_leaf_findings(leaves: list[Leaf]) -> list[Finding]:
     """Report normalized duplicates within a category and across categories."""
     findings: list[Finding] = []
@@ -556,13 +569,21 @@ def duplicate_leaf_findings(leaves: list[Leaf]) -> list[Finding]:
             seen[key] = leaf
             continue
         same_category = prior.category == leaf.category
+        if duplicate_leaf_weight_only_variant(leaf.text, prior.text):
+            severity, rule, note = (
+                "warning", "duplicate_leaf_weight_variant",
+                "The only difference is emphasis weight, which may be an intentional authored variant.",
+            )
+        else:
+            severity, rule, note = (
+                ("error", "duplicate_leaf") if same_category else ("warning", "cross_category_duplicate_leaf")
+            ) + ("",)
         findings.append(Finding(
-            "error" if same_category else "warning",
-            "duplicate_leaf" if same_category else "cross_category_duplicate_leaf",
+            severity, rule,
             (
                 f"Leaf in {leaf.category} duplicates an earlier leaf in {prior.category} after "
                 "normalizing tag order, "
-                "weights, underscores, hyphens, and spacing."
+                f"weights, underscores, hyphens, and spacing.{(' ' + note) if note else ''}"
             ),
             leaf.file, leaf.line, leaf.category, leaf.uid,
             json.dumps({
@@ -968,11 +989,13 @@ def namespace_policy_findings(
             reached = reachable(root_key)
             for category in excluded:
                 if (namespace, str(category)) in reached:
+                    # Route-wide fact, not a per-leaf one: leave leaf_id empty so it can
+                    # never poison a specific leaf's fix eligibility (see STRUCTURAL_FIX_RULES).
                     anchor = categories[root_key][0]
                     findings.append(Finding(
                         "error", "route_contract_violation",
                         f"{namespace}/{root} must not reach the '{category}' output family.",
-                        anchor.file, anchor.line, str(root), anchor.uid, str(category),
+                        anchor.file, anchor.line, str(root), "", str(category),
                     ))
 
         for name, content_policy in policy.get("forbidden_content", {}).items():
@@ -1052,11 +1075,14 @@ def namespace_policy_findings(
             actual_max_words = max((size[1] for size in dist), default=0)
             if over > 0:
                 over_label = "<0.1%" if over < 0.001 else f"{over:.1%}"
+                # Whole-route combinatorial fact, not a per-leaf one: leave leaf_id empty
+                # (see STRUCTURAL_FIX_RULES) so no single leaf edit can be misreported as
+                # having resolved an aggregate budget violation across the whole route.
                 anchor = categories[key][0]
                 findings.append(Finding(
                     budget.get("severity", "warning"), "route_prompt_budget",
                     f"Expanded {namespace}/{root} prompts exceed {max_items} items or {max_words} words in approximately {over_label} of routes.",
-                    anchor.file, anchor.line, str(root), anchor.uid,
+                    anchor.file, anchor.line, str(root), "",
                     f"p90={p90_items} items/{p90_words} words; max={actual_max_items}/{actual_max_words}; target={budget.get('target_items', max_items)} items",
                 ))
     return findings
@@ -1115,18 +1141,29 @@ def parse_json_array_response(content: str) -> list[dict[str, Any]]:
     except json.JSONDecodeError:
         pass
     decoder = json.JSONDecoder()
-    candidates: list[list[dict[str, Any]]] = []
+    candidates: list[tuple[int, int, list[dict[str, Any]]]] = []
     for index, character in enumerate(content):
         if character != "[":
             continue
         try:
-            parsed, _ = decoder.raw_decode(content[index:])
+            parsed, end_offset = decoder.raw_decode(content[index:])
         except json.JSONDecodeError:
             continue
         if isinstance(parsed, list) and parsed and all(isinstance(item, dict) for item in parsed):
-            candidates.append(parsed)
-    if candidates:
-        return candidates[-1]
+            candidates.append((index, index + end_offset, parsed))
+    # A candidate whose span is nested inside another candidate's span (for example a
+    # "provenance" array inside one leaf, inside the real top-level response array) is
+    # never the intended answer, even though its own bracket parses on its own.
+    top_level = [
+        candidate
+        for position, candidate in enumerate(candidates)
+        if not any(
+            other_position != position and other[0] <= candidate[0] and candidate[1] <= other[1]
+            for other_position, other in enumerate(candidates)
+        )
+    ]
+    if top_level:
+        return top_level[-1][2]
     raise json.JSONDecodeError("response does not contain a valid JSON array of objects", content, 0)
 
 
@@ -2043,10 +2080,19 @@ def validate_suggestions(
     leaf_by_id = {leaf.uid: leaf for leaf in leaves}
     targeted_errors: dict[str, set[str]] = {}
     deterministic_errors: dict[str, set[str]] = {}
+    # rewrite_must_resolve flags live in three places: rules.yaml's "patterns" mapping,
+    # tags-rules.yaml's "literalized_style_terms" mapping (finding rule name == config key,
+    # e.g. ambiguous_brush_medium), and tags-rules.yaml's single "canonical_composition"
+    # object, whose finding rule name is "canonical_tag_composition", not the config key.
     must_resolve_rules = {
         name for name, policy in rules.get("patterns", {}).items()
         if policy.get("rewrite_must_resolve")
+    } | {
+        name for name, policy in tags_rules.get("literalized_style_terms", {}).items()
+        if policy.get("rewrite_must_resolve")
     }
+    if tags_rules.get("canonical_composition", {}).get("rewrite_must_resolve"):
+        must_resolve_rules.add("canonical_tag_composition")
     for finding in findings:
         if finding.severity == "error" and finding.leaf_id:
             targeted_errors.setdefault(finding.leaf_id, set()).add(finding.rule)
@@ -2523,7 +2569,9 @@ def canonical_evidence_highlights(finding: Finding) -> tuple[list[str], list[str
 
 def duplicate_evidence_comparison(finding: Finding) -> tuple[dict[str, object], dict[str, object]] | None:
     """Return both sides of an exact duplicate finding's structured evidence."""
-    if finding.rule not in {"duplicate_leaf", "cross_category_duplicate_leaf"} or not finding.evidence:
+    if finding.rule not in {
+        "duplicate_leaf", "cross_category_duplicate_leaf", "duplicate_leaf_weight_variant",
+    } or not finding.evidence:
         return None
     try:
         evidence = json.loads(finding.evidence)
@@ -2568,15 +2616,22 @@ def render(
     proposed_suggestions = proposed_suggestions or {}
     rejected_suggestions = rejected_suggestions or {}
     affected_leaf_ids = {finding.leaf_id for finding in findings if finding.leaf_id}
+    # A finding with no leaf_id (route/graph/category-level facts such as
+    # unreachable_category or route_prompt_budget) was never eligible for the per-leaf fix
+    # pipeline in the first place. Counting it as "unresolved" the moment any unrelated fix
+    # succeeds elsewhere in the file misleadingly implies a fix was attempted and failed.
     unresolved_count = sum(
-        fix_attempted and (not finding.leaf_id or finding.leaf_id not in fixed_leaf_ids)
+        1
         for finding in findings
+        if fix_attempted and finding.leaf_id and finding.leaf_id not in fixed_leaf_ids
     )
 
     def fix_status(finding: Finding) -> str:
         if not fix_attempted:
             return "not_attempted"
-        return "fixed" if finding.leaf_id and finding.leaf_id in fixed_leaf_ids else "unresolved"
+        if not finding.leaf_id:
+            return "not_leaf_attachable"
+        return "fixed" if finding.leaf_id in fixed_leaf_ids else "unresolved"
 
     if fmt == "json":
         rendered_findings = []
@@ -2784,7 +2839,8 @@ def canonical_relationship_components(
         if action in RELATIONAL_ACTION_TAGS and target in tags:
             return [*([action] if action in tags else []), target]
         # Prefer-mode prompts may compactly attach a canonical modifier to a canonical
-        # object (for example, black wax_seal) without inventing a compound tag.
+        # object (for example, black wax_seal, or velvet seat) without inventing a
+        # compound tag.
         if action in tags and target in tags:
             return [action, target]
     if len(tokens) == 3:
