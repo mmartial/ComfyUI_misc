@@ -31,8 +31,14 @@ gkr_superhero:
   # GENERATOR: Balance combat, rescue, investigation, public protection, and aftermath. Each leaf must show one decisive single-image moment.
   superhero_scene: []
 
-  # Spotlight categories default to 50 complete, curated prompts.
+  # Spotlight categories default to 50 complete, curated prompts. Spotlight is the
+  # highest bar in the file: every leaf must read as one deliberate, legible scene,
+  # not an assembled list of theme-adjacent nouns.
   # GENERATOR: Showcase the theme's most recognizable and desirable images without copying existing intellectual property.
+  # GENERATOR: Before writing a leaf, decide one governing idea: what is the subject doing, to/with what, and why would a viewer choose to look at this. Every included tag must serve that one idea; omit anything that does not.
+  # GENERATOR: Every leaf needs an explicit action or pose tying the subject to at least one object or setting detail. A bare list of disconnected nouns is invalid, for example "1person, laboratory, holding_bag" — holding a bag explains nothing about why the scene matters.
+  # GENERATOR: Keep every leaf inside one recognizable sub-tradition or era. Do not blend incompatible genre signifiers in the same leaf (for example cowboy-western imagery with science-fiction rocket ships and mechanical prosthetics) unless the category is explicitly about genre fusion.
+  # GENERATOR: Example of a valid leaf: "1man, detective, trench_coat, fedora, examining (footprints:1.1), alley, rain, chiaroscuro" — one subject, one concrete action tied to one object, one consistent setting and mood.
   spotlight: []
 
   # Routers have no fixed leaf count. They contain only wildcard references.
