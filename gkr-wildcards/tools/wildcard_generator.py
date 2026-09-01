@@ -599,7 +599,12 @@ GENERATION_EXAMPLE = (
     "WRONG — do not comma-split an attached compound into loose, unrelated tags merely to reach canonical "
     'vocabulary: "bone armor" must not become "bone, armor", and "sleek metallic bodysuit" must not become '
     '"sleek, metallic, bodysuit". Either use one canonical compound tag if one exists, or keep the compact '
-    "literal phrase together as a single comma item with a literal_fallbacks entry."
+    "literal phrase together as a single comma item with a literal_fallbacks entry.\n"
+    "WRONG in the opposite direction — do not fuse words into a new underscore compound that merely resembles "
+    'Danbooru naming style: "holding a heart" must not become the invented tag "holding_heart", and "jumping '
+    'while chasing" must not become "jumping_during_chase". A fused word that looks plausible is exactly as '
+    "invalid as a random one unless it is an exact canonical vocabulary tag. Keep it as a literal phrase with "
+    "spaces (\"holding heart\") or a compact relationship form (\"holding (heart:1.2)\") instead."
 )
 
 

@@ -116,6 +116,32 @@ class DanbooruIndexTests(unittest.TestCase):
         results = index.hybrid_search("unrelated wording", [1.0, 0.0], 2)
         self.assertEqual(results[0].tag, "superhero_landing")
 
+    def test_hybrid_retrieval_excludes_weak_semantic_matches_below_similarity_floor(self):
+        # Regression test: every semantic hit used to score >=0.52 regardless of
+        # true cosine similarity (0.52 + 0.38*score + ...), so an unrelated
+        # nearest neighbor for a niche/coined query concept could still outrank
+        # or crowd out a genuinely relevant lexical match. Lexical retrieval
+        # already gates on similarity < 0.28 (see the trigram path); semantic
+        # retrieval needs an equivalent floor.
+        INDEX.write_embeddings(
+            self.sqlite,
+            {
+                0: [1.0, 0.0],           # exact match to the query vector
+                1: [0.3, 0.9539392],     # unit vector, raw cosine 0.30: below the 0.35 floor
+                2: [0.0, 1.0],           # orthogonal: zero similarity
+                3: [-1.0, 0.0],          # opposite direction: negative similarity
+            },
+            {"embedding_model": "test", "embedding_base_url": "http://test/v1"},
+        )
+        index = INDEX.DanbooruIndex(self.sqlite)
+        self.addCleanup(index.close)
+        results = index.hybrid_search("completely unrelated wording xyzzy", [1.0, 0.0], 4)
+        tags = {item.tag for item in results}
+        self.assertIn("superhero_landing", tags)
+        self.assertNotIn("night_vision_device", tags)
+        self.assertNotIn("carrying_person", tags)
+        self.assertNotIn("long_hair", tags)
+
 
 if __name__ == "__main__":
     unittest.main()

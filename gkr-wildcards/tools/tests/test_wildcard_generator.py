@@ -692,6 +692,68 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertEqual(GENERATOR.requested_count(directives, "spotlight"), 200)
         self.assertTrue(GENERATOR.has_explicit_count(directives))
 
+    def test_requested_count_resolves_ranged_phrasing_to_the_upper_bound(self):
+        # Regression test: the middle span used to allow crossing another digit
+        # run, so re.search's leftmost-match behavior bound to the FIRST number
+        # ("Create between 20 and 30 leaves" resolved to 20, not 30).
+        directives = ["# GENERATOR: Create between 20 and 30 leaves for this category"]
+        self.assertEqual(GENERATOR.requested_count(directives, "component"), 30)
+
+    def test_requested_count_still_finds_single_number_directives(self):
+        directives = ["# GENERATOR: Create 12 items for this pool"]
+        self.assertEqual(GENERATOR.requested_count(directives, "component"), 12)
+
+    def test_category_batches_never_shares_a_batch_with_its_own_dependency(self):
+        # Regression test: batching used to slice the flat topologically-sorted
+        # list by fixed size with no wave boundary, so a small dependency-free
+        # wave could spill into the next wave and a combo/scene category would be
+        # generated in the same LLM call as its own dependency -- meaning
+        # dependency_examples would be {} because the dependency's leaves did not
+        # exist yet within that call.
+        plans = [
+            GENERATOR.CategoryPlan("hero_props", "component", "props", 5, [], True),
+            GENERATOR.CategoryPlan("hero_pose", "component", "pose", 5, [], True),
+            GENERATOR.CategoryPlan("hero_combo", "combo", "combo", 5, ["hero_props", "hero_pose"], True),
+            GENERATOR.CategoryPlan("hero_scene", "scene", "scene", 5, ["hero_combo"], True),
+        ]
+        batches = GENERATOR.category_batches(plans, 3)
+        for batch in batches:
+            names = {plan.name for plan in batch}
+            for plan in batch:
+                self.assertFalse(
+                    set(plan.dependencies) & names,
+                    f"{plan.name} shares a batch with its own dependency: {names}",
+                )
+        # Every plan is still scheduled exactly once, in a valid dependency order.
+        ordered_names = [plan.name for batch in batches for plan in batch]
+        self.assertEqual(sorted(ordered_names), sorted(plan.name for plan in plans))
+        self.assertLess(ordered_names.index("hero_props"), ordered_names.index("hero_combo"))
+        self.assertLess(ordered_names.index("hero_pose"), ordered_names.index("hero_combo"))
+        self.assertLess(ordered_names.index("hero_combo"), ordered_names.index("hero_scene"))
+
+    def test_session_record_usage_enforces_token_budget_immediately(self):
+        # Regression test: --max-total-tokens used to be checked only once per
+        # repair stage (before the whole multi-batch llm_review/llm_suggest_fixes
+        # call), not once per underlying HTTP call, so a large file could blow
+        # past the configured budget by an arbitrary multiple within one stage.
+        # record_usage is the linter's llm_usage_callback, invoked after every
+        # individual HTTP response including each internal batch of a
+        # multi-batch stage, so checking the budget there closes that gap.
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        output = Path(temporary.name) / "gkr-test.yaml"
+        session_args = SimpleNamespace(
+            output=output, interactive_overrides=None, model="test-model",
+            base_url="http://localhost:11434/v1", api_key_env="PATH",
+            max_total_tokens=100,
+        )
+        session = GENERATOR.Session(session_args, None)
+        session.record_usage({"total_tokens": 40})
+        self.assertEqual(session.reported_tokens, 40)
+        with self.assertRaises(RuntimeError):
+            session.record_usage({"total_tokens": 70})
+        self.assertEqual(session.reported_tokens, 110)
+
     def test_large_category_is_generated_and_aggregated_in_chunks(self):
         index_module = sys.modules["danbooru_index"]
         temporary = tempfile.TemporaryDirectory()

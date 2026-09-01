@@ -451,6 +451,28 @@ class WildcardLinterTests(unittest.TestCase):
         content = "`json\n[{\"id\": \"item\"}]\n`\nextra explanation"
         self.assertEqual(LINTER.parse_json_array_response(content), [{"id": "item"}])
 
+    def test_json_response_parser_ignores_nested_array_inside_the_real_response(self):
+        # Regression test: the recovery scanner used to keep the LAST successfully
+        # parsed "[" span, not the outermost one. Every generator response schema
+        # nests an array inside each object (provenance/candidates_considered), so
+        # when a model wraps its real answer in any commentary, the scanner would
+        # silently return that nested fragment instead of the actual response.
+        payload = [{
+            "id": "hero_props", "leaves": ["y"],
+            "provenance": [{"text": "y", "reason": "r", "candidates_considered": []}],
+        }]
+        content = (
+            "Here is the result:\n```json\n" + json.dumps(payload) + "\n```\n"
+            "Let me know if changes are needed."
+        )
+        self.assertEqual(LINTER.parse_json_array_response(content), payload)
+
+    def test_json_response_parser_uses_last_of_several_independent_top_level_arrays(self):
+        first = [{"id": "a"}]
+        second = [{"id": "b"}]
+        content = json.dumps(first) + "\nActually here is the corrected answer:\n" + json.dumps(second)
+        self.assertEqual(LINTER.parse_json_array_response(content), second)
+
     def test_incomplete_fix_suggestion_keeps_missing_leaf_unresolved(self):
         leaves, _, _ = self.inventory(
             "# MODE: tags\ngkr_test:\n  subject:\n"
@@ -779,6 +801,56 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertIn("gkr-test.yaml:4`", markdown)
         self.assertIn("`dynamic pose, muscles`", markdown)
 
+    def test_duplicate_leaf_weight_only_variant_is_a_separate_warning_rule(self):
+        # Two leaves identical except for emphasis weight are a deliberate authored
+        # variant (see prompt.md's weight-syntax guidance), not the same content
+        # twice, so they must not be reported as a hard duplicate_leaf error.
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  props:\n"
+            "    - (sword:1.3), shield\n"
+            "    - (sword:0.8), shield\n"
+        )
+        findings = LINTER.duplicate_leaf_findings(leaves)
+        self.assertEqual([finding.rule for finding in findings], ["duplicate_leaf_weight_variant"])
+        self.assertEqual(findings[0].severity, "warning")
+        self.assertIn("duplicate_leaf_weight_variant", LINTER.STRUCTURAL_FIX_RULES)
+
+    def test_duplicate_leaf_exact_match_still_uses_duplicate_leaf_rule(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  props:\n"
+            "    - (sword:1.3), shield\n"
+            "    - (sword:1.3), shield\n"
+        )
+        findings = LINTER.duplicate_leaf_findings(leaves)
+        self.assertEqual([finding.rule for finding in findings], ["duplicate_leaf"])
+        self.assertEqual(findings[0].severity, "error")
+
+    def test_leafless_finding_reports_not_leaf_attachable_without_crashing(self):
+        # Regression test: render() previously used `and`-chaining to compute
+        # unresolved_count, so a finding with leaf_id == "" (falsy but not a bool)
+        # leaked through as the sum term instead of False, raising
+        # "TypeError: unsupported operand type(s) for +: 'int' and 'str'" the
+        # moment any fix was accepted anywhere in the same run.
+        leaves, _, _ = self.inventory("gkr_test:\n  scene:\n    - one\n")
+        leaf = leaves[0]
+        findings = [
+            LINTER.Finding(
+                "warning", "route_prompt_budget", "route budget note",
+                leaf.file, leaf.line, "scene", "",
+            ),
+            LINTER.Finding(
+                "error", "some_rule", "needs a fix", leaf.file, leaf.line, "scene", leaf.uid,
+            ),
+        ]
+        report = LINTER.render(
+            findings, leaves, "json", fix_attempted=True, fixed_leaf_ids={leaf.uid},
+        )
+        data = json.loads(report)
+        statuses = {item["rule"]: item["fix_status"] for item in data["findings"]}
+        self.assertEqual(statuses["route_prompt_budget"], "not_leaf_attachable")
+        self.assertEqual(statuses["some_rule"], "fixed")
+        self.assertEqual(data["summary"]["unresolved"], 0)
+
     def test_route_motif_probability_accounts_for_nested_routes(self):
         leaves, categories, _ = self.inventory(
             "gkr_test:\n"
@@ -804,7 +876,14 @@ class WildcardLinterTests(unittest.TestCase):
             "route_exclusions": {"random": ["design"]}
         }}}
         findings = LINTER.namespace_policy_findings(leaves, categories, rules)
-        self.assertIn("route_contract_violation", {finding.rule for finding in findings})
+        matches = [finding for finding in findings if finding.rule == "route_contract_violation"]
+        self.assertEqual(len(matches), 1)
+        # A route-wide graph fact must never carry a leaf_id: attaching one to an
+        # arbitrary anchor leaf would let an unrelated accepted fix on that leaf
+        # permanently block every other real fix proposed for it (see
+        # STRUCTURAL_FIX_RULES) or falsely report the route violation as resolved.
+        self.assertEqual(matches[0].leaf_id, "")
+        self.assertIn("route_contract_violation", LINTER.STRUCTURAL_FIX_RULES)
 
     def test_namespace_budget_uses_recursive_expansion_probability(self):
         leaves, categories, _ = self.inventory(
@@ -818,6 +897,10 @@ class WildcardLinterTests(unittest.TestCase):
         findings = LINTER.namespace_policy_findings(leaves, categories, rules)
         self.assertEqual(len(findings), 1)
         self.assertIn("50.0%", findings[0].message)
+        # Same reasoning as route_contract_violation: this is a whole-route
+        # combinatorial fact, not a per-leaf one.
+        self.assertEqual(findings[0].leaf_id, "")
+        self.assertIn("route_prompt_budget", LINTER.STRUCTURAL_FIX_RULES)
 
     def test_details_audit_is_mode_aware(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -1077,6 +1160,59 @@ class WildcardLinterTests(unittest.TestCase):
         findings = LINTER.canonical_tag_findings([leaf], vocabulary, 5, "underscore", policy)
         self.assertEqual(findings[0].rule, "canonical_tag_composition")
         self.assertIn("glowing_eye, red_eyes", findings[0].message)
+
+    def test_canonical_composition_rewrite_must_resolve_is_enforced(self):
+        # Regression test: must_resolve_rules used to read only rules.yaml's
+        # "patterns" mapping, so tags-rules.yaml's canonical_composition.
+        # rewrite_must_resolve (finding rule "canonical_tag_composition", a
+        # different name than its config key) was silently never enforced.
+        self.assertTrue(self.tags_rules.get("canonical_composition", {}).get("rewrite_must_resolve"))
+        vocabulary = LINTER.DanbooruVocabulary(
+            {"glowing_eye", "red_eyes"}, {"glowing_eye": 500, "red_eyes": 1000}, {},
+        )
+        leaf = LINTER.Leaf("id", "test.yaml", "gkr", "eyes", 0, 1, "glowing red eye", (), "tags")
+        findings = LINTER.canonical_tag_findings(
+            [leaf], vocabulary, 5, "underscore", self.tags_rules.get("canonical_composition"),
+        )
+        self.assertIn("canonical_tag_composition", {finding.rule for finding in findings})
+        accepted, rejected = LINTER.validate_suggestions(
+            [leaf], {"id": "glowing red eye, sparkle"}, findings,
+            self.rules, self.tags_rules, vocabulary,
+        )
+        self.assertFalse(accepted)
+        self.assertTrue(
+            any(
+                "targeted representability warning remains: canonical_tag_composition" in reason
+                for reason in rejected["id"]
+            )
+        )
+
+    def test_ambiguous_brush_medium_rewrite_must_resolve_is_enforced(self):
+        # Regression test: ambiguous_brush_medium lives in tags-rules.yaml's
+        # literalized_style_terms mapping, which must_resolve_rules did not scan
+        # before the fix, so a rewrite that kept the flagged "brush" wording could
+        # be accepted into --fixed-output untouched.
+        self.assertTrue(
+            self.tags_rules.get("literalized_style_terms", {})
+            .get("ambiguous_brush_medium", {}).get("rewrite_must_resolve")
+        )
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1,
+            "1other, bold brush contours, standing", (), "tags",
+        )
+        findings = LINTER.tags_mode_findings([leaf], self.tags_rules)
+        self.assertIn("ambiguous_brush_medium", {finding.rule for finding in findings})
+        accepted, rejected = LINTER.validate_suggestions(
+            [leaf], {"id": "1other, bold brush contours, kneeling"}, findings,
+            self.rules, self.tags_rules,
+        )
+        self.assertFalse(accepted)
+        self.assertTrue(
+            any(
+                "targeted representability warning remains: ambiguous_brush_medium" in reason
+                for reason in rejected["id"]
+            )
+        )
 
     def test_multiple_quantity_tag_deterministically_subsumes_singular_tag(self):
         vocabulary = LINTER.DanbooruVocabulary({"sword", "multiple_swords"})
