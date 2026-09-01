@@ -436,15 +436,18 @@ uv run tools/wildcard_linter.py gkr-comics.yaml \
   --fail-on never --verbose
 ```
 
-This pass embeds the scoped leaf text in batches and compares cosine similarity only
-within the same category. Each leaf produces at most one warning for its closest earlier
-neighbor, avoiding an unreadable all-pairs report. Exact normalized duplicates remain
-covered by `duplicate_leaf`; the semantic pass skips those redundant pairs. Findings use
-rule `semantic_duplicate_leaf` and include both source locations, both complete leaves,
-the measured cosine similarity, and the configured threshold. The default threshold is
+This pass embeds scoped content leaves in batches and compares cosine similarity only
+within the same category. Reference-only/router leaves are excluded because their shared
+category names create false positives while their route combinations remain structurally
+distinct. Above-threshold pairs are joined into connected clusters, producing one
+`semantic_duplicate_leaf` finding per cluster rather than one finding per pair. Exact
+normalized duplicates remain covered by `duplicate_leaf`. Structured evidence contains
+the representative, every member and source location, similarity to the representative,
+and configured threshold. The unresolved Markdown renders all clusters in one dedicated
+section with one manual consolidation decision per cluster. The default threshold is
 `0.94`; increase it for fewer, stronger matches or lower it cautiously for broader
-review. Because similarity is model-dependent and does not prove identity, these are
-warnings for human review rather than automatic removals or fixes.
+review. Similarity does not prove identity, so cluster merging and deletion remain
+report-only and never enter fixed YAML automatically.
 
 When `--llm --suggest-fixes` makes semantic-duplicate warnings eligible for repair (for
 example through `--fix-severity both` or `--fix-rules semantic_duplicate_leaf`), proposed
@@ -575,6 +578,16 @@ to `5students` cannot enter the fixed copy. Fix-manifest statuses are exclusive;
 safe deterministic repair survives but a later LLM enhancement fails, the accepted
 rewrite and rejected enhancement are recorded in separate fields.
 
+Literal review uses a canonical-anchor coverage target for short phrases: at least half
+of their non-preposition content words should already be exact vocabulary items when
+faithful tags exist (one of two words, two of three or four words). Phrases meeting that
+target are treated as valid human-curated compositions and are not sent to embedding
+review merely because the complete phrase is not one canonical tag. Falling below the
+target emits `canonical_literal_concept` evidence with `content_words`, current and
+required coverage counts, whole-phrase candidates, and component candidates. The target
+never authorizes destructive splitting; unmatched modifiers and relationships remain
+literal when the vocabulary cannot preserve them.
+
 When fix generation is enabled, exact deterministic canonical and redundancy repairs
 are applied to an in-memory working copy before LLM review. All subsequent content
 review, candidate generation, correction retries, and verification therefore operate on
@@ -592,6 +605,14 @@ representability. A standalone literal descriptor cannot be silently deleted by 
 repair—even when an LLM finding criticizes it; the rewrite must retain it or provide a
 concrete replacement. This keeps subjective removals such as dropping `stark` in the
 unresolved review artifacts instead of applying them automatically.
+
+Generator underscore validation uses the complete authoritative CSV vocabulary. The
+retrieved concept palette remains preferred authoring guidance, but a real vocabulary
+tag outside that palette is valid and an invented underscore token is invalid. Weighted
+items validate their inner token. Shared policy also requires contextual coherence for
+all categories: props need a visible worn/held/attached/nearby relationship, anatomy and
+actions must be compatible, technical details must be visible from the selected
+viewpoint, and arbitrary scale-reference objects are omitted.
 
 This review is deliberately opt-in because compound-word similarity is heuristic and a
 nearest embedding candidate is not proof of equivalence. Its findings are report-only by

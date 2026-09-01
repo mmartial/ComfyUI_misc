@@ -46,7 +46,7 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertEqual(candidates, ["business_suit"])
         self.assertEqual(retriever.request, ("formal_outfit", 3))
 
-    def test_plain_literal_compound_receives_canonical_candidate_review(self):
+    def test_plain_literal_compound_meeting_half_coverage_needs_no_review(self):
         vocabulary = LINTER.DanbooruVocabulary({"glass", "dome", "greenhouse", "obidome"})
         leaf = LINTER.Leaf(
             "bio", "test.yaml", "gkr", "scene", 0, 10,
@@ -62,14 +62,7 @@ class WildcardLinterTests(unittest.TestCase):
         findings = LINTER.canonical_literal_concept_findings(
             [leaf], vocabulary, retriever, candidate_count=5,
         )
-        self.assertEqual(len(findings), 1)
-        self.assertEqual(findings[0].rule, "canonical_literal_concept")
-        evidence = json.loads(findings[0].evidence)
-        self.assertEqual(evidence["input"], "glass biodome")
-        self.assertEqual(evidence["status"], "literal_phrase_candidate_review")
-        self.assertEqual(evidence["known_canonical_components"], ["glass"])
-        self.assertEqual(evidence["unknown_words"], ["biodome"])
-        self.assertIn("dome", evidence["candidates"])
+        self.assertEqual(findings, [])
         self.assertFalse(LINTER.canonical_compound_component("golden", "gold"))
         self.assertFalse(LINTER.canonical_compound_component("stained", "stain"))
         self.assertTrue(LINTER.canonical_compound_component("biodome", "dome"))
@@ -98,7 +91,7 @@ class WildcardLinterTests(unittest.TestCase):
         )
         self.assertEqual(
             retriever.requests,
-            ["strapped in", "strapped", "magnetic rails", "magnetic", "rails"],
+            ["magnetic rails", "magnetic", "rails"],
         )
         self.assertEqual(findings, [])
 
@@ -136,6 +129,9 @@ class WildcardLinterTests(unittest.TestCase):
         findings = LINTER.canonical_literal_concept_findings([leaf], vocabulary, FakeRetriever())
         self.assertEqual(len(findings), 1)
         evidence = json.loads(findings[0].evidence)
+        self.assertEqual(evidence["canonical_coverage_count"], 0)
+        self.assertEqual(evidence["required_coverage_count"], 2)
+        self.assertEqual(evidence["content_words"], ["crumbling", "stone", "cloister"])
         self.assertEqual(
             evidence["candidate_tag_set_palette"],
             ["ruins", "rubble", "stone_wall", "arch", "column"],
@@ -382,9 +378,25 @@ class WildcardLinterTests(unittest.TestCase):
         finding = findings[0]
         self.assertEqual(finding.rule, "semantic_duplicate_leaf")
         self.assertEqual(finding.line, 11)
-        self.assertIn("closest earlier leaf: test.yaml:10", finding.evidence)
-        self.assertIn("comic_cover, red car, desert", finding.evidence)
-        self.assertIn("cosine similarity:", finding.evidence)
+        evidence = json.loads(finding.evidence)
+        self.assertEqual(evidence["type"], "semantic_duplicate_cluster")
+        self.assertEqual(evidence["representative"]["line"], 10)
+        self.assertEqual(evidence["representative"]["leaf"], "comic_cover, red car, desert")
+        self.assertEqual(len(evidence["members"]), 2)
+
+    def test_semantic_duplicate_checker_excludes_reference_only_routers(self):
+        leaves = [
+            LINTER.Leaf("a", "test.yaml", "gkr", "random", 0, 10,
+                        "__gkr/subject__, __gkr/action__", (("gkr", "subject"), ("gkr", "action")), "tags"),
+            LINTER.Leaf("b", "test.yaml", "gkr", "random", 1, 11,
+                        "__gkr/subject__, __gkr/setting__", (("gkr", "subject"), ("gkr", "setting")), "tags"),
+        ]
+
+        class NoEmbeddingExpected:
+            def embed(self, inputs):
+                raise AssertionError("router-only leaves must not be embedded")
+
+        self.assertEqual(LINTER.semantic_duplicate_findings(leaves, NoEmbeddingExpected()), [])
 
     def test_semantic_duplicate_fix_must_fall_below_threshold(self):
         leaves = [
@@ -1954,6 +1966,41 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertIn("rejected candidate", report)
         self.assertIn("`rule_one`: first issue", report)
         self.assertIn("`rule_two`: second issue", report)
+
+    def test_unresolved_report_groups_semantic_cluster_in_one_section(self):
+        first = LINTER.Leaf("a", "test.yaml", "gkr", "scene", 0, 7, "red car", (), "tags")
+        second = LINTER.Leaf("b", "test.yaml", "gkr", "scene", 1, 8, "crimson automobile", (), "tags")
+        evidence = {
+            "type": "semantic_duplicate_cluster", "cluster_id": "cluster123",
+            "threshold": 0.94,
+            "representative": {
+                "id": first.uid, "file": first.file, "line": first.line,
+                "category": first.category, "leaf": first.text,
+                "similarity_to_representative": 1.0,
+            },
+            "members": [
+                {
+                    "id": first.uid, "file": first.file, "line": first.line,
+                    "category": first.category, "leaf": first.text,
+                    "similarity_to_representative": 1.0,
+                },
+                {
+                    "id": second.uid, "file": second.file, "line": second.line,
+                    "category": second.category, "leaf": second.text,
+                    "similarity_to_representative": 0.96,
+                },
+            ],
+        }
+        finding = LINTER.Finding(
+            "warning", "semantic_duplicate_leaf", "cluster", second.file, second.line,
+            second.category, second.uid, json.dumps(evidence),
+        )
+        report = LINTER.render_unresolved_report(
+            [first, second], [finding], {}, {second.uid},
+        )
+        self.assertEqual(report.count("## Cluster `cluster123`"), 1)
+        self.assertIn("Router-only/reference-only leaves are excluded", report)
+        self.assertIn("crimson automobile", report)
 
     def test_valid_partial_repair_may_retain_ambiguous_literal_phrase(self):
         vocabulary = LINTER.DanbooruVocabulary({"armor", "plate_armor", "grey_suit"})

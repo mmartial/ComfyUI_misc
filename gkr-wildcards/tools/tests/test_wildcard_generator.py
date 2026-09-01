@@ -50,6 +50,8 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertIn("biodome", concept)
         self.assertIn("combination of candidates", generation)
         self.assertIn("greenhouse, glass, dome", generation)
+        self.assertIn("contextually plausible combination", generation)
+        self.assertIn("at least half of its content", generation)
 
     def test_colored_verbose_log_highlights_corrective_retry(self):
         stream = io.StringIO()
@@ -169,6 +171,32 @@ class WildcardGeneratorTests(unittest.TestCase):
             GENERATOR.validate_category_response(
                 "vehicle", missing, 1, "gkr_test", [], allowed, canonical_policy="strict",
             )
+
+    def test_authoritative_vocabulary_accepts_exact_tag_outside_retrieval_palette(self):
+        response = {
+            "leaves": ["person, padded_jacket"],
+            "provenance": [{"canonical_tags": ["padded_jacket"], "literal_fallbacks": []}],
+        }
+        leaves, _ = GENERATOR.validate_category_response(
+            "subject", response, 1, "gkr_test", [], {"person"},
+            canonical_vocabulary={"person", "padded_jacket"},
+            canonical_policy="prefer",
+        )
+        self.assertEqual(leaves, response["leaves"])
+
+    def test_authoritative_vocabulary_rejects_invented_underscore_tag(self):
+        for leaf in ("person, padded_doublet", "person, (padded_doublet:1.2)"):
+            response = {
+                "leaves": [leaf],
+                "provenance": [{"canonical_tags": ["padded_doublet"], "literal_fallbacks": []}],
+            }
+            with self.assertRaisesRegex(
+                GENERATOR.CategoryValidationError, "outside the authoritative vocabulary",
+            ):
+                GENERATOR.validate_category_response(
+                    "subject", response, 1, "gkr_test", [], {"person"},
+                    canonical_vocabulary={"person", "padded_jacket", "neck_ruff"},
+                )
 
     def test_prefer_does_not_treat_recognized_relationship_compositions_as_fallbacks(self):
         canonical = {

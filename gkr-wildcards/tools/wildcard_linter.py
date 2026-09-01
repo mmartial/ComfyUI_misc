@@ -590,8 +590,11 @@ def semantic_duplicate_findings(
     leaves: list[Leaf], embedding_client: EmbeddingClient,
     threshold: float = 0.94, batch_size: int = 64,
 ) -> list[Finding]:
-    """Report each leaf's closest earlier semantic neighbor within its category."""
-    eligible = [leaf for leaf in leaves if semantic_leaf_text(leaf.text)]
+    """Report connected semantic-duplicate clusters, excluding reference-only routers."""
+    eligible = [
+        leaf for leaf in leaves
+        if has_literal_content(leaf) and semantic_leaf_text(leaf.text)
+    ]
     if len(eligible) < 2:
         return []
     texts = [semantic_leaf_text(leaf.text) for leaf in eligible]
@@ -608,31 +611,65 @@ def semantic_duplicate_findings(
     by_category: dict[tuple[str, str], list[int]] = {}
     for index, leaf in enumerate(eligible):
         by_category.setdefault((leaf.namespace, leaf.category), []).append(index)
-    for indexes in by_category.values():
-        for position, current_index in enumerate(indexes):
-            if position == 0:
+    for category_key, indexes in by_category.items():
+        parents = {index: index for index in indexes}
+
+        def find(index: int) -> int:
+            while parents[index] != index:
+                parents[index] = parents[parents[index]]
+                index = parents[index]
+            return index
+
+        def union(left: int, right: int) -> None:
+            left_root, right_root = find(left), find(right)
+            if left_root != right_root:
+                parents[right_root] = left_root
+
+        for position, left_index in enumerate(indexes):
+            for right_index in indexes[position + 1:]:
+                if duplicate_leaf_signature(
+                    eligible[left_index].text, eligible[left_index].mode,
+                ) == duplicate_leaf_signature(eligible[right_index].text, eligible[right_index].mode):
+                    continue
+                if float(matrix[left_index] @ matrix[right_index]) >= threshold:
+                    union(left_index, right_index)
+        clusters: dict[int, list[int]] = {}
+        for index in indexes:
+            clusters.setdefault(find(index), []).append(index)
+        cluster_number = 0
+        for members in clusters.values():
+            if len(members) < 2:
                 continue
-            prior_indexes = indexes[:position]
-            scores = matrix[prior_indexes] @ matrix[current_index]
-            best_offset = int(np.argmax(scores))
-            score = float(scores[best_offset])
-            prior_index = prior_indexes[best_offset]
-            current = eligible[current_index]
-            prior = eligible[prior_index]
-            if score < threshold:
-                continue
-            if duplicate_leaf_signature(current.text, current.mode) == duplicate_leaf_signature(prior.text, prior.mode):
-                continue
-            evidence = (
-                f"cosine similarity: {score:.4f}\n"
-                f"candidate: {current.file}:{current.line}\n  {current.text}\n"
-                f"closest earlier leaf: {prior.file}:{prior.line}\n  {prior.text}"
-            )
+            cluster_number += 1
+            members.sort()
+            representative_index = members[0]
+            anchor_index = members[-1]
+            representative = eligible[representative_index]
+            member_records = []
+            for index in members:
+                leaf = eligible[index]
+                score = 1.0 if index == representative_index else float(
+                    matrix[representative_index] @ matrix[index]
+                )
+                member_records.append({
+                    "id": leaf.uid, "file": leaf.file, "line": leaf.line,
+                    "category": leaf.category, "leaf": leaf.text,
+                    "similarity_to_representative": round(score, 4),
+                })
+            cluster_id = hashlib.sha256(
+                "|".join(member["id"] for member in member_records).encode("utf-8")
+            ).hexdigest()[:12]
+            evidence = json.dumps({
+                "type": "semantic_duplicate_cluster", "cluster_id": cluster_id,
+                "threshold": threshold, "representative": member_records[0],
+                "members": member_records,
+            }, ensure_ascii=False)
+            anchor = eligible[anchor_index]
             findings.append(Finding(
                 "warning", "semantic_duplicate_leaf",
-                f"Leaf is semantically similar to an earlier leaf in the same category "
-                f"(cosine similarity {score:.4f}, threshold {threshold:.4f}).",
-                current.file, current.line, current.category, current.uid, evidence,
+                f"Semantic duplicate cluster contains {len(members)} leaves in "
+                f"{category_key[1]} (threshold {threshold:.4f}); review one cluster-level consolidation.",
+                anchor.file, anchor.line, anchor.category, anchor.uid, evidence,
             ))
     return findings
 
@@ -2334,13 +2371,49 @@ def render_unresolved_report(
     for finding in findings:
         if finding.leaf_id:
             findings_by_id.setdefault(finding.leaf_id, []).append(finding)
-    unresolved_without_candidate = unresolved_ids - set(candidates)
+    semantic_clusters: list[dict[str, Any]] = []
+    semantic_anchor_ids: set[str] = set()
+    for finding in findings:
+        if finding.rule != "semantic_duplicate_leaf" or not finding.evidence:
+            continue
+        try:
+            evidence = json.loads(finding.evidence)
+        except (TypeError, json.JSONDecodeError):
+            continue
+        if isinstance(evidence, dict) and evidence.get("type") == "semantic_duplicate_cluster":
+            semantic_clusters.append(evidence)
+            if finding.leaf_id:
+                semantic_anchor_ids.add(finding.leaf_id)
+    unresolved_without_candidate = unresolved_ids - set(candidates) - semantic_anchor_ids
     lines = [
         "# Unresolved wildcard repair candidates", "",
         "> Review-only output. Every proposed rewrite below failed automatic validation and was not applied to the fixed YAML.",
         "",
         f"Candidate leaves: {len(candidates)} · Other unresolved leaves without a rejected rewrite: {len(unresolved_without_candidate)}",
     ]
+    if semantic_clusters:
+        lines.extend([
+            "", "# Semantic duplicate clusters", "",
+            "These are grouped review decisions. Router-only/reference-only leaves are excluded, and no cluster consolidation is applied automatically.",
+        ])
+        for evidence in semantic_clusters:
+            representative = evidence.get("representative", {})
+            members = evidence.get("members", [])
+            lines.extend([
+                "", "---", "",
+                f"## Cluster `{evidence.get('cluster_id', '')}` · `{representative.get('category', '')}` · {len(members)} leaves", "",
+                "**Suggested review:** keep the strongest representative, merge only compatible distinctive details, and remove other leaves only after manual approval.", "",
+                "**Current representative:**", "",
+                f"- `{representative.get('file', '')}:{representative.get('line', 0)}`",
+                f"  - `{representative.get('leaf', '')}`", "",
+                "**Cluster members:**", "",
+            ])
+            for member in members:
+                lines.extend([
+                    f"- similarity `{float(member.get('similarity_to_representative', 0.0)):.4f}` · "
+                    f"`{member.get('file', '')}:{member.get('line', 0)}`",
+                    f"  - `{member.get('leaf', '')}`",
+                ])
     for uid, candidate in sorted(
         candidates.items(), key=lambda item: (leaf_by_id[item[0]].file, leaf_by_id[item[0]].line)
     ):
@@ -3337,11 +3410,19 @@ def canonical_literal_concept_findings(
             words = re.findall(r"[a-z0-9][a-z0-9+'-]*", raw)
             if not 2 <= len(words) <= 5:
                 continue
-            known = [word for word in words if normalize_canonical_tag(word) in vocabulary]
+            content_words = [word for word in words if word not in LITERAL_CONCEPT_STOPWORDS]
+            if len(content_words) < 2:
+                continue
+            known = [word for word in content_words if normalize_canonical_tag(word) in vocabulary]
+            required_coverage_count = (len(content_words) + 1) // 2
+            coverage = len(known) / len(content_words)
+            # Human-curated literal compositions meeting the canonical-anchor target do
+            # not need embedding review merely because the whole phrase is not one tag.
+            if len(known) >= required_coverage_count:
+                continue
             unknown = [
-                word for word in words
-                if len(word) >= 5 and word not in LITERAL_CONCEPT_STOPWORDS
-                and normalize_canonical_tag(word) not in vocabulary
+                word for word in content_words
+                if normalize_canonical_tag(word) not in vocabulary
             ]
             # A phrase composed entirely of known tags is a valid literal composition under
             # the prefer policy. Reporting it merely invites destructive word atomization.
@@ -3387,6 +3468,10 @@ def canonical_literal_concept_findings(
             guidance = {
                 "input": raw,
                 "status": "literal_phrase_candidate_review",
+                "content_words": content_words,
+                "canonical_coverage_count": len(known),
+                "required_coverage_count": required_coverage_count,
+                "canonical_coverage": round(coverage, 4),
                 "known_canonical_components": rendered_known,
                 "unknown_words": unknown,
                 "candidates": rendered_candidates,
@@ -3410,7 +3495,8 @@ def canonical_literal_concept_findings(
             rendered_palette = guidance["candidate_tag_set_palette"][:max(candidate_count * 3, candidate_count)]
             findings.append(Finding(
                 "warning", "canonical_literal_concept",
-                f"Plain literal phrase has component-aware canonical alternatives{component_note}; "
+                f"Plain literal phrase has {len(known)}/{len(content_words)} canonical content-word coverage "
+                f"(target {required_coverage_count}/{len(content_words)}){component_note}; "
                 f"review tag-set palette: {', '.join(rendered_palette)}.",
                 leaf.file, leaf.line, leaf.category, leaf.uid,
                 evidence=json.dumps(guidance, ensure_ascii=False),

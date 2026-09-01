@@ -610,7 +610,10 @@ def generation_instruction(
         "leaves are generated deterministically and are not supplied. Spotlight leaves are complete, high-specificity, single-image prompts. "
         "Use every allowed dependency at least once somewhere in the category's leaves so all planned categories contribute to output routes. "
         "Use the candidate palette for each concept as the primary vocabulary. Every underscore-form token must be an exact canonical "
-        "tag from that palette. Prefer a canonical candidate whenever it preserves the concept. A literal fallback is allowed only when "
+        "tag in the authoritative vocabulary; never concatenate plausible words into a new underscore token. Prefer a supplied candidate "
+        "whenever it preserves the concept. A short literal phrase should use exact canonical vocabulary for at least half of its content "
+        "words when faithful tags exist, but never split a cohesive relationship or substitute merely associated candidates to reach that target. "
+        "A literal fallback is allowed only when "
         "no candidate or combination of candidates preserves necessary visible meaning; first try decomposing a compound literal into "
         "multiple canonical tags (for example greenhouse, glass, dome instead of glass biodome). Record fallback text and a specific reason "
         "in literal_fallbacks; merely preferring the coined phrase is not a valid reason. All literal output is "
@@ -619,7 +622,9 @@ def generation_instruction(
         "content; sensitive permits non-explicit mature material but not explicit sexual content; unrestricted adds no content "
         "restriction. Compact relationship compositions made from verified canonical components are not literal fallbacks; accepted "
         "forms include `holding black_rose`, `standing against_mirror`, and `hands on (steering_wheel:1.2)`. Keep these relations short "
-        "and do not use this exception for decorative prose or an unknown underscore token. " + canonical_note +
+        "and do not use this exception for decorative prose or an unknown underscore token. Every subject, prop, action, material, and setting "
+        "must form a visible and contextually plausible combination. State whether a prop is worn, held, attached, operated, nearby, or an explicit "
+        "scale reference; reject anatomically impossible use, invisible details for the selected viewpoint, and arbitrary unrelated props. " + canonical_note +
         "Avoid duplicate or near-duplicate leaves. For component pools, treat the first content-bearing item as the "
         "lead motif and do not use any lead motif more than max_lead_motif_repeats; vary the actual base subject or setting rather "
         "than producing several lightly modified variants of one base. When—and only when—a concept intentionally restricts the "
@@ -900,7 +905,14 @@ def retrieve_literal_fallback_guidance(
                 word for word in re.findall(r"[a-z0-9][a-z0-9+'-]*", phrase.lower())
                 if word not in linter.LITERAL_CONCEPT_STOPWORDS
             ]
-            entries.append({"leaf_index": leaf_index, "phrase": phrase, "components": components})
+            exact_count = sum(component in vocabulary.tags for component in components)
+            required_count = (len(components) + 1) // 2
+            entries.append({
+                "leaf_index": leaf_index, "phrase": phrase, "components": components,
+                "canonical_coverage_count": exact_count,
+                "required_coverage_count": required_count,
+                "canonical_coverage": round(exact_count / max(1, len(components)), 4),
+            })
     queries = list(dict.fromkeys(
         query for entry in entries for query in [entry["phrase"], *entry["components"]]
     ))
@@ -969,7 +981,9 @@ def canonicalize_preferred_fallbacks(
         "provenance object per leaf. For each literal_fallback_guidance entry, build the smallest tag set that covers "
         "every visible component using exact_tags and supplied candidates. Do not use a merely related candidate or "
         "add an architectural/object detail only because it is commonly associated with the source phrase. Preserve "
-        "any unmatched component as concise literal text. For every retained literal, provenance.literal_fallbacks must contain an "
+        "any unmatched component as concise literal text. Aim for required_coverage_count exact canonical content words when faithful "
+        "tags exist, but retain a cohesive phrase rather than atomizing it or changing its meaning to meet the numeric target. For every "
+        "retained literal, provenance.literal_fallbacks must contain an "
         "object with text (the exact retained comma item), reason (a specific explanation of the information lost by "
         "the candidates), and candidates_considered (candidate tags actually reviewed). canonical_tags must list all "
         "canonical tags used. Never invent underscore tags, alter wildcard references, add concepts, remove required "
@@ -992,6 +1006,7 @@ def validate_category_response(
     max_lead_motif_repeats: int | None = None,
     forbidden_lead_motifs: set[str] | None = None,
     canonical_policy: str = "flexible",
+    canonical_vocabulary: set[str] | None = None,
 ) -> tuple[list[str], list[dict[str, Any]]]:
     if canonical_policy not in CANONICAL_POLICIES:
         raise ValueError("canonical_policy must be strict, prefer, or flexible")
@@ -1060,6 +1075,7 @@ def validate_category_response(
     elif len(provenance) != len(leaves):
         errors.append(f"returned {len(provenance)} provenance objects for {len(leaves)} leaves")
 
+    authoritative_canonical = canonical_vocabulary or allowed_canonical
     invalid_provenance: set[str] = set()
     for entry in provenance:
         canonical_tags = entry.get("canonical_tags", [])
@@ -1069,18 +1085,18 @@ def validate_category_response(
             continue
         invalid_provenance.update(
             str(tag) for tag in canonical_tags
-            if str(tag) not in allowed_canonical and str(tag) != "limited_palette"
+            if str(tag) not in authoritative_canonical and str(tag) != "limited_palette"
         )
     if invalid_provenance:
         errors.append(
-            "provenance cites tags outside the retrieved palette: "
+            "provenance cites tags outside the authoritative vocabulary: "
             + ", ".join(sorted(invalid_provenance))
         )
 
     if canonical_policy in {"strict", "prefer"} and len(provenance) == len(leaves):
         provenance_errors: list[str] = []
         for leaf_index, (leaf, entry) in enumerate(zip(leaves, provenance), 1):
-            literals = literal_fallback_phrases(leaf, allowed_canonical)
+            literals = literal_fallback_phrases(leaf, authoritative_canonical)
             fallbacks = entry.get("literal_fallbacks", []) if isinstance(entry, dict) else []
             if canonical_policy == "strict":
                 if literals:
@@ -1141,7 +1157,7 @@ def validate_category_response(
         invalid_output_tags.update(
             token
             for token in UNDERSCORE_TAG_RE.findall(literal)
-            if token not in allowed_canonical and token != "limited_palette"
+            if token not in authoritative_canonical and token != "limited_palette"
         )
         for raw_item in linter.split_top_level_commas(literal):
             unweighted = linter.WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip()
@@ -1158,7 +1174,7 @@ def validate_category_response(
         )
     if invalid_output_tags:
         errors.append(
-            "uses underscore tags outside the retrieved palette: "
+            "uses underscore tags outside the authoritative vocabulary: "
             + ", ".join(sorted(invalid_output_tags))
         )
     if forbidden_output_tags:
@@ -1407,6 +1423,7 @@ def generate_categories(
                             max_lead_motif_repeats=motif_limit,
                             forbidden_lead_motifs=prior_lead_motifs,
                             canonical_policy=canonical_policy,
+                            canonical_vocabulary=vocabulary.tags,
                         )
                         break
                     except CategoryValidationError as exc:
@@ -1434,6 +1451,7 @@ def generate_categories(
                                     forbidden_tags=skeleton.excluded_tags,
                                     max_lead_motif_repeats=None,
                                     canonical_policy=canonical_policy,
+                                    canonical_vocabulary=vocabulary.tags,
                                 )
                             except CategoryValidationError:
                                 raise exc
