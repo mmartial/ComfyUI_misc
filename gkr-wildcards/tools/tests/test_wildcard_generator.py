@@ -161,7 +161,7 @@ class WildcardGeneratorTests(unittest.TestCase):
                 }],
             }],
         }
-        leaves, _ = GENERATOR.validate_category_response(
+        leaves, _, _ = GENERATOR.validate_category_response(
             "vehicle", justified, 1, "gkr_test", [], allowed, canonical_policy="prefer",
         )
         self.assertEqual(leaves, [leaf])
@@ -172,12 +172,123 @@ class WildcardGeneratorTests(unittest.TestCase):
                 "vehicle", missing, 1, "gkr_test", [], allowed, canonical_policy="strict",
             )
 
+    def test_final_attempt_downgrades_prefer_provenance_instead_of_raising(self):
+        # Regression test: after every corrective retry is exhausted, a prefer-mode
+        # provenance bookkeeping mismatch (the fallback text/reason no longer lines
+        # up with the leaf) used to be an unrecoverable hard failure with no
+        # --interactive escape hatch, discarding the whole category (and, before the
+        # content-preservation fix, every other category already generated in the
+        # same call). It is now a downgradable paperwork issue: the tags themselves
+        # are still fine, so the category is accepted and the mismatch is reported.
+        allowed = {"motor_vehicle", "city_lights"}
+        leaf = "motor_vehicle, velvet seat, city_lights"
+        missing = {
+            "leaves": [leaf],
+            "provenance": [{"canonical_tags": list(allowed), "literal_fallbacks": []}],
+        }
+        leaves, provenance, downgraded = GENERATOR.validate_category_response(
+            "vehicle", missing, 1, "gkr_test", [], allowed, canonical_policy="prefer",
+            final_attempt=True,
+        )
+        self.assertEqual(leaves, [leaf])
+        self.assertEqual(provenance, missing["provenance"])
+        self.assertEqual(len(downgraded["provenance_issues"]), 1)
+        self.assertIn("lacks justified provenance for: velvet seat", downgraded["provenance_issues"][0])
+
+    def test_final_attempt_still_enforces_strict_mode(self):
+        # Strict mode's fallback-existence violation is a real content-policy
+        # problem (a literal fallback was used when none are permitted at all),
+        # not a paperwork mismatch, so it must never be downgraded.
+        allowed = {"motor_vehicle", "city_lights"}
+        leaf = "motor_vehicle, velvet seat, city_lights"
+        missing = {
+            "leaves": [leaf],
+            "provenance": [{"canonical_tags": list(allowed), "literal_fallbacks": []}],
+        }
+        with self.assertRaisesRegex(
+            GENERATOR.CategoryValidationError, "contains literal fallback.*velvet seat"
+        ):
+            GENERATOR.validate_category_response(
+                "vehicle", missing, 1, "gkr_test", [], allowed, canonical_policy="strict",
+                final_attempt=True,
+            )
+
+    def test_final_attempt_downgrades_leaf_count_shortfall(self):
+        # Regression test for the same failure shape as the concept-generation
+        # shortfall: after every corrective retry is exhausted, returning fewer
+        # unique leaves than requested (but more than zero) is now accepted
+        # rather than hard-failing the whole category.
+        allowed: set[str] = set()
+        response = {
+            "leaves": ["one leaf", "two leaf"],
+            "provenance": [
+                {"canonical_tags": [], "literal_fallbacks": []},
+                {"canonical_tags": [], "literal_fallbacks": []},
+            ],
+        }
+        leaves, provenance, downgraded = GENERATOR.validate_category_response(
+            "subject", response, 5, "gkr_test", [], allowed, final_attempt=True,
+        )
+        self.assertEqual(leaves, ["one leaf", "two leaf"])
+        self.assertEqual(len(provenance), 2)
+        self.assertEqual(downgraded["leaf_shortfall"], 3)
+
+    def test_leaf_count_shortfall_still_raises_without_final_attempt(self):
+        allowed: set[str] = set()
+        response = {
+            "leaves": ["one leaf"],
+            "provenance": [{"canonical_tags": [], "literal_fallbacks": []}],
+        }
+        with self.assertRaisesRegex(
+            GENERATOR.CategoryValidationError, "returned 1 unique leaves; expected 5"
+        ):
+            GENERATOR.validate_category_response("subject", response, 5, "gkr_test", [], allowed)
+
+    def test_final_attempt_dedupes_within_chunk_duplicates_instead_of_raising(self):
+        # Regression test: a model returning two leaves that normalize to the
+        # same signature within one chunk's own response had no relief valve
+        # at all, unlike cross-chunk duplicates (already relaxed via
+        # forbidden_signatures) and motif repeats (already relaxed via
+        # max_lead_motif_repeats). The duplicate is now removed, the chunk's
+        # target implicitly shrinks by one (surfaced as leaf_shortfall), and
+        # provenance stays aligned with the surviving leaves.
+        allowed: set[str] = set()
+        response = {
+            "leaves": ["red sword", "(red:1.0) sword", "blue shield"],
+            "provenance": [
+                {"canonical_tags": [], "literal_fallbacks": [], "marker": "first"},
+                {"canonical_tags": [], "literal_fallbacks": [], "marker": "duplicate"},
+                {"canonical_tags": [], "literal_fallbacks": [], "marker": "third"},
+            ],
+        }
+        leaves, provenance, downgraded = GENERATOR.validate_category_response(
+            "subject", response, 3, "gkr_test", [], allowed, final_attempt=True,
+        )
+        self.assertEqual(leaves, ["red sword", "blue shield"])
+        self.assertEqual([entry["marker"] for entry in provenance], ["first", "third"])
+        self.assertEqual(downgraded["duplicate_positions"], ["1 and 2"])
+        self.assertEqual(downgraded["leaf_shortfall"], 1)
+
+    def test_within_chunk_duplicates_still_raise_without_final_attempt(self):
+        allowed: set[str] = set()
+        response = {
+            "leaves": ["red sword", "(red:1.0) sword"],
+            "provenance": [
+                {"canonical_tags": [], "literal_fallbacks": []},
+                {"canonical_tags": [], "literal_fallbacks": []},
+            ],
+        }
+        with self.assertRaisesRegex(
+            GENERATOR.CategoryValidationError, "contains normalized duplicate leaves at positions 1 and 2"
+        ):
+            GENERATOR.validate_category_response("subject", response, 2, "gkr_test", [], allowed)
+
     def test_authoritative_vocabulary_accepts_exact_tag_outside_retrieval_palette(self):
         response = {
             "leaves": ["person, padded_jacket"],
             "provenance": [{"canonical_tags": ["padded_jacket"], "literal_fallbacks": []}],
         }
-        leaves, _ = GENERATOR.validate_category_response(
+        leaves, _, _ = GENERATOR.validate_category_response(
             "subject", response, 1, "gkr_test", [], {"person"},
             canonical_vocabulary={"person", "padded_jacket"},
             canonical_policy="prefer",
@@ -231,7 +342,7 @@ class WildcardGeneratorTests(unittest.TestCase):
             "leaves": ["cover, (red, copper, blue) limited_palette"],
             "provenance": [{"canonical_tags": ["limited_palette"], "literal_fallbacks": []}],
         }
-        leaves, _ = GENERATOR.validate_category_response(
+        leaves, _, _ = GENERATOR.validate_category_response(
             "spotlight_covers", valid, 1, "gkr_test", [], set()
         )
         self.assertEqual(leaves, valid["leaves"])
@@ -450,7 +561,66 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertIn("    cover, red", finding.evidence)
         report = linter.render([finding], leaves, "markdown", fix_attempted=True)
         self.assertIn("```text\nPair 1", report)
-        self.assertNotIn("Evidence: `Pair 1", report)
+
+    def test_generation_issue_finding_handles_every_known_rule(self):
+        # Regression test for a real crash: report generation iterated
+        # session.generation_issues and assumed any rule it didn't explicitly
+        # name was "unused_declared_dependencies", accessing
+        # issue["missing_dependencies"] unconditionally. Adding the four
+        # graceful-degradation rules in this file without also updating that
+        # renderer produced a bare KeyError that crashed the run after a full,
+        # successful 200-leaf category generation. Every rule that can
+        # actually be appended to generation_issues must be covered here.
+        fixed = Path("/tmp/gkr-test.fixed.yaml")
+        issues = [
+            {
+                "category": "subject", "rule": "trimmed_excess_generated_concepts",
+                "expected_count": 2, "removed_concepts": [{"summary": "excess"}],
+            },
+            {
+                "category": "subject", "rule": "trimmed_excess_generated_leaves",
+                "expected_count": 2, "removed_leaves": ["excess leaf"],
+            },
+            {
+                "category": "subject", "rule": "repeated_component_lead_motifs",
+                "motifs": {"sword": [{"position": 1, "leaf": "sword, red"}, {"position": 2, "leaf": "sword, blue"}]},
+            },
+            {
+                "category": "subject", "rule": "unused_declared_dependencies",
+                "missing_dependencies": ["other_category"],
+            },
+            {
+                "category": "subject", "rule": "undersized_concept_chunk",
+                "chunk_index": 4, "requested_count": 25, "accepted_count": 20, "shortfall": 5,
+            },
+            {
+                "category": "subject", "rule": "undersized_leaf_chunk",
+                "chunk_index": 4, "requested_count": 25, "accepted_count": 20, "shortfall": 5,
+            },
+            {
+                "category": "subject", "rule": "unresolved_prefer_provenance",
+                "chunk_index": 0, "issues": ["leaf 4 lacks justified provenance for: drilling"],
+            },
+            {
+                "category": "subject", "rule": "unresolved_within_chunk_duplicate_leaves",
+                "chunk_index": 0, "duplicate_positions": ["1 and 2"],
+            },
+        ]
+        for issue in issues:
+            finding = GENERATOR.generation_issue_finding(issue, [], fixed)
+            self.assertEqual(finding.rule, issue["rule"])
+            self.assertEqual(finding.category, "subject")
+
+    def test_generation_issue_finding_never_crashes_on_an_unrecognized_rule(self):
+        # The defensive fallback must produce a usable Finding, not a KeyError,
+        # for a rule this function has no specific handling for -- including
+        # one missing its own "category" key, the actual shape of the crash.
+        fixed = Path("/tmp/gkr-test.fixed.yaml")
+        finding = GENERATOR.generation_issue_finding(
+            {"rule": "some_future_rule_not_yet_handled"}, [], fixed,
+        )
+        self.assertEqual(finding.rule, "some_future_rule_not_yet_handled")
+        self.assertIn("does not have specific handling for", finding.message)
 
     def test_exact_canonical_normalization_is_rewritten_without_llm(self):
         linter = sys.modules["wildcard_linter"]
@@ -601,6 +771,128 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertEqual(session.calls, ["concept generation", "category generation"])
         self.assertEqual(generated["subject"], ["velvet seat"])
 
+    def test_generated_leaves_get_their_own_text_recorded_on_provenance(self):
+        # The linter's --spotlight-intents keys off leaf_text recorded on each
+        # provenance entry, so the manifest must be self-contained -- a reader
+        # must not need to positionally align it with the separately rendered
+        # YAML, which may already have been edited by the time it is read.
+        index_module = sys.modules["danbooru_index"]
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        csv_path = root / "tags.csv"
+        index_path = root / "tags.sqlite"
+        csv_path.write_text("name,post_count\nsafari_jacket,1000\n", encoding="utf-8")
+        index_module.build_index(csv_path, index_path)
+        index = index_module.DanbooruIndex(index_path)
+        self.addCleanup(index.close)
+        skeleton = self.skeleton("# MODE: tags\ngkr_test:\n  spotlight_european_comics: []\n")
+        plan = GENERATOR.CategoryPlan("spotlight_european_comics", "spotlight", "spotlight", 1, [], True)
+
+        class FakeSession:
+            def __init__(self):
+                self.args = SimpleNamespace(
+                    batch_categories=3, category_chunk_size=25, retrieval_candidates=5,
+                    content_profile="general", verbose=False, canonical_policy=None,
+                    max_category_retries=1, interactive=False,
+                )
+                self.calls = []
+                self.provenance = {}
+                self.generation_issues = []
+
+            def request(self, name, instruction, items):
+                self.calls.append(name)
+                if name == "concept generation":
+                    return [{"id": "spotlight_european_comics", "concepts": [{
+                        "summary": "adventurer with map", "search_queries": ["safari jacket"],
+                    }]}]
+                return [{
+                    "id": "spotlight_european_comics",
+                    "leaves": ["1man, safari_jacket, jungle, ruins"],
+                    "provenance": [{
+                        "canonical_tags": ["safari_jacket"], "literal_fallbacks": [],
+                        "intent": "An adventurer surveys jungle ruins.",
+                    }],
+                }]
+
+        session = FakeSession()
+        vocabulary = sys.modules["wildcard_linter"].DanbooruVocabulary({"safari_jacket"})
+        GENERATOR.generate_categories(
+            session, skeleton, [plan], "policy", vocabulary, index, None, "",
+        )
+        entry = session.provenance["spotlight_european_comics"][0]
+        self.assertEqual(entry["leaf_text"], "1man, safari_jacket, jungle, ruins")
+        self.assertEqual(entry["intent"], "An adventurer surveys jungle ruins.")
+
+    def test_content_from_earlier_successful_categories_survives_a_later_failure(self):
+        # Regression test for a real failed run: two independent categories with no
+        # dependencies land in the same wave/batch and are requested together. Before
+        # this fix, generate_categories only returned its accumulated dict on success,
+        # so a later category exhausting its corrective retries and raising discarded
+        # every category already completed in the same call -- including ones that
+        # succeeded -- because the caller's `content` variable was never assigned.
+        # content is now mutated in place, so it must retain "category_a_safe" even
+        # though "category_b_failing" raises.
+        index_module = sys.modules["danbooru_index"]
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        csv_path = root / "tags.csv"
+        index_path = root / "tags.sqlite"
+        csv_path.write_text("name,post_count\ntag_one,1000\n", encoding="utf-8")
+        index_module.build_index(csv_path, index_path)
+        index = index_module.DanbooruIndex(index_path)
+        self.addCleanup(index.close)
+        skeleton = self.skeleton(
+            "# MODE: tags\ngkr_test:\n  category_a_safe: []\n  category_b_failing: []\n"
+        )
+        plans = [
+            GENERATOR.CategoryPlan("category_a_safe", "component", "safe", 1, [], True),
+            GENERATOR.CategoryPlan("category_b_failing", "component", "bad", 1, [], True),
+        ]
+
+        class FakeSession:
+            def __init__(self):
+                self.args = SimpleNamespace(
+                    batch_categories=3, category_chunk_size=25, retrieval_candidates=5,
+                    content_profile="general", verbose=False, canonical_policy=None,
+                    max_category_retries=1, interactive=False,
+                )
+                self.calls = []
+                self.provenance = {}
+                self.generation_issues = []
+
+            def request(self, name, instruction, items):
+                self.calls.append(name)
+                ids = {item["id"] for item in items}
+                if name == "concept generation":
+                    return [
+                        {"id": category_id, "concepts": [{"summary": "x", "search_queries": ["x"]}]}
+                        for category_id in ids
+                    ]
+                results = []
+                if "category_a_safe" in ids:
+                    results.append({
+                        "id": "category_a_safe", "leaves": ["safe leaf"],
+                        "provenance": [{"canonical_tags": [], "literal_fallbacks": []}],
+                    })
+                if "category_b_failing" in ids:
+                    # Always returns the wrong leaf count (0 instead of 1), a
+                    # structural error that is never downgraded, so every corrective
+                    # retry fails identically and generate_categories must raise.
+                    results.append({"id": "category_b_failing", "leaves": [], "provenance": []})
+                return results
+
+        session = FakeSession()
+        vocabulary = sys.modules["wildcard_linter"].DanbooruVocabulary(set())
+        content: dict[str, list[str]] = {}
+        with self.assertRaises((GENERATOR.CategoryValidationError, RuntimeError)):
+            GENERATOR.generate_categories(
+                session, skeleton, plans, "policy", vocabulary, index, None, "", content,
+            )
+        self.assertEqual(content.get("category_a_safe"), ["safe leaf"])
+        self.assertNotIn("category_b_failing", content)
+
     def test_excess_concepts_are_trimmed_and_recorded(self):
         skeleton = self.skeleton("# MODE: tags\ngkr_test:\n  subject: []\n")
         plan = GENERATOR.CategoryPlan("subject", "component", "subject", 2, [], True)
@@ -622,6 +914,67 @@ class WildcardGeneratorTests(unittest.TestCase):
         self.assertEqual([item["summary"] for item in concepts["subject"]], ["first", "second"])
         self.assertEqual(session.generation_issues[0]["rule"], "trimmed_excess_generated_concepts")
         self.assertEqual(session.generation_issues[0]["removed_concepts"][0]["summary"], "excess")
+
+    def test_concept_shortfall_after_retries_shrinks_chunk_and_is_recorded(self):
+        # Regression test for a real failed run: exhausting corrective retries
+        # used to always raise, discarding the entire run even when the model
+        # returned a genuine majority of usable concepts (not zero). A
+        # persistent partial shortfall is now accepted: this chunk's target
+        # shrinks to match what was actually achieved (so leaf realization
+        # asks for a matching count), and the gap is recorded so the outer
+        # accumulation loop can request the remainder in a later chunk instead
+        # of the whole run aborting.
+        skeleton = self.skeleton("# MODE: tags\ngkr_test:\n  subject: []\n")
+        plan = GENERATOR.CategoryPlan("subject", "component", "subject", 25, [], True)
+
+        class FakeSession:
+            def __init__(self):
+                self.args = SimpleNamespace(
+                    content_profile="general", verbose=False,
+                    max_category_retries=1, concept_continuation_buffer=3,
+                )
+                self.generation_issues = []
+
+            def request(self, name, instruction, items):
+                # Always returns the same 20 concepts regardless of how many
+                # more were asked for, simulating a model that has run out of
+                # novel ideas within this chunk.
+                return [{"id": "subject", "concepts": [
+                    {"summary": f"concept {i}", "search_queries": [f"concept {i}"]}
+                    for i in range(20)
+                ]}]
+
+        session = FakeSession()
+        concepts = GENERATOR.generate_concepts(session, skeleton, [plan], "policy")
+        self.assertEqual(len(concepts["subject"]), 20)
+        self.assertEqual(plan.count, 20)
+        issue = session.generation_issues[0]
+        self.assertEqual(issue["rule"], "undersized_concept_chunk")
+        self.assertEqual(issue["requested_count"], 25)
+        self.assertEqual(issue["accepted_count"], 20)
+        self.assertEqual(issue["shortfall"], 5)
+
+    def test_zero_concepts_after_retries_still_raises(self):
+        # A genuine zero-usable-concepts result is not a partial shortfall to
+        # gracefully accept -- it indicates a deeper problem, so this must
+        # still raise rather than silently produce a zero-leaf chunk.
+        skeleton = self.skeleton("# MODE: tags\ngkr_test:\n  subject: []\n")
+        plan = GENERATOR.CategoryPlan("subject", "component", "subject", 5, [], True)
+
+        class FakeSession:
+            def __init__(self):
+                self.args = SimpleNamespace(
+                    content_profile="general", verbose=False,
+                    max_category_retries=1, concept_continuation_buffer=3,
+                )
+                self.generation_issues = []
+
+            def request(self, name, instruction, items):
+                return [{"id": "subject", "concepts": []}]
+
+        session = FakeSession()
+        with self.assertRaisesRegex(RuntimeError, "returned 0 new unique concepts"):
+            GENERATOR.generate_concepts(session, skeleton, [plan], "policy")
 
     def test_repeated_id_single_concept_objects_are_coalesced(self):
         skeleton = self.skeleton("# MODE: tags\ngkr_test:\n  subject: []\n")
@@ -921,7 +1274,7 @@ class WildcardGeneratorTests(unittest.TestCase):
             "leaves": ["heads-up_display, goggles"],
             "provenance": [{"canonical_tags": ["heads-up_display"], "literal_fallbacks": []}],
         }
-        leaves, _ = GENERATOR.validate_category_response(
+        leaves, _, _ = GENERATOR.validate_category_response(
             "superhero_gear", response, 1, "gkr_hero", [], {"heads-up_display"}
         )
         self.assertEqual(leaves, ["heads-up_display, goggles"])
@@ -933,7 +1286,7 @@ class WildcardGeneratorTests(unittest.TestCase):
                 "canonical_tags": ["western_comics_(style)"], "literal_fallbacks": []
             }],
         }
-        leaves, _ = GENERATOR.validate_category_response(
+        leaves, _, _ = GENERATOR.validate_category_response(
             "spotlight_us_comics", response, 1, "gkr_comics", [],
             {"western_comics_(style)"},
         )
@@ -950,7 +1303,7 @@ class WildcardGeneratorTests(unittest.TestCase):
                 "canonical_tags": ["brushing_another's_hair"], "literal_fallbacks": []
             }],
         }
-        leaves, _ = GENERATOR.validate_category_response(
+        leaves, _, _ = GENERATOR.validate_category_response(
             "romance_scene", response, 1, "gkr_comics", [],
             {"brushing_another's_hair"},
         )
@@ -976,7 +1329,7 @@ class WildcardGeneratorTests(unittest.TestCase):
                 ["superhero_combo", "hero_action"], {"street", "dynamic_pose"},
             )
 
-        leaves, provenance = GENERATOR.validate_category_response(
+        leaves, provenance, _ = GENERATOR.validate_category_response(
             "superhero_scene", response, 1, "gkr_hero",
             ["superhero_combo", "hero_action"], {"street", "dynamic_pose"},
             require_dependencies=False,
@@ -1066,7 +1419,7 @@ class WildcardGeneratorTests(unittest.TestCase):
                 {"canonical_tags": ["rooftop"], "literal_fallbacks": []},
             ],
         }
-        leaves, _ = GENERATOR.validate_category_response(
+        leaves, _, _ = GENERATOR.validate_category_response(
             "superhero_scene", response, 2, "gkr_hero",
             ["superhero_combo", "hero_action"], {"street", "rooftop"},
         )

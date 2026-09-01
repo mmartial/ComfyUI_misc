@@ -287,6 +287,16 @@ Repair behavior:
     parser.add_argument("--output", type=Path, help="Write the lint report here instead of stdout; this is distinct from --fixed-output YAML")
     parser.add_argument("--fail-on", choices=("error", "warning", "never"), default="error", help="Exit nonzero for errors, for warnings or errors, or never; processing and report generation still finish (default: error)")
     parser.add_argument("--color", choices=("auto", "always", "never"), default="auto", help="ANSI color mode for terminal text and verbose progress; Markdown/JSON files are not colorized (default: auto)")
+    parser.add_argument(
+        "--run-log", type=Path,
+        help=(
+            "Duplicate everything written to stdout and stderr (verbose progress, cache/HTTP "
+            "timing, and error output) into this plain-text file, in addition to the terminal. "
+            "Unlike piping through `tee`, stdout/stderr remain attached to the real terminal, so "
+            "--color auto still detects a tty and colors keep rendering there; ANSI escapes are "
+            "stripped before writing to the file."
+        ),
+    )
     parser.add_argument("-v", "--verbose", action="store_true", help="Report inventory, rule, route, and LLM batch progress to stderr")
     parser.add_argument("--llm", action="store_true", help="Add OpenAI-compatible semantic/visual review after deterministic checks")
     parser.add_argument("--llm-scope", choices=("candidates", "content", "all"), default="candidates", help="Select LLM coverage: flagged leaves only, all leaves with literal content, or every leaf including pure routers (default: candidates)")
@@ -299,6 +309,17 @@ Repair behavior:
         help="Allow canonical_literal_concept warnings to join the normal --fix-severity selection; requires --canonical-literal-review",
     )
     parser.add_argument("--fix-manifest", type=Path, help="Write machine-readable proposed, accepted, rejected, and unresolved fix details as JSON")
+    parser.add_argument(
+        "--spotlight-intents", type=Path,
+        help=(
+            "Optional generator .generation.json manifest. When a leaf's current text exactly "
+            "matches its originally generated text, its recorded spotlight intent (the governing "
+            "idea it was written to depict) is supplied to fix-suggestion and correction-retry "
+            "prompts as a revision target. Never supplied to review or fix-verification, which "
+            "must judge each leaf independently. A leaf that has already changed since generation "
+            "has no match and gets no intent."
+        ),
+    )
     parser.add_argument(
         "--unresolved-output", type=Path,
         help="Write a review-only YAML based on --fixed-output with the safest rejected candidate substituted for each unresolved leaf; requires --fixed-output (default report: same stem with .md)",
@@ -463,6 +484,34 @@ def load_rules(path: Path) -> dict[str, Any]:
     if not isinstance(data, dict):
         raise ValueError("rules file must contain a mapping")
     return data
+
+
+def load_spotlight_intents(path: Path) -> dict[str, dict[str, str]]:
+    """Load a generator .generation.json manifest's per-leaf spotlight intent.
+
+    Returns {category: {leaf_text: intent}}. A leaf whose current text no longer
+    matches its originally generated leaf_text has no entry, so an already-edited
+    or already-repaired leaf gets no (possibly stale) intent supplied.
+    """
+    try:
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"invalid spotlight-intents manifest {path}: {exc}") from exc
+    provenance = manifest.get("tag_provenance", {}) if isinstance(manifest, dict) else {}
+    intents: dict[str, dict[str, str]] = {}
+    if not isinstance(provenance, dict):
+        return intents
+    for category, entries in provenance.items():
+        if not isinstance(entries, list):
+            continue
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            leaf_text = entry.get("leaf_text")
+            intent = entry.get("intent")
+            if isinstance(leaf_text, str) and isinstance(intent, str) and intent.strip():
+                intents.setdefault(category, {})[leaf_text] = intent.strip()
+    return intents
 
 
 def literal_text(text: str) -> str:
@@ -1100,6 +1149,69 @@ def category_has_sequence(key: tuple[str, str], categories: dict[tuple[str, str]
     return False
 
 
+class _TeeStream:
+    """Duplicate writes to a live stream and a plain-text log file.
+
+    ANSI escapes are stripped before writing to the file, since a log meant for
+    later review or sharing is more useful as plain text than full of escape
+    codes. isatty() delegates to the wrapped stream so --color auto's terminal
+    detection is unaffected by this wrapper being installed. The log file is
+    flushed after every write rather than relying on an explicit close, since
+    an atexit-registered close raced with the interpreter's own shutdown-time
+    stream handling and produced a garbled "Exception ignored" message instead
+    of clean output; writes to the file are also defensive so a late write
+    during shutdown can never raise instead of just being dropped.
+    """
+
+    _ANSI_RE = re.compile(r"\x1b\[[0-9;]*[a-zA-Z]")
+
+    def __init__(self, primary: Any, log_file: Any) -> None:
+        self._primary = primary
+        self._log_file = log_file
+
+    def write(self, data: str) -> int:
+        self._primary.write(data)
+        try:
+            self._log_file.write(self._ANSI_RE.sub("", data))
+            self._log_file.flush()
+        except (ValueError, OSError):
+            pass
+        return len(data)
+
+    def flush(self) -> None:
+        self._primary.flush()
+        try:
+            self._log_file.flush()
+        except (ValueError, OSError):
+            pass
+
+    def isatty(self) -> bool:
+        return self._primary.isatty()
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._primary, name)
+
+
+def enable_run_log(path: Path) -> None:
+    """Duplicate stdout and stderr into one combined, ANSI-stripped log file.
+
+    Unlike `command | tee file`, stdout/stderr stay attached to the real
+    terminal, so --color auto still detects a tty and colors keep rendering
+    there, while everything written to either stream -- verbose progress,
+    cache/HTTP timing, and error output -- is also captured into a plain-text
+    file in chronological order, ready to review later or hand off directly.
+    """
+    resolved = path.expanduser().resolve()
+    resolved.parent.mkdir(parents=True, exist_ok=True)
+    # Every write flushes the file directly (see _TeeStream), so there is no
+    # need to explicitly close it: the OS reclaims the descriptor at process
+    # exit either way, and doing so here previously raced with the
+    # interpreter's own shutdown-time stream handling.
+    log_file = resolved.open("w", encoding="utf-8")
+    sys.stdout = _TeeStream(sys.stdout, log_file)
+    sys.stderr = _TeeStream(sys.stderr, log_file)
+
+
 def verbose(args: argparse.Namespace, message: str) -> None:
     if args.verbose:
         color_mode = getattr(args, "color", "auto")
@@ -1563,6 +1675,7 @@ def llm_suggest_fixes(
     danbooru_vocabulary: DanbooruVocabulary | None = None,
     tags_rules: dict[str, Any] | None = None,
     canonical_retriever: CanonicalTagRetriever | None = None,
+    spotlight_intents: dict[str, dict[str, str]] | None = None,
 ) -> tuple[dict[str, str], dict[str, str]]:
     model = args.model or os.getenv("OPENAI_MODEL")
     base_url = (args.base_url or os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1").rstrip("/")
@@ -1632,6 +1745,9 @@ def llm_suggest_fixes(
                     leaf, danbooru_vocabulary, args.canonical_tag_candidate_count, args.canonical_tag_style,
                     (tags_rules or {}).get("canonical_composition"), canonical_retriever,
                 )
+            original_intent = (spotlight_intents or {}).get(leaf.category, {}).get(leaf.text)
+            if original_intent:
+                item["original_intent"] = original_intent
             items.append(item)
         instruction = (
             "Propose one replacement wildcard leaf for every supplied item. Fix only the listed issues while preserving all valid visible facts, "
@@ -1654,7 +1770,9 @@ def llm_suggest_fixes(
             "For shared_head_composition, preserve every supplied component unless the original itself makes that component unsupported; do "
             "not collapse multiple visible attributes into only one component. For a canonical_literal_concept issue, treat the evidence "
             "candidates as review options rather than automatic replacements: combine canonical components when that preserves the full "
-            "visible meaning, and retain the literal phrase when none does. "
+            "visible meaning, and retain the literal phrase when none does. When original_intent is present, it is the single governing "
+            "idea the leaf was written to depict (subject, action, and why the moment matters); use it as the revision target so the fix "
+            "still delivers that idea, not merely a rewrite that dodges the reported issue by any available change. "
             "Return JSON only as an array with exactly one object per input ID containing id, suggested_rewrite, and rationale. "
             "Do not modify files and do not omit IDs. Repair policy version 2."
         )
@@ -1696,6 +1814,7 @@ def llm_correct_rejected_fixes(
     trace_path: Path | None = None, danbooru_vocabulary: DanbooruVocabulary | None = None,
     tags_rules: dict[str, Any] | None = None,
     canonical_retriever: CanonicalTagRetriever | None = None,
+    spotlight_intents: dict[str, dict[str, str]] | None = None,
 ) -> tuple[dict[str, str], dict[str, str]]:
     """Request fresh alternatives using exact deterministic rejection feedback."""
     if not rejections:
@@ -1737,6 +1856,9 @@ def llm_correct_rejected_fixes(
                     args.canonical_tag_style, (tags_rules or {}).get("canonical_composition"),
                     canonical_retriever,
                 )
+            original_intent = (spotlight_intents or {}).get(leaf.category, {}).get(leaf.text)
+            if original_intent:
+                item["original_intent"] = original_intent
             items.append(item)
         instruction = (
             "The previous wildcard rewrite was rejected. Produce one different complete-leaf repair per input. "
@@ -1747,7 +1869,9 @@ def llm_correct_rejected_fixes(
             "the concept, retain a compact literal phrase. If a rejection reason names an invented underscore token such as "
             "'unknown_canonical_tag', do not propose a different fused compound in its place (for example replacing "
             "'holding_heart' with 'grasping_heart' is the same error again) — rewrite that concept as a literal phrase with "
-            "spaces instead, unless a supplied canonical_tag_guidance candidate matches it exactly. Return JSON only as an array with exactly one object per ID containing "
+            "spaces instead, unless a supplied canonical_tag_guidance candidate matches it exactly. When original_intent is present, "
+            "it is the single governing idea the leaf was written to depict; the new attempt must still deliver that idea, not merely "
+            "avoid the rejection reasons by any available change. Return JSON only as an array with exactly one object per ID containing "
             "id, suggested_rewrite, and rationale. Repair policy version 2."
         )
         trace_event(trace_path, {"event": "fix_correction_request", "retry": retry, "batch": batch_number, "items": items})
@@ -3796,6 +3920,8 @@ def write_annotated_details(source: Path, destination: Path, audits: list[Prompt
 
 def main() -> int:
     args = parse_args()
+    if args.run_log:
+        enable_run_log(args.run_log)
     if args.unresolved_output and not args.unresolved_report:
         args.unresolved_report = args.unresolved_output.with_suffix(".md")
     elif args.unresolved_report and not args.unresolved_output:
@@ -3806,6 +3932,7 @@ def main() -> int:
     audits: list[PromptAudit] = []
     danbooru_vocabulary: DanbooruVocabulary | None = None
     canonical_retriever: CanonicalTagRetriever | None = None
+    spotlight_intents: dict[str, dict[str, str]] = {}
     try:
         if args.annotated_details and not args.validate_post_prompts:
             raise ValueError("--annotated-details requires --validate-post-prompts")
@@ -3834,6 +3961,8 @@ def main() -> int:
             raise ValueError("--danbooru-index requires --danbooru-tags")
         if args.canonical_tag_suggestions and (not args.llm or not args.suggest_fixes):
             raise ValueError("--canonical-tag-suggestions requires --llm and --suggest-fixes")
+        if args.spotlight_intents and (not args.llm or not args.suggest_fixes):
+            raise ValueError("--spotlight-intents requires --llm and --suggest-fixes")
         if args.canonical_tag_candidate_count < 1:
             raise ValueError("--canonical-tag-candidate-count must be at least 1")
         if not 0.0 < args.semantic_duplicate_threshold <= 1.0:
@@ -3841,6 +3970,14 @@ def main() -> int:
         if args.danbooru_tags:
             danbooru_vocabulary = load_danbooru_tags(args.danbooru_tags.expanduser().resolve())
             verbose(args, f"loaded {len(danbooru_vocabulary)} local Danbooru tags from {args.danbooru_tags}")
+        if args.spotlight_intents:
+            spotlight_intents = load_spotlight_intents(args.spotlight_intents.expanduser().resolve())
+            intent_count = sum(len(entries) for entries in spotlight_intents.values())
+            verbose(
+                args,
+                f"loaded {intent_count} spotlight intent(s) across {len(spotlight_intents)} "
+                f"categor{'y' if len(spotlight_intents) == 1 else 'ies'} from {args.spotlight_intents}",
+            )
         if args.validate_post_prompts:
             audits = audit_post_prompts(args.validate_post_prompts.expanduser().resolve(), danbooru_vocabulary)
             if args.annotated_details:
@@ -4081,7 +4218,7 @@ def main() -> int:
                 verbose(args, "requesting potential fixes for found leaf issues")
                 llm_proposed, llm_rationales = llm_suggest_fixes(
                     working_leaves, repair_findings, args, trace_path, danbooru_vocabulary, tags_rules,
-                    canonical_retriever,
+                    canonical_retriever, spotlight_intents,
                 )
                 proposed_suggestions.update(llm_proposed)
                 fix_rationales.update(llm_rationales)
@@ -4109,7 +4246,7 @@ def main() -> int:
                         break
                     corrected, corrected_rationales = llm_correct_rejected_fixes(
                         working_leaves, repair_findings, proposed_suggestions, retry_targets, args, retry,
-                        trace_path, danbooru_vocabulary, tags_rules, canonical_retriever,
+                        trace_path, danbooru_vocabulary, tags_rules, canonical_retriever, spotlight_intents,
                     )
                     if not corrected:
                         verbose(args, f"fix correction retry {retry}/{args.max_fix_retries} returned no usable alternatives")

@@ -451,6 +451,75 @@ class WildcardLinterTests(unittest.TestCase):
         content = "`json\n[{\"id\": \"item\"}]\n`\nextra explanation"
         self.assertEqual(LINTER.parse_json_array_response(content), [{"id": "item"}])
 
+    def test_tee_stream_writes_ansi_intact_to_primary_and_stripped_to_log(self):
+        class FakeStream:
+            def __init__(self):
+                self.written = []
+                self.flushed = False
+
+            def write(self, data):
+                self.written.append(data)
+
+            def flush(self):
+                self.flushed = True
+
+            def isatty(self):
+                return True
+
+        primary = FakeStream()
+        log_file = FakeStream()
+        tee = LINTER._TeeStream(primary, log_file)
+        tee.write("\033[35;1m[wildcard-linter]\033[0m plain message\n")
+        self.assertEqual(primary.written, ["\033[35;1m[wildcard-linter]\033[0m plain message\n"])
+        self.assertEqual(log_file.written, ["[wildcard-linter] plain message\n"])
+        self.assertTrue(log_file.flushed)
+        self.assertTrue(tee.isatty())
+
+    def test_tee_stream_write_survives_a_closed_log_file(self):
+        # Regression guard: an atexit-registered close used to race with the
+        # interpreter's own shutdown-time stream handling, producing a garbled
+        # "Exception ignored" message instead of a clean exit. The file is no
+        # longer explicitly closed, but a write must also never raise even if
+        # the underlying file object is unusable for any other reason.
+        class FakeStream:
+            def write(self, data):
+                pass
+
+            def flush(self):
+                pass
+
+            def isatty(self):
+                return False
+
+        class ClosedLogFile:
+            def write(self, data):
+                raise ValueError("I/O operation on closed file")
+
+            def flush(self):
+                raise ValueError("I/O operation on closed file")
+
+        tee = LINTER._TeeStream(FakeStream(), ClosedLogFile())
+        tee.write("still fine\n")
+        tee.flush()
+
+    def test_enable_run_log_captures_both_streams_and_strips_ansi(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        log_path = Path(temporary.name) / "run.log"
+        original_stdout, original_stderr = sys.stdout, sys.stderr
+        self.addCleanup(setattr, sys, "stdout", original_stdout)
+        self.addCleanup(setattr, sys, "stderr", original_stderr)
+        LINTER.enable_run_log(log_path)
+        self.addCleanup(sys.stdout._log_file.close)
+        print("\033[32;1mstdout line\033[0m")
+        print("\033[33;1mstderr line\033[0m", file=sys.stderr)
+        sys.stdout.flush()
+        sys.stderr.flush()
+        content = log_path.read_text(encoding="utf-8")
+        self.assertIn("stdout line", content)
+        self.assertIn("stderr line", content)
+        self.assertNotIn("\033[", content)
+
     def test_json_response_parser_ignores_nested_array_inside_the_real_response(self):
         # Regression test: the recovery scanner used to keep the LAST successfully
         # parsed "[" span, not the outermost one. Every generator response schema
@@ -502,6 +571,107 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertEqual(suggestions, {leaves[0].uid: "first repaired token"})
         self.assertEqual(rationales, {leaves[0].uid: "fixed"})
         self.assertNotIn(leaves[1].uid, suggestions)
+
+    def test_load_spotlight_intents_keys_by_category_and_leaf_text(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        manifest_path = Path(temporary.name) / "gkr-test.generation.json"
+        manifest_path.write_text(json.dumps({
+            "tag_provenance": {
+                "spotlight_european_comics": [
+                    {
+                        "leaf_text": "1man, safari_jacket, holding_map, jungle, ruins, ligne_claire",
+                        "canonical_tags": ["safari_jacket", "holding_map", "jungle", "ruins", "ligne_claire"],
+                        "literal_fallbacks": [],
+                        "intent": "An adventurer holds a torn map while surveying jungle ruins.",
+                    },
+                    {
+                        # No intent recorded (non-spotlight category, or model omitted it): skipped.
+                        "leaf_text": "utility_belt, (grapple_hook:1.1)",
+                        "canonical_tags": ["utility_belt", "grapple_hook"], "literal_fallbacks": [],
+                    },
+                ],
+            },
+        }), encoding="utf-8")
+        intents = LINTER.load_spotlight_intents(manifest_path)
+        self.assertEqual(
+            intents,
+            {
+                "spotlight_european_comics": {
+                    "1man, safari_jacket, holding_map, jungle, ruins, ligne_claire":
+                        "An adventurer holds a torn map while surveying jungle ruins.",
+                },
+            },
+        )
+
+    def test_llm_suggest_fixes_attaches_matching_spotlight_intent(self):
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  spotlight_european_comics:\n    - safari_jacket, jungle, ruins\n"
+        )
+        leaf = leaves[0]
+        finding = LINTER.Finding(
+            "error", "Comprehension", "no stated action", leaf.file, leaf.line,
+            leaf.category, leaf.uid, source="llm",
+        )
+        captured_items: list[list[dict]] = []
+        original_request = LINTER.llm_json_request
+
+        def fake_request(**kwargs):
+            captured_items.append(kwargs["items"])
+            return [{"id": leaf.uid, "suggested_rewrite": "safari_jacket, holding_map, jungle, ruins", "rationale": "added action"}]
+
+        self.addCleanup(setattr, LINTER, "llm_json_request", original_request)
+        LINTER.llm_json_request = fake_request
+        fix_args = SimpleNamespace(
+            model="test", base_url="http://localhost:11434/v1", api_key_env="PATH",
+            fix_rules="", fix_severity="both", canonical_tag_suggestions=False,
+            batch_size=20, canonical_tag_candidate_count=5, canonical_tag_style="underscore",
+            verbose=False,
+        )
+        spotlight_intents = {
+            leaf.category: {leaf.text: "An adventurer surveys jungle ruins."},
+        }
+        LINTER.llm_suggest_fixes(
+            leaves, [finding], fix_args, spotlight_intents=spotlight_intents,
+        )
+        self.assertEqual(
+            captured_items[0][0]["original_intent"], "An adventurer surveys jungle ruins.",
+        )
+
+    def test_llm_suggest_fixes_omits_intent_once_leaf_text_diverges(self):
+        # Regression guard: a leaf that has already been edited/repaired since
+        # generation no longer matches its recorded leaf_text, so no (possibly
+        # stale) intent should be attached.
+        leaves, _, _ = self.inventory(
+            "# MODE: tags\ngkr_test:\n  spotlight_european_comics:\n    - safari_jacket, jungle, ruins\n"
+        )
+        leaf = leaves[0]
+        finding = LINTER.Finding(
+            "error", "Comprehension", "no stated action", leaf.file, leaf.line,
+            leaf.category, leaf.uid, source="llm",
+        )
+        captured_items: list[list[dict]] = []
+        original_request = LINTER.llm_json_request
+
+        def fake_request(**kwargs):
+            captured_items.append(kwargs["items"])
+            return [{"id": leaf.uid, "suggested_rewrite": "safari_jacket, holding_map, jungle, ruins", "rationale": "added action"}]
+
+        self.addCleanup(setattr, LINTER, "llm_json_request", original_request)
+        LINTER.llm_json_request = fake_request
+        fix_args = SimpleNamespace(
+            model="test", base_url="http://localhost:11434/v1", api_key_env="PATH",
+            fix_rules="", fix_severity="both", canonical_tag_suggestions=False,
+            batch_size=20, canonical_tag_candidate_count=5, canonical_tag_style="underscore",
+            verbose=False,
+        )
+        spotlight_intents = {
+            leaf.category: {"a completely different original leaf text": "stale intent"},
+        }
+        LINTER.llm_suggest_fixes(
+            leaves, [finding], fix_args, spotlight_intents=spotlight_intents,
+        )
+        self.assertNotIn("original_intent", captured_items[0][0])
 
     def test_duplicate_findings_are_not_sent_for_invented_content_repairs(self):
         leaves, _, _ = self.inventory(

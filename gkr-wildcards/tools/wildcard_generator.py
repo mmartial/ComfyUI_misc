@@ -160,6 +160,16 @@ def parse_args() -> argparse.Namespace:
         "--color", choices=("auto", "always", "never"), default="auto",
         help="ANSI color mode for verbose output (default: auto)",
     )
+    parser.add_argument(
+        "--run-log", type=Path,
+        help=(
+            "Duplicate everything written to stdout and stderr (verbose progress, cache/LLM "
+            "timing, and error output) into this plain-text file, in addition to the terminal. "
+            "Unlike piping through `tee`, stdout/stderr remain attached to the real terminal, so "
+            "--color auto still detects a tty and colors keep rendering there; ANSI escapes are "
+            "stripped before writing to the file."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -635,6 +645,9 @@ def generation_instruction(
         "allowed_dependencies. Component leaves must contain literal visible content and no references unless the category purpose "
         "explicitly requires composition. Combo/scene leaves may combine allowed references with compact literal tag phrases. Router "
         "leaves are generated deterministically and are not supplied. Spotlight leaves are complete, high-specificity, single-image prompts. "
+        "For a spotlight leaf, also add an intent field to its provenance entry: one sentence naming the subject, the concrete action "
+        "tying it to an object or setting, and why the moment is worth depicting. Decide that governing idea before choosing tags, and "
+        "include only tags that serve it. "
         "Use every allowed dependency at least once somewhere in the category's leaves so all planned categories contribute to output routes. "
         "Use the candidate palette for each concept as the primary vocabulary. Every underscore-form token must be an exact canonical "
         "tag in the authoritative vocabulary; never concatenate plausible words into a new underscore token. Prefer a supplied candidate "
@@ -756,10 +769,37 @@ def generate_concepts(
             if len(unique) >= plan.count:
                 break
             if retry >= max_retries:
-                raise RuntimeError(
-                    f"category {plan.name} returned {len(unique)} new unique concepts; expected {plan.count} "
-                    f"for chunk {(chunk_indexes or {}).get(plan.name, 0) + 1}"
+                if not unique:
+                    raise RuntimeError(
+                        f"category {plan.name} returned {len(unique)} new unique concepts; expected {plan.count} "
+                        f"for chunk {(chunk_indexes or {}).get(plan.name, 0) + 1}"
+                    )
+                # A genuine shortfall (as opposed to zero usable concepts) is not a
+                # reason to abandon the whole run: shrink this one chunk's target to
+                # what was actually achieved (mutating this ephemeral per-chunk plan,
+                # not the category's true total) so leaf realization asks for a
+                # matching count, record the shortfall for review, and let the
+                # outer accumulation loop request the remaining difference in a
+                # later chunk with a fresh avoid_concept_summaries list -- a model
+                # that ran dry on novel ideas within one chunk's pressure often
+                # still has room once framed against a different remaining target.
+                shortfall = plan.count - len(unique)
+                session.generation_issues.append({
+                    "category": plan.name,
+                    "rule": "undersized_concept_chunk",
+                    "chunk_index": (chunk_indexes or {}).get(plan.name, 0),
+                    "requested_count": plan.count,
+                    "accepted_count": len(unique),
+                    "shortfall": shortfall,
+                })
+                log(
+                    session.args,
+                    f"category {plan.name} accepted only {len(unique)}/{plan.count} concepts for chunk "
+                    f"{(chunk_indexes or {}).get(plan.name, 0) + 1} after exhausting corrective retries; "
+                    f"reduced this chunk's target by {shortfall} and recorded an unresolved finding",
                 )
+                plan.count = len(unique)
+                break
             log(
                 session.args,
                 f"category {plan.name} returned {len(unique)}/{plan.count} concepts for chunk "
@@ -1038,16 +1078,30 @@ def validate_category_response(
     forbidden_lead_motifs: set[str] | None = None,
     canonical_policy: str = "flexible",
     canonical_vocabulary: set[str] | None = None,
-) -> tuple[list[str], list[dict[str, Any]]]:
+    final_attempt: bool = False,
+) -> tuple[list[str], list[dict[str, Any]], dict[str, Any]]:
+    # final_attempt marks the last-chance call made only after every corrective
+    # retry is exhausted. Three specific, non-catastrophic problems are
+    # downgraded (accepted, with the mismatch recorded for the caller to log)
+    # rather than raised on that call: prefer-mode provenance bookkeeping
+    # mismatches, a leaf-count shortfall, and normalized duplicate leaves
+    # within this one chunk's own response. All three represent a model that
+    # tried and came up partially short, not an unusable response -- unlike
+    # invalid/forbidden tags (still routed to --interactive) or structurally
+    # malformed output (still always fatal).
     if canonical_policy not in CANONICAL_POLICIES:
         raise ValueError("canonical_policy must be strict, prefer, or flexible")
+    downgraded: dict[str, Any] = {}
     raw = result.get("leaves", [])
     provenance = result.get("provenance", [])
     leaves = [" ".join(value.split()) for value in raw if isinstance(value, str) and value.strip()]
     leaves = list(dict.fromkeys(leaves))
     errors: list[str] = []
-    if len(leaves) != expected_count:
-        errors.append(f"returned {len(leaves)} unique leaves; expected {expected_count}")
+
+    # Within-chunk normalized duplicates are detected and, on the final attempt,
+    # deduplicated before any other per-leaf check runs, so every later
+    # index-based check (cross-chunk signatures, motif positions, provenance
+    # alignment) stays consistent with the leaves that actually remain.
     signatures: dict[str, int] = {}
     normalized_duplicates: list[str] = []
     for index, leaf in enumerate(leaves, 1):
@@ -1057,10 +1111,28 @@ def validate_category_response(
         else:
             signatures[signature] = index
     if normalized_duplicates:
-        errors.append(
-            "contains normalized duplicate leaves at positions "
-            + ", ".join(normalized_duplicates)
-        )
+        if final_attempt:
+            downgraded["duplicate_positions"] = normalized_duplicates
+            keep_positions = sorted(signatures.values())
+            if isinstance(provenance, list) and len(provenance) == len(leaves):
+                provenance = [provenance[position - 1] for position in keep_positions]
+            leaves = [leaves[position - 1] for position in keep_positions]
+            signatures = {
+                linter.duplicate_leaf_signature(leaf, "tags"): index
+                for index, leaf in enumerate(leaves, 1)
+            }
+        else:
+            errors.append(
+                "contains normalized duplicate leaves at positions "
+                + ", ".join(normalized_duplicates)
+            )
+
+    if len(leaves) != expected_count:
+        if final_attempt and leaves and len(leaves) < expected_count:
+            downgraded["leaf_shortfall"] = expected_count - len(leaves)
+        else:
+            errors.append(f"returned {len(leaves)} unique leaves; expected {expected_count}")
+
     repeated_from_prior = sorted(
         index for signature, index in signatures.items()
         if signature in (forbidden_signatures or set())
@@ -1126,6 +1198,13 @@ def validate_category_response(
 
     if canonical_policy in {"strict", "prefer"} and len(provenance) == len(leaves):
         provenance_errors: list[str] = []
+        # Bookkeeping mismatches between a leaf's text and its declared literal_fallbacks
+        # (missing/extra/thin justification) are paperwork problems, not content problems:
+        # the tags themselves are still fine. Unlike strict mode's fallback-existence
+        # violations below, these are eligible for final_attempt to downgrade to an
+        # unresolved finding instead of hard-failing the category after every
+        # corrective retry has already been spent on the same inconsistency.
+        prefer_provenance_issues: list[str] = []
         for leaf_index, (leaf, entry) in enumerate(zip(leaves, provenance), 1):
             literals = literal_fallback_phrases(leaf, authoritative_canonical)
             fallbacks = entry.get("literal_fallbacks", []) if isinstance(entry, dict) else []
@@ -1145,11 +1224,11 @@ def validate_category_response(
             missing = [literal for literal in literals if literal not in declared]
             extra = [text for text in declared if text not in literals]
             if missing:
-                provenance_errors.append(
+                prefer_provenance_issues.append(
                     f"leaf {leaf_index} lacks justified provenance for: {', '.join(missing)}"
                 )
             if extra:
-                provenance_errors.append(
+                prefer_provenance_issues.append(
                     f"leaf {leaf_index} declares absent literal fallback(s): {', '.join(extra)}"
                 )
             for literal in literals:
@@ -1159,15 +1238,20 @@ def validate_category_response(
                 reason = " ".join(str(fallback.get("reason", "")).split())
                 considered = fallback.get("candidates_considered", [])
                 if len(reason) < 12:
-                    provenance_errors.append(
+                    prefer_provenance_issues.append(
                         f"leaf {leaf_index} fallback '{literal}' lacks a specific reason"
                     )
                 if not isinstance(considered, list):
-                    provenance_errors.append(
+                    prefer_provenance_issues.append(
                         f"leaf {leaf_index} fallback '{literal}' candidates_considered must be an array"
                     )
         if provenance_errors:
             errors.append("canonical policy provenance: " + "; ".join(provenance_errors))
+        if prefer_provenance_issues:
+            if not final_attempt:
+                errors.append("canonical policy provenance: " + "; ".join(prefer_provenance_issues))
+            else:
+                downgraded["provenance_issues"] = prefer_provenance_issues
 
     allowed_refs = {(namespace, dependency) for dependency in dependencies}
     invalid_refs: set[str] = set()
@@ -1225,7 +1309,7 @@ def validate_category_response(
             invalid_provenance | invalid_output_tags | forbidden_output_tags,
             set(missing_dependencies),
         )
-    return leaves, provenance
+    return leaves, provenance, downgraded
 
 
 def trim_excess_category_response(
@@ -1330,8 +1414,17 @@ def generate_categories(
     session: Session, skeleton: Skeleton, plans: list[CategoryPlan], policy: str,
     vocabulary: linter.DanbooruVocabulary, index: DanbooruIndex,
     embedding_client: EmbeddingClient | None, embedding_query_prefix: str,
+    content: dict[str, list[str]] | None = None,
 ) -> dict[str, list[str]]:
-    generated: dict[str, list[str]] = {}
+    # content is mutated in place (not built up in a local dict returned only on
+    # success) specifically so a caller that supplies its own dict retains every
+    # category completed before a later category's exhausted retries raise --
+    # otherwise an unrelated category failing anywhere in this call would silently
+    # discard all already-generated work, including categories that succeeded in
+    # the same batch/call. Callers that don't need that (tests, one-shot use)
+    # can omit it and get the previous return-only behavior.
+    if content is None:
+        content = {}
     canonical_policy = getattr(session.args, "canonical_policy", None) or skeleton.canonical_policy
     log(session.args, f"canonical policy: {canonical_policy}")
     plan_by_name = {plan.name: plan for plan in plans}
@@ -1342,14 +1435,54 @@ def generate_categories(
         routers = [plan for plan in batch if plan.kind == "router"]
         content_batch = [plan for plan in batch if plan.kind != "router"]
         for plan in routers:
-            generated[plan.name] = [f"__{skeleton.namespace}/{name}__" for name in plan.dependencies]
-            log(session.args, f"generated {plan.name}: {len(generated[plan.name])} router leaves")
+            content[plan.name] = [f"__{skeleton.namespace}/{name}__" for name in plan.dependencies]
+            log(session.args, f"generated {plan.name}: {len(content[plan.name])} router leaves")
         if not content_batch:
             continue
         accumulated_leaves = {plan.name: [] for plan in content_batch}
         accumulated_provenance = {plan.name: [] for plan in content_batch}
         accumulated_summaries = {plan.name: [] for plan in content_batch}
         chunk_index = 0
+
+        def finalize_plan(plan: CategoryPlan) -> None:
+            # Commits one plan's accumulated leaves into the caller's content dict
+            # the moment it reaches its target count, rather than waiting for every
+            # other plan sharing this content_batch to finish too. Multiple
+            # dependency-free plans routinely land in the same batch (they were
+            # requested together for LLM efficiency), so without this, one plan
+            # exhausting its retries and raising would discard every other plan's
+            # already-complete work purely because it happened to share a batch.
+            leaves = accumulated_leaves[plan.name]
+            provenance = accumulated_provenance[plan.name]
+            if len(leaves) != plan.count:
+                raise RuntimeError(f"category {plan.name} aggregated {len(leaves)} leaves; expected {plan.count}")
+            used_dependencies = {
+                category for leaf in leaves for namespace, category in REFERENCE_RE.findall(leaf)
+                if namespace == skeleton.namespace
+            }
+            missing_dependencies = sorted(set(plan.dependencies) - used_dependencies)
+            if missing_dependencies:
+                session.generation_issues.append({
+                    "category": plan.name,
+                    "rule": "unused_declared_dependencies",
+                    "missing_dependencies": missing_dependencies,
+                })
+                log(
+                    session.args,
+                    f"category {plan.name} omits declared dependencies after aggregation; "
+                    "continuing with an unresolved review finding",
+                )
+            # Record each leaf's own text on its provenance entry so the manifest is
+            # self-contained: a downstream reader (the linter's --spotlight-intents)
+            # can key off leaf_text without also having to load and positionally
+            # align the rendered YAML, which may already have been edited by then.
+            for leaf_text, entry in zip(leaves, provenance):
+                if isinstance(entry, dict):
+                    entry["leaf_text"] = leaf_text
+            content[plan.name] = leaves
+            session.provenance[plan.name] = provenance
+            log(session.args, f"generated {plan.name}: {len(leaves)} leaves")
+
         while any(len(accumulated_leaves[plan.name]) < plan.count for plan in content_batch):
             active_originals = [
                 plan for plan in content_batch if len(accumulated_leaves[plan.name]) < plan.count
@@ -1383,7 +1516,7 @@ def generate_categories(
                     if (motif := lead_leaf_motif(leaf))
                 }
                 skeleton_category = next((item for item in skeleton.categories if item.name == plan.name), None)
-                dependency_examples = {name: generated.get(name, [])[:3] for name in plan.dependencies}
+                dependency_examples = {name: content.get(name, [])[:3] for name in plan.dependencies}
                 items.append({
                     "id": plan.name, "namespace": skeleton.namespace, "kind": plan.kind,
                     "purpose": plan.purpose, "requested_count": plan.count,
@@ -1445,7 +1578,7 @@ def generate_categories(
                         }
                         session.generation_issues.append(excess_issue)
                     try:
-                        leaves, provenance = validate_category_response(
+                        leaves, provenance, _ = validate_category_response(
                             plan.name, result, plan.count, skeleton.namespace,
                             plan.dependencies, allowed_canonical,
                             require_dependencies=False,
@@ -1470,11 +1603,13 @@ def generate_categories(
                                 session.save_interactive_overrides()
                                 allowed_canonical |= set(replacements.values())
                                 interactive_applied = True
-                            # Leaf duplication and component lead-motif repetition are
-                            # recoverable only after the final corrective retry. Retain the
-                            # structurally valid chunk and expose complete context for repair.
+                            # Leaf duplication, component lead-motif repetition, prefer-mode
+                            # provenance bookkeeping mismatches, within-chunk normalized
+                            # duplicates, and a leaf-count shortfall are all recoverable only
+                            # after the final corrective retry. Retain the structurally valid
+                            # chunk and expose complete context for repair.
                             try:
-                                leaves, provenance = validate_category_response(
+                                leaves, provenance, downgraded = validate_category_response(
                                     plan.name, result, plan.count, skeleton.namespace,
                                     plan.dependencies, allowed_canonical,
                                     require_dependencies=False,
@@ -1483,9 +1618,53 @@ def generate_categories(
                                     max_lead_motif_repeats=None,
                                     canonical_policy=canonical_policy,
                                     canonical_vocabulary=vocabulary.tags,
+                                    final_attempt=True,
                                 )
                             except CategoryValidationError:
                                 raise exc
+                            if downgraded.get("provenance_issues"):
+                                session.generation_issues.append({
+                                    "category": plan.name,
+                                    "rule": "unresolved_prefer_provenance",
+                                    "chunk_index": chunk_index,
+                                    "issues": downgraded["provenance_issues"],
+                                })
+                                log(
+                                    session.args,
+                                    f"category {plan.name}: retained chunk with unresolved prefer-mode "
+                                    "provenance bookkeeping after exhausting corrective retries; "
+                                    "recorded for manual/lint review",
+                                )
+                            if downgraded.get("leaf_shortfall"):
+                                session.generation_issues.append({
+                                    "category": plan.name,
+                                    "rule": "undersized_leaf_chunk",
+                                    "chunk_index": chunk_index,
+                                    "requested_count": plan.count,
+                                    "accepted_count": len(leaves),
+                                    "shortfall": downgraded["leaf_shortfall"],
+                                })
+                                plan.count = len(leaves)
+                                log(
+                                    session.args,
+                                    f"category {plan.name} accepted only {len(leaves)} leaves for this "
+                                    f"chunk after exhausting corrective retries; reduced this chunk's "
+                                    f"target by {downgraded['leaf_shortfall']} and recorded an unresolved "
+                                    "finding",
+                                )
+                            if downgraded.get("duplicate_positions"):
+                                session.generation_issues.append({
+                                    "category": plan.name,
+                                    "rule": "unresolved_within_chunk_duplicate_leaves",
+                                    "chunk_index": chunk_index,
+                                    "duplicate_positions": downgraded["duplicate_positions"],
+                                })
+                                log(
+                                    session.args,
+                                    f"category {plan.name}: deduplicated {len(downgraded['duplicate_positions'])} "
+                                    "within-chunk duplicate leaf pair(s) after exhausting corrective retries; "
+                                    "recorded for manual/lint review",
+                                )
                             prior_by_signature = {
                                 linter.duplicate_leaf_signature(leaf, "tags"): (index, leaf)
                                 for index, leaf in enumerate(accumulated_leaves[plan.name], 1)
@@ -1515,7 +1694,9 @@ def generate_categories(
                                     if len(entries) > 1
                                     and any(entry["position"] > offsets[plan.name] for entry in entries)
                                 }
-                            if not duplicate_pairs and not motif_groups and interactive_applied:
+                            if not duplicate_pairs and not motif_groups and (
+                                interactive_applied or downgraded
+                            ):
                                 break
                             if not duplicate_pairs and not motif_groups:
                                 raise exc
@@ -1563,37 +1744,25 @@ def generate_categories(
                     f"generated {plan.name} chunk {chunk_index + 1}: {len(leaves)} leaves "
                     f"({len(accumulated_leaves[plan.name])}/{original.count})",
                 )
+                # Commit this specific plan the moment it reaches its target count,
+                # immediately after its own processing -- not after the rest of this
+                # chunk round's other plans, one of which may still exhaust its
+                # retries and raise before the round finishes.
+                if plan.name not in content and len(accumulated_leaves[plan.name]) >= original.count:
+                    finalize_plan(original)
             chunk_index += 1
 
+        # Safety net for any plan the incremental check above didn't already finalize
+        # (for example a plan whose count is 0, or a wave with only one plan whose
+        # completion coincided exactly with the while loop's own exit check).
         for plan in content_batch:
-            leaves = accumulated_leaves[plan.name]
-            provenance = accumulated_provenance[plan.name]
-            if len(leaves) != plan.count:
-                raise RuntimeError(f"category {plan.name} aggregated {len(leaves)} leaves; expected {plan.count}")
-            used_dependencies = {
-                category for leaf in leaves for namespace, category in REFERENCE_RE.findall(leaf)
-                if namespace == skeleton.namespace
-            }
-            missing_dependencies = sorted(set(plan.dependencies) - used_dependencies)
-            if missing_dependencies:
-                session.generation_issues.append({
-                    "category": plan.name,
-                    "rule": "unused_declared_dependencies",
-                    "missing_dependencies": missing_dependencies,
-                })
-                log(
-                    session.args,
-                    f"category {plan.name} omits declared dependencies after aggregation; "
-                    "continuing with an unresolved review finding",
-                )
-            generated[plan.name] = leaves
-            session.provenance[plan.name] = provenance
-            log(session.args, f"generated {plan.name}: {len(leaves)} leaves")
+            if plan.name not in content:
+                finalize_plan(plan)
     # Retain planner order in rendering, while keeping this sanity check explicit.
-    missing = set(plan_by_name) - set(generated)
+    missing = set(plan_by_name) - set(content)
     if missing:
         raise RuntimeError("generation omitted categories: " + ", ".join(sorted(missing)))
-    return generated
+    return content
 
 
 def yaml_quote(value: str) -> str:
@@ -1640,6 +1809,125 @@ def deterministic_findings(
     findings.extend(linter.route_motif_findings(categories, rules))
     findings.extend(linter.namespace_policy_findings(leaves, categories, rules))
     return leaves, findings
+
+
+def generation_issue_finding(
+    issue: dict[str, Any], leaves: list[linter.Leaf], fixed_output: Path,
+) -> linter.Finding:
+    """Render one recorded generation_issues entry as a report Finding.
+
+    A standalone, directly testable function specifically so every rule name
+    that can appear in session.generation_issues is covered explicitly here:
+    an unrecognized rule previously fell through to code that assumed it was
+    always "unused_declared_dependencies" and crashed report generation with
+    a bare KeyError the moment a different rule was ever recorded without a
+    matching update here. The final else branch below is a defensive fallback
+    for exactly that scenario -- a rule added later without updating this
+    function -- so that mistake can only ever produce a generic finding, not
+    a crash.
+    """
+    rule = issue.get("rule", "unknown_generation_issue")
+    category = str(issue.get("category", "unknown"))
+    if rule == "trimmed_excess_generated_concepts":
+        removed = " | ".join(
+            str(concept.get("summary", concept)) for concept in issue["removed_concepts"]
+        )
+        return linter.Finding(
+            "warning", str(rule),
+            f"Concept generation for category '{category}' returned more than its requested "
+            f"{issue['expected_count']} concepts. The generator retained the first "
+            f"{issue['expected_count']} and omitted: {removed}. Manual review: no action is required unless "
+            "the omitted concept should replace one of the generated leaves.",
+            str(fixed_output), category=category, evidence=removed,
+        )
+    if rule == "trimmed_excess_generated_leaves":
+        removed = " | ".join(issue["removed_leaves"])
+        return linter.Finding(
+            "warning", str(rule),
+            f"Generated category '{category}' returned more than its requested "
+            f"{issue['expected_count']} leaves. The generator retained the first "
+            f"{issue['expected_count']} aligned leaf/provenance pairs and removed the following excess "
+            f"output: {removed}. Manual review: restore or replace an omitted concept only if it is more "
+            "valuable than one of the retained leaves.",
+            str(fixed_output), category=category, evidence=removed,
+        )
+    if rule == "duplicate_leaves_across_chunks":
+        return duplicate_generation_finding(issue, leaves, fixed_output)
+    if rule == "repeated_component_lead_motifs":
+        motif_context = " | ".join(
+            f"{motif}: " + "; ".join(
+                f"leaf {entry['position']}: {entry['leaf']}" for entry in entries
+            )
+            for motif, entries in sorted(issue["motifs"].items())
+        )
+        return linter.Finding(
+            "warning", str(rule),
+            f"Generated component category '{category}' retained repeated lead motifs only after "
+            f"exhausting its final corrective retry. Generation continued for manual review. Repetition "
+            f"context: {motif_context}. Manual review: replace every repeated base motif so each component "
+            "leaf contributes a distinct random choice.",
+            str(fixed_output), category=category, evidence=motif_context,
+        )
+    if rule == "unused_declared_dependencies":
+        missing = ", ".join(issue["missing_dependencies"])
+        return linter.Finding(
+            "warning", str(rule),
+            f"Generated category '{category}' did not reference these declared dependencies after "
+            f"corrective retries: {missing}. This may leave category pools unreachable from public routes. "
+            "Manual review: connect required pools through an appropriate reachable composite/router. Only "
+            "a planner-added pool confirmed to be unnecessary should be manually removed.",
+            str(fixed_output), category=category, evidence=missing,
+        )
+    if rule == "undersized_concept_chunk":
+        evidence = f"accepted {issue['accepted_count']}/{issue['requested_count']}"
+        return linter.Finding(
+            "warning", str(rule),
+            f"Concept generation for category '{category}' accepted only {issue['accepted_count']} "
+            f"of {issue['requested_count']} requested concepts for one chunk after exhausting corrective "
+            f"retries (chunk index {issue['chunk_index']}, shortfall {issue['shortfall']}). Generation "
+            "continued; the missing concepts were requested again in a later chunk. Manual review: confirm "
+            "the category still reached its full leaf count and that no worthwhile concept direction was "
+            "permanently lost.",
+            str(fixed_output), category=category, evidence=evidence,
+        )
+    if rule == "undersized_leaf_chunk":
+        evidence = f"accepted {issue['accepted_count']}/{issue['requested_count']}"
+        return linter.Finding(
+            "warning", str(rule),
+            f"Generated category '{category}' accepted only {issue['accepted_count']} of "
+            f"{issue['requested_count']} requested leaves for one chunk after exhausting corrective "
+            f"retries (chunk index {issue['chunk_index']}, shortfall {issue['shortfall']}). Generation "
+            "continued; the missing leaves were requested again in a later chunk. Manual review: confirm "
+            "the category reached its full leaf count.",
+            str(fixed_output), category=category, evidence=evidence,
+        )
+    if rule == "unresolved_prefer_provenance":
+        evidence = " | ".join(issue["issues"])
+        return linter.Finding(
+            "warning", str(rule),
+            f"Category '{category}' retained a chunk whose prefer-mode literal-fallback "
+            "provenance no longer matches the leaf text after exhausting corrective retries. The tags "
+            f"themselves are unaffected; only the stated justification is inconsistent: {evidence}. Manual "
+            "review: correct or remove the stale justification, or confirm the leaf text is still accurate.",
+            str(fixed_output), category=category, evidence=evidence,
+        )
+    if rule == "unresolved_within_chunk_duplicate_leaves":
+        evidence = "; ".join(issue["duplicate_positions"])
+        return linter.Finding(
+            "warning", str(rule),
+            f"Generated category '{category}' returned normalized duplicate leaves within one "
+            f"chunk's own response after exhausting corrective retries; the duplicates were removed, "
+            f"keeping the first occurrence of each (positions within that chunk: {evidence}). Manual "
+            "review: confirm the category still reached its full leaf count with genuinely distinct "
+            "content.",
+            str(fixed_output), category=category, evidence=evidence,
+        )
+    return linter.Finding(
+        "warning", str(rule),
+        f"Category '{category}' recorded a generation issue during repair that this report renderer "
+        f"does not have specific handling for: {issue}. Manual review recommended.",
+        str(fixed_output), category=category,
+    )
 
 
 def duplicate_generation_finding(
@@ -1726,6 +2014,8 @@ def deterministic_canonical_rewrites(
 
 def main() -> int:
     args = parse_args()
+    if args.run_log:
+        linter.enable_run_log(args.run_log)
     script_dir = Path(__file__).resolve().parent
     prompt_path = (args.prompt or script_dir.parent / "prompt.md").resolve()
     rules_path = (args.rules or script_dir / "rules.yaml").resolve()
@@ -1838,7 +2128,7 @@ def main() -> int:
         log(args, f"accepted plan with {len(plans)} categories ({sum(not plan.required for plan in plans)} added)")
         content = generate_categories(
             session, skeleton, plans, policy, vocabulary, tag_index,
-            embedding_client, embedding_query_prefix,
+            embedding_client, embedding_query_prefix, content,
         )
         output.write_text(render_wildcard(skeleton, plans, content), encoding="utf-8")
         fixed_output.write_text(render_wildcard(skeleton, plans, content), encoding="utf-8")
@@ -1859,56 +2149,7 @@ def main() -> int:
                 args.canonical_tag_candidate_count, args.canonical_tag_style,
             )
             for issue in session.generation_issues:
-                if issue["rule"] == "trimmed_excess_generated_concepts":
-                    removed = " | ".join(
-                        str(concept.get("summary", concept)) for concept in issue["removed_concepts"]
-                    )
-                    findings.append(linter.Finding(
-                        "warning", str(issue["rule"]),
-                        f"Concept generation for category '{issue['category']}' returned more than its requested "
-                        f"{issue['expected_count']} concepts. The generator retained the first "
-                        f"{issue['expected_count']} and omitted: {removed}. Manual review: no action is required unless "
-                        "the omitted concept should replace one of the generated leaves.",
-                        str(fixed_output), category=str(issue["category"]), evidence=removed,
-                    ))
-                elif issue["rule"] == "trimmed_excess_generated_leaves":
-                    removed = " | ".join(issue["removed_leaves"])
-                    findings.append(linter.Finding(
-                        "warning", str(issue["rule"]),
-                        f"Generated category '{issue['category']}' returned more than its requested "
-                        f"{issue['expected_count']} leaves. The generator retained the first "
-                        f"{issue['expected_count']} aligned leaf/provenance pairs and removed the following excess "
-                        f"output: {removed}. Manual review: restore or replace an omitted concept only if it is more "
-                        "valuable than one of the retained leaves.",
-                        str(fixed_output), category=str(issue["category"]), evidence=removed,
-                    ))
-                elif issue["rule"] == "duplicate_leaves_across_chunks":
-                    findings.append(duplicate_generation_finding(issue, leaves, fixed_output))
-                elif issue["rule"] == "repeated_component_lead_motifs":
-                    motif_context = " | ".join(
-                        f"{motif}: " + "; ".join(
-                            f"leaf {entry['position']}: {entry['leaf']}" for entry in entries
-                        )
-                        for motif, entries in sorted(issue["motifs"].items())
-                    )
-                    findings.append(linter.Finding(
-                        "warning", str(issue["rule"]),
-                        f"Generated component category '{issue['category']}' retained repeated lead motifs only after "
-                        f"exhausting its final corrective retry. Generation continued for manual review. Repetition "
-                        f"context: {motif_context}. Manual review: replace every repeated base motif so each component "
-                        "leaf contributes a distinct random choice.",
-                        str(fixed_output), category=str(issue["category"]), evidence=motif_context,
-                    ))
-                else:
-                    missing = ", ".join(issue["missing_dependencies"])
-                    findings.append(linter.Finding(
-                        "warning", str(issue["rule"]),
-                        f"Generated category '{issue['category']}' did not reference these declared dependencies after "
-                        f"corrective retries: {missing}. This may leave category pools unreachable from public routes. "
-                        "Manual review: connect required pools through an appropriate reachable composite/router. Only "
-                        "a planner-added pool confirmed to be unnecessary should be manually removed.",
-                        str(fixed_output), category=str(issue["category"]), evidence=missing,
-                    ))
+                findings.append(generation_issue_finding(issue, leaves, fixed_output))
             if not args.skip_semantic_review:
                 session.check_token_budget()
                 review_leaves = [leaf for leaf in leaves if linter.has_literal_content(leaf)]

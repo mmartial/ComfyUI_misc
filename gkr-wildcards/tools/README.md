@@ -195,6 +195,47 @@ was approved. A typo or ad hoc string accepted once will silently suppress an
 `unknown_canonical_tag`-style finding anywhere else it happens to recur in the
 same run. Review `interactive_tag_overrides` in the generation manifest before
 trusting the file as fully vocabulary-clean.
+
+`--interactive`'s prompt covers invalid/unknown tags only. The final corrective
+retry for leaf generation also tolerates three other non-catastrophic
+outcomes rather than failing the whole category outright, each recorded in
+the generation manifest for manual or lint review instead of aborting:
+
+- A `prefer`-policy pure bookkeeping mismatch between a leaf's text and its
+  declared `literal_fallbacks` (the tags themselves are fine; only the stated
+  justification is inconsistent) — recorded under `unresolved_prefer_provenance`.
+  A `strict`-policy category using a literal fallback at all is a real
+  content-policy violation, not a bookkeeping mismatch, and is never
+  downgraded this way.
+- A leaf-count shortfall (fewer unique leaves returned than the chunk
+  requested, but more than zero) — recorded under `undersized_leaf_chunk`,
+  with that chunk's target reduced to match what was achieved so the outer
+  accumulation loop requests the difference in a later chunk.
+- Normalized duplicate leaves within one chunk's own response (as opposed to
+  cross-chunk duplicates and lead-motif repeats, which were already relaxed
+  on the final retry) — the duplicates are removed, keeping the first
+  occurrence of each and the aligned provenance entry, recorded under
+  `unresolved_within_chunk_duplicate_leaves`; the resulting shortfall is
+  handled the same way as an ordinary undersized chunk.
+
+A genuine zero-usable-leaves result, a structurally malformed response, or an
+invalid/forbidden tag are never downgraded this way.
+
+Every category already completed before a later category exhausts its retries
+and raises is retained in the written draft, even when both were requested
+together in the same batch call — a category's leaves are committed the
+moment it individually reaches its target count, not only after every other
+category sharing that call also finishes.
+
+Concept generation for one chunk can also exhaust its corrective retries
+without reaching the chunk's requested count — for example a model running
+out of genuinely novel ideas partway through a large category. A persistent
+partial shortfall is not treated as fatal: that chunk's target is reduced to
+match what was actually achieved, the gap is recorded under
+`undersized_concept_chunk` in the generation manifest, and the outer
+accumulation loop requests the remaining difference in a later chunk with a
+fresh exclusion list. Only a genuine zero-usable-concepts result still aborts
+the category, since there is nothing to build a chunk from at all.
 Each decision is also written immediately to
 `<output-stem>.interactive-overrides.json`, so incomplete or interrupted runs
 reuse it without prompting again. Use `--interactive-overrides PATH` to choose a
@@ -277,77 +318,6 @@ Retrieval modes are:
 lighter alternative; `qwen3-embedding` is a quality-oriented alternative to
 evaluate against curated correction examples. Indexing and querying must use
 the same embedding model and prefixes.
-
-## Practical example:
-
-### Obtain the safebooru_general_tags.csv file and prepare it for use
-
-```bash
-python3 tools/download_danbooru_tags.py \
-  --output safebooru_general_tags.csv \
-  --min-post-count 100 \
-  --verbose
-
-# classify the tags for use
-# once concluded, feel free to review the created CSV's ambiguous tags
-OLLAMA_API_KEY=ollama uv run tools/classify_danbooru_tags.py \
-  safebooru_general_tags.csv \
-  --output safebooru_general_tags.classified.csv \
-  --api-key-env OLLAMA_API_KEY \
-  --base-url http://localhost:11434/v1 \
-  --model gemma4:cloud \
-  --batch-size 100 \
-  --verbose
-
-# Generate a database with embeddings
-OLLAMA_API_KEY="ollama" uv run tools/build_danbooru_index.py \
-  safebooru_general_tags.classified.csv \
-  --output safebooru_general_tags.index.sqlite \
-  --content-profile general \
-  --embeddings \
-  --embedding-api-key-env OLLAMA_API_KEY \
-  --embedding-base-url http://localhost:11434/v1 \
-  --embedding-model embeddinggemma:latest \
-  --embedding-batch-size 512 \
-  --verbose
-
-```
-
-### Obtain a test file
-
-```bash
-# Without Sqlite and embeddings
-OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
-  ../howto/wildcard-generator-skeleton.yaml \
-  --output gkr-superhero.yaml \
-  --danbooru-tags safebooru_general_tags.csv \
-  --api-key-env OLLAMA_API_KEY \
-  --base-url http://localhost:11434/v1 \
-  --model gemma4:cloud \
-  --verbose
-
-# WITH both
-THEME="superhero"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
-  gkr-$THEME.skeleton.yaml \
-  --output gkr-$THEME.yaml \
-  --danbooru-tags safebooru_general_tags.classified.csv \
-  --danbooru-index safebooru_general_tags.index.sqlite \
-  --content-profile general \
-  --api-key-env OLLAMA_API_KEY \
-  --base-url http://localhost:11434/v1 \
-  --model gemma4:cloud \
-  --retrieval-candidates 30 \
-  --canonical-policy prefer \
-  --llm-log gkr-$THEME.json \
-  --max-planner-retries 3 \
-  --category-chunk-size 25 \
-  --max-category-retries 3 \
-  --max-generation-calls 200 \
-  --concept-continuation-buffer 5 \
-  --interactive \
-  --verbose \
-  --color auto
-```
 
 # Lint an existing wildcard
 
@@ -551,6 +521,38 @@ To let the existing LLM fix stage choose from constrained candidates, add:
 ```
 
 `--canonical-tag-suggestions` requires `--llm --suggest-fixes`. It makes canonical-tag findings eligible for that fix pass even when `--fix-severity error` is otherwise in effect; an explicit `--fix-rules` allowlist still takes precedence. For each questionable Tags-mode item, the LLM receives only the retrieved candidates and may select one when semantically equivalent, retain a short literal phrase, or omit an unsupported/nonvisual concept. It is explicitly prohibited from inventing another underscore tag. Deterministic fix validation then rejects a rewrite that retains the targeted canonical issue or introduces a new canonical-tag finding. The normal semantic verification pass still checks preservation of visible facts.
+
+### Feeding a leaf's original spotlight intent back into repair
+
+`wildcard_generator.py` records, for every spotlight-kind leaf, an `intent` field on its
+provenance entry: one sentence naming the subject, the concrete action tying it to an
+object or setting, and why the moment is worth depicting — the same governing-idea
+requirement documented for spotlight categories in `howto/wildcard-generator-skeleton.yaml`.
+Each provenance entry also records the leaf's own `leaf_text`, so `.generation.json`
+is self-contained without needing to be positionally aligned with the rendered YAML.
+
+Pass that manifest back to the linter with `--spotlight-intents`:
+
+```bash
+uv run tools/wildcard_linter.py gkr-comics.yaml \
+  --llm --suggest-fixes --fixed-output gkr-comics.fixed.yaml \
+  --spotlight-intents gkr-comics.generation.json \
+  --api-key-env OPENAI_API_KEY --model your-model
+```
+
+`--spotlight-intents` requires `--llm --suggest-fixes`. When a leaf's current text
+exactly matches its originally generated `leaf_text`, its recorded intent is supplied
+to the fix-suggestion and correction-retry prompts as `original_intent` — a concrete
+revision target, so a repair must still deliver that governing idea rather than merely
+dodge the reported issue by any available change (for example, a rewrite that only adds
+emphasis weight without touching the actual ambiguity). A leaf that has already changed
+since generation — through a prior accepted fix or a manual edit — no longer matches its
+recorded `leaf_text`, so it gets no intent; a stale claim is never supplied.
+
+This is deliberately scoped to the fix-suggestion and correction-retry passes only. The
+independent LLM review pass (the seven `prompt.md` tests) and the semantic-preservation
+verifier never receive it, so a leaf is still judged on what it actually shows, not on
+whether it matches its own original claim.
 
 Add `--canonical-literal-review` to review short plain-space multiword phrases that
 would otherwise bypass underscore-tag validation. It searches the complete phrase
@@ -773,6 +775,20 @@ The trace records:
 - Raw assistant response returned for each batch
 
 The trace never records the API key or authorization headers. It can still contain sensitive wildcard content and model-generated text, so review it before sharing and delete it when it is no longer needed. Automatically created traces remain in the system temporary directory until the operating system or user removes them.
+
+## Capturing a plain-text run log without piping through `tee`
+
+Both tools accept `--run-log PATH`, available on the linter and the generator, to duplicate everything written to standard output and standard error into one combined, chronologically ordered, plain-text file:
+
+```bash
+uv run tools/wildcard_linter.py gkr-anime.yaml --verbose --run-log _tmp/anime-lint.log
+uv run tools/wildcard_generator.py gkr-superhero.skel.yaml --output gkr-superhero.yaml \
+  --danbooru-tags safebooru_general_tags.classified.csv \
+  --model your-model --api-key-env OPENAI_API_KEY \
+  --verbose --run-log _tmp/superhero-generate.log
+```
+
+This differs from `command --verbose ... 2>&1 | tee file.log` in one important way: standard output and standard error remain attached to the real terminal, so `--color auto` still detects a tty and colors keep rendering there. ANSI color codes are stripped before writing to the log file, so the file itself stays clean plain text — useful for reviewing later or handing off directly (for example, pasting into a support conversation) without escape-code noise. The log file is flushed after every write rather than closed explicitly at exit, so it is safe to `tail -f` while a long run is in progress.
 
 ## LLM response cache
 
@@ -1127,18 +1143,84 @@ uv run tools/wildcard_linter.py gkr-anime.yaml \
   --timeout 300
 ```
 
-## Practical example
+# Practical example
 
-### Obtain the safebooru_general_tags.csv file
+## Danbooru tags
+
+Obtain the safebooru_general_tags.csv file and prepare it for use:
 
 ```bash
 python3 tools/download_danbooru_tags.py \
   --output safebooru_general_tags.csv \
   --min-post-count 100 \
   --verbose
+
+# classify the tags for use
+# once concluded, feel free to review the created CSV's ambiguous tags
+OLLAMA_API_KEY=ollama uv run tools/classify_danbooru_tags.py \
+  safebooru_general_tags.csv \
+  --output safebooru_general_tags.classified.csv \
+  --api-key-env OLLAMA_API_KEY \
+  --base-url http://localhost:11434/v1 \
+  --model gemma4:cloud \
+  --batch-size 100 \
+  --verbose
+
+# Generate a database with embeddings
+OLLAMA_API_KEY="ollama" uv run tools/build_danbooru_index.py \
+  safebooru_general_tags.classified.csv \
+  --output safebooru_general_tags.index.sqlite \
+  --content-profile general \
+  --embeddings \
+  --embedding-api-key-env OLLAMA_API_KEY \
+  --embedding-base-url http://localhost:11434/v1 \
+  --embedding-model embeddinggemma:latest \
+  --embedding-batch-size 512 \
+  --verbose
 ```
 
-### Fix a theme file (with LLM)
+## Generate a wildcard file
+
+```bash
+# Without Sqlite and embeddings
+OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
+  ../howto/wildcard-generator-skeleton.yaml \
+  --output gkr-superhero.yaml \
+  --danbooru-tags safebooru_general_tags.csv \
+  --api-key-env OLLAMA_API_KEY \
+  --base-url http://localhost:11434/v1 \
+  --model gemma4:cloud \
+  --llm-cache-dir wildcard-linter-cache \
+  --verbose
+
+# using the Danboory embeddings
+mkdir _tmp; THEME="superhero"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_generator.py \
+  gkr-$THEME.skel.yaml \
+  --output _tmp/gkr-$THEME.yaml \
+  --danbooru-tags safebooru_general_tags.classified.csv \
+  --danbooru-index safebooru_general_tags.index.sqlite \
+  --content-profile general \
+  --api-key-env OLLAMA_API_KEY \
+  --base-url http://localhost:11434/v1 \
+  --model gemma4:cloud \
+  --retrieval-candidates 30 \
+  --canonical-policy prefer \
+  --llm-cache-dir wildcard-linter-cache \
+  --llm-log _tmp/gkr-$THEME.json \
+  --max-planner-retries 3 \
+  --category-chunk-size 25 \
+  --max-category-retries 3 \
+  --max-generation-calls 200 \
+  --concept-continuation-buffer 5 \
+  --interactive \
+  --verbose \
+  --color auto \
+  --run-log _tmp/$THEME.generator-run.log
+```
+
+## Lint a wildcard file
+
+Fix a theme file (with LLM)
 
 ```bash
 # Delete and re-create the wildcard-linter-cache folder to start a full llm step (otherwise it will use the cache)
@@ -1207,11 +1289,12 @@ After completion:
 1. Compare the bsase YAML against the `.fixed` YAML and make decisions
 2. Review the `.fixed-report.md` for `UNRESOLVED` entries
 
-Or to get a futher "fixed" `fixed.yaml` file:
+Or to get a futher "fixed" `fixed.yaml` file as well as an `unresolved.yaml` file:
 
 ```bash
-mkdir _tmp; THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
-  gkr-$THEME.yaml \
+# Make sure to adapt the RUN value
+mkdir _tmp; THEME="comics"; RUN="1"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter.py \
+  _tmp/gkr-$THEME.yaml \
   --semantic-duplicates \
   --semantic-duplicate-threshold 0.94 \
   --canonical-literal-review \
@@ -1221,8 +1304,8 @@ mkdir _tmp; THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter
   --llm-scope content \
   --suggest-fixes \
   --fix-severity both \
+  --spotlight-intents _tmp/gkr-$THEME.generation.json \
   --max-fix-retries 2 \
-  --fix-manifest _tmp/gkr-comics-new.fix-manifest.json \
   --danbooru-tags safebooru_general_tags.classified.csv \
   --danbooru-index safebooru_general_tags.index.sqlite \
   --retrieval auto \
@@ -1236,15 +1319,19 @@ mkdir _tmp; THEME="comics"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_linter
   --verification-batch-size 15 \
   --timeout 300 \
   --llm-cache-dir wildcard-linter-cache \
-  --llm-log "_tmp/gkr-$THEME.llm.jsonl" \
-  --fixed-output _tmp/gkr-$THEME.fixed.yaml \
+  --llm-log "_tmp/gkr-$THEME.llm$RUN.jsonl" \
+  --fixed-output _tmp/gkr-$THEME.fixed$RUN.yaml \
   --format markdown \
-  --output _tmp/gkr-$THEME.fixed.report.md \
-  --unresolved-output _tmp/gkr-$THEME.unresolved.yaml \
-  --unresolved-report _tmp/gkr-$THEME.unresolved.md
+  --output _tmp/gkr-$THEME.fixed.report$RUN.md \
+  --unresolved-output _tmp/gkr-$THEME.unresolved$RUN.yaml \
+  --unresolved-report _tmp/gkr-$THEME.unresolved$RUN.md \
+  --fix-manifest _tmp/gkr-$THEME.fix-manifest$RUN.json \
   --color auto \
-  --fail-on never
+  --fail-on never \
+    --run-log _tmp/$THEME.generator-run.log
 ```
+
+First review the `fixed.yaml` then the `unresolved.yaml` files for manual integration in the 
 
 ### Fix "only" a section in a generated file
 
