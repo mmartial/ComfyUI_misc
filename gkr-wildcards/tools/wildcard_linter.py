@@ -1923,6 +1923,24 @@ def case_only_rewrite_issues(original: str, rewrite: str) -> list[str]:
     return []
 
 
+def weight_only_rewrite_issues(original: str, rewrite: str) -> list[str]:
+    """Reject full-leaf rewrites whose only effect is adding or changing emphasis weight.
+
+    Every deterministic relationship/composition check strips (term:weight) syntax
+    before matching, so weight never changes what a phrase means or how it is
+    recognized; it only changes rendering priority. A rewrite that is otherwise
+    byte-identical to the original therefore cannot have addressed a content,
+    comprehension, canonicalization, or ambiguity finding, no matter how the LLM
+    that proposed it framed the change.
+    """
+    if original.strip() == rewrite.strip():
+        return []
+    unweighted = lambda text: WEIGHT_RE.sub(lambda match: match.group(1), text).strip().lower()
+    if unweighted(original) == unweighted(rewrite):
+        return ["repair only adds or changes emphasis weight and does not resolve the issue"]
+    return []
+
+
 def removed_standalone_literal_issues(original: str, rewrite: str) -> list[str]:
     """Require standalone literal descriptors to be retained or concretely replaced."""
     rewritten_items = normalized_leaf_items(rewrite)
@@ -2119,6 +2137,7 @@ def validate_suggestions(
         if subject_count_tokens(leaf.text) != subject_count_tokens(rewrite):
             reasons.append("explicit subject-count facts changed")
         reasons.extend(case_only_rewrite_issues(leaf.text, rewrite))
+        reasons.extend(weight_only_rewrite_issues(leaf.text, rewrite))
         reasons.extend(removed_standalone_literal_issues(leaf.text, rewrite))
         reasons.extend(general_phrase_cohesion_issues(leaf.text, rewrite))
         reasons.extend(unsupported_added_item_issues(leaf.text, rewrite, leaf_findings))

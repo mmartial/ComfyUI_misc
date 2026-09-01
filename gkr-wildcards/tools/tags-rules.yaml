@@ -27,7 +27,6 @@ canonical_composition:
   rewrite_must_resolve: true
   shared_head_attributes: true
   minimum_matches: 2
-  require_vocabulary_match: true
   allow_inflection_match: true
 
 # Explicit output families may opt into layouts that are unsuitable for a

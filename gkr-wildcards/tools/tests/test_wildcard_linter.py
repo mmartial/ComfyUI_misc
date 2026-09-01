@@ -2006,6 +2006,48 @@ class WildcardLinterTests(unittest.TestCase):
             rejected[leaf.uid],
         )
 
+    def test_validation_rejects_weight_only_rewrite(self):
+        # Regression test: real fix-suggestion output was observed wrapping an
+        # already-present word in (word:weight) as its entire "fix" for an LLM
+        # Comprehension finding ("lifting door" -> "lifting (door:1.1)"), which
+        # changes nothing -- every deterministic relationship/composition check
+        # strips weight syntax before matching, so it cannot resolve a content,
+        # comprehension, or canonicalization complaint. llm_verify_fixes was
+        # accepting these because it is itself a same-model LLM judgment call.
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1,
+            "lifting door, muscles, veins", (), "tags",
+        )
+        finding = LINTER.Finding(
+            "error", "Comprehension",
+            "The phrase 'lifting door' is a literal phrase lacking canonical coverage.",
+            leaf.file, leaf.line, leaf.category, leaf.uid, source="llm",
+        )
+        accepted, rejected = LINTER.validate_suggestions(
+            [leaf], {leaf.uid: "lifting (door:1.1), muscles, veins"}, [finding],
+            self.rules, self.tags_rules,
+        )
+        self.assertEqual(accepted, {})
+        self.assertIn(
+            "repair only adds or changes emphasis weight and does not resolve the issue",
+            rejected[leaf.uid],
+        )
+
+    def test_validation_accepts_a_genuine_content_rewrite_with_new_weights(self):
+        # A real content fix that happens to also add weight syntax must not be
+        # rejected merely because weight is present in the rewrite.
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1,
+            "lifting door, muscles, veins", (), "tags",
+        )
+        accepted, rejected = LINTER.validate_suggestions(
+            [leaf],
+            {leaf.uid: "lifting (metal_door:1.1), muscles, veins"},
+            [], self.rules, self.tags_rules,
+        )
+        self.assertEqual(rejected, {})
+        self.assertIn(leaf.uid, accepted)
+
     def test_validation_rejects_bare_standalone_descriptor_deletion(self):
         leaf = LINTER.Leaf(
             "id", "test.yaml", "gkr", "scene", 0, 1,
