@@ -1843,6 +1843,37 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertEqual(accepted, {})
         self.assertTrue(any("protected source tag 'pointed_sword'" in reason for reason in rejected[leaf.uid]))
 
+    def test_validation_rejects_case_only_rewrite(self):
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1,
+            "1man, sketchbook, Cairo street", (), "tags",
+        )
+        accepted, rejected = LINTER.validate_suggestions(
+            [leaf], {leaf.uid: "1man, sketchbook, cairo street"}, [],
+            self.rules, self.tags_rules,
+        )
+        self.assertEqual(accepted, {})
+        self.assertIn(
+            "repair changes only letter casing and does not resolve a representational issue",
+            rejected[leaf.uid],
+        )
+
+    def test_validation_rejects_bare_standalone_descriptor_deletion(self):
+        leaf = LINTER.Leaf(
+            "id", "test.yaml", "gkr", "scene", 0, 1,
+            "2people, long white table, stark, modernist", (), "tags",
+        )
+        finding = LINTER.Finding(
+            "error", "Visual test", "The term 'stark' is interpretive.",
+            leaf.file, leaf.line, leaf.category, leaf.uid, source="llm",
+        )
+        accepted, rejected = LINTER.validate_suggestions(
+            [leaf], {leaf.uid: "2people, long white table, modernist"}, [finding],
+            self.rules, self.tags_rules,
+        )
+        self.assertEqual(accepted, {})
+        self.assertTrue(any("standalone source descriptor 'stark'" in reason for reason in rejected[leaf.uid]))
+
     def test_fix_manifest_separates_accepted_repair_from_rejected_enhancement(self):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)

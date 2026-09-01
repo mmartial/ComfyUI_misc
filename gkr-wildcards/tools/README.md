@@ -587,6 +587,11 @@ attached descriptive phrases, loss of canonical source tags, and substitution of
 unknown underscore token with a merely similar retrieved neighbor. Embedding candidates
 remain suggestions: they do not prove that tags such as `steam_pipe` and `exhaust_pipe`
 are interchangeable.
+Pure letter-case rewrites are also rejected because they do not improve model
+representability. A standalone literal descriptor cannot be silently deleted by an LLM
+repair—even when an LLM finding criticizes it; the rewrite must retain it or provide a
+concrete replacement. This keeps subjective removals such as dropping `stark` in the
+unresolved review artifacts instead of applying them automatically.
 
 This review is deliberately opt-in because compound-word similarity is heuristic and a
 nearest embedding candidate is not proof of equivalence. Its findings are report-only by

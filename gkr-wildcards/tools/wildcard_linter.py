@@ -1834,6 +1834,30 @@ def normalized_leaf_items(text: str) -> set[str]:
     }
 
 
+def case_only_rewrite_issues(original: str, rewrite: str) -> list[str]:
+    """Reject full-leaf rewrites whose only effect is changing letter casing."""
+    if original != rewrite and original.casefold() == rewrite.casefold():
+        return ["repair changes only letter casing and does not resolve a representational issue"]
+    return []
+
+
+def removed_standalone_literal_issues(original: str, rewrite: str) -> list[str]:
+    """Require standalone literal descriptors to be retained or concretely replaced."""
+    rewritten_items = normalized_leaf_items(rewrite)
+    issues: list[str] = []
+    for raw_item in split_top_level_commas(literal_text(original)):
+        unweighted = WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip().lower()
+        if (
+            not re.fullmatch(r"[a-z][a-z'’-]*", unweighted)
+            or normalize_canonical_tag(unweighted) in rewritten_items
+        ):
+            continue
+        issues.append(
+            f"repair deletes standalone source descriptor '{unweighted}' without a concrete replacement"
+        )
+    return issues
+
+
 def general_phrase_cohesion_issues(original: str, rewrite: str) -> list[str]:
     """Reject comma-splitting an attached descriptive phrase for any repair rule."""
     original_items = normalized_leaf_items(original)
@@ -2003,6 +2027,8 @@ def validate_suggestions(
             reasons.append("alternative-choice markers changed")
         if subject_count_tokens(leaf.text) != subject_count_tokens(rewrite):
             reasons.append("explicit subject-count facts changed")
+        reasons.extend(case_only_rewrite_issues(leaf.text, rewrite))
+        reasons.extend(removed_standalone_literal_issues(leaf.text, rewrite))
         reasons.extend(general_phrase_cohesion_issues(leaf.text, rewrite))
         reasons.extend(unsupported_added_item_issues(leaf.text, rewrite, leaf_findings))
         reasons.extend(canonical_literal_atomization_issues(rewrite, leaf_findings, leaf.text))
