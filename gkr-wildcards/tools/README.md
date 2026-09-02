@@ -790,6 +790,8 @@ uv run tools/wildcard_generator.py gkr-superhero.skel.yaml --output gkr-superher
 
 This differs from `command --verbose ... 2>&1 | tee file.log` in one important way: standard output and standard error remain attached to the real terminal, so `--color auto` still detects a tty and colors keep rendering there. ANSI color codes are stripped before writing to the log file, so the file itself stays clean plain text — useful for reviewing later or handing off directly (for example, pasting into a support conversation) without escape-code noise. The log file is flushed after every write rather than closed explicitly at exit, so it is safe to `tail -f` while a long run is in progress.
 
+The very first thing written — before any progress output, independent of `--verbose` — is the exact command line as invoked and the complete effective parameter set, one line per argument, explicit values and un-passed defaults alike (for example `batch_categories = 3` even when `--batch-categories` was never supplied). This is a full record of what the run was actually asked to do, not just what happened during it, which matters when debugging a failure well after the fact: reconstructing the intended configuration from shell history or memory is unreliable, but it is always the first few lines of the log. Every parameter is safe to print in full; secrets are never held in `args` in the first place, since `--api-key-env`/`--embedding-api-key-env` only ever carry the *name* of an environment variable, never a key value.
+
 ## LLM response cache
 
 Successful review, fix-suggestion, and fix-verification results are cached per item by default in the system temporary directory under `wildcard-linter-cache`. Each new entry is named `item-<sha256>.json` and keyed by the phase, endpoint, model, instructions, and one prompt's semantic inputs—including mode, category, text, issues, or proposed rewrite as applicable. File path, source line, list index, and transient leaf ID are excluded, so an unchanged prompt remains reusable after reordering. Before each LLM call, the linter resolves individual hits and submits only missing items as a batch. Failed, malformed, omitted, and incomplete item responses are not cached. Cache files created by the older batch-level implementation do not have the `item-` prefix and are not reused; they may be deleted.
@@ -1215,7 +1217,7 @@ mkdir _tmp; THEME="superhero"; OLLAMA_API_KEY="ollama" uv run tools/wildcard_gen
   --interactive \
   --verbose \
   --color auto \
-  --run-log _tmp/$THEME.generator-run.log
+  --run-log _tmp/gkr-$THEME.generator-run.log
 ```
 
 ## Lint a wildcard file
@@ -1328,7 +1330,7 @@ mkdir _tmp; THEME="comics"; RUN="1"; OLLAMA_API_KEY="ollama" uv run tools/wildca
   --fix-manifest _tmp/gkr-$THEME.fix-manifest$RUN.json \
   --color auto \
   --fail-on never \
-    --run-log _tmp/$THEME.generator-run.log
+  --run-log _tmp/gkr-$THEME.linter-run$RUN.log
 ```
 
 First review the `fixed.yaml` then the `unresolved.yaml` files for manual integration in the 

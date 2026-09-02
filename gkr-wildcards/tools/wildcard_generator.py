@@ -2015,7 +2015,7 @@ def deterministic_canonical_rewrites(
 def main() -> int:
     args = parse_args()
     if args.run_log:
-        linter.enable_run_log(args.run_log)
+        linter.enable_run_log(args.run_log, args)
     script_dir = Path(__file__).resolve().parent
     prompt_path = (args.prompt or script_dir.parent / "prompt.md").resolve()
     rules_path = (args.rules or script_dir / "rules.yaml").resolve()

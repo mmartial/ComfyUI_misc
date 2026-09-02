@@ -16,6 +16,7 @@ import io
 import json
 import os
 import re
+import shlex
 import sys
 import tempfile
 import time
@@ -1192,7 +1193,7 @@ class _TeeStream:
         return getattr(self._primary, name)
 
 
-def enable_run_log(path: Path) -> None:
+def enable_run_log(path: Path, args: argparse.Namespace | None = None) -> None:
     """Duplicate stdout and stderr into one combined, ANSI-stripped log file.
 
     Unlike `command | tee file`, stdout/stderr stay attached to the real
@@ -1200,6 +1201,15 @@ def enable_run_log(path: Path) -> None:
     there, while everything written to either stream -- verbose progress,
     cache/HTTP timing, and error output -- is also captured into a plain-text
     file in chronological order, ready to review later or hand off directly.
+
+    When args is supplied, the exact invoked command line and the complete
+    effective parameter set (explicit values and defaults alike) are written
+    first, unconditionally -- independent of --verbose, since this is a
+    one-time "what was this run actually asked to do" header, not per-step
+    progress. Every parameter is safe to print in full: this codebase reads
+    secrets only from environment variables (--api-key-env and
+    --embedding-api-key-env carry an environment variable *name*, never a
+    key value), so nothing here can leak a credential.
     """
     resolved = path.expanduser().resolve()
     resolved.parent.mkdir(parents=True, exist_ok=True)
@@ -1210,6 +1220,12 @@ def enable_run_log(path: Path) -> None:
     log_file = resolved.open("w", encoding="utf-8")
     sys.stdout = _TeeStream(sys.stdout, log_file)
     sys.stderr = _TeeStream(sys.stderr, log_file)
+    if args is not None:
+        print(f"[run-log] started {time.strftime('%Y-%m-%d %H:%M:%S')}", file=sys.stderr)
+        print(f"[run-log] command: {shlex.join(sys.argv)}", file=sys.stderr)
+        print("[run-log] effective parameters:", file=sys.stderr)
+        for name in sorted(vars(args)):
+            print(f"[run-log]   {name} = {getattr(args, name)!r}", file=sys.stderr)
 
 
 def verbose(args: argparse.Namespace, message: str) -> None:
@@ -2736,6 +2752,29 @@ def duplicate_evidence_comparison(finding: Finding) -> tuple[dict[str, object], 
     return current, earlier
 
 
+def semantic_duplicate_cluster_evidence(finding: Finding) -> dict[str, Any] | None:
+    """Return a semantic_duplicate_leaf finding's structured cluster evidence.
+
+    Mirrors duplicate_evidence_comparison so the report renders the same kind
+    of readable representative/member breakdown instead of a raw single-line
+    JSON dump -- the cluster just has one representative plus N members
+    instead of a fixed current/earlier pair.
+    """
+    if finding.rule != "semantic_duplicate_leaf" or not finding.evidence:
+        return None
+    try:
+        evidence = json.loads(finding.evidence)
+    except (json.JSONDecodeError, TypeError):
+        return None
+    if not isinstance(evidence, dict) or evidence.get("type") != "semantic_duplicate_cluster":
+        return None
+    representative = evidence.get("representative")
+    members = evidence.get("members")
+    if not isinstance(representative, dict) or not isinstance(members, list):
+        return None
+    return evidence
+
+
 def markdown_highlight_source_terms(message: str, leaf: Leaf | None) -> str:
     """Emphasize quoted finding terms that occur in the source leaf."""
     if leaf is None:
@@ -2833,7 +2872,26 @@ def render(
                         f"- **{label}:** category **`{item.get('category', '')}`** at `{item_location}`",
                         f"  - `{item.get('leaf', '')}`",
                     ])
-            if finding.evidence and not duplicate_comparison:
+            semantic_cluster = semantic_duplicate_cluster_evidence(finding)
+            if semantic_cluster:
+                threshold = semantic_cluster.get("threshold", 0)
+                lines.extend(["", f"**Semantic duplicate cluster** (threshold {threshold:.4f}):", ""])
+                representative = semantic_cluster["representative"]
+                rep_location = f"{representative.get('file', '')}:{representative.get('line', 0)}"
+                lines.extend([
+                    f"- **Representative:** category **`{representative.get('category', '')}`** at `{rep_location}`",
+                    f"  - `{representative.get('leaf', '')}`",
+                ])
+                for member in semantic_cluster["members"]:
+                    if member.get("id") == representative.get("id"):
+                        continue
+                    member_location = f"{member.get('file', '')}:{member.get('line', 0)}"
+                    similarity = member.get("similarity_to_representative", 0)
+                    lines.extend([
+                        f"- **Member** (similarity {similarity:.4f}): category **`{member.get('category', '')}`** at `{member_location}`",
+                        f"  - `{member.get('leaf', '')}`",
+                    ])
+            if finding.evidence and not duplicate_comparison and not semantic_cluster:
                 if "\n" in finding.evidence:
                     lines.extend(["", "Evidence:", "", "```text", finding.evidence, "```"])
                 else:
@@ -2896,7 +2954,26 @@ def render(
                     f"- {label}: {item.get('category', '')} at {item_location}\n"
                     f"  {item.get('leaf', '')}"
                 )
-        if evidence and not duplicate_comparison:
+        semantic_cluster = semantic_duplicate_cluster_evidence(finding)
+        if semantic_cluster:
+            threshold = semantic_cluster.get("threshold", 0)
+            lines.append(ansi(f"Semantic duplicate cluster (threshold {threshold:.4f}):", "36;1", color))
+            representative = semantic_cluster["representative"]
+            rep_location = f"{representative.get('file', '')}:{representative.get('line', 0)}"
+            lines.append(
+                f"- Representative: {representative.get('category', '')} at {rep_location}\n"
+                f"  {representative.get('leaf', '')}"
+            )
+            for member in semantic_cluster["members"]:
+                if member.get("id") == representative.get("id"):
+                    continue
+                member_location = f"{member.get('file', '')}:{member.get('line', 0)}"
+                similarity = member.get("similarity_to_representative", 0)
+                lines.append(
+                    f"- Member (similarity {similarity:.4f}): {member.get('category', '')} at {member_location}\n"
+                    f"  {member.get('leaf', '')}"
+                )
+        if evidence and not duplicate_comparison and not semantic_cluster:
             lines.append(evidence.lstrip("\n"))
         if finding.alternatives:
             lines.extend([
@@ -3921,7 +3998,7 @@ def write_annotated_details(source: Path, destination: Path, audits: list[Prompt
 def main() -> int:
     args = parse_args()
     if args.run_log:
-        enable_run_log(args.run_log)
+        enable_run_log(args.run_log, args)
     if args.unresolved_output and not args.unresolved_report:
         args.unresolved_report = args.unresolved_output.with_suffix(".md")
     elif args.unresolved_report and not args.unresolved_output:

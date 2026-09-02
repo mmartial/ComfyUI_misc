@@ -520,6 +520,41 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertIn("stderr line", content)
         self.assertNotIn("\033[", content)
 
+    def test_enable_run_log_writes_command_and_parameters_when_args_supplied(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        log_path = Path(temporary.name) / "run.log"
+        original_stdout, original_stderr = sys.stdout, sys.stderr
+        original_argv = sys.argv
+        self.addCleanup(setattr, sys, "stdout", original_stdout)
+        self.addCleanup(setattr, sys, "stderr", original_stderr)
+        self.addCleanup(setattr, sys, "argv", original_argv)
+        sys.argv = ["wildcard_linter.py", "gkr-anime.yaml", "--verbose"]
+        args = SimpleNamespace(
+            verbose=True, batch_size=20, api_key_env="OPENAI_API_KEY", danbooru_tags=None,
+        )
+        LINTER.enable_run_log(log_path, args)
+        self.addCleanup(sys.stdout._log_file.close)
+        sys.stdout.flush()
+        content = log_path.read_text(encoding="utf-8")
+        self.assertIn("[run-log] command: wildcard_linter.py gkr-anime.yaml --verbose", content)
+        self.assertIn("[run-log]   batch_size = 20", content)
+        self.assertIn("[run-log]   api_key_env = 'OPENAI_API_KEY'", content)
+        self.assertIn("[run-log]   danbooru_tags = None", content)
+
+    def test_enable_run_log_skips_parameter_dump_without_args(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        log_path = Path(temporary.name) / "run.log"
+        original_stdout, original_stderr = sys.stdout, sys.stderr
+        self.addCleanup(setattr, sys, "stdout", original_stdout)
+        self.addCleanup(setattr, sys, "stderr", original_stderr)
+        LINTER.enable_run_log(log_path)
+        self.addCleanup(sys.stdout._log_file.close)
+        sys.stdout.flush()
+        content = log_path.read_text(encoding="utf-8")
+        self.assertNotIn("[run-log]", content)
+
     def test_json_response_parser_ignores_nested_array_inside_the_real_response(self):
         # Regression test: the recovery scanner used to keep the LAST successfully
         # parsed "[" span, not the outermost one. Every generator response schema
@@ -970,6 +1005,54 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertIn("**Earlier matching leaf:** category **`first`**", markdown)
         self.assertIn("gkr-test.yaml:4`", markdown)
         self.assertIn("`dynamic pose, muscles`", markdown)
+
+    def test_semantic_duplicate_cluster_renders_readably_instead_of_raw_json(self):
+        # The user specifically preferred duplicate_leaf_weight_variant's readable
+        # "Duplicate comparison" rendering over semantic_duplicate_leaf's single-line
+        # raw JSON evidence dump. semantic_duplicate_leaf now gets the same kind of
+        # representative/member breakdown instead.
+        evidence = json.dumps({
+            "type": "semantic_duplicate_cluster", "cluster_id": "abc123", "threshold": 0.94,
+            "representative": {
+                "id": "rep", "file": "gkr-test.yaml", "line": 31, "category": "spotlight_vehicles",
+                "leaf": "armored_vehicle, black_car, rain, street", "similarity_to_representative": 1.0,
+            },
+            "members": [
+                {
+                    "id": "rep", "file": "gkr-test.yaml", "line": 31, "category": "spotlight_vehicles",
+                    "leaf": "armored_vehicle, black_car, rain, street", "similarity_to_representative": 1.0,
+                },
+                {
+                    "id": "other", "file": "gkr-test.yaml", "line": 81, "category": "spotlight_vehicles",
+                    "leaf": "black_car, armored_vehicle, rain, street", "similarity_to_representative": 0.9428,
+                },
+            ],
+        })
+        leaf = LINTER.Leaf(
+            "other", "gkr-test.yaml", "gkr", "spotlight_vehicles", 0, 81,
+            "black_car, armored_vehicle, rain, street", (), "tags",
+        )
+        finding = LINTER.Finding(
+            "warning", "semantic_duplicate_leaf",
+            "Semantic duplicate cluster contains 2 leaves in spotlight_vehicles (threshold 0.9400).",
+            leaf.file, leaf.line, leaf.category, leaf.uid, evidence,
+        )
+        markdown = LINTER.render([finding], [leaf], "markdown")
+        self.assertIn("**Semantic duplicate cluster** (threshold 0.9400):", markdown)
+        self.assertIn("**Representative:** category **`spotlight_vehicles`** at `gkr-test.yaml:31`", markdown)
+        self.assertIn("`armored_vehicle, black_car, rain, street`", markdown)
+        self.assertIn("**Member** (similarity 0.9428): category **`spotlight_vehicles`** at `gkr-test.yaml:81`", markdown)
+        self.assertIn("`black_car, armored_vehicle, rain, street`", markdown)
+        # The representative must not also be listed a second time as a member.
+        self.assertEqual(markdown.count("similarity"), 1)
+        # The raw single-line JSON dump must no longer appear.
+        self.assertNotIn(f"Evidence: `{evidence}`", markdown)
+
+        text = LINTER.render([finding], [leaf], "text")
+        self.assertIn("Semantic duplicate cluster (threshold 0.9400):", text)
+        self.assertIn("Representative: spotlight_vehicles at gkr-test.yaml:31", text)
+        self.assertIn("Member (similarity 0.9428): spotlight_vehicles at gkr-test.yaml:81", text)
+        self.assertNotIn(evidence, text)
 
     def test_duplicate_leaf_weight_only_variant_is_a_separate_warning_rule(self):
         # Two leaves identical except for emphasis weight are a deliberate authored
