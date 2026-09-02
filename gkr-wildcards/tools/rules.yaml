@@ -119,6 +119,55 @@ patterns:
     regex:
       - "\\b(?:used intelligently|each contributing differently|different visual rules|technique and hospitality distinguishing|practical detail|carefully coordinated|meaningful interaction|important decision|mundane interruptions|ensemble reactions?)\\b"
 
+  interpretive_visual_modifier:
+    severity: warning
+    rewrite_must_resolve: true
+    message: An interpretive adjective is not independently representable and must not carry the visual concept by itself.
+    suggestion: Remove the modifier when redundant. Otherwise retain only concrete evidence already present in the leaf, such as named period materials, specified unusual objects or dress, repeated matching forms, or exact spatial geometry; do not invent evidence merely to preserve the adjective.
+    regex:
+      - "\\b(?:familiar|eccentric|historical|recurring)\\b"
+
+  underspecified_specificity:
+    severity: warning
+    rewrite_must_resolve: true
+    message: A hyphenated *-specific label defers the visible detail instead of naming what makes the subject, object, or setting distinctive.
+    suggestion: Remove the *-specific shorthand and retain only concrete evidence already present, such as named garments, tools, materials, architecture, anatomy, equipment, or props. Do not invent details merely to replace the label.
+    regex:
+      - "\\b[A-Za-z][A-Za-z-]*-specific\\b"
+
+  unspecified_impossibility:
+    severity: warning
+    rewrite_must_resolve: true
+    message: Impossible is an interpretation, not a visible property, unless the leaf specifies the violated geometry, anatomy, scale, or physical relationship.
+    suggestion: Remove impossible when concrete contradictory geometry or scale is already stated; otherwise omit the unsupported claim rather than inventing a new anomaly.
+    regex:
+      - "\\bimpossible(?:-scale)?\\b"
+
+  ambiguous_looming:
+    severity: warning
+    rewrite_must_resolve: true
+    message: Looming does not specify the scale or spatial cue the image must show.
+    suggestion: Use already-supported relative scale and placement such as filling the upper frame, rising above small foreground figures, or a supplied low-angle view; otherwise remove looming.
+    regex:
+      - "\\blooming\\b"
+
+  temporal_state_transition:
+    severity: warning
+    rewrite_must_resolve: true
+    message: A transition verb may ask one image to communicate change over time instead of one stable visible state.
+    suggestion: Freeze the concept at one visible endpoint or intermediate state. Name simultaneous visible evidence, such as multiple separated silhouettes or a body partly composed of petals, without relying on the process verb.
+    regex:
+      - "\\b(?:becoming|transforming|fragmenting|materializing|dematerializing|morphing|evolving)\\b"
+      - "\\b(?:shifting between|changing into|turning into|splitting into|dissolving into|multiplying into)\\b"
+
+  dynamic_event_shorthand:
+    severity: warning
+    rewrite_must_resolve: true
+    message: Crashing names an event but may not specify the single visible impact state.
+    suggestion: "Freeze the event at visible contact: identify what strikes what and retain supplied deformation, spray, debris, foam, or body position. For waves, prefer a curling crest striking named rocks or a hull with impact spray and foam."
+    regex:
+      - "\\bcrashing\\b"
+
   generic_mood_language:
     severity: warning
     message: Mood or atmosphere wording may not identify its visible cause.

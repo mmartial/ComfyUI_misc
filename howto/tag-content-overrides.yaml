@@ -1,0 +1,11 @@
+# Human-reviewed corrections for classify_danbooru_tags.py.
+#
+# Values may be a class directly or a mapping with a `class` field. Valid
+# classes are: general, sensitive, explicit, ambiguous.
+#
+# overrides:
+#   example_false_positive: general
+#   example_reviewed_term:
+#     class: sensitive
+
+overrides: {}

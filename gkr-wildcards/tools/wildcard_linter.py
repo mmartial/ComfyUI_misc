@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["PyYAML>=6.0.2"]
+# dependencies = ["PyYAML>=6.0.2", "numpy>=2.0"]
 # ///
 
 """Lint GKR wildcard YAML files and optionally request semantic LLM review."""
@@ -9,20 +9,27 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import difflib
 import hashlib
+import io
 import json
 import os
 import re
+import shlex
 import sys
 import tempfile
+import time
 import urllib.error
 import urllib.request
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Iterable
 
 import yaml
+import numpy as np
+
+from danbooru_index import DanbooruIndex, EmbeddingClient
 
 
 REFERENCE_RE = re.compile(r"__([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)__")
@@ -36,6 +43,16 @@ SEQUENCE_RE = re.compile(
 CAMERA_CATEGORY_RE = re.compile(r"(?:^|_)(camera|composition|framing)$", re.I)
 MODE_RE = re.compile(r"\bMODE\s*:\s*(narrative|tags)\b", re.I)
 WEIGHT_RE = re.compile(r"\(([^()]+):(-?(?:\d+(?:\.\d+)?|\.\d+))\)")
+PALETTE_COLOR_NAMES = {
+    "amber", "beige", "black", "blue", "brown", "copper", "coral", "crimson", "cyan",
+    "emerald", "gold", "green", "grey", "indigo", "ivory", "lavender", "lime",
+    "magenta", "maroon", "navy", "ochre", "orange", "pink", "purple", "red",
+    "scarlet", "silver", "tan", "teal", "turquoise", "violet", "white", "yellow",
+}
+EXPLICIT_MULTI_MOMENT_CANONICAL_TAGS = {
+    "age_comparison", "age_progression", "before_and_after", "different_times",
+    "multiple_views", "progression", "sequence", "stages_of_life", "timeline",
+}
 TAG_SEQUENCE_RE = re.compile(
     r"\b(?:multi[- ]?panel|split comic panels?|sequential panels?|\w+-panel (?:page|sequence)|"
     r"comic page|manga page|(?:two|three|four|five|six|seven|eight|nine|\d+)[- ]page|"
@@ -59,8 +76,25 @@ TAG_DANGLING_RELATION_RE = re.compile(
     re.I,
 )
 ALTERNATIVE_RE = re.compile(r"\b(?:or|either)\b", re.I)
+RELATIONAL_ACTION_TAGS = {
+    "holding", "gripping", "protecting", "fighting", "facing", "chasing", "blocking",
+    "catching", "carrying", "surrounding", "reaching", "standing", "kneeling",
+    "crouching", "climbing", "crawling", "hovering", "floating", "looking", "staring",
+    "leaning", "slipping", "scanning", "balancing", "watering", "brushing",
+}
+RELATIONAL_PREPOSITIONS = {
+    "at", "on", "in", "inside", "against", "around", "under", "over", "near",
+    "beside", "behind", "through", "toward", "with", "from", "into",
+}
+BODY_RELATION_SUBJECTS = {"hand", "hands", "foot", "feet", "head", "back", "arms", "legs"}
+BODY_RELATION_PREPOSITIONS = {
+    "on", "in", "inside", "against", "around", "under", "over", "near", "beside", "behind",
+}
 STRUCTURAL_FIX_RULES = {
     "camera_format_conflict", "unrestricted_camera_composite", "missing_reference", "reference_cycle",
+    "duplicate_leaf", "cross_category_duplicate_leaf", "semantic_duplicate_leaf",
+    "duplicate_leaves_across_chunks", "route_contract_violation", "route_prompt_budget",
+    "duplicate_leaf_weight_variant",
 }
 
 
@@ -88,6 +122,7 @@ class Finding:
     leaf_id: str = ""
     evidence: str = ""
     suggestion: str = ""
+    alternatives: tuple[str, ...] = ()
     source: str = "deterministic"
 
 
@@ -98,38 +133,229 @@ class PromptAudit:
     status: str
     issues: list[str]
     post_prompt: str
+    issue_codes: list[str] = field(default_factory=list)
+    pre_prompt: str = ""
+
+
+@dataclass
+class DanbooruVocabulary:
+    tags: set[str]
+    post_counts: dict[str, int] = field(default_factory=dict)
+    aliases: dict[str, set[str]] = field(default_factory=dict)
+
+    def __contains__(self, value: object) -> bool:
+        return value in self.tags
+
+    def __len__(self) -> int:
+        return len(self.tags)
+
+
+@dataclass
+class CanonicalTagRetriever:
+    """Retrieve repair candidates from a lexical or embedded SQLite index."""
+    index: DanbooruIndex
+    vocabulary: DanbooruVocabulary
+    embedding_client: EmbeddingClient | None = None
+    query_prefix: str = ""
+    vector_cache: dict[str, list[float]] = field(default_factory=dict)
+    strict_embeddings: bool = False
+
+    def prime(self, leaves: list[Leaf], batch_size: int = 64) -> int:
+        """Batch query embeddings for unknown canonical-looking items before linting."""
+        if self.embedding_client is None:
+            return 0
+        queries: list[str] = []
+        for leaf in leaves:
+            if leaf.mode != "tags":
+                continue
+            for item in split_top_level_commas(leaf.text):
+                raw = WEIGHT_RE.sub(lambda match: match.group(1), item).strip().lower()
+                normalized = normalize_canonical_tag(raw)
+                if (
+                    "_" in raw
+                    and re.fullmatch(r"[a-z0-9][a-z0-9_+().:'-]*", raw)
+                    and normalized not in self.vocabulary
+                    and normalized not in self.vocabulary.aliases
+                    and not canonical_inflection_matches(normalized, self.vocabulary)
+                    and raw not in self.vector_cache
+                ):
+                    queries.append(raw)
+        unique = list(dict.fromkeys(queries))
+        for offset in range(0, len(unique), batch_size):
+            batch = unique[offset:offset + batch_size]
+            try:
+                vectors = self.embedding_client.embed([self.query_prefix + value for value in batch])
+            except RuntimeError:
+                if self.strict_embeddings:
+                    raise
+                self.embedding_client = None
+                self.vector_cache.clear()
+                return -1
+            self.vector_cache.update(zip(batch, vectors))
+        return len(unique)
+
+    def prime_literal_phrases(self, leaves: list[Leaf], batch_size: int = 64) -> int:
+        """Batch embeddings for multiword literals before canonical-literal review."""
+        if self.embedding_client is None:
+            return 0
+        queries: list[str] = []
+        for leaf in leaves:
+            if leaf.mode != "tags":
+                continue
+            for item in split_top_level_commas(literal_text(leaf.text)):
+                raw = WEIGHT_RE.sub(lambda match: match.group(1), item).strip().lower()
+                words = re.findall(r"[a-z0-9][a-z0-9+'-]*", raw)
+                if (
+                    2 <= len(words) <= 5 and "_" not in raw
+                    and normalize_canonical_tag(raw) not in self.vocabulary
+                    and raw not in self.vector_cache
+                ):
+                    queries.append(raw)
+        unique = list(dict.fromkeys(queries))
+        for offset in range(0, len(unique), batch_size):
+            batch = unique[offset:offset + batch_size]
+            try:
+                vectors = self.embedding_client.embed([self.query_prefix + value for value in batch])
+            except RuntimeError:
+                if self.strict_embeddings:
+                    raise
+                self.embedding_client = None
+                self.vector_cache.clear()
+                return -1
+            self.vector_cache.update(zip(batch, vectors))
+        return len(unique)
+
+    def candidates(self, value: str, limit: int) -> list[str]:
+        return [result.tag for result in self.candidate_results(value, limit)]
+
+    def candidate_results(self, value: str, limit: int) -> list[Any]:
+        """Return ranked vocabulary-backed results, retaining scores for repair decisions."""
+        vector = None
+        if self.embedding_client is not None:
+            vector = self.vector_cache.get(value)
+            if vector is None:
+                try:
+                    vector = self.embedding_client.embed([self.query_prefix + value])[0]
+                    self.vector_cache[value] = vector
+                except RuntimeError:
+                    if self.strict_embeddings:
+                        raise
+                    self.embedding_client = None
+                    vector = None
+        results = self.index.hybrid_search(value, vector, max(limit * 2, 10))
+        return [result for result in results if result.tag in self.vocabulary.tags][:limit]
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Lint wildcard YAML structure, language, and composite routes."
+        description="Lint wildcard YAML structure, tags, routes, and optional LLM-visible semantics.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""Common scopes:
+  --llm-scope candidates  Review only leaves already flagged by deterministic checks.
+  --llm-scope content     Also review clean leaves containing literal prompt text; skip pure routers.
+  --llm-scope all         Review every leaf, including pure wildcard routers.
+
+Repair behavior:
+  The input YAML is never overwritten. --fixed-output receives accepted rewrites, while
+  findings not repaired remain marked [UNRESOLVED] in text/Markdown reports.
+  --fail-on controls only the process exit status; it does not stop report generation.
+""",
     )
-    parser.add_argument("paths", nargs="*", help="YAML file(s) or directories")
+    parser.add_argument("paths", nargs="*", help="One or more YAML files/directories. Required for wildcard linting; may be omitted only with --validate-post-prompts")
+    parser.add_argument(
+        "--only", action="append", metavar="CATEGORY",
+        help="Audit only this category and referenced categories up to --only-depth (default: 1). Repeat the option or use commas; namespace/category disambiguates names",
+    )
+    parser.add_argument(
+        "--only-depth", type=int, default=1, metavar="LEVELS",
+        help="Reference levels followed from each --only category: 0 checks only the named category, 1 includes direct children, and larger values recurse further (default: 1; requires --only)",
+    )
+    parser.add_argument(
+        "--semantic-duplicates", action="store_true",
+        help="Embed leaf text and report near-duplicates within each audited category; requires --danbooru-tags and an available embedded SQLite index",
+    )
+    parser.add_argument(
+        "--semantic-duplicate-threshold", type=float, default=0.94, metavar="SIMILARITY",
+        help="Minimum cosine similarity for --semantic-duplicates warnings; raise to reduce false positives (default: 0.94)",
+    )
+    parser.add_argument(
+        "--canonical-literal-review", action="store_true",
+        help="Opt in to embedding-assisted review of every short multiword literal phrase such as 'glass biodome' or 'riveted steel'; warnings are report-only unless --fix-literal-concepts or an explicit --fix-rules allowlist authorizes them",
+    )
     parser.add_argument("--rules", type=Path, help="Rules YAML (defaults beside script)")
     parser.add_argument("--tags-rules", type=Path, help="Tags-mode rules YAML (defaults beside script)")
-    parser.add_argument("--format", choices=("text", "json", "markdown"), default="text")
-    parser.add_argument("--output", type=Path, help="Write report to this path")
-    parser.add_argument("--fail-on", choices=("error", "warning", "never"), default="error")
-    parser.add_argument("--color", choices=("auto", "always", "never"), default="auto", help="ANSI color mode for text reports")
+    parser.add_argument("--format", choices=("text", "json", "markdown"), default="text", help="Report encoding written to --output or stdout (default: text)")
+    parser.add_argument("--output", type=Path, help="Write the lint report here instead of stdout; this is distinct from --fixed-output YAML")
+    parser.add_argument("--fail-on", choices=("error", "warning", "never"), default="error", help="Exit nonzero for errors, for warnings or errors, or never; processing and report generation still finish (default: error)")
+    parser.add_argument("--color", choices=("auto", "always", "never"), default="auto", help="ANSI color mode for terminal text and verbose progress; Markdown/JSON files are not colorized (default: auto)")
+    parser.add_argument(
+        "--run-log", type=Path,
+        help=(
+            "Duplicate everything written to stdout and stderr (verbose progress, cache/HTTP "
+            "timing, and error output) into this plain-text file, in addition to the terminal. "
+            "Unlike piping through `tee`, stdout/stderr remain attached to the real terminal, so "
+            "--color auto still detects a tty and colors keep rendering there; ANSI escapes are "
+            "stripped before writing to the file."
+        ),
+    )
     parser.add_argument("-v", "--verbose", action="store_true", help="Report inventory, rule, route, and LLM batch progress to stderr")
-    parser.add_argument("--llm", action="store_true", help="Run OpenAI-compatible semantic review")
-    parser.add_argument("--llm-scope", choices=("candidates", "content", "all"), default="candidates", help="LLM selection: flagged candidates, all literal-content leaves, or every leaf")
-    parser.add_argument("--suggest-fixes", action="store_true", help="Run a second LLM pass proposing rewrites for found leaf issues; requires --llm")
-    parser.add_argument("--fixed-output", type=Path, help="Write suggested rewrites to a new YAML file; requires --llm and --suggest-fixes")
+    parser.add_argument("--llm", action="store_true", help="Add OpenAI-compatible semantic/visual review after deterministic checks")
+    parser.add_argument("--llm-scope", choices=("candidates", "content", "all"), default="candidates", help="Select LLM coverage: flagged leaves only, all leaves with literal content, or every leaf including pure routers (default: candidates)")
+    parser.add_argument("--suggest-fixes", action="store_true", help="Ask the LLM for constrained rewrites of eligible findings; requires --llm and does not alter the input")
+    parser.add_argument("--fixed-output", type=Path, help="Optional. Write accepted rewrites to this separate YAML file. When omitted, no fixed YAML is produced; requires --llm, --suggest-fixes, and exactly one input YAML")
     parser.add_argument("--fix-severity", choices=("error", "warning", "both"), default="error", help="Fix errors only (default), warnings only, or both")
-    parser.add_argument("--fix-rules", help="Comma-separated rule allowlist for fixes; overrides --fix-severity")
-    parser.add_argument("--fix-manifest", type=Path, help="Write accepted and rejected fix details as JSON")
-    parser.add_argument("--skip-fix-verification", action="store_true", help="Skip the final LLM semantic-preservation check (not recommended)")
-    parser.add_argument("--model", help="Model name; defaults to OPENAI_MODEL")
-    parser.add_argument("--base-url", help="API base URL; defaults to OPENAI_BASE_URL")
+    parser.add_argument("--fix-rules", help="Comma-separated rule-code allowlist; when supplied, only these rules are repair targets and --fix-severity is ignored")
+    parser.add_argument(
+        "--fix-literal-concepts", action="store_true",
+        help="Allow canonical_literal_concept warnings to join the normal --fix-severity selection; requires --canonical-literal-review",
+    )
+    parser.add_argument("--fix-manifest", type=Path, help="Write machine-readable proposed, accepted, rejected, and unresolved fix details as JSON")
+    parser.add_argument(
+        "--spotlight-intents", type=Path,
+        help=(
+            "Optional generator .generation.json manifest. When a leaf's current text exactly "
+            "matches its originally generated text, its recorded spotlight intent (the governing "
+            "idea it was written to depict) is supplied to fix-suggestion and correction-retry "
+            "prompts as a revision target. Never supplied to review or fix-verification, which "
+            "must judge each leaf independently. A leaf that has already changed since generation "
+            "has no match and gets no intent."
+        ),
+    )
+    parser.add_argument(
+        "--unresolved-output", type=Path,
+        help="Write a review-only YAML based on --fixed-output with the safest rejected candidate substituted for each unresolved leaf; requires --fixed-output (default report: same stem with .md)",
+    )
+    parser.add_argument(
+        "--unresolved-report", type=Path,
+        help="Write a compact Markdown report containing only ranked unresolved repair candidates; requires --fixed-output (default YAML: same stem with .yaml)",
+    )
+    parser.add_argument("--max-fix-retries", type=int, default=2, metavar="COUNT", help="Fresh corrective LLM attempts after a proposed rewrite fails deterministic validation (default: 2; use 0 for one-shot behavior)")
+    parser.add_argument("--skip-fix-verification", action="store_true", help="Skip both independent LLM semantic-preservation passes (not recommended)")
+    parser.add_argument("--model", help="Chat model name. With --llm, omission falls back to OPENAI_MODEL and fails if neither is set")
+    parser.add_argument("--base-url", help="OpenAI-compatible API base URL. With --llm, omission falls back to OPENAI_BASE_URL")
     parser.add_argument("--api-key-env", default="OPENAI_API_KEY", help="Environment variable containing the API key")
-    parser.add_argument("--batch-size", type=int, default=20)
+    parser.add_argument("--batch-size", type=int, default=20, help="Leaves per semantic-review or fix-suggestion LLM request (default: 20)")
     parser.add_argument("--verification-batch-size", type=int, default=15, help="Items per semantic fix-verification request")
-    parser.add_argument("--timeout", type=int, default=120)
+    parser.add_argument("--timeout", type=int, default=120, help="Timeout in seconds for each individual chat or embedding HTTP request; it is not a whole-run limit (default: 120)")
     parser.add_argument("--prompt", type=Path, help="Review policy Markdown; defaults to ../prompt.md")
     parser.add_argument("--llm-log", type=Path, help="Write sanitized LLM requests and responses as JSON Lines")
+    parser.add_argument("--llm-cache-dir", type=Path, help="Persistent response cache; identical requests become cache hits and make no LLM call (default: system temp/wildcard-linter-cache)")
+    parser.add_argument("--no-llm-cache", action="store_true", help="Force fresh LLM calls and do not save their responses")
+    parser.add_argument("--llm-cache-max-age-minutes", type=float, help="Refresh cache entries older than this age; omit to retain cached responses indefinitely")
     parser.add_argument("--validate-post-prompts", type=Path, metavar="DETAILS_MD", help="Audit final post-LLM prompts recorded by theme_organizer.py")
-    parser.add_argument("--annotated-details", type=Path, help="Write a copy of details.md with audit results appended; requires --validate-post-prompts")
+    parser.add_argument("--annotated-details", type=Path, help="Write a copy of details.md with audit status inserted into each image section; requires --validate-post-prompts")
+    parser.add_argument("--post-prompt-output", type=Path, help="Write post-prompt audit summary to a separate report; requires --validate-post-prompts")
+    parser.add_argument("--include-post-prompt-report", action="store_true", help="Append post-prompt validation to the ordinary --output report; requires --validate-post-prompts")
+    parser.add_argument("--danbooru-tags", type=Path, help="CSV vocabulary used to recognize exact canonical tags and find normalized/candidate forms")
+    parser.add_argument("--danbooru-index", type=Path, help="SQLite retrieval index with optional embeddings (default when present: <danbooru-tags stem>.index.sqlite)")
+    parser.add_argument("--retrieval", choices=("auto", "lexical", "hybrid"), default="auto", help="Canonical candidate retrieval: auto uses compatible SQLite embeddings when available and otherwise lexical; lexical disables embeddings; hybrid requires a compatible complete embedding index (default: auto)")
+    parser.add_argument("--embedding-model", help="Embedding query model; when omitted, use the model recorded in SQLite metadata")
+    parser.add_argument("--embedding-base-url", help="Embedding API base URL; when omitted, use the URL recorded in SQLite metadata")
+    parser.add_argument("--embedding-api-key-env", default="OLLAMA_API_KEY", help="Name of the environment variable containing the embedding API key (default: OLLAMA_API_KEY)")
+    parser.add_argument("--embedding-query-prefix", help="Text prepended to embedding queries; when omitted, use the prefix recorded in SQLite metadata")
+    parser.add_argument("--canonical-tag-suggestions", action="store_true", help="Let the fix stage choose only from retrieved canonical candidates (or retain a literal/remove it); requires --danbooru-tags, --llm, and --suggest-fixes")
+    parser.add_argument("--canonical-tag-candidate-count", type=int, default=5, help="Maximum canonical candidates supplied per unknown tag-like item (default: 5)")
+    parser.add_argument("--canonical-tag-style", choices=("underscore", "spaces"), default="underscore", help="How canonical candidates are written in repair prompts/output: underscore uses exact database identifiers such as red_hair; spaces renders red hair for models expecting natural-language tags. Matching remains canonical internally (default: underscore)")
     return parser.parse_args()
 
 
@@ -203,11 +429,90 @@ def load_inventory(paths: list[Path]) -> tuple[list[Leaf], dict[tuple[str, str],
     return leaves, categories, findings
 
 
+def filter_inventory(
+    leaves: list[Leaf], categories: dict[tuple[str, str], list[Leaf]],
+    findings: list[Finding], raw_only: list[str], depth: int = 1,
+) -> tuple[list[Leaf], dict[tuple[str, str], list[Leaf]], list[Finding], set[tuple[str, str]]]:
+    """Select requested categories and a bounded number of reference hops."""
+    if depth < 0:
+        raise ValueError("--only-depth must be zero or greater")
+    selectors = [value.strip() for raw in raw_only for value in raw.split(",") if value.strip()]
+    if not selectors:
+        raise ValueError("--only requires at least one non-empty category name")
+    roots: set[tuple[str, str]] = set()
+    missing: list[str] = []
+    for selector in selectors:
+        if "/" in selector:
+            namespace, category = selector.split("/", 1)
+            matches = {(namespace, category)} & categories.keys()
+        else:
+            matches = {key for key in categories if key[1] == selector}
+        if not matches:
+            missing.append(selector)
+        roots.update(matches)
+    if missing:
+        available = ", ".join(sorted({category for _, category in categories}))
+        raise ValueError(
+            "--only category not found: " + ", ".join(missing)
+            + (f"; available categories: {available}" if available else "")
+        )
+    included = set(roots)
+    frontier = set(roots)
+    for _ in range(depth):
+        next_frontier: set[tuple[str, str]] = set()
+        for key in frontier:
+            for leaf in categories.get(key, []):
+                next_frontier.update(
+                    reference for reference in leaf.references
+                    if reference in categories and reference not in included
+                )
+        included.update(next_frontier)
+        frontier = next_frontier
+        if not frontier:
+            break
+    selected_categories = {key: categories[key] for key in included}
+    selected_leaves = [leaf for leaf in leaves if (leaf.namespace, leaf.category) in included]
+    included_locations = {(leaf.file, leaf.category) for leaf in selected_leaves}
+    selected_findings = [
+        finding for finding in findings
+        if not finding.category or (finding.file, finding.category) in included_locations
+    ]
+    return selected_leaves, selected_categories, selected_findings, roots
+
+
 def load_rules(path: Path) -> dict[str, Any]:
     data = yaml.safe_load(path.read_text(encoding="utf-8"))
     if not isinstance(data, dict):
         raise ValueError("rules file must contain a mapping")
     return data
+
+
+def load_spotlight_intents(path: Path) -> dict[str, dict[str, str]]:
+    """Load a generator .generation.json manifest's per-leaf spotlight intent.
+
+    Returns {category: {leaf_text: intent}}. A leaf whose current text no longer
+    matches its originally generated leaf_text has no entry, so an already-edited
+    or already-repaired leaf gets no (possibly stale) intent supplied.
+    """
+    try:
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"invalid spotlight-intents manifest {path}: {exc}") from exc
+    provenance = manifest.get("tag_provenance", {}) if isinstance(manifest, dict) else {}
+    intents: dict[str, dict[str, str]] = {}
+    if not isinstance(provenance, dict):
+        return intents
+    for category, entries in provenance.items():
+        if not isinstance(entries, list):
+            continue
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            leaf_text = entry.get("leaf_text")
+            intent = entry.get("intent")
+            if isinstance(leaf_text, str) and isinstance(intent, str) and intent.strip():
+                intents.setdefault(category, {})[leaf_text] = intent.strip()
+    return intents
 
 
 def literal_text(text: str) -> str:
@@ -238,6 +543,206 @@ def split_top_level_commas(text: str) -> list[str]:
             start = index + 1
     parts.append(text[start:])
     return parts
+
+
+def invalid_limited_palettes(text: str) -> list[str]:
+    """Return malformed palettes or palettes containing non-color values."""
+    invalid: list[str] = []
+    for raw_item in split_top_level_commas(literal_text(text)):
+        item = WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip()
+        if not re.search(r"(?:\blimited[ _]palette\b|\bpalette\b)", item, re.I):
+            continue
+        match = re.fullmatch(r"\(([^()]+)\)\s+limited_palette", item, re.I)
+        colors = [color.strip().lower() for color in match.group(1).split(",")] if match else []
+        if (
+            not match or len(colors) < 2 or len(colors) != len(set(colors))
+            or any(color not in PALETTE_COLOR_NAMES for color in colors)
+        ):
+            invalid.append(item)
+    return list(dict.fromkeys(invalid))
+
+
+def valid_limited_palette_item(text: str) -> bool:
+    """Return whether one complete item uses the required limited-palette grammar."""
+    item = WEIGHT_RE.sub(lambda match: match.group(1), text).strip()
+    match = re.fullmatch(r"\(([^()]+)\)\s+limited_palette", item, re.I)
+    if not match:
+        return False
+    colors = [color.strip().lower() for color in match.group(1).split(",")]
+    return (
+        len(colors) >= 2 and len(colors) == len(set(colors))
+        and all(color in PALETTE_COLOR_NAMES for color in colors)
+    )
+
+
+def duplicate_leaf_signature(text: str, mode: str) -> str:
+    """Normalize non-semantic tags-mode spelling, weighting, order, and spacing."""
+    compact = " ".join(text.lower().split())
+    if mode != "tags":
+        return compact
+    references = sorted(f"{namespace}/{category}" for namespace, category in REFERENCE_RE.findall(compact))
+    literal = literal_text(compact)
+    phrases: list[str] = []
+    for phrase in split_top_level_commas(literal):
+        phrase = WEIGHT_RE.sub(lambda match: match.group(1), phrase)
+        phrase = re.sub(r"[_-]+", " ", phrase)
+        phrase = re.sub(r"[^a-z0-9()]+", " ", phrase)
+        phrase = " ".join(phrase.split())
+        if phrase:
+            phrases.append(phrase)
+    return "refs:" + "|".join(references) + ";tags:" + "|".join(sorted(phrases))
+
+
+def duplicate_leaf_weight_only_variant(current_text: str, prior_text: str) -> bool:
+    """Return whether two leaves are identical except for their (term:weight) values.
+
+    Weight expresses visual priority (see prompt.md), so two otherwise-identical leaves
+    authored at different emphasis are a deliberate variant, not the same content twice.
+    """
+    if current_text.strip().lower() == prior_text.strip().lower():
+        return False
+    unweighted = lambda text: WEIGHT_RE.sub(lambda match: match.group(1), text).strip().lower()
+    return unweighted(current_text) == unweighted(prior_text)
+
+
+def duplicate_leaf_findings(leaves: list[Leaf]) -> list[Finding]:
+    """Report normalized duplicates within a category and across categories."""
+    findings: list[Finding] = []
+    seen: dict[tuple[str, str], Leaf] = {}
+    for leaf in leaves:
+        signature = duplicate_leaf_signature(leaf.text, leaf.mode)
+        if not signature:
+            continue
+        key = (leaf.namespace, signature)
+        prior = seen.get(key)
+        if prior is None:
+            seen[key] = leaf
+            continue
+        same_category = prior.category == leaf.category
+        if duplicate_leaf_weight_only_variant(leaf.text, prior.text):
+            severity, rule, note = (
+                "warning", "duplicate_leaf_weight_variant",
+                "The only difference is emphasis weight, which may be an intentional authored variant.",
+            )
+        else:
+            severity, rule, note = (
+                ("error", "duplicate_leaf") if same_category else ("warning", "cross_category_duplicate_leaf")
+            ) + ("",)
+        findings.append(Finding(
+            severity, rule,
+            (
+                f"Leaf in {leaf.category} duplicates an earlier leaf in {prior.category} after "
+                "normalizing tag order, "
+                f"weights, underscores, hyphens, and spacing.{(' ' + note) if note else ''}"
+            ),
+            leaf.file, leaf.line, leaf.category, leaf.uid,
+            json.dumps({
+                "current": {
+                    "file": leaf.file, "line": leaf.line,
+                    "category": leaf.category, "leaf": leaf.text,
+                },
+                "earlier_match": {
+                    "file": prior.file, "line": prior.line,
+                    "category": prior.category, "leaf": prior.text,
+                },
+            }, ensure_ascii=False),
+        ))
+    return findings
+
+
+def semantic_leaf_text(text: str) -> str:
+    """Render wildcard syntax as embedding-friendly text without losing referenced concepts."""
+    text = REFERENCE_RE.sub(lambda match: match.group(2).replace("_", " "), text)
+    text = WEIGHT_RE.sub(lambda match: match.group(1), text)
+    return " ".join(text.replace("_", " ").split())
+
+
+def semantic_duplicate_findings(
+    leaves: list[Leaf], embedding_client: EmbeddingClient,
+    threshold: float = 0.94, batch_size: int = 64,
+) -> list[Finding]:
+    """Report connected semantic-duplicate clusters, excluding reference-only routers."""
+    eligible = [
+        leaf for leaf in leaves
+        if has_literal_content(leaf) and semantic_leaf_text(leaf.text)
+    ]
+    if len(eligible) < 2:
+        return []
+    texts = [semantic_leaf_text(leaf.text) for leaf in eligible]
+    vectors: list[list[float]] = []
+    for offset in range(0, len(texts), batch_size):
+        vectors.extend(embedding_client.embed(texts[offset:offset + batch_size]))
+    matrix = np.asarray(vectors, dtype=np.float32)
+    if matrix.ndim != 2 or matrix.shape[0] != len(eligible):
+        raise RuntimeError("semantic duplicate embeddings have an invalid shape")
+    norms = np.linalg.norm(matrix, axis=1, keepdims=True)
+    norms[norms == 0] = 1.0
+    matrix = matrix / norms
+    findings: list[Finding] = []
+    by_category: dict[tuple[str, str], list[int]] = {}
+    for index, leaf in enumerate(eligible):
+        by_category.setdefault((leaf.namespace, leaf.category), []).append(index)
+    for category_key, indexes in by_category.items():
+        parents = {index: index for index in indexes}
+
+        def find(index: int) -> int:
+            while parents[index] != index:
+                parents[index] = parents[parents[index]]
+                index = parents[index]
+            return index
+
+        def union(left: int, right: int) -> None:
+            left_root, right_root = find(left), find(right)
+            if left_root != right_root:
+                parents[right_root] = left_root
+
+        for position, left_index in enumerate(indexes):
+            for right_index in indexes[position + 1:]:
+                if duplicate_leaf_signature(
+                    eligible[left_index].text, eligible[left_index].mode,
+                ) == duplicate_leaf_signature(eligible[right_index].text, eligible[right_index].mode):
+                    continue
+                if float(matrix[left_index] @ matrix[right_index]) >= threshold:
+                    union(left_index, right_index)
+        clusters: dict[int, list[int]] = {}
+        for index in indexes:
+            clusters.setdefault(find(index), []).append(index)
+        cluster_number = 0
+        for members in clusters.values():
+            if len(members) < 2:
+                continue
+            cluster_number += 1
+            members.sort()
+            representative_index = members[0]
+            anchor_index = members[-1]
+            representative = eligible[representative_index]
+            member_records = []
+            for index in members:
+                leaf = eligible[index]
+                score = 1.0 if index == representative_index else float(
+                    matrix[representative_index] @ matrix[index]
+                )
+                member_records.append({
+                    "id": leaf.uid, "file": leaf.file, "line": leaf.line,
+                    "category": leaf.category, "leaf": leaf.text,
+                    "similarity_to_representative": round(score, 4),
+                })
+            cluster_id = hashlib.sha256(
+                "|".join(member["id"] for member in member_records).encode("utf-8")
+            ).hexdigest()[:12]
+            evidence = json.dumps({
+                "type": "semantic_duplicate_cluster", "cluster_id": cluster_id,
+                "threshold": threshold, "representative": member_records[0],
+                "members": member_records,
+            }, ensure_ascii=False)
+            anchor = eligible[anchor_index]
+            findings.append(Finding(
+                "warning", "semantic_duplicate_leaf",
+                f"Semantic duplicate cluster contains {len(members)} leaves in "
+                f"{category_key[1]} (threshold {threshold:.4f}); review one cluster-level consolidation.",
+                anchor.file, anchor.line, anchor.category, anchor.uid, evidence,
+            ))
+    return findings
 
 
 def pattern_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Finding]:
@@ -281,6 +786,20 @@ def tags_mode_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Findin
         if leaf.mode != "tags" or not has_literal_content(leaf):
             continue
         literal = " ".join(literal_text(leaf.text).split())
+        invalid_palettes = invalid_limited_palettes(literal)
+        if invalid_palettes:
+            findings.append(Finding(
+                "error", "tags_limited_palette",
+                "Color palettes must use `(color1, color2, ... colorN) limited_palette` with at least two "
+                "distinct ordinary color names; do not use prose, material names, or intensity modifiers.",
+                leaf.file, leaf.line, leaf.category, leaf.uid, " | ".join(invalid_palettes),
+            ))
+        if any(not phrase.strip() for phrase in split_top_level_commas(leaf.text)):
+            findings.append(Finding(
+                "warning", "tags_empty_phrase",
+                "Tags-mode leaf contains an empty comma-separated phrase; remove the leading, trailing, or repeated comma.",
+                leaf.file, leaf.line, leaf.category, leaf.uid, leaf.text,
+            ))
         sequence_text = re.sub(
             r"\b(?:panel[- ]border(?:ed)?(?: framing)?|no sequential panels?)\b", "", literal, flags=re.I
         )
@@ -315,8 +834,24 @@ def tags_mode_findings(leaves: list[Leaf], rules: dict[str, Any]) -> list[Findin
                 "Tags mode should use flat tag phrases; sentence connectors require a scene-defining relationship that cannot survive splitting.",
                 leaf.file, leaf.line, leaf.category, leaf.uid, connector.group(0),
             ))
+        for name, rule in rules.get("literalized_style_terms", {}).items():
+            literal_object_re = rule.get("literal_object_regex")
+            if literal_object_re and re.search(literal_object_re, literal, re.IGNORECASE):
+                continue
+            match = re.search(rule.get("regex", r"(?!x)x"), literal, re.IGNORECASE)
+            if match:
+                message = rule.get("message", "Style term may be rendered as a literal object.")
+                guidance = rule.get("suggestion", "")
+                if guidance:
+                    message = f"{message} Suggested approach: {guidance}"
+                findings.append(Finding(
+                    rule.get("severity", "warning"), name, message,
+                    leaf.file, leaf.line, leaf.category, leaf.uid, match.group(0),
+                ))
         for phrase in (part.strip(" .;:-") for part in split_top_level_commas(literal)):
             if not phrase:
+                continue
+            if valid_limited_palette_item(phrase):
                 continue
             unweighted = WEIGHT_RE.sub(lambda m: m.group(1), phrase)
             dangling = TAG_DANGLING_RELATION_RE.search(unweighted)
@@ -343,14 +878,18 @@ def authored_category(category: str, rules: dict[str, Any]) -> bool:
     return any(re.search(pattern, category) for pattern in rules.get("authored_category_regex", []))
 
 
-def graph_findings(leaves: list[Leaf], categories: dict[tuple[str, str], list[Leaf]]) -> list[Finding]:
+def graph_findings(
+    leaves: list[Leaf], categories: dict[tuple[str, str], list[Leaf]],
+    known_categories: dict[tuple[str, str], list[Leaf]] | None = None, partial: bool = False,
+) -> list[Finding]:
     findings: list[Finding] = []
+    known_categories = known_categories or categories
     graph: dict[tuple[str, str], set[tuple[str, str]]] = {key: set() for key in categories}
     for leaf in leaves:
         source = (leaf.namespace, leaf.category)
         for ref in leaf.references:
             graph.setdefault(source, set()).add(ref)
-            if ref not in categories:
+            if ref not in known_categories:
                 findings.append(Finding("error", "missing_reference", f"reference {ref[0]}/{ref[1]} does not exist", leaf.file, leaf.line, leaf.category, leaf.uid, f"__{ref[0]}/{ref[1]}__"))
 
     visiting: set[tuple[str, str]] = set()
@@ -379,12 +918,42 @@ def graph_findings(leaves: list[Leaf], categories: dict[tuple[str, str], list[Le
     for node in graph:
         walk(node, [])
 
+    namespaces = sorted({namespace for namespace, _ in categories})
+    for namespace in (() if partial else namespaces):
+        roots = sorted(
+            key for key in categories
+            if key[0] == namespace and (
+                key[1] == "random" or key[1].startswith("random_")
+                or key[1].endswith("_random") or key[1].endswith("_router")
+            )
+        )
+        if not roots:
+            continue
+        reachable: set[tuple[str, str]] = set()
+        pending = list(roots)
+        while pending:
+            node = pending.pop()
+            if node in reachable or node not in categories:
+                continue
+            reachable.add(node)
+            pending.extend(graph.get(node, set()))
+        root_names = ", ".join(name for _, name in roots)
+        for key in sorted(node for node in categories if node[0] == namespace and node not in reachable):
+            anchor = categories[key][0]
+            findings.append(Finding(
+                "warning", "unreachable_category",
+                f"Category {namespace}/{key[1]} is not reachable from public router(s): {root_names}. "
+                f"Add __{namespace}/{key[1]}__ to a reachable composite/router, connect it through another used "
+                "category, or remove the unused pool after review.",
+                anchor.file, anchor.line, key[1], evidence=f"routers: {root_names}",
+            ))
+
     for leaf in leaves:
         camera_refs = [ref for ref in leaf.references if CAMERA_CATEGORY_RE.search(ref[1])]
         if not camera_refs:
             continue
         other_refs = [ref for ref in leaf.references if ref not in camera_refs]
-        if SEQUENCE_RE.search(literal_text(leaf.text)) or any(category_has_sequence(ref, categories, set()) for ref in other_refs):
+        if SEQUENCE_RE.search(literal_text(leaf.text)) or any(category_has_sequence(ref, known_categories, set()) for ref in other_refs):
             findings.append(Finding("error", "camera_format_conflict", "unrestricted camera pool can conflict with sequential or multi-panel content", leaf.file, leaf.line, leaf.category, leaf.uid, ", ".join(f"{a}/{b}" for a, b in camera_refs)))
         elif len(other_refs) or len(literal_text(leaf.text).split()) > 10:
             findings.append(Finding("warning", "unrestricted_camera_composite", "completed content references an unrestricted camera pool; verify every expansion preserves subject count and visibility", leaf.file, leaf.line, leaf.category, leaf.uid, ", ".join(f"{a}/{b}" for a, b in camera_refs)))
@@ -470,11 +1039,13 @@ def namespace_policy_findings(
             reached = reachable(root_key)
             for category in excluded:
                 if (namespace, str(category)) in reached:
+                    # Route-wide fact, not a per-leaf one: leave leaf_id empty so it can
+                    # never poison a specific leaf's fix eligibility (see STRUCTURAL_FIX_RULES).
                     anchor = categories[root_key][0]
                     findings.append(Finding(
                         "error", "route_contract_violation",
                         f"{namespace}/{root} must not reach the '{category}' output family.",
-                        anchor.file, anchor.line, str(root), anchor.uid, str(category),
+                        anchor.file, anchor.line, str(root), "", str(category),
                     ))
 
         for name, content_policy in policy.get("forbidden_content", {}).items():
@@ -554,11 +1125,14 @@ def namespace_policy_findings(
             actual_max_words = max((size[1] for size in dist), default=0)
             if over > 0:
                 over_label = "<0.1%" if over < 0.001 else f"{over:.1%}"
+                # Whole-route combinatorial fact, not a per-leaf one: leave leaf_id empty
+                # (see STRUCTURAL_FIX_RULES) so no single leaf edit can be misreported as
+                # having resolved an aggregate budget violation across the whole route.
                 anchor = categories[key][0]
                 findings.append(Finding(
                     budget.get("severity", "warning"), "route_prompt_budget",
                     f"Expanded {namespace}/{root} prompts exceed {max_items} items or {max_words} words in approximately {over_label} of routes.",
-                    anchor.file, anchor.line, str(root), anchor.uid,
+                    anchor.file, anchor.line, str(root), "",
                     f"p90={p90_items} items/{p90_words} words; max={actual_max_items}/{actual_max_words}; target={budget.get('target_items', max_items)} items",
                 ))
     return findings
@@ -576,9 +1150,106 @@ def category_has_sequence(key: tuple[str, str], categories: dict[tuple[str, str]
     return False
 
 
+class _TeeStream:
+    """Duplicate writes to a live stream and a plain-text log file.
+
+    ANSI escapes are stripped before writing to the file, since a log meant for
+    later review or sharing is more useful as plain text than full of escape
+    codes. isatty() delegates to the wrapped stream so --color auto's terminal
+    detection is unaffected by this wrapper being installed. The log file is
+    flushed after every write rather than relying on an explicit close, since
+    an atexit-registered close raced with the interpreter's own shutdown-time
+    stream handling and produced a garbled "Exception ignored" message instead
+    of clean output; writes to the file are also defensive so a late write
+    during shutdown can never raise instead of just being dropped.
+    """
+
+    _ANSI_RE = re.compile(r"\x1b\[[0-9;]*[a-zA-Z]")
+
+    def __init__(self, primary: Any, log_file: Any) -> None:
+        self._primary = primary
+        self._log_file = log_file
+
+    def write(self, data: str) -> int:
+        self._primary.write(data)
+        try:
+            self._log_file.write(self._ANSI_RE.sub("", data))
+            self._log_file.flush()
+        except (ValueError, OSError):
+            pass
+        return len(data)
+
+    def flush(self) -> None:
+        self._primary.flush()
+        try:
+            self._log_file.flush()
+        except (ValueError, OSError):
+            pass
+
+    def isatty(self) -> bool:
+        return self._primary.isatty()
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._primary, name)
+
+
+def enable_run_log(path: Path, args: argparse.Namespace | None = None) -> None:
+    """Duplicate stdout and stderr into one combined, ANSI-stripped log file.
+
+    Unlike `command | tee file`, stdout/stderr stay attached to the real
+    terminal, so --color auto still detects a tty and colors keep rendering
+    there, while everything written to either stream -- verbose progress,
+    cache/HTTP timing, and error output -- is also captured into a plain-text
+    file in chronological order, ready to review later or hand off directly.
+
+    When args is supplied, the exact invoked command line and the complete
+    effective parameter set (explicit values and defaults alike) are written
+    first, unconditionally -- independent of --verbose, since this is a
+    one-time "what was this run actually asked to do" header, not per-step
+    progress. Every parameter is safe to print in full: this codebase reads
+    secrets only from environment variables (--api-key-env and
+    --embedding-api-key-env carry an environment variable *name*, never a
+    key value), so nothing here can leak a credential.
+    """
+    resolved = path.expanduser().resolve()
+    resolved.parent.mkdir(parents=True, exist_ok=True)
+    # Every write flushes the file directly (see _TeeStream), so there is no
+    # need to explicitly close it: the OS reclaims the descriptor at process
+    # exit either way, and doing so here previously raced with the
+    # interpreter's own shutdown-time stream handling.
+    log_file = resolved.open("w", encoding="utf-8")
+    sys.stdout = _TeeStream(sys.stdout, log_file)
+    sys.stderr = _TeeStream(sys.stderr, log_file)
+    if args is not None:
+        print(f"[run-log] started {time.strftime('%Y-%m-%d %H:%M:%S')}", file=sys.stderr)
+        print(f"[run-log] command: {shlex.join(sys.argv)}", file=sys.stderr)
+        print("[run-log] effective parameters:", file=sys.stderr)
+        for name in sorted(vars(args)):
+            print(f"[run-log]   {name} = {getattr(args, name)!r}", file=sys.stderr)
+
+
 def verbose(args: argparse.Namespace, message: str) -> None:
     if args.verbose:
-        print(f"[wildcard-linter] {message}", file=sys.stderr)
+        color_mode = getattr(args, "color", "auto")
+        use_color = color_mode == "always" or (color_mode == "auto" and sys.stderr.isatty())
+        prefix = "\033[35;1m[wildcard-linter]\033[0m" if use_color else "[wildcard-linter]"
+        if use_color:
+            message = re.sub(
+                r"\bno LLM call\b|\b\d+/\d+ item cache hits\b|\b\d+ cached\b",
+                lambda match: f"\033[32;1m{match.group(0)}\033[0m",
+                message,
+            )
+            message = re.sub(
+                r"\bHTTP 2\d\d\b",
+                lambda match: f"\033[32;1m{match.group(0)}\033[0m",
+                message,
+            )
+            message = re.sub(
+                r"\b\d+ requested\b",
+                lambda match: f"\033[33;1m{match.group(0)}\033[0m",
+                message,
+            )
+        print(f"{prefix} {message}", file=sys.stderr)
 
 
 def trace_event(path: Path | None, event: dict[str, Any]) -> None:
@@ -588,7 +1259,246 @@ def trace_event(path: Path | None, event: dict[str, Any]) -> None:
         handle.write(json.dumps(event, ensure_ascii=False) + "\n")
 
 
-def llm_review(leaves: list[Leaf], args: argparse.Namespace, policy: str, trace_path: Path | None = None) -> list[Finding]:
+def parse_json_array_response(content: str) -> list[dict[str, Any]]:
+    """Parse a JSON object array, recovering from fences, commentary, or repeated answers."""
+    cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", content.strip(), flags=re.I)
+    try:
+        parsed = json.loads(cleaned)
+        if isinstance(parsed, list) and parsed and all(isinstance(item, dict) for item in parsed):
+            return parsed
+    except json.JSONDecodeError:
+        pass
+    decoder = json.JSONDecoder()
+    candidates: list[tuple[int, int, list[dict[str, Any]]]] = []
+    for index, character in enumerate(content):
+        if character != "[":
+            continue
+        try:
+            parsed, end_offset = decoder.raw_decode(content[index:])
+        except json.JSONDecodeError:
+            continue
+        if isinstance(parsed, list) and parsed and all(isinstance(item, dict) for item in parsed):
+            candidates.append((index, index + end_offset, parsed))
+    # A candidate whose span is nested inside another candidate's span (for example a
+    # "provenance" array inside one leaf, inside the real top-level response array) is
+    # never the intended answer, even though its own bracket parses on its own.
+    top_level = [
+        candidate
+        for position, candidate in enumerate(candidates)
+        if not any(
+            other_position != position and other[0] <= candidate[0] and candidate[1] <= other[1]
+            for other_position, other in enumerate(candidates)
+        )
+    ]
+    if top_level:
+        return top_level[-1][2]
+    raise json.JSONDecodeError("response does not contain a valid JSON array of objects", content, 0)
+
+
+def llm_cache_dir(args: argparse.Namespace) -> Path | None:
+    if args.no_llm_cache:
+        return None
+    configured = args.llm_cache_dir or Path(tempfile.gettempdir()) / "wildcard-linter-cache"
+    return configured.expanduser().resolve()
+
+
+def prune_llm_cache(args: argparse.Namespace) -> int:
+    cache_root = llm_cache_dir(args)
+    maximum_age = args.llm_cache_max_age_minutes
+    if cache_root is None or maximum_age is None or not cache_root.is_dir():
+        return 0
+    cutoff = time.time() - maximum_age * 60
+    removed = 0
+    for path in cache_root.glob("item-*.json"):
+        try:
+            cached = json.loads(path.read_text(encoding="utf-8"))
+            created = float(cached.get("created", path.stat().st_mtime))
+            if created < cutoff:
+                path.unlink()
+                removed += 1
+        except (OSError, TypeError, ValueError, json.JSONDecodeError):
+            continue
+    return removed
+
+
+def llm_json_request(
+    *, args: argparse.Namespace, endpoint: str, api_key: str, model: str,
+    instruction: str, items: list[dict[str, Any]],
+    call_name: str, batch_number: int, batch_total: int, offset: int,
+    trace_path: Path | None, response_event: str,
+) -> list[dict[str, Any]]:
+    """Return item results, requesting only per-item cache misses."""
+    started = time.perf_counter()
+    cache_root = llm_cache_dir(args)
+    maximum_age = getattr(args, "llm_cache_max_age_minutes", None)
+
+    def stable_item(item: dict[str, Any]) -> dict[str, Any]:
+        # IDs, source line numbers, and file locations are routing metadata, not
+        # prompt semantics. Omitting them allows reuse after harmless reordering.
+        return {key: value for key, value in item.items() if key not in {"id", "file", "line"}}
+
+    shared = {
+        "version": 2, "call": call_name, "endpoint": endpoint, "model": model,
+        "temperature": 0, "instruction": instruction,
+    }
+    keys: dict[str, str] = {}
+    paths: dict[str, Path] = {}
+    cached_by_id: dict[str, dict[str, Any]] = {}
+    misses: list[dict[str, Any]] = []
+    now = time.time()
+    for item in items:
+        uid = str(item.get("id", ""))
+        material = json.dumps(
+            {**shared, "item": stable_item(item)}, sort_keys=True,
+            separators=(",", ":"), ensure_ascii=False,
+        ).encode("utf-8")
+        cache_key = hashlib.sha256(material).hexdigest()
+        keys[uid] = cache_key
+        cache_path = cache_root / f"item-{cache_key}.json" if cache_root else None
+        if cache_path:
+            paths[uid] = cache_path
+        if not cache_path or not cache_path.is_file():
+            misses.append(item)
+            continue
+        try:
+            cached = json.loads(cache_path.read_text(encoding="utf-8"))
+            created = float(cached.get("created", cache_path.stat().st_mtime))
+            if maximum_age is not None and now - created > maximum_age * 60:
+                cache_path.unlink(missing_ok=True)
+                verbose(args, f"expired cache entry {cache_path.name} ({(now - created) / 60:.1f} minutes old)")
+                misses.append(item)
+                continue
+            reviewed_item = cached["reviewed"]
+            if cached.get("version") != 2 or not isinstance(reviewed_item, dict):
+                raise ValueError("not a version 2 per-item response")
+            if (
+                call_name in {"concept generation", "concept correction"}
+                and not isinstance(reviewed_item.get("concepts"), list)
+            ):
+                raise ValueError("legacy concept cache entry does not contain a concepts array")
+            reviewed_item = dict(reviewed_item)
+            reviewed_item["id"] = uid
+            cached_by_id[uid] = reviewed_item
+        except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError) as exc:
+            verbose(args, f"ignored invalid cache entry {cache_path}: {exc}")
+            misses.append(item)
+
+    hit_count = len(cached_by_id)
+    if not misses:
+        elapsed = time.perf_counter() - started
+        verbose(args, f"{call_name} {batch_number}/{batch_total}: {hit_count}/{len(items)} item cache hits in {elapsed:.2f}s; no LLM call")
+        trace_event(trace_path, {
+            "event": "cache_hit", "call": call_name, "batch": batch_number,
+            "item_hits": hit_count, "item_count": len(items), "elapsed_seconds": round(elapsed, 3),
+        })
+        return [cached_by_id[str(item.get("id", ""))] for item in items]
+
+    body = json.dumps({
+        "model": model, "temperature": 0,
+        "messages": [
+            {"role": "system", "content": instruction},
+            {"role": "user", "content": json.dumps(misses, ensure_ascii=False)},
+        ],
+    }).encode("utf-8")
+    trace_event(trace_path, {
+        "event": "cache_resolution", "call": call_name, "batch": batch_number,
+        "item_hits": hit_count, "items_requested": len(misses),
+        "requested_ids": [str(item.get("id", "")) for item in misses],
+    })
+
+    request = urllib.request.Request(
+        endpoint, data=body,
+        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=args.timeout) as response:
+            status = getattr(response, "status", None)
+            raw_response = response.read().decode("utf-8", errors="replace")
+        response_data = json.loads(raw_response)
+        usage_callback = getattr(args, "llm_usage_callback", None)
+        if callable(usage_callback) and isinstance(response_data.get("usage"), dict):
+            usage_callback(response_data["usage"])
+        content = response_data["choices"][0]["message"]["content"].strip()
+        trace_event(trace_path, {"event": response_event, "batch": batch_number, "content": content})
+        requested_results = parse_json_array_response(content)
+        if call_name in {"concept generation", "concept correction"}:
+            # Some models emit one repeated-ID object per concept instead of
+            # one category object containing a concepts array. Coalesce that
+            # equivalent shape before item caching, which otherwise retains
+            # only the final repeated ID.
+            coalesced: dict[str, dict[str, Any]] = {}
+            for result in requested_results:
+                uid = str(result.get("id", ""))
+                target = coalesced.setdefault(uid, {"id": uid, "concepts": []})
+                concepts = result.get("concepts", [])
+                if isinstance(concepts, list):
+                    target["concepts"].extend(concepts)
+                elif isinstance(concepts, (dict, str)):
+                    target["concepts"].append(concepts)
+            requested_results = list(coalesced.values())
+    except urllib.error.HTTPError as exc:
+        elapsed = time.perf_counter() - started
+        response_body = exc.read().decode("utf-8", errors="replace")
+        trace_event(trace_path, {
+            "event": "http_error", "call": call_name, "batch": batch_number,
+            "endpoint": endpoint, "status": exc.code, "reason": str(exc.reason),
+            "response_body": response_body, "elapsed_seconds": round(elapsed, 3),
+        })
+        display_body = response_body.strip() or "<empty response body>"
+        if len(display_body) > 4000:
+            display_body = display_body[:4000] + "… [truncated; full body is in the LLM trace]"
+        trace_note = f"; trace={trace_path}" if trace_path else ""
+        raise RuntimeError(
+            f"{call_name} {batch_number}/{batch_total} failed after {elapsed:.2f}s "
+            f"at offset {offset}: HTTP {exc.code} {exc.reason}; endpoint={endpoint}; "
+            f"response={display_body}{trace_note}"
+        ) from exc
+    except (urllib.error.URLError, KeyError, json.JSONDecodeError, TimeoutError, ValueError) as exc:
+        elapsed = time.perf_counter() - started
+        raw = locals().get("raw_response", "")
+        trace_event(trace_path, {
+            "event": "request_error", "call": call_name, "batch": batch_number,
+            "endpoint": endpoint, "error_type": type(exc).__name__, "error": str(exc),
+            "response_body": raw, "elapsed_seconds": round(elapsed, 3),
+        })
+        response_note = ""
+        if raw:
+            compact = " ".join(raw.split())
+            response_note = f"; response={compact[:4000]}"
+        trace_note = f"; trace={trace_path}" if trace_path else ""
+        raise RuntimeError(
+            f"{call_name} {batch_number}/{batch_total} failed after {elapsed:.2f}s "
+            f"at offset {offset}: {type(exc).__name__}: {exc}; endpoint={endpoint}"
+            f"{response_note}{trace_note}"
+        ) from exc
+
+    elapsed = time.perf_counter() - started
+    requested_by_id = {
+        str(result.get("id", "")): result for result in requested_results
+        if str(result.get("id", "")) in {str(item.get("id", "")) for item in misses}
+    }
+    if cache_root:
+        cache_root.mkdir(parents=True, exist_ok=True)
+        for uid, reviewed_item in requested_by_id.items():
+            paths[uid].write_text(json.dumps({
+                "version": 2, "call": call_name, "endpoint": endpoint,
+                "created": time.time(), "reviewed": reviewed_item,
+            }, ensure_ascii=False), encoding="utf-8")
+    status_text = f", HTTP {status}" if status is not None else ""
+    verbose(args, f"{call_name} {batch_number}/{batch_total} completed in {elapsed:.2f}s{status_text}; {hit_count} cached, {len(misses)} requested")
+    trace_event(trace_path, {
+        "event": "timing", "call": call_name, "batch": batch_number,
+        "elapsed_seconds": round(elapsed, 3), "item_hits": hit_count,
+        "items_requested": len(misses), "cache_keys": [keys[str(item.get("id", ""))] for item in items],
+    })
+    combined = {**cached_by_id, **requested_by_id}
+    return [combined[uid] for item in items if (uid := str(item.get("id", ""))) in combined]
+
+
+def llm_review(
+    leaves: list[Leaf], args: argparse.Namespace, policy: str, trace_path: Path | None = None,
+    danbooru_vocabulary: DanbooruVocabulary | None = None,
+) -> list[Finding]:
     model = args.model or os.getenv("OPENAI_MODEL")
     base_url = (args.base_url or os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1").rstrip("/")
     api_key = os.getenv(args.api_key_env)
@@ -612,32 +1522,41 @@ def llm_review(leaves: list[Leaf], args: argparse.Namespace, policy: str, trace_
         batch_number = offset // args.batch_size + 1
         batch_total = (len(leaves) + args.batch_size - 1) // args.batch_size
         verbose(args, f"LLM batch {batch_number}/{batch_total}: {len(batch)} leaves")
-        payload_items = [{"id": leaf.uid, "file": Path(leaf.file).name, "namespace": leaf.namespace,
-                          "mode": leaf.mode, "category": leaf.category, "line": leaf.line, "text": leaf.text} for leaf in batch]
+        payload_items = [{
+            "id": leaf.uid, "file": Path(leaf.file).name, "namespace": leaf.namespace,
+            "mode": leaf.mode, "category": leaf.category, "line": leaf.line, "text": leaf.text,
+            "verified_canonical_items": exact_canonical_tag_items(leaf, danbooru_vocabulary),
+            "verified_relationship_compositions": exact_canonical_relationship_items(
+                leaf, danbooru_vocabulary,
+            ),
+        } for leaf in batch]
         instruction = (
             "Audit every supplied wildcard leaf against the policy. Return JSON only as an array with one object per input ID. "
-            "Each object must contain id, classification (pass, definite_failure, uncertain), failed_test, and reason. "
+            "Each object must contain id, classification (pass, definite_failure, uncertain), failed_test, reason, and "
+            "replacement_candidates. For a failure tied to a specific term or phrase, replacement_candidates must contain "
+            "2-4 concise visible substitute tags or phrases that fit the existing leaf; return [] when deletion is the best "
+            "resolution or no safe context-preserving replacement exists. These are alternatives, not full-leaf rewrites. "
             "Apply the prompt-language section matching each item's mode. Do not omit IDs and do not add IDs. "
-            "Modular leaves may be partial.\n\nPOLICY:\n" + policy
+            "Modular leaves may be partial. In tags mode, each complete comma-separated item in verified_canonical_items is an exact "
+            "local Danbooru-vocabulary match and passes the visual-representability test by itself; do not reject or rewrite that item "
+            "merely because the same word could be abstract in prose. For the Comprehension test, treat each verified canonical item as a "
+            "recognized atomic image concept; do not reject it solely for being unfamiliar, abstract-sounding, or dependent on learned tag "
+            "semantics. Each verified_relationship_compositions entry is an intentionally compact hybrid relationship whose listed "
+            "components were checked against the same vocabulary; do not reject it merely for joining those components with a short "
+            "action or spatial frame. A leaf may still fail comprehension when the composition leaves a subject, object, action target, or relationship "
+            "genuinely unspecified or ambiguous. For the Single-moment test, accept a verified atomic action/effect such as jumping, breaking, "
+            "digital_dissolve, or transformation as a learned freeze-frame concept; do not reject it merely because the named action implies "
+            "time in ordinary prose. Explicit sequences, progressions, before/after tags, multi-state layouts, and contextually incompatible use "
+            "may still fail. This exception does not validate a larger phrase containing the word, nor does it override "
+            "structural, compatibility, or composition checks.\n\nPOLICY:\n" + policy
         )
-        body = json.dumps({
-            "model": model,
-            "temperature": 0,
-            "messages": [{"role": "system", "content": instruction}, {"role": "user", "content": json.dumps(payload_items, ensure_ascii=False)}],
-        }).encode("utf-8")
         trace_event(trace_path, {"event": "request", "batch": batch_number, "items": payload_items})
-        request = urllib.request.Request(endpoint, data=body, headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"})
-        try:
-            with urllib.request.urlopen(request, timeout=args.timeout) as response:
-                response_data = json.loads(response.read().decode("utf-8"))
-            content = response_data["choices"][0]["message"]["content"].strip()
-            trace_event(trace_path, {"event": "response", "batch": batch_number, "content": content})
-            content = re.sub(r"^```(?:json)?\s*|\s*```$", "", content, flags=re.I)
-            reviewed = json.loads(content)
-        except (urllib.error.URLError, KeyError, json.JSONDecodeError, TimeoutError) as exc:
-            raise RuntimeError(f"LLM request failed for batch starting at {offset}: {exc}") from exc
-        if not isinstance(reviewed, list) or not all(isinstance(item, dict) for item in reviewed):
-            raise RuntimeError(f"LLM response for batch starting at {offset} must be a JSON array of objects")
+        reviewed = llm_json_request(
+            args=args, endpoint=endpoint, api_key=api_key, model=model,
+            instruction=instruction, items=payload_items,
+            call_name="LLM batch", batch_number=batch_number, batch_total=batch_total,
+            offset=offset, trace_path=trace_path, response_event="response",
+        )
         by_id = {leaf.uid: leaf for leaf in batch}
         received: set[str] = set()
         for item in reviewed:
@@ -649,10 +1568,27 @@ def llm_review(leaves: list[Leaf], args: argparse.Namespace, policy: str, trace_
             if classification == "pass":
                 continue
             leaf = by_id[uid]
+            canonical_test, canonical_matches = canonical_llm_false_positive_matches(
+                item, leaf, danbooru_vocabulary,
+            )
+            if canonical_matches:
+                verbose(
+                    args,
+                    f"ignored LLM {canonical_test} finding for canonical vocabulary item(s) "
+                    f"[{', '.join(canonical_matches)}] in "
+                    f"{leaf.category} at {leaf.file}:{leaf.line}",
+                )
+                continue
+            raw_alternatives = item.get("replacement_candidates", [])
+            alternatives = tuple(dict.fromkeys(
+                " ".join(value.split()) for value in raw_alternatives
+                if isinstance(value, str) and value.strip()
+            ))[:4] if isinstance(raw_alternatives, list) else ()
             results.append(Finding(
                 "error" if classification == "definite_failure" else "warning",
                 str(item.get("failed_test") or "llm_semantic_review"), str(item.get("reason") or classification),
-                leaf.file, leaf.line, leaf.category, leaf.uid, source="llm",
+                leaf.file, leaf.line, leaf.category, leaf.uid,
+                alternatives=alternatives, source="llm",
             ))
         for uid in by_id.keys() - received:
             leaf = by_id[uid]
@@ -660,8 +1596,102 @@ def llm_review(leaves: list[Leaf], args: argparse.Namespace, policy: str, trace_
     return results
 
 
+def canonical_visual_test_false_positive(
+    reviewed_item: dict[str, Any], leaf: Leaf,
+    vocabulary: DanbooruVocabulary | None,
+) -> bool:
+    """Suppress an LLM visual-test rejection of an exact local canonical item."""
+    return bool(canonical_visual_test_matches(reviewed_item, leaf, vocabulary))
+
+
+def canonical_visual_test_matches(
+    reviewed_item: dict[str, Any], leaf: Leaf,
+    vocabulary: DanbooruVocabulary | None,
+) -> list[str]:
+    """Return exact canonical items incorrectly rejected by an LLM visual test."""
+    failed_test = str(reviewed_item.get("failed_test", ""))
+    if "visual" not in failed_test.casefold() or vocabulary is None:
+        return []
+    verified = set(exact_canonical_tag_items(leaf, vocabulary))
+    if not verified:
+        return []
+    reason = str(reviewed_item.get("reason", ""))
+    quoted = re.findall(r"['`\"]([^'`\"]+)['`\"]", reason)
+    return sorted({normalize_canonical_tag(value) for value in quoted} & verified)
+
+
+def canonical_llm_false_positive_matches(
+    reviewed_item: dict[str, Any], leaf: Leaf,
+    vocabulary: DanbooruVocabulary | None,
+) -> tuple[str, list[str]]:
+    """Protect exact canonical items without excusing genuinely unclear relationships."""
+    visual = canonical_visual_test_matches(reviewed_item, leaf, vocabulary)
+    if visual:
+        return "visual-test", visual
+    failed_test = str(reviewed_item.get("failed_test", ""))
+    if vocabulary is None:
+        return "", []
+    verified = set(exact_canonical_tag_items(leaf, vocabulary))
+    reason = str(reviewed_item.get("reason", ""))
+    quoted = re.findall(r"['`\"]([^'`\"]+)['`\"]", reason)
+    quoted_canonical = {normalize_canonical_tag(value) for value in quoted} & vocabulary.tags
+    compound_context: set[str] = set()
+    if leaf.mode == "tags":
+        for raw_item in split_top_level_commas(literal_text(leaf.text)):
+            item = WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip()
+            words = re.findall(r"[A-Za-z0-9+][A-Za-z0-9_+().'’-]*", item.lower())
+            normalized_words = {normalize_canonical_tag(word) for word in words}
+            present = quoted_canonical & normalized_words
+            verified.update(present)
+            if len(words) > 1:
+                compound_context.update(present)
+    matches = sorted(quoted_canonical & verified)
+    if not matches:
+        return "", []
+    if "single-moment" in failed_test.casefold() or "single moment" in failed_test.casefold():
+        atomic = [tag for tag in matches if tag not in EXPLICIT_MULTI_MOMENT_CANONICAL_TAGS]
+        transition_objection = re.search(
+            r"\b(?:transition|process|change|across time|over time|stable (?:visible )?state|earlier|later)\b",
+            reason, re.I,
+        )
+        intrinsic_objection = re.search(
+            r"\b(?:abstract|interpretive|unfamiliar|unrecognized|not (?:a )?(?:visible|visual)|"
+            r"not (?:visually )?representable|cannot be seen|requires visible evidence)\b",
+            reason, re.I,
+        )
+        contextual_objection = re.search(
+            r"\b(?:in (?:this|the) context|before[- /]?and[- /]?after|multiple (?:moments|states)|"
+            r"sequence|progression|panels?|stages?)\b",
+            reason, re.I,
+        )
+        if atomic and (transition_objection or intrinsic_objection) and not contextual_objection:
+            return "single-moment-test", atomic
+        return "", []
+    if "comprehension" not in failed_test.casefold():
+        return "", []
+    relational_failure = re.search(
+        r"\b(?:incomplete|(?:does not|doesn't) specify (?:what|who|which|the (?:subject|object|target|action))|"
+        r"unclear (?:what|who|which)|"
+        r"relationship between|disconnected|lacks? (?:a |an |the )?(?:subject|object|target|action)|"
+        r"missing (?:a |an |the )?(?:subject|object|target|action)|focal subject)\b",
+        reason, re.I,
+    )
+    if relational_failure and not set(matches) <= compound_context:
+        return "", []
+    intrinsic_rejection = re.search(
+        r"\b(?:abstract|interpretive|unfamiliar|unrecognized|not (?:visually )?representable|"
+        r"cannot be seen|requires visible evidence|dependent on (?:context|explanation))\b",
+        reason, re.I,
+    )
+    return ("comprehension-test", matches) if intrinsic_rejection else ("", [])
+
+
 def llm_suggest_fixes(
-    leaves: list[Leaf], findings: list[Finding], args: argparse.Namespace, trace_path: Path | None = None
+    leaves: list[Leaf], findings: list[Finding], args: argparse.Namespace, trace_path: Path | None = None,
+    danbooru_vocabulary: DanbooruVocabulary | None = None,
+    tags_rules: dict[str, Any] | None = None,
+    canonical_retriever: CanonicalTagRetriever | None = None,
+    spotlight_intents: dict[str, dict[str, str]] | None = None,
 ) -> tuple[dict[str, str], dict[str, str]]:
     model = args.model or os.getenv("OPENAI_MODEL")
     base_url = (args.base_url or os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1").rstrip("/")
@@ -672,10 +1702,37 @@ def llm_suggest_fixes(
     leaf_by_id = {leaf.uid: leaf for leaf in leaves}
     selected_rules = {name.strip() for name in (args.fix_rules or "").split(",") if name.strip()}
     eligible_severities = {"error", "warning"} if args.fix_severity == "both" else {args.fix_severity}
+    canonical_rules = {
+        "unknown_canonical_tag", "canonical_tag_normalization", "canonical_tag_alias",
+        "canonical_tag_contained_span", "canonical_tag_separator_normalization",
+        "canonical_tag_composition", "canonical_tag_redundancy",
+    }
+    def component_decomposition_only(finding: Finding) -> bool:
+        if finding.rule != "canonical_literal_concept" or not finding.evidence:
+            return False
+        try:
+            evidence = json.loads(finding.evidence)
+        except (TypeError, json.JSONDecodeError):
+            return False
+        return bool(evidence.get("component_guidance")) and not bool(
+            evidence.get("meaning_preserving_candidates")
+        )
+
     eligible = [
         finding for finding in findings
         if finding.rule not in STRUCTURAL_FIX_RULES
-        and (finding.rule in selected_rules if selected_rules else finding.severity in eligible_severities)
+        and not component_decomposition_only(finding)
+        and (
+            finding.rule != "canonical_literal_concept"
+            or finding.rule in selected_rules
+            or getattr(args, "fix_literal_concepts", False)
+        )
+        and (
+            finding.rule in selected_rules if selected_rules
+            else finding.severity in eligible_severities
+            or (args.canonical_tag_suggestions and finding.rule in canonical_rules)
+            or (getattr(args, "fix_literal_concepts", False) and finding.rule == "canonical_literal_concept")
+        )
     ]
     issues: dict[str, list[Finding]] = {}
     for finding in eligible:
@@ -689,42 +1746,59 @@ def llm_suggest_fixes(
         batch_number = offset // args.batch_size + 1
         batch_total = (len(targets) + args.batch_size - 1) // args.batch_size
         verbose(args, f"fix-suggestion batch {batch_number}/{batch_total}: {len(batch)} leaves")
-        items = [{
-            "id": leaf.uid,
-            "mode": leaf.mode,
-            "category": leaf.category,
-            "text": leaf.text,
-            "issues": [{"rule": finding.rule, "message": finding.message, "evidence": finding.evidence} for finding in issues[leaf.uid]],
-        } for leaf in batch]
+        items = []
+        for leaf in batch:
+            item: dict[str, Any] = {
+                "id": leaf.uid,
+                "mode": leaf.mode,
+                "category": leaf.category,
+                "text": leaf.text,
+                "issues": [{"rule": finding.rule, "message": finding.message, "evidence": finding.evidence} for finding in issues[leaf.uid]],
+                "repair_policy_version": 2,
+            }
+            if args.canonical_tag_suggestions and danbooru_vocabulary is not None:
+                item["canonical_tag_guidance"] = canonical_tag_guidance(
+                    leaf, danbooru_vocabulary, args.canonical_tag_candidate_count, args.canonical_tag_style,
+                    (tags_rules or {}).get("canonical_composition"), canonical_retriever,
+                )
+            original_intent = (spotlight_intents or {}).get(leaf.category, {}).get(leaf.text)
+            if original_intent:
+                item["original_intent"] = original_intent
+            items.append(item)
         instruction = (
             "Propose one replacement wildcard leaf for every supplied item. Fix only the listed issues while preserving all valid visible facts, "
             "theme, subject count, distinct actions, format, and compact wildcard style. Do not add decorative detail, generic quality terms, "
             "negative prompts, new people, or a new camera. Preserve every __namespace/category__ wildcard reference and its weight exactly; "
             "never replace a reference with literal text. Preserve the item's declared mode. For tags mode, return a flat comma-separated "
             "tag list without dangling mini-prose fragments such as 'clutched in one hand'; keep each relationship attached to its subject or "
-            "object. Never return sequential, multi-panel, or multi-page content. For narrative mode, a sequential rewrite is allowed only "
-            "when the original requires multiple moments. "
+            "object as a literal phrase with spaces, such as 'holding heart' or the compact form 'holding (heart:1.2)'. Never fuse the words "
+            "into a new underscore compound such as 'holding_heart', 'poker_table_in_alley', or 'jumping_during_chase' merely because it "
+            "matches Danbooru's naming style — a fused word that resembles a real tag is exactly as invalid as a random one; an underscore "
+            "token is valid only when it is copied exactly from a supplied canonical_tag_guidance candidate or was already a verified "
+            "canonical tag in the original leaf. This applies to every new concept the rewrite introduces, not only ones flagged by an "
+            "existing canonical-tag finding. Never return sequential, multi-panel, or multi-page content. For narrative mode, a sequential "
+            "rewrite is allowed only when the original requires multiple moments. When canonical_tag_guidance is present, preserve verified "
+            "tags; replace an exact normalized match or unique alias only with its supplied canonical candidate. For an unknown "
+            "canonical-looking token, select a supplied candidate only when it is semantically equivalent in context; otherwise use a short "
+            "literal phrase with spaces or omit the concept only when it is nonvisual or unsupported. For contained canonical spans, emit the "
+            "supplied canonical candidates as separate tag items; preserve an unmatched modifier only if it has its own supplied canonical "
+            "support. Do not create a hybrid item such as 'vibrant red_hair', and do not substitute a merely related tag such as colorful. "
+            "For shared_head_composition, preserve every supplied component unless the original itself makes that component unsupported; do "
+            "not collapse multiple visible attributes into only one component. For a canonical_literal_concept issue, treat the evidence "
+            "candidates as review options rather than automatic replacements: combine canonical components when that preserves the full "
+            "visible meaning, and retain the literal phrase when none does. When original_intent is present, it is the single governing "
+            "idea the leaf was written to depict (subject, action, and why the moment matters); use it as the revision target so the fix "
+            "still delivers that idea, not merely a rewrite that dodges the reported issue by any available change. "
             "Return JSON only as an array with exactly one object per input ID containing id, suggested_rewrite, and rationale. "
-            "Do not modify files and do not omit IDs."
+            "Do not modify files and do not omit IDs. Repair policy version 2."
         )
-        body = json.dumps({
-            "model": model,
-            "temperature": 0,
-            "messages": [{"role": "system", "content": instruction}, {"role": "user", "content": json.dumps(items, ensure_ascii=False)}],
-        }).encode("utf-8")
         trace_event(trace_path, {"event": "fix_request", "batch": batch_number, "items": items})
-        request = urllib.request.Request(endpoint, data=body, headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"})
-        try:
-            with urllib.request.urlopen(request, timeout=args.timeout) as response:
-                response_data = json.loads(response.read().decode("utf-8"))
-            content = response_data["choices"][0]["message"]["content"].strip()
-            trace_event(trace_path, {"event": "fix_response", "batch": batch_number, "content": content})
-            content = re.sub(r"^```(?:json)?\s*|\s*```$", "", content, flags=re.I)
-            reviewed = json.loads(content)
-        except (urllib.error.URLError, KeyError, json.JSONDecodeError, TimeoutError) as exc:
-            raise RuntimeError(f"fix-suggestion request failed for batch starting at {offset}: {exc}") from exc
-        if not isinstance(reviewed, list) or not all(isinstance(item, dict) for item in reviewed):
-            raise RuntimeError(f"fix-suggestion response for batch starting at {offset} must be a JSON array of objects")
+        reviewed = llm_json_request(
+            args=args, endpoint=endpoint, api_key=api_key, model=model,
+            instruction=instruction, items=items,
+            call_name="fix-suggestion batch", batch_number=batch_number, batch_total=batch_total,
+            offset=offset, trace_path=trace_path, response_event="fix_response",
+        )
         expected = {leaf.uid for leaf in batch}
         received: set[str] = set()
         for item in reviewed:
@@ -737,7 +1811,100 @@ def llm_suggest_fixes(
                 received.add(uid)
         if received != expected:
             missing = ", ".join(sorted(expected - received))
-            raise RuntimeError(f"fix-suggestion response omitted or returned an empty rewrite for: {missing}")
+            verbose(
+                args,
+                f"fix-suggestion response omitted or returned an empty rewrite for {missing}; "
+                "keeping original leaves unresolved",
+            )
+            trace_event(trace_path, {
+                "event": "fix_suggestion_incomplete", "batch": batch_number,
+                "missing_ids": sorted(expected - received),
+                "action": "kept_original_unresolved",
+            })
+    return suggestions, rationales
+
+
+def llm_correct_rejected_fixes(
+    leaves: list[Leaf], findings: list[Finding], previous: dict[str, str],
+    rejections: dict[str, list[str]], args: argparse.Namespace, retry: int,
+    trace_path: Path | None = None, danbooru_vocabulary: DanbooruVocabulary | None = None,
+    tags_rules: dict[str, Any] | None = None,
+    canonical_retriever: CanonicalTagRetriever | None = None,
+    spotlight_intents: dict[str, dict[str, str]] | None = None,
+) -> tuple[dict[str, str], dict[str, str]]:
+    """Request fresh alternatives using exact deterministic rejection feedback."""
+    if not rejections:
+        return {}, {}
+    model = args.model or os.getenv("OPENAI_MODEL")
+    base_url = (args.base_url or os.getenv("OPENAI_BASE_URL") or "https://api.openai.com/v1").rstrip("/")
+    api_key = os.getenv(args.api_key_env)
+    if not model or not api_key:
+        raise ValueError("model and API key are required for corrective fix suggestions")
+    endpoint = base_url if base_url.endswith("/chat/completions") else f"{base_url}/chat/completions"
+    leaf_by_id = {leaf.uid: leaf for leaf in leaves}
+    findings_by_id: dict[str, list[Finding]] = {}
+    for finding in findings:
+        if finding.leaf_id in rejections:
+            findings_by_id.setdefault(finding.leaf_id, []).append(finding)
+    targets = [leaf_by_id[uid] for uid in rejections if uid in leaf_by_id]
+    suggestions: dict[str, str] = {}
+    rationales: dict[str, str] = {}
+    for offset in range(0, len(targets), args.batch_size):
+        batch = targets[offset:offset + args.batch_size]
+        batch_number = offset // args.batch_size + 1
+        batch_total = (len(targets) + args.batch_size - 1) // args.batch_size
+        verbose(args, f"fix correction retry {retry}/{args.max_fix_retries}, batch {batch_number}/{batch_total}: {len(batch)} leaves")
+        items = []
+        for leaf in batch:
+            item: dict[str, Any] = {
+                "id": leaf.uid, "mode": leaf.mode, "category": leaf.category,
+                "original": leaf.text, "rejected_rewrite": previous.get(leaf.uid, ""),
+                "rejection_reasons": rejections[leaf.uid],
+                "issues": [
+                    {"rule": finding.rule, "message": finding.message, "evidence": finding.evidence}
+                    for finding in findings_by_id.get(leaf.uid, [])
+                ],
+                "repair_policy_version": 2,
+            }
+            if args.canonical_tag_suggestions and danbooru_vocabulary is not None:
+                item["canonical_tag_guidance"] = canonical_tag_guidance(
+                    leaf, danbooru_vocabulary, args.canonical_tag_candidate_count,
+                    args.canonical_tag_style, (tags_rules or {}).get("canonical_composition"),
+                    canonical_retriever,
+                )
+            original_intent = (spotlight_intents or {}).get(leaf.category, {}).get(leaf.text)
+            if original_intent:
+                item["original_intent"] = original_intent
+            items.append(item)
+        instruction = (
+            "The previous wildcard rewrite was rejected. Produce one different complete-leaf repair per input. "
+            "Obey every rejection reason exactly while fixing the listed issues and preserving every valid visible fact, "
+            "wildcard reference, weight, relationship, alternative, subject count, and tags/narrative mode. Never split a "
+            "multiword visible concept into independent singleton tags unless the evidence supplies a meaning-preserving "
+            "compound canonical candidate. Candidate tags are options, not mandatory substitutions. If no candidate preserves "
+            "the concept, retain a compact literal phrase. If a rejection reason names an invented underscore token such as "
+            "'unknown_canonical_tag', do not propose a different fused compound in its place (for example replacing "
+            "'holding_heart' with 'grasping_heart' is the same error again) — rewrite that concept as a literal phrase with "
+            "spaces instead, unless a supplied canonical_tag_guidance candidate matches it exactly. When original_intent is present, "
+            "it is the single governing idea the leaf was written to depict; the new attempt must still deliver that idea, not merely "
+            "avoid the rejection reasons by any available change. Return JSON only as an array with exactly one object per ID containing "
+            "id, suggested_rewrite, and rationale. Repair policy version 2."
+        )
+        trace_event(trace_path, {"event": "fix_correction_request", "retry": retry, "batch": batch_number, "items": items})
+        reviewed = llm_json_request(
+            args=args, endpoint=endpoint, api_key=api_key, model=model,
+            instruction=instruction, items=items,
+            call_name=f"fix correction retry {retry}", batch_number=batch_number,
+            batch_total=batch_total, offset=offset, trace_path=trace_path,
+            response_event="fix_correction_response",
+        )
+        expected = {leaf.uid for leaf in batch}
+        for item in reviewed:
+            uid = str(item.get("id", ""))
+            rewrite = " ".join(str(item.get("suggested_rewrite", "")).split())
+            if uid in expected and rewrite and rewrite != leaf_by_id[uid].text:
+                suggestions[uid] = rewrite
+                rationales[uid] = " ".join(str(item.get("rationale", "")).split())
     return suggestions, rationales
 
 
@@ -751,14 +1918,347 @@ def reference_tokens(text: str) -> tuple[str, ...]:
     return tuple(tokens)
 
 
+def canonical_literal_atomization_issues(
+    rewrite: str, targeted_findings: list[Finding], original: str = "",
+) -> list[str]:
+    """Reject fixes that replace a compound concept with unrelated singleton tags."""
+    rewritten_items = {
+        normalize_canonical_tag(WEIGHT_RE.sub(lambda match: match.group(1), item).strip())
+        for item in split_top_level_commas(literal_text(rewrite))
+        if item.strip()
+    }
+    original_items = {
+        normalize_canonical_tag(WEIGHT_RE.sub(lambda match: match.group(1), item).strip())
+        for item in split_top_level_commas(literal_text(original))
+        if item.strip()
+    }
+    issues: list[str] = []
+    for finding in targeted_findings:
+        if finding.rule != "canonical_literal_concept" or not finding.evidence:
+            continue
+        try:
+            evidence = json.loads(finding.evidence)
+        except (TypeError, json.JSONDecodeError):
+            continue
+        phrase = str(evidence.get("input", "")).strip().lower()
+        words = [
+            normalize_canonical_tag(word)
+            for word in re.findall(r"[a-z0-9][a-z0-9+'-]*", phrase)
+            if word not in LITERAL_CONCEPT_STOPWORDS
+        ]
+        if len(words) < 2:
+            continue
+        source = normalize_canonical_tag(phrase)
+        if source in rewritten_items:
+            continue
+        word_set = {canonical_cohesion_stem(word) for word in words}
+        contributing_items = [
+            item for item in rewritten_items
+            if {canonical_cohesion_stem(word) for word in item.split("_")} & word_set
+        ]
+        covered_words = {
+            canonical_cohesion_stem(word)
+            for item in contributing_items for word in item.split("_")
+            if canonical_cohesion_stem(word) in word_set
+        }
+        if not word_set.issubset(covered_words) or len(contributing_items) < 2:
+            continue
+        compound_candidates = {
+            normalize_canonical_tag(str(candidate))
+            for candidate in evidence.get("meaning_preserving_candidates", [])
+            if len(re.findall(r"[a-z0-9]+", str(candidate).replace("_", " "))) >= 2
+        }
+        # A candidate already present elsewhere in the original leaf cannot justify
+        # atomizing this phrase. An introduced candidate containing the phrase's noun
+        # head must cover the whole phrase; otherwise it may represent a modifier only
+        # when the unchanged head remains as its own item (for example,
+        # `oversized_clothes, hoodie`).
+        introduced_candidates = compound_candidates & (rewritten_items - original_items)
+        source_stems = {canonical_cohesion_stem(word) for word in words}
+        head_stem = canonical_cohesion_stem(words[-1])
+        justified = False
+        for candidate in introduced_candidates:
+            candidate_stems = {
+                canonical_cohesion_stem(word) for word in candidate.split("_")
+            }
+            if head_stem in candidate_stems:
+                justified = source_stems.issubset(candidate_stems)
+            else:
+                justified = (
+                    head_stem in rewritten_items
+                    and bool(candidate_stems & (source_stems - {head_stem}))
+                )
+            if justified:
+                break
+        if justified:
+            continue
+        issues.append(
+            f"canonical literal repair atomizes '{phrase}' into independent tags and loses the compound relationship"
+        )
+    return issues
+
+
+NON_PLURAL_S_WORDS = {"brass", "class", "dress", "glass", "grass", "news"}
+
+
+def canonical_cohesion_stem(word: str) -> str:
+    """Return a conservative stem used only to detect split compound concepts."""
+    word = normalize_canonical_tag(word)
+    adjective_stems = {
+        "dusty": "dust", "golden": "gold", "plumed": "plume",
+        "rainy": "rain", "starry": "star",
+    }
+    if word in adjective_stems:
+        return adjective_stems[word]
+    if len(word) > 4 and word.endswith("ies"):
+        return word[:-3] + "y"
+    if len(word) > 4 and word.endswith(("ches", "shes", "sses", "xes", "zes")):
+        return word[:-2]
+    if len(word) > 3 and word.endswith("s") and word not in NON_PLURAL_S_WORDS \
+            and not word.endswith(("ss", "us", "is")):
+        return word[:-1]
+    if len(word) > 4 and word.endswith("ied"):
+        return word[:-3] + "y"
+    if len(word) > 5 and word.endswith("ing"):
+        stem = word[:-3]
+        return stem[:-1] if len(stem) > 2 and stem[-1] == stem[-2] else stem
+    if len(word) > 4 and word.endswith("ed"):
+        return word[:-1] if word[-3] == "e" else word[:-2]
+    return word
+
+
+def visibly_plural(word: str) -> bool:
+    word = normalize_canonical_tag(word)
+    return (
+        len(word) > 3 and word.endswith("s") and word not in NON_PLURAL_S_WORDS
+        and not word.endswith(("ss", "us", "is"))
+    )
+
+
+SUBJECT_COUNT_RE = re.compile(
+    r"(?<![a-z0-9_])(?:\d+\+?(?:girls?|boys?|women|men|others?|people|persons?|students?)|"
+    r"multiple_(?:girls?|boys?|women|men|others?|people|persons?|students?))(?![a-z0-9_])",
+    re.IGNORECASE,
+)
+
+
+def subject_count_tokens(text: str) -> tuple[str, ...]:
+    """Return explicit subject-count facts that a repair must preserve verbatim."""
+    return tuple(sorted(match.group(0).lower() for match in SUBJECT_COUNT_RE.finditer(literal_text(text))))
+
+
+def normalized_leaf_items(text: str) -> set[str]:
+    """Return normalized, unweighted top-level items from a tags-mode leaf."""
+    return {
+        normalize_canonical_tag(WEIGHT_RE.sub(lambda match: match.group(1), item).strip())
+        for item in split_top_level_commas(literal_text(text))
+        if item.strip()
+    }
+
+
+def case_only_rewrite_issues(original: str, rewrite: str) -> list[str]:
+    """Reject full-leaf rewrites whose only effect is changing letter casing."""
+    if original != rewrite and original.casefold() == rewrite.casefold():
+        return ["repair changes only letter casing and does not resolve a representational issue"]
+    return []
+
+
+def weight_only_rewrite_issues(original: str, rewrite: str) -> list[str]:
+    """Reject full-leaf rewrites whose only effect is adding or changing emphasis weight.
+
+    Every deterministic relationship/composition check strips (term:weight) syntax
+    before matching, so weight never changes what a phrase means or how it is
+    recognized; it only changes rendering priority. A rewrite that is otherwise
+    byte-identical to the original therefore cannot have addressed a content,
+    comprehension, canonicalization, or ambiguity finding, no matter how the LLM
+    that proposed it framed the change.
+    """
+    if original.strip() == rewrite.strip():
+        return []
+    unweighted = lambda text: WEIGHT_RE.sub(lambda match: match.group(1), text).strip().lower()
+    if unweighted(original) == unweighted(rewrite):
+        return ["repair only adds or changes emphasis weight and does not resolve the issue"]
+    return []
+
+
+def removed_standalone_literal_issues(original: str, rewrite: str) -> list[str]:
+    """Require standalone literal descriptors to be retained or concretely replaced."""
+    rewritten_items = normalized_leaf_items(rewrite)
+    issues: list[str] = []
+    for raw_item in split_top_level_commas(literal_text(original)):
+        unweighted = WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip().lower()
+        if (
+            not re.fullmatch(r"[a-z][a-z'’-]*", unweighted)
+            or normalize_canonical_tag(unweighted) in rewritten_items
+        ):
+            continue
+        issues.append(
+            f"repair deletes standalone source descriptor '{unweighted}' without a concrete replacement"
+        )
+    return issues
+
+
+def general_phrase_cohesion_issues(original: str, rewrite: str) -> list[str]:
+    """Reject comma-splitting an attached descriptive phrase for any repair rule."""
+    original_items = normalized_leaf_items(original)
+    rewritten_items = normalized_leaf_items(rewrite)
+    issues: list[str] = []
+    for raw_item in split_top_level_commas(literal_text(original)):
+        phrase = WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip().lower()
+        words = [
+            normalize_canonical_tag(word)
+            for word in re.findall(r"[a-z0-9][a-z0-9+'-]*", phrase)
+            if word not in LITERAL_CONCEPT_STOPWORDS
+        ]
+        if len(words) < 2 or normalize_canonical_tag(phrase) in rewritten_items:
+            continue
+        source_stems = {canonical_cohesion_stem(word) for word in words}
+        contributors = [
+            item for item in rewritten_items - original_items
+            if {canonical_cohesion_stem(word) for word in item.split("_")} & source_stems
+        ]
+        covered = {
+            canonical_cohesion_stem(word)
+            for item in contributors for word in item.split("_")
+            if canonical_cohesion_stem(word) in source_stems
+        }
+        if len(contributors) >= 2 and source_stems.issubset(covered):
+            issues.append(f"repair splits cohesive source phrase '{phrase}' into separate items")
+    return issues
+
+
+def protected_tag_item_issues(
+    original: str, rewrite: str, vocabulary: DanbooruVocabulary,
+) -> list[str]:
+    """Preserve canonical and underscore-style source tokens across non-deterministic fixes."""
+    rewritten_items = normalized_leaf_items(rewrite)
+    issues: list[str] = []
+    for raw_item in split_top_level_commas(literal_text(original)):
+        unweighted = WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip().lower()
+        normalized = normalize_canonical_tag(unweighted)
+        if (
+            not normalized or " " in unweighted or REFERENCE_RE.search(raw_item)
+            or normalized in rewritten_items
+        ):
+            continue
+        if normalized in vocabulary or "_" in unweighted:
+            issues.append(f"repair removes or substitutes protected source tag '{unweighted}'")
+    return issues
+
+
+def unsupported_added_item_issues(
+    original: str, rewrite: str, targeted_findings: list[Finding],
+) -> list[str]:
+    """Reject wholly novel items unless deterministic evidence supplied that exact candidate."""
+    if any(finding.rule == "semantic_duplicate_leaf" for finding in targeted_findings):
+        return []
+    original_items = normalized_leaf_items(original)
+    rewritten_items = normalized_leaf_items(rewrite)
+    original_stems = {
+        canonical_cohesion_stem(word)
+        for item in original_items for word in item.split("_")
+    }
+    authorized: set[str] = set()
+    for finding in targeted_findings:
+        if not finding.evidence:
+            continue
+        try:
+            evidence = json.loads(finding.evidence)
+        except (TypeError, json.JSONDecodeError):
+            continue
+        if evidence.get("status") not in DETERMINISTIC_CANONICAL_STATUSES:
+            continue
+        authorized.update(normalize_canonical_tag(str(value)) for value in evidence.get("candidates", []))
+        authorized.update(normalize_canonical_tag(str(value)) for value in evidence.get("canonical_ids", []))
+    issues: list[str] = []
+    for item in rewritten_items - original_items:
+        stems = {canonical_cohesion_stem(word) for word in item.split("_")}
+        if item not in authorized and not (stems & original_stems):
+            issues.append(f"repair adds unsupported source concept '{item}'")
+    return issues
+
+
+def canonical_literal_fact_loss_issues(
+    rewrite: str, targeted_findings: list[Finding],
+) -> list[str]:
+    """Reject canonical-literal repairs that silently discard visible source words."""
+    rewrite_words = {
+        normalize_canonical_tag(word)
+        for word in re.findall(
+            r"[a-z0-9][a-z0-9+'-]*",
+            WEIGHT_RE.sub(lambda match: match.group(1), literal_text(rewrite).lower()),
+        )
+    }
+
+    def preserved(source: str) -> bool:
+        if source in rewrite_words:
+            return True
+        if visibly_plural(source):
+            stem = canonical_cohesion_stem(source)
+            return any(
+                word.startswith("multiple_")
+                and canonical_cohesion_stem(word.removeprefix("multiple_")) == stem
+                for word in rewrite_words
+            )
+        for word in rewrite_words:
+            if source in canonical_inflection_variants(word) or word in canonical_inflection_variants(source):
+                return True
+            if source.startswith(word) or word.startswith(source):
+                suffix = source[len(word):] if source.startswith(word) else word[len(source):]
+                if suffix in LITERAL_CONCEPT_INFLECTION_AFFIXES:
+                    return True
+            if source.endswith("ed") and source[:-1] == word:
+                return True
+        return False
+
+    issues: list[str] = []
+    for finding in targeted_findings:
+        if finding.rule != "canonical_literal_concept" or not finding.evidence:
+            continue
+        try:
+            evidence = json.loads(finding.evidence)
+        except (TypeError, json.JSONDecodeError):
+            continue
+        phrase = str(evidence.get("input", "")).strip().lower()
+        source_words = [
+            normalize_canonical_tag(word)
+            for word in re.findall(r"[a-z0-9][a-z0-9+'-]*", phrase)
+            if word not in LITERAL_CONCEPT_STOPWORDS
+        ]
+        missing = [word for word in source_words if not preserved(word)]
+        if missing:
+            issues.append(
+                f"canonical literal repair drops visible source word(s) from '{phrase}': "
+                + ", ".join(missing)
+            )
+    return issues
+
+
 def validate_suggestions(
     leaves: list[Leaf], suggestions: dict[str, str], findings: list[Finding],
     rules: dict[str, Any], tags_rules: dict[str, Any],
+    danbooru_vocabulary: DanbooruVocabulary | None = None, canonical_candidate_count: int = 5,
+    canonical_tag_style: str = "underscore", canonical_retriever: CanonicalTagRetriever | None = None,
+    semantic_duplicate_client: EmbeddingClient | None = None,
+    semantic_duplicate_threshold: float | None = None,
 ) -> tuple[dict[str, str], dict[str, list[str]]]:
     """Reject structural changes and rewrites that leave or introduce targeted errors."""
     leaf_by_id = {leaf.uid: leaf for leaf in leaves}
     targeted_errors: dict[str, set[str]] = {}
     deterministic_errors: dict[str, set[str]] = {}
+    # rewrite_must_resolve flags live in three places: rules.yaml's "patterns" mapping,
+    # tags-rules.yaml's "literalized_style_terms" mapping (finding rule name == config key,
+    # e.g. ambiguous_brush_medium), and tags-rules.yaml's single "canonical_composition"
+    # object, whose finding rule name is "canonical_tag_composition", not the config key.
+    must_resolve_rules = {
+        name for name, policy in rules.get("patterns", {}).items()
+        if policy.get("rewrite_must_resolve")
+    } | {
+        name for name, policy in tags_rules.get("literalized_style_terms", {}).items()
+        if policy.get("rewrite_must_resolve")
+    }
+    if tags_rules.get("canonical_composition", {}).get("rewrite_must_resolve"):
+        must_resolve_rules.add("canonical_tag_composition")
     for finding in findings:
         if finding.severity == "error" and finding.leaf_id:
             targeted_errors.setdefault(finding.leaf_id, set()).add(finding.rule)
@@ -769,16 +2269,62 @@ def validate_suggestions(
     for uid, rewrite in suggestions.items():
         leaf = leaf_by_id[uid]
         reasons: list[str] = []
+        leaf_findings = [finding for finding in findings if finding.leaf_id == uid]
         if sorted(reference_tokens(leaf.text)) != sorted(reference_tokens(rewrite)):
             reasons.append("wildcard references or their weights changed")
         if len(ALTERNATIVE_RE.findall(leaf.text)) != len(ALTERNATIVE_RE.findall(rewrite)):
             reasons.append("alternative-choice markers changed")
+        if subject_count_tokens(leaf.text) != subject_count_tokens(rewrite):
+            reasons.append("explicit subject-count facts changed")
+        reasons.extend(case_only_rewrite_issues(leaf.text, rewrite))
+        reasons.extend(weight_only_rewrite_issues(leaf.text, rewrite))
+        reasons.extend(removed_standalone_literal_issues(leaf.text, rewrite))
+        reasons.extend(general_phrase_cohesion_issues(leaf.text, rewrite))
+        reasons.extend(unsupported_added_item_issues(leaf.text, rewrite, leaf_findings))
+        reasons.extend(canonical_literal_atomization_issues(rewrite, leaf_findings, leaf.text))
+        reasons.extend(canonical_literal_fact_loss_issues(rewrite, leaf_findings))
+        if danbooru_vocabulary is not None and leaf.mode == "tags":
+            reasons.extend(protected_tag_item_issues(leaf.text, rewrite, danbooru_vocabulary))
+            original_relationships = exact_canonical_relationship_items(leaf, danbooru_vocabulary)
+            rewritten_items = {
+                WEIGHT_RE.sub(lambda match: match.group(1), item).strip().lower()
+                for item in split_top_level_commas(literal_text(rewrite))
+            }
+            changed_relationships = [
+                item["text"] for item in original_relationships
+                if WEIGHT_RE.sub(lambda match: match.group(1), item["text"]).strip().lower()
+                not in rewritten_items
+            ]
+            if changed_relationships:
+                reasons.append(
+                    "verified compact relationship changed or split: " + ", ".join(changed_relationships)
+                )
         candidate = Leaf(
             leaf.uid, leaf.file, leaf.namespace, leaf.category, leaf.index, leaf.line,
             rewrite, tuple(REFERENCE_RE.findall(rewrite)), leaf.mode,
         )
         post = pattern_findings([candidate], rules) + tags_mode_findings([candidate], tags_rules)
         baseline_local = pattern_findings([leaf], rules) + tags_mode_findings([leaf], tags_rules)
+        if danbooru_vocabulary is not None:
+            post += canonical_tag_findings(
+                [candidate], danbooru_vocabulary, canonical_candidate_count, canonical_tag_style,
+                tags_rules.get("canonical_composition"), canonical_retriever,
+            )
+            baseline_local += canonical_tag_findings(
+                [leaf], danbooru_vocabulary, canonical_candidate_count, canonical_tag_style,
+                tags_rules.get("canonical_composition"), canonical_retriever,
+            )
+            post += canonical_tag_redundancy_findings([candidate], danbooru_vocabulary)
+            baseline_local += canonical_tag_redundancy_findings([leaf], danbooru_vocabulary)
+            if canonical_retriever is not None:
+                post += canonical_literal_concept_findings(
+                    [candidate], danbooru_vocabulary, canonical_retriever,
+                    canonical_candidate_count, canonical_tag_style,
+                )
+                baseline_local += canonical_literal_concept_findings(
+                    [leaf], danbooru_vocabulary, canonical_retriever,
+                    canonical_candidate_count, canonical_tag_style,
+                )
         locally_evaluable = {finding.rule for finding in baseline_local}
         unsupported = deterministic_errors.get(uid, set()) - locally_evaluable
         if unsupported:
@@ -787,6 +2333,13 @@ def validate_suggestions(
         unresolved = targeted_errors.get(uid, set()) & post_errors
         if unresolved:
             reasons.append("targeted error remains: " + ", ".join(sorted(unresolved)))
+        targeted_must_resolve = {
+            finding.rule for finding in findings
+            if finding.leaf_id == uid and finding.rule in must_resolve_rules
+        }
+        remaining_must_resolve = targeted_must_resolve & {finding.rule for finding in post}
+        if remaining_must_resolve:
+            reasons.append("targeted representability warning remains: " + ", ".join(sorted(remaining_must_resolve)))
         baseline_rules = {
             finding.rule for finding in findings
             if finding.leaf_id == uid and finding.source == "deterministic"
@@ -794,16 +2347,53 @@ def validate_suggestions(
         introduced = {finding.rule for finding in post if finding.rule not in baseline_rules}
         if introduced:
             reasons.append("new deterministic finding: " + ", ".join(sorted(introduced)))
+        targeted_canonical = {
+            finding.rule for finding in findings if finding.leaf_id == uid
+            and finding.rule in {
+                "unknown_canonical_tag", "canonical_tag_normalization", "canonical_tag_alias",
+                "canonical_tag_contained_span", "canonical_tag_separator_normalization",
+                "canonical_tag_composition",
+                "canonical_tag_redundancy",
+            }
+        }
+        remaining_canonical = targeted_canonical & {finding.rule for finding in post}
+        if remaining_canonical:
+            reasons.append("targeted canonical-tag issue remains: " + ", ".join(sorted(remaining_canonical)))
         if reasons:
             rejected[uid] = reasons
         else:
             accepted[uid] = rewrite
+    targeted_semantic = {
+        finding.leaf_id for finding in findings
+        if finding.rule == "semantic_duplicate_leaf" and finding.leaf_id in accepted
+    }
+    if targeted_semantic and semantic_duplicate_client is not None and semantic_duplicate_threshold is not None:
+        rewritten_leaves = [
+            Leaf(
+                leaf.uid, leaf.file, leaf.namespace, leaf.category, leaf.index, leaf.line,
+                accepted.get(leaf.uid, leaf.text),
+                tuple(REFERENCE_RE.findall(accepted.get(leaf.uid, leaf.text))), leaf.mode,
+            )
+            for leaf in leaves
+        ]
+        remaining = semantic_duplicate_findings(
+            rewritten_leaves, semantic_duplicate_client, semantic_duplicate_threshold,
+        )
+        remaining_by_id = {
+            finding.leaf_id: finding for finding in remaining
+            if finding.leaf_id in targeted_semantic
+        }
+        for uid, finding in remaining_by_id.items():
+            accepted.pop(uid, None)
+            rejected.setdefault(uid, []).append(
+                "semantic duplicate remains after rewrite: " + finding.message
+            )
     return accepted, rejected
 
 
 def llm_verify_fixes(
     leaves: list[Leaf], suggestions: dict[str, str], findings: list[Finding],
-    args: argparse.Namespace, trace_path: Path | None = None,
+    args: argparse.Namespace, trace_path: Path | None = None, pass_number: int = 1,
 ) -> tuple[dict[str, str], dict[str, list[str]]]:
     """Use a separate LLM pass to reject rewrites that change valid semantics."""
     if not suggestions:
@@ -827,11 +2417,13 @@ def llm_verify_fixes(
         batch = targets[offset:offset + verification_batch_size]
         batch_number = offset // verification_batch_size + 1
         batch_total = (len(targets) + verification_batch_size - 1) // verification_batch_size
-        verbose(args, f"fix-verification batch {batch_number}/{batch_total}: {len(batch)} leaves")
+        verbose(args, f"fix-verification pass {pass_number}, batch {batch_number}/{batch_total}: {len(batch)} leaves")
         items = [{
             "id": leaf.uid, "mode": leaf.mode, "category": leaf.category,
             "original": leaf.text, "rewrite": suggestions[leaf.uid],
             "issues": [{"rule": finding.rule, "message": finding.message} for finding in issues.get(leaf.uid, [])],
+            "verification_policy_version": 3,
+            "verification_pass": pass_number,
         } for leaf in batch]
         instruction = (
             "Act as a strict preservation verifier for wildcard rewrites. Compare every original and rewrite. A rewrite passes only when it "
@@ -841,25 +2433,17 @@ def llm_verify_fixes(
             "strictly necessary to replace an explicitly listed invisible/abstract failure with minimal visible evidence are allowed. Formatting "
             "and compact wording changes alone are allowed. Return JSON only as an array with exactly one object per input ID containing id, "
             "classification (pass or reject), reason, and violations (an array chosen from fact_removed, fact_added, alternative_changed, "
-            "relationship_changed, subject_or_action_changed, format_evasion, other). Do not omit IDs."
+            "relationship_changed, subject_or_action_changed, format_evasion, other). Do not omit IDs. "
+            f"This is independent verification pass {pass_number}; reassess the rewrite from the supplied facts rather than trusting a prior "
+            "review. Verification policy version 3."
         )
-        body = json.dumps({
-            "model": model, "temperature": 0,
-            "messages": [{"role": "system", "content": instruction}, {"role": "user", "content": json.dumps(items, ensure_ascii=False)}],
-        }).encode("utf-8")
         trace_event(trace_path, {"event": "verify_request", "batch": batch_number, "items": items})
-        request = urllib.request.Request(endpoint, data=body, headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"})
-        try:
-            with urllib.request.urlopen(request, timeout=args.timeout) as response:
-                response_data = json.loads(response.read().decode("utf-8"))
-            content = response_data["choices"][0]["message"]["content"].strip()
-            trace_event(trace_path, {"event": "verify_response", "batch": batch_number, "content": content})
-            content = re.sub(r"^```(?:json)?\s*|\s*```$", "", content, flags=re.I)
-            reviewed = json.loads(content)
-        except (urllib.error.URLError, KeyError, json.JSONDecodeError, TimeoutError) as exc:
-            raise RuntimeError(f"fix verification failed for batch starting at {offset}: {exc}") from exc
-        if not isinstance(reviewed, list) or not all(isinstance(item, dict) for item in reviewed):
-            raise RuntimeError(f"fix verification response for batch starting at {offset} must be a JSON array of objects")
+        reviewed = llm_json_request(
+            args=args, endpoint=endpoint, api_key=api_key, model=model,
+            instruction=instruction, items=items,
+            call_name=f"fix-verification pass {pass_number}", batch_number=batch_number, batch_total=batch_total,
+            offset=offset, trace_path=trace_path, response_event="verify_response",
+        )
         expected = {leaf.uid for leaf in batch}
         received: set[str] = set()
         for item in reviewed:
@@ -894,20 +2478,186 @@ def write_fix_manifest(
     records = []
     for uid, rewrite in proposed.items():
         leaf = leaf_by_id[uid]
+        accepted_rewrite = accepted.get(uid)
+        rejected_enhancement = rewrite if accepted_rewrite and rewrite != accepted_rewrite else ""
         records.append({
             "id": uid, "file": leaf.file, "line": leaf.line, "category": leaf.category,
             "status": "accepted" if uid in accepted else "rejected",
-            "original": leaf.text, "suggested_rewrite": rewrite,
+            "original": leaf.text, "suggested_rewrite": accepted_rewrite or rewrite,
             "rationale": rationales.get(uid, ""), "issues": issues.get(uid, []),
-            "rejection_reasons": rejected.get(uid, []),
+            "rejection_reasons": [] if accepted_rewrite else rejected.get(uid, []),
+            "rejected_enhancement": rejected_enhancement,
+            "rejected_enhancement_reasons": rejected.get(uid, []) if rejected_enhancement else [],
         })
+    rejected_ids = set(proposed) - set(accepted)
     payload = {
-        "summary": {"proposed": len(proposed), "accepted": len(accepted), "rejected": len(rejected)},
+        "summary": {
+            "proposed": len(proposed), "accepted": len(accepted), "rejected": len(rejected_ids),
+            "accepted_with_rejected_enhancement": sum(
+                bool(record["rejected_enhancement"]) for record in records
+            ),
+        },
         "fixes": records,
     }
     path = path.expanduser().resolve()
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def record_fix_attempts(
+    history: dict[str, list[dict[str, Any]]], proposals: dict[str, str],
+    rationales: dict[str, str], rejections: dict[str, list[str]], stage: str,
+) -> None:
+    """Retain each distinct repair attempt and its validation result."""
+    for uid, rewrite in proposals.items():
+        attempt = {
+            "rewrite": rewrite, "rationale": rationales.get(uid, ""),
+            "stage": stage, "rejection_reasons": list(rejections.get(uid, [])),
+        }
+        existing = next(
+            (item for item in history.setdefault(uid, []) if item["rewrite"] == rewrite), None
+        )
+        if existing is None:
+            history[uid].append(attempt)
+        else:
+            existing["rationale"] = attempt["rationale"] or existing.get("rationale", "")
+            existing["stage"] = stage
+            existing["rejection_reasons"] = list(dict.fromkeys(
+                [*existing.get("rejection_reasons", []), *attempt["rejection_reasons"]]
+            ))
+
+
+def append_attempt_rejections(
+    history: dict[str, list[dict[str, Any]]], proposals: dict[str, str],
+    rejections: dict[str, list[str]], stage: str,
+) -> None:
+    for uid, reasons in rejections.items():
+        rewrite = proposals.get(uid)
+        if not rewrite:
+            continue
+        record_fix_attempts(history, {uid: rewrite}, {}, {uid: reasons}, stage)
+
+
+def rank_unresolved_candidates(
+    leaves: list[Leaf], accepted: dict[str, str],
+    history: dict[str, list[dict[str, Any]]], unresolved_ids: set[str] | None = None,
+) -> dict[str, dict[str, Any]]:
+    """Choose the least-risk rejected attempt for each still-unresolved leaf."""
+    leaf_by_id = {leaf.uid: leaf for leaf in leaves}
+    severe_markers = (
+        "reference", "subject-count", "alternative-choice", "atomizes", "splits cohesive",
+        "drops visible", "protected source tag", "unsupported source concept", "structural",
+        "new deterministic finding", "canonical-tag issue remains",
+    )
+    selected: dict[str, dict[str, Any]] = {}
+    for uid, attempts in history.items():
+        if uid not in leaf_by_id or (unresolved_ids is not None and uid not in unresolved_ids):
+            continue
+        baseline = accepted.get(uid, leaf_by_id[uid].text)
+        rejected = [
+            attempt for attempt in attempts
+            if attempt.get("rejection_reasons") and attempt.get("rewrite") != baseline
+        ]
+        if not rejected:
+            continue
+
+        def score(attempt: dict[str, Any]) -> tuple[int, int, float, int]:
+            reasons = [str(reason).lower() for reason in attempt.get("rejection_reasons", [])]
+            severe = sum(any(marker in reason for marker in severe_markers) for reason in reasons)
+            similarity = difflib.SequenceMatcher(None, baseline, str(attempt["rewrite"])).ratio()
+            return severe, len(reasons), -similarity, len(str(attempt["rewrite"]))
+
+        best = min(rejected, key=score)
+        selected[uid] = {
+            **best, "baseline": baseline, "original": leaf_by_id[uid].text,
+            "alternatives": sorted(rejected, key=score)[1:],
+        }
+    return selected
+
+
+def render_unresolved_report(
+    leaves: list[Leaf], findings: list[Finding],
+    candidates: dict[str, dict[str, Any]], unresolved_ids: set[str],
+) -> str:
+    leaf_by_id = {leaf.uid: leaf for leaf in leaves}
+    findings_by_id: dict[str, list[Finding]] = {}
+    for finding in findings:
+        if finding.leaf_id:
+            findings_by_id.setdefault(finding.leaf_id, []).append(finding)
+    semantic_clusters: list[dict[str, Any]] = []
+    semantic_anchor_ids: set[str] = set()
+    for finding in findings:
+        if finding.rule != "semantic_duplicate_leaf" or not finding.evidence:
+            continue
+        try:
+            evidence = json.loads(finding.evidence)
+        except (TypeError, json.JSONDecodeError):
+            continue
+        if isinstance(evidence, dict) and evidence.get("type") == "semantic_duplicate_cluster":
+            semantic_clusters.append(evidence)
+            if finding.leaf_id:
+                semantic_anchor_ids.add(finding.leaf_id)
+    unresolved_without_candidate = unresolved_ids - set(candidates) - semantic_anchor_ids
+    lines = [
+        "# Unresolved wildcard repair candidates", "",
+        "> Review-only output. Every proposed rewrite below failed automatic validation and was not applied to the fixed YAML.",
+        "",
+        f"Candidate leaves: {len(candidates)} · Other unresolved leaves without a rejected rewrite: {len(unresolved_without_candidate)}",
+    ]
+    if semantic_clusters:
+        lines.extend([
+            "", "# Semantic duplicate clusters", "",
+            "These are grouped review decisions. Router-only/reference-only leaves are excluded, and no cluster consolidation is applied automatically.",
+        ])
+        for evidence in semantic_clusters:
+            representative = evidence.get("representative", {})
+            members = evidence.get("members", [])
+            lines.extend([
+                "", "---", "",
+                f"## Cluster `{evidence.get('cluster_id', '')}` · `{representative.get('category', '')}` · {len(members)} leaves", "",
+                "**Suggested review:** keep the strongest representative, merge only compatible distinctive details, and remove other leaves only after manual approval.", "",
+                "**Current representative:**", "",
+                f"- `{representative.get('file', '')}:{representative.get('line', 0)}`",
+                f"  - `{representative.get('leaf', '')}`", "",
+                "**Cluster members:**", "",
+            ])
+            for member in members:
+                lines.extend([
+                    f"- similarity `{float(member.get('similarity_to_representative', 0.0)):.4f}` · "
+                    f"`{member.get('file', '')}:{member.get('line', 0)}`",
+                    f"  - `{member.get('leaf', '')}`",
+                ])
+    for uid, candidate in sorted(
+        candidates.items(), key=lambda item: (leaf_by_id[item[0]].file, leaf_by_id[item[0]].line)
+    ):
+        leaf = leaf_by_id[uid]
+        lines.extend([
+            "", "---", "",
+            f"## `{leaf.category}` · line {leaf.line}", "",
+            f"Location: `{leaf.file}:{leaf.line}`", "",
+            "**Fixed baseline:**", "", "```text", candidate["baseline"], "```", "",
+            "**Best rejected candidate:**", "", "```text", candidate["rewrite"], "```", "",
+            "```diff", f"- {candidate['baseline']}", f"+ {candidate['rewrite']}", "```", "",
+            f"Attempt stage: `{candidate['stage']}`", "",
+            "**Why it was rejected:**", "",
+        ])
+        lines.extend(f"- {reason}" for reason in candidate["rejection_reasons"])
+        leaf_findings = findings_by_id.get(uid, [])
+        if leaf_findings:
+            lines.extend(["", "**Issues being reviewed:**", ""])
+            lines.extend(
+                f"- `{finding.rule}`: {finding.message}" for finding in leaf_findings
+            )
+        alternatives = candidate.get("alternatives", [])
+        if alternatives:
+            lines.extend(["", f"<details><summary>{len(alternatives)} other rejected attempt(s)</summary>", ""])
+            for attempt in alternatives:
+                lines.extend([
+                    f"- `{attempt['stage']}`: `{attempt['rewrite']}`",
+                    *[f"  - {reason}" for reason in attempt.get("rejection_reasons", [])],
+                ])
+            lines.extend(["", "</details>"])
+    return "\n".join(lines) + "\n"
 
 
 def unified_leaf_diff(original: str, suggestion: str) -> str:
@@ -920,7 +2670,10 @@ def ansi(text: str, code: str, enabled: bool) -> str:
     return f"\033[{code}m{text}\033[0m" if enabled else text
 
 
-def write_fixed_file(source: Path, destination: Path, leaves: list[Leaf], suggestions: dict[str, str]) -> int:
+def write_fixed_file(
+    source: Path, destination: Path, leaves: list[Leaf], suggestions: dict[str, str],
+    header: str = "",
+) -> int:
     source = source.resolve()
     destination = destination.expanduser().resolve()
     if source == destination:
@@ -943,7 +2696,7 @@ def write_fixed_file(source: Path, destination: Path, leaves: list[Leaf], sugges
     descriptor, temporary_name = tempfile.mkstemp(prefix=f".{destination.name}.", suffix=".tmp", dir=destination.parent)
     os.close(descriptor)
     temporary_path = Path(temporary_name)
-    temporary_path.write_text("".join(lines), encoding="utf-8")
+    temporary_path.write_text(header + "".join(lines), encoding="utf-8")
     try:
         yaml.safe_load(temporary_path.read_text(encoding="utf-8"))
     except yaml.YAMLError as exc:
@@ -953,11 +2706,123 @@ def write_fixed_file(source: Path, destination: Path, leaves: list[Leaf], sugges
     return applied
 
 
-def render(findings: list[Finding], leaves: list[Leaf], fmt: str, color: bool = False) -> str:
+def canonical_evidence_highlights(finding: Finding) -> tuple[list[str], list[str]]:
+    """Extract the important human-review fields from canonical JSON evidence."""
+    if not finding.rule.startswith("canonical_tag_") or not finding.evidence:
+        return [], []
+    try:
+        evidence = json.loads(finding.evidence)
+    except (json.JSONDecodeError, TypeError):
+        return [], []
+    if not isinstance(evidence, dict):
+        return [], []
+
+    canonical = evidence.get("canonical_ids", [])
+    if not isinstance(canonical, list):
+        canonical = []
+    if not canonical and isinstance(evidence.get("spans"), list):
+        canonical = [
+            span.get("canonical") for span in evidence["spans"]
+            if isinstance(span, dict) and span.get("canonical")
+        ]
+    unmatched = evidence.get("unmatched_words", [])
+    if not isinstance(unmatched, list):
+        unmatched = []
+    return (
+        list(dict.fromkeys(str(tag) for tag in canonical if tag)),
+        list(dict.fromkeys(str(word) for word in unmatched if word)),
+    )
+
+
+def duplicate_evidence_comparison(finding: Finding) -> tuple[dict[str, object], dict[str, object]] | None:
+    """Return both sides of an exact duplicate finding's structured evidence."""
+    if finding.rule not in {
+        "duplicate_leaf", "cross_category_duplicate_leaf", "duplicate_leaf_weight_variant",
+    } or not finding.evidence:
+        return None
+    try:
+        evidence = json.loads(finding.evidence)
+    except (json.JSONDecodeError, TypeError):
+        return None
+    if not isinstance(evidence, dict):
+        return None
+    current, earlier = evidence.get("current"), evidence.get("earlier_match")
+    if not isinstance(current, dict) or not isinstance(earlier, dict):
+        return None
+    return current, earlier
+
+
+def semantic_duplicate_cluster_evidence(finding: Finding) -> dict[str, Any] | None:
+    """Return a semantic_duplicate_leaf finding's structured cluster evidence.
+
+    Mirrors duplicate_evidence_comparison so the report renders the same kind
+    of readable representative/member breakdown instead of a raw single-line
+    JSON dump -- the cluster just has one representative plus N members
+    instead of a fixed current/earlier pair.
+    """
+    if finding.rule != "semantic_duplicate_leaf" or not finding.evidence:
+        return None
+    try:
+        evidence = json.loads(finding.evidence)
+    except (json.JSONDecodeError, TypeError):
+        return None
+    if not isinstance(evidence, dict) or evidence.get("type") != "semantic_duplicate_cluster":
+        return None
+    representative = evidence.get("representative")
+    members = evidence.get("members")
+    if not isinstance(representative, dict) or not isinstance(members, list):
+        return None
+    return evidence
+
+
+def markdown_highlight_source_terms(message: str, leaf: Leaf | None) -> str:
+    """Emphasize quoted finding terms that occur in the source leaf."""
+    if leaf is None:
+        return message
+    normalized_leaf = re.sub(r"[_-]+", " ", leaf.text).lower()
+
+    def replace(match: re.Match[str]) -> str:
+        term = match.group(1)
+        normalized_term = re.sub(r"[_-]+", " ", term).lower()
+        if normalized_term not in normalized_leaf:
+            return match.group(0)
+        return f"**`{term.replace('`', '')}`**"
+
+    message = re.sub(r"(?<!\w)'([^'\n]{1,160})'(?!\w)", replace, message)
+    return re.sub(r"(?<!\w)‘([^’\n]{1,160})’(?!\w)", replace, message)
+
+
+def render(
+    findings: list[Finding], leaves: list[Leaf], fmt: str, color: bool = False,
+    fix_attempted: bool = False, fixed_leaf_ids: set[str] | None = None,
+    proposed_suggestions: dict[str, str] | None = None,
+    rejected_suggestions: dict[str, list[str]] | None = None,
+) -> str:
     counts = {severity: sum(f.severity == severity for f in findings) for severity in ("error", "warning")}
     files = len({leaf.file for leaf in leaves})
     categories = len({(leaf.namespace, leaf.category) for leaf in leaves})
     leaf_by_id = {leaf.uid: leaf for leaf in leaves}
+    fixed_leaf_ids = fixed_leaf_ids or set()
+    proposed_suggestions = proposed_suggestions or {}
+    rejected_suggestions = rejected_suggestions or {}
+    affected_leaf_ids = {finding.leaf_id for finding in findings if finding.leaf_id}
+    # A finding with no leaf_id (route/graph/category-level facts such as
+    # unreachable_category or route_prompt_budget) was never eligible for the per-leaf fix
+    # pipeline in the first place. Counting it as "unresolved" the moment any unrelated fix
+    # succeeds elsewhere in the file misleadingly implies a fix was attempted and failed.
+    unresolved_count = sum(
+        1
+        for finding in findings
+        if fix_attempted and finding.leaf_id and finding.leaf_id not in fixed_leaf_ids
+    )
+
+    def fix_status(finding: Finding) -> str:
+        if not fix_attempted:
+            return "not_attempted"
+        if not finding.leaf_id:
+            return "not_leaf_attachable"
+        return "fixed" if finding.leaf_id in fixed_leaf_ids else "unresolved"
+
     if fmt == "json":
         rendered_findings = []
         for finding in findings:
@@ -965,34 +2830,163 @@ def render(findings: list[Finding], leaves: list[Leaf], fmt: str, color: bool = 
             leaf = leaf_by_id.get(finding.leaf_id)
             item["original_text"] = leaf.text if leaf else ""
             item["diff"] = unified_leaf_diff(leaf.text, finding.suggestion) if leaf and finding.suggestion else ""
+            item["fix_status"] = fix_status(finding)
             rendered_findings.append(item)
-        return json.dumps({"summary": {"files": files, "categories": categories, "leaves": len(leaves), **counts}, "findings": rendered_findings}, indent=2, ensure_ascii=False)
+        return json.dumps({"summary": {"files": files, "categories": categories, "leaves": len(leaves), **counts, "unresolved": unresolved_count}, "findings": rendered_findings}, indent=2, ensure_ascii=False)
     if fmt == "markdown":
-        lines = ["# Wildcard lint report", "", f"Files: {files} · Categories: {categories} · Leaves: {len(leaves)} · Errors: {counts['error']} · Warnings: {counts['warning']}", ""]
+        lines = ["# Wildcard lint report", "", f"Files: {files} · Categories: {categories} · Leaves: {len(leaves)} · Errors: {counts['error']} · Warnings: {counts['warning']}"]
+        if fix_attempted:
+            lines.extend([
+                "", f"Unresolved after fixed-output generation: {unresolved_count} findings across "
+                f"{len(affected_leaf_ids - fixed_leaf_ids)} leaves. Search this report for `[UNRESOLVED]`.",
+                "", f"Repair summary: {len(proposed_suggestions)} leaves received proposals · "
+                f"{len(fixed_leaf_ids)} accepted · {len(rejected_suggestions)} rejected.",
+            ])
+        lines.append("")
+        rendered_rejections: set[str] = set()
         for finding in findings:
             location = f"{finding.file}:{finding.line}" if finding.line else finding.file
+            leaf = leaf_by_id.get(finding.leaf_id)
             llm_badge = " · **LLM**" if finding.source == "llm" else ""
+            unresolved_badge = " · **[UNRESOLVED]**" if fix_status(finding) == "unresolved" else ""
             marker = "🔴" if finding.severity == "error" else "🟠"
-            lines.extend(["---", "", f"### {marker} {finding.severity.upper()} · `{finding.rule}`{llm_badge}", "", f"Location: `{location}`", "", finding.message])
-            if finding.evidence:
-                lines.extend(["", f"Evidence: `{finding.evidence}`"])
+            lines.extend(["---", "", f"### {marker} {finding.severity.upper()} · `{finding.rule}`{llm_badge}{unresolved_badge}", "", f"Location: `{location}`"])
+            if leaf:
+                lines.extend(["", "**Source leaf:**", "", "```text", leaf.text, "```"])
+            lines.extend(["", markdown_highlight_source_terms(finding.message, leaf)])
+            canonical_tags, unmatched_words = canonical_evidence_highlights(finding)
+            if canonical_tags or unmatched_words:
+                lines.extend(["", "**Canonical analysis:**", ""])
+                if canonical_tags:
+                    highlighted = ", ".join(f"**`{tag}`**" for tag in canonical_tags)
+                    lines.append(f"- ✅ Canonical tags extracted from source: {highlighted}")
+                if unmatched_words:
+                    highlighted = ", ".join(f"**`{word}`**" for word in unmatched_words)
+                    lines.append(f"- ⚠️ Unmatched source words: {highlighted}")
+            duplicate_comparison = duplicate_evidence_comparison(finding)
+            if duplicate_comparison:
+                lines.extend(["", "**Duplicate comparison:**", ""])
+                for label, item in zip(("Current leaf", "Earlier matching leaf"), duplicate_comparison):
+                    item_location = f"{item.get('file', '')}:{item.get('line', 0)}"
+                    lines.extend([
+                        f"- **{label}:** category **`{item.get('category', '')}`** at `{item_location}`",
+                        f"  - `{item.get('leaf', '')}`",
+                    ])
+            semantic_cluster = semantic_duplicate_cluster_evidence(finding)
+            if semantic_cluster:
+                threshold = semantic_cluster.get("threshold", 0)
+                lines.extend(["", f"**Semantic duplicate cluster** (threshold {threshold:.4f}):", ""])
+                representative = semantic_cluster["representative"]
+                rep_location = f"{representative.get('file', '')}:{representative.get('line', 0)}"
+                lines.extend([
+                    f"- **Representative:** category **`{representative.get('category', '')}`** at `{rep_location}`",
+                    f"  - `{representative.get('leaf', '')}`",
+                ])
+                for member in semantic_cluster["members"]:
+                    if member.get("id") == representative.get("id"):
+                        continue
+                    member_location = f"{member.get('file', '')}:{member.get('line', 0)}"
+                    similarity = member.get("similarity_to_representative", 0)
+                    lines.extend([
+                        f"- **Member** (similarity {similarity:.4f}): category **`{member.get('category', '')}`** at `{member_location}`",
+                        f"  - `{member.get('leaf', '')}`",
+                    ])
+            if finding.evidence and not duplicate_comparison and not semantic_cluster:
+                if "\n" in finding.evidence:
+                    lines.extend(["", "Evidence:", "", "```text", finding.evidence, "```"])
+                else:
+                    lines.extend(["", f"Evidence: `{finding.evidence}`"])
+            if finding.alternatives:
+                lines.extend(["", "**Potential replacements — LLM generated:**", ""])
+                lines.extend(f"- `{alternative}`" for alternative in finding.alternatives)
             if finding.suggestion:
-                leaf = leaf_by_id.get(finding.leaf_id)
-                lines.extend(["", "**Potential fix — LLM generated:**", "", finding.suggestion])
+                fix_label = (
+                    "**Applied fix — LLM generated and written to fixed output:**"
+                    if fix_status(finding) == "fixed"
+                    else "**Potential fix — LLM generated:**"
+                )
+                lines.extend(["", fix_label, "", finding.suggestion])
                 if leaf:
                     lines.extend(["", "```diff", f"- {leaf.text}", f"+ {finding.suggestion}", "```"])
+            elif finding.leaf_id in rejected_suggestions and finding.leaf_id not in rendered_rejections:
+                rendered_rejections.add(finding.leaf_id)
+                lines.extend(["", "**Rejected automatic repair:**", ""])
+                proposed = proposed_suggestions.get(finding.leaf_id, "")
+                if proposed:
+                    lines.extend(["```diff", f"- {leaf.text if leaf else ''}", f"+ {proposed}", "```", ""])
+                lines.extend(f"- {reason}" for reason in rejected_suggestions[finding.leaf_id])
         return "\n".join(lines) + "\n"
     lines = [f"Scanned {files} file(s), {categories} categories, {len(leaves)} leaves: {counts['error']} error(s), {counts['warning']} warning(s)"]
+    if fix_attempted:
+        lines.append(f"Unresolved after fixed-output generation: {unresolved_count}; search for [UNRESOLVED]")
     for finding in findings:
         location = f"{finding.file}:{finding.line}" if finding.line else finding.file
-        evidence = f" [{finding.evidence}]" if finding.evidence else ""
+        leaf = leaf_by_id.get(finding.leaf_id)
+        evidence = (
+            f"\nEvidence:\n{finding.evidence}" if finding.evidence and "\n" in finding.evidence
+            else (f" [{finding.evidence}]" if finding.evidence else "")
+        )
         severity_color = "31;1" if finding.severity == "error" else "33;1"
         heading = ansi(finding.severity.upper(), severity_color, color)
         llm_badge = ansi(" [LLM]", "35;1", color) if finding.source == "llm" else ""
-        lines.extend(["", ansi("─" * 88, "90", color), f"{heading}{llm_badge}  {location}", f"category: {finding.category}  rule: {finding.rule}", f"{finding.message}{evidence}"])
+        unresolved_badge = ansi(" [UNRESOLVED]", "33;1", color) if fix_status(finding) == "unresolved" else ""
+        lines.extend(["", ansi("─" * 88, "90", color), f"{heading}{llm_badge}{unresolved_badge}  {location}", f"category: {finding.category}  rule: {finding.rule}"])
+        if leaf:
+            lines.extend(["", ansi("Source leaf:", "36;1", color), leaf.text])
+        lines.extend(["", finding.message])
+        canonical_tags, unmatched_words = canonical_evidence_highlights(finding)
+        if canonical_tags:
+            lines.append(
+                f"{ansi('Canonical tags extracted from source:', '32;1', color)} "
+                + ", ".join(ansi(tag, "32;1", color) for tag in canonical_tags)
+            )
+        if unmatched_words:
+            lines.append(
+                f"{ansi('Unmatched source words:', '33;1', color)} "
+                + ", ".join(ansi(word, "33;1", color) for word in unmatched_words)
+            )
+        duplicate_comparison = duplicate_evidence_comparison(finding)
+        if duplicate_comparison:
+            lines.append(ansi("Duplicate comparison:", "36;1", color))
+            for label, item in zip(("Current leaf", "Earlier matching leaf"), duplicate_comparison):
+                item_location = f"{item.get('file', '')}:{item.get('line', 0)}"
+                lines.append(
+                    f"- {label}: {item.get('category', '')} at {item_location}\n"
+                    f"  {item.get('leaf', '')}"
+                )
+        semantic_cluster = semantic_duplicate_cluster_evidence(finding)
+        if semantic_cluster:
+            threshold = semantic_cluster.get("threshold", 0)
+            lines.append(ansi(f"Semantic duplicate cluster (threshold {threshold:.4f}):", "36;1", color))
+            representative = semantic_cluster["representative"]
+            rep_location = f"{representative.get('file', '')}:{representative.get('line', 0)}"
+            lines.append(
+                f"- Representative: {representative.get('category', '')} at {rep_location}\n"
+                f"  {representative.get('leaf', '')}"
+            )
+            for member in semantic_cluster["members"]:
+                if member.get("id") == representative.get("id"):
+                    continue
+                member_location = f"{member.get('file', '')}:{member.get('line', 0)}"
+                similarity = member.get("similarity_to_representative", 0)
+                lines.append(
+                    f"- Member (similarity {similarity:.4f}): {member.get('category', '')} at {member_location}\n"
+                    f"  {member.get('leaf', '')}"
+                )
+        if evidence and not duplicate_comparison and not semantic_cluster:
+            lines.append(evidence.lstrip("\n"))
+        if finding.alternatives:
+            lines.extend([
+                "", ansi("Potential replacements [LLM-generated]:", "36;1", color),
+                *[f"- {alternative}" for alternative in finding.alternatives],
+            ])
         if finding.suggestion:
-            leaf = leaf_by_id.get(finding.leaf_id)
-            lines.extend(["", ansi("Potential fix [LLM-generated]:", "32;1", color), finding.suggestion])
+            fix_label = (
+                "Applied fix [LLM-generated; written to fixed output]:"
+                if fix_status(finding) == "fixed"
+                else "Potential fix [LLM-generated]:"
+            )
+            lines.extend(["", ansi(fix_label, "32;1", color), finding.suggestion])
             if leaf:
                 lines.extend(["", ansi(f"- {leaf.text}", "31", color), ansi(f"+ {finding.suggestion}", "32", color)])
     return "\n".join(lines) + "\n"
@@ -1008,26 +3002,830 @@ def parse_details_prompts(path: Path) -> list[dict[str, str]]:
     for index, match in enumerate(matches):
         section = text[match.end():matches[index + 1].start() if index + 1 < len(matches) else len(text)]
         mode_match = re.search(r"^- Prompt mode: `([^`]+)`", section, re.M)
+        pre_match = re.search(r"^### Pre-LLM prompt\s*\n+```text\n(.*?)\n```", section, re.M | re.S)
         post_match = re.search(r"^### Post-LLM prompt\s*\n+```text\n(.*?)\n```", section, re.M | re.S)
         records.append({
             "image": match.group(1),
             "mode": mode_match.group(1).strip() if mode_match else "Not found",
+            "pre_prompt": pre_match.group(1).strip() if pre_match else "",
             "post_prompt": post_match.group(1).strip() if post_match else "",
         })
     return records
 
 
-def validate_tag_prompt(prompt: str, max_items: int = 24) -> list[str]:
-    issues: list[str] = []
+COUNTER_TAGS = {
+    "1girl", "2girls", "3girls", "4girls", "5girls", "6+girls", "multiple_girls",
+    "1boy", "2boys", "3boys", "4boys", "5boys", "6+boys", "multiple_boys",
+    "1other", "2others", "3others", "4others", "5others", "6+others", "multiple_others",
+}
+LEAD_SUBJECT_TAGS = COUNTER_TAGS | {"no_humans", "crowd", "people"}
+TRANSPORT_ERROR_RE = re.compile(
+    r"^(?:\s*(?:404|500|502|503|504)\b|\s*(?:page )?not found\b|\s*(?:internal server|bad gateway|service unavailable|gateway timeout|unauthorized|forbidden)\b)",
+    re.I,
+)
+REPRESENTABILITY_PATTERNS = {
+    "nonvisual_modifier": re.compile(r"\b(?:familiar|eccentric|historical|recurring)\b", re.I),
+    "underspecified_specificity": re.compile(r"\b[A-Za-z][A-Za-z-]*-specific\b", re.I),
+    "unspecified_impossibility": re.compile(r"\bimpossible(?:-scale)?\b", re.I),
+    "ambiguous_scale": re.compile(r"\blooming\b", re.I),
+    "temporal_transition": re.compile(
+        r"\b(?:becoming|transforming|fragmenting|materializing|dematerializing|morphing|evolving|crashing)\b|"
+        r"\b(?:shifting between|changing into|turning into|splitting into|dissolving into|multiplying into)\b",
+        re.I,
+    ),
+}
+
+
+def normalize_canonical_tag(value: str) -> str:
+    return re.sub(r"\s+", "_", value.strip().lower())
+
+
+def exact_canonical_tag_items(
+    leaf: Leaf, vocabulary: DanbooruVocabulary | None,
+) -> list[str]:
+    """Return complete tags-mode items that exactly match the local vocabulary."""
+    if leaf.mode != "tags" or vocabulary is None:
+        return []
+    matches: set[str] = set()
+    for raw_item in split_top_level_commas(literal_text(leaf.text)):
+        item = WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip()
+        canonical = normalize_canonical_tag(item)
+        if canonical and canonical in vocabulary:
+            matches.add(canonical)
+    return sorted(matches)
+
+
+def canonical_relationship_components(
+    value: str, vocabulary: DanbooruVocabulary | set[str],
+) -> list[str]:
+    """Recognize a narrow hybrid relationship made from canonical tag components."""
+    tags = vocabulary.tags if isinstance(vocabulary, DanbooruVocabulary) else vocabulary
+    unweighted = WEIGHT_RE.sub(lambda match: match.group(1), value.strip().lower())
+    tokens = re.findall(r"[a-z0-9][a-z0-9_+().'’-]*", unweighted)
+    if len(tokens) == 2:
+        action, target = map(normalize_canonical_tag, tokens)
+        if action in RELATIONAL_ACTION_TAGS and target in tags:
+            return [*([action] if action in tags else []), target]
+        # Prefer-mode prompts may compactly attach a canonical modifier to a canonical
+        # object (for example, black wax_seal, or velvet seat) without inventing a
+        # compound tag.
+        if action in tags and target in tags:
+            return [action, target]
+    if len(tokens) == 3:
+        subject, preposition, target = map(normalize_canonical_tag, tokens)
+        normalized_target = normalize_canonical_tag(target)
+        if (
+            subject in RELATIONAL_ACTION_TAGS
+            and preposition in RELATIONAL_PREPOSITIONS
+            and normalized_target in tags
+        ):
+            return [*([subject] if subject in tags else []), normalized_target]
+        if (
+            subject in BODY_RELATION_SUBJECTS
+            and preposition in BODY_RELATION_PREPOSITIONS
+            and normalized_target in tags
+        ):
+            return [normalized_target]
+    return []
+
+
+def exact_canonical_relationship_items(
+    leaf: Leaf, vocabulary: DanbooruVocabulary | None,
+) -> list[dict[str, Any]]:
+    """Return recognized compact relationship items and their canonical components."""
+    if leaf.mode != "tags" or vocabulary is None:
+        return []
+    relationships: list[dict[str, Any]] = []
+    for raw_item in split_top_level_commas(literal_text(leaf.text)):
+        item = raw_item.strip()
+        components = canonical_relationship_components(item, vocabulary)
+        if components:
+            relationships.append({"text": item, "canonical_components": components})
+    return relationships
+
+
+def load_danbooru_tags(path: Path) -> DanbooruVocabulary:
+    text = path.read_text(encoding="utf-8-sig")
+    meaningful = [line for line in text.splitlines() if line.strip() and not line.lstrip().startswith("#")]
+    if not meaningful:
+        return DanbooruVocabulary(set())
+    reader = csv.DictReader(io.StringIO("\n".join(meaningful)))
+    fieldnames = {name.strip().lower() for name in (reader.fieldnames or [])}
+    tags: set[str] = set()
+    counts: dict[str, int] = {}
+    aliases: dict[str, set[str]] = {}
+    if fieldnames & {"name", "tag"}:
+        name_column = "name" if "name" in fieldnames else "tag"
+        count_column = "post_count" if "post_count" in fieldnames else "count"
+        for row in reader:
+            raw_name = row.get(name_column, "")
+            if not raw_name:
+                continue
+            name = normalize_canonical_tag(raw_name)
+            tags.add(name)
+            try:
+                counts[name] = int(str(row.get(count_column, "0")).replace(",", ""))
+            except ValueError:
+                counts[name] = 0
+            raw_aliases = row.get("alias", "") or ""
+            for alias in raw_aliases.split(","):
+                normalized_alias = normalize_canonical_tag(alias)
+                if normalized_alias:
+                    aliases.setdefault(normalized_alias, set()).add(name)
+    else:
+        for line in meaningful:
+            name = normalize_canonical_tag(line.split(",", 1)[0].strip().strip('"'))
+            if name not in {"name", "tag"}:
+                tags.add(name)
+    return DanbooruVocabulary(tags, counts, aliases)
+
+
+def open_canonical_retriever(
+    args: argparse.Namespace, csv_path: Path, vocabulary: DanbooruVocabulary,
+) -> CanonicalTagRetriever | None:
+    """Open a compatible index and enable embeddings according to --retrieval."""
+    index_path = (args.danbooru_index or csv_path.with_suffix(".index.sqlite")).expanduser().resolve()
+    if not index_path.exists():
+        if args.retrieval == "hybrid":
+            raise ValueError(f"--retrieval hybrid requires an existing Danbooru index: {index_path}")
+        verbose(args, f"Danbooru index not found at {index_path}; using in-memory lexical candidates")
+        return None
+    index = DanbooruIndex(index_path)
+    if not index.compatible_with_csv(csv_path):
+        index.close()
+        if args.retrieval == "hybrid":
+            raise ValueError(f"Danbooru index is not compatible with {csv_path}; rebuild its embeddings")
+        verbose(args, f"Danbooru index does not match {csv_path}; using in-memory lexical candidates")
+        return None
+
+    query_prefix = str(
+        args.embedding_query_prefix
+        if args.embedding_query_prefix is not None
+        else index.metadata.get("embedding_query_prefix", "")
+    )
+    client: EmbeddingClient | None = None
+    mode = "SQLite lexical"
+    if args.retrieval == "hybrid" and not index.has_embeddings:
+        index.close()
+        raise ValueError("--retrieval hybrid requires a complete embedding index")
+    if args.retrieval != "lexical" and index.has_embeddings:
+        model = args.embedding_model or index.metadata.get("embedding_model")
+        base_url = args.embedding_base_url or index.metadata.get("embedding_base_url")
+        if not model or not base_url:
+            if args.retrieval == "hybrid":
+                index.close()
+                raise ValueError("embedding index lacks model or base-URL metadata")
+            verbose(args, "embedding metadata is incomplete; using SQLite lexical retrieval")
+        else:
+            candidate = EmbeddingClient(
+                str(base_url), str(model), os.getenv(args.embedding_api_key_env, ""), args.timeout,
+                int(index.metadata.get("embedding_dimensions", 0)) or None,
+            )
+            try:
+                probe = candidate.embed([query_prefix + "canonical tag candidate"])[0]
+                expected = int(index.metadata.get("embedding_dimensions", 0))
+                if len(probe) != expected:
+                    raise RuntimeError(
+                        f"query embedding has {len(probe)} dimensions; index requires {expected}"
+                    )
+                client = candidate
+                mode = "SQLite hybrid (lexical + embeddings)"
+            except RuntimeError as exc:
+                if args.retrieval == "hybrid":
+                    index.close()
+                    raise
+                verbose(args, f"embedding query probe failed; using SQLite lexical retrieval: {exc}")
+    verbose(args, f"canonical candidate retrieval: {mode}; index={index_path}")
+    return CanonicalTagRetriever(
+        index, vocabulary, client, query_prefix, strict_embeddings=args.retrieval == "hybrid",
+    )
+
+
+def canonical_candidates(
+    value: str, vocabulary: DanbooruVocabulary, limit: int = 5,
+    retriever: CanonicalTagRetriever | None = None,
+) -> list[str]:
+    normalized = normalize_canonical_tag(value)
+    alias_matches = vocabulary.aliases.get(normalized, set())
+    if alias_matches:
+        return sorted(alias_matches, key=lambda tag: (-vocabulary.post_counts.get(tag, 0), tag))[:limit]
+    inflection_matches = canonical_inflection_matches(normalized, vocabulary)
+    if inflection_matches:
+        return inflection_matches[:limit]
+    if retriever is not None:
+        indexed = retriever.candidates(value, limit)
+        if indexed:
+            return indexed
+    query_tokens = set(normalized.replace("+", "_").split("_"))
+    scored: list[tuple[float, int, str]] = []
+    for tag in vocabulary.tags:
+        tag_tokens = set(tag.replace("+", "_").split("_"))
+        overlap = len(query_tokens & tag_tokens) / max(1, len(query_tokens | tag_tokens))
+        similarity = difflib.SequenceMatcher(None, normalized, tag).ratio()
+        score = similarity * 0.65 + overlap * 0.35
+        if score >= 0.42:
+            scored.append((score, vocabulary.post_counts.get(tag, 0), tag))
+    scored.sort(key=lambda item: (-item[0], -item[1], item[2]))
+    return [tag for _, _, tag in scored[:limit]]
+
+
+def canonical_inflection_variants(value: str) -> set[str]:
+    """Return conservative singular/plural variants of the final tag component."""
+    parts = value.split("_")
+    word = parts[-1]
+    variants: set[str] = set()
+    if len(word) >= 4 and word.endswith("ies"):
+        variants.add(word[:-3] + "y")
+    if len(word) >= 4 and word.endswith(("ches", "shes", "sses", "xes", "zes")):
+        variants.add(word[:-2])
+    if len(word) >= 3 and word.endswith("s") and not word.endswith(("ss", "us", "is")):
+        variants.add(word[:-1])
+    if len(word) >= 2 and word.endswith("y") and word[-2] not in "aeiou":
+        variants.add(word[:-1] + "ies")
+    if word.endswith(("ch", "sh", "ss", "x", "z")):
+        variants.add(word + "es")
+    elif not word.endswith("s"):
+        variants.add(word + "s")
+    return {"_".join([*parts[:-1], variant]) for variant in variants if variant and variant != word}
+
+
+def canonical_inflection_matches(value: str, vocabulary: DanbooruVocabulary) -> list[str]:
+    matches = canonical_inflection_variants(value) & vocabulary.tags
+    return sorted(matches, key=lambda tag: (-vocabulary.post_counts.get(tag, 0), tag))
+
+
+def render_canonical_tag(tag: str, style: str) -> str:
+    return tag.replace("_", " ") if style == "spaces" else tag
+
+
+def normalize_separator_variant(value: str) -> str:
+    """Normalize hyphen-like word separators without changing canonical tags globally."""
+    return normalize_canonical_tag(re.sub(r"[-‐‑‒–—]+", " ", value))
+
+
+def contained_canonical_spans(value: str, vocabulary: DanbooruVocabulary) -> list[dict[str, Any]]:
+    """Find longest non-overlapping canonical spans of at least two words."""
+    words = list(re.finditer(r"[A-Za-z0-9+][A-Za-z0-9+().'’-]*", value))
+    candidates: list[tuple[int, int, str, str]] = []
+    for width in range(len(words), 1, -1):
+        for start in range(0, len(words) - width + 1):
+            end = start + width
+            phrase = " ".join(match.group(0) for match in words[start:end]).lower()
+            canonical = normalize_canonical_tag(phrase)
+            matches = [canonical] if canonical in vocabulary else canonical_inflection_matches(canonical, vocabulary)
+            if len(matches) == 1:
+                candidates.append((start, end, phrase, matches[0]))
+    candidates.sort(key=lambda item: (-(item[1] - item[0]), item[0], -vocabulary.post_counts.get(item[3], 0)))
+    occupied: set[int] = set()
+    selected: list[tuple[int, int, str, str]] = []
+    for start, end, phrase, canonical in candidates:
+        positions = set(range(start, end))
+        if positions & occupied:
+            continue
+        occupied.update(positions)
+        selected.append((start, end, phrase, canonical))
+    selected.sort(key=lambda item: item[0])
+    return [
+        {
+            "text": value[words[start].start():words[end - 1].end()],
+            "canonical": canonical,
+            "word_start": start,
+            "word_end": end,
+        }
+        for start, end, _, canonical in selected
+    ]
+
+
+def shared_head_canonical_composition(
+    value: str, vocabulary: DanbooruVocabulary, policy: dict[str, Any] | None,
+) -> dict[str, Any] | None:
+    """Find known modifier+head tags that overlap on a final noun."""
+    if not policy or not policy.get("enabled", True) or not policy.get("shared_head_attributes", True):
+        return None
+    words = re.findall(r"[A-Za-z0-9+][A-Za-z0-9+().'’-]*", value.lower())
+    if len(words) < 3:
+        return None
+    head = words[-1]
+    components: list[dict[str, str]] = []
+    matched_modifier_indexes: set[int] = set()
+    for index, modifier in enumerate(words[:-1]):
+        source = f"{modifier} {head}"
+        normalized = normalize_canonical_tag(source)
+        if normalized in vocabulary:
+            matches = [normalized]
+            match_type = "exact"
+        elif policy.get("allow_inflection_match", True):
+            matches = canonical_inflection_matches(normalized, vocabulary)
+            match_type = "inflection"
+        else:
+            matches = []
+            match_type = ""
+        if len(matches) != 1:
+            continue
+        components.append({"source": source, "canonical": matches[0], "match": match_type})
+        matched_modifier_indexes.add(index)
+    if len(components) < int(policy.get("minimum_matches", 2)):
+        return None
+    return {
+        "head": head,
+        "components": components,
+        "canonical_ids": [component["canonical"] for component in components],
+        "unmatched_words": [
+            word for index, word in enumerate(words[:-1]) if index not in matched_modifier_indexes
+        ],
+    }
+
+
+def canonical_tag_guidance(
+    leaf: Leaf, vocabulary: DanbooruVocabulary, candidate_count: int,
+    output_style: str = "underscore", composition_policy: dict[str, Any] | None = None,
+    retriever: CanonicalTagRetriever | None = None,
+) -> list[dict[str, Any]]:
+    if leaf.mode != "tags":
+        return []
+    guidance: list[dict[str, Any]] = []
+    for item in split_top_level_commas(leaf.text):
+        raw = item.strip()
+        if not raw or REFERENCE_RE.search(raw) or valid_limited_palette_item(raw):
+            continue
+        unweighted = WEIGHT_RE.sub(lambda match: match.group(1), raw).strip().lower()
+        if canonical_relationship_components(raw, vocabulary):
+            continue
+        normalized = normalize_canonical_tag(unweighted)
+        if normalized in vocabulary:
+            rendered = render_canonical_tag(normalized, output_style)
+            if unweighted != rendered:
+                guidance.append({
+                    "input": raw, "status": "exact_normalized_match",
+                    "canonical_ids": [normalized], "candidates": [rendered],
+                })
+            continue
+        alias_matches = vocabulary.aliases.get(normalized, set())
+        if len(alias_matches) == 1:
+            canonical_ids = sorted(alias_matches)
+            guidance.append({
+                "input": raw, "status": "unique_alias", "canonical_ids": canonical_ids,
+                "candidates": [render_canonical_tag(tag, output_style) for tag in canonical_ids],
+            })
+        elif (separator_normalized := normalize_separator_variant(unweighted)) != normalized and separator_normalized in vocabulary:
+            guidance.append({
+                "input": raw, "status": "separator_normalized_match",
+                "canonical_ids": [separator_normalized],
+                "candidates": [render_canonical_tag(separator_normalized, output_style)],
+            })
+        elif "_" in unweighted and re.fullmatch(r"[a-z0-9][a-z0-9_+().:'-]*", unweighted):
+            canonical_ids = canonical_candidates(unweighted, vocabulary, candidate_count, retriever)
+            guidance.append({
+                "input": raw, "status": "unknown_canonical_looking_token",
+                "canonical_ids": canonical_ids,
+                "candidates": [render_canonical_tag(tag, output_style) for tag in canonical_ids],
+            })
+        else:
+            composition = shared_head_canonical_composition(unweighted, vocabulary, composition_policy)
+            if composition:
+                guidance.append({
+                    "input": raw,
+                    "status": "shared_head_composition",
+                    **composition,
+                    "candidates": [
+                        render_canonical_tag(tag, output_style) for tag in composition["canonical_ids"]
+                    ],
+                })
+                continue
+            spans = contained_canonical_spans(unweighted, vocabulary)
+            if spans:
+                matched_positions = {
+                    position for span in spans for position in range(span["word_start"], span["word_end"])
+                }
+                words = re.findall(r"[A-Za-z0-9+][A-Za-z0-9+().'’-]*", unweighted)
+                unmatched = [word for index, word in enumerate(words) if index not in matched_positions]
+                guidance.append({
+                    "input": raw,
+                    "status": "contained_canonical_spans",
+                    "spans": spans,
+                    "canonical_ids": [span["canonical"] for span in spans],
+                    "candidates": [render_canonical_tag(span["canonical"], output_style) for span in spans],
+                    "unmatched_words": unmatched,
+                })
+    return guidance
+
+
+def canonical_tag_findings(
+    leaves: list[Leaf], vocabulary: DanbooruVocabulary, candidate_count: int = 5,
+    output_style: str = "underscore", composition_policy: dict[str, Any] | None = None,
+    retriever: CanonicalTagRetriever | None = None,
+) -> list[Finding]:
+    findings: list[Finding] = []
+    for leaf in leaves:
+        for guidance in canonical_tag_guidance(
+            leaf, vocabulary, candidate_count, output_style, composition_policy, retriever,
+        ):
+            status = guidance["status"]
+            candidates = guidance["candidates"]
+            if status == "exact_normalized_match":
+                message = f"literal phrase has an exact canonical Danbooru form: {candidates[0]}"
+                rule = "canonical_tag_normalization"
+            elif status == "unique_alias":
+                message = f"tag phrase has one canonical alias target: {candidates[0]}"
+                rule = "canonical_tag_alias"
+            elif status == "separator_normalized_match":
+                message = f"hyphenated phrase has an exact canonical Danbooru form: {candidates[0]}"
+                rule = "canonical_tag_separator_normalization"
+            elif status == "shared_head_composition":
+                unmatched = guidance.get("unmatched_words", [])
+                remainder = f"; unmatched words: {', '.join(unmatched)}" if unmatched else ""
+                message = f"item can be decomposed into canonical shared-head tags: {', '.join(candidates)}{remainder}"
+                rule = "canonical_tag_composition"
+            elif status == "contained_canonical_spans":
+                unmatched = guidance.get("unmatched_words", [])
+                remainder = f"; unmatched words: {', '.join(unmatched)}" if unmatched else ""
+                message = f"item contains canonical Danbooru span(s): {', '.join(candidates)}{remainder}"
+                rule = "canonical_tag_contained_span"
+            else:
+                suffix = f"; candidates: {', '.join(candidates)}" if candidates else "; no close canonical candidate found"
+                message = f"unknown canonical-looking Danbooru token: {guidance['input']}{suffix}"
+                rule = "unknown_canonical_tag"
+            findings.append(Finding(
+                "warning", rule, message, leaf.file, leaf.line, leaf.category, leaf.uid,
+                evidence=json.dumps(guidance, ensure_ascii=False),
+            ))
+    return findings
+
+
+def canonical_tag_redundancy_findings(
+    leaves: list[Leaf], vocabulary: DanbooruVocabulary,
+) -> list[Finding]:
+    """Find only provably redundant complete canonical items within one leaf."""
+    findings: list[Finding] = []
+    for leaf in leaves:
+        if leaf.mode != "tags":
+            continue
+        items: list[tuple[str, str]] = []
+        for raw_item in split_top_level_commas(literal_text(leaf.text)):
+            raw = raw_item.strip()
+            canonical = normalize_canonical_tag(WEIGHT_RE.sub(lambda match: match.group(1), raw))
+            if raw and canonical in vocabulary:
+                items.append((raw, canonical))
+        grouped: dict[str, list[str]] = {}
+        for raw, canonical in items:
+            grouped.setdefault(canonical, []).append(raw)
+        for canonical, raw_group in grouped.items():
+            if len(raw_group) < 2:
+                continue
+            def item_weight(value: str) -> float:
+                match = WEIGHT_RE.fullmatch(value)
+                return float(match.group(2)) if match else 1.0
+            preferred = max(enumerate(raw_group), key=lambda item: (item_weight(item[1]), -item[0]))[1]
+            for raw in raw_group:
+                if raw == preferred:
+                    continue
+                guidance = {
+                    "input": raw, "status": "safe_redundancy", "preferred": preferred,
+                    "reason": "exact canonical item already appears in this leaf", "candidates": [],
+                }
+                findings.append(Finding(
+                    "warning", "canonical_tag_redundancy",
+                    f"canonical item duplicates `{preferred}` and can be removed: {raw}",
+                    leaf.file, leaf.line, leaf.category, leaf.uid,
+                    evidence=json.dumps(guidance, ensure_ascii=False),
+                ))
+        canonical_set = {canonical for _, canonical in items}
+        for raw, canonical in items:
+            if not canonical.startswith("multiple_"):
+                continue
+            plural = canonical.removeprefix("multiple_")
+            possible_singulars = canonical_inflection_variants(plural) | {plural}
+            singular = next((tag for tag in canonical_set if tag in possible_singulars), "")
+            if not singular:
+                # canonical_inflection_variants is bidirectional only through comparison.
+                singular = next(
+                    (tag for tag in canonical_set if plural in canonical_inflection_variants(tag)), ""
+                )
+            if not singular or singular == canonical:
+                continue
+            redundant_raw = next(source for source, tag in items if tag == singular)
+            guidance = {
+                "input": redundant_raw, "status": "safe_redundancy", "preferred": raw,
+                "reason": f"{canonical} preserves the explicit plurality of {singular}", "candidates": [],
+            }
+            findings.append(Finding(
+                "warning", "canonical_tag_redundancy",
+                f"broader singular tag `{singular}` is redundant beside more accurate `{canonical}`",
+                leaf.file, leaf.line, leaf.category, leaf.uid,
+                evidence=json.dumps(guidance, ensure_ascii=False),
+            ))
+    return findings
+
+
+DETERMINISTIC_CANONICAL_STATUSES = {
+    "exact_normalized_match", "unique_alias", "separator_normalized_match",
+    "shared_head_composition", "contained_canonical_spans", "safe_redundancy",
+}
+DETERMINISTIC_CANONICAL_RULES = {
+    "canonical_tag_normalization", "canonical_tag_alias",
+    "canonical_tag_separator_normalization", "canonical_tag_composition",
+    "canonical_tag_contained_span",
+    "canonical_tag_redundancy",
+}
+
+
+def deterministic_canonical_repairs(
+    leaves: list[Leaf], findings: list[Finding],
+) -> tuple[dict[str, str], set[tuple[str, str, str]]]:
+    """Combine only unambiguous whole-item canonical rewrites for each leaf."""
+    leaf_by_id = {leaf.uid: leaf for leaf in leaves}
+    rewrites: dict[str, str] = {}
+    resolved: set[tuple[str, str, str]] = set()
+    for finding in findings:
+        if (
+            finding.rule not in DETERMINISTIC_CANONICAL_RULES
+            or finding.leaf_id not in leaf_by_id or not finding.evidence
+        ):
+            continue
+        try:
+            guidance = json.loads(finding.evidence)
+        except (TypeError, json.JSONDecodeError):
+            continue
+        status = guidance.get("status")
+        candidates = [str(candidate) for candidate in guidance.get("candidates", []) if str(candidate)]
+        unmatched = guidance.get("unmatched_words", [])
+        if status not in DETERMINISTIC_CANONICAL_STATUSES or (not candidates and status != "safe_redundancy"):
+            continue
+        if status in {"shared_head_composition", "contained_canonical_spans"} and unmatched:
+            continue
+        source_item = str(guidance.get("input", "")).strip()
+        if not source_item:
+            continue
+        weight = WEIGHT_RE.fullmatch(source_item)
+        if weight and len(candidates) != 1:
+            continue
+        replacement = (
+            "" if status == "safe_redundancy"
+            else (f"({candidates[0]}:{weight.group(2)})" if weight else ", ".join(candidates))
+        )
+        current = rewrites.get(finding.leaf_id, leaf_by_id[finding.leaf_id].text)
+        parts = split_top_level_commas(current)
+        matching = [index for index, part in enumerate(parts) if part.strip() == source_item]
+        if len(matching) != 1:
+            continue
+        index = matching[0]
+        leading = parts[index][:len(parts[index]) - len(parts[index].lstrip())]
+        if status == "safe_redundancy":
+            parts.pop(index)
+        else:
+            parts[index] = leading + replacement
+        rewritten = ",".join(parts)
+        if sorted(reference_tokens(current)) != sorted(reference_tokens(rewritten)):
+            continue
+        rewrites[finding.leaf_id] = rewritten
+        resolved.add((finding.leaf_id, finding.rule, source_item))
+    return rewrites, resolved
+
+
+def leaves_with_rewrites(leaves: list[Leaf], rewrites: dict[str, str]) -> list[Leaf]:
+    """Return an inventory view containing staged leaf text without touching disk."""
+    return [
+        Leaf(
+            leaf.uid, leaf.file, leaf.namespace, leaf.category, leaf.index, leaf.line,
+            rewrites.get(leaf.uid, leaf.text),
+            tuple(REFERENCE_RE.findall(rewrites.get(leaf.uid, leaf.text))), leaf.mode,
+        )
+        for leaf in leaves
+    ]
+
+
+def canonical_finding_key(finding: Finding) -> tuple[str, str, str] | None:
+    if not finding.evidence:
+        return None
+    try:
+        evidence = json.loads(finding.evidence)
+    except (TypeError, json.JSONDecodeError):
+        return None
+    source_item = str(evidence.get("input", "")).strip()
+    return (finding.leaf_id, finding.rule, source_item) if source_item else None
+
+
+def validate_deterministic_canonical_repairs(
+    leaves: list[Leaf], rewrites: dict[str, str], resolved: set[tuple[str, str, str]],
+    rules: dict[str, Any], tags_rules: dict[str, Any], vocabulary: DanbooruVocabulary,
+    candidate_count: int = 5, output_style: str = "underscore",
+    retriever: CanonicalTagRetriever | None = None,
+) -> tuple[dict[str, str], set[tuple[str, str, str]], dict[str, list[str]]]:
+    """Re-lint staged deterministic leaves and retain only locally clean rewrites."""
+    leaf_by_id = {leaf.uid: leaf for leaf in leaves}
+    accepted: dict[str, str] = {}
+    rejected: dict[str, list[str]] = {}
+    accepted_resolved: set[tuple[str, str, str]] = set()
+    for uid, rewrite in rewrites.items():
+        original = leaf_by_id[uid]
+        candidate = leaves_with_rewrites([original], {uid: rewrite})[0]
+        baseline = (
+            pattern_findings([original], rules) + tags_mode_findings([original], tags_rules)
+            + canonical_tag_findings(
+                [original], vocabulary, candidate_count, output_style,
+                tags_rules.get("canonical_composition"), retriever,
+            ) + canonical_tag_redundancy_findings([original], vocabulary)
+        )
+        post = (
+            pattern_findings([candidate], rules) + tags_mode_findings([candidate], tags_rules)
+            + canonical_tag_findings(
+                [candidate], vocabulary, candidate_count, output_style,
+                tags_rules.get("canonical_composition"), retriever,
+            ) + canonical_tag_redundancy_findings([candidate], vocabulary)
+        )
+        baseline_rules = {finding.rule for finding in baseline}
+        introduced = sorted({finding.rule for finding in post if finding.rule not in baseline_rules})
+        targeted = {key for key in resolved if key[0] == uid}
+        remaining_keys = {key for finding in post if (key := canonical_finding_key(finding))}
+        remaining = targeted & remaining_keys
+        reasons = []
+        if introduced:
+            reasons.append("new deterministic finding: " + ", ".join(introduced))
+        if remaining:
+            reasons.append("targeted canonical repair remains unresolved")
+        if reasons:
+            rejected[uid] = reasons
+        else:
+            accepted[uid] = rewrite
+            accepted_resolved.update(targeted)
+    return accepted, accepted_resolved, rejected
+
+
+LITERAL_CONCEPT_STOPWORDS = {
+    "about", "above", "across", "after", "against", "along", "among", "around",
+    "behind", "below", "beneath", "beside", "between", "during", "from", "in", "inside",
+    "into", "near", "onto", "outside", "over", "through", "toward", "under", "upon",
+    "while", "with", "without",
+}
+LITERAL_CONCEPT_INFLECTION_AFFIXES = {"ed", "en", "er", "es", "ing", "ly", "s", "y"}
+
+
+def canonical_compound_component(word: str, candidate: str) -> bool:
+    """Accept a substantial embedded canonical component, excluding simple inflection."""
+    comparable = candidate.replace("_", " ")
+    if " " in comparable or len(comparable) < 4 or comparable == word:
+        return False
+    if word.startswith(comparable):
+        affix = word[len(comparable):]
+    elif word.endswith(comparable):
+        affix = word[:-len(comparable)]
+    else:
+        return False
+    return len(affix) >= 2 and affix not in LITERAL_CONCEPT_INFLECTION_AFFIXES
+
+
+def canonical_literal_concept_findings(
+    leaves: list[Leaf], vocabulary: DanbooruVocabulary,
+    retriever: CanonicalTagRetriever, candidate_count: int = 5,
+    output_style: str = "underscore",
+) -> list[Finding]:
+    """Flag plain compound concepts that may decompose into canonical vocabulary."""
+    findings: list[Finding] = []
+    for leaf in leaves:
+        if leaf.mode != "tags":
+            continue
+        for raw_item in split_top_level_commas(literal_text(leaf.text)):
+            raw = WEIGHT_RE.sub(lambda match: match.group(1), raw_item).strip().lower()
+            if (
+                not raw or "_" in raw or normalize_canonical_tag(raw) in vocabulary
+                or canonical_relationship_components(raw_item, vocabulary)
+            ):
+                continue
+            words = re.findall(r"[a-z0-9][a-z0-9+'-]*", raw)
+            if not 2 <= len(words) <= 5:
+                continue
+            content_words = [word for word in words if word not in LITERAL_CONCEPT_STOPWORDS]
+            if len(content_words) < 2:
+                continue
+            known = [word for word in content_words if normalize_canonical_tag(word) in vocabulary]
+            required_coverage_count = (len(content_words) + 1) // 2
+            coverage = len(known) / len(content_words)
+            # Human-curated literal compositions meeting the canonical-anchor target do
+            # not need embedding review merely because the whole phrase is not one tag.
+            if len(known) >= required_coverage_count:
+                continue
+            unknown = [
+                word for word in content_words
+                if normalize_canonical_tag(word) not in vocabulary
+            ]
+            # A phrase composed entirely of known tags is a valid literal composition under
+            # the prefer policy. Reporting it merely invites destructive word atomization.
+            if not unknown:
+                continue
+            def retrieve(query: str) -> tuple[list[str], list[dict[str, Any]]]:
+                if hasattr(retriever, "candidate_results"):
+                    ranked = retriever.candidate_results(query, max(candidate_count, 1))
+                    return (
+                        [item.tag for item in ranked],
+                        [{"tag": item.tag, "score": round(float(item.score), 4),
+                          "post_count": item.post_count} for item in ranked],
+                    )
+                tags = retriever.candidates(query, max(candidate_count, 1))
+                return tags, [{"tag": tag} for tag in tags]
+
+            raw_candidates, candidate_records = retrieve(raw)
+            candidates = list(dict.fromkeys(raw_candidates))[:candidate_count]
+            head = next((word for word in reversed(words) if word not in LITERAL_CONCEPT_STOPWORDS), "")
+            relevant = [
+                candidate for candidate in candidates
+                if head in normalize_canonical_tag(candidate).split("_")
+                or canonical_compound_component(head, normalize_canonical_tag(candidate))
+            ]
+            component_guidance: list[dict[str, Any]] = []
+            component_candidates: list[str] = []
+            for word in words:
+                normalized_word = normalize_canonical_tag(word)
+                if word in LITERAL_CONCEPT_STOPWORDS:
+                    continue
+                if normalized_word in vocabulary:
+                    component_guidance.append({"text": word, "exact_tags": [normalized_word], "candidates": []})
+                    component_candidates.append(normalized_word)
+                    continue
+                tags, records = retrieve(word)
+                if tags:
+                    component_guidance.append({"text": word, "exact_tags": [], "candidates": records})
+                    component_candidates.extend(tags[:candidate_count])
+            if not relevant and not component_candidates:
+                continue
+            rendered_known = [render_canonical_tag(tag, output_style) for tag in known]
+            rendered_candidates = [render_canonical_tag(tag, output_style) for tag in candidates]
+            guidance = {
+                "input": raw,
+                "status": "literal_phrase_candidate_review",
+                "content_words": content_words,
+                "canonical_coverage_count": len(known),
+                "required_coverage_count": required_coverage_count,
+                "canonical_coverage": round(coverage, 4),
+                "known_canonical_components": rendered_known,
+                "unknown_words": unknown,
+                "candidates": rendered_candidates,
+                "ranked_candidates": candidate_records,
+                "meaning_preserving_candidates": [render_canonical_tag(tag, output_style) for tag in relevant],
+                "component_guidance": component_guidance,
+                "candidate_tag_set_palette": [
+                    render_canonical_tag(tag, output_style)
+                    for tag in dict.fromkeys([*relevant, *component_candidates])
+                ],
+                "instruction": (
+                    "Build the smallest tag set that covers every visible source component. Prefer exact "
+                    "canonical components, use retrieved candidates only when equivalent, and retain unmatched "
+                    "literal components. Never add details merely associated with the phrase."
+                ),
+            }
+            component_note = (
+                f"; known canonical component(s): {', '.join(rendered_known)}"
+                if rendered_known else ""
+            )
+            rendered_palette = guidance["candidate_tag_set_palette"][:max(candidate_count * 3, candidate_count)]
+            findings.append(Finding(
+                "warning", "canonical_literal_concept",
+                f"Plain literal phrase has {len(known)}/{len(content_words)} canonical content-word coverage "
+                f"(target {required_coverage_count}/{len(content_words)}){component_note}; "
+                f"review tag-set palette: {', '.join(rendered_palette)}.",
+                leaf.file, leaf.line, leaf.category, leaf.uid,
+                evidence=json.dumps(guidance, ensure_ascii=False),
+            ))
+    return findings
+
+
+def representability_issues(prompt: str) -> list[tuple[str, str]]:
+    issues: list[tuple[str, str]] = []
+    if TRANSPORT_ERROR_RE.search(prompt):
+        issues.append(("invalid_service_response", "post-LLM output is an HTTP or service error instead of an image prompt"))
+        return issues
+    for code, expression in REPRESENTABILITY_PATTERNS.items():
+        match = expression.search(prompt)
+        if match:
+            issues.append((code, f"nonvisual or time-dependent expression remains: {match.group(0)}"))
+    return issues
+
+
+def validate_tag_prompt_detailed(
+    prompt: str, max_items: int = 24,
+    danbooru_tags: DanbooruVocabulary | set[str] | None = None,
+) -> list[tuple[str, str]]:
+    issues: list[tuple[str, str]] = representability_issues(prompt)
+    if any(code == "invalid_service_response" for code, _ in issues):
+        return issues
     if "\n" in prompt:
-        issues.append("tags output must be exactly one line")
+        issues.append(("format_failure", "tags output must be exactly one line"))
     items = [item.strip() for item in split_top_level_commas(prompt) if item.strip()]
     if len(items) > max_items:
-        issues.append(f"tags output has {len(items)} items; soft maximum is {max_items}")
-    if not items or not re.match(r"^(?:no_humans|\d+(?:others?|girls?|boys?|women|men)|solo)\b", items[0], re.I):
-        issues.append("first item does not declare an exact subject count or no_humans")
+        issues.append(("format_failure", f"tags output has {len(items)} items; soft maximum is {max_items}"))
+    first = items[0].lower() if items else ""
+    if first not in LEAD_SUBJECT_TAGS:
+        issues.append(("subject_count_failure", "first item is not a valid Danbooru counter, no_humans, crowd, or people"))
+    if first == "solo":
+        issues.append(("subject_count_failure", "solo supplements a 1girl, 1boy, or 1other counter; it cannot replace one"))
+    leading_counters = [item.lower() for item in items if item.lower() in COUNTER_TAGS]
+    if first == "no_humans" and leading_counters:
+        issues.append(("subject_count_failure", "no_humans conflicts with character counter tags"))
+    for item in items:
+        token = item.lower()
+        if re.fullmatch(r"\d+\+?(?:girls?|boys?|others?|women|men|family)", token) and token not in COUNTER_TAGS:
+            issues.append(("subject_count_failure", f"invalid Danbooru character counter: {item}"))
     if ALTERNATIVE_RE.search(prompt):
-        issues.append("unresolved or/either alternative remains")
+        issues.append(("unresolved_alternative", "unresolved or/either alternative remains"))
     camera_terms = {
         name for name, expression in {
             "close": r"\b(?:close[- ]?up|macro)\b",
@@ -1039,61 +3837,123 @@ def validate_tag_prompt(prompt: str, max_items: int = 24) -> list[str]:
     }
     distance_terms = camera_terms & {"close", "medium", "wide"}
     if len(distance_terms) > 1:
-        issues.append(f"competing camera distances remain: {', '.join(sorted(distance_terms))}")
+        issues.append(("camera_conflict", f"competing camera distances remain: {', '.join(sorted(distance_terms))}"))
     if re.search(r"[.!?]\s+[A-Z]", prompt):
-        issues.append("sentence-like prose remains in tags output")
+        issues.append(("format_failure", "sentence-like prose remains in tags output"))
     without_valid_weights = WEIGHT_RE.sub("", prompt)
     malformed = re.search(r"(?:^|,)\s*[^,()]+:\d+(?:\.\d+)?(?:\s*,|$)", without_valid_weights)
     if malformed:
-        issues.append("weighted tag is missing outer parentheses")
+        issues.append(("weight_syntax", "weighted tag is missing outer parentheses"))
+    if danbooru_tags is not None:
+        for item in items:
+            unweighted = WEIGHT_RE.sub(lambda match: match.group(1), item).strip().lower()
+            if "_" in unweighted and re.fullmatch(r"[a-z0-9][a-z0-9_+().:'-]*", unweighted) and unweighted not in danbooru_tags:
+                issues.append(("unknown_canonical_tag", f"unknown underscore-style Danbooru tag: {item}"))
     return issues
 
 
-def audit_post_prompts(path: Path) -> list[PromptAudit]:
+def validate_tag_prompt(prompt: str, max_items: int = 24) -> list[str]:
+    return [message for _, message in validate_tag_prompt_detailed(prompt, max_items)]
+
+
+def audit_post_prompts(
+    path: Path, danbooru_tags: DanbooruVocabulary | set[str] | None = None,
+) -> list[PromptAudit]:
     audits: list[PromptAudit] = []
     for record in parse_details_prompts(path):
         mode = record["mode"]
         prompt = record["post_prompt"]
         issues: list[str] = []
+        issue_codes: list[str] = []
         if not prompt or prompt == "_Not found_" or mode == "Not found":
             status = "unable"
             issues.append("prompt mode or post-LLM prompt is missing")
+            issue_codes.append("missing_prompt")
         elif mode == "Tags":
-            issues = validate_tag_prompt(prompt)
-            status = "noncompliant" if issues else "compliant"
+            detailed = validate_tag_prompt_detailed(prompt, danbooru_tags=danbooru_tags)
+            issue_codes = [code for code, _ in detailed]
+            issues = [message for _, message in detailed]
+            status = "noncompliant" if any(code != "unknown_canonical_tag" for code in issue_codes) else "compliant"
         elif mode == "Narrative":
+            detailed = representability_issues(prompt)
+            issue_codes = [code for code, _ in detailed]
+            issues = [message for _, message in detailed]
             if len([part for part in prompt.split("\n\n") if part.strip()]) != 1:
                 issues.append("narrative output must contain exactly one prose block")
-            status = "noncompliant" if issues else "compliant"
+                issue_codes.append("format_failure")
+            status = "noncompliant" if any(code != "unknown_canonical_tag" for code in issue_codes) else "compliant"
         elif mode == "Narrative and Tags":
             blocks = [part.strip() for part in prompt.split("\n\n") if part.strip()]
             if len(blocks) != 2:
                 issues.append("combined output must contain exactly two blocks")
+                issue_codes.append("format_failure")
             else:
-                issues.extend(validate_tag_prompt(blocks[1]))
-            status = "noncompliant" if issues else "compliant"
+                detailed = representability_issues(blocks[0]) + validate_tag_prompt_detailed(blocks[1], danbooru_tags=danbooru_tags)
+                issue_codes.extend(code for code, _ in detailed)
+                issues.extend(message for _, message in detailed)
+            status = "noncompliant" if any(code != "unknown_canonical_tag" for code in issue_codes) else "compliant"
         else:
             status = "unable"
             issues.append(f"unrecognized prompt mode: {mode}")
-        audits.append(PromptAudit(record["image"], mode, status, issues, prompt))
+            issue_codes.append("unknown_mode")
+        audits.append(PromptAudit(record["image"], mode, status, issues, prompt, issue_codes, record["pre_prompt"]))
     return audits
+
+
+def prompt_audit_has_warning(audits: Sequence[PromptAudit]) -> bool:
+    return any(
+        audit.status == "noncompliant" or "unknown_canonical_tag" in audit.issue_codes
+        for audit in audits
+    )
 
 
 def render_prompt_audit(audits: list[PromptAudit], fmt: str) -> str:
     counts = {status: sum(a.status == status for a in audits) for status in ("compliant", "noncompliant", "unable")}
+    unique_by_pair: dict[tuple[str, str, str], PromptAudit] = {}
+    for audit in audits:
+        unique_by_pair.setdefault((audit.mode, audit.pre_prompt, audit.post_prompt), audit)
+    unique = list(unique_by_pair.values())
+    unique_counts = {status: sum(a.status == status for a in unique) for status in ("compliant", "noncompliant", "unable")}
+    issue_counts: dict[str, int] = {}
+    for audit in unique:
+        for code in set(audit.issue_codes):
+            issue_counts[code] = issue_counts.get(code, 0) + 1
     if fmt == "json":
-        return json.dumps({"summary": counts, "images": [asdict(audit) for audit in audits]}, indent=2, ensure_ascii=False) + "\n"
+        return json.dumps({
+            "summary": {
+                "images": {"total": len(audits), **counts},
+                "unique_prompt_pairs": {"total": len(unique), **unique_counts},
+                "issues_by_unique_pair": dict(sorted(issue_counts.items())),
+            },
+            "images": [asdict(audit) for audit in audits],
+        }, indent=2, ensure_ascii=False) + "\n"
     if fmt == "markdown":
-        lines = ["# Post-prompt validation", "", f"Audited {len(audits)} generated image prompt(s): {counts['compliant']} compliant, {counts['noncompliant']} noncompliant, {counts['unable']} unable to validate.", "", "> This is a post-generation audit. It does not reject an image or alter workflow output."]
+        lines = [
+            "# Post-prompt validation", "",
+            f"Audited {len(audits)} generated images: {counts['compliant']} compliant, {counts['noncompliant']} noncompliant, {counts['unable']} unable to validate.",
+            f"Unique pre/post prompt pairs: {len(unique)} total · {unique_counts['compliant']} compliant · {unique_counts['noncompliant']} noncompliant · {unique_counts['unable']} unable.",
+        ]
+        if issue_counts:
+            lines.extend(["", "Issue classifications by unique prompt pair:", "", *[f"- `{code}`: {count}" for code, count in sorted(issue_counts.items())]])
+        lines.extend(["", "> This is a post-generation audit. It does not reject an image or alter workflow output."])
         for audit in audits:
             lines.extend(["", f"## `{audit.image}`", "", f"- Mode: `{audit.mode}`", f"- Audit status: **{audit.status}**"])
             if audit.issues:
-                lines.extend(["", *[f"- {issue}" for issue in audit.issues]])
+                lines.extend(["", *[
+                    f"- `{audit.issue_codes[index] if index < len(audit.issue_codes) else 'audit_issue'}`: {issue}"
+                    for index, issue in enumerate(audit.issues)
+                ]])
         return "\n".join(lines) + "\n"
-    lines = [f"Audited {len(audits)} generated image prompt(s): {counts['compliant']} compliant, {counts['noncompliant']} noncompliant, {counts['unable']} unable"]
+    lines = [
+        f"Audited {len(audits)} generated images: {counts['compliant']} compliant, {counts['noncompliant']} noncompliant, {counts['unable']} unable",
+        f"Unique prompt pairs: {len(unique)} total, {unique_counts['compliant']} compliant, {unique_counts['noncompliant']} noncompliant, {unique_counts['unable']} unable",
+    ]
     for audit in audits:
         lines.append(f"{audit.status.upper()} {audit.image} [{audit.mode}]")
-        lines.extend(f"  - {issue}" for issue in audit.issues)
+        lines.extend(
+            f"  - [{audit.issue_codes[index] if index < len(audit.issue_codes) else 'audit_issue'}] {issue}"
+            for index, issue in enumerate(audit.issues)
+        )
     return "\n".join(lines) + "\n"
 
 
@@ -1109,23 +3969,94 @@ def combine_reports(lint_report: str, audits: list[PromptAudit], fmt: str) -> st
 
 
 def write_annotated_details(source: Path, destination: Path, audits: list[PromptAudit]) -> None:
-    original = source.read_text(encoding="utf-8").rstrip()
-    annotation = render_prompt_audit(audits, "markdown")
+    original = source.read_text(encoding="utf-8")
+    by_image = {audit.image: audit for audit in audits}
+    matches = list(DETAIL_SECTION_RE.finditer(original))
+    pieces = [original[:matches[0].start()]] if matches else [original]
+    for index, match in enumerate(matches):
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(original)
+        section = original[match.end():end]
+        section = re.sub(r"\n- Audit status:.*(?=\n|$)", "", section)
+        section = re.sub(r"\n- Audit issue(?: `[^`]+`)?:.*(?=\n|$)", "", section)
+        audit = by_image.get(match.group(1))
+        if audit:
+            annotation = f"\n\n- Audit status: **{audit.status}**"
+            annotation += "".join(
+                f"\n\n- Audit issue `{audit.issue_codes[index] if index < len(audit.issue_codes) else 'audit_issue'}`: {issue}"
+                for index, issue in enumerate(audit.issues)
+            )
+            mode_match = re.search(r"^- Prompt mode: `[^`]+`[ \t]*$", section, re.M)
+            if mode_match:
+                section = section[:mode_match.end()] + annotation + section[mode_match.end():]
+            else:
+                section = annotation + section
+        pieces.extend([match.group(0), section])
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(original + "\n\n---\n\n" + annotation, encoding="utf-8")
+    destination.write_text("".join(pieces), encoding="utf-8")
 
 
 def main() -> int:
     args = parse_args()
+    if args.run_log:
+        enable_run_log(args.run_log, args)
+    if args.unresolved_output and not args.unresolved_report:
+        args.unresolved_report = args.unresolved_output.with_suffix(".md")
+    elif args.unresolved_report and not args.unresolved_output:
+        args.unresolved_output = args.unresolved_report.with_suffix(".yaml")
     script_dir = Path(__file__).resolve().parent
     rules_path = args.rules or script_dir / "rules.yaml"
     prompt_path = args.prompt or script_dir.parent / "prompt.md"
     audits: list[PromptAudit] = []
+    danbooru_vocabulary: DanbooruVocabulary | None = None
+    canonical_retriever: CanonicalTagRetriever | None = None
+    spotlight_intents: dict[str, dict[str, str]] = {}
     try:
         if args.annotated_details and not args.validate_post_prompts:
             raise ValueError("--annotated-details requires --validate-post-prompts")
+        if args.post_prompt_output and not args.validate_post_prompts:
+            raise ValueError("--post-prompt-output requires --validate-post-prompts")
+        if args.include_post_prompt_report and not args.validate_post_prompts:
+            raise ValueError("--include-post-prompt-report requires --validate-post-prompts")
+        if args.include_post_prompt_report and args.post_prompt_output:
+            raise ValueError("--include-post-prompt-report cannot be combined with --post-prompt-output")
+        if not args.paths and args.output and args.post_prompt_output:
+            raise ValueError("audit-only mode accepts either --output or --post-prompt-output, not both")
+        if args.paths and args.output and args.post_prompt_output:
+            if args.output.expanduser().resolve() == args.post_prompt_output.expanduser().resolve():
+                raise ValueError("--output and --post-prompt-output must name different files")
+        if args.canonical_tag_suggestions and not args.danbooru_tags:
+            raise ValueError("--canonical-tag-suggestions requires --danbooru-tags")
+        if args.semantic_duplicates and not args.danbooru_tags:
+            raise ValueError("--semantic-duplicates requires --danbooru-tags and its embedded SQLite index")
+        if args.canonical_literal_review and not args.danbooru_tags:
+            raise ValueError("--canonical-literal-review requires --danbooru-tags and its embedded SQLite index")
+        if args.fix_literal_concepts and not args.canonical_literal_review:
+            raise ValueError("--fix-literal-concepts requires --canonical-literal-review")
+        if args.fix_literal_concepts and (not args.llm or not args.suggest_fixes):
+            raise ValueError("--fix-literal-concepts requires --llm and --suggest-fixes")
+        if args.danbooru_index and not args.danbooru_tags:
+            raise ValueError("--danbooru-index requires --danbooru-tags")
+        if args.canonical_tag_suggestions and (not args.llm or not args.suggest_fixes):
+            raise ValueError("--canonical-tag-suggestions requires --llm and --suggest-fixes")
+        if args.spotlight_intents and (not args.llm or not args.suggest_fixes):
+            raise ValueError("--spotlight-intents requires --llm and --suggest-fixes")
+        if args.canonical_tag_candidate_count < 1:
+            raise ValueError("--canonical-tag-candidate-count must be at least 1")
+        if not 0.0 < args.semantic_duplicate_threshold <= 1.0:
+            raise ValueError("--semantic-duplicate-threshold must be greater than 0 and at most 1")
+        if args.danbooru_tags:
+            danbooru_vocabulary = load_danbooru_tags(args.danbooru_tags.expanduser().resolve())
+            verbose(args, f"loaded {len(danbooru_vocabulary)} local Danbooru tags from {args.danbooru_tags}")
+        if args.spotlight_intents:
+            spotlight_intents = load_spotlight_intents(args.spotlight_intents.expanduser().resolve())
+            intent_count = sum(len(entries) for entries in spotlight_intents.values())
+            verbose(
+                args,
+                f"loaded {intent_count} spotlight intent(s) across {len(spotlight_intents)} "
+                f"categor{'y' if len(spotlight_intents) == 1 else 'ies'} from {args.spotlight_intents}",
+            )
         if args.validate_post_prompts:
-            audits = audit_post_prompts(args.validate_post_prompts.expanduser().resolve())
+            audits = audit_post_prompts(args.validate_post_prompts.expanduser().resolve(), danbooru_vocabulary)
             if args.annotated_details:
                 write_annotated_details(
                     args.validate_post_prompts.expanduser().resolve(),
@@ -1133,42 +4064,103 @@ def main() -> int:
                 )
             if not args.paths:
                 report = render_prompt_audit(audits, args.format)
-                if args.output:
-                    args.output.parent.mkdir(parents=True, exist_ok=True)
-                    args.output.write_text(report, encoding="utf-8")
+                audit_output = args.post_prompt_output or args.output
+                if audit_output:
+                    audit_output.parent.mkdir(parents=True, exist_ok=True)
+                    audit_output.write_text(report, encoding="utf-8")
                 else:
                     sys.stdout.write(report)
                 if args.fail_on == "never":
                     return 0
                 if any(audit.status == "unable" for audit in audits):
                     return 1
-                if args.fail_on == "warning" and any(audit.status == "noncompliant" for audit in audits):
+                if args.fail_on == "warning" and prompt_audit_has_warning(audits):
                     return 1
                 return 0
         if not args.paths:
             raise ValueError("provide at least one YAML path or --validate-post-prompts")
+        if danbooru_vocabulary is not None:
+            canonical_retriever = open_canonical_retriever(
+                args, args.danbooru_tags.expanduser().resolve(), danbooru_vocabulary,
+            )
+        if args.semantic_duplicates and (
+            canonical_retriever is None or canonical_retriever.embedding_client is None
+        ):
+            raise ValueError(
+                "--semantic-duplicates requires a compatible complete embedding index and reachable embedding endpoint"
+            )
+        if args.canonical_literal_review and (
+            canonical_retriever is None or canonical_retriever.embedding_client is None
+        ):
+            raise ValueError(
+                "--canonical-literal-review requires a compatible complete embedding index and reachable embedding endpoint"
+            )
         if args.batch_size < 1:
             raise ValueError("--batch-size must be at least 1")
         if args.verification_batch_size < 1:
             raise ValueError("--verification-batch-size must be at least 1")
+        if args.max_fix_retries < 0:
+            raise ValueError("--max-fix-retries must be at least 0")
         if args.timeout < 1:
             raise ValueError("--timeout must be at least 1 second")
+        if args.llm_cache_max_age_minutes is not None and args.llm_cache_max_age_minutes <= 0:
+            raise ValueError("--llm-cache-max-age-minutes must be greater than 0")
         if args.suggest_fixes and not args.llm:
             raise ValueError("--suggest-fixes requires --llm")
         if args.fixed_output and (not args.llm or not args.suggest_fixes):
             raise ValueError("--fixed-output requires --llm and --suggest-fixes")
         if args.fix_manifest and (not args.llm or not args.suggest_fixes):
             raise ValueError("--fix-manifest requires --llm and --suggest-fixes")
+        if (args.unresolved_output or args.unresolved_report) and not args.fixed_output:
+            raise ValueError("--unresolved-output/--unresolved-report require --fixed-output")
         if args.llm_scope == "content" and (not args.llm or not args.suggest_fixes or not args.fixed_output):
             raise ValueError("--llm-scope content requires --llm, --suggest-fixes, and --fixed-output")
         paths = discover_paths(args.paths)
         if args.fixed_output and len(paths) != 1:
             raise ValueError("--fixed-output requires exactly one input YAML file")
+        artifact_paths = [
+            path.expanduser().resolve() for path in (
+                args.fixed_output, args.unresolved_output, args.unresolved_report,
+            ) if path is not None
+        ]
+        if len(artifact_paths) != len(set(artifact_paths)):
+            raise ValueError("--fixed-output, --unresolved-output, and --unresolved-report must use distinct paths")
         verbose(args, f"discovered {len(paths)} YAML file(s)")
         rules = load_rules(rules_path)
         verbose(args, f"loaded general rules from {rules_path}")
         leaves, categories, findings = load_inventory(paths)
+        all_categories = categories
+        if args.only_depth < 0:
+            raise ValueError("--only-depth must be zero or greater")
+        if not args.only and args.only_depth != 1:
+            raise ValueError("--only-depth requires --only")
+        if args.only:
+            leaves, categories, findings, only_roots = filter_inventory(
+                leaves, categories, findings, args.only, args.only_depth,
+            )
+            root_names = ", ".join(
+                f"{namespace}/{category}" for namespace, category in sorted(only_roots)
+            )
+            included_names = ", ".join(
+                f"{namespace}/{category}" for namespace, category in sorted(categories)
+            )
+            verbose(args, f"--only roots: {root_names}; auditing depth-{args.only_depth} scope: {included_names}")
         verbose(args, f"inventoried {len(categories)} categories and {len(leaves)} leaves")
+        if canonical_retriever is not None and canonical_retriever.embedding_client is not None:
+            primed = canonical_retriever.prime(leaves)
+            if primed < 0:
+                verbose(args, "embedding batch failed; continuing with SQLite lexical retrieval")
+            else:
+                verbose(args, f"precomputed {primed} canonical-candidate query embedding(s) in batches")
+            if args.canonical_literal_review and canonical_retriever.embedding_client is not None:
+                literal_primed = canonical_retriever.prime_literal_phrases(leaves)
+                if literal_primed < 0:
+                    verbose(args, "literal-phrase embedding batch failed; continuing with SQLite lexical retrieval")
+                else:
+                    verbose(
+                        args,
+                        f"precomputed {literal_primed} canonical-literal phrase embedding(s) in batches",
+                    )
         pattern_results = pattern_findings(leaves, rules)
         findings.extend(pattern_results)
         verbose(args, f"pattern checks produced {len(pattern_results)} finding(s)")
@@ -1178,30 +4170,104 @@ def main() -> int:
         tags_results = tags_mode_findings(leaves, tags_rules)
         findings.extend(tags_results)
         verbose(args, f"tags-mode checks produced {len(tags_results)} finding(s)")
-        graph_results = graph_findings(leaves, categories)
+        duplicate_results = duplicate_leaf_findings(leaves)
+        findings.extend(duplicate_results)
+        verbose(args, f"duplicate checks produced {len(duplicate_results)} finding(s)")
+        if args.semantic_duplicates:
+            assert canonical_retriever is not None and canonical_retriever.embedding_client is not None
+            verbose(
+                args,
+                f"embedding {len(leaves)} scoped leaves for semantic duplicate comparison "
+                f"at threshold {args.semantic_duplicate_threshold:.4f}",
+            )
+            semantic_duplicate_results = semantic_duplicate_findings(
+                leaves, canonical_retriever.embedding_client,
+                args.semantic_duplicate_threshold,
+            )
+            findings.extend(semantic_duplicate_results)
+            verbose(args, f"semantic duplicate checks produced {len(semantic_duplicate_results)} finding(s)")
+        if danbooru_vocabulary is not None:
+            canonical_results = canonical_tag_findings(
+                leaves, danbooru_vocabulary, args.canonical_tag_candidate_count, args.canonical_tag_style,
+                tags_rules.get("canonical_composition"), canonical_retriever,
+            )
+            findings.extend(canonical_results)
+            verbose(args, f"canonical-tag checks produced {len(canonical_results)} finding(s)")
+            redundancy_results = canonical_tag_redundancy_findings(leaves, danbooru_vocabulary)
+            findings.extend(redundancy_results)
+            verbose(args, f"canonical redundancy checks produced {len(redundancy_results)} finding(s)")
+            if args.canonical_literal_review and canonical_retriever is not None:
+                literal_results = canonical_literal_concept_findings(
+                    leaves, danbooru_vocabulary, canonical_retriever,
+                    args.canonical_tag_candidate_count, args.canonical_tag_style,
+                )
+                findings.extend(literal_results)
+                verbose(args, f"canonical literal-concept checks produced {len(literal_results)} finding(s)")
+        graph_results = graph_findings(
+            leaves, categories, all_categories if args.only else None, partial=bool(args.only),
+        )
         findings.extend(graph_results)
         verbose(args, f"reference and route checks produced {len(graph_results)} finding(s)")
-        motif_results = route_motif_findings(categories, rules)
+        motif_results = [] if args.only else route_motif_findings(categories, rules)
         findings.extend(motif_results)
         verbose(args, f"route motif checks produced {len(motif_results)} finding(s)")
-        policy_results = namespace_policy_findings(leaves, categories, rules)
+        policy_results = [] if args.only else namespace_policy_findings(leaves, categories, rules)
         findings.extend(policy_results)
         verbose(args, f"namespace policy checks produced {len(policy_results)} finding(s)")
         suggestions: dict[str, str] = {}
         proposed_suggestions: dict[str, str] = {}
         rejected_suggestions: dict[str, list[str]] = {}
         fix_rationales: dict[str, str] = {}
+        fix_attempt_history: dict[str, list[dict[str, Any]]] = {}
         if args.llm:
-            candidate_ids = {finding.leaf_id for finding in findings if finding.leaf_id}
+            deterministic_suggestions: dict[str, str] = {}
+            deterministically_resolved: set[tuple[str, str, str]] = set()
+            working_leaves = leaves
+            repair_findings = list(findings)
+            if args.suggest_fixes:
+                deterministic_suggestions, deterministically_resolved = deterministic_canonical_repairs(
+                    leaves, findings,
+                )
+                if deterministic_suggestions and danbooru_vocabulary is not None:
+                    deterministic_suggestions, deterministically_resolved, deterministic_rejections = (
+                        validate_deterministic_canonical_repairs(
+                            leaves, deterministic_suggestions, deterministically_resolved,
+                            rules, tags_rules, danbooru_vocabulary,
+                            args.canonical_tag_candidate_count, args.canonical_tag_style,
+                            canonical_retriever,
+                        )
+                    )
+                    for uid, reasons in deterministic_rejections.items():
+                        verbose(args, f"rejected deterministic canonical repair for {uid}: {'; '.join(reasons)}")
+                working_leaves = leaves_with_rewrites(leaves, deterministic_suggestions)
+                repair_findings = [
+                    finding for finding in findings
+                    if canonical_finding_key(finding) not in deterministically_resolved
+                ]
+                suggestions = dict(deterministic_suggestions)
+                proposed_suggestions = dict(deterministic_suggestions)
+                fix_rationales.update({
+                    uid: "unambiguous canonical repair applied deterministically"
+                    for uid in deterministic_suggestions
+                })
+                verbose(
+                    args,
+                    f"applied {len(deterministic_suggestions)} deterministic leaf repair(s) before "
+                    f"LLM review, resolving {len(deterministically_resolved)} finding(s)",
+                )
+            candidate_ids = {finding.leaf_id for finding in repair_findings if finding.leaf_id}
             if args.llm_scope == "all":
-                review_leaves = leaves
+                review_leaves = working_leaves
             else:
                 review_ids = set(candidate_ids)
                 if args.llm_scope == "content":
-                    content_ids = {leaf.uid for leaf in leaves if leaf.uid not in candidate_ids and has_literal_content(leaf)}
+                    content_ids = {
+                        leaf.uid for leaf in working_leaves
+                        if leaf.uid not in candidate_ids and has_literal_content(leaf)
+                    }
                     review_ids.update(content_ids)
                     verbose(args, f"added {len(content_ids)} clean content-bearing leaves; router-only leaves excluded")
-                review_leaves = [leaf for leaf in leaves if leaf.uid in review_ids]
+                review_leaves = [leaf for leaf in working_leaves if leaf.uid in review_ids]
             trace_path = args.llm_log
             if trace_path is None and args.verbose:
                 descriptor, temporary_name = tempfile.mkstemp(prefix="wildcard-linter-llm-", suffix=".jsonl")
@@ -1212,26 +4278,111 @@ def main() -> int:
                 trace_path.parent.mkdir(parents=True, exist_ok=True)
                 trace_path.write_text("", encoding="utf-8")
                 verbose(args, f"sanitized LLM trace: {trace_path}")
+            cache_root = llm_cache_dir(args)
+            verbose(args, f"LLM cache: {cache_root if cache_root else 'disabled'}")
+            expired_count = prune_llm_cache(args)
+            if args.llm_cache_max_age_minutes is not None:
+                verbose(args, f"LLM cache expiry: removed {expired_count} item(s) older than {args.llm_cache_max_age_minutes:g} minutes")
             verbose(args, f"submitting {len(review_leaves)} leaves for {args.llm_scope} LLM review")
-            llm_results = llm_review(review_leaves, args, prompt_path.read_text(encoding="utf-8"), trace_path)
+            llm_results = llm_review(
+                review_leaves, args, prompt_path.read_text(encoding="utf-8"), trace_path,
+                danbooru_vocabulary,
+            )
             findings.extend(llm_results)
+            repair_findings.extend(llm_results)
             verbose(args, f"LLM review produced {len(llm_results)} finding(s)")
             if args.suggest_fixes:
                 verbose(args, "requesting potential fixes for found leaf issues")
-                proposed_suggestions, fix_rationales = llm_suggest_fixes(leaves, findings, args, trace_path)
-                suggestions, rejected_suggestions = validate_suggestions(
-                    leaves, proposed_suggestions, findings, rules, tags_rules
+                llm_proposed, llm_rationales = llm_suggest_fixes(
+                    working_leaves, repair_findings, args, trace_path, danbooru_vocabulary, tags_rules,
+                    canonical_retriever, spotlight_intents,
                 )
-                verbose(args, f"deterministic validation accepted {len(suggestions)} of {len(proposed_suggestions)} potential fixes")
-                if not args.skip_fix_verification:
-                    suggestions, semantic_rejections = llm_verify_fixes(
-                        leaves, suggestions, findings, args, trace_path
+                proposed_suggestions.update(llm_proposed)
+                fix_rationales.update(llm_rationales)
+                llm_accepted, rejected_suggestions = validate_suggestions(
+                    working_leaves, llm_proposed, repair_findings, rules, tags_rules,
+                    danbooru_vocabulary, args.canonical_tag_candidate_count, args.canonical_tag_style,
+                    canonical_retriever,
+                    (
+                        canonical_retriever.embedding_client
+                        if args.semantic_duplicates and canonical_retriever is not None else None
+                    ),
+                    args.semantic_duplicate_threshold if args.semantic_duplicates else None,
+                )
+                record_fix_attempts(
+                    fix_attempt_history, llm_proposed, llm_rationales,
+                    rejected_suggestions, "initial suggestion",
+                )
+                verbose(args, f"deterministic validation accepted {len(llm_accepted)} of {len(llm_proposed)} LLM fixes")
+                for retry in range(1, args.max_fix_retries + 1):
+                    retry_targets = {
+                        uid: reasons for uid, reasons in rejected_suggestions.items()
+                        if uid not in llm_accepted
+                    }
+                    if not retry_targets:
+                        break
+                    corrected, corrected_rationales = llm_correct_rejected_fixes(
+                        working_leaves, repair_findings, proposed_suggestions, retry_targets, args, retry,
+                        trace_path, danbooru_vocabulary, tags_rules, canonical_retriever, spotlight_intents,
                     )
-                    rejected_suggestions.update(semantic_rejections)
+                    if not corrected:
+                        verbose(args, f"fix correction retry {retry}/{args.max_fix_retries} returned no usable alternatives")
+                        continue
+                    proposed_suggestions.update(corrected)
+                    fix_rationales.update(corrected_rationales)
+                    retry_accepted, retry_rejected = validate_suggestions(
+                        working_leaves, corrected, repair_findings, rules, tags_rules,
+                        danbooru_vocabulary, args.canonical_tag_candidate_count,
+                        args.canonical_tag_style, canonical_retriever,
+                        (
+                            canonical_retriever.embedding_client
+                            if args.semantic_duplicates and canonical_retriever is not None else None
+                        ),
+                        args.semantic_duplicate_threshold if args.semantic_duplicates else None,
+                    )
+                    record_fix_attempts(
+                        fix_attempt_history, corrected, corrected_rationales,
+                        retry_rejected, f"correction retry {retry}",
+                    )
+                    llm_accepted.update(retry_accepted)
+                    for uid in retry_accepted:
+                        rejected_suggestions.pop(uid, None)
+                    rejected_suggestions.update(retry_rejected)
+                    verbose(
+                        args,
+                        f"fix correction retry {retry}/{args.max_fix_retries} accepted "
+                        f"{len(retry_accepted)} of {len(corrected)} alternatives",
+                    )
+                if not args.skip_fix_verification:
+                    for verification_pass in (1, 2):
+                        verification_candidates = dict(llm_accepted)
+                        llm_accepted, semantic_rejections = llm_verify_fixes(
+                            working_leaves, llm_accepted, repair_findings, args, trace_path,
+                            verification_pass,
+                        )
+                        append_attempt_rejections(
+                            fix_attempt_history, verification_candidates,
+                            semantic_rejections, f"semantic verification pass {verification_pass}",
+                        )
+                        rejected_suggestions.update(semantic_rejections)
+                        if not llm_accepted:
+                            break
+                suggestions.update(llm_accepted)
                 for finding in findings:
                     if finding.leaf_id in suggestions:
                         finding.suggestion = suggestions[finding.leaf_id]
-                verbose(args, f"accepted {len(suggestions)} of {len(proposed_suggestions)} potential fixes; rejected {len(rejected_suggestions)}")
+                rejected_count = len(set(proposed_suggestions) - set(suggestions))
+                rejected_enhancements = len(set(rejected_suggestions) & set(suggestions))
+                detail = (
+                    f"; {rejected_enhancements} accepted deterministic repairs retained after "
+                    "rejecting later LLM enhancements"
+                    if rejected_enhancements else ""
+                )
+                verbose(
+                    args,
+                    f"accepted {len(suggestions)} of {len(proposed_suggestions)} potential fixes; "
+                    f"rejected {rejected_count}{detail}",
+                )
                 if args.fix_manifest:
                     write_fix_manifest(
                         args.fix_manifest, leaves, proposed_suggestions, suggestions,
@@ -1241,11 +4392,58 @@ def main() -> int:
         if args.fixed_output:
             applied = write_fixed_file(paths[0], args.fixed_output, leaves, suggestions)
             verbose(args, f"wrote fixed copy to {args.fixed_output.expanduser().resolve()} with {applied} replacement(s)")
+        if args.unresolved_output and args.unresolved_report:
+            unresolved_ids = set(rejected_suggestions) | {
+                finding.leaf_id for finding in findings
+                if finding.leaf_id and finding.leaf_id not in suggestions
+            }
+            unresolved_candidates = rank_unresolved_candidates(
+                leaves, suggestions, fix_attempt_history, unresolved_ids,
+            )
+            review_suggestions = dict(suggestions)
+            review_suggestions.update({
+                uid: candidate["rewrite"] for uid, candidate in unresolved_candidates.items()
+            })
+            header = (
+                "# REVIEW_CANDIDATES: true\n"
+                "# This file contains unverified rejected repairs layered over the accepted fixed content.\n"
+                "# Do not use as production wildcard content without manual review.\n"
+            )
+            review_applied = write_fixed_file(
+                paths[0], args.unresolved_output, leaves, review_suggestions, header,
+            )
+            args.unresolved_report.expanduser().resolve().parent.mkdir(parents=True, exist_ok=True)
+            args.unresolved_report.expanduser().resolve().write_text(
+                render_unresolved_report(
+                    leaves, findings, unresolved_candidates, unresolved_ids,
+                ),
+                encoding="utf-8",
+            )
+            verbose(
+                args,
+                f"wrote review-only unresolved YAML to {args.unresolved_output.expanduser().resolve()} "
+                f"with {len(unresolved_candidates)} rejected candidate(s) over {len(suggestions)} accepted repair(s) "
+                f"({review_applied} total changed leaves)",
+            )
+            verbose(args, f"wrote unresolved-only report to {args.unresolved_report.expanduser().resolve()}")
         findings.sort(key=lambda f: (f.file, f.line, f.severity, f.rule))
         use_color = args.format == "text" and not args.output and (args.color == "always" or (args.color == "auto" and sys.stdout.isatty()))
-        report = render(findings, leaves, args.format, use_color)
-        if audits:
+        report_rejections = {
+            uid: reasons for uid, reasons in rejected_suggestions.items() if uid not in suggestions
+        }
+        report = render(
+            findings, leaves, args.format, use_color,
+            fix_attempted=bool(args.fixed_output and args.llm and args.suggest_fixes),
+            fixed_leaf_ids=set(suggestions),
+            proposed_suggestions=proposed_suggestions,
+            rejected_suggestions=report_rejections,
+        )
+        if audits and args.include_post_prompt_report:
             report = combine_reports(report, audits, args.format)
+        if audits and args.post_prompt_output:
+            args.post_prompt_output.parent.mkdir(parents=True, exist_ok=True)
+            args.post_prompt_output.write_text(render_prompt_audit(audits, args.format), encoding="utf-8")
+            verbose(args, f"wrote post-prompt report to {args.post_prompt_output.resolve()}")
         if args.output:
             args.output.parent.mkdir(parents=True, exist_ok=True)
             args.output.write_text(report, encoding="utf-8")
@@ -1255,6 +4453,9 @@ def main() -> int:
     except (OSError, ValueError, RuntimeError) as exc:
         print(f"wildcard_linter: {exc}", file=sys.stderr)
         return 2
+    finally:
+        if canonical_retriever is not None:
+            canonical_retriever.index.close()
     if args.fail_on == "never":
         return 0
     if any(f.severity == "error" for f in findings):
@@ -1263,7 +4464,7 @@ def main() -> int:
         return 1
     if args.fail_on == "warning" and any(f.severity == "warning" for f in findings):
         return 1
-    if args.fail_on == "warning" and any(audit.status == "noncompliant" for audit in audits):
+    if args.fail_on == "warning" and prompt_audit_has_warning(audits):
         return 1
     return 0
 

@@ -1,5 +1,14 @@
 <h1>How to Create Your Own AI Art Wildcard Files with an LLM</h1>
 
+> **Current automated workflow:** use
+> [`wildcard-generator-skeleton.yaml`](wildcard-generator-skeleton.yaml) with
+> `gkr-wildcards/tools/wildcard_generator.py`. It applies the current
+> `prompt.md`, linter rules, route validation, and local Danbooru vocabulary in
+> staged generation and repair passes. The older
+> `llm-wildcard-generator.yaml` described below is retained as historical
+> guidance for manually prompting an LLM, but it does not encode all current
+> wildcard requirements.
+
 This guide explains how to use the `llm-wildcard-generator.yaml` template to instruct a Large Language Model (LLM) like Gemini or ChatGPT to create a powerful, custom wildcard file for your AI art projects.
 
 - [1. Prerequisites](#1-prerequisites)
