@@ -279,6 +279,16 @@ Repair behavior:
         help="Minimum cosine similarity for --semantic-duplicates warnings; raise to reduce false positives (default: 0.94)",
     )
     parser.add_argument(
+        "--duplicates-only", action="store_true",
+        help=(
+            "Skip every check except duplicate detection (exact/normalized duplicate_leaf, "
+            "cross_category_duplicate_leaf, duplicate_leaf_weight_variant, and -- when --semantic-duplicates is "
+            "also given -- semantic_duplicate_leaf). Uses the same detection methods as an ordinary run, just "
+            "without pattern, tags-mode, canonical-tag, reference/route, motif, or namespace-policy checks; "
+            "combine with --only to scope to specific categories. Not compatible with --llm."
+        ),
+    )
+    parser.add_argument(
         "--canonical-literal-review", action="store_true",
         help="Opt in to embedding-assisted review of every short multiword literal phrase such as 'glass biodome' or 'riveted steel'; warnings are report-only unless --fix-literal-concepts or an explicit --fix-rules allowlist authorizes them",
     )
@@ -4040,6 +4050,11 @@ def main() -> int:
             raise ValueError("--canonical-tag-suggestions requires --llm and --suggest-fixes")
         if args.spotlight_intents and (not args.llm or not args.suggest_fixes):
             raise ValueError("--spotlight-intents requires --llm and --suggest-fixes")
+        if args.duplicates_only and args.llm:
+            raise ValueError(
+                "--duplicates-only is not compatible with --llm: duplicate findings are always report-only "
+                "and never sent to the fixer, so LLM review would only add cost with nothing to fix"
+            )
         if args.canonical_tag_candidate_count < 1:
             raise ValueError("--canonical-tag-candidate-count must be at least 1")
         if not 0.0 < args.semantic_duplicate_threshold <= 1.0:
@@ -4161,15 +4176,17 @@ def main() -> int:
                         args,
                         f"precomputed {literal_primed} canonical-literal phrase embedding(s) in batches",
                     )
-        pattern_results = pattern_findings(leaves, rules)
-        findings.extend(pattern_results)
-        verbose(args, f"pattern checks produced {len(pattern_results)} finding(s)")
+        if not args.duplicates_only:
+            pattern_results = pattern_findings(leaves, rules)
+            findings.extend(pattern_results)
+            verbose(args, f"pattern checks produced {len(pattern_results)} finding(s)")
         tags_rules_path = args.tags_rules or script_dir / "tags-rules.yaml"
         tags_rules = load_rules(tags_rules_path)
         verbose(args, f"loaded tags-mode rules from {tags_rules_path}")
-        tags_results = tags_mode_findings(leaves, tags_rules)
-        findings.extend(tags_results)
-        verbose(args, f"tags-mode checks produced {len(tags_results)} finding(s)")
+        if not args.duplicates_only:
+            tags_results = tags_mode_findings(leaves, tags_rules)
+            findings.extend(tags_results)
+            verbose(args, f"tags-mode checks produced {len(tags_results)} finding(s)")
         duplicate_results = duplicate_leaf_findings(leaves)
         findings.extend(duplicate_results)
         verbose(args, f"duplicate checks produced {len(duplicate_results)} finding(s)")
@@ -4186,7 +4203,7 @@ def main() -> int:
             )
             findings.extend(semantic_duplicate_results)
             verbose(args, f"semantic duplicate checks produced {len(semantic_duplicate_results)} finding(s)")
-        if danbooru_vocabulary is not None:
+        if danbooru_vocabulary is not None and not args.duplicates_only:
             canonical_results = canonical_tag_findings(
                 leaves, danbooru_vocabulary, args.canonical_tag_candidate_count, args.canonical_tag_style,
                 tags_rules.get("canonical_composition"), canonical_retriever,
@@ -4203,17 +4220,18 @@ def main() -> int:
                 )
                 findings.extend(literal_results)
                 verbose(args, f"canonical literal-concept checks produced {len(literal_results)} finding(s)")
-        graph_results = graph_findings(
-            leaves, categories, all_categories if args.only else None, partial=bool(args.only),
-        )
-        findings.extend(graph_results)
-        verbose(args, f"reference and route checks produced {len(graph_results)} finding(s)")
-        motif_results = [] if args.only else route_motif_findings(categories, rules)
-        findings.extend(motif_results)
-        verbose(args, f"route motif checks produced {len(motif_results)} finding(s)")
-        policy_results = [] if args.only else namespace_policy_findings(leaves, categories, rules)
-        findings.extend(policy_results)
-        verbose(args, f"namespace policy checks produced {len(policy_results)} finding(s)")
+        if not args.duplicates_only:
+            graph_results = graph_findings(
+                leaves, categories, all_categories if args.only else None, partial=bool(args.only),
+            )
+            findings.extend(graph_results)
+            verbose(args, f"reference and route checks produced {len(graph_results)} finding(s)")
+            motif_results = [] if args.only else route_motif_findings(categories, rules)
+            findings.extend(motif_results)
+            verbose(args, f"route motif checks produced {len(motif_results)} finding(s)")
+            policy_results = [] if args.only else namespace_policy_findings(leaves, categories, rules)
+            findings.extend(policy_results)
+            verbose(args, f"namespace policy checks produced {len(policy_results)} finding(s)")
         suggestions: dict[str, str] = {}
         proposed_suggestions: dict[str, str] = {}
         rejected_suggestions: dict[str, list[str]] = {}

@@ -433,6 +433,30 @@ rewrites are embedded again before acceptance. A rewrite that remains at or abov
 configured similarity threshold is rejected and remains `[UNRESOLVED]`; it is not marked
 fixed merely because the LLM changed its wording.
 
+### Checking only for duplicates
+
+`--duplicates-only` skips every other deterministic check (pattern, tags-mode, canonical-tag,
+reference/route, motif, namespace-policy) and reports nothing but duplicate leaves, using the
+same detection already described above:
+
+```bash
+uv run tools/wildcard_linter.py gkr-comics.yaml \
+  --duplicates-only \
+  --danbooru-tags safebooru_general_tags.classified.csv \
+  --danbooru-index safebooru_general_tags.index.sqlite \
+  --retrieval auto \
+  --semantic-duplicates \
+  --format markdown --output duplicates.md --fail-on never
+```
+
+This is a fast, focused pass for combing a large file for `duplicate_leaf`,
+`cross_category_duplicate_leaf`, `duplicate_leaf_weight_variant`, and (when
+`--semantic-duplicates` is also given) `semantic_duplicate_leaf` findings, without paying
+for or waiting on the rest of the deterministic checks. Combine with `--only` to scope it
+to specific categories. Duplicate findings are always report-only (see above), so
+`--duplicates-only` is rejected together with `--llm` — there would be nothing for the
+fixer to do.
+
 Audit every wildcard YAML file in the folder:
 
 ```bash

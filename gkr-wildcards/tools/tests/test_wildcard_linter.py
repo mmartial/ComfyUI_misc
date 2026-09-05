@@ -1078,6 +1078,45 @@ class WildcardLinterTests(unittest.TestCase):
         self.assertEqual([finding.rule for finding in findings], ["duplicate_leaf"])
         self.assertEqual(findings[0].severity, "error")
 
+    def test_duplicates_only_rejects_llm(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            source = Path(temporary) / "gkr-test.yaml"
+            source.write_text("# MODE: tags\ngkr_test:\n  props:\n    - sword\n", encoding="utf-8")
+            argv = [
+                "wildcard_linter.py", str(source), "--duplicates-only",
+                "--llm", "--model", "test-model",
+            ]
+            with patch.object(sys, "argv", argv):
+                with patch.object(sys, "stderr", io.StringIO()) as captured:
+                    self.assertEqual(LINTER.main(), 2)
+                self.assertIn("--duplicates-only is not compatible with --llm", captured.getvalue())
+
+    def test_duplicates_only_skips_every_check_but_duplicate_detection(self):
+        # Regression test: --duplicates-only must report cross_category_duplicate_leaf
+        # while suppressing an unrelated tags_sequential_format finding that would
+        # otherwise fire on the same file, proving the other deterministic checks
+        # (pattern/tags-mode/canonical/reference/motif/namespace) were actually skipped
+        # rather than just filtered out of the report afterward.
+        with tempfile.TemporaryDirectory() as temporary:
+            source = Path(temporary) / "gkr-test.yaml"
+            report = Path(temporary) / "report.json"
+            source.write_text(
+                "# MODE: tags\ngkr_test:\n"
+                "  action_scene:\n    - four-panel sequence, changing face\n"
+                "  first:\n    - muscles, (dynamic_pose:1.2)\n"
+                "  second:\n    - dynamic pose, muscles\n",
+                encoding="utf-8",
+            )
+            argv = [
+                "wildcard_linter.py", str(source), "--duplicates-only",
+                "--format", "json", "--output", str(report), "--fail-on", "never",
+            ]
+            with patch.object(sys, "argv", argv):
+                self.assertEqual(LINTER.main(), 0)
+            parsed = json.loads(report.read_text(encoding="utf-8"))
+            rules = {finding["rule"] for finding in parsed["findings"]}
+            self.assertEqual(rules, {"cross_category_duplicate_leaf"})
+
     def test_leafless_finding_reports_not_leaf_attachable_without_crashing(self):
         # Regression test: render() previously used `and`-chaining to compute
         # unresolved_count, so a finding with leaf_id == "" (falsy but not a bool)
