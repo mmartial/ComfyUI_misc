@@ -1,6 +1,57 @@
 <h1>ComfyUI "Combined Workflow"</h1>
 
+# Simpler version(s)
+
+The simpler (`_simple`) version removes Stage 3 and Stage 4 from the Full version, and is therefore much lighter to run at only about 300 nodes (most hidden within subgraphs) and 18 custom nodes to obtain.
+
+FYSA: list (and count) of used custom nodes:
+
+```bash
+❯ fgrep cnr_id gkr_combined-simple-v9.3.json | tr '[:upper:]' '[:lower:]' | tr -s " " | sort | cut -d ":" -f 2 | uniq -c
+   1  "cg-image-filter",
+ 148  "comfy-core",
+   7  "comfy-image-saver",
+   3  "comfyliterals",
+   4  "comfyui_essentials",
+   3  "comfyui_llm_party",
+  12  "comfyui-crystools",
+  20  "comfyui-custom-scripts",
+   7  "comfyui-detail-daemon",
+  17  "comfyui-easy-use",
+   1  "comfyui-fbcnn",
+  30  "comfyui-image-saver",
+   3  "comfyui-impact-pack",
+  11  "comfyui-kjnodes",
+  16  "comfyui-lora-manager",
+   3  "comfyui-ollama",
+   2  "comfyui-qwenvl",
+   1  "comfyui-resolution-master",
+   3  "comfyui-rmbg",
+   1  "neons-style-explorer",
+  18  "rgthree-comfy",
+```
+
+## extras
+
+### _simple_detailer
+
+Stage3's detailers made generic detailer with manual mask (and drawing for inpainting) selection.
+
+### _simple_detailer_sam3
+
+Stage 3's detailers with automatic detection (SAM3 based) to automatically detail the mask found with the provided prompt.
+
+### _simple_resampler
+
+Stage3's Initial and Detailer resamplers.
+
+### _simple_Flus_resampler
+
+Stage3's Flus resampler.
+
 # Full version
+
+**20260920 Note: As models are getting better at providing good content on first generation, I am going to stop maintaining the "full" combined workflow in favor of the "simpler" version which split the various components of the larger workflow into smaller workflows.**
 
 Please check CivitAI for the older versions of this workflow at [https://civitai.com/models/2149956](https://civitai.com/models/2149956)
 
@@ -15,6 +66,7 @@ It will generate an upscaled 16MP image as the final result while staying as clo
 The workflow contains a "READ ME FIRST" section that details some about how it came to be, what it does and how to use it. Please refer to it for more information.
 
 FYSA: list (and count) of used custom nodes:
+
 ```bash
 ❯ fgrep cnr_id gkr_combined_v9.2.json | tr '[:upper:]' '[:lower:]' | tr -s " " | sort | cut -d ":" -f 2 | uniq -c
    1  "cg-image-filter",
@@ -43,25 +95,3 @@ FYSA: list (and count) of used custom nodes:
   87  "rgthree-comfy",
    3  "seedvr2_videoupscaler",
  ```
-
-# Simpler version(s)
-
-The simpler (`_simple`) version removes Stage 3 and Stage 4 from the Full version, and is therefore much lighter to run at only about 300 nodes (most hidden within subgraphs) and 18 custom nodes to obtain.
-
-## extras
-
-### _simple_detailer
-
-Stage3's detailers made generic detailer with manual mask (and drawing for inpainting) selection.
-
-### _simple_detailer_sam3
-
-Stage 3's detailers with automatic detection (SAM3 based) to automatically detail the mask found with the provided prompt.
-
-### _simple_resampler
-
-Stage3's Initial and Detailer resamplers.
-
-### _simple_Flus_resampler
-
-Stage3's Flus resampler.
