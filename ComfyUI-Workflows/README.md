@@ -13,18 +13,18 @@ FYSA: list (and count) of used custom nodes:
 ```bash
 ❯ fgrep cnr_id gkr_9.4_combined.json | tr '[:upper:]' '[:lower:]' | tr -s " " | sort | cut -d ":" -f 2 | uniq -c
    1  "cg-image-filter",
- 200  "comfy-core",
+ 201  "comfy-core",
    7  "comfy-image-saver",
    1  "comfy-mtb",
   36  "comfyliterals",
-   8  "comfyui_essentials",
+   9  "comfyui_essentials",
    4  "comfyui_lc_maskmaker_nodes",
   15  "comfyui_lc123_nodes",
    7  "comfyui_llm_party",
   15  "comfyui-crystools",
   25  "comfyui-custom-scripts",
    8  "comfyui-detail-daemon",
-  17  "comfyui-easy-use",
+  18  "comfyui-easy-use",
    4  "comfyui-fbcnn",
   25  "comfyui-image-saver",
    1  "comfyui-impact-pack",
@@ -34,7 +34,7 @@ FYSA: list (and count) of used custom nodes:
    1  "comfyui-resolution-master",
    2  "comfyui-rmbg",
    1  "neons-style-explorer",
-  21  "rgthree-comfy",
+  25  "rgthree-comfy",
 ```
 
 ## "ModelTools"

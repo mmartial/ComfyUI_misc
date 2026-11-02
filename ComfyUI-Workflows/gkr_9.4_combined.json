@@ -1,8 +1,8 @@
 {
   "id": "0c4a75d9-fca0-4229-a8bc-e706e9aa78f5",
   "revision": 0,
-  "last_node_id": 3332,
-  "last_link_id": 7605,
+  "last_node_id": 3352,
+  "last_link_id": 7678,
   "nodes": [
     {
       "id": 159,
@@ -54,10 +54,10 @@
         "secondTabWidth": 65
       },
       "widgets_values": [
-        "A cyberpunk woman stands beneath a towering corporate skyscraper, its spires lit with pulsating neon hues. Above, golden holographic fish ripple across the sky like digital jellyfish. She holds two katana blades—one in each hand—her left arm extended forward in a defensive arc. A cybernetic eye pulses brightly within her skull, casting a soft glow through the rain-laden air. Her full body is locked into a powerful combat stance, fists clenched, legs apart, feet planted firmly on the wet pavement. Rain lashes down in thick sheets, blurring the city lights into streaks of silver and vanthro\n\nShe wears a modern denim kimono, narrow geometric obi, leather belt layered at waist, ankle boots, contemporary gallery entrance, close textile study, weave, dye transitions, embroidery, precise edge finishing that flows with every movement, shimmering against the cold steel backdrop.\n\nHer short lace gloves catch the light as she grips the swords, their edges gleaming with iridescent blue and copper tones.\n\nShe glows with intense orange cybernetic implant, reflecting the jagged beams of overhead energy. This is not just a battle-ready form, it’s a silent declaration of power, poised to strike. From a strong upward perspective, the scene unfolds like a cinematic moment captured mid-action. Deep blues, dark indigo, and shadowed blacks dominate the palette, punctuated by bright, electric highlights on metal surfaces and flowing fabrics. The ambient lighting crackles with static, giving life to every pixel in the stormy night.\n\nShe stands tall, ready to respond, her presence commanding attention amidst the falling rain. The wind carries the scent of ozone and old wood, grounding her in the harsh urban wilderness. This is not merely a figure in a dystopian world—it's a living symbol of resistance, born from technology and tradition. The entire environment feels alive, breathing with the rhythm of the city, where silence speaks louder than sound. Her kimono catches the edge of a distant beam of light, revealing layers of material beneath the surface. In this moment, nothing changes—not even the way her fingers move over the hilt of her sword.\n\nTHEME=\"CyberPunk Megalopolis\"\n\nINSTR=\"Enhance the portrait composition\", STYLE=\"Nocturnal cinematic film, intense starburst lens flare, chromatic aberration, vintage analog grain, high contrast night photography, rainbow light leaks, ethereal glowing bloom, style image\",\n"
+        "(anime-inspired hero:1.2), male, bright coat flaring behind him, glowing sword mid-swing, spiky hair, extreme diagonal pose, STYLE=\"Caricature, exaggerated features on a shrunken body, confident ink contour, flat marker colour, playful distortion, illustration style image\",\n"
       ],
       "widgets_values_named": {
-        "text_0": "A cyberpunk woman stands beneath a towering corporate skyscraper, its spires lit with pulsating neon hues. Above, golden holographic fish ripple across the sky like digital jellyfish. She holds two katana blades—one in each hand—her left arm extended forward in a defensive arc. A cybernetic eye pulses brightly within her skull, casting a soft glow through the rain-laden air. Her full body is locked into a powerful combat stance, fists clenched, legs apart, feet planted firmly on the wet pavement. Rain lashes down in thick sheets, blurring the city lights into streaks of silver and vanthro\n\nShe wears a modern denim kimono, narrow geometric obi, leather belt layered at waist, ankle boots, contemporary gallery entrance, close textile study, weave, dye transitions, embroidery, precise edge finishing that flows with every movement, shimmering against the cold steel backdrop.\n\nHer short lace gloves catch the light as she grips the swords, their edges gleaming with iridescent blue and copper tones.\n\nShe glows with intense orange cybernetic implant, reflecting the jagged beams of overhead energy. This is not just a battle-ready form, it’s a silent declaration of power, poised to strike. From a strong upward perspective, the scene unfolds like a cinematic moment captured mid-action. Deep blues, dark indigo, and shadowed blacks dominate the palette, punctuated by bright, electric highlights on metal surfaces and flowing fabrics. The ambient lighting crackles with static, giving life to every pixel in the stormy night.\n\nShe stands tall, ready to respond, her presence commanding attention amidst the falling rain. The wind carries the scent of ozone and old wood, grounding her in the harsh urban wilderness. This is not merely a figure in a dystopian world—it's a living symbol of resistance, born from technology and tradition. The entire environment feels alive, breathing with the rhythm of the city, where silence speaks louder than sound. Her kimono catches the edge of a distant beam of light, revealing layers of material beneath the surface. In this moment, nothing changes—not even the way her fingers move over the hilt of her sword.\n\nTHEME=\"CyberPunk Megalopolis\"\n\nINSTR=\"Enhance the portrait composition\", STYLE=\"Nocturnal cinematic film, intense starburst lens flare, chromatic aberration, vintage analog grain, high contrast night photography, rainbow light leaks, ethereal glowing bloom, style image\",\n"
+        "text_0": "(anime-inspired hero:1.2), male, bright coat flaring behind him, glowing sword mid-swing, spiky hair, extreme diagonal pose, STYLE=\"Caricature, exaggerated features on a shrunken body, confident ink contour, flat marker colour, playful distortion, illustration style image\",\n"
       },
       "color": "#232",
       "bgcolor": "#353"
@@ -74,13 +74,13 @@
         26
       ],
       "flags": {},
-      "order": 228,
+      "order": 235,
       "mode": 0,
       "inputs": [
         {
           "name": "",
           "type": "*",
-          "link": 5802
+          "link": 7623
         }
       ],
       "outputs": [
@@ -89,7 +89,8 @@
           "type": "IMAGE",
           "links": [
             5340,
-            5784
+            5784,
+            7629
           ]
         }
       ],
@@ -229,10 +230,10 @@
       ],
       "size": [
         269.96665954589844,
-        784
+        804
       ],
       "flags": {},
-      "order": 189,
+      "order": 187,
       "mode": 2,
       "inputs": [
         {
@@ -477,6 +478,13 @@
           "links": [
             7568
           ]
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7656
+          ]
         }
       ],
       "properties": {
@@ -590,10 +598,10 @@
       ],
       "size": [
         269.1000061035156,
-        736
+        756
       ],
       "flags": {},
-      "order": 190,
+      "order": 188,
       "mode": 2,
       "inputs": [
         {
@@ -823,6 +831,13 @@
           "links": [
             7574
           ]
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7657
+          ]
         }
       ],
       "properties": {
@@ -971,10 +986,10 @@
       ],
       "size": [
         269.1000061035156,
-        736
+        756
       ],
       "flags": {},
-      "order": 191,
+      "order": 189,
       "mode": 2,
       "inputs": [
         {
@@ -1204,6 +1219,13 @@
           "links": [
             7580
           ]
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7658
+          ]
         }
       ],
       "properties": {
@@ -1407,14 +1429,14 @@
           "version": 1,
           "textWidgetName": "text"
         },
-        "A cyberpunk woman stands beneath a towering corporate skyscraper, its spires lit with pulsating neon hues. Above, golden holographic fish ripple across the sky like digital jellyfish. She holds two katana blades—one in each hand—her left arm extended forward in a defensive arc. A cybernetic eye pulses brightly within her skull, casting a soft glow through the rain-laden air. Her full body is locked into a powerful combat stance, fists clenched, legs apart, feet planted firmly on the wet pavement. Rain lashes down in thick sheets, blurring the city lights into streaks of silver and vanthro\n\nShe wears a __gkr_japan/random_kimono__ that flows with every movement, shimmering against the cold steel backdrop.\n\nHer short lace gloves catch the light as she grips the swords, their edges gleaming with iridescent blue and copper tones.\n\nShe glows with intense orange cybernetic implant, reflecting the jagged beams of overhead energy. This is not just a battle-ready form, it’s a silent declaration of power, poised to strike. From a strong upward perspective, the scene unfolds like a cinematic moment captured mid-action. Deep blues, dark indigo, and shadowed blacks dominate the palette, punctuated by bright, electric highlights on metal surfaces and flowing fabrics. The ambient lighting crackles with static, giving life to every pixel in the stormy night.\n\nShe stands tall, ready to respond, her presence commanding attention amidst the falling rain. The wind carries the scent of ozone and old wood, grounding her in the harsh urban wilderness. This is not merely a figure in a dystopian world—it's a living symbol of resistance, born from technology and tradition. The entire environment feels alive, breathing with the rhythm of the city, where silence speaks louder than sound. Her kimono catches the edge of a distant beam of light, revealing layers of material beneath the surface. In this moment, nothing changes—not even the way her fingers move over the hilt of her sword.\n\nTHEME=\"CyberPunk Megalopolis\"\n\nINSTR=\"Enhance the portrait composition\""
+        "__gkr_videogame/random_spotlight__"
       ],
       "widgets_values_named": {
         "__lm_autocomplete_meta_text": {
           "version": 1,
           "textWidgetName": "text"
         },
-        "text": "A cyberpunk woman stands beneath a towering corporate skyscraper, its spires lit with pulsating neon hues. Above, golden holographic fish ripple across the sky like digital jellyfish. She holds two katana blades—one in each hand—her left arm extended forward in a defensive arc. A cybernetic eye pulses brightly within her skull, casting a soft glow through the rain-laden air. Her full body is locked into a powerful combat stance, fists clenched, legs apart, feet planted firmly on the wet pavement. Rain lashes down in thick sheets, blurring the city lights into streaks of silver and vanthro\n\nShe wears a __gkr_japan/random_kimono__ that flows with every movement, shimmering against the cold steel backdrop.\n\nHer short lace gloves catch the light as she grips the swords, their edges gleaming with iridescent blue and copper tones.\n\nShe glows with intense orange cybernetic implant, reflecting the jagged beams of overhead energy. This is not just a battle-ready form, it’s a silent declaration of power, poised to strike. From a strong upward perspective, the scene unfolds like a cinematic moment captured mid-action. Deep blues, dark indigo, and shadowed blacks dominate the palette, punctuated by bright, electric highlights on metal surfaces and flowing fabrics. The ambient lighting crackles with static, giving life to every pixel in the stormy night.\n\nShe stands tall, ready to respond, her presence commanding attention amidst the falling rain. The wind carries the scent of ozone and old wood, grounding her in the harsh urban wilderness. This is not merely a figure in a dystopian world—it's a living symbol of resistance, born from technology and tradition. The entire environment feels alive, breathing with the rhythm of the city, where silence speaks louder than sound. Her kimono catches the edge of a distant beam of light, revealing layers of material beneath the surface. In this moment, nothing changes—not even the way her fingers move over the hilt of her sword.\n\nTHEME=\"CyberPunk Megalopolis\"\n\nINSTR=\"Enhance the portrait composition\""
+        "text": "__gkr_videogame/random_spotlight__"
       },
       "color": "#223",
       "bgcolor": "#335"
@@ -1843,7 +1865,7 @@
         90
       ],
       "flags": {},
-      "order": 230,
+      "order": 236,
       "mode": 0,
       "inputs": [
         {
@@ -1910,7 +1932,7 @@
         90
       ],
       "flags": {},
-      "order": 243,
+      "order": 249,
       "mode": 0,
       "inputs": [
         {
@@ -1968,13 +1990,13 @@
         90
       ],
       "flags": {},
-      "order": 241,
+      "order": 248,
       "mode": 0,
       "inputs": [
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 5693
+          "link": 7631
         }
       ],
       "outputs": [
@@ -2035,7 +2057,7 @@
         90
       ],
       "flags": {},
-      "order": 234,
+      "order": 239,
       "mode": 0,
       "inputs": [
         {
@@ -2095,7 +2117,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 264,
+      "order": 270,
       "mode": 0,
       "inputs": [
         {
@@ -2178,7 +2200,7 @@
         50
       ],
       "flags": {},
-      "order": 269,
+      "order": 276,
       "mode": 0,
       "inputs": [
         {
@@ -2233,7 +2255,7 @@
         80
       ],
       "flags": {},
-      "order": 273,
+      "order": 280,
       "mode": 0,
       "inputs": [
         {
@@ -2288,7 +2310,7 @@
         200
       ],
       "flags": {},
-      "order": 246,
+      "order": 252,
       "mode": 0,
       "inputs": [
         {
@@ -2338,13 +2360,13 @@
           "links": []
         },
         {
-          "label": "32,034,822,656   freemem_before",
+          "label": "32,034,847,232   freemem_before",
           "name": "freemem_before",
           "type": "INT",
           "links": null
         },
         {
-          "label": "32,034,822,656      freemem_after",
+          "label": "32,034,847,232      freemem_after",
           "name": "freemem_after",
           "type": "INT",
           "links": null
@@ -2396,7 +2418,7 @@
         190
       ],
       "flags": {},
-      "order": 205,
+      "order": 204,
       "mode": 0,
       "inputs": [
         {
@@ -2504,7 +2526,7 @@
         30
       ],
       "flags": {},
-      "order": 197,
+      "order": 195,
       "mode": 0,
       "inputs": [
         {
@@ -2611,13 +2633,13 @@
         30
       ],
       "flags": {},
-      "order": 242,
+      "order": 247,
       "mode": 0,
       "inputs": [
         {
           "name": "anything",
           "type": "*",
-          "link": 5694
+          "link": 7628
         }
       ],
       "outputs": [
@@ -2662,7 +2684,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 262,
+      "order": 268,
       "mode": 0,
       "inputs": [
         {
@@ -2746,7 +2768,7 @@
         50
       ],
       "flags": {},
-      "order": 265,
+      "order": 271,
       "mode": 0,
       "inputs": [
         {
@@ -2802,7 +2824,7 @@
         80
       ],
       "flags": {},
-      "order": 270,
+      "order": 277,
       "mode": 0,
       "inputs": [
         {
@@ -2965,7 +2987,7 @@
       ],
       "flags": {},
       "order": 26,
-      "mode": 0,
+      "mode": 2,
       "inputs": [],
       "outputs": [
         {
@@ -3017,7 +3039,7 @@
         548.5003707739688
       ],
       "flags": {},
-      "order": 232,
+      "order": 231,
       "mode": 0,
       "inputs": [
         {
@@ -3053,10 +3075,10 @@
         "secondTabWidth": 65
       },
       "widgets_values": [
-        "A portrait shot from a strong upward perspective shows a cyberpunk woman in a powerful combat stance, holding two katana blades with iridescent blue and copper edges. She wears a modern denim kimono with a narrow geometric obi, leather belt, and short lace gloves, while a glowing orange cybernetic implant and a pulsing cybernetic eye cast light through thick sheets of rain. The scene is set beneath a towering corporate skyscraper with pulsating neon spires and golden holographic fish rippling across the sky, rendered as high contrast nocturnal cinematic film with intense starburst lens flares, chromatic aberration, vintage analog grain, rainbow light leaks, and ethereal glowing bloom.\n\n1girl, solo, combat stance, holding katana, denim kimono, geometric obi, leather belt, ankle boots, short lace gloves, cybernetic eye, glowing orange cybernetic implant, rain, corporate skyscraper, neon spires, holographic fish, from_below, portrait, nocturnal cinematic film, starburst lens flare, chromatic aberration, vintage analog grain, high contrast night photography, rainbow light leaks, ethereal glowing bloom"
+        "An illustration in a caricature style shows an anime-inspired male hero in an extreme diagonal pose. He has exaggerated features on a shrunken body, spiky hair, and a bright coat that flares behind him as he swings a glowing sword. The image is rendered with confident ink contours and flat marker color, featuring playful distortion."
       ],
       "widgets_values_named": {
-        "text_0": "A portrait shot from a strong upward perspective shows a cyberpunk woman in a powerful combat stance, holding two katana blades with iridescent blue and copper edges. She wears a modern denim kimono with a narrow geometric obi, leather belt, and short lace gloves, while a glowing orange cybernetic implant and a pulsing cybernetic eye cast light through thick sheets of rain. The scene is set beneath a towering corporate skyscraper with pulsating neon spires and golden holographic fish rippling across the sky, rendered as high contrast nocturnal cinematic film with intense starburst lens flares, chromatic aberration, vintage analog grain, rainbow light leaks, and ethereal glowing bloom.\n\n1girl, solo, combat stance, holding katana, denim kimono, geometric obi, leather belt, ankle boots, short lace gloves, cybernetic eye, glowing orange cybernetic implant, rain, corporate skyscraper, neon spires, holographic fish, from_below, portrait, nocturnal cinematic film, starburst lens flare, chromatic aberration, vintage analog grain, high contrast night photography, rainbow light leaks, ethereal glowing bloom"
+        "text_0": "An illustration in a caricature style shows an anime-inspired male hero in an extreme diagonal pose. He has exaggerated features on a shrunken body, spiky hair, and a bright coat that flares behind him as he swings a glowing sword. The image is rendered with confident ink contours and flat marker color, featuring playful distortion."
       },
       "color": "#232",
       "bgcolor": "#353"
@@ -3297,11 +3319,11 @@
       ],
       "size": [
         269.96665954589844,
-        736
+        756
       ],
       "flags": {},
-      "order": 192,
-      "mode": 2,
+      "order": 190,
+      "mode": 0,
       "inputs": [
         {
           "name": "batch_size",
@@ -3512,6 +3534,13 @@
           "links": [
             7586
           ]
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7659
+          ]
         }
       ],
       "properties": {
@@ -3617,7 +3646,7 @@
       ],
       "flags": {},
       "order": 27,
-      "mode": 2,
+      "mode": 0,
       "inputs": [],
       "outputs": [
         {
@@ -3722,7 +3751,7 @@
         395.1980605163923
       ],
       "flags": {},
-      "order": 175,
+      "order": 174,
       "mode": 0,
       "inputs": [
         {
@@ -3760,10 +3789,10 @@
         "secondTabWidth": 65
       },
       "widgets_values": [
-        "sharp focus, crisp details, rich micro-texture, balanced lighting, accurate anatomy. A portrait shot from a strong upward perspective shows a cyberpunk woman in a powerful combat stance, holding two katana blades with iridescent blue and copper edges. She wears a modern denim kimono with a narrow geometric obi, leather belt, and short lace gloves, while a glowing orange cybernetic implant and a pulsing cybernetic eye cast light through thick sheets of rain. The scene is set beneath a towering corporate skyscraper with pulsating neon spires and golden holographic fish rippling across the sky, rendered as high contrast nocturnal cinematic film with intense starburst lens flares, chromatic aberration, vintage analog grain, rainbow light leaks, and ethereal glowing bloom.\n\n1girl, solo, combat stance, holding katana, denim kimono, geometric obi, leather belt, ankle boots, short lace gloves, cybernetic eye, glowing orange cybernetic implant, rain, corporate skyscraper, neon spires, holographic fish, from_below, portrait, nocturnal cinematic film, starburst lens flare, chromatic aberration, vintage analog grain, high contrast night photography, rainbow light leaks, ethereal glowing bloom <lora:anon_style_moss_uma_v1:0.85> <lora:MOSSwSh4rpD3tails:1.0>"
+        "sharp focus, crisp details, rich micro-texture, balanced lighting, accurate anatomy. @x1nk41,. An illustration in a caricature style shows an anime-inspired male hero in an extreme diagonal pose. He has exaggerated features on a shrunken body, spiky hair, and a bright coat that flares behind him as he swings a glowing sword. The image is rendered with confident ink contours and flat marker color, featuring playful distortion. <lora:yuuki fuumi anima:0.98> <lora:xinkai_AnimaB_v01:1.07> <lora:Smooth_Booster_Anima:1.0>"
       ],
       "widgets_values_named": {
-        "text_0": "sharp focus, crisp details, rich micro-texture, balanced lighting, accurate anatomy. A portrait shot from a strong upward perspective shows a cyberpunk woman in a powerful combat stance, holding two katana blades with iridescent blue and copper edges. She wears a modern denim kimono with a narrow geometric obi, leather belt, and short lace gloves, while a glowing orange cybernetic implant and a pulsing cybernetic eye cast light through thick sheets of rain. The scene is set beneath a towering corporate skyscraper with pulsating neon spires and golden holographic fish rippling across the sky, rendered as high contrast nocturnal cinematic film with intense starburst lens flares, chromatic aberration, vintage analog grain, rainbow light leaks, and ethereal glowing bloom.\n\n1girl, solo, combat stance, holding katana, denim kimono, geometric obi, leather belt, ankle boots, short lace gloves, cybernetic eye, glowing orange cybernetic implant, rain, corporate skyscraper, neon spires, holographic fish, from_below, portrait, nocturnal cinematic film, starburst lens flare, chromatic aberration, vintage analog grain, high contrast night photography, rainbow light leaks, ethereal glowing bloom <lora:anon_style_moss_uma_v1:0.85> <lora:MOSSwSh4rpD3tails:1.0>"
+        "text_0": "sharp focus, crisp details, rich micro-texture, balanced lighting, accurate anatomy. @x1nk41,. An illustration in a caricature style shows an anime-inspired male hero in an extreme diagonal pose. He has exaggerated features on a shrunken body, spiky hair, and a bright coat that flares behind him as he swings a glowing sword. The image is rendered with confident ink contours and flat marker color, featuring playful distortion. <lora:yuuki fuumi anima:0.98> <lora:xinkai_AnimaB_v01:1.07> <lora:Smooth_Booster_Anima:1.0>"
       },
       "color": "#232",
       "bgcolor": "#353"
@@ -3780,7 +3809,7 @@
         460
       ],
       "flags": {},
-      "order": 222,
+      "order": 219,
       "mode": 2,
       "inputs": [
         {
@@ -3942,10 +3971,10 @@
       ],
       "size": [
         269.96665954589844,
-        736
+        756
       ],
       "flags": {},
-      "order": 194,
+      "order": 192,
       "mode": 2,
       "inputs": [
         {
@@ -4157,6 +4186,13 @@
           "links": [
             7598
           ]
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7664
+          ]
         }
       ],
       "properties": {
@@ -4253,8 +4289,8 @@
       "id": 2018,
       "type": "c73f17db-c687-4768-8236-3ddb51f1db50",
       "pos": [
-        1347.2683831564507,
-        -651.459527976438
+        -1529.7191885213012,
+        1553.6011351758966
       ],
       "size": [
         210,
@@ -4263,13 +4299,13 @@
       "flags": {
         "collapsed": false
       },
-      "order": 239,
+      "order": 243,
       "mode": 0,
       "inputs": [
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 5721
+          "link": 7625
         },
         {
           "name": "metadata",
@@ -4283,8 +4319,7 @@
           "name": "image_pass",
           "type": "IMAGE",
           "links": [
-            5693,
-            5694
+            7626
           ]
         }
       ],
@@ -4329,10 +4364,10 @@
       ],
       "size": [
         269.96665954589844,
-        760
+        780
       ],
       "flags": {},
-      "order": 193,
+      "order": 191,
       "mode": 2,
       "inputs": [
         {
@@ -4553,6 +4588,13 @@
           "links": [
             7592
           ]
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7662
+          ]
         }
       ],
       "properties": {
@@ -4659,7 +4701,7 @@
         442
       ],
       "flags": {},
-      "order": 208,
+      "order": 207,
       "mode": 0,
       "inputs": [
         {
@@ -5623,21 +5665,21 @@
       "id": 2310,
       "type": "Image Filter",
       "pos": [
-        -1592.9347316413998,
-        240.18286255080073
+        -1634.0673039318146,
+        224.5216929709011
       ],
       "size": [
-        210.8264462809916,
+        210,
         394
       ],
       "flags": {},
-      "order": 174,
-      "mode": 0,
+      "order": 212,
+      "mode": 2,
       "inputs": [
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 7444
+          "link": 7668
         },
         {
           "name": "latents",
@@ -5657,7 +5699,7 @@
           "name": "images",
           "type": "IMAGE",
           "links": [
-            5707
+            7632
           ]
         },
         {
@@ -5884,25 +5926,35 @@
           "roll_mode": "always",
           "last_used": [
             {
-              "name": "MOSS Image/style/Batesz",
-              "strength": 0.73,
-              "clipStrength": 0.73,
+              "name": "Anima/anime/InoaartAnima",
+              "strength": 0.72,
+              "clipStrength": 0.72,
               "active": true,
               "expanded": false,
-              "locked": false
+              "locked": false,
+              "selected": false
             }
           ],
           "use_recommended_strength": false,
           "recommended_strength_scale_min": 0.5,
           "recommended_strength_scale_max": 1,
-          "execution_seed": 366442881,
-          "next_seed": 612740595
+          "execution_seed": null,
+          "next_seed": null
         },
         [
           {
-            "name": "MOSS Image/style/Animosity_MOSS LoRA",
-            "strength": 0.72,
-            "clipStrength": 0.72,
+            "name": "Anima/style/yuuki fuumi anima",
+            "strength": 0.98,
+            "clipStrength": 0.98,
+            "active": true,
+            "expanded": false,
+            "locked": false,
+            "selected": false
+          },
+          {
+            "name": "Anima/style/xinkai_AnimaB_v01",
+            "strength": 1.07,
+            "clipStrength": 1.07,
             "active": true,
             "expanded": false,
             "locked": false,
@@ -5924,25 +5976,35 @@
           "roll_mode": "always",
           "last_used": [
             {
-              "name": "MOSS Image/style/Batesz",
-              "strength": 0.73,
-              "clipStrength": 0.73,
+              "name": "Anima/anime/InoaartAnima",
+              "strength": 0.72,
+              "clipStrength": 0.72,
               "active": true,
               "expanded": false,
-              "locked": false
+              "locked": false,
+              "selected": false
             }
           ],
           "use_recommended_strength": false,
           "recommended_strength_scale_min": 0.5,
           "recommended_strength_scale_max": 1,
-          "execution_seed": 366442881,
-          "next_seed": 612740595
+          "execution_seed": null,
+          "next_seed": null
         },
         "loras": [
           {
-            "name": "MOSS Image/style/Animosity_MOSS LoRA",
-            "strength": 0.72,
-            "clipStrength": 0.72,
+            "name": "Anima/style/yuuki fuumi anima",
+            "strength": 0.98,
+            "clipStrength": 0.98,
+            "active": true,
+            "expanded": false,
+            "locked": false,
+            "selected": false
+          },
+          {
+            "name": "Anima/style/xinkai_AnimaB_v01",
+            "strength": 1.07,
+            "clipStrength": 1.07,
             "active": true,
             "expanded": false,
             "locked": false,
@@ -6001,7 +6063,7 @@
           "version": 2,
           "filters": {
             "baseModels": [
-              "MOSS Image"
+              "Anima"
             ],
             "tags": {
               "include": [],
@@ -6026,8 +6088,8 @@
             }
           },
           "preview": {
-            "matchCount": 114,
-            "lastUpdated": 1793564834646
+            "matchCount": 4525,
+            "lastUpdated": 1793577812197
           }
         }
       ],
@@ -6036,7 +6098,7 @@
           "version": 2,
           "filters": {
             "baseModels": [
-              "MOSS Image"
+              "Anima"
             ],
             "tags": {
               "include": [],
@@ -6061,8 +6123,8 @@
             }
           },
           "preview": {
-            "matchCount": 114,
-            "lastUpdated": 1793564834646
+            "matchCount": 4525,
+            "lastUpdated": 1793577812197
           }
         }
       },
@@ -6163,7 +6225,7 @@
         513.7520661157024
       ],
       "flags": {},
-      "order": 181,
+      "order": 180,
       "mode": 0,
       "inputs": [
         {
@@ -6260,7 +6322,7 @@
         214
       ],
       "flags": {},
-      "order": 220,
+      "order": 217,
       "mode": 2,
       "inputs": [
         {
@@ -6549,13 +6611,13 @@
         }
       },
       "widgets_values": [
-        "Illustrious/beMixIllustrious_v10.safetensors",
+        "Illustrious/AnillustriousV5.safetensors",
         "randomize",
         "",
         "Illustrious"
       ],
       "widgets_values_named": {
-        "ckpt_name": "Illustrious/beMixIllustrious_v10.safetensors",
+        "ckpt_name": "Illustrious/AnillustriousV5.safetensors",
         "fixed": "randomize",
         "control_filter_list": "",
         "base_model": "Illustrious"
@@ -6602,14 +6664,14 @@
         }
       },
       "widgets_values": [
-        "Flux.1 D/copaxTimeless_xplusMIX4.safetensors",
+        "Flux.1 D/fluxFusionV24StepsGGUFNF4_V2Fp16.safetensors",
         "randomize",
         "",
         "default",
         "Flux.1 D"
       ],
       "widgets_values_named": {
-        "unet_name": "Flux.1 D/copaxTimeless_xplusMIX4.safetensors",
+        "unet_name": "Flux.1 D/fluxFusionV24StepsGGUFNF4_V2Fp16.safetensors",
         "fixed": "randomize",
         "control_filter_list": "",
         "weight_dtype": "default",
@@ -6710,14 +6772,14 @@
         }
       },
       "widgets_values": [
-        "ZImageTurbo/gonzalomoZpop_v40.safetensors",
+        "ZImageTurbo/zAnimimageTurboByLau_semiRealBf16.safetensors",
         "randomize",
         "",
         "default",
         "ZImageTurbo"
       ],
       "widgets_values_named": {
-        "unet_name": "ZImageTurbo/gonzalomoZpop_v40.safetensors",
+        "unet_name": "ZImageTurbo/zAnimimageTurboByLau_semiRealBf16.safetensors",
         "fixed": "randomize",
         "control_filter_list": "",
         "weight_dtype": "default",
@@ -6739,7 +6801,7 @@
       ],
       "flags": {},
       "order": 49,
-      "mode": 2,
+      "mode": 0,
       "inputs": [],
       "outputs": [
         {
@@ -6765,14 +6827,14 @@
         }
       },
       "widgets_values": [
-        "Anima/nijce_1.safetensors",
+        "Anima/Sleepless.safetensors_00001_.safetensors",
         "randomize",
         "",
         "default",
         "Anima"
       ],
       "widgets_values_named": {
-        "unet_name": "Anima/nijce_1.safetensors",
+        "unet_name": "Anima/Sleepless.safetensors_00001_.safetensors",
         "fixed": "randomize",
         "control_filter_list": "",
         "weight_dtype": "default",
@@ -6820,14 +6882,14 @@
         }
       },
       "widgets_values": [
-        "Flux.2 Klein 9B/x3n0FluxX_x3n0FluxXBf16.safetensors",
+        "Flux.2 Klein 9B/x3n0Flux_x3n0MatrixV1Bf16.safetensors",
         "randomize",
         "",
         "default",
         "Flux.2 Klein 9B"
       ],
       "widgets_values_named": {
-        "unet_name": "Flux.2 Klein 9B/x3n0FluxX_x3n0FluxXBf16.safetensors",
+        "unet_name": "Flux.2 Klein 9B/x3n0Flux_x3n0MatrixV1Bf16.safetensors",
         "fixed": "randomize",
         "control_filter_list": "",
         "weight_dtype": "default",
@@ -6875,14 +6937,14 @@
         }
       },
       "widgets_values": [
-        "Krea 2/x3n0_Krea2X.safetensors",
+        "Krea 2/ARTY_2209_fp8.safetensors",
         "randomize",
         "",
         "default",
         "Krea 2"
       ],
       "widgets_values_named": {
-        "unet_name": "Krea 2/x3n0_Krea2X.safetensors",
+        "unet_name": "Krea 2/ARTY_2209_fp8.safetensors",
         "fixed": "randomize",
         "control_filter_list": "",
         "weight_dtype": "default",
@@ -6982,7 +7044,7 @@
         126
       ],
       "flags": {},
-      "order": 225,
+      "order": 222,
       "mode": 0,
       "inputs": [
         {
@@ -7065,7 +7127,7 @@
         186
       ],
       "flags": {},
-      "order": 229,
+      "order": 227,
       "mode": 0,
       "inputs": [
         {
@@ -7116,13 +7178,13 @@
           "links": null
         },
         {
-          "label": "32,034,822,656   freemem_before",
+          "label": "32,034,847,232   freemem_before",
           "name": "freemem_before",
           "type": "INT",
           "links": null
         },
         {
-          "label": "32,034,822,656      freemem_after",
+          "label": "32,034,847,232      freemem_after",
           "name": "freemem_after",
           "type": "INT",
           "links": null
@@ -7174,7 +7236,7 @@
         30
       ],
       "flags": {},
-      "order": 227,
+      "order": 224,
       "mode": 0,
       "inputs": [
         {
@@ -7386,7 +7448,7 @@
         "collapsed": true
       },
       "order": 12,
-      "mode": 0,
+      "mode": 2,
       "inputs": [],
       "outputs": [
         {
@@ -7510,7 +7572,7 @@
         "collapsed": true
       },
       "order": 14,
-      "mode": 2,
+      "mode": 0,
       "inputs": [],
       "outputs": [
         {
@@ -7603,7 +7665,7 @@
         207.81385683618277
       ],
       "flags": {},
-      "order": 200,
+      "order": 198,
       "mode": 0,
       "inputs": [
         {
@@ -7642,10 +7704,10 @@
         "secondTabWidth": 65
       },
       "widgets_values": [
-        "blurry, oversmoothed, waxy, oversaturated, bad hands, extra fingers, artifacts, watermark"
+        "blurry, oversmoothed, waxy, oversaturated, bad hands, extra fingers, artifacts, watermark, accurate proportion, photographic realism"
       ],
       "widgets_values_named": {
-        "text_0": "blurry, oversmoothed, waxy, oversaturated, bad hands, extra fingers, artifacts, watermark"
+        "text_0": "blurry, oversmoothed, waxy, oversaturated, bad hands, extra fingers, artifacts, watermark, accurate proportion, photographic realism"
       },
       "color": "#322",
       "bgcolor": "#533"
@@ -7662,7 +7724,7 @@
         1298
       ],
       "flags": {},
-      "order": 179,
+      "order": 178,
       "mode": 0,
       "inputs": [
         {
@@ -7879,7 +7941,7 @@
         26
       ],
       "flags": {},
-      "order": 216,
+      "order": 215,
       "mode": 0,
       "inputs": [
         {
@@ -7926,7 +7988,7 @@
         182
       ],
       "flags": {},
-      "order": 186,
+      "order": 184,
       "mode": 0,
       "inputs": [
         {
@@ -8511,7 +8573,7 @@
       ],
       "flags": {},
       "order": 34,
-      "mode": 2,
+      "mode": 0,
       "inputs": [],
       "outputs": [
         {
@@ -8639,7 +8701,7 @@
         917
       ],
       "flags": {},
-      "order": 248,
+      "order": 254,
       "mode": 0,
       "inputs": [
         {
@@ -8748,7 +8810,7 @@
         },
         "lc_inpaint_meta": [
           {
-            "filename": "lc_inpaint_temp_hlodq_00041_.png",
+            "filename": "lc_inpaint_temp_oemek_00007_.png",
             "subfolder": "",
             "type": "temp",
             "metadata": {
@@ -8758,7 +8820,7 @@
             }
           },
           {
-            "filename": "lc_inpaint_temp_hlodq_00042_.png",
+            "filename": "lc_inpaint_temp_oemek_00008_.png",
             "subfolder": "",
             "type": "temp",
             "metadata": {
@@ -8875,9 +8937,7 @@
         {
           "name": "Image",
           "type": "IMAGE",
-          "links": [
-            7444
-          ]
+          "links": []
         },
         {
           "name": "Mask",
@@ -9016,7 +9076,7 @@
         917
       ],
       "flags": {},
-      "order": 249,
+      "order": 255,
       "mode": 0,
       "inputs": [
         {
@@ -9125,7 +9185,7 @@
         },
         "lc_inpaint_meta": [
           {
-            "filename": "lc_inpaint_temp_lpuuc_00041_.png",
+            "filename": "lc_inpaint_temp_zhegd_00007_.png",
             "subfolder": "",
             "type": "temp",
             "metadata": {
@@ -9135,7 +9195,7 @@
             }
           },
           {
-            "filename": "lc_inpaint_temp_lpuuc_00042_.png",
+            "filename": "lc_inpaint_temp_zhegd_00008_.png",
             "subfolder": "",
             "type": "temp",
             "metadata": {
@@ -9198,7 +9258,7 @@
         198
       ],
       "flags": {},
-      "order": 257,
+      "order": 263,
       "mode": 0,
       "inputs": [
         {
@@ -9278,7 +9338,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 201,
+      "order": 199,
       "mode": 0,
       "inputs": [
         {
@@ -9380,7 +9440,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 251,
+      "order": 257,
       "mode": 0,
       "inputs": [
         {
@@ -9450,7 +9510,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 259,
+      "order": 265,
       "mode": 0,
       "inputs": [
         {
@@ -9518,7 +9578,7 @@
         90
       ],
       "flags": {},
-      "order": 266,
+      "order": 272,
       "mode": 0,
       "inputs": [
         {
@@ -9584,7 +9644,7 @@
         200
       ],
       "flags": {},
-      "order": 253,
+      "order": 259,
       "mode": 0,
       "inputs": [
         {
@@ -9634,13 +9694,13 @@
           "links": []
         },
         {
-          "label": "32,034,822,656   freemem_before",
+          "label": "32,034,847,232   freemem_before",
           "name": "freemem_before",
           "type": "INT",
           "links": []
         },
         {
-          "label": "32,034,822,656      freemem_after",
+          "label": "32,034,847,232      freemem_after",
           "name": "freemem_after",
           "type": "INT",
           "links": []
@@ -9692,7 +9752,7 @@
         30
       ],
       "flags": {},
-      "order": 252,
+      "order": 258,
       "mode": 0,
       "inputs": [
         {
@@ -9733,15 +9793,15 @@
       "id": 2570,
       "type": "LCVOSRUpscale",
       "pos": [
-        -1634.602263365829,
-        1179.4317234591806
+        -1627.8543155021548,
+        1020.8549486628226
       ],
       "size": [
         300,
         198
       ],
       "flags": {},
-      "order": 231,
+      "order": 237,
       "mode": 0,
       "inputs": [
         {
@@ -9819,7 +9879,7 @@
         26
       ],
       "flags": {},
-      "order": 247,
+      "order": 253,
       "mode": 0,
       "inputs": [
         {
@@ -9835,7 +9895,6 @@
           "links": [
             5342,
             5449,
-            6556,
             6566,
             6622
           ]
@@ -9863,7 +9922,7 @@
         90
       ],
       "flags": {},
-      "order": 258,
+      "order": 264,
       "mode": 0,
       "inputs": [
         {
@@ -9919,11 +9978,11 @@
         -625.5550379216006
       ],
       "size": [
-        290,
+        295.4,
         90
       ],
       "flags": {},
-      "order": 235,
+      "order": 240,
       "mode": 0,
       "inputs": [
         {
@@ -9979,7 +10038,7 @@
         90
       ],
       "flags": {},
-      "order": 244,
+      "order": 250,
       "mode": 0,
       "inputs": [
         {
@@ -10035,7 +10094,7 @@
         90
       ],
       "flags": {},
-      "order": 271,
+      "order": 278,
       "mode": 0,
       "inputs": [
         {
@@ -10382,7 +10441,7 @@
         106
       ],
       "flags": {},
-      "order": 254,
+      "order": 260,
       "mode": 0,
       "inputs": [
         {
@@ -10443,15 +10502,15 @@
       "id": 2594,
       "type": "Any Switch (rgthree)",
       "pos": [
-        4751.86417533774,
-        -644.2437373222648
+        4758.51917533774,
+        -649.5677373222646
       ],
       "size": [
         175.79999389648438,
         106
       ],
       "flags": {},
-      "order": 263,
+      "order": 269,
       "mode": 0,
       "inputs": [
         {
@@ -10495,7 +10554,8 @@
           "links": [
             5562,
             6555,
-            6565
+            6565,
+            7670
           ]
         }
       ],
@@ -10521,7 +10581,7 @@
         78
       ],
       "flags": {},
-      "order": 177,
+      "order": 176,
       "mode": 0,
       "inputs": [
         {
@@ -10576,7 +10636,7 @@
         79.59003369201582
       ],
       "flags": {},
-      "order": 176,
+      "order": 175,
       "mode": 0,
       "inputs": [
         {
@@ -10623,12 +10683,12 @@
       "id": 2610,
       "type": "MarkdownNote",
       "pos": [
-        -7554.172398135599,
+        -7591.28611138581,
         -1304.2977882366013
       ],
       "size": [
-        379.12469866480694,
-        501.1099953398077
+        416.23841191501776,
+        510.38842365236053
       ],
       "flags": {
         "collapsed": false
@@ -10646,10 +10706,10 @@
         }
       },
       "widgets_values": [
-        "Upscale note: upscale applies the factor to the width and height (ie if 2x it quadruples the MP: if the original image is 1.5MP, the upscaled image will be 1.5 *2 * 2 = 6MP)\n\nModify parameters note: if not available in the \"🔴KSampler Selection\", use the arrow in the \"Stages\" selection to go to the stage nodes and alter its parameters.\n\n### Stage 0: Candidate Selection\n\nEnable to select which image to send to further stages.\n\n### Stage 1: Model Resampler\n\nUses the `resampler_denoise` and `resampler_steps_multiplier` from the \"🔴KSampler Selection\" and the model (and its LoRAs) to do an upscale (using a model, default: 1.5x width and height) and resampling using the original conditioning. Will increase detail but modify the source image as it re-invents those resampled details.\n\n### Stage 2: VOSR2 Upscale\n\nEfficient upscaler (default upscale of 1.5x width and height)\n\n### Stage 3: Face and Eyes Detailers\n\nUses the `detailer_denoise` and `detailer_steps` from the \"🔴KSampler Selection\" and the model (and its LoRAs) to find (using Segment Anything Model 3.1) Faces and redraw that area. Same process with Eyes.\n\nFrom testing, the \"Face + Eye Detailers\" are recommended for SDXL/Pony/Illustrious, and potentially Anima, but likely not needed for other models.\n\n### Stage 4: Final Upscaler\n\nUses VOSR2 (default: 1.5x) to produce final image."
+        "Upscale note: upscale applies the factor to the width and height (ie if 2x it quadruples the MP: if the original image is 1.5MP, the upscaled image will be 1.5 *2 * 2 = 6MP)\n\nModify parameters note: if not available in the \"🔴KSampler Selection\", use the arrow in the \"Stages\" selection to go to the stage nodes and alter its parameters.\n\nImages are saved at each Stage, bypassing stages will not save their image. The only automatic save is for Stage 0.\n\n### Stage 0: Candidate Selection\n\nEnable to select which image to send to further stages.\n\n### Stage 1: Model Resampler\n\nUses the `resampler_denoise` and `resampler_steps_multiplier` from the \"🔴KSampler Selection\" and the model (and its LoRAs) to do an upscale (using a model, default: 1.5x width and height) and resampling using the original conditioning. Will increase detail but modify the source image as it re-invents those resampled details.\n\n### Stage 2: VOSR2 Upscale\n\nEfficient upscaler (default upscale of 1.5x width and height)\n\n### Stage 3: Face and Eyes Detailers\n\nUses the `detailer_denoise` and `detailer_steps` from the \"🔴KSampler Selection\" and the model (and its LoRAs) to find (using Segment Anything Model 3.1) Faces and redraw that area. Same process with Eyes.\n\nFrom testing, the \"Face + Eye Detailers\" are recommended for SDXL/Pony/Illustrious, and potentially Anima, but likely not needed for other models.\n\n### Stage 4: Final Upscaler\n\nUses VOSR2 (default: 1.5x) to produce final image."
       ],
       "widgets_values_named": {
-        "text": "Upscale note: upscale applies the factor to the width and height (ie if 2x it quadruples the MP: if the original image is 1.5MP, the upscaled image will be 1.5 *2 * 2 = 6MP)\n\nModify parameters note: if not available in the \"🔴KSampler Selection\", use the arrow in the \"Stages\" selection to go to the stage nodes and alter its parameters.\n\n### Stage 0: Candidate Selection\n\nEnable to select which image to send to further stages.\n\n### Stage 1: Model Resampler\n\nUses the `resampler_denoise` and `resampler_steps_multiplier` from the \"🔴KSampler Selection\" and the model (and its LoRAs) to do an upscale (using a model, default: 1.5x width and height) and resampling using the original conditioning. Will increase detail but modify the source image as it re-invents those resampled details.\n\n### Stage 2: VOSR2 Upscale\n\nEfficient upscaler (default upscale of 1.5x width and height)\n\n### Stage 3: Face and Eyes Detailers\n\nUses the `detailer_denoise` and `detailer_steps` from the \"🔴KSampler Selection\" and the model (and its LoRAs) to find (using Segment Anything Model 3.1) Faces and redraw that area. Same process with Eyes.\n\nFrom testing, the \"Face + Eye Detailers\" are recommended for SDXL/Pony/Illustrious, and potentially Anima, but likely not needed for other models.\n\n### Stage 4: Final Upscaler\n\nUses VOSR2 (default: 1.5x) to produce final image."
+        "text": "Upscale note: upscale applies the factor to the width and height (ie if 2x it quadruples the MP: if the original image is 1.5MP, the upscaled image will be 1.5 *2 * 2 = 6MP)\n\nModify parameters note: if not available in the \"🔴KSampler Selection\", use the arrow in the \"Stages\" selection to go to the stage nodes and alter its parameters.\n\nImages are saved at each Stage, bypassing stages will not save their image. The only automatic save is for Stage 0.\n\n### Stage 0: Candidate Selection\n\nEnable to select which image to send to further stages.\n\n### Stage 1: Model Resampler\n\nUses the `resampler_denoise` and `resampler_steps_multiplier` from the \"🔴KSampler Selection\" and the model (and its LoRAs) to do an upscale (using a model, default: 1.5x width and height) and resampling using the original conditioning. Will increase detail but modify the source image as it re-invents those resampled details.\n\n### Stage 2: VOSR2 Upscale\n\nEfficient upscaler (default upscale of 1.5x width and height)\n\n### Stage 3: Face and Eyes Detailers\n\nUses the `detailer_denoise` and `detailer_steps` from the \"🔴KSampler Selection\" and the model (and its LoRAs) to find (using Segment Anything Model 3.1) Faces and redraw that area. Same process with Eyes.\n\nFrom testing, the \"Face + Eye Detailers\" are recommended for SDXL/Pony/Illustrious, and potentially Anima, but likely not needed for other models.\n\n### Stage 4: Final Upscaler\n\nUses VOSR2 (default: 1.5x) to produce final image."
       },
       "color": "#233",
       "bgcolor": "#355"
@@ -10666,7 +10726,7 @@
         26
       ],
       "flags": {},
-      "order": 255,
+      "order": 261,
       "mode": 0,
       "inputs": [
         {
@@ -10699,21 +10759,21 @@
       "id": 2617,
       "type": "PreviewImage",
       "pos": [
-        -1238.353429504148,
+        -1111.152672238867,
         165.65623475154936
       ],
       "size": [
-        1840.5734269739817,
-        1306.7256147196751
+        1713.3726697087006,
+        1331.424790887691
       ],
       "flags": {},
-      "order": 185,
+      "order": 221,
       "mode": 0,
       "inputs": [
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 5707
+          "link": 7636
         }
       ],
       "outputs": [
@@ -10721,7 +10781,7 @@
           "name": "images",
           "type": "IMAGE",
           "links": [
-            5800
+            7618
           ]
         }
       ],
@@ -10751,7 +10811,7 @@
       ],
       "flags": {},
       "order": 60,
-      "mode": 0,
+      "mode": 2,
       "inputs": [],
       "outputs": [
         {
@@ -10794,7 +10854,7 @@
       ],
       "flags": {},
       "order": 61,
-      "mode": 0,
+      "mode": 2,
       "inputs": [],
       "outputs": [
         {
@@ -10845,11 +10905,11 @@
       ],
       "size": [
         269.96665954589844,
-        736
+        756
       ],
       "flags": {},
-      "order": 195,
-      "mode": 0,
+      "order": 193,
+      "mode": 2,
       "inputs": [
         {
           "label": "STEPS",
@@ -11060,6 +11120,13 @@
           "links": [
             7600
           ]
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7666
+          ]
         }
       ],
       "properties": {
@@ -11165,7 +11232,7 @@
       ],
       "flags": {},
       "order": 123,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "model",
@@ -11229,7 +11296,7 @@
         432.94711516317784
       ],
       "flags": {},
-      "order": 221,
+      "order": 218,
       "mode": 2,
       "inputs": [
         {
@@ -11348,7 +11415,7 @@
         200
       ],
       "flags": {},
-      "order": 261,
+      "order": 267,
       "mode": 0,
       "inputs": [
         {
@@ -11398,13 +11465,13 @@
           "links": []
         },
         {
-          "label": "32,034,822,656   freemem_before",
+          "label": "32,034,847,232   freemem_before",
           "name": "freemem_before",
           "type": "INT",
           "links": []
         },
         {
-          "label": "32,034,822,656      freemem_after",
+          "label": "32,034,847,232      freemem_after",
           "name": "freemem_after",
           "type": "INT",
           "links": []
@@ -11456,7 +11523,7 @@
         30
       ],
       "flags": {},
-      "order": 260,
+      "order": 266,
       "mode": 0,
       "inputs": [
         {
@@ -11505,13 +11572,13 @@
         26
       ],
       "flags": {},
-      "order": 238,
+      "order": 245,
       "mode": 0,
       "inputs": [
         {
           "name": "",
           "type": "*",
-          "link": 5791
+          "link": 7627
         }
       ],
       "outputs": [
@@ -11519,8 +11586,9 @@
           "name": "",
           "type": "IMAGE",
           "links": [
-            5721,
-            6619
+            6619,
+            7628,
+            7631
           ]
         }
       ],
@@ -11538,15 +11606,15 @@
       "id": 2691,
       "type": "JPEG artifacts removal FBCNN",
       "pos": [
-        -1613.7882580361393,
-        1568.1122765246266
+        -1607.040310172465,
+        1409.535501728269
       ],
       "size": [
         250,
         90
       ],
       "flags": {},
-      "order": 236,
+      "order": 241,
       "mode": 0,
       "inputs": [
         {
@@ -11560,7 +11628,7 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            5791
+            7625
           ]
         }
       ],
@@ -11598,8 +11666,8 @@
       "id": 2694,
       "type": "75dc4510-2eeb-4bbc-b39f-4b7ae6b518ca",
       "pos": [
-        286.75216243709565,
-        19.80039986754826
+        -1366.305732685153,
+        514.3649332319978
       ],
       "size": [
         210,
@@ -11608,13 +11676,13 @@
       "flags": {
         "collapsed": false
       },
-      "order": 211,
+      "order": 216,
       "mode": 0,
       "inputs": [
         {
           "name": "images",
           "type": "IMAGE",
-          "link": 5800
+          "link": 7633
         },
         {
           "name": "metadata",
@@ -11628,9 +11696,7 @@
           "name": "image_pass",
           "type": "IMAGE",
           "links": [
-            7514,
-            7517,
-            7535
+            7636
           ]
         }
       ],
@@ -11670,15 +11736,15 @@
       "id": 2698,
       "type": "VRAM_Debug",
       "pos": [
-        256.1971904875256,
-        -334.73445733770313
+        243.96793193631152,
+        -344.31330397292487
       ],
       "size": [
         310,
         200
       ],
       "flags": {},
-      "order": 226,
+      "order": 242,
       "mode": 0,
       "inputs": [
         {
@@ -11718,7 +11784,6 @@
           "name": "image_pass",
           "type": "IMAGE",
           "links": [
-            5802,
             5806
           ]
         },
@@ -11728,13 +11793,13 @@
           "links": []
         },
         {
-          "label": "32,034,822,656   freemem_before",
+          "label": "32,034,847,232   freemem_before",
           "name": "freemem_before",
           "type": "INT",
           "links": []
         },
         {
-          "label": "32,034,822,656      freemem_after",
+          "label": "32,034,847,232      freemem_after",
           "name": "freemem_after",
           "type": "INT",
           "links": []
@@ -11786,13 +11851,13 @@
         30
       ],
       "flags": {},
-      "order": 224,
+      "order": 238,
       "mode": 0,
       "inputs": [
         {
           "name": "anything",
           "type": "*",
-          "link": 7513
+          "link": 7629
         }
       ],
       "outputs": [
@@ -11897,8 +11962,8 @@
       "id": 2703,
       "type": "MarkdownNote",
       "pos": [
-        -1616.198001031069,
-        1422.0989977008303
+        -1609.4500531673948,
+        1263.5222229044728
       ],
       "size": [
         260.7978641117212,
@@ -11940,7 +12005,7 @@
         90
       ],
       "flags": {},
-      "order": 250,
+      "order": 256,
       "mode": 0,
       "inputs": [
         {
@@ -12002,14 +12067,14 @@
       "flags": {
         "pinned": false
       },
-      "order": 267,
+      "order": 273,
       "mode": 0,
       "inputs": [
         {
           "name": "image_a",
           "shape": 7,
           "type": "IMAGE",
-          "link": 6556
+          "link": 7635
         },
         {
           "name": "image_b",
@@ -12051,7 +12116,7 @@
         78
       ],
       "flags": {},
-      "order": 268,
+      "order": 274,
       "mode": 0,
       "inputs": [
         {
@@ -12112,7 +12177,7 @@
         798.8854850552339
       ],
       "flags": {},
-      "order": 272,
+      "order": 279,
       "mode": 0,
       "inputs": [
         {
@@ -12153,7 +12218,7 @@
         146
       ],
       "flags": {},
-      "order": 245,
+      "order": 251,
       "mode": 0,
       "inputs": [
         {
@@ -12444,7 +12509,7 @@
       "id": 3012,
       "type": "LCBatchImageComparer",
       "pos": [
-        628.9911564801561,
+        629.8346499631155,
         -480.54120490415175
       ],
       "size": [
@@ -12454,14 +12519,14 @@
       "flags": {
         "pinned": false
       },
-      "order": 240,
+      "order": 246,
       "mode": 0,
       "inputs": [
         {
           "name": "image_a",
           "shape": 7,
           "type": "IMAGE",
-          "link": 7517
+          "link": 7630
         },
         {
           "name": "image_b",
@@ -12507,7 +12572,7 @@
       "flags": {
         "pinned": false
       },
-      "order": 256,
+      "order": 262,
       "mode": 0,
       "inputs": [
         {
@@ -12591,7 +12656,7 @@
         185.68708368909233
       ],
       "flags": {},
-      "order": 182,
+      "order": 181,
       "mode": 0,
       "inputs": [
         {
@@ -12761,7 +12826,7 @@
         190
       ],
       "flags": {},
-      "order": 223,
+      "order": 220,
       "mode": 0,
       "inputs": [
         {
@@ -13060,7 +13125,7 @@
         170.5973079233716
       ],
       "flags": {},
-      "order": 187,
+      "order": 185,
       "mode": 0,
       "inputs": [
         {
@@ -13166,7 +13231,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 202,
+      "order": 200,
       "mode": 0,
       "inputs": [
         {
@@ -13268,7 +13333,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 178,
+      "order": 177,
       "mode": 0,
       "inputs": [
         {
@@ -13370,7 +13435,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 184,
+      "order": 183,
       "mode": 0,
       "inputs": [
         {
@@ -13472,7 +13537,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 183,
+      "order": 182,
       "mode": 0,
       "inputs": [
         {
@@ -13652,7 +13717,7 @@
         66
       ],
       "flags": {},
-      "order": 180,
+      "order": 179,
       "mode": 0,
       "inputs": [
         {
@@ -13966,7 +14031,7 @@
         230
       ],
       "flags": {},
-      "order": 233,
+      "order": 232,
       "mode": 0,
       "inputs": [
         {
@@ -14133,7 +14198,7 @@
         708
       ],
       "flags": {},
-      "order": 188,
+      "order": 186,
       "mode": 2,
       "inputs": [
         {
@@ -14357,6 +14422,13 @@
           "links": [
             7554
           ]
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7655
+          ]
         }
       ],
       "properties": {
@@ -14456,7 +14528,7 @@
         150
       ],
       "flags": {},
-      "order": 196,
+      "order": 194,
       "mode": 0,
       "inputs": [
         {
@@ -15028,7 +15100,7 @@
         26
       ],
       "flags": {},
-      "order": 212,
+      "order": 211,
       "mode": 0,
       "inputs": [
         {
@@ -15823,7 +15895,7 @@
       ],
       "flags": {},
       "order": 165,
-      "mode": 2,
+      "mode": 0,
       "inputs": [
         {
           "name": "seed",
@@ -15895,7 +15967,7 @@
       ],
       "flags": {},
       "order": 166,
-      "mode": 2,
+      "mode": 0,
       "inputs": [
         {
           "name": "seed",
@@ -15967,7 +16039,7 @@
       ],
       "flags": {},
       "order": 131,
-      "mode": 2,
+      "mode": 0,
       "inputs": [
         {
           "name": "trigger_words",
@@ -16029,7 +16101,7 @@
       ],
       "flags": {},
       "order": 83,
-      "mode": 2,
+      "mode": 0,
       "inputs": [
         {
           "name": "lora_stack",
@@ -16126,7 +16198,7 @@
       ],
       "flags": {},
       "order": 118,
-      "mode": 2,
+      "mode": 0,
       "inputs": [
         {
           "name": "",
@@ -16622,7 +16694,7 @@
         60
       ],
       "flags": {},
-      "order": 237,
+      "order": 234,
       "mode": 0,
       "inputs": [
         {
@@ -16668,7 +16740,7 @@
         60
       ],
       "flags": {},
-      "order": 206,
+      "order": 205,
       "mode": 0,
       "inputs": [
         {
@@ -17627,7 +17699,7 @@
       ],
       "flags": {},
       "order": 139,
-      "mode": 2,
+      "mode": 0,
       "inputs": [
         {
           "name": "",
@@ -18104,7 +18176,7 @@
         60
       ],
       "flags": {},
-      "order": 207,
+      "order": 206,
       "mode": 0,
       "inputs": [
         {
@@ -18191,7 +18263,7 @@
         60
       ],
       "flags": {},
-      "order": 199,
+      "order": 197,
       "mode": 0,
       "inputs": [
         {
@@ -18237,7 +18309,7 @@
         60
       ],
       "flags": {},
-      "order": 198,
+      "order": 196,
       "mode": 0,
       "inputs": [
         {
@@ -18399,7 +18471,7 @@
       ],
       "flags": {},
       "order": 171,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "seed",
@@ -18471,7 +18543,7 @@
       ],
       "flags": {},
       "order": 172,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "seed",
@@ -18543,7 +18615,7 @@
       ],
       "flags": {},
       "order": 146,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "trigger_words",
@@ -18605,7 +18677,7 @@
       ],
       "flags": {},
       "order": 101,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "lora_stack",
@@ -18702,7 +18774,7 @@
       ],
       "flags": {},
       "order": 142,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "",
@@ -18747,7 +18819,7 @@
       ],
       "flags": {},
       "order": 154,
-      "mode": 0,
+      "mode": 2,
       "inputs": [
         {
           "name": "",
@@ -18811,15 +18883,15 @@
       "id": 3286,
       "type": "bdda53c0-3558-4477-9d1f-a0e73022b4ba",
       "pos": [
-        -1595.9639866278144,
-        734.9505014832516
+        -1639.2481077539167,
+        729.376949595901
       ],
       "size": [
         255.0500030517578,
         166
       ],
       "flags": {},
-      "order": 214,
+      "order": 226,
       "mode": 0,
       "inputs": [
         {
@@ -18858,7 +18930,7 @@
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 7514
+          "link": 7622
         },
         {
           "label": "resampler_steps_multiplier",
@@ -18914,8 +18986,8 @@
       "id": 3289,
       "type": "a511bb80-e082-4b56-917e-9e155b3746eb",
       "pos": [
-        -1575.96556502763,
-        948.7391633006627
+        -1362.5573276728069,
+        744.6743032565765
       ],
       "size": [
         210,
@@ -18924,7 +18996,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 217,
+      "order": 230,
       "mode": 0,
       "inputs": [
         {
@@ -18944,7 +19016,7 @@
           "name": "image_pass",
           "type": "IMAGE",
           "links": [
-            7513
+            7621
           ]
         }
       ],
@@ -18992,7 +19064,7 @@
         90
       ],
       "flags": {},
-      "order": 218,
+      "order": 228,
       "mode": 0,
       "inputs": [
         {
@@ -19048,13 +19120,13 @@
         90
       ],
       "flags": {},
-      "order": 215,
+      "order": 225,
       "mode": 0,
       "inputs": [
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 7535
+          "link": 7619
         }
       ],
       "outputs": [
@@ -19117,7 +19189,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 203,
+      "order": 201,
       "mode": 0,
       "inputs": [
         {
@@ -19217,7 +19289,7 @@
         186
       ],
       "flags": {},
-      "order": 204,
+      "order": 202,
       "mode": 0,
       "inputs": [
         {
@@ -19310,7 +19382,7 @@
         90
       ],
       "flags": {},
-      "order": 219,
+      "order": 229,
       "mode": 0,
       "inputs": [
         {
@@ -19331,12 +19403,12 @@
       "properties": {
         "cnr_id": "comfyui-custom-scripts",
         "ver": "1.2.5",
+        "Node name for S&R": "ShowText|pysssss",
         "ue_properties": {
           "widget_ue_connectable": {},
           "version": "7.8",
           "input_ue_unconnectable": {}
         },
-        "Node name for S&R": "ShowText|pysssss",
         "enableTabs": false,
         "tabWidth": 65,
         "tabXOffset": 10,
@@ -19353,6 +19425,439 @@
       },
       "color": "#332922",
       "bgcolor": "#593930"
+    },
+    {
+      "id": 3333,
+      "type": "Any Switch (rgthree)",
+      "pos": [
+        -1062.6576139828358,
+        1558.4282295571836
+      ],
+      "size": [
+        175.79999389648438,
+        106
+      ],
+      "flags": {},
+      "order": 214,
+      "mode": 0,
+      "inputs": [
+        {
+          "dir": 3,
+          "name": "any_01",
+          "type": "IMAGE",
+          "link": 7632
+        },
+        {
+          "dir": 3,
+          "name": "any_02",
+          "type": "IMAGE",
+          "link": 7669
+        },
+        {
+          "dir": 3,
+          "name": "any_03",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "dir": 3,
+          "name": "any_04",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "dir": 3,
+          "name": "any_05",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "dir": 4,
+          "label": "IMAGE",
+          "name": "*",
+          "shape": 3,
+          "type": "IMAGE",
+          "links": [
+            7620,
+            7633
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "1.0.2610050029",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "8.0"
+        }
+      }
+    },
+    {
+      "id": 3334,
+      "type": "Any Switch (rgthree)",
+      "pos": [
+        -844.6079821723608,
+        1557.8538796320884
+      ],
+      "size": [
+        175.79999389648438,
+        106
+      ],
+      "flags": {},
+      "order": 233,
+      "mode": 0,
+      "inputs": [
+        {
+          "dir": 3,
+          "name": "any_01",
+          "type": "IMAGE",
+          "link": 7621
+        },
+        {
+          "dir": 3,
+          "name": "any_02",
+          "type": "IMAGE",
+          "link": 7620
+        },
+        {
+          "dir": 3,
+          "name": "any_03",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "dir": 3,
+          "name": "any_04",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "dir": 3,
+          "name": "any_05",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "dir": 4,
+          "label": "IMAGE",
+          "name": "*",
+          "shape": 3,
+          "type": "IMAGE",
+          "links": [
+            7623,
+            7624
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "1.0.2610050029",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "8.0"
+        }
+      }
+    },
+    {
+      "id": 3335,
+      "type": "Any Switch (rgthree)",
+      "pos": [
+        -625.1256608625058,
+        1552.1106877591867
+      ],
+      "size": [
+        175.79999389648438,
+        106
+      ],
+      "flags": {},
+      "order": 244,
+      "mode": 0,
+      "inputs": [
+        {
+          "dir": 3,
+          "name": "any_01",
+          "type": "IMAGE",
+          "link": 7626
+        },
+        {
+          "dir": 3,
+          "name": "any_02",
+          "type": "IMAGE",
+          "link": 7624
+        },
+        {
+          "dir": 3,
+          "name": "any_03",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "dir": 3,
+          "name": "any_04",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "dir": 3,
+          "name": "any_05",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "dir": 4,
+          "label": "IMAGE",
+          "name": "*",
+          "shape": 3,
+          "type": "IMAGE",
+          "links": [
+            7627
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "1.0.2610050029",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "8.0"
+        }
+      }
+    },
+    {
+      "id": 3336,
+      "type": "Reroute",
+      "pos": [
+        309.57988501906374,
+        -856.3918855880535
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 223,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 7618
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "IMAGE",
+          "links": [
+            7619,
+            7622,
+            7630,
+            7635
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      }
+    },
+    {
+      "id": 3342,
+      "type": "Any Switch (rgthree)",
+      "pos": [
+        -3044.9197133406997,
+        -1789.2169939067137
+      ],
+      "size": [
+        180,
+        186
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 203,
+      "mode": 0,
+      "inputs": [
+        {
+          "dir": 3,
+          "name": "any_01",
+          "type": "IMAGE",
+          "link": 7655
+        },
+        {
+          "dir": 3,
+          "name": "any_02",
+          "type": "IMAGE",
+          "link": 7656
+        },
+        {
+          "dir": 3,
+          "name": "any_03",
+          "type": "IMAGE",
+          "link": 7657
+        },
+        {
+          "dir": 3,
+          "name": "any_04",
+          "type": "IMAGE",
+          "link": 7658
+        },
+        {
+          "dir": 3,
+          "name": "any_05",
+          "type": "IMAGE",
+          "link": 7659
+        },
+        {
+          "dir": 3,
+          "name": "any_06",
+          "type": "IMAGE",
+          "link": 7662
+        },
+        {
+          "dir": 3,
+          "name": "any_07",
+          "type": "IMAGE",
+          "link": 7664
+        },
+        {
+          "dir": 3,
+          "name": "any_08",
+          "type": "IMAGE",
+          "link": 7666
+        },
+        {
+          "dir": 3,
+          "name": "any_09",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "dir": 4,
+          "label": "IMAGE",
+          "name": "*",
+          "type": "IMAGE",
+          "links": [
+            7667
+          ]
+        }
+      ],
+      "title": "Image",
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "1.0.2512112053",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        },
+        "Node name for S&R": "Any Switch (rgthree)",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      }
+    },
+    {
+      "id": 3344,
+      "type": "Reroute",
+      "pos": [
+        -1767.5436802828444,
+        154.83259287014735
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 208,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 7667
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "IMAGE",
+          "links": [
+            7668,
+            7669
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "8.0",
+          "input_ue_unconnectable": {}
+        }
+      }
+    },
+    {
+      "id": 3345,
+      "type": "PreviewImage",
+      "pos": [
+        6354.622547135778,
+        -1876.516967640829
+      ],
+      "size": [
+        1667.7228024109402,
+        1334.277907593801
+      ],
+      "flags": {},
+      "order": 275,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 7670
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": null,
+        "Node name for S&R": "PreviewImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {}
     }
   ],
   "links": [
@@ -20021,30 +20526,6 @@
       "INT"
     ],
     [
-      5693,
-      2018,
-      0,
-      1296,
-      0,
-      "IMAGE"
-    ],
-    [
-      5694,
-      2018,
-      0,
-      1387,
-      0,
-      "IMAGE"
-    ],
-    [
-      5707,
-      2310,
-      0,
-      2617,
-      0,
-      "IMAGE"
-    ],
-    [
       5708,
       1387,
       0,
@@ -20077,42 +20558,10 @@
       "INT"
     ],
     [
-      5721,
-      2662,
-      0,
-      2018,
-      0,
-      "IMAGE"
-    ],
-    [
       5784,
       377,
       0,
       2570,
-      0,
-      "IMAGE"
-    ],
-    [
-      5791,
-      2691,
-      0,
-      2662,
-      0,
-      "IMAGE"
-    ],
-    [
-      5800,
-      2617,
-      0,
-      2694,
-      0,
-      "IMAGE"
-    ],
-    [
-      5802,
-      2698,
-      1,
-      377,
       0,
       "IMAGE"
     ],
@@ -20186,14 +20635,6 @@
       0,
       2987,
       1,
-      "IMAGE"
-    ],
-    [
-      6556,
-      2572,
-      0,
-      2987,
-      0,
       "IMAGE"
     ],
     [
@@ -21821,22 +22262,6 @@
       "LORA_STACK"
     ],
     [
-      7444,
-      2532,
-      7,
-      2310,
-      0,
-      "IMAGE"
-    ],
-    [
-      7513,
-      3289,
-      0,
-      2699,
-      0,
-      "IMAGE"
-    ],
-    [
       7516,
       2159,
       0,
@@ -21845,28 +22270,12 @@
       "METADATA"
     ],
     [
-      7517,
-      2694,
-      0,
-      3012,
-      0,
-      "IMAGE"
-    ],
-    [
       7534,
       3301,
       3,
       3300,
       0,
       "STRING"
-    ],
-    [
-      7535,
-      2694,
-      0,
-      3301,
-      0,
-      "IMAGE"
     ],
     [
       7499,
@@ -21885,20 +22294,156 @@
       "FLOAT"
     ],
     [
-      7514,
-      2694,
-      0,
-      3286,
-      4,
-      "IMAGE"
-    ],
-    [
       7562,
       3313,
       0,
       3286,
       5,
       "FLOAT"
+    ],
+    [
+      7601,
+      3301,
+      3,
+      3330,
+      0,
+      "STRING"
+    ],
+    [
+      7605,
+      3286,
+      0,
+      3289,
+      0,
+      "IMAGE"
+    ],
+    [
+      7618,
+      2617,
+      0,
+      3336,
+      0,
+      "IMAGE"
+    ],
+    [
+      7619,
+      3336,
+      0,
+      3301,
+      0,
+      "IMAGE"
+    ],
+    [
+      7622,
+      3336,
+      0,
+      3286,
+      4,
+      "IMAGE"
+    ],
+    [
+      7623,
+      3334,
+      0,
+      377,
+      0,
+      "IMAGE"
+    ],
+    [
+      7625,
+      2691,
+      0,
+      2018,
+      0,
+      "IMAGE"
+    ],
+    [
+      7627,
+      3335,
+      0,
+      2662,
+      0,
+      "IMAGE"
+    ],
+    [
+      7628,
+      2662,
+      0,
+      1387,
+      0,
+      "IMAGE"
+    ],
+    [
+      7629,
+      377,
+      0,
+      2699,
+      0,
+      "IMAGE"
+    ],
+    [
+      7630,
+      3336,
+      0,
+      3012,
+      0,
+      "IMAGE"
+    ],
+    [
+      7631,
+      2662,
+      0,
+      1296,
+      0,
+      "IMAGE"
+    ],
+    [
+      7633,
+      3333,
+      0,
+      2694,
+      0,
+      "IMAGE"
+    ],
+    [
+      7635,
+      3336,
+      0,
+      2987,
+      0,
+      "IMAGE"
+    ],
+    [
+      7636,
+      2694,
+      0,
+      2617,
+      0,
+      "IMAGE"
+    ],
+    [
+      7667,
+      3342,
+      0,
+      3344,
+      0,
+      "IMAGE"
+    ],
+    [
+      7668,
+      3344,
+      0,
+      2310,
+      0,
+      "IMAGE"
+    ],
+    [
+      7670,
+      2594,
+      0,
+      3345,
+      0,
+      "IMAGE"
     ],
     [
       4781,
@@ -21987,6 +22532,46 @@
       2443,
       4,
       "BOOLEAN"
+    ],
+    [
+      4787,
+      2350,
+      0,
+      2376,
+      0,
+      "STRING"
+    ],
+    [
+      6604,
+      1496,
+      0,
+      2376,
+      1,
+      "STRING"
+    ],
+    [
+      6678,
+      3035,
+      0,
+      2376,
+      2,
+      "STRING"
+    ],
+    [
+      5680,
+      2651,
+      0,
+      2376,
+      3,
+      "STRING"
+    ],
+    [
+      5681,
+      2434,
+      0,
+      2376,
+      4,
+      "STRING"
     ],
     [
       6605,
@@ -22155,6 +22740,38 @@
       2542,
       7,
       "LC_PIPE"
+    ],
+    [
+      5552,
+      2568,
+      1,
+      2593,
+      0,
+      "IMAGE"
+    ],
+    [
+      5449,
+      2572,
+      0,
+      2593,
+      1,
+      "IMAGE"
+    ],
+    [
+      5710,
+      2659,
+      1,
+      2594,
+      0,
+      "IMAGE"
+    ],
+    [
+      6564,
+      2611,
+      0,
+      2594,
+      1,
+      "IMAGE"
     ],
     [
       6909,
@@ -22605,91 +23222,115 @@
       "FLOAT"
     ],
     [
-      4787,
-      2350,
+      7632,
+      2310,
       0,
-      2376,
-      0,
-      "STRING"
-    ],
-    [
-      6604,
-      1496,
-      0,
-      2376,
-      1,
-      "STRING"
-    ],
-    [
-      6678,
-      3035,
-      0,
-      2376,
-      2,
-      "STRING"
-    ],
-    [
-      5680,
-      2651,
-      0,
-      2376,
-      3,
-      "STRING"
-    ],
-    [
-      5681,
-      2434,
-      0,
-      2376,
-      4,
-      "STRING"
-    ],
-    [
-      5552,
-      2568,
-      1,
-      2593,
+      3333,
       0,
       "IMAGE"
     ],
     [
-      5449,
-      2572,
+      7669,
+      3344,
       0,
-      2593,
+      3333,
       1,
       "IMAGE"
     ],
     [
-      5710,
-      2659,
-      1,
-      2594,
-      0,
-      "IMAGE"
-    ],
-    [
-      6564,
-      2611,
-      0,
-      2594,
-      1,
-      "IMAGE"
-    ],
-    [
-      7601,
-      3301,
-      3,
-      3330,
-      0,
-      "STRING"
-    ],
-    [
-      7605,
-      3286,
-      0,
+      7621,
       3289,
       0,
+      3334,
+      0,
+      "IMAGE"
+    ],
+    [
+      7620,
+      3333,
+      0,
+      3334,
+      1,
+      "IMAGE"
+    ],
+    [
+      7626,
+      2018,
+      0,
+      3335,
+      0,
+      "IMAGE"
+    ],
+    [
+      7624,
+      3334,
+      0,
+      3335,
+      1,
+      "IMAGE"
+    ],
+    [
+      7655,
+      3102,
+      4,
+      3342,
+      0,
+      "IMAGE"
+    ],
+    [
+      7656,
+      490,
+      4,
+      3342,
+      1,
+      "IMAGE"
+    ],
+    [
+      7657,
+      515,
+      4,
+      3342,
+      2,
+      "IMAGE"
+    ],
+    [
+      7658,
+      526,
+      4,
+      3342,
+      3,
+      "IMAGE"
+    ],
+    [
+      7659,
+      1481,
+      4,
+      3342,
+      4,
+      "IMAGE"
+    ],
+    [
+      7662,
+      2138,
+      4,
+      3342,
+      5,
+      "IMAGE"
+    ],
+    [
+      7664,
+      1937,
+      4,
+      3342,
+      6,
+      "IMAGE"
+    ],
+    [
+      7666,
+      2644,
+      4,
+      3342,
+      7,
       "IMAGE"
     ]
   ],
@@ -22712,8 +23353,8 @@
       "bounding": [
         -6679.550471035706,
         -1085.235014979509,
-        599.9635620715544,
-        1242.3533199853669
+        599.2805486161897,
+        1245.768387262192
       ],
       "color": "#A88",
       "flags": {}
@@ -22724,8 +23365,8 @@
       "bounding": [
         -6028.802933668169,
         -1081.322376666048,
-        605.8471655416806,
-        1200.8318464997913
+        607.8962059077758,
+        1216.5411559731879
       ],
       "color": "#A88",
       "flags": {}
@@ -22747,8 +23388,8 @@
       "bounding": [
         -5370.977402921354,
         -1075.7166888454003,
-        614.7823998655376,
-        1148.2688545752544
+        618.1974671423623,
+        1162.6121371379209
       ],
       "color": "#A88",
       "flags": {}
@@ -22759,8 +23400,8 @@
       "bounding": [
         -4713.091314364383,
         -1090.4469976661971,
-        606.3244086459526,
-        1152.9641897896308
+        609.0564624674125,
+        1166.6244588969323
       ],
       "color": "#A88",
       "flags": {}
@@ -22795,8 +23436,8 @@
       "bounding": [
         -4055.7818027599756,
         -1088.5201171011392,
-        609.072768094753,
-        1153.5390886562093
+        605.9104157964125,
+        1182.8676864295853
       ],
       "color": "#A88",
       "flags": {}
@@ -22843,8 +23484,8 @@
       "bounding": [
         -3412.4080223885926,
         -1063.9049415959075,
-        609.9872237098211,
-        1183.2261999847287
+        611.6401162718043,
+        1192.3171090756377
       ],
       "color": "#A88",
       "flags": {}
@@ -22855,8 +23496,8 @@
       "bounding": [
         -2735.716150253221,
         -1057.163727495057,
-        613.9336825319538,
-        1144.4946866511086
+        616.413021374929,
+        1156.8913808659845
       ],
       "color": "#A88",
       "flags": {}
@@ -22889,10 +23530,10 @@
       "id": 89,
       "title": "Stage 0: Candidate Selection",
       "bounding": [
-        -1602.9347316413998,
-        170.18286255080073,
-        230.8264462809916,
-        474.00000000000006
+        -1644.0673039318146,
+        155.75665177930193,
+        244.4408528426968,
+        491.47111181384025
       ],
       "color": "#3f789e",
       "flags": {}
@@ -22975,8 +23616,8 @@
       "bounding": [
         -2065.8810858889765,
         -1236.133259689628,
-        654.0304483240789,
-        1310.921988956868
+        656.5097871670539,
+        1327.4509145767029
       ],
       "color": "#A88",
       "flags": {}
@@ -22997,10 +23638,10 @@
       "id": 99,
       "title": "Stage 2: VOSR2 Upscale",
       "bounding": [
-        -1652.3022633658297,
-        1097.3317234591805,
-        341.8111906822939,
-        582.260624520206
+        -1645.5543155021555,
+        938.7549486628225,
+        356.99407337556227,
+        739.9939058336045
       ],
       "color": "#3f789e",
       "flags": {}
@@ -23046,8 +23687,8 @@
       "bounding": [
         -4971.52352234508,
         -1850.3463245229163,
-        1891.058465342578,
-        342.2043964084344
+        2159.653506664892,
+        337.24571872248407
       ],
       "flags": {}
     },
@@ -23055,10 +23696,10 @@
       "id": 141,
       "title": "Stage 1: Model Resampler",
       "bounding": [
-        -1646.5534113552812,
-        666.7226812909493,
-        340.2156753211084,
-        406.33712045693517
+        -1653.8420385415322,
+        659.5227052697566,
+        516.7586082564555,
+        255.4729126713645
       ],
       "color": "#3f789e",
       "flags": {}
@@ -23071,8 +23712,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -23093,7 +23734,7 @@
             -100,
             240,
             199.0500030517578,
-            128
+            148
           ]
         },
         "inputs": [
@@ -23508,6 +24149,18 @@
             "pos": [
               -76,
               324
+            ]
+          },
+          {
+            "id": "83c2b92e-bafc-4b50-af08-4dd9b5ca6c4d",
+            "name": "IMAGE",
+            "type": "IMAGE",
+            "linkIds": [
+              7651
+            ],
+            "pos": [
+              -76,
+              344
             ]
           }
         ],
@@ -24145,8 +24798,7 @@
                 "type": "LATENT",
                 "slot_index": 0,
                 "links": [
-                  7418,
-                  7470
+                  7418
                 ]
               },
               {
@@ -24939,7 +25591,7 @@
                 "name": "image",
                 "shape": 7,
                 "type": "IMAGE",
-                "link": 7442
+                "link": null
               },
               {
                 "label": "Mask",
@@ -24971,7 +25623,7 @@
                 "name": "latent",
                 "shape": 7,
                 "type": "LATENT",
-                "link": 7470
+                "link": null
               },
               {
                 "label": "Batch",
@@ -25541,7 +26193,7 @@
                 "name": "IMAGE",
                 "type": "IMAGE",
                 "links": [
-                  7442
+                  7651
                 ]
               }
             ],
@@ -26260,14 +26912,6 @@
             "type": "VAE"
           },
           {
-            "id": 7442,
-            "origin_id": 3263,
-            "origin_slot": 0,
-            "target_id": 2577,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
             "id": 5355,
             "origin_id": 2577,
             "origin_slot": 0,
@@ -26282,14 +26926,6 @@
             "target_id": -20,
             "target_slot": 1,
             "type": "STRING"
-          },
-          {
-            "id": 7470,
-            "origin_id": 1555,
-            "origin_slot": 0,
-            "target_id": 2577,
-            "target_slot": 11,
-            "type": "LATENT"
           },
           {
             "id": 7471,
@@ -26338,6 +26974,14 @@
             "target_id": -20,
             "target_slot": 3,
             "type": "FLOAT"
+          },
+          {
+            "id": 7651,
+            "origin_id": 3263,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 4,
+            "type": "IMAGE"
           }
         ],
         "extra": {
@@ -26351,8 +26995,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -26373,7 +27017,7 @@
             -100,
             240,
             199.0500030517578,
-            128
+            148
           ]
         },
         "inputs": [
@@ -26763,6 +27407,18 @@
             "pos": [
               -76,
               324
+            ]
+          },
+          {
+            "id": "d3709b3b-11f2-475d-921d-e4a50d8d7a3d",
+            "name": "IMAGE",
+            "type": "IMAGE",
+            "linkIds": [
+              7652
+            ],
+            "pos": [
+              -76,
+              344
             ]
           }
         ],
@@ -27236,8 +27892,7 @@
                 "type": "LATENT",
                 "slot_index": 0,
                 "links": [
-                  7421,
-                  7467
+                  7421
                 ]
               },
               {
@@ -27406,7 +28061,7 @@
                 "name": "IMAGE",
                 "type": "IMAGE",
                 "links": [
-                  7441
+                  7652
                 ]
               }
             ],
@@ -28095,7 +28750,7 @@
                 "name": "image",
                 "shape": 7,
                 "type": "IMAGE",
-                "link": 7441
+                "link": null
               },
               {
                 "label": "Mask",
@@ -28127,7 +28782,7 @@
                 "name": "latent",
                 "shape": 7,
                 "type": "LATENT",
-                "link": 7467
+                "link": null
               },
               {
                 "label": "Batch",
@@ -29343,14 +29998,6 @@
             "type": "IMAGE"
           },
           {
-            "id": 7441,
-            "origin_id": 2464,
-            "origin_slot": 0,
-            "target_id": 2589,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
             "id": 5446,
             "origin_id": 2589,
             "origin_slot": 0,
@@ -29365,14 +30012,6 @@
             "target_id": -20,
             "target_slot": 1,
             "type": "STRING"
-          },
-          {
-            "id": 7467,
-            "origin_id": 1568,
-            "origin_slot": 0,
-            "target_id": 2589,
-            "target_slot": 11,
-            "type": "LATENT"
           },
           {
             "id": 7468,
@@ -29421,6 +30060,14 @@
             "target_id": 3321,
             "target_slot": 0,
             "type": "STRING"
+          },
+          {
+            "id": 7652,
+            "origin_id": 2464,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 4,
+            "type": "IMAGE"
           }
         ],
         "extra": {
@@ -29434,8 +30081,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -29456,7 +30103,7 @@
             -100,
             240,
             199.0500030517578,
-            128
+            148
           ]
         },
         "inputs": [
@@ -29850,6 +30497,18 @@
               -76,
               324
             ]
+          },
+          {
+            "id": "ec78a1cd-0df4-42c2-8b90-229150adc2ea",
+            "name": "IMAGE",
+            "type": "IMAGE",
+            "linkIds": [
+              7653
+            ],
+            "pos": [
+              -76,
+              344
+            ]
           }
         ],
         "widgets": [],
@@ -30195,8 +30854,7 @@
                 "type": "LATENT",
                 "slot_index": 0,
                 "links": [
-                  7424,
-                  7464
+                  7424
                 ]
               },
               {
@@ -31137,7 +31795,7 @@
                 "name": "image",
                 "shape": 7,
                 "type": "IMAGE",
-                "link": 7440
+                "link": null
               },
               {
                 "label": "Mask",
@@ -31169,7 +31827,7 @@
                 "name": "latent",
                 "shape": 7,
                 "type": "LATENT",
-                "link": 7464
+                "link": null
               },
               {
                 "label": "Batch",
@@ -31705,7 +32363,7 @@
                 "name": "IMAGE",
                 "type": "IMAGE",
                 "links": [
-                  7440
+                  7653
                 ]
               }
             ],
@@ -32384,14 +33042,6 @@
             "type": "VAE"
           },
           {
-            "id": 7440,
-            "origin_id": 3265,
-            "origin_slot": 0,
-            "target_id": 2595,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
             "id": 5454,
             "origin_id": 2595,
             "origin_slot": 0,
@@ -32406,14 +33056,6 @@
             "target_id": -20,
             "target_slot": 1,
             "type": "STRING"
-          },
-          {
-            "id": 7464,
-            "origin_id": 1585,
-            "origin_slot": 0,
-            "target_id": 2595,
-            "target_slot": 11,
-            "type": "LATENT"
           },
           {
             "id": 7465,
@@ -32462,6 +33104,14 @@
             "target_id": -20,
             "target_slot": 3,
             "type": "FLOAT"
+          },
+          {
+            "id": 7653,
+            "origin_id": 3265,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 4,
+            "type": "IMAGE"
           }
         ],
         "extra": {
@@ -32475,8 +33125,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -33272,8 +33922,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -33284,8 +33934,8 @@
           "bounding": [
             -1800,
             1737.0447217723024,
-            120,
-            60
+            128,
+            68
           ]
         },
         "outputNode": {
@@ -33293,8 +33943,8 @@
           "bounding": [
             -96.63545639398585,
             1736.5813816251439,
-            120,
-            120
+            128,
+            128
           ]
         },
         "inputs": [
@@ -33307,8 +33957,8 @@
             ],
             "localized_name": "image",
             "pos": [
-              -1700,
-              1757.0447217723024
+              -1696,
+              1761.0447217723024
             ]
           }
         ],
@@ -33322,8 +33972,8 @@
             ],
             "localized_name": "width",
             "pos": [
-              -76.63545639398585,
-              1756.5813816251439
+              -72.63545639398585,
+              1760.5813816251439
             ]
           },
           {
@@ -33335,8 +33985,8 @@
             ],
             "localized_name": "height",
             "pos": [
-              -76.63545639398585,
-              1776.5813816251439
+              -72.63545639398585,
+              1780.5813816251439
             ]
           },
           {
@@ -33349,8 +33999,8 @@
             "localized_name": "FLOAT",
             "label": "MP",
             "pos": [
-              -76.63545639398585,
-              1796.5813816251439
+              -72.63545639398585,
+              1800.5813816251439
             ]
           },
           {
@@ -33362,8 +34012,8 @@
             ],
             "label": "text_output",
             "pos": [
-              -76.63545639398585,
-              1816.5813816251439
+              -72.63545639398585,
+              1820.5813816251439
             ]
           }
         ],
@@ -34069,8 +34719,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -34091,7 +34741,7 @@
             1120,
             3080,
             199.0500030517578,
-            128
+            148
           ]
         },
         "inputs": [
@@ -34480,6 +35130,18 @@
               1144,
               3164
             ]
+          },
+          {
+            "id": "cc62ecc0-886a-45d6-91ff-1d6c9051e024",
+            "name": "IMAGE",
+            "type": "IMAGE",
+            "linkIds": [
+              7654
+            ],
+            "pos": [
+              1144,
+              3184
+            ]
           }
         ],
         "widgets": [],
@@ -34499,7 +35161,7 @@
               "collapsed": false
             },
             "order": 1,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "vae_name",
@@ -34562,7 +35224,7 @@
             ],
             "flags": {},
             "order": 5,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "sampler_name",
@@ -34622,7 +35284,7 @@
             ],
             "flags": {},
             "order": 10,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "noise_seed",
@@ -34683,7 +35345,7 @@
             ],
             "flags": {},
             "order": 4,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "model",
@@ -34761,7 +35423,7 @@
             ],
             "flags": {},
             "order": 9,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "sampler",
@@ -34881,7 +35543,7 @@
             ],
             "flags": {},
             "order": 6,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "seed",
@@ -35042,7 +35704,7 @@
             ],
             "flags": {},
             "order": 11,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "value",
@@ -35094,7 +35756,7 @@
             ],
             "flags": {},
             "order": 8,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "noise",
@@ -35134,8 +35796,7 @@
                 "type": "LATENT",
                 "slot_index": 0,
                 "links": [
-                  7427,
-                  7461
+                  7427
                 ]
               },
               {
@@ -35176,7 +35837,7 @@
             ],
             "flags": {},
             "order": 3,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "clip_name",
@@ -35239,7 +35900,7 @@
             ],
             "flags": {},
             "order": 2,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "clip",
@@ -35305,7 +35966,7 @@
             ],
             "flags": {},
             "order": 12,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "pixels",
@@ -35354,7 +36015,7 @@
             ],
             "flags": {},
             "order": 13,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "width",
@@ -35419,7 +36080,7 @@
             ],
             "flags": {},
             "order": 14,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "on_true",
@@ -35490,7 +36151,7 @@
             ],
             "flags": {},
             "order": 16,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "samples",
@@ -35548,7 +36209,7 @@
             ],
             "flags": {},
             "order": 7,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "model",
@@ -35636,7 +36297,7 @@
             ],
             "flags": {},
             "order": 15,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "string_a",
@@ -35701,7 +36362,7 @@
             ],
             "flags": {},
             "order": 17,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "label": "pipe",
@@ -35765,7 +36426,7 @@
                 "name": "image",
                 "shape": 7,
                 "type": "IMAGE",
-                "link": 7439
+                "link": null
               },
               {
                 "label": "Mask",
@@ -35797,7 +36458,7 @@
                 "name": "latent",
                 "shape": 7,
                 "type": "LATENT",
-                "link": 7461
+                "link": null
               },
               {
                 "label": "Batch",
@@ -35948,7 +36609,7 @@
             ],
             "flags": {},
             "order": 18,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "Number",
@@ -36000,7 +36661,7 @@
             ],
             "flags": {},
             "order": 19,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "Number",
@@ -36052,7 +36713,7 @@
             ],
             "flags": {},
             "order": 20,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "model",
@@ -36142,7 +36803,7 @@
             ],
             "flags": {},
             "order": 0,
-            "mode": 2,
+            "mode": 0,
             "inputs": [],
             "outputs": [
               {
@@ -36184,7 +36845,7 @@
             ],
             "flags": {},
             "order": 21,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "clip",
@@ -36250,7 +36911,7 @@
             ],
             "flags": {},
             "order": 22,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "string_1",
@@ -36312,7 +36973,7 @@
             ],
             "flags": {},
             "order": 23,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "samples",
@@ -36333,7 +36994,7 @@
                 "name": "IMAGE",
                 "type": "IMAGE",
                 "links": [
-                  7439
+                  7654
                 ]
               }
             ],
@@ -36373,7 +37034,7 @@
             ],
             "flags": {},
             "order": 24,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "Number",
@@ -36425,7 +37086,7 @@
             ],
             "flags": {},
             "order": 25,
-            "mode": 2,
+            "mode": 0,
             "inputs": [
               {
                 "localized_name": "Number",
@@ -37012,14 +37673,6 @@
             "type": "VAE"
           },
           {
-            "id": 7439,
-            "origin_id": 3266,
-            "origin_slot": 0,
-            "target_id": 2598,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
             "id": 5472,
             "origin_id": 2598,
             "origin_slot": 0,
@@ -37034,14 +37687,6 @@
             "target_id": -20,
             "target_slot": 1,
             "type": "STRING"
-          },
-          {
-            "id": 7461,
-            "origin_id": 1783,
-            "origin_slot": 0,
-            "target_id": 2598,
-            "target_slot": 11,
-            "type": "LATENT"
           },
           {
             "id": 7462,
@@ -37090,6 +37735,14 @@
             "target_id": 3325,
             "target_slot": 0,
             "type": "STRING"
+          },
+          {
+            "id": 7654,
+            "origin_id": 3266,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 4,
+            "type": "IMAGE"
           }
         ],
         "extra": {
@@ -37103,8 +37756,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -37125,7 +37778,7 @@
             2010,
             3190,
             199.0500030517578,
-            128
+            148
           ]
         },
         "inputs": [
@@ -37512,6 +38165,18 @@
               2034,
               3274
             ]
+          },
+          {
+            "id": "18bb67c9-152a-4faf-b39b-a916b8fdeefe",
+            "name": "IMAGE",
+            "type": "IMAGE",
+            "linkIds": [
+              7663
+            ],
+            "pos": [
+              2034,
+              3294
+            ]
           }
         ],
         "widgets": [],
@@ -37569,8 +38234,7 @@
                 "type": "LATENT",
                 "slot_index": 0,
                 "links": [
-                  7433,
-                  7455
+                  7433
                 ]
               },
               {
@@ -38913,7 +39577,7 @@
                 "name": "image",
                 "shape": 7,
                 "type": "IMAGE",
-                "link": 7437
+                "link": null
               },
               {
                 "label": "Mask",
@@ -38945,7 +39609,7 @@
                 "name": "latent",
                 "shape": 7,
                 "type": "LATENT",
-                "link": 7455
+                "link": null
               },
               {
                 "label": "Batch",
@@ -39485,7 +40149,7 @@
                 "name": "IMAGE",
                 "type": "IMAGE",
                 "links": [
-                  7437
+                  7663
                 ]
               }
             ],
@@ -40180,14 +40844,6 @@
             "type": "VAE"
           },
           {
-            "id": 7437,
-            "origin_id": 3268,
-            "origin_slot": 0,
-            "target_id": 2606,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
             "id": 5533,
             "origin_id": 2606,
             "origin_slot": 0,
@@ -40202,14 +40858,6 @@
             "target_id": -20,
             "target_slot": 1,
             "type": "STRING"
-          },
-          {
-            "id": 7455,
-            "origin_id": 1917,
-            "origin_slot": 0,
-            "target_id": 2606,
-            "target_slot": 11,
-            "type": "LATENT"
           },
           {
             "id": 7456,
@@ -40258,6 +40906,14 @@
             "target_id": 3329,
             "target_slot": 0,
             "type": "STRING"
+          },
+          {
+            "id": 7663,
+            "origin_id": 3268,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 4,
+            "type": "IMAGE"
           }
         ],
         "extra": {
@@ -40271,8 +40927,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -40423,14 +41079,14 @@
                 "links": null
               },
               {
-                "label": "28,459,469,824   freemem_before",
+                "label": "28,459,494,400   freemem_before",
                 "localized_name": "freemem_before",
                 "name": "freemem_before",
                 "type": "INT",
                 "links": null
               },
               {
-                "label": "28,459,469,824      freemem_after",
+                "label": "28,459,494,400      freemem_after",
                 "localized_name": "freemem_after",
                 "name": "freemem_after",
                 "type": "INT",
@@ -40630,8 +41286,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -40652,7 +41308,7 @@
             2010,
             3190,
             199.0500030517578,
-            128
+            148
           ]
         },
         "inputs": [
@@ -41052,6 +41708,18 @@
             "pos": [
               2034,
               3274
+            ]
+          },
+          {
+            "id": "ee3b26b8-1172-4744-b8ca-d8a9b85a834a",
+            "name": "IMAGE",
+            "type": "IMAGE",
+            "linkIds": [
+              7660
+            ],
+            "pos": [
+              2034,
+              3294
             ]
           }
         ],
@@ -41604,8 +42272,7 @@
                 "type": "LATENT",
                 "slot_index": 0,
                 "links": [
-                  7430,
-                  7458
+                  7430
                 ]
               },
               {
@@ -42478,7 +43145,7 @@
                 "name": "image",
                 "shape": 7,
                 "type": "IMAGE",
-                "link": 7438
+                "link": null
               },
               {
                 "label": "Mask",
@@ -42510,7 +43177,7 @@
                 "name": "latent",
                 "shape": 7,
                 "type": "LATENT",
-                "link": 7458
+                "link": null
               },
               {
                 "label": "Batch",
@@ -43050,7 +43717,7 @@
                 "name": "IMAGE",
                 "type": "IMAGE",
                 "links": [
-                  7438
+                  7660
                 ]
               }
             ],
@@ -43753,14 +44420,6 @@
             "type": "VAE"
           },
           {
-            "id": 7438,
-            "origin_id": 3267,
-            "origin_slot": 0,
-            "target_id": 2601,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
             "id": 5488,
             "origin_id": 2601,
             "origin_slot": 0,
@@ -43775,14 +44434,6 @@
             "target_id": -20,
             "target_slot": 1,
             "type": "STRING"
-          },
-          {
-            "id": 7458,
-            "origin_id": 2116,
-            "origin_slot": 0,
-            "target_id": 2601,
-            "target_slot": 11,
-            "type": "LATENT"
           },
           {
             "id": 7459,
@@ -43831,6 +44482,14 @@
             "target_id": 3327,
             "target_slot": 0,
             "type": "STRING"
+          },
+          {
+            "id": 7660,
+            "origin_id": 3267,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 4,
+            "type": "IMAGE"
           }
         ],
         "extra": {
@@ -43844,8 +44503,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -44641,8 +45300,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -45146,8 +45805,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -45813,8 +46472,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -46503,8 +47162,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -46655,14 +47314,14 @@
                 "links": null
               },
               {
-                "label": "19,743,898,112   freemem_before",
+                "label": "25,662,679,040   freemem_before",
                 "localized_name": "freemem_before",
                 "name": "freemem_before",
                 "type": "INT",
                 "links": null
               },
               {
-                "label": "19,743,898,112      freemem_after",
+                "label": "25,662,679,040      freemem_after",
                 "localized_name": "freemem_after",
                 "name": "freemem_after",
                 "type": "INT",
@@ -46862,8 +47521,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -47014,14 +47673,14 @@
                 "links": null
               },
               {
-                "label": "28,459,469,824   freemem_before",
+                "label": "28,459,494,400   freemem_before",
                 "localized_name": "freemem_before",
                 "name": "freemem_before",
                 "type": "INT",
                 "links": null
               },
               {
-                "label": "28,459,469,824      freemem_after",
+                "label": "28,459,494,400      freemem_after",
                 "localized_name": "freemem_after",
                 "name": "freemem_after",
                 "type": "INT",
@@ -47221,8 +47880,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -48018,8 +48677,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -48040,7 +48699,7 @@
             2010,
             3190,
             199.0500030517578,
-            128
+            148
           ]
         },
         "inputs": [
@@ -48427,6 +49086,18 @@
               2034,
               3274
             ]
+          },
+          {
+            "id": "46e384be-2c63-47c5-a693-1f12c3a8703d",
+            "name": "IMAGE",
+            "type": "IMAGE",
+            "linkIds": [
+              7665
+            ],
+            "pos": [
+              2034,
+              3294
+            ]
           }
         ],
         "widgets": [],
@@ -48444,7 +49115,7 @@
             ],
             "flags": {},
             "order": 1,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "sampler_name",
@@ -48504,7 +49175,7 @@
             ],
             "flags": {},
             "order": 2,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "noise_seed",
@@ -48565,7 +49236,7 @@
             ],
             "flags": {},
             "order": 3,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "value",
@@ -48627,7 +49298,7 @@
             ],
             "flags": {},
             "order": 4,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "value",
@@ -48689,7 +49360,7 @@
             ],
             "flags": {},
             "order": 5,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "model",
@@ -48767,7 +49438,7 @@
             ],
             "flags": {},
             "order": 6,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "sampler",
@@ -48887,7 +49558,7 @@
             ],
             "flags": {},
             "order": 7,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "value",
@@ -48939,7 +49610,7 @@
             ],
             "flags": {},
             "order": 8,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "noise",
@@ -48979,8 +49650,7 @@
                 "type": "LATENT",
                 "slot_index": 0,
                 "links": [
-                  7412,
-                  7452
+                  7412
                 ]
               },
               {
@@ -49021,7 +49691,7 @@
             ],
             "flags": {},
             "order": 9,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "vae_name",
@@ -49084,7 +49754,7 @@
             ],
             "flags": {},
             "order": 10,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "model",
@@ -49164,7 +49834,7 @@
             ],
             "flags": {},
             "order": 11,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "seed",
@@ -49325,7 +49995,7 @@
             ],
             "flags": {},
             "order": 12,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "clip_name",
@@ -49397,7 +50067,7 @@
               "collapsed": false
             },
             "order": 13,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "clip",
@@ -49465,7 +50135,7 @@
             ],
             "flags": {},
             "order": 14,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "on_true",
@@ -49536,7 +50206,7 @@
             ],
             "flags": {},
             "order": 15,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "string_a",
@@ -49601,7 +50271,7 @@
             ],
             "flags": {},
             "order": 16,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "samples",
@@ -49659,7 +50329,7 @@
             ],
             "flags": {},
             "order": 17,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "pixels",
@@ -49708,7 +50378,7 @@
             ],
             "flags": {},
             "order": 18,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "width",
@@ -49780,7 +50450,7 @@
             ],
             "flags": {},
             "order": 19,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "label": "pipe",
@@ -49844,7 +50514,7 @@
                 "name": "image",
                 "shape": 7,
                 "type": "IMAGE",
-                "link": 7436
+                "link": null
               },
               {
                 "label": "Mask",
@@ -49876,7 +50546,7 @@
                 "name": "latent",
                 "shape": 7,
                 "type": "LATENT",
-                "link": 7452
+                "link": null
               },
               {
                 "label": "Batch",
@@ -50027,7 +50697,7 @@
             ],
             "flags": {},
             "order": 20,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "Number",
@@ -50079,7 +50749,7 @@
             ],
             "flags": {},
             "order": 21,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "Number",
@@ -50131,7 +50801,7 @@
             ],
             "flags": {},
             "order": 22,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "model",
@@ -50221,7 +50891,7 @@
             ],
             "flags": {},
             "order": 0,
-            "mode": 0,
+            "mode": 2,
             "inputs": [],
             "outputs": [
               {
@@ -50265,7 +50935,7 @@
               "collapsed": false
             },
             "order": 23,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "clip",
@@ -50333,7 +51003,7 @@
             ],
             "flags": {},
             "order": 24,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "string_1",
@@ -50395,7 +51065,7 @@
             ],
             "flags": {},
             "order": 25,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "samples",
@@ -50416,7 +51086,7 @@
                 "name": "IMAGE",
                 "type": "IMAGE",
                 "links": [
-                  7436
+                  7665
                 ]
               }
             ],
@@ -50456,7 +51126,7 @@
             ],
             "flags": {},
             "order": 26,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "Number",
@@ -50508,7 +51178,7 @@
             ],
             "flags": {},
             "order": 27,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "Number",
@@ -51111,14 +51781,6 @@
             "type": "VAE"
           },
           {
-            "id": 7436,
-            "origin_id": 3260,
-            "origin_slot": 0,
-            "target_id": 2639,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
             "id": 5605,
             "origin_id": 2639,
             "origin_slot": 0,
@@ -51133,14 +51795,6 @@
             "target_id": -20,
             "target_slot": 1,
             "type": "STRING"
-          },
-          {
-            "id": 7452,
-            "origin_id": 2628,
-            "origin_slot": 0,
-            "target_id": 2639,
-            "target_slot": 11,
-            "type": "LATENT"
           },
           {
             "id": 7453,
@@ -51189,6 +51843,14 @@
             "target_id": -20,
             "target_slot": 3,
             "type": "FLOAT"
+          },
+          {
+            "id": 7665,
+            "origin_id": 3260,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 4,
+            "type": "IMAGE"
           }
         ],
         "extra": {
@@ -51202,8 +51864,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -51322,7 +51984,7 @@
             ],
             "flags": {},
             "order": 0,
-            "mode": 0,
+            "mode": 2,
             "showAdvanced": true,
             "inputs": [
               {
@@ -51412,7 +52074,7 @@
             ],
             "flags": {},
             "order": 1,
-            "mode": 0,
+            "mode": 2,
             "inputs": [
               {
                 "localized_name": "on_false",
@@ -51550,8 +52212,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -52243,8 +52905,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -52395,14 +53057,14 @@
                 "links": null
               },
               {
-                "label": "21,684,588,032   freemem_before",
+                "label": "27,636,923,392   freemem_before",
                 "localized_name": "freemem_before",
                 "name": "freemem_before",
                 "type": "INT",
                 "links": null
               },
               {
-                "label": "21,684,588,032      freemem_after",
+                "label": "27,636,923,392      freemem_after",
                 "localized_name": "freemem_after",
                 "name": "freemem_after",
                 "type": "INT",
@@ -52602,8 +53264,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -53011,8 +53673,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -53390,8 +54052,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -53747,8 +54409,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -53769,7 +54431,7 @@
             1120,
             3080,
             199.0500030517578,
-            128
+            148
           ]
         },
         "inputs": [
@@ -54160,6 +54822,18 @@
             "pos": [
               1144,
               3164
+            ]
+          },
+          {
+            "id": "3d4e9ada-e272-400c-8eca-1f869f06ec76",
+            "name": "IMAGE",
+            "type": "IMAGE",
+            "linkIds": [
+              7650
+            ],
+            "pos": [
+              1144,
+              3184
             ]
           }
         ],
@@ -54848,8 +55522,7 @@
                 "type": "LATENT",
                 "slot_index": 0,
                 "links": [
-                  7416,
-                  7473
+                  7416
                 ]
               },
               {
@@ -55328,7 +56001,7 @@
                 "name": "image",
                 "shape": 7,
                 "type": "IMAGE",
-                "link": 7443
+                "link": null
               },
               {
                 "label": "Mask",
@@ -55360,7 +56033,7 @@
                 "name": "latent",
                 "shape": 7,
                 "type": "LATENT",
-                "link": 7473
+                "link": null
               },
               {
                 "label": "Batch",
@@ -55896,7 +56569,7 @@
                 "name": "IMAGE",
                 "type": "IMAGE",
                 "links": [
-                  7443
+                  7650
                 ]
               }
             ],
@@ -56567,14 +57240,6 @@
             "type": "VAE"
           },
           {
-            "id": 7443,
-            "origin_id": 3262,
-            "origin_slot": 0,
-            "target_id": 3098,
-            "target_slot": 7,
-            "type": "IMAGE"
-          },
-          {
             "id": 6826,
             "origin_id": 3098,
             "origin_slot": 0,
@@ -56589,14 +57254,6 @@
             "target_id": -20,
             "target_slot": 1,
             "type": "STRING"
-          },
-          {
-            "id": 7473,
-            "origin_id": 3091,
-            "origin_slot": 0,
-            "target_id": 3098,
-            "target_slot": 11,
-            "type": "LATENT"
           },
           {
             "id": 7474,
@@ -56645,6 +57302,14 @@
             "target_id": -20,
             "target_slot": 3,
             "type": "FLOAT"
+          },
+          {
+            "id": 7650,
+            "origin_id": 3262,
+            "origin_slot": 0,
+            "target_id": -20,
+            "target_slot": 4,
+            "type": "IMAGE"
           }
         ],
         "extra": {
@@ -56658,8 +57323,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -56677,8 +57342,8 @@
         "outputNode": {
           "id": -20,
           "bounding": [
-            1969.9462304170286,
-            2829.851493371575,
+            2139.0541189810765,
+            2714.7142075407332,
             128,
             68
           ]
@@ -56742,7 +57407,7 @@
             "name": "image",
             "type": "IMAGE",
             "linkIds": [
-              7505
+              7645
             ],
             "pos": [
               -1287.4926880511537,
@@ -56769,11 +57434,11 @@
             "name": "IMAGE",
             "type": "IMAGE",
             "linkIds": [
-              7602
+              7677
             ],
             "pos": [
-              1993.9462304170286,
-              2853.851493371575
+              2163.0541189810765,
+              2738.7142075407332
             ]
           }
         ],
@@ -56791,7 +57456,7 @@
               546
             ],
             "flags": {},
-            "order": 6,
+            "order": 4,
             "mode": 0,
             "inputs": [
               {
@@ -57014,7 +57679,7 @@
               58
             ],
             "flags": {},
-            "order": 9,
+            "order": 7,
             "mode": 0,
             "inputs": [
               {
@@ -57067,7 +57732,7 @@
               130
             ],
             "flags": {},
-            "order": 7,
+            "order": 5,
             "mode": 0,
             "inputs": [
               {
@@ -57145,7 +57810,7 @@
               60
             ],
             "flags": {},
-            "order": 2,
+            "order": 0,
             "mode": 0,
             "inputs": [
               {
@@ -57208,7 +57873,7 @@
               130
             ],
             "flags": {},
-            "order": 8,
+            "order": 6,
             "mode": 0,
             "inputs": [
               {
@@ -57286,7 +57951,7 @@
               50
             ],
             "flags": {},
-            "order": 3,
+            "order": 1,
             "mode": 0,
             "inputs": [
               {
@@ -57299,7 +57964,7 @@
                 "localized_name": "image",
                 "name": "image",
                 "type": "IMAGE",
-                "link": 7505
+                "link": 7645
               }
             ],
             "outputs": [
@@ -57334,22 +57999,22 @@
             "id": 3284,
             "type": "VAEEncodeTiled",
             "pos": [
-              159.65436247101115,
-              2800.02552578591
+              211.82594511311075,
+              2895.373590614578
             ],
             "size": [
               270,
               150
             ],
             "flags": {},
-            "order": 11,
+            "order": 9,
             "mode": 0,
             "inputs": [
               {
                 "localized_name": "pixels",
                 "name": "pixels",
                 "type": "IMAGE",
-                "link": 7492
+                "link": 7675
               },
               {
                 "localized_name": "vae",
@@ -57395,15 +58060,15 @@
             "id": 3274,
             "type": "ImageResizeKJv2",
             "pos": [
-              -251.34563752898885,
-              2952.284341990864
+              -248.6471073923286,
+              2958.5809123097392
             ],
             "size": [
-              270,
-              340
+              266.4019598177863,
+              336
             ],
             "flags": {},
-            "order": 4,
+            "order": 2,
             "mode": 0,
             "inputs": [
               {
@@ -57444,7 +58109,7 @@
                 "name": "IMAGE",
                 "type": "IMAGE",
                 "links": [
-                  7492
+                  7674
                 ]
               },
               {
@@ -57519,15 +58184,15 @@
             "id": 3276,
             "type": "KSampler",
             "pos": [
-              537.6543624710112,
-              2685.02552578591
+              600.6200656597523,
+              2806.459381935627
             ],
             "size": [
               270,
               262
             ],
             "flags": {},
-            "order": 5,
+            "order": 3,
             "mode": 0,
             "inputs": [
               {
@@ -57652,15 +58317,15 @@
             "id": 3285,
             "type": "VAEDecodeTiled",
             "pos": [
-              890.6543624710112,
-              2680.02552578591
+              923.9362341564873,
+              2857.229004759939
             ],
             "size": [
               270,
               150
             ],
             "flags": {},
-            "order": 12,
+            "order": 10,
             "mode": 0,
             "inputs": [
               {
@@ -57721,7 +58386,7 @@
               130
             ],
             "flags": {},
-            "order": 10,
+            "order": 8,
             "mode": 0,
             "inputs": [
               {
@@ -57799,7 +58464,7 @@
               58
             ],
             "flags": {},
-            "order": 13,
+            "order": 11,
             "mode": 0,
             "inputs": [
               {
@@ -57843,22 +58508,22 @@
             "id": 3331,
             "type": "JPEG artifacts removal FBCNN",
             "pos": [
-              1473.606387386602,
-              2707.7865004680557
+              1491.5965882976705,
+              2752.762002745732
             ],
             "size": [
               290.5000061035156,
               83.79902009110674
             ],
             "flags": {},
-            "order": 0,
+            "order": 12,
             "mode": 0,
             "inputs": [
               {
                 "localized_name": "image",
                 "name": "image",
                 "type": "IMAGE",
-                "link": 7604
+                "link": 7642
               }
             ],
             "outputs": [
@@ -57867,18 +58532,19 @@
                 "name": "IMAGE",
                 "type": "IMAGE",
                 "links": [
-                  7602
+                  7676
                 ]
               }
             ],
             "properties": {
               "cnr_id": "comfyui-fbcnn",
               "ver": "1.0.1",
+              "Node name for S&R": "JPEG artifacts removal FBCNN",
               "ue_properties": {
                 "widget_ue_connectable": {},
-                "input_ue_unconnectable": {}
-              },
-              "Node name for S&R": "JPEG artifacts removal FBCNN"
+                "input_ue_unconnectable": {},
+                "version": "8.0"
+              }
             },
             "widgets_values": [
               "enable",
@@ -57893,15 +58559,15 @@
             "id": 3332,
             "type": "ImageRemoveAlpha+",
             "pos": [
-              1224.8156199611385,
-              2703.2889502402886
+              1229.3131701889056,
+              2858.0046780754824
             ],
             "size": [
               202.23332824707032,
               26
             ],
             "flags": {},
-            "order": 1,
+            "order": 13,
             "mode": 0,
             "inputs": [
               {
@@ -57917,18 +58583,106 @@
                 "name": "IMAGE",
                 "type": "IMAGE",
                 "links": [
-                  7604
+                  7642
                 ]
               }
             ],
             "properties": {
               "cnr_id": "comfyui_essentials",
               "ver": "1.1.0",
+              "Node name for S&R": "ImageRemoveAlpha+",
               "ue_properties": {
                 "widget_ue_connectable": {},
-                "input_ue_unconnectable": {}
-              },
-              "Node name for S&R": "ImageRemoveAlpha+"
+                "input_ue_unconnectable": {},
+                "version": "8.0"
+              }
+            }
+          },
+          {
+            "id": 3350,
+            "type": "easy imageBatchToImageList",
+            "pos": [
+              75.95263468599555,
+              2807.2116962691553
+            ],
+            "size": [
+              214.3166717529297,
+              26
+            ],
+            "flags": {},
+            "order": 14,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "IMAGE",
+                "link": 7674
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "IMAGE",
+                "name": "IMAGE",
+                "shape": 6,
+                "type": "IMAGE",
+                "links": [
+                  7675
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfyui-easy-use",
+              "ver": "b0b47ca1372117fce575d9e744655344ebff6bef",
+              "Node name for S&R": "easy imageBatchToImageList",
+              "ue_properties": {
+                "widget_ue_connectable": {},
+                "input_ue_unconnectable": {},
+                "version": "8.0"
+              }
+            }
+          },
+          {
+            "id": 3351,
+            "type": "ImageListToBatch+",
+            "pos": [
+              1844.4202682750574,
+              2746.9445232170833
+            ],
+            "size": [
+              192.66666259765626,
+              26
+            ],
+            "flags": {},
+            "order": 15,
+            "mode": 0,
+            "inputs": [
+              {
+                "localized_name": "image",
+                "name": "image",
+                "type": "IMAGE",
+                "link": 7676
+              }
+            ],
+            "outputs": [
+              {
+                "localized_name": "IMAGE",
+                "name": "IMAGE",
+                "type": "IMAGE",
+                "links": [
+                  7677
+                ]
+              }
+            ],
+            "properties": {
+              "cnr_id": "comfyui_essentials",
+              "ver": "1.1.0",
+              "Node name for S&R": "ImageListToBatch+",
+              "ue_properties": {
+                "widget_ue_connectable": {},
+                "input_ue_unconnectable": {},
+                "version": "8.0"
+              }
             }
           }
         ],
@@ -57973,14 +58727,6 @@
             "target_id": 3273,
             "target_slot": 0,
             "type": "UPSCALE_MODEL"
-          },
-          {
-            "id": 7492,
-            "origin_id": 3274,
-            "origin_slot": 0,
-            "target_id": 3284,
-            "target_slot": 0,
-            "type": "IMAGE"
           },
           {
             "id": 7493,
@@ -58143,14 +58889,6 @@
             "type": "FLOAT"
           },
           {
-            "id": 7505,
-            "origin_id": -10,
-            "origin_slot": 4,
-            "target_id": 3273,
-            "target_slot": 1,
-            "type": "IMAGE"
-          },
-          {
             "id": 7560,
             "origin_id": -10,
             "origin_slot": 5,
@@ -58167,14 +58905,6 @@
             "type": "FLOAT"
           },
           {
-            "id": 7602,
-            "origin_id": 3331,
-            "origin_slot": 0,
-            "target_id": -20,
-            "target_slot": 0,
-            "type": "IMAGE"
-          },
-          {
             "id": 7603,
             "origin_id": 3285,
             "origin_slot": 0,
@@ -58183,10 +58913,50 @@
             "type": "IMAGE"
           },
           {
-            "id": 7604,
+            "id": 7642,
             "origin_id": 3332,
             "origin_slot": 0,
             "target_id": 3331,
+            "target_slot": 0,
+            "type": "IMAGE"
+          },
+          {
+            "id": 7645,
+            "origin_id": -10,
+            "origin_slot": 4,
+            "target_id": 3273,
+            "target_slot": 1,
+            "type": "IMAGE"
+          },
+          {
+            "id": 7674,
+            "origin_id": 3274,
+            "origin_slot": 0,
+            "target_id": 3350,
+            "target_slot": 0,
+            "type": "IMAGE"
+          },
+          {
+            "id": 7675,
+            "origin_id": 3350,
+            "origin_slot": 0,
+            "target_id": 3284,
+            "target_slot": 0,
+            "type": "IMAGE"
+          },
+          {
+            "id": 7676,
+            "origin_id": 3331,
+            "origin_slot": 0,
+            "target_id": 3351,
+            "target_slot": 0,
+            "type": "IMAGE"
+          },
+          {
+            "id": 7677,
+            "origin_id": 3351,
+            "origin_slot": 0,
+            "target_id": -20,
             "target_slot": 0,
             "type": "IMAGE"
           }
@@ -58201,8 +58971,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -58353,14 +59123,14 @@
                 "links": null
               },
               {
-                "label": "21,584,115,712   freemem_before",
+                "label": "27,502,896,640   freemem_before",
                 "localized_name": "freemem_before",
                 "name": "freemem_before",
                 "type": "INT",
                 "links": null
               },
               {
-                "label": "21,584,115,712      freemem_after",
+                "label": "27,502,896,640      freemem_after",
                 "localized_name": "freemem_after",
                 "name": "freemem_after",
                 "type": "INT",
@@ -58560,8 +59330,8 @@
         "version": 1,
         "state": {
           "lastGroupId": 141,
-          "lastNodeId": 3332,
-          "lastLinkId": 7605,
+          "lastNodeId": 3352,
+          "lastLinkId": 7678,
           "lastRerouteId": 4
         },
         "revision": 0,
@@ -59430,39 +60200,39 @@
         "size": 8664848742,
         "url": ""
       },
-      "2365_Illustrious/beMixIllustrious_v10.safetensors": {
+      "2365_Illustrious/AnillustriousV5.safetensors": {
         "hash": "",
-        "size": 6938040706,
+        "size": 6938040768,
         "url": ""
       },
-      "2367_Flux.1 D/copaxTimeless_xplusMIX4.safetensors": {
-        "hash": "712640adfb31a10791dde8c54842fd45c58d69ecd24df74be3ca87664d53ccaa",
-        "size": 11901496800,
-        "url": "https://civitai.red/models/118111?modelVersionId=1217501"
+      "2367_Flux.1 D/fluxFusionV24StepsGGUFNF4_V2Fp16.safetensors": {
+        "hash": "",
+        "size": 23782443544,
+        "url": ""
       },
       "2368_Qwen/jibMixQwen_v60.safetensors": {
         "hash": "45ab8add7e97cd91f20451cc46a759f28809eae9de24d2fe280ec03bc4422d7e",
         "size": 20430679792,
         "url": "https://civitai.red/models/1936965?modelVersionId=2753478"
       },
-      "2369_ZImageTurbo/gonzalomoZpop_v40.safetensors": {
+      "2369_ZImageTurbo/zAnimimageTurboByLau_semiRealBf16.safetensors": {
+        "hash": "54657cf020efaab34df4fce5b46764fd78bb9f50f18e88ff719dcd9bdceb2e48",
+        "size": 12309889944,
+        "url": "https://civitai.red/models/2238903?modelVersionId=2540933"
+      },
+      "2370_Anima/Sleepless.safetensors_00001_.safetensors": {
         "hash": "",
-        "size": 18109620317,
+        "size": 4248120536,
         "url": ""
       },
-      "2370_Anima/nijce_1.safetensors": {
+      "2371_Flux.2 Klein 9B/x3n0Flux_x3n0MatrixV1Bf16.safetensors": {
         "hash": "",
-        "size": 4183186440,
+        "size": 18157185336,
         "url": ""
       },
-      "2371_Flux.2 Klein 9B/x3n0FluxX_x3n0FluxXBf16.safetensors": {
+      "2372_Krea 2/ARTY_2209_fp8.safetensors": {
         "hash": "",
-        "size": 18157189728,
-        "url": ""
-      },
-      "2372_Krea 2/x3n0_Krea2X.safetensors": {
-        "hash": "",
-        "size": 25640200888,
+        "size": 12821598624,
         "url": ""
       },
       "2452_Qwen-Image-2.1/qwen_image_2.1_bf16.safetensors": {
@@ -59553,12 +60323,12 @@
         "hash": "45ab8add7e97cd91f20451cc46a759f28809eae9de24d2fe280ec03bc4422d7e",
         "auto": true
       },
-      "Flux.1 D/copaxTimeless_xplusMIX4.safetensors": {
-        "name": "Flux.1 D/copaxTimeless_xplusMIX4.safetensors",
-        "url": "https://civitai.red/models/118111?modelVersionId=1217501",
+      "ZImageTurbo/zAnimimageTurboByLau_semiRealBf16.safetensors": {
+        "name": "ZImageTurbo/zAnimimageTurboByLau_semiRealBf16.safetensors",
+        "url": "https://civitai.red/models/2238903?modelVersionId=2540933",
         "platform": "Civitai",
-        "nodeId": 2367,
-        "hash": "712640adfb31a10791dde8c54842fd45c58d69ecd24df74be3ca87664d53ccaa",
+        "nodeId": 2369,
+        "hash": "54657cf020efaab34df4fce5b46764fd78bb9f50f18e88ff719dcd9bdceb2e48",
         "auto": true
       }
     },
@@ -59567,10 +60337,10 @@
       "snapshots": []
     },
     "ds": {
-      "scale": 0.16595793372513357,
+      "scale": 0.179858789909214,
       "offset": [
-        10372.71364204764,
-        3608.4528759036375
+        9368.532395147135,
+        3558.9299354422005
       ]
     }
   },
